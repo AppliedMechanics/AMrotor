@@ -1,0 +1,1 @@
+add_files(scan_files(endswith='.svg', maxdepth=2), install_path='build')

@@ -1,0 +1,4 @@
+scripts=['pure_svg/SConscript',
+         'tex_svg/SConscript',
+         ]
+SConscript(scripts)

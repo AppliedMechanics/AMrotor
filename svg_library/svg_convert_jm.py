@@ -6,29 +6,26 @@ from tools_scons.filedata import FileDataTEX, FileDataSVG
 from tools_scons.tools import *
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
+base_dir = os.path.abspath(__file__)
 
-def compile_svg(path):
+def rasterize_svg(path):
   '''
   Compilation of the svg file given in path
   '''
-  print_progress()
+
+  output_width = 640
+  output_height = 640
+
   buf.svg[path].check_consistency(Global.install)
 
-  if len(buf.svg[path].imported_in)>0:
-      export_tex = '--export-latex'
-  else:
-      export_tex = ''
   try:
-      # Bugfix as strange inkscape error occurs, when subprocess.check_output
-      # is used.
-      cmd = 'inkscape -z -D --export-pdf=' + \
-            os.path.join(Global.base_dir, path)[0:-4] + '.pdf --file=' + \
-            os.path.join(Global.base_dir, path) + ' ' + export_tex
+
+      cmd = 'inkscape -z -D --export-png=' + \
+            os.path.join(Global.base_dir, path)[0:-4] + '.png --file=' + \
+            os.path.join(Global.base_dir, path) + ' --export-width=' + output_width + ' --export-height=' + output_height \
       print('Compile:' + cmd)
       sys_out = os.system(cmd)
-      if export_tex == '--export-latex':
-          fix_pdf_tex_bug(os.path.join(Global.base_dir, path)[0:-4])
-      # sys_out=subprocess.check_output(['inkscape', '-D', '-z', '--export-pdf='+os.path.join(Global.base_dir, path)[0:-4]+'.pdf', '--file='+os.path.join(Global.base_dir, path), export_tex], stderr=subprocess.STDOUT)
+
   except subprocess.CalledProcessError as grepexc:
       print("error code", grepexc.returncode, grepexc.output)
       sys.exit(10)
@@ -36,11 +33,47 @@ def compile_svg(path):
   if path in Global.install:
       install_path=Global.install[path]
       prepare_install(install_path)
-      print('Install: '+os.path.join(install_path, os.path.basename(path)[0:-4]+'.pdf'))
-      shutil.copyfile(path[0:-4]+'.pdf', os.path.join(install_path, os.path.basename(path)[0:-4]+'.pdf'))
+      print('Install: '+os.path.join(install_path, os.path.basename(path)[0:-4]+'.png'))
+      shutil.copyfile(path[0:-4]+'.png', os.path.join(install_path, os.path.basename(path)[0:-4]+'.png'))
 
-  Global.finished_compilation['svg'].append(path)
   return sys_out
+
+
+def prepare_install(path):
+  if not os.path.isdir(path):
+    os.makedirs(path)
+
+
+def SConscript(scripts):
+    '''
+    Read the Scons-Scripts to get the global tex-files that should be read
+    '''
+
+    parent_dir=Global.current_dir
+
+    #Global.script_paths.add(scripts)
+
+    for script in scripts:
+        script=platform_path(script)
+
+        script_file=os.path.join(parent_dir, script)
+
+        # For repository check
+        Global.script_paths.add(os.path.relpath(script_file, Global.base_dir))
+
+        # Local SConscript file
+        if os.path.exists(script_file+'_local') and arguments.repo==False and arguments.ignore_local==False:
+            print('scons: Using local SConscript file: '+os.path.relpath(script_file+'_local', Global.base_dir))
+            script_file=script_file+'_local'
+
+        # For error messages
+        Global.current_scr=script_file
+
+        # For recursion
+        Global.current_dir=os.path.dirname(script_file)
+
+        exec(compile(open(script_file).read(), script_file, 'exec'), {'Global':Global, 'SConscript':SConscript, 'add_files':add_files, 'scan_files':scan_files})
+
 
   # START OF the script
 
@@ -48,25 +81,16 @@ if __name__ == '__main__': #For windows-parallelization this is needed
 
     # -----------------SETTINGS-------------------------
     version=0.1
-    buf_file='.buffer'
-    clean_file='.clean'
-
+    scripts=['SConscript']
     # -----------------------------------------------------------
-
-    # initialise Global
-    Global = Global
-
-    # Initialize clean file data
-    clean=CleanFile(clean_file)
-
+    print('Hello to the svg-library compiler')
 
     # Parsing options
-    arg_parser = argparse.ArgumentParser(description="Enjoy the cool scons building tool!")
+    arg_parser = argparse.ArgumentParser(description="Enjoy the cool building tool!")
     arg_parser.add_argument('-c', '--clean', action='store_true', dest='clean', default=False, help='clean unversioned documents')
-    arg_parser.add_argument('-t', '--thorough', action='store_true', dest='thorough', default=False, help='build missing files even when sources have not changed')
-    arg_parser.add_argument('-j', '--multithread', action='store', dest='no_of_processes', type=int, default=1, help='create multiple build processes')
-    arg_parser.add_argument('-r', '--repo', action='store_true', dest='repo', default=False, help='check if all necessary files were added in repository. Ignores in the subsequent build run SConscript_local-files')
-    arg_parser.add_argument('-i', '--ignore-local', action='store_true', dest='ignore_local', default=False, help='ignore local SConscript files')
+#    arg_parser.add_argument('-t', '--thorough', action='store_true', dest='thorough', default=False, help='build missing files even when sources have not changed')
+#    arg_parser.add_argument('-r', '--repo', action='store_true', dest='repo', default=False, help='check if all necessary files were added in repository. Ignores in the subsequent build run SConscript_local-files')
+#    arg_parser.add_argument('-i', '--ignore-local', action='store_true', dest='ignore_local', default=False, help='ignore local SConscript files')
     arg_parser.add_argument('-s', '--silent', action='store_true', dest='silent', default=False, help='Puts latex into silent mode. No output will be shown and no errors as well. Only a list at the end which file was not successful.')
 
     arguments = arg_parser.parse_args()
@@ -89,5 +113,4 @@ if __name__ == '__main__': #For windows-parallelization this is needed
     print('scons: Reading SConscript files...')
     SConscript(scripts)
 
-
-    print('scons: Done.')
+    print('Done.')
