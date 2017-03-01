@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.43"
+   width="18mm"
+   height="14mm"
+   version="1.0"
+   sodipodi:docbase="C:\Dokumente und Einstellungen\MovGP0\Desktop"
+   sodipodi:docname="Symbol_Manual_operation_on_Vent.svg">
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs5" />
+  <sodipodi:namedview
+     inkscape:window-height="742"
+     inkscape:window-width="988"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     showgrid="true"
+     gridspacingy="1mm"
+     gridspacingx="1mm"
+     gridoriginy="0mm"
+     gridoriginx="0mm"
+     gridtolerance="0.5mm"
+     gridempspacing="10"
+     inkscape:grid-points="true"
+     inkscape:guide-points="true"
+     guidetolerance="0.5mm"
+     inkscape:zoom="5.6568543"
+     inkscape:cx="34.26651"
+     inkscape:cy="36.441333"
+     inkscape:window-x="32"
+     inkscape:window-y="-4"
+     inkscape:current-layer="svg2"
+     inkscape:document-units="mm" />
+  <path
+     style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="M 60.322835,3.5433045 L 42.606299,3.5433045 L 42.606299,38.976375 L 60.322835,38.976375"
+     id="path1348" />
+  <path
+     style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="M 42.606299,17.716533 L 28.43307,17.716532"
+     id="path1358"
+     sodipodi:nodetypes="cc" />
+  <path
+     style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000012px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="M 42.606299,24.803153 L 28.43307,24.803152 L 22.721456,30.421017"
+     id="path1360"
+     sodipodi:nodetypes="ccc" />
+  <path
+     sodipodi:type="arc"
+     style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.99842536;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path2251"
+     sodipodi:cx="3.5433071"
+     sodipodi:cy="21.259842"
+     sodipodi:rx="3.5433071"
+     sodipodi:ry="3.5433071"
+     d="M 3.7123048,24.799117 A 3.5433071,3.5433071 0 1 1 3.7227754,24.798601"
+     sodipodi:start="1.5230833"
+     sodipodi:end="7.80331"
+     sodipodi:open="true"
+     transform="matrix(0.5,0,0,0.5,11.98838,25.30296)" />
+  <path
+     sodipodi:type="arc"
+     style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.99921262;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path2253"
+     sodipodi:cx="3.5433071"
+     sodipodi:cy="21.259842"
+     sodipodi:rx="10.629921"
+     sodipodi:ry="10.629921"
+     d="M 4.0503004,31.877665 A 10.629921,10.629921 0 1 1 4.0523518,31.877567"
+     sodipodi:start="1.5230833"
+     sodipodi:end="7.8060754"
+     sodipodi:open="true"
+     transform="translate(10.21673,14.67304)" />
+  <path
+     style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="M 26.158956,18.466532 L 18.216535,26.283953"
+     id="path3130"
+     sodipodi:nodetypes="cc" />
+  <path
+     sodipodi:type="arc"
+     style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.99921262;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path3132"
+     sodipodi:cx="17.716536"
+     sodipodi:cy="21.259842"
+     sodipodi:rx="3.5433071"
+     sodipodi:ry="3.5433071"
+     d="M 17.885533,24.799117 A 3.5433071,3.5433071 0 1 1 17.886217,24.799084"
+     sodipodi:start="1.5230833"
+     sodipodi:end="7.8060754"
+     sodipodi:open="true"
+     transform="translate(10.71654,-1.34452e-6)" />
+</svg>

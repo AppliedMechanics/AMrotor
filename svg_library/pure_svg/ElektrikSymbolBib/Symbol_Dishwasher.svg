@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.43"
+   width="12mm"
+   height="12mm"
+   version="1.0"
+   sodipodi:docbase="C:\Dokumente und Einstellungen\MovGP0\Desktop"
+   sodipodi:docname="Elektrogerät.svg">
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs5" />
+  <sodipodi:namedview
+     inkscape:window-height="742"
+     inkscape:window-width="1024"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     showgrid="true"
+     gridspacingy="1mm"
+     gridspacingx="1mm"
+     gridoriginy="0mm"
+     gridoriginx="0mm"
+     gridtolerance="0.5mm"
+     gridempspacing="10"
+     inkscape:grid-points="true"
+     inkscape:guide-points="true"
+     guidetolerance="0.5mm"
+     inkscape:zoom="1.4142136"
+     inkscape:cx="239.32682"
+     inkscape:cy="6.2869507"
+     inkscape:window-x="1020"
+     inkscape:window-y="-4"
+     inkscape:current-layer="svg2"
+     inkscape:document-units="mm"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:grid-bbox="true" />
+  <rect
+     style="fill:none;fill-opacity:1;stroke:#000000;stroke-opacity:1"
+     id="rect14768"
+     width="35.433071"
+     height="35.433071"
+     x="3.543313"
+     y="3.5433097" />
+  <path
+     sodipodi:type="arc"
+     style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-opacity:1"
+     id="path14770"
+     sodipodi:cx="124.01575"
+     sodipodi:cy="24.803148"
+     sodipodi:rx="3.5433071"
+     sodipodi:ry="3.5433071"
+     d="M 120.47251,24.78091 A 3.5433071,3.5433071 0 1 1 120.47244,24.802304"
+     sodipodi:start="3.1478689"
+     sodipodi:end="9.4250163"
+     sodipodi:open="true"
+     transform="translate(-102.7559,-3.543327)" />
+  <path
+     sodipodi:type="arc"
+     style="fill:none;fill-opacity:1;stroke:#000000;stroke-opacity:1"
+     id="path14772"
+     sodipodi:cx="124.01575"
+     sodipodi:cy="106.29921"
+     sodipodi:rx="10.629921"
+     sodipodi:ry="10.629921"
+     d="M 113.38604,106.23249 A 10.629921,10.629921 0 1 1 113.38583,106.29668"
+     sodipodi:start="3.1478689"
+     sodipodi:end="9.4250163"
+     sodipodi:open="true"
+     transform="translate(-102.7559,-85.03938)" />
+  <path
+     style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="M 3.5433071,3.5433059 L 14.173227,14.173227"
+     id="path14774" />
+  <path
+     style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="M 38.976377,3.5433059 L 28.346457,14.173227"
+     id="path14776" />
+  <path
+     style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="M 28.346457,28.346462 L 38.976377,38.976383"
+     id="path14778" />
+  <path
+     style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="M 3.5433071,38.976383 L 14.173227,28.346462"
+     id="path14780" />
+</svg>

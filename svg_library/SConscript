@@ -1,3 +1,0 @@
-script_pure=['pure_svg/SConscript']
-script_tex=['tex_svg/SConscript']
-SConscript(scripts)
