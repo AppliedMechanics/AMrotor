@@ -1,13 +1,14 @@
-classdef Lager < handle
+classdef Sensor < matlab.mixin.Heterogeneous
    properties
       name
       position
+      direction
    end
    methods
       %Konstruktor
-       function obj = Lager(arg)
+       function obj = Sensor(arg)
          if nargin == 0
-           obj.name = "starkes Lager!";
+           obj.name = "Depp";
          else
            obj.name = arg.name;
            obj.position=arg.position;

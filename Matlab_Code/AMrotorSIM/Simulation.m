@@ -1,36 +1,52 @@
-% Clean up
+% Johannes Maierhofer
+% 28.03.2017
+
+%% Clean up
 
 close all
 clear all
 clc
 
-%
+%% Paths
 addpath(strcat(fileparts(which(mfilename)),'\modules'));
+   %% Add Paths
+   addpath(strcat(fileparts(which(mfilename)),'\modules\Rotor'));
+   addpath(strcat(fileparts(which(mfilename)),'\modules\Lager'));
+   addpath(strcat(fileparts(which(mfilename)),'\modules\Sensor'));
+   
+  addpath(strcat(fileparts(which(mfilename)),'\modules\Simulation'));
+  addpath(strcat(fileparts(which(mfilename)),'\modules\Graphs'));
+      addpath(strcat(fileparts(which(mfilename)),'\modules\Graphs\Campbell'));
+           
+%% Building rotorsystem
 
-Config
+r = Rotorsystem("Cooles Rotorsystem");
+r.show;
 
-%% Building rotor
+r.rotor.mesh()
+r.rotor.print()
+%r.rotor.visu()
 
-r = Rotor("Cooler Rotor");
-r.show_Rotor;
+r.compute_matrices();
+r.reduce_modal();
 
-%% Adding Sensors to Rotor
-for i=cnfg_sensor
-r.add_Sensor(i);
+
+for i=r.lager
+    i.print();
 end
 
 for i=r.sensors
     i.print();
 end
 
-%% Adding Lager to Rotor
-for i=cnfg_lager
-r.add_Lager(i);
-end
 
-for i=r.lager
-    i.print();
-end
 
 %% Running Simulation
-testfunction();
+
+Modalanalyse(r).show()
+Hochlaufanalyse(r,[100:10:200]).show()
+
+%% Postprocessing
+
+c = Campbell(r.rotor);
+c.show();

@@ -1,22 +1,26 @@
-classdef Sensor < handle
+classdef Lager < matlab.mixin.Heterogeneous
    properties
       name
       position
-      direction
    end
    methods
       %Konstruktor
-       function obj = Sensor(arg)
+       function obj = Lager(arg)
          if nargin == 0
-           obj.name = "Depp";
+           obj.name = "starkes Lager!";
          else
            obj.name = arg.name;
            obj.position=arg.position;
          end
+         addpath(strcat(fileparts(which(mfilename)),'\fcns'));
       end
       
       function print(obj)
          disp(obj.name);
+      end
+      
+      function [M,K] = compute_matrices(obj)
+        disp('Berechne Lagersteifigkeit')
       end
    end
 end
