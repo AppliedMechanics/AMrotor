@@ -5,13 +5,14 @@ classdef Orbit < handle
    end
    methods
        %Konstruktor
-       function obj = Wegorbit(a)
+       function obj = Orbit(a)
          if nargin == 0
            disp('Keine Orbitdarstellung möglich ohne Rotorsystem')
          else
            obj.rotorsystem = a;
-           obj.name = obj.rotorsystem.lager
+           obj.name = strcat(obj.rotorsystem.name,'- Wegorbits');
          end
+        addpath(strcat(fileparts(which(mfilename)),'\fcns'));
        end
       
       function show(obj)

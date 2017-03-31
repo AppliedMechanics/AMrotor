@@ -1,15 +1,16 @@
-function [h] = assembling_loads (pos, loads, rotor)
+function [h] = assembling_loads (load, rotor)
 
+pos = load.cnfg.position;
 rotorpar = rotor.cnfg;
 nodes = rotor.nodes;
 moment_of_inertia = rotor.moment_of_inertia;
 
 %pos die Positionen 
 
-h1_ZPcos = loads.h.ZPcos;
-h1_ZPsin = loads.h.ZPsin;
-h1_DBcos = loads.h.DBcos;
-h1_DBsin = loads.h.DBsin;
+h1_ZPcos = load.h.h_ZPcos;
+h1_ZPsin = load.h.h_ZPsin;
+h1_DBcos = load.h.h_DBcos;
+h1_DBsin = load.h.h_DBsin;
 
 
 n_nodes = length(nodes);
@@ -17,6 +18,26 @@ M=zeros(n_nodes*4, n_nodes*4);
 D=zeros(n_nodes*4, n_nodes*4);
 G=zeros(n_nodes*4, n_nodes*4);
 K=zeros(n_nodes*4, n_nodes*4);
+
+h.h = zeros(4*n_nodes,1);   
+
+%centripetal-force unbalance, rotating
+h.h_ZPsin = h.h;                                      
+h.h_ZPcos = h.h;   
+
+%unbalance mass inertia force 
+h.h_DBsin = h.h;                                 
+h.h_DBcos = h.h;
+
+
+%Constant_fix_force   e.g wight force
+h.h_sin = h.h;                     
+h.h_cos = h.h;
+
+
+%rotating_fix_force%   e.g  bearing exitation 
+h.h_rotsin = h.h;                   
+h.h_rotcos = h.h;
 
 sd = rotorpar.shear_def;
 
@@ -67,15 +88,15 @@ sd = rotorpar.shear_def;
     z3 = n_nodes*2+n0*2-1;
     z4 = n_nodes*2+n0*2+2;
     
-    h.h_ZPcos(z1:z2) = h.h_ZPcos(z1:z2) + bv.'*h1.h_ZPcos(1);
-    h.h_ZPcos(z3:z4) = h.h_ZPcos(z3:z4) + bw.'*h1.h_ZPcos(3);
-    h.h_ZPsin(z1:z2) = h.h_ZPsin(z1:z2) - bv.'*h1.h_ZPsin(1);
-    h.h_ZPsin(z3:z4) = h.h_ZPsin(z3:z4) + bw.'*h1.h_ZPsin(3);
+    h.h_ZPcos(z1:z2) = h.h_ZPcos(z1:z2) + bv.'*h1_ZPcos(1);
+    h.h_ZPcos(z3:z4) = h.h_ZPcos(z3:z4) + bw.'*h1_ZPcos(3);
+    h.h_ZPsin(z1:z2) = h.h_ZPsin(z1:z2) - bv.'*h1_ZPsin(1);
+    h.h_ZPsin(z3:z4) = h.h_ZPsin(z3:z4) + bw.'*h1_ZPsin(3);
     
-    h.h_DBcos(z1:z2) = h.h_DBcos(z1:z2) + bv.'*h1.h_DBcos(1);
-    h.h_DBcos(z3:z4) = h.h_DBcos(z3:z4) - bw.'*h1.h_DBcos(3);
-    h.h_DBsin(z1:z2) = h.h_DBsin(z1:z2) + bv.'*h1.h_DBsin(1);
-    h.h_DBsin(z3:z4) = h.h_DBsin(z3:z4) + bw.'*h1.h_DBsin(3);
+    h.h_DBcos(z1:z2) = h.h_DBcos(z1:z2) + bv.'*h1_DBcos(1);
+    h.h_DBcos(z3:z4) = h.h_DBcos(z3:z4) - bw.'*h1_DBcos(3);
+    h.h_DBsin(z1:z2) = h.h_DBsin(z1:z2) + bv.'*h1_DBsin(1);
+    h.h_DBsin(z3:z4) = h.h_DBsin(z3:z4) + bw.'*h1_DBsin(3);
 
 end
     

@@ -23,8 +23,8 @@ classdef Rotor < handle
        end
        
        function mesh(obj)
+           disp('Mesh ....')
           [obj.nodes] = meshing(obj.cnfg);  %function divide rotor in thin disks 
-          disp('Knoten'+length(obj.nodes));
        end
       
       function print(obj)
@@ -42,8 +42,8 @@ classdef Rotor < handle
         
         n_nodes = length(obj.nodes);
 
-        D=zeros(n_nodes*4, n_nodes*4);
-        %D=0.01*M+0.0002*K;
+        %D=zeros(n_nodes*4, n_nodes*4);
+        D=0.01*M+0.0002*K;
       end
       
       function visu(obj)

@@ -5,7 +5,7 @@ cnfg_rotor.name = "Testrotor vom Feinsten";
 cnfg_rotor.shear_def = 1;     % 1 = Timoshenko or 0 = Bernoulli beam theoy
 
 %rotor geometry             [z1,da,di;   z2,da,di]  
-cnfg_rotor.rotor_dimensions = [0,15,0;300,15,0;350,150,0;600,15,0]*1e-3; %[m] %Angefangen bei 0, die Durchmessersprünge am ende des Abschnites eingeben
+cnfg_rotor.rotor_dimensions = [0,15,0;400,15,0;450,150,0;600,15,0]*1e-3; %[m] %Angefangen bei 0, die Durchmessersprünge am ende des Abschnites eingeben
 cnfg_rotor.shear_factor   = 0.9;  %!!!!!!!!!wird Automatisch korregiert wenn Kreisring.
                                 %!!!!!!!!!Schubkorrekrutfaktor für Kreisquerschnitt 0.9[-], Kreisring 0.5[-]
 
@@ -27,16 +27,16 @@ cnfg_disc(1).Iz = 1e-4;                         %disc mom. of inertia [m^4]
 %% ========================================================================
 % Sensors
 cnfg_sensor(1).name = 'Sepp';
-cnfg_sensor(1).position=0.025;
+cnfg_sensor(1).position=0.050;
 cnfg_sensor(1).type=1;
 
 cnfg_sensor(2).name='Hans';
-cnfg_sensor(2).position=0.225;
+cnfg_sensor(2).position=0.550;
 cnfg_sensor(2).type=1;
 
-cnfg_sensor(3).name='Kraft';
-cnfg_sensor(3).position=0.525;
-cnfg_sensor(3).type=2;
+% cnfg_sensor(3).name='Kraft';
+% cnfg_sensor(3).position=0.525;
+% cnfg_sensor(3).type=2;
 
 %% ========================================================================
 % Lager
@@ -49,12 +49,32 @@ cnfg_lager(1).stiffness=5e7;%7.0e5;              %[N/m]
 cnfg_lager(2).name = 'Straffes lässiges Lager';
 cnfg_lager(2).position=600e-3;                        %[m]
 cnfg_lager(2).type=1;
-cnfg_lager(2).stiffness=4e3;                  %[N/m]
+cnfg_lager(2).stiffness=5e7;                  %[N/m]
 
 %% ========================================================================
 % Unwuchten
 cnfg_unbalance(1).name = 'Geplante Unwucht';
 cnfg_unbalance(1).position = 300e-3;
-cnfg_unbalance(1).betrag = 5e-3;
+cnfg_unbalance(1).betrag = 5e-4;
 cnfg_unbalance(1).winkellage = 0;
+
+%% Infos
+% %KoSy:
+%        Z-Längsachse des Rotors
+%        X-Z-Ebene
+%        verschiebung in X1       X1
+%        drehung um Y1            Beta_1
+%        verschiebung in X2       X2
+%        drehung um Y2            Beta_2
+%                                  :
+%                                 Xn
+%        
+%        Y-Z-Ebene
+%        verschiebung in Y1       Y1
+%        drehung um Z1            Alpha_1
+%        verschiebung in Y2       Y3
+%        drehung um Z2            Alpha_2
+%                                   :
+%                                 Yn
+%                                 Alpha_n
 

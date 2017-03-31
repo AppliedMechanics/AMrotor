@@ -62,30 +62,30 @@ sd = rotorpar.shear_def;
     
     %Masse   
     M(z1:z2,z1:z2) = M(z1:z2,z1:z2) + m(1,1)*(bv.'*bv); %für X - Richtung
-    M(z3:z4,z3:z4) = M(z3:z4,z3:z4) + m(2,2)*(bw.'*bw); %für Y - Richtung
+    M(z3:z4,z3:z4) = M(z3:z4,z3:z4) + m(3,3)*(bw.'*bw); %für Y - Richtung
     
     %Daempfung
     D(z1:z2,z1:z2) = D(z1:z2,z1:z2) + d(1,1)*(bv.'*bv); %für X - Richtung
-    D(z1:z2,z3:z4) = D(z1:z2,z3:z4) + d(2,2)*(bw.'*bw); %für Y - Richtung Koppelterm
+    D(z1:z2,z3:z4) = D(z1:z2,z3:z4) + d(1,3)*(bw.'*bw); %für Y - Richtung Koppelterm
     
-    D(z3:z4,z3:z4) = D(z3:z4,z3:z4) + d(1,2)*(bw.'*bw); %für Y - Richtung
-    D(z3:z4,z1:z2) = D(z3:z4,z1:z2) + d(2,1)*(bv.'*bv); %für X - Richtung Koppelterm
+    D(z3:z4,z3:z4) = D(z3:z4,z3:z4) + d(3,3)*(bw.'*bw); %für Y - Richtung
+    D(z3:z4,z1:z2) = D(z3:z4,z1:z2) + d(3,1)*(bv.'*bv); %für X - Richtung Koppelterm
     
 
     %Gyroskopie
     G(z1:z2,z1:z2) = G(z1:z2,z1:z2) + g(1,1)*(bv.'*bv); %für X - Richtung
-    G(z1:z2,z3:z4) = G(z1:z2,z3:z4) + g(2,2)*(bw.'*bw); %für Y - Richtung Koppelterm
+    G(z1:z2,z3:z4) = G(z1:z2,z3:z4) + g(1,3)*(bw.'*bw); %für Y - Richtung Koppelterm
     
-    G(z3:z4,z3:z4) = G(z3:z4,z3:z4) + g(1,2)*(bw.'*bw); %für Y - Richtung
-    G(z3:z4,z1:z2) = G(z3:z4,z1:z2) + g(2,1)*(bv.'*bv); %für X - Richtung Koppelterm
+    G(z3:z4,z3:z4) = G(z3:z4,z3:z4) + g(3,3)*(bw.'*bw); %für Y - Richtung
+    G(z3:z4,z1:z2) = G(z3:z4,z1:z2) + g(3,1)*(bv.'*bv); %für X - Richtung Koppelterm
 
     
     %Steifigkeit
     K(z1:z2,z1:z2) = K(z1:z2,z1:z2) + k(1,1)*(bv.'*bv); %für X - Richtung
-    K(z1:z2,z3:z4) = K(z1:z2,z3:z4) + k(1,2)*(bw.'*bw); %für Y - Richtung Koppelterm
+    K(z1:z2,z3:z4) = K(z1:z2,z3:z4) + k(1,3)*(bw.'*bw); %für Y - Richtung Koppelterm
     
-    K(z3:z4,z3:z4) = K(z3:z4,z3:z4) + k(2,2)*(bw.'*bw); %für Y - Richtung
-    K(z3:z4,z1:z2) = K(z3:z4,z1:z2) + k(2,1)*(bv.'*bv); %für X - Richtung Koppelterm
+    K(z3:z4,z3:z4) = K(z3:z4,z3:z4) + k(3,3)*(bw.'*bw); %für Y - Richtung
+    K(z3:z4,z1:z2) = K(z3:z4,z1:z2) + k(3,1)*(bv.'*bv); %für X - Richtung Koppelterm
 
 end
     

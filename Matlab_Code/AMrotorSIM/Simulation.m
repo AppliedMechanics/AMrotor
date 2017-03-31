@@ -1,5 +1,5 @@
 % Johannes Maierhofer
-% 28.03.2017,29.03.2017,30.03.2017
+% 28.03.2017,29.03.2017,30.03.2017,31.03.2017
 
 %% Clean up
 close all
@@ -18,6 +18,7 @@ addpath(strcat(fileparts(which(mfilename)),'\modules'));
   addpath(strcat(fileparts(which(mfilename)),'\modules\Simulation'));
   addpath(strcat(fileparts(which(mfilename)),'\modules\Graphs'));
       addpath(strcat(fileparts(which(mfilename)),'\modules\Graphs\Campbell'));
+    addpath(strcat(fileparts(which(mfilename)),'\modules\Graphs\Orbits'));
            
 %% Building rotorsystem
 
@@ -25,46 +26,32 @@ r = Rotorsystem("Cooles Rotorsystem");
 r.show;
 
 r.rotor.mesh()
-%r.rotor.visu()
+r.rotor.visu()
 
 r.compute_matrices();
 r.compute_loads();
-%r.reduce_modal(10);
+r.reduce_modal(10);
 
 %r.sichern();
 
 %% Running system analyses
-Modalanalyse(r).show()
+%Modalanalyse(r).show()
 
 %% Running Time Simulation
 
-%St_Lsg = Stationaere_Lsg(r,150);
-%St_Lsg.show()
-%St_Lsg.compute()
+St_Lsg = Stationaere_Lsg(r,50,[0:1e-3:5]);
+St_Lsg.show()
+St_Lsg.compute()
 
-Hochlaufanalyse(r,[100:10:200]).show()
+w = Wegorbit(r);
+w.plot(r.sensors(1:2));
+
+%data = r.generate_sensor_output();
+
+
+%Hochlaufanalyse(r,[100:10:200]).show()
 
 %% Postprocessing
 
-c = Campbell(r);
-c.show();
-
-%% Infos
-% %KoSy:
-%        Z-Längsachse des Rotors
-%        X-Z-Ebene
-%        verschiebung in X1       X1
-%        drehung um Y1            Beta_1
-%        verschiebung in X2       X2
-%        drehung um Y2            Beta_2
-%                                  :
-%                                 Xn
-%        
-%        Y-Z-Ebene
-%        verschiebung in Y1       Y1
-%        drehung um Z1            Alpha_1
-%        verschiebung in Y2       Y3
-%        drehung um Z2            Alpha_2
-%                                   :
-%                                 Yn
-%                                 Alpha_n
+%c = Campbell(r);
+%c.show();

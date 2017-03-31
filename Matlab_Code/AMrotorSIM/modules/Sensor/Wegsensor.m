@@ -6,5 +6,10 @@ classdef Wegsensor < Sensor
         function obj=Wegsensor(variable) 
            obj = obj@Sensor(variable); 
         end 
+        
+        function [x_pos,beta_pos,y_pos,alpha_pos] = read_values(obj,rotorsystem)
+            z_pos=obj.position;
+            [x_pos,beta_pos,y_pos,alpha_pos] = displacement_calc_at_pos(z_pos,rotorsystem);
+        end
    end
 end

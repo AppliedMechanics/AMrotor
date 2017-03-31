@@ -13,6 +13,7 @@ classdef Sensor < matlab.mixin.Heterogeneous
            obj.name = arg.name;
            obj.position=arg.position;
          end
+        addpath(strcat(fileparts(which(mfilename)),'\fcns'));
       end
       
       function print(obj)

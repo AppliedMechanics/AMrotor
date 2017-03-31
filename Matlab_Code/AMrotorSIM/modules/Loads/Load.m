@@ -1,7 +1,8 @@
-classdef Load < matlab.mixin.Heterogeneous
+classdef Load < matlab.mixin.Heterogeneous & handle
    properties
       cnfg=struct([])    
       name
+      h
    end
    methods
        %Konstruktor

@@ -8,6 +8,8 @@ classdef Rotorsystem < handle
       sensors = Sensor().empty
       lager = Lager().empty
       loads = Load().empty
+      
+      time_result
    end
    %%
    methods
@@ -36,7 +38,8 @@ classdef Rotorsystem < handle
         for i=obj.lager
             i.print();
         end
-
+            disp('----------------------------------------------')
+            disp('--------------- Sensors ------------------------')
         for i=obj.sensors
             i.print();
         end
@@ -63,10 +66,14 @@ classdef Rotorsystem < handle
         
       obj.systemmatrizen.M=M; obj.systemmatrizen.G=G; obj.systemmatrizen.D=D; obj.systemmatrizen.K=K;
       
+      obj.reduktionsmatrizen.EVmr = eye(size(M));
+      obj.reduktionsmatrizen.EWmr=0;
+      
       end
       
       function compute_loads(obj) 
-            h.h = zeros(4*length(obj.rotor.nodes),1);   
+          
+          h.h = zeros(4*length(obj.rotor.nodes),1);   
 
             %centripetal-force unbalance, rotating
             h.h_ZPsin = h.h;                                      
@@ -85,19 +92,24 @@ classdef Rotorsystem < handle
             %rotating_fix_force%   e.g  bearing exitation 
             h.h_rotsin = h.h;                   
             h.h_rotcos = h.h;
-            
+
+          
             for i=obj.loads
             %UNBALANCE% centripetal-force and mass inertia force
-            hu = i.compute_load();
-            [hua]=assembling_loads(i.cnfg.position,h,obj.rotor);
-            h=h+hua;
+            i.compute_load();
+            [hi]=assembling_loads(i,obj.rotor);
+            
+                fields = fieldnames(h);
+                for j=1:numel(fields)
+                    h.(fields{j})=h.(fields{j})+hi.(fields{j});
+                end
             end
             
             obj.systemmatrizen.h = h;
       end 
       
       function reduce_modal(obj,number_of_modes)
-          disp('Reduzieren auf Moden: '+ number_of_modes)
+          %disp('Reduzieren auf Moden: '+ number_of_modes)
           
           M=obj.systemmatrizen.M; G=obj.systemmatrizen.G; D=obj.systemmatrizen.D; K=obj.systemmatrizen.K;
           h=obj.systemmatrizen.h;
@@ -107,6 +119,21 @@ classdef Rotorsystem < handle
           
           obj.reduktionsmatrizen.EVmr = EVmr;
           obj.reduktionsmatrizen.EWmr = EWmr;
+      end
+      
+      function clear_time_result(obj)
+        obj.time_result = [];
+      end
+      
+      function data = generate_sensor_output(obj)
+          n=0;
+          for i=obj.sensors  
+              n=n+1;
+              data(n).name=i.name;
+              data(n).unit=i.unit;
+              [x_pos,beta_pos,y_pos,alpha_pos]=i.read_values(obj);
+              data(n).timedata=[x_pos;beta_pos;y_pos;alpha_pos];
+          end
       end
       
       function sichern(obj)

@@ -1,10 +1,5 @@
 function Z0 = cumpute_Z0_rotor(M,phi, omega,domega,method)
 
-
-
-
-
-
 % initial conditions
 dim_M=size(M);              % parameter for calculation 
 
