@@ -1,0 +1,42 @@
+classdef Unbalance < handle
+   properties
+      cnfg=struct([])
+      
+      name
+   end
+   methods
+       %Konstruktor
+       function obj = Unbalance(a)
+         if nargin == 0
+           obj.name = "Geplante Unwucht";
+         else
+           obj.cnfg = a;
+           obj.name = obj.cnfg.name;
+         end
+         addpath(strcat(fileparts(which(mfilename)),'\fcns'));
+       end
+       
+        function [h] = compute_load(obj)
+            % Positionen in Gesamtvektor
+    z1 = n0*2-1;
+    z2 = n0*2+2;
+    z3 = n_nodes*2+n0*2-1;
+    z4 = n_nodes*2+n0*2+2;
+    
+    h.h_ZPcos(z1:z2) = h.h_ZPcos(z1:z2) + bv.'*Parameter(n,2)*cos(Parameter(n,3));
+    h.h_ZPcos(z3:z4) = h.h_ZPcos(z3:z4) + bw.'*Parameter(n,2)*sin(Parameter(n,3));
+    h.h_ZPsin(z1:z2) = h.h_ZPsin(z1:z2) - bv.'*Parameter(n,2)*sin(Parameter(n,3));
+    h.h_ZPsin(z3:z4) = h.h_ZPsin(z3:z4) + bw.'*Parameter(n,2)*cos(Parameter(n,3));
+    
+    h.h_DBcos(z1:z2) = h.h_DBcos(z1:z2) + bv.'*Parameter(n,2)*sin(Parameter(n,3));
+    h.h_DBcos(z3:z4) = h.h_DBcos(z3:z4) - bw.'*Parameter(n,2)*cos(Parameter(n,3));
+    h.h_DBsin(z1:z2) = h.h_DBsin(z1:z2) + bv.'*Parameter(n,2)*cos(Parameter(n,3));
+    h.h_DBsin(z3:z4) = h.h_DBsin(z3:z4) + bw.'*Parameter(n,2)*sin(Parameter(n,3));
+            
+            
+            
+            [h] = add_unbalance_mass(h, unbalance_mass_1, rotorpar, nodes, moment_of_inertia);
+        end
+        
+   end
+end

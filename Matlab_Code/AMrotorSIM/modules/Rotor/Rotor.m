@@ -37,8 +37,13 @@ classdef Rotor < handle
         M  = compute_mass_matrix(obj.cnfg,obj.moment_of_inertia, obj.nodes);
         %stiffnesmatrix
         K  = compute_stiffness_matrix(obj.cnfg, obj.moment_of_inertia, obj.nodes);
-        G = 0;
-        D = 0;
+        %gyroskopie
+        G  = 2*compute_gyroscopic_matrix(obj.cnfg, obj.moment_of_inertia, obj.nodes);
+        
+        n_nodes = length(obj.nodes);
+
+        D=zeros(n_nodes*4, n_nodes*4);
+        %D=0.01*M+0.0002*K;
       end
       
       function visu(obj)

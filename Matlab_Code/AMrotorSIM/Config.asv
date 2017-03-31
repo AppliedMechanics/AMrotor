@@ -53,8 +53,5 @@ cnfg_lager(2).stiffness=4e3;                  %[N/m]
 
 %% ========================================================================
 % Unwuchten
-cnfg_unbalance(1).name = 'Geplante Unwucht';
-cnfg_unbalance(1).position = 300e-3;
-cnfg_unbalance(1).betrag = 5e-3;
-cnfg_unbalance(1).winkellage = 0;
+cnfg_unwucht(1).name
 

@@ -7,6 +7,7 @@ classdef Rotorsystem < handle
       discs = Massescheibe().empty
       sensors = Sensor().empty
       lager = Lager().empty
+      
       loads = Load().empty
    end
    %%
@@ -18,6 +19,10 @@ classdef Rotorsystem < handle
          else
            obj.name = a;
          end
+          % Add Paths
+               addpath(strcat(fileparts(which(mfilename)),'\Rotor'));
+               addpath(strcat(fileparts(which(mfilename)),'\Lager'));
+               addpath(strcat(fileparts(which(mfilename)),'\Sensor'));
           %
          assemble_rotorsystem(obj)
        end
@@ -144,7 +149,7 @@ classdef Rotorsystem < handle
           end 
       end
       % Loads
-      function add_Unbalance(obj,arg)
+      function add_Un(obj,arg)
           obj.loads = Unbalance_static(arg);
       end
       
