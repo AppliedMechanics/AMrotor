@@ -19,7 +19,6 @@ classdef Rotor < handle
            obj.cnfg = a;
            obj.name = obj.cnfg.name;
          end
-         addpath(strcat(fileparts(which(mfilename)),'\fcns'));
        end
        
        function mesh(obj)
@@ -47,7 +46,6 @@ classdef Rotor < handle
       end
       
       function visu(obj)
-         addpath(strcat(fileparts(which(mfilename)),'\..\Graphs\Geometrie'));
          disp('Start visualization');
          Visu_Rotorgeometrie(obj).show();
       end 

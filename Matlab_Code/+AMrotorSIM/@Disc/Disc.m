@@ -1,4 +1,4 @@
-classdef Massescheibe < handle
+classdef Disc < handle
    properties
       cnfg=struct([])
       
@@ -6,14 +6,13 @@ classdef Massescheibe < handle
    end
    methods
        %Konstruktor
-       function obj = Massescheibe(a)
+       function obj = Disc(a)
          if nargin == 0
            obj.name = "Mittelmäßige Massengewichtsscheibe";
          else
            obj.cnfg = a;
            obj.name = obj.cnfg.name;
          end
-         addpath(strcat(fileparts(which(mfilename)),'\fcns'));
        end
       
       function print(obj)

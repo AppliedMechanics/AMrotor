@@ -4,7 +4,7 @@ classdef Rotorsystem < handle
       systemmatrizen
       reduktionsmatrizen
       rotor = Rotor().empty
-      discs = Massescheibe().empty
+      discs = Disc().empty
       sensors = Sensor().empty
       lager = Lager().empty
       loads = Load().empty
@@ -148,8 +148,8 @@ classdef Rotorsystem < handle
           obj.rotor = Rotor(arg);
       end
       % Disc
-      function add_Massescheibe(obj,arg)
-          obj.discs = Massescheibe(arg);
+      function add_Disc(obj,arg)
+          obj.discs = Disc(arg);
       end
       % Sensor
       function add_Sensor(obj,arg)
@@ -187,7 +187,7 @@ classdef Rotorsystem < handle
             
            % Adding discs
             for i=cnfg_disc
-            obj.add_Massescheibe(i);
+            obj.add_Disc(i);
             end
             
             % Adding Sensors to Rotor
