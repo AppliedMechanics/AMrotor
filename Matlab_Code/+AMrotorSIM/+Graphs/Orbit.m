@@ -1,7 +1,7 @@
 classdef Orbit < handle
    properties
       name
-      rotorsystem = Rotorsystem().empty
+      rotorsystem
    end
    methods
        %Konstruktor
@@ -12,7 +12,6 @@ classdef Orbit < handle
            obj.rotorsystem = a;
            obj.name = strcat(obj.rotorsystem.name,'- Wegorbits');
          end
-        addpath(strcat(fileparts(which(mfilename)),'\fcns'));
        end
       
       function show(obj)

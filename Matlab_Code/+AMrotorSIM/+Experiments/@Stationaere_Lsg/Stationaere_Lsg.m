@@ -1,7 +1,7 @@
 classdef Stationaere_Lsg < handle
    properties
       name='Stationäre Lösung'
-      rotorsystem = Rotorsystem().empty
+      rotorsystem
       drehzahl
       time        % time steps [S]
       
@@ -17,7 +17,6 @@ classdef Stationaere_Lsg < handle
            obj.drehzahl = drehzahl;
            obj.time = time;
          end
-         addpath(strcat(fileparts(which(mfilename)),'\fcns'));
        end
       
       function show(obj)

@@ -1,10 +1,10 @@
-classdef Wegsensor < Sensor
+classdef Wegsensor < AMrotorSIM.Sensors.Sensor
    properties
        unit = "m"
    end
    methods
         function obj=Wegsensor(variable) 
-           obj = obj@Sensor(variable); 
+           obj = obj@AMrotorSIM.Sensors.Sensor(variable); 
         end 
         
         function [x_pos,beta_pos,y_pos,alpha_pos] = read_values(obj,rotorsystem)

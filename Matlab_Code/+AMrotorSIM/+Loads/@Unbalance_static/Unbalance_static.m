@@ -1,11 +1,11 @@
-classdef Unbalance_static < Load
+classdef Unbalance_static < AMrotorSIM.Loads.Load
    properties
 
    end
    methods
        %Konstruktor
         function obj=Unbalance_static(variable) 
-           obj = obj@Load(variable); 
+           obj = obj@AMrotorSIM.Loads.Load(variable); 
         end 
        
         function compute_load(obj)

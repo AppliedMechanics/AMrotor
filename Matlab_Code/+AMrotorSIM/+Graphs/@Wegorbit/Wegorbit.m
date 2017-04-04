@@ -1,10 +1,10 @@
-classdef Wegorbit < Orbit
+classdef Wegorbit < AMrotorSIM.Graphs.Orbit
    properties
     unit = "m"
    end
    methods
       function obj=Wegorbit(variable) 
-           obj = obj@Orbit(variable); 
+           obj = obj@AMrotorSIM.Graphs.Orbit(variable); 
       end
       
       function plot(obj,sensors)

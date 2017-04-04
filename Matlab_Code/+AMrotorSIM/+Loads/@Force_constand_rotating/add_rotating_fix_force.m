@@ -1,6 +1,6 @@
-function [h] = add_unbalance_mass(h, Parameter,  rotorpar,  nodes,  moment_of_inertia)
+function [h] = add_rotating_fix_force(h, Parameter,  rotorpar,  nodes,  moment_of_inertia)
 
-% parameter order , unbalance = mass*displacement, psi [in rad]
+% Parameter in Form Position, Unwuchtkraft, psi [in rad]
 
 n_nodes = length(nodes);
 Dim = size(Parameter);
@@ -9,7 +9,7 @@ for n = 1:Dim(1)
     if (Parameter(n,1) < 0 || Parameter(n,1) > nodes(end))
         disp('Unwuchtmasse: ')
         disp(n)
-        error('Angriffspunkt ausserhalb des Rotors');
+        error('Angriffspunkt au√üerhalb des Rotors');
     else
         if Parameter(n,1) == nodes(end)
             % In diesem Fall macht untere Prozedur keinen Sinn, Zuordnung
@@ -17,7 +17,6 @@ for n = 1:Dim(1)
             n0 = n_nodes-1;
             kappa = 1; %Kappa-Wert
             l_Ele = nodes(end)-nodes(end-1);
-            PhiS = sd*moment_of_inertia(end-1,5)/l_Ele^2;
         else
             % Suche den linken Nachbarknoten
             % Falls Angriffspunkt=Knoten, dann Angriffspunkt=linker Nachbar
@@ -26,20 +25,19 @@ for n = 1:Dim(1)
             while nodes(n0+1) <= Parameter(n,1)
                 n0 = n0+1;
             end
-            l_Ele=nodes(n0+1)-nodes(n0);
+            l_Ele=nodes(n0+1)-nodesn0);
             kappa = (Parameter(n,1)-nodes(n0)) / l_Ele;
             
-            
-             while rotorpar.rotor_dimensions(b,1) <= Parameter(n,1)
-                   b=b+1;
-
+            while rotorpar.rotor_dimensions(b,1) < Parameter(n,1)
+                b=b+1;
+                
             end
             PhiS = sd*moment_of_inertia(b,5)/l_Ele^2;
         end
     end
- 
+  
     
-    
+
 %Faktor PhiS ber¸cksichtigt Schubspannung, 
 %da Kreisquerschnitt f¸r beide Ebenen gleich!!    
     
@@ -50,8 +48,7 @@ for n = 1:Dim(1)
     
     
     
-    % Formfunktionen_ohne_schub
-    
+    % Formfunktionen ohne Schub
     %bw=[1-3*kappa^2+2*kappa^3, l_Ele*(-kappa^3+2*kappa^2-kappa), 3*kappa^2-2*kappa^3, l_Ele*(-kappa^3+kappa^2)];
     %bv=[bw(1), -bw(2), bw(3), -bw(4)];
     
@@ -61,13 +58,13 @@ for n = 1:Dim(1)
     z3 = n_nodes*2+n0*2-1;
     z4 = n_nodes*2+n0*2+2;
     
-    h.h_ZPcos(z1:z2) = h.h_ZPcos(z1:z2) + bv.'*Parameter(n,2)*cos(Parameter(n,3));
-    h.h_ZPcos(z3:z4) = h.h_ZPcos(z3:z4) + bw.'*Parameter(n,2)*sin(Parameter(n,3));
-    h.h_ZPsin(z1:z2) = h.h_ZPsin(z1:z2) - bv.'*Parameter(n,2)*sin(Parameter(n,3));
-    h.h_ZPsin(z3:z4) = h.h_ZPsin(z3:z4) + bw.'*Parameter(n,2)*cos(Parameter(n,3));
+    h.h_rotcos(z1:z2) = h.h_rotcos(z1:z2) + bv.'*Parameter(n,2)*cos(Parameter(n,3));
+    h.h_rotcos(z3:z4) = h.h_rotcos(z3:z4) + bw.'*Parameter(n,2)*sin(Parameter(n,3));
+    h.h_rotsin(z1:z2) = h.h_rotsin(z1:z2) - bv.'*Parameter(n,2)*sin(Parameter(n,3));
+    h.h_rotsin(z3:z4) = h.h_rotsin(z3:z4) + bw.'*Parameter(n,2)*cos(Parameter(n,3));
     
-    h.h_DBcos(z1:z2) = h.h_DBcos(z1:z2) + bv.'*Parameter(n,2)*sin(Parameter(n,3));
-    h.h_DBcos(z3:z4) = h.h_DBcos(z3:z4) - bw.'*Parameter(n,2)*cos(Parameter(n,3));
-    h.h_DBsin(z1:z2) = h.h_DBsin(z1:z2) + bv.'*Parameter(n,2)*cos(Parameter(n,3));
-    h.h_DBsin(z3:z4) = h.h_DBsin(z3:z4) + bw.'*Parameter(n,2)*sin(Parameter(n,3));
+    h.h_rotcos(z1:z2) = h.h_rotcos(z1:z2) + bv.'*Parameter(n,2)*sin(Parameter(n,3));
+    h.h_rotcos(z3:z4) = h.h_rotcos(z3:z4) - bw.'*Parameter(n,2)*cos(Parameter(n,3));
+    h.h_rotsin(z1:z2) = h.h_rotsin(z1:z2) + bv.'*Parameter(n,2)*cos(Parameter(n,3));
+    h.h_rotsin(z3:z4) = h.h_rotsin(z3:z4) + bw.'*Parameter(n,2)*sin(Parameter(n,3));
 end

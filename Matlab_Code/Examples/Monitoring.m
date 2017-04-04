@@ -1,14 +1,12 @@
 % Johannes Maierhofer
 %03.04.2017
 
+import AMrotorMONI.*
+
 %% Clean up
 close all
 clear all
 clc
-
-%% Paths
-addpath(strcat(fileparts(which(mfilename)),'\modules'));
-
 
 %% Include Simulation
 

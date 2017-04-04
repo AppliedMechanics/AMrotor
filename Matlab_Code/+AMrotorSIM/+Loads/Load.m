@@ -13,7 +13,6 @@ classdef Load < matlab.mixin.Heterogeneous & handle
            obj.cnfg = a;
            obj.name = obj.cnfg.name;
          end
-         addpath(strcat(fileparts(which(mfilename)),'\fcns'));
        end
        
       function print(obj)

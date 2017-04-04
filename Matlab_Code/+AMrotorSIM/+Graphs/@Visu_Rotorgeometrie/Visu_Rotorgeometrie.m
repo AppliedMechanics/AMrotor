@@ -1,7 +1,7 @@
 classdef Visu_Rotorgeometrie < handle
    properties
       name='Rotor Geometrie'
-      rotor = Rotor().empty
+      rotor = AMrotorSIM.Rotor().empty
    end
    methods
        %Konstruktor
@@ -11,7 +11,6 @@ classdef Visu_Rotorgeometrie < handle
          else
            obj.rotor = a;
          end
-        addpath(strcat(fileparts(which(mfilename)),'\fcns'));
        end
       
       function show(obj)

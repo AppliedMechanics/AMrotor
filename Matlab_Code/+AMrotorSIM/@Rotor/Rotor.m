@@ -7,8 +7,8 @@ classdef Rotor < handle
       
       moment_of_inertia
       
-      sensors=Sensor().empty
-      lager=Lager().empty
+      sensors=AMrotorSIM.Sensors.Sensor().empty
+      lager=AMrotorSIM.Bearings.Lager().empty
    end
    methods
        %Konstruktor
@@ -44,11 +44,6 @@ classdef Rotor < handle
         %D=zeros(n_nodes*4, n_nodes*4);
         D=0.01*M+0.0002*K;
       end
-      
-      function visu(obj)
-         disp('Start visualization');
-         Visu_Rotorgeometrie(obj).show();
-      end 
       
    end
 end

@@ -3,25 +3,29 @@ classdef Rotorsystem < handle
       name
       systemmatrizen
       reduktionsmatrizen
-      rotor = Rotor().empty
-      discs = Disc().empty
-      sensors = Sensor().empty
-      lager = Lager().empty
-      loads = Load().empty
+      
+      cnfg=struct([])
+      
+      rotor = AMrotorSIM.Rotor().empty
+      discs = AMrotorSIM.Disc().empty
+      sensors = AMrotorSIM.Sensors.Sensor().empty
+      lager = AMrotorSIM.Bearings.Lager().empty
+      loads = AMrotorSIM.Loads.Load().empty
       
       time_result
    end
    %%
    methods
        %Konstruktor
-       function obj = Rotorsystem(a)
+       function obj = Rotorsystem(a,name)
          if nargin == 0
            obj.name = "Netter Rotorsystem Name";
          else
-           obj.name = a;
+           obj.cnfg = a;
+           obj.name = name;
          end
           %
-         assemble_rotorsystem(obj)
+         assemble_rotorsystem(obj);
        end
       
       function show(obj)
@@ -73,7 +77,7 @@ classdef Rotorsystem < handle
       
       function compute_loads(obj) 
           
-          h.h = zeros(4*length(obj.rotor.nodes),1);   
+            h.h = zeros(4*length(obj.rotor.nodes),1);   
 
             %centripetal-force unbalance, rotating
             h.h_ZPsin = h.h;                                      
@@ -95,7 +99,7 @@ classdef Rotorsystem < handle
 
           
             for i=obj.loads
-            %UNBALANCE% centripetal-force and mass inertia force
+
             i.compute_load();
             [hi]=assembling_loads(i,obj.rotor);
             
@@ -145,64 +149,68 @@ classdef Rotorsystem < handle
    methods(Access=private)
       % Rotor
       function add_Rotor(obj,arg)
-          obj.rotor = Rotor(arg);
+          obj.rotor = AMrotorSIM.Rotor(arg);
       end
       % Disc
       function add_Disc(obj,arg)
-          obj.discs = Disc(arg);
+          obj.discs = AMrotorSIM.Disc(arg);
       end
       % Sensor
       function add_Sensor(obj,arg)
           switch arg.type
               case 1
-                obj.sensors(end+1) = Wegsensor(arg);
+                obj.sensors(end+1) = AMrotorSIM.Sensors.Wegsensor(arg);
               case 2
-                 obj.sensors(end+1) = Kraftsensor(arg);
+                 obj.sensors(end+1) = AMrotorSIM.Sensors.Kraftsensor(arg);
           end 
       end
       
       % Lager
-      function add_Lager(obj,arg)
+      function add_Bearing(obj,arg)
           switch arg.type
               case 1
-                obj.lager(end+1) = SimpleLager(arg); 
+                obj.lager(end+1) = AMrotorSIM.Bearings.SimpleLager(arg); 
               case 2
-                obj.lager(end+1) = MagnetLager(arg);
+                obj.lager(end+1) = AMrotorSIM.Bearings.MagnetLager(arg);
           end 
       end
       % Loads
-      function add_Unbalance(obj,arg)
-          obj.loads = Unbalance_static(arg);
+      function add_Load(obj,arg)
+          obj.loads = AMrotorSIM.Loads.Unbalance_static(arg);
+      end
+      function add_Force(obj,arg)
+          obj.loads = AMrotorSIM.Loads.Force_constant_fix(arg);
       end
       
       % Assemble
        function assemble_rotorsystem(obj)
-           % Read configfile
-           Config
            
            % Adding rotor
-            for i=cnfg_rotor
+            for i=obj.cnfg.cnfg_rotor
             obj.add_Rotor(i);
             end
             
            % Adding discs
-            for i=cnfg_disc
+            for i=obj.cnfg.cnfg_disc
             obj.add_Disc(i);
             end
             
             % Adding Sensors to Rotor
-            for i=cnfg_sensor
+            for i=obj.cnfg.cnfg_sensor
             obj.add_Sensor(i);
             end
             
             % Adding Lager to Rotor
-            for i=cnfg_lager
-            obj.add_Lager(i);
+            for i=obj.cnfg.cnfg_lager
+            obj.add_Bearing(i);
             end
             
             % Adding Loads to System
-            for i=cnfg_unbalance
-                obj.add_Unbalance(i);
+            for i=obj.cnfg.cnfg_unbalance
+                obj.add_Load(i);
+            end
+            for i=obj.cnfg.cnfg_force_const_fix
+                obj.add_Force(i);
             end
        end
    end
