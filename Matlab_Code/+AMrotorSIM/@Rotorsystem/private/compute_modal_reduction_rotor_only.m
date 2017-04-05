@@ -1,4 +1,3 @@
-
 function [M,K,G,D,h,EVmr,EWmr] = compute_modal_reduction_rotor_only(M,K,G,D,h,moden,modal_reduction)
 
 

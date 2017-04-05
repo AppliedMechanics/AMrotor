@@ -19,7 +19,8 @@ cnfg.cnfg_rotor.dz=0.01;                %set elemet length for meshing
 %% ========================================================================
 % Massescheiben
 cnfg.cnfg_disc(1).name = 'Zusatzscheibe';
-cnfg.cnfg_disc(1).position = 300e-3;                         %disc position [m]
+cnfg.cnfg_disc(1).position = 300e-3;                 %disc position [m]
+cnfg.cnfg_disc(1).radius = 200e-3;  
 cnfg.cnfg_disc(1).m = 5;                             %disc mass [kg]
 cnfg.cnfg_disc(1).Ix = 1e-4;                         %disc mom. of inertia [m^4]
 cnfg.cnfg_disc(1).Iz = 1e-4;                         %disc mom. of inertia [m^4]
