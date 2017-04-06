@@ -1,8 +1,7 @@
-classdef Sensor < matlab.mixin.Heterogeneous
+classdef Sensor < matlab.mixin.Heterogeneous & handle
    properties
+      cnfg=struct([])  
       name
-      position
-      direction
    end
    methods
       %Konstruktor
@@ -10,8 +9,8 @@ classdef Sensor < matlab.mixin.Heterogeneous
          if nargin == 0
            obj.name = "Depp";
          else
-           obj.name = arg.name;
-           obj.position=arg.position;
+           obj.cnfg = arg;
+           obj.name = obj.cnfg.name;
          end
       end
       

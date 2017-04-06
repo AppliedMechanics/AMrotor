@@ -1,4 +1,9 @@
 classdef Rotorsystem < handle
+% ROTORSYSTEM - Grundklasse für ein Physikalisches Rotorsystem.
+%  R=ROTORSYSTEM(cnfg,'System');
+%
+%   See also ROTOR.
+
    properties
       name
       systemmatrizen
@@ -176,10 +181,10 @@ classdef Rotorsystem < handle
       end
       % Loads
       function add_Load(obj,arg)
-          obj.loads = AMrotorSIM.Loads.Unbalance_static(arg);
+          obj.loads(end+1) = AMrotorSIM.Loads.Unbalance_static(arg);
       end
       function add_Force(obj,arg)
-          obj.loads = AMrotorSIM.Loads.Force_constant_fix(arg);
+          obj.loads(end+1) = AMrotorSIM.Loads.Force_constant_fix(arg);
       end
       
       % Assemble

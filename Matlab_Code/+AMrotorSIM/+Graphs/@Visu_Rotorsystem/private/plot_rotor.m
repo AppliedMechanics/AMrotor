@@ -33,13 +33,15 @@ end
 
 ax = axes('xlim', [-10 10], 'ylim', [-10 10], 'zlim',[-10 10]);
 
-view(3);
-grid on;
+view(160,-30);
+grid off;
 axis equal;
 hold on
 xlabel('x')
 ylabel('y')
 zlabel('z')
+title(rotor.name);
+set(gca, 'visible', 'off'); 
 
 dim_r=size(r);
 

@@ -42,7 +42,7 @@ classdef Rotor < handle
         n_nodes = length(obj.nodes);
 
         %D=zeros(n_nodes*4, n_nodes*4);
-        D=0.01*M+0.0002*K;
+        D=0.01*M+0.001*K;
       end
       
    end

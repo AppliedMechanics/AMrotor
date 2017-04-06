@@ -8,7 +8,7 @@ classdef Wegsensor < AMrotorSIM.Sensors.Sensor
         end 
         
         function [x_pos,beta_pos,y_pos,alpha_pos] = read_values(obj,rotorsystem)
-            z_pos=obj.position;
+            z_pos=obj.cnfg.position;
             [x_pos,beta_pos,y_pos,alpha_pos] = displacement_calc_at_pos(z_pos,rotorsystem);
         end
    end

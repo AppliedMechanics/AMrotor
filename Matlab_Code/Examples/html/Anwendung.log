@@ -1,0 +1,270 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210) (preloaded format=pdflatex 2016.10.12)  6 APR 2017 17:21
+entering extended mode
+**./Anwendung.tex
+(Anwendung.tex
+LaTeX2e <2016/03/31>
+Babel <3.9r> and hyphenation patterns for 75 language(s) loaded.
+("C:\Program Files (x86)\MiKTeX\tex\latex\base\article.cls"
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+("C:\Program Files (x86)\MiKTeX\tex\latex\base\size10.clo"
+File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+("C:\Program Files (x86)\MiKTeX\tex\latex\graphics\graphicx.sty"
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files (x86)\MiKTeX\tex\latex\graphics\keyval.sty"
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+("C:\Program Files (x86)\MiKTeX\tex\latex\graphics\graphics.sty"
+Package: graphics 2016/10/09 v1.0u Standard LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files (x86)\MiKTeX\tex\latex\graphics\trig.sty"
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(C:\Users\ga73raw\AppData\Roaming\MiKTeX\2.9\tex\latex\graphics-cfg\graphics.cf
+g
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 99.
+
+(C:\Users\ga73raw\AppData\Roaming\MiKTeX\2.9\tex\latex\graphics-def\pdftex.def
+File: pdftex.def 2017/01/12 v0.06k Graphics/color for pdfTeX
+
+("C:\Program Files (x86)\MiKTeX\tex\generic\oberdiek\infwarerr.sty"
+Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
+)
+("C:\Program Files (x86)\MiKTeX\tex\generic\oberdiek\ltxcmds.sty"
+Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count87
+))
+\Gin@req@height=\dimen103
+\Gin@req@width=\dimen104
+)
+("C:\Program Files (x86)\MiKTeX\tex\latex\graphics\color.sty"
+Package: color 2016/07/10 v1.1e Standard LaTeX Color (DPC)
+
+(C:\Users\ga73raw\AppData\Roaming\MiKTeX\2.9\tex\latex\graphics-cfg\color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package color Info: Driver file: pdftex.def on input line 147.
+) (Anwendung.aux)
+\openout1 = `Anwendung.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+ ("C:\Program Files (x86)\MiKTeX\tex\context\base\supp-pdf.mkii"
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count88
+\scratchdimen=\dimen105
+\scratchbox=\box26
+\nofMPsegments=\count89
+\nofMParguments=\count90
+\everyMPshowfont=\toks15
+\MPscratchCnt=\count91
+\MPscratchDim=\dimen106
+\MPnumerator=\count92
+\makeMPintoPDFobject=\count93
+\everyMPtoPDFconversion=\toks16
+) ("C:\Program Files (x86)\MiKTeX\tex\generic\oberdiek\pdftexcmds.sty"
+Package: pdftexcmds 2016/05/21 v0.22 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+("C:\Program Files (x86)\MiKTeX\tex\generic\oberdiek\ifluatex.sty"
+Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+("C:\Program Files (x86)\MiKTeX\tex\generic\oberdiek\ifpdf.sty"
+Package: ifpdf 2016/05/14 v3.1 Provides the ifpdf switch
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+("C:\Program Files (x86)\MiKTeX\tex\latex\oberdiek\epstopdf-base.sty"
+Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
+
+("C:\Program Files (x86)\MiKTeX\tex\latex\oberdiek\grfext.sty"
+Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
+
+("C:\Program Files (x86)\MiKTeX\tex\generic\oberdiek\kvdefinekeys.sty"
+Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
+))
+("C:\Program Files (x86)\MiKTeX\tex\latex\oberdiek\kvoptions.sty"
+Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
+
+("C:\Program Files (x86)\MiKTeX\tex\generic\oberdiek\kvsetkeys.sty"
+Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
+
+("C:\Program Files (x86)\MiKTeX\tex\generic\oberdiek\etexcmds.sty"
+Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+38.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 456.
+)
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 27.
+
+("C:\Program Files (x86)\MiKTeX\tex\latex\base\omscmr.fd"
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 27.
+
+Overfull \hbox (122.24593pt too wide) in paragraph at lines 49--49
+[]\OT1/cmtt/m/n/10 % 28.03.2017,29.03.2017,30.03.2017,31.03.2017,03.04.2017,04.
+04.2017,05.04.2017,06.04.2017[] 
+ []
+
+
+Overfull \hbox (69.74638pt too wide) in paragraph at lines 49--49
+[]\OT1/cmtt/m/n/10 %    .8"888.      888b     d'888  oooo d8b  .ooooo.  .o888oo
+  .ooooo.  oooo d8b[] 
+ []
+
+
+Overfull \hbox (69.74638pt too wide) in paragraph at lines 49--49
+[]\OT1/cmtt/m/n/10 %   .8' `888.     8 Y88. .P  888  `888""8P d88' `88b   888  
+ d88' `88b `888""8P[] 
+ []
+
+
+Overfull \hbox (48.74657pt too wide) in paragraph at lines 49--49
+[]\OT1/cmtt/m/n/10 %  .88ooo8888.    8  `888'   888   888     888   888   888  
+ 888   888  888[] 
+ []
+
+
+Overfull \hbox (48.74657pt too wide) in paragraph at lines 49--49
+[]\OT1/cmtt/m/n/10 % .8'     `888.   8    Y     888   888     888   888   888 .
+ 888   888  888[] 
+ []
+
+
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 49--49
+[]\OT1/cmtt/m/n/10 %o88o     o8888o o8o        o888o d888b    `Y8bod8P'   "888"
+ `Y8bod8P' d888b[] 
+ []
+
+[1
+
+{C:/Users/ga73raw/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+Missing character: There is no ä in font cmtt10!
+Missing character: There is no ä in font cmtt10!
+Package epstopdf Info: Source file: <Anwendung_01.eps>
+(epstopdf)                    date: 2017-04-06 17:19:55
+(epstopdf)                    size: 678517 bytes
+(epstopdf)             Output file: <Anwendung_01-eps-converted-to.pdf>
+(epstopdf)             Command: <epstopdf --outfile=Anwendung_01-eps-converted-
+to.pdf Anwendung_01.eps>
+(epstopdf)             \includegraphics on input line 111.
+runsystem(epstopdf --outfile=Anwendung_01-eps-converted-to.pdf Anwendung_01.eps
+)...executed (allowed).
+
+Package epstopdf Info: Result file: <Anwendung_01-eps-converted-to.pdf>
+(epstopdf)                    date: 2017-04-06 17:21:08
+(epstopdf)                    size: 52769 bytes.
+
+<Anwendung_01-eps-converted-to.pdf, id=9, 155.58125pt x 187.70125pt>
+File: Anwendung_01-eps-converted-to.pdf Graphic file (type pdf)
+
+<use Anwendung_01-eps-converted-to.pdf>
+Package pdftex.def Info: Anwendung_01-eps-converted-to.pdf used on input line 1
+11.
+(pdftex.def)             Requested size: 289.07999pt x 348.79994pt.
+ [2]
+Missing character: There is no ä in font cmtt10!
+Missing character: There is no ö in font cmtt10!
+Package epstopdf Info: Source file: <Anwendung_02.eps>
+(epstopdf)                    date: 2017-04-06 17:19:56
+(epstopdf)                    size: 106987 bytes
+(epstopdf)             Output file: <Anwendung_02-eps-converted-to.pdf>
+(epstopdf)             Command: <epstopdf --outfile=Anwendung_02-eps-converted-
+to.pdf Anwendung_02.eps>
+(epstopdf)             \includegraphics on input line 137.
+runsystem(epstopdf --outfile=Anwendung_02-eps-converted-to.pdf Anwendung_02.eps
+)...executed (allowed).
+
+Package epstopdf Info: Result file: <Anwendung_02-eps-converted-to.pdf>
+(epstopdf)                    date: 2017-04-06 17:21:11
+(epstopdf)                    size: 42559 bytes.
+
+<Anwendung_02-eps-converted-to.pdf, id=13, 341.275pt x 303.1325pt> [3 <./Anwend
+ung_01-eps-converted-to.pdf>]
+File: Anwendung_02-eps-converted-to.pdf Graphic file (type pdf)
+ <use Anwendung_02-eps-converted-to.pdf>
+Package pdftex.def Info: Anwendung_02-eps-converted-to.pdf used on input line 1
+37.
+(pdftex.def)             Requested size: 289.07999pt x 256.785pt.
+Package epstopdf Info: Source file: <Anwendung_03.eps>
+(epstopdf)                    date: 2017-04-06 17:19:56
+(epstopdf)                    size: 106913 bytes
+(epstopdf)             Output file: <Anwendung_03-eps-converted-to.pdf>
+(epstopdf)             Command: <epstopdf --outfile=Anwendung_03-eps-converted-
+to.pdf Anwendung_03.eps>
+(epstopdf)             \includegraphics on input line 139.
+runsystem(epstopdf --outfile=Anwendung_03-eps-converted-to.pdf Anwendung_03.eps
+)...executed (allowed).
+
+Package epstopdf Info: Result file: <Anwendung_03-eps-converted-to.pdf>
+(epstopdf)                    date: 2017-04-06 17:21:14
+(epstopdf)                    size: 42490 bytes.
+
+<Anwendung_03-eps-converted-to.pdf, id=19, 341.275pt x 303.1325pt>
+File: Anwendung_03-eps-converted-to.pdf Graphic file (type pdf)
+
+<use Anwendung_03-eps-converted-to.pdf>
+Package pdftex.def Info: Anwendung_03-eps-converted-to.pdf used on input line 1
+39.
+(pdftex.def)             Requested size: 289.07999pt x 256.785pt.
+ [4 <./Anwendung_02-eps-converted-to.pdf> <./Anwendung_03-eps-converted-to.pdf>
+] (Anwendung.aux) ) 
+Here is how much of TeX's memory you used:
+ 1545 strings out of 493335
+ 22484 string characters out of 3138393
+ 83258 words of memory out of 3000000
+ 5082 multiletter control sequences out of 15000+200000
+ 5018 words of font info for 19 fonts, out of 3000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 40i,6n,25p,241b,245s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files (x86)/MiKTeX/fonts/type1/public/amsfonts/c
+m/cmbx12.pfb><C:/Program Files (x86)/MiKTeX/fonts/type1/public/amsfonts/cm/cmr1
+0.pfb><C:/Program Files (x86)/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+<C:/Program Files (x86)/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on Anwendung.pdf (4 pages, 192069 bytes).
+PDF statistics:
+ 52 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
+
