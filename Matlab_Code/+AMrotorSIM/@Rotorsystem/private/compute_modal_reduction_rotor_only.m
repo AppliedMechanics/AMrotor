@@ -3,8 +3,6 @@ function [M,K,G,D,h,EVmr,EWmr] = compute_modal_reduction_rotor_only(M,K,G,D,h,mo
 
 n=size(M);
 
-
-
 if modal_reduction ==1
     
  [EVmr,EWmr]=eigs(K,M,moden,'sm');
@@ -31,11 +29,7 @@ if modal_reduction ==1
    
    h.h_rotsin = EVmr'*h.h_rotsin;
    h.h_rotcos = EVmr'*h.h_rotcos;
-   
     
-
-   
-   
 else
 
     if modal_reduction==0

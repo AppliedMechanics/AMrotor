@@ -4,6 +4,7 @@ classdef Rotor < handle
       
       name
       nodes
+      matrizen
       
       moment_of_inertia
       
@@ -43,6 +44,11 @@ classdef Rotor < handle
 
         %D=zeros(n_nodes*4, n_nodes*4);
         D=0.01*M+0.001*K;
+        
+        obj.matrizen.M=M;
+        obj.matrizen.G=G;
+        obj.matrizen.D=D;
+        obj.matrizen.K=K;
       end
       
    end

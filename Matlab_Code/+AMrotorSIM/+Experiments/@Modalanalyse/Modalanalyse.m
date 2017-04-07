@@ -1,8 +1,10 @@
 classdef Modalanalyse < handle
    properties
       name='Modalanalyse'
-      rotorsystem = Rotorsystem().empty
-      eigen=struct.empty
+      rotorsystem
+      
+      n_ew
+      eigenmatrizen
    end
    methods
        %Konstruktor
@@ -18,8 +20,19 @@ classdef Modalanalyse < handle
          disp(obj.name);
       end
 
-      function calculate_ew_ev(obj)
+      function calculate_rotor_only(obj,n_modes)
           
+          obj.n_ew = n_modes;
+          
+          K=obj.rotorsystem.rotor.matrizen.K;
+          M=obj.rotorsystem.rotor.matrizen.M;
+          
+         [obj.eigenmatrizen.EVmr,EWmr]=eigs(K,M,n_modes,'sm');
+      end
+      
+      function plot(obj)
+          
+
       end
  
    end

@@ -16,7 +16,6 @@
 
 %% Import
 
-%import AMrotorMONI.*
 import AMrotorSIM.*
 
 %% Clean up
@@ -42,10 +41,13 @@ r.compute_matrices();
 r.compute_loads();
 r.reduce_modal(10);
 
-%r.sichern();
-
 %% Running system analyses
-%Modalanalyse(r).show()
+
+m=Experiments.Modalanalyse(r);
+m.calculate_rotor_only(4);
+
+esf = Graphs.Eigenschwingformen(m);
+esf.plot();
 
 %% Running Time Simulation
 
