@@ -1,7 +1,7 @@
-%% ========================================================================
+%% ======================================================================
 % Rotor
 
-cnfg.cnfg_rotor.name = "Testrotor vom Feinsten";
+cnfg.cnfg_rotor.name = "Testrotor";
 cnfg.cnfg_rotor.shear_def = 1;     % 1 = Timoshenko or 0 = Bernoulli beam theoy
 
 %rotor geometry             [z1,da,di;   z2,da,di]  
@@ -18,6 +18,8 @@ cnfg.cnfg_rotor.dz=0.01;           %set elemet length for meshing
     
 %% ========================================================================
 % Massescheiben
+cnfg.cnfg_disc=[];
+
 cnfg.cnfg_disc(1).name = 'Zusatzscheibe';
 cnfg.cnfg_disc(1).position = 300e-3;                 %disc position [m]
 cnfg.cnfg_disc(1).radius = 200e-3;  
@@ -27,6 +29,8 @@ cnfg.cnfg_disc(1).Iz = 1e-4;                         %disc mom. of inertia [m^4]
 
 %% ========================================================================
 % Sensors
+cnfg.cnfg_sensor=[];
+
 cnfg.cnfg_sensor(1).name = 'Sepp';
 cnfg.cnfg_sensor(1).position=0.050;
 cnfg.cnfg_sensor(1).type=1;
@@ -45,6 +49,8 @@ cnfg.cnfg_sensor(2).type=1;
 
 %% ========================================================================
 % Lager
+cnfg.cnfg_lager=[];
+
 cnfg.cnfg_lager(1).name = 'Locker lässiges Lager';
 cnfg.cnfg_lager(1).position=0e-3;                        %[m]
 cnfg.cnfg_lager(1).type=1;
@@ -65,7 +71,7 @@ cnfg.cnfg_force_const_fix=[];
 % cnfg.cnfg_force_const_fix(1).betrag_y= 100;
 
 % Unwuchten
-% cnfg.cnfg_unbalance=[];
+cnfg.cnfg_unbalance=[];
 cnfg.cnfg_unbalance(1).name = 'Geplante Unwucht';
 cnfg.cnfg_unbalance(1).position = 300e-3;
 cnfg.cnfg_unbalance(1).betrag = 5e-1;

@@ -4,7 +4,7 @@
 %% Header
 
 % Johannes Maierhofer
-% 28.03.2017,29.03.2017,30.03.2017,31.03.2017,03.04.2017,04.04.2017,05.04.2017,06.04.2017
+% 28.03.2017,29.03.2017,30.03.2017,31.03.2017,03.04.2017,04.04.2017,05.04.2017,06.04.2017,12.04.2017
 %
 %         .o.       ooo        ooooo                        .                      
 %        .888.      `88.       .888'                      .o8                      
@@ -31,29 +31,35 @@ r=Rotorsystem(cnfg,'System');
 r.show;
 
 r.rotor.mesh()
-%g=Graphs.Visu_Rotorgeometrie(r.rotor);
-%g.show();
 
 g=Graphs.Visu_Rotorsystem(r);
 g.show();
 
 r.compute_matrices();
 r.compute_loads();
-r.reduce_modal(10);
+%r.reduce_modal(10);
 
 %% Running system analyses
 
 m=Experiments.Modalanalyse(r);
-m.calculate_rotor_only(4);
 
-esf = Graphs.Eigenschwingformen(m);
-esf.plot();
+% m.calculate_rotor_only(4,0:100:1000);
+% esf = Graphs.Eigenschwingformen(m);
+% esf.plot();
+
+m.calculate_rotorsystem(4,0:100:1000);
+esf2= Graphs.Eigenschwingformen(m);
+esf2.plot();
+
+m.calculate_rotorsystem(3,0:100:3000);
+cmp = Graphs.Campbell(m);
+cmp.plot();
 
 %% Running Time Simulation
 
  St_Lsg = Experiments.Stationaere_Lsg(r,1000,[0 2]);
  St_Lsg.show()
  St_Lsg.compute()
-% 
+
  w = Graphs.Wegorbit(r);
  w.plot(r.sensors);
