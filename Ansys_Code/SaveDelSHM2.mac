@@ -1,0 +1,11 @@
+!!SaveDelSMH2
+!!Speichert und Löscht alles
+!!fuer standardisierten Hufeisenmagneten 2
+!!Abhaengig von x und I
+!!Michael Mirza 09.03.2017
+!!
+!!
+x=arg1			!!Eingabeargumente
+I=arg2
+SAVE,%x%_%I%,db		!!Database speichern, funktioniert nicht wie gewuenscht
+/CLEAR			!!Alles loeschen, wird nicht ausgefuehrt

@@ -13,7 +13,7 @@
 %   o88o     o8888o o8o        o888o d888b    `Y8bod8P'   "888" `Y8bod8P' d888b    
 
 %% Import
-
+import AMrotorSIM.*
 
 %% Clean up
 close all
@@ -26,7 +26,21 @@ Config_Sim_DemoB
 
 
 %% Running system analysis
+r=Rotorsystem(cnfg,'System');
+r.show;
+
+r.rotor.mesh();
+
+g=Graphs.Visu_Rotorsystem(r);
+g.show();
+
+r.compute_matrices();
 
 
 %% Running Time Simulation
 
+m = Experiments.Modalanalyse(r);
+
+m.calculate_rotorsystem(4,0:100:1000);
+esf=Graphs.Eigenschwingformen(m);
+esf.plot();
