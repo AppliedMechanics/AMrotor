@@ -20,12 +20,12 @@ cnfg.cnfg_rotor.dz=0.01;           %set elemet length for meshing
 % Massescheiben
 cnfg.cnfg_disc=[];
 
-cnfg.cnfg_disc(1).name = 'Zusatzscheibe';
-cnfg.cnfg_disc(1).position = 300e-3;                 %disc position [m]
-cnfg.cnfg_disc(1).radius = 200e-3;  
-cnfg.cnfg_disc(1).m = 5;                             %disc mass [kg]
-cnfg.cnfg_disc(1).Ix = 1e-4;                         %disc mom. of inertia [m^4]
-cnfg.cnfg_disc(1).Iz = 1e-4;                         %disc mom. of inertia [m^4]
+% cnfg.cnfg_disc(1).name = 'Zusatzscheibe';
+% cnfg.cnfg_disc(1).position = 300e-3;                 %disc position [m]
+% cnfg.cnfg_disc(1).radius = 200e-3;  
+% cnfg.cnfg_disc(1).m = 5;                             %disc mass [kg]
+% cnfg.cnfg_disc(1).Ix = 1e-4;                         %disc mom. of inertia [m^4]
+% cnfg.cnfg_disc(1).Iz = 1e-4;                         %disc mom. of inertia [m^4]
 
 %% ========================================================================
 % Sensors
@@ -57,10 +57,12 @@ cnfg.cnfg_lager(1).type=1;
 cnfg.cnfg_lager(1).stiffness=5e6;%7.0e5;              %[N/m]
 
 % Lager
-cnfg.cnfg_lager(2).name = 'Straffes lässiges Lager';
+cnfg.cnfg_lager(2).name = 'Ein Magnet-Lager';
 cnfg.cnfg_lager(2).position=600e-3;                        %[m]
-cnfg.cnfg_lager(2).type=1;
-cnfg.cnfg_lager(2).stiffness=5e6;                  %[N/m]
+cnfg.cnfg_lager(2).type=2;
+Config_Sim_Mag1
+cnfg.cnfg_lager(2).mag=mag;
+%cnfg.cnfg_lager(2).stiffness=5e6;                  %[N/m]
 
 %% ========================================================================
 % Kraft in feste Richtung
