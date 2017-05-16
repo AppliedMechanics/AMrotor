@@ -1,5 +1,6 @@
 function Z = rotor_sys_function(t,z,K,M,D,G,h,omega_rot_const_force,method)
 
+
 % Initialisierung und Extrahieren der Zustandsgroessen
 
 % Zustandsvektor Z Aufbau [{q_punkt};{q_punkt_punkt};phi;omega]
@@ -62,6 +63,7 @@ if method == 1
 Z(end-2) = omega;
 Z(end-1) = domega; 
 Z(end)   = ddomega;    
+
 end
 
 

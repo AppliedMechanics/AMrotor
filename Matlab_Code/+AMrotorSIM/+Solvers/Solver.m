@@ -1,4 +1,4 @@
-classdef Solver < matlab.mixin.Heterogeneous & handle
+classdef Solver < matlab.mixin.Heterogeneous & matlab.System & handle
    properties
       cnfg=struct([])  
       name

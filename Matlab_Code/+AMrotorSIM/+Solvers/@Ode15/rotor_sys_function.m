@@ -1,5 +1,10 @@
 function Z = rotor_sys_function(t,z,K,M,D,G,h,omega_rot_const_force,method)
 
+% %Als Trigger zum Debuggen
+%    if t>0
+%        stop=1;
+%    end
+%     
 % Initialisierung und Extrahieren der Zustandsgroessen
 
 % Zustandsvektor Z Aufbau [{q_punkt};{q_punkt_punkt};phi;omega]
@@ -54,7 +59,8 @@ Z(1:dim(1),1)     = xd;
 Z(dim(1)+1:2*dim(1)) = pinv(M)*h_ges;   
 
 if method == 0
-Z(end-1,1)       = omega;                                                                                                   
+Z(end-1,1)       = omega;                                            
+                                                       
 Z(end,1)         = domega;                             
 end
 
@@ -62,6 +68,7 @@ if method == 1
 Z(end-2) = omega;
 Z(end-1) = domega; 
 Z(end)   = ddomega;    
+
 end
 
 

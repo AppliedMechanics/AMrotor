@@ -25,7 +25,7 @@ clc
 
 %% Compute Rotor
 
-Config_Sim
+doc_Tutorial_Example1_Config_Sim
 
 r=Rotorsystem(cnfg,'System');
 r.show;
@@ -57,9 +57,9 @@ cmp.plot();
 
 %% Running Time Simulation
 
-St_Lsg = Experiments.Stationaere_Lsg(r,1000,[0 2]);
-St_Lsg.show()
-St_Lsg.compute()
+ St_Lsg = Experiments.Stationaere_Lsg(r,1000,[0 2]);
+ St_Lsg.show()
+ St_Lsg.compute()
 
  w = Graphs.Wegorbit(r);
  w.plot(r.sensors);

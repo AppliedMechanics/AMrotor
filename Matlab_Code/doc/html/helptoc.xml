@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding="utf-8"?>
+
+<toc version="2.0">
+
+    <tocitem target="doc_willkommen.html">AMrotor
+        <tocitem target="doc_Start" image="HelpIcon.GETTING_STARTED">
+            Getting Started with AMrotor
+        </tocitem>
+        
+        <!-- User Guide comes next -->
+        <tocitem target="doc_userguide.html" 
+            image="HelpIcon.USER_GUIDE">User Guide
+        </tocitem>
+        
+       <!-- Examples -->
+        <tocitem target="doc_Tutorial_Example1.html">Examples
+        </tocitem>
+        
+        <!-- Function reference next -->
+        <!-- First item is page describing function categories, if any -->
+        <tocitem target="doc_functionref.html" 
+                 image="HelpIcon.FUNCTION">Function Reference
+            <!-- Third category, with link to anchor in above page -->
+            <!--<tocitem target="doc_functionref.html">Fun-->
+                <!-- ... -->
+            <!--</tocitem>-->
+        </tocitem>
+
+        <!-- Optional link or links to your or other Web sites -->
+        <tocitem target="http://www.amm.mw.tum.de" 
+                 image="$toolbox/matlab/icons/webicon.gif">
+        Lehrstuhl für Angewandte Mechanik (TUM)
+        </tocitem>
+    </tocitem>
+</toc>
