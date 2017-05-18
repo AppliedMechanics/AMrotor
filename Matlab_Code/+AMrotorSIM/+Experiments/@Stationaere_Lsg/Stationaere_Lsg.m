@@ -105,8 +105,8 @@ classdef Stationaere_Lsg < handle
 %                 
 %             end
 %         end
-        
-        obj.rotorsystem.time_result.X = q(:);
+        obj.rotorsystem.time_result.T= obj.time';
+        obj.rotorsystem.time_result.X = q;
       end
  
    end

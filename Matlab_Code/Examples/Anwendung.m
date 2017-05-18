@@ -57,10 +57,10 @@ r.compute_loads();
 
 %% Running Time Simulation
 
-St_Lsg = Experiments.Stationaere_Lsg(r,1000,[0:0.01:1]);
+St_Lsg = Experiments.Stationaere_Lsg(r,1000,[0:0.001:1]);
 St_Lsg.show()
-%St_Lsg.compute()
-St_Lsg.compute_newmark()
+St_Lsg.compute()
+%St_Lsg.compute_newmark()
 
  w = Graphs.Wegorbit(r);
  w.plot(r.sensors);
