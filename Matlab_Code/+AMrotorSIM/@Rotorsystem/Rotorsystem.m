@@ -177,6 +177,8 @@ classdef Rotorsystem < handle
                 obj.lager(end+1) = AMrotorSIM.Bearings.SimpleLager(arg); 
               case 2
                 obj.lager(end+1) = AMrotorSIM.Bearings.SimpleMagneticBearing(arg);
+              case 3
+                obj.lager(end+1) = AMrotorSIM.Bearings.PID_MagneticBearing(arg);
           end 
       end
       % Loads

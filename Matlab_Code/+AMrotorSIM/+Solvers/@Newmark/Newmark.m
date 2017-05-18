@@ -1,18 +1,13 @@
 classdef Newmark < AMrotorSIM.Solvers.Solver
-    % NEWMARK führt eine Zeitintegration für eine Substruktur mit dem Newmark-Scheme durch
-   
-    properties
-        % Public, tunable properties.
-    end
+    % NEWMARK führt eine Zeitintegration mit dem Newmark-Scheme durch
     
-    properties (Nontunable)
-        % Public, non-tunable properties.
-        M=1;
-        C=0;
-        K=1;
+    properties
+        M;
+        C;
+        K;
         beta=0.25;
         gamma=0.5;
-        T_A=0.01;
+        t=[0:0.01:1];
         P=1;
         G=1;
         
@@ -20,6 +15,9 @@ classdef Newmark < AMrotorSIM.Solvers.Solver
         qd_0=0.0;
         qdd_0=0.0;
         
+        q;
+        qd;
+        qdd;
     end
     
     properties (Access = private)
@@ -29,60 +27,40 @@ classdef Newmark < AMrotorSIM.Solvers.Solver
         U;
     end
     
-    properties (Access = private, Nontunable)
-        
-    end
-    
-    properties (DiscreteState)
-        q;
-        qd;
-        qdd;
-    end
-    
     methods
         % Constructor
         function obj = Newmark(varargin)
             % Support name-value pair arguments when constructing the
             % object.
-            setProperties(obj,nargin,varargin{:});
+            %setProperties(obj,nargin,varargin{:});
         end
     end
     
-    methods (Static, Access = protected)
-        function header = getHeaderImpl
-            header = matlab.system.display.Header('Newmark',...
-                'Title','Newmark-Scheme for Substructures');
-        end
-        
-        function groups = getPropertyGroupsImpl
-            systemGroup = matlab.system.display.Section(...
-            'Title','Systemmatrizen','Description','Newmark',...
-            'PropertyList',{'M','C','K','P','G'});
- 
-            setupGroup = matlab.system.display.Section(...
-            'Title','Newmark-Parameter',...
-            'PropertyList',{'beta','gamma','T_A'});
-        
-            icGroup = matlab.system.display.Section(...
-            'Title','Anfangswerte',...
-            'PropertyList',{'q_0','qd_0','qdd_0'});
-        
-            groups = [systemGroup,setupGroup,icGroup];
-        end
+    methods
+       [q,qd,qdd] = newmark_integration(obj, beta , gamma, M, D, K,f,t,q_0,qd_0,qdd_0,constant)
     end
     
-    methods (Access = protected)
+    methods
         %% Common functions
         function setupImpl(obj)
             % Implement tasks that need to be performed only once,
             % such as pre-computed constants.
+        if isvector(obj.t)
+            nsteps=length(obj.t);
+        else
+            fprintf(2,'Fehler in newmark_intergration: t muss ein Vektor sein');
+            return;
+        end
+        
+        obj.T_A=obj.t(2)-obj.t(1);
+        
             fprintf('LU-Zerlegung...');
             [obj.L,obj.U] = lu(obj.M + (obj.T_A*obj.gamma).*obj.C+(obj.T_A^2*obj.beta).*obj.K);
             obj.ndofin = size(obj.P,2);
             fprintf('beendet.\n');
         end
         
-        function y = stepImpl(obj,u)
+        function [q, qd, qdd] = stepImpl(obj,u)
             % Implement algorithm. Calculate y as a function of
             % input u and discrete states.
             % Prädiktion
@@ -99,10 +77,13 @@ classdef Newmark < AMrotorSIM.Solvers.Solver
             y = obj.G*q_new;
             
             %Correction
-            obj.qdd = qdd_new;
-            obj.qd=qd_p+obj.T_A*obj.gamma.*qdd_new;
-            obj.q=q_new;
-
+            qdd = qdd_new;
+            qd=qd_p+obj.T_A*obj.gamma.*qdd_new;
+            q=q_new;
+            
+            obj.qdd=qdd;
+            obj.qd=qd;
+            obj.q=q;
         end
         
         function resetImpl(obj)

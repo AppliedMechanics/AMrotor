@@ -48,8 +48,6 @@ classdef Stationaere_Lsg < handle
             options = odeset('OutputFcn','odeprint', 'OutputSel',1);
             end
         end
-        
-        % ODE function
 
         [obj.result.T,Z] = ode15s(@rotor_sys_function,obj.time,Z0,options,K,M,D,G,h,omega_rot_const_force,method);
         
@@ -68,20 +66,47 @@ classdef Stationaere_Lsg < handle
         
         h = obj.rotorsystem.systemmatrizen.h;
         % Berechnung von Lastvektor für jeden Zeitschritt:
+        
+        omega = obj.drehzahl*pi/60;           
+        domega = 0;                         %domega_ode  [rad/s^2]
+        omega_rot_const_force=0;
         t=obj.time;
         
-        q_0=0.0;
-        qd_0=0.0;
-        qdd_0=0.0;
+        phi=omega*t;
+        
+        h_ges = (h.h +(h.h_ZPsin.*(omega^2) + h.h_DBsin.*domega +h.h_sin).*(-1)*sin(phi) ...
+              +(h.h_ZPcos.*(omega^2) + h.h_DBcos.*domega +h.h_cos).*(-1)*cos(phi)) ...
+              + h.h_rotsin.*sin(phi*omega_rot_const_force) + h.h_rotcos.*cos(phi*omega_rot_const_force); %+Dichtung+Lager
+
+        %f=zeros(length(M),length(t));
+        f=h_ges;
+        
+        q_0=zeros(length(M),1);
+        qd_0=zeros(length(M),1);
+        qdd_0=zeros(length(M),1);
         
         beta=0.25;
         gamma=0.5;
         
         constant = 1;
         
-        [q,qd,qdd] = newmark_integration( beta , gamma, M, D, K,f,t,q_0,qd_0,qdd_0,constant);
+        nwmrk = AMrotorSIM.Solvers.Newmark();
         
-        obj.rotorsystem.time_result = obj.result;
+         [q,qd,qdd] = nwmrk.newmark_integration( beta , gamma, M, D, K,f,t,q_0,qd_0,qdd_0,constant);
+        
+%         nwmrk.setupImpl;
+%         for n = 2:nsteps
+%         y(n) = nwmrk.stepImpl(u);
+%         end
+%         nwmrk.resetImpl;
+        
+%         for i=obj.rotorsystem.lager
+%             if i.type==3
+%                 
+%             end
+%         end
+        
+        obj.rotorsystem.time_result.X = q(:);
       end
  
    end
