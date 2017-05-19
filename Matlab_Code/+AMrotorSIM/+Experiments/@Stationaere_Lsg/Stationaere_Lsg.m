@@ -92,7 +92,7 @@ classdef Stationaere_Lsg < handle
         
         nwmrk = AMrotorSIM.Solvers.Newmark();
         
-         [q,qd,qdd] = nwmrk.newmark_integration( beta , gamma, M, D, K,f,t,q_0,qd_0,qdd_0,constant);
+        [q,qd,qdd] = nwmrk.newmark_integration( beta , gamma, M, D, K,f,t,q_0,qd_0,qdd_0,constant);
         
 %         nwmrk.setupImpl;
 %         for n = 2:nsteps
@@ -105,8 +105,14 @@ classdef Stationaere_Lsg < handle
 %                 
 %             end
 %         end
+
         obj.rotorsystem.time_result.T= obj.time';
-        obj.rotorsystem.time_result.X = q;
+        
+        EVmr = obj.rotorsystem.reduktionsmatrizen.EVmr;
+        Z=[q;qd]';
+        
+        [obj.rotorsystem.time_result.X,obj.rotorsystem.time_result.X_d,x,x_d,beta,beta_d,y,y_d,alpha,alpha_d,omega_ode,phi_ode] = modal_back_transformation(Z,M,EVmr);
+
       end
  
    end
