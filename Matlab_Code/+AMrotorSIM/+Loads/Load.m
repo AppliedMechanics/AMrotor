@@ -8,7 +8,7 @@ classdef Load < matlab.mixin.Heterogeneous & handle
        %Konstruktor
        function obj = Load(a)
          if nargin == 0
-           obj.name = "Unkontrollierte Last";
+           obj.name = 'Unkontrollierte Last';
          else
            obj.cnfg = a;
            obj.name = obj.cnfg.name;

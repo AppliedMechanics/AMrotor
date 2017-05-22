@@ -1,6 +1,6 @@
 classdef Wegsensor < AMrotorSIM.Sensors.Sensor
    properties
-       unit = "m"
+       unit = 'm'
    end
    methods
         function obj=Wegsensor(variable) 

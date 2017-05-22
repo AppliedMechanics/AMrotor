@@ -1,7 +1,7 @@
 %% ======================================================================
 % Rotor
 
-cnfg.cnfg_rotor.name = "Testrotor";
+cnfg.cnfg_rotor.name = 'Testrotor';
 cnfg.cnfg_rotor.shear_def = 1;     % 1 = Timoshenko or 0 = Bernoulli beam theoy
 
 %rotor geometry             [z1,da,di;   z2,da,di]  
