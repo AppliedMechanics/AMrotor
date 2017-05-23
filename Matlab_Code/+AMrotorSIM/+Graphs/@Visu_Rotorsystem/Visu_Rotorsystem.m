@@ -17,7 +17,7 @@ classdef Visu_Rotorsystem < handle
          disp(obj.name);
          figurehandle=plot_rotor(obj.rotorsystem.rotor);
          plot_discs(figurehandle,obj.rotorsystem.discs);
-         plot_bearings(figurehandle,obj.rotorsystem.lager);
+         plot_bearings(figurehandle,obj.rotorsystem.lager,obj.rotorsystem.rotor);
          plot_sensors(figurehandle,obj.rotorsystem.sensors);
          plot_loads(figurehandle,obj.rotorsystem.loads);
          

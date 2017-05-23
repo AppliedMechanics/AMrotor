@@ -3,7 +3,7 @@ function plot_bearings(ax,bearing,obj)
 for i=bearing
     zp=i.cnfg.position;
     
-    bearing_pos = bearing.position; %Anders will die Funktion drunter dies nicht annehmen --> too many input arguments
+    bearing_pos = bearing.position; %Anders will die Funktion drunter dies nicht annehmen
     diameter = obj.get_diameter(bearing_pos);
     
     % Zylinderfläche;
