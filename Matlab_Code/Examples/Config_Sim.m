@@ -57,12 +57,12 @@ cnfg.cnfg_lager(1).type=1;
 cnfg.cnfg_lager(1).stiffness=5e6;%7.0e5;              %[N/m]
 
 % Lager
-cnfg.cnfg_lager(2).name = 'Ein Magnet-Lager';
+cnfg.cnfg_lager(2).name = 'Ein Lager';
 cnfg.cnfg_lager(2).position=600e-3;                        %[m]
-cnfg.cnfg_lager(2).type=3;
-Config_Sim_Mag1
-cnfg.cnfg_lager(2).mag=mag;
-%cnfg.cnfg_lager(2).stiffness=5e6;                  %[N/m]
+cnfg.cnfg_lager(2).type=1;
+%Config_Sim_Mag1
+%cnfg.cnfg_lager(2).mag=mag;
+cnfg.cnfg_lager(2).stiffness=5e6;                  %[N/m]
 
 %% ========================================================================
 % Kraft in feste Richtung

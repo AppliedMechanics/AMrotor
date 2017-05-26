@@ -49,7 +49,10 @@ classdef Rotor < handle
         obj.matrizen.G=G;
         obj.matrizen.D=D;
         obj.matrizen.K=K;
-      end
-      
+      end   
+   end
+   
+   methods
+       [Jt,Dt,Kt] = compute_torsion_matrices(obj)
    end
 end

@@ -37,20 +37,23 @@ r.rotor.mesh()
 
 r.compute_matrices();
 r.compute_loads();
+
+r.transform_StateSpace();
+
 %r.reduce_modal(10);
 
 %% Running system analyses
 
 % m=Experiments.Modalanalyse(r);
 % 
-% % m.calculate_rotor_only(4,0:100:1000);
-% % esf = Graphs.Eigenschwingformen(m);
-% % esf.plot();
+% m.calculate_rotor_only(4,0:100:1000);
+% esf = Graphs.Eigenschwingformen(m);
+% esf.plot();
 % 
-% m.calculate_rotorsystem(4,0:100:1000);
+% m.calculate_rotorsystem_ss(3,0:100:200);
 % esf2= Graphs.Eigenschwingformen(m);
-% esf2.plot();
-% 
+% esf2.plot_displacements();
+
 % m.calculate_rotorsystem(3,0:100:3000);
 % cmp = Graphs.Campbell(m);
 % cmp.plot();
@@ -60,7 +63,8 @@ r.compute_loads();
 St_Lsg = Experiments.Stationaere_Lsg(r,1000,[0:0.001:1]);
 St_Lsg.show()
 %St_Lsg.compute()
-St_Lsg.compute_newmark()
+%St_Lsg.compute_newmark()
+St_Lsg.compute_ode15s_ss()
 
  w = Graphs.Wegorbit(r);
  w.plot(r.sensors);

@@ -112,9 +112,41 @@ classdef Stationaere_Lsg < handle
         Z=[q;qd]';
         
         [obj.rotorsystem.time_result.X,obj.rotorsystem.time_result.X_d,x,x_d,beta,beta_d,y,y_d,alpha,alpha_d,omega_ode,phi_ode] = modal_back_transformation(Z,M,EVmr);
-
       end
- 
+      
+     function compute_ode15s_ss(obj)
+        disp('Compute.... ode15s State Space ....')
+        obj.rotorsystem.clear_time_result() 
+        
+        n_nodes = length(obj.rotorsystem.rotor.nodes);
+        
+        omega = obj.drehzahl*pi/60;           
+        
+        ss = obj.rotorsystem.systemmatrizen.ss;
+        ss_G = obj.rotorsystem.systemmatrizen.ss_G;
+        ss_h = obj.rotorsystem.systemmatrizen.ss_h;
+        
+        ss=ss+ss_G*omega;
+        
+        %init Vector
+        Z0 = zeros(length(ss),1);
+        Z0(8*n_nodes+2)=omega;
+        
+        % solver parameters
+        omega_rot_const_force = 0;     %[1/s] angular velocity of constant_rotating_force 
+        options = odeset('AbsTol', 1e-6, 'RelTol', 1e-6); %'OutputFcn','odeprint' as option to display steps
+        if (exist('verbose','var'))
+            if verbose == 1
+            options = odeset('OutputFcn','odeprint', 'OutputSel',1);
+            end
+        end
+
+        [obj.rotorsystem.time_result.T,Z] = ode15s(@integrate_function,obj.time,Z0,options,ss,ss_h,n_nodes,omega_rot_const_force);
+        
+        obj.rotorsystem.time_result.X = Z(:,1:4*n_nodes)';
+        obj.rotorsystem.time_result.X_d = Z(:,4*n_nodes+1:2*4*n_nodes)';
+     end
+     
    end
    methods(Access=private)
        

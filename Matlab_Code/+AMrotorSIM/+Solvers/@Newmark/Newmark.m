@@ -37,7 +37,8 @@ classdef Newmark < AMrotorSIM.Solvers.Solver
     end
     
     methods
-       [q,qd,qdd] = newmark_integration(obj, beta , gamma, M, D, K,f,t,q_0,qd_0,qdd_0,constant)
+       [q,qd,qdd] = newmark_integration(obj, beta, gamma, M, D, K,f,t,q_0,qd_0,qdd_0,constant)
+       [q,qd,qdd] = newmark_integration_ss(obj, beta, gamma, ss,f,t,q_0,qd_0,qdd_0,constant)
     end
     
     methods
