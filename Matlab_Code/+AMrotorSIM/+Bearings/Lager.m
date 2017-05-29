@@ -21,5 +21,6 @@ classdef Lager < matlab.mixin.Heterogeneous
       function [M,K] = compute_matrices(obj)
         disp('Berechne Lagersteifigkeit')
       end
+      
    end
 end

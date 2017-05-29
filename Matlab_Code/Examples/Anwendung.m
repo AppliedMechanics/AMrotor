@@ -5,6 +5,7 @@
 
 % Johannes Maierhofer
 % 28.03.2017,29.03.2017,30.03.2017,31.03.2017,03.04.2017,04.04.2017,05.04.2017,06.04.2017,12.04.2017
+% 24.05.2017,26.05.2017,29.05.2017
 %
 %         .o.       ooo        ooooo                        .                      
 %        .888.      `88.       .888'                      .o8                      
@@ -50,7 +51,14 @@ r.transform_StateSpace();
 % esf = Graphs.Eigenschwingformen(m);
 % esf.plot();
 % 
-% m.calculate_rotorsystem_ss(3,0:100:200);
+
+% 
+% m.calculate_rotorsystem(5,0:100:200);
+% esf2= Graphs.Eigenschwingformen(m);
+% esf2.plot();
+
+%
+% m.calculate_rotorsystem_ss(10,0:100:200);
 % esf2= Graphs.Eigenschwingformen(m);
 % esf2.plot_displacements();
 
@@ -60,11 +68,11 @@ r.transform_StateSpace();
 
 %% Running Time Simulation
 
-St_Lsg = Experiments.Stationaere_Lsg(r,1000,[0:0.001:1]);
-St_Lsg.show()
-%St_Lsg.compute()
-%St_Lsg.compute_newmark()
-St_Lsg.compute_ode15s_ss()
-
- w = Graphs.Wegorbit(r);
- w.plot(r.sensors);
+% St_Lsg = Experiments.Stationaere_Lsg(r,1000,[0:0.01:1]);
+% St_Lsg.show()
+% St_Lsg.compute()
+% St_Lsg.compute_newmark()
+% St_Lsg.compute_ode15s_ss()
+% 
+%  w = Graphs.Wegorbit(r);
+%  w.plot(r.sensors);

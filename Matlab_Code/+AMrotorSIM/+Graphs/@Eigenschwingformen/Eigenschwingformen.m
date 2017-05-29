@@ -57,6 +57,7 @@ classdef Eigenschwingformen < handle
           
           V_y = obj.modalsystem.eigenmatrizen.V(2*n_nodes+1:2:4*n_nodes,1:2:end,1);
           D_y = obj.modalsystem.eigenmatrizen.D(2*n_ew+1:2:4*n_ew,1:2:2*n_ew,1)
+          
           %
           disp('Eigenkreisfrequenzen')
 

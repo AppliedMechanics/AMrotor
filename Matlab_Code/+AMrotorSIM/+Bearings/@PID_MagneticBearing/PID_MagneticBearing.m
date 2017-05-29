@@ -23,36 +23,12 @@ classdef PID_MagneticBearing < AMrotorSIM.Bearings.Lager
            M = zeros(4,4);
 
         end
-        
-        function [F]= compute_force(obj, x,xd,xdd,dtspan)
-            
-            %Reglerkonstanten aus Config-Datei
-            Kp=obj.cnfg.mag.Kp;
-            Kd=obj.cnfg.mag.Kd;
-            Ki=obj.cnfg.mag.Ki;
-            
-            %Magnetlagerkonstanten aus Config-Datei
-            k_i=obj.cnfg.mag.k_i;
-            k_s=obj.cnfg.mag.k_s;
-
-            
-            err = obj.x_w-x; %Fehler = Sollgröße - Istgröße
-            d_err = obj.xd_w - xd;
-            dd_err = obj.xdd_w - xdd;
-
-            
-            %Regler
-            %init_con = [yold ; (yold-yold1)]; 
-            init_con = [0;0];
-            options = [];
-            [t,I]  = ode45(@pid_ctrl,dtspan,init_con,options,err,d_err,dd_err, Kp,Ki,Kd); 
-
-            %Kraftbestimmung
-            F=[k_i*I(1) + k_s*x(1),k_i*I(2) + k_s*x(2)];
-         
-        end
             
         function [T] = compute_torque(obj)
         end
+   end
+   methods  
+        [ss_out] = add_controller_ss(obj,ss_in,dir)
+        [Fx,Fy]= compute_force(obj, x,y,Ix,Iy)
    end
 end

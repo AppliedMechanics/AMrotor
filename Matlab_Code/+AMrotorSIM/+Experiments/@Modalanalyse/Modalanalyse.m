@@ -69,12 +69,15 @@ classdef Modalanalyse < handle
           
           for n1 = 1:length(obj.omega)
 
-              ss=obj.rotorsystem.systemmatrizen.ss+obj.rotorsystem.systemmatrizen.ss_G*n1;
+             ss=obj.rotorsystem.systemmatrizen.ss+obj.rotorsystem.systemmatrizen.ss_G*n1;
 
-              ss_mech = ss(1:2*4*n_nodes,1:2*4*n_nodes);
+             ss_mech = ss(1:2*4*n_nodes,1:2*4*n_nodes);
               
-             [V,D] = eigs(ss_mech,n_modes*4,'sm');
-
+             %opts.tol = 1e-4;
+              opts.isreal =1;
+             [V,D] = eigs(ss_mech,n_modes*4,'sm',opts);  
+             %[V,D] = eig(ss_mech);
+             
              obj.eigenmatrizen.V(:,:,n1) = V;
              obj.eigenmatrizen.D(:,:,n1) = D;
           end   
