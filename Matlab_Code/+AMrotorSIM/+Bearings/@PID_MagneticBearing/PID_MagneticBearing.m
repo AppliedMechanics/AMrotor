@@ -28,7 +28,7 @@ classdef PID_MagneticBearing < AMrotorSIM.Bearings.Lager
         end
    end
    methods  
-        [ss_out] = add_controller_ss(obj,ss_in,dir)
+        [ss_out] = add_controller_ss(obj,ss_in,dir,rotorsystem)
         [Fx,Fy]= compute_force(obj, x,y,Ix,Iy)
    end
 end

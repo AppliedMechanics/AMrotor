@@ -1,4 +1,4 @@
-function [ ss_out] = add_controller_ss(obj, ss_in, dir)
+function [ ss_out] = add_controller_ss(obj, ss_in, dir,rotorsystem)
 %ADD_CONTROLLER_SS Fügt einen PID-Regler zum System Zustand hinzu
 % Eingabe: Zustandsraumdarstellung
 % Ausgabe: Zustandsraumdarstellung um einen Stromzustand erweitert
@@ -18,7 +18,7 @@ elseif dir == 3
             z_pos = obj.position;
             
    % Position im Zustandsvektor finden für x und dx
-   [n_x,n_dx,n_y,n_dy]=obj.rotorsystem.find_next_node_ss(obj, z_pos);
+   [n_x,n_dx,n_y,n_dy]=rotorsystem.find_next_node_ss(z_pos);
    
    ss_controller_x = zeros(length(ss_in)+2);
    ss_controller_y = zeros(length(ss_in)+2);
@@ -29,10 +29,10 @@ elseif dir == 3
    ss_pi_y = zeros(1,length(ss_in)+2);
    ss_pi_y(n_y)=Ki; ss_pi_y(n_dy)=Kp;
    
-   ss_controller_x(end-1,:) = Kd*ss_in(n_dx,:)+ss_pi_x;
-   ss_controller_y(end,:) = Kd*ss_in(n_dy,:)+ss_pi_y;
+   ss_controller_x(end-1,:) = Kd*[ss_in(n_dx,:),0,0]+ss_pi_x;
+   ss_controller_y(end,:) = Kd*[ss_in(n_dy,:),0,0]+ss_pi_y;
    
-   ss_out = [ss_in,zeros(length(ss_in)+2,1);zeros(1,length(ss_in)+2),zeros(2)]+ss_controller_x+ss_controller_y;
+   ss_out = [ss_in,zeros(length(ss_in),2);zeros(2,length(ss_in)+2)]+ss_controller_x+ss_controller_y;
 end
 end
 

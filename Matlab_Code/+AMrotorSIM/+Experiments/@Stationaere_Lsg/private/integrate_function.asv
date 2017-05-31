@@ -21,9 +21,7 @@ h_ges = (ss_h.h +(ss_h.h_ZPsin.*(omega^2) + ss_h.h_DBsin.*domega +ss_h.h_sin).*(
 % I aus Zustandsvektor suchen
 % Kraft F(x,I) berechnen 
             [Fx,Fy]=i.compute_force( Z(n_x),Z(n_y),Z(end-1),Z(end));
-% F zu h_ges hinzufügen  
-            h_ges(n_x)=h_ges(n_x)+Fx;
-            h_ges(n_y)=h_ges(n_y)+Fy;
+% F zu h_ges hinzufügen   
             end
         end          
 

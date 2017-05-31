@@ -126,7 +126,7 @@ classdef Stationaere_Lsg < handle
         ss_G = obj.rotorsystem.systemmatrizen.ss_G;
         ss_h = obj.rotorsystem.systemmatrizen.ss_h;
         
-        ss=ss+ss_G*omega;
+        ss=ss+[ss_G*omega,zeros(length(ss_G),2);zeros(2,length(ss_G)+2)];
         
         %init Vector
         Z0 = zeros(length(ss),1);
@@ -141,8 +141,8 @@ classdef Stationaere_Lsg < handle
             end
         end
 
-        [obj.rotorsystem.time_result.T,Z] = ode15s(@integrate_function,obj.time,Z0,options,ss,ss_h,n_nodes,omega_rot_const_force);
-        
+        [obj.rotorsystem.time_result.T,Z] = ode15s(@integrate_function,obj.time,Z0,options,ss,ss_h,n_nodes,omega_rot_const_force,obj.rotorsystem);
+
         obj.rotorsystem.time_result.X = Z(:,1:4*n_nodes)';
         obj.rotorsystem.time_result.X_d = Z(:,4*n_nodes+1:2*4*n_nodes)';
      end

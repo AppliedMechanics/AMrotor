@@ -6,7 +6,7 @@ ToDo: Christian Looschen (christian_looschen@hotmail.com)
 - Visualisierung Lagerringe
 - Drehung der Visualisierung
 - Klasse Kraftsensor generieren
-
+- Geschwindigkeitssensor und Stromsensor erstellen
 
 
 - Torsions-DGL einpflegen/erstellen

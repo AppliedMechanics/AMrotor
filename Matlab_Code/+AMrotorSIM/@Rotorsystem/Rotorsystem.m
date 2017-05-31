@@ -156,7 +156,7 @@ classdef Rotorsystem < handle
         
         for i=obj.lager
             if i.cnfg.type==3
-            obj.systemmatrizen.ss = i.add_controller_ss(ss,3);
+            obj.systemmatrizen.ss = i.add_controller_ss(ss,3,obj);
             end
         end
         dim_ss2=length(obj.systemmatrizen.ss);
