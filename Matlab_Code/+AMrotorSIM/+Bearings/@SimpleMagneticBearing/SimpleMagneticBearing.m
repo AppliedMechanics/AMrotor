@@ -1,6 +1,7 @@
 classdef SimpleMagneticBearing < AMrotorSIM.Bearings.Lager
    properties
         cnfg
+        color = 'red'
    end
    methods
         function obj=SimpleMagneticBearing(arg) 

@@ -9,8 +9,9 @@ classdef Sensor < matlab.mixin.Heterogeneous & handle
          if nargin == 0
            obj.name = 'Depp';
          else
+           assert(isscalar(arg));
            obj.cnfg = arg;
-           obj.name = obj.cnfg.name;
+           obj.name = obj.cnfg.name;  
          end
       end
       

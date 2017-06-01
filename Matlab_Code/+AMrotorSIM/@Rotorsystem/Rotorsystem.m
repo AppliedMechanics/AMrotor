@@ -60,25 +60,27 @@ classdef Rotorsystem < handle
             disp('----------------------------------------------')
       end
 
-      function compute_matrices(obj)
-            [M,G,D,K]=obj.rotor.compute_matrices(); 
-        for i=obj.lager
-            [matrices.m,matrices.g,matrices.d,matrices.k]=i.compute_matrices();
-            [Ml,Gl,Dl,Kl]=assembling_matrices(i.cnfg.position,matrices,obj.rotor);
-            M=M+Ml; G=G+Gl; D=D+Dl; K=K+Kl;
-        end
-        for i=obj.discs
-            [matrices.m,matrices.g,matrices.d,matrices.k]=i.compute_matrices();
-            [Ml,Gl,Dl,Kl]=assembling_matrices(i.cnfg.position,matrices,obj.rotor);
+    function compute_matrices(obj)
+        [M,G,D,K]=obj.rotor.compute_matrices(); 
+        
+        for lager = obj.lager
+            [matrices.m,matrices.g,matrices.d,matrices.k]=lager.compute_matrices();
+            [Ml,Gl,Dl,Kl]=assembling_matrices(lager.cnfg.position,matrices,obj.rotor);
             M=M+Ml; G=G+Gl; D=D+Dl; K=K+Kl;
         end
         
-      obj.systemmatrizen.M=M; obj.systemmatrizen.G=G; obj.systemmatrizen.D=D; obj.systemmatrizen.K=K;
+        for disc = obj.discs
+            [matrices.m,matrices.g,matrices.d,matrices.k]=disc.compute_matrices();
+            [Ml,Gl,Dl,Kl]=assembling_matrices(disc.cnfg.position,matrices,obj.rotor);
+            M=M+Ml; G=G+Gl; D=D+Dl; K=K+Kl;
+        end
+        
+        obj.systemmatrizen.M=M; obj.systemmatrizen.G=G; obj.systemmatrizen.D=D; obj.systemmatrizen.K=K;
+
+        obj.reduktionsmatrizen.EVmr = eye(size(M));
+        obj.reduktionsmatrizen.EWmr=0;
       
-      obj.reduktionsmatrizen.EVmr = eye(size(M));
-      obj.reduktionsmatrizen.EWmr=0;
-      
-      end
+    end
       
       function compute_loads(obj) 
           
@@ -166,7 +168,7 @@ classdef Rotorsystem < handle
               case 1
                 obj.sensors(end+1) = AMrotorSIM.Sensors.Wegsensor(arg);
               case 2
-                 obj.sensors(end+1) = AMrotorSIM.Sensors.Kraftsensor(arg);
+                 obj.sensors(end+1) = AMrotorSIM.Sensors.Kraftsensor(arg,obj.lager);
           end 
       end
       
