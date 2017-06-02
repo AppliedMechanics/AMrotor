@@ -56,6 +56,33 @@ classdef Modalanalyse < handle
       
       end
       
+      function calculate_rotorsystem_ss(obj,n_modes,drehzahl)
+      
+          disp('Berechne Modalanalyse Rotorsystem')
+          
+          obj.n_ew = n_modes;
+          obj.omega=drehzahl/60*2*pi;
+      
+          nodes=obj.rotorsystem.rotor.nodes;
+          n_nodes=length(nodes);
+          
+          
+          for n1 = 1:length(obj.omega)
+
+             ss=obj.rotorsystem.systemmatrizen.ss+obj.rotorsystem.systemmatrizen.ss_G*n1;
+
+             ss_mech = ss(1:2*4*n_nodes,1:2*4*n_nodes);
+              
+             %opts.tol = 1e-4;
+              opts.isreal =1;
+             [V,D] = eigs(ss_mech,n_modes*4,'sm',opts);  
+             %[V,D] = eig(ss_mech);
+             
+             obj.eigenmatrizen.V(:,:,n1) = V;
+             obj.eigenmatrizen.D(:,:,n1) = D;
+          end   
+      end
+      
    end
    methods(Access=private)
        

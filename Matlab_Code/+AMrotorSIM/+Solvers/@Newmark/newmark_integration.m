@@ -1,4 +1,4 @@
-function [q,qd,qdd] = newmark_integration( beta , gamma, M, D, K,f,t,q_0,qd_0,qdd_0,constant)
+function [q,qd,qdd] = newmark_integration(obj, beta , gamma, M, D, K,f,t,q_0,qd_0,qdd_0,constant)
 % NEWMARK_INTEGRATION   führt eine Newmark Zeitintegration durch
 %
 % Syntax:
@@ -38,18 +38,20 @@ function [q,qd,qdd] = newmark_integration( beta , gamma, M, D, K,f,t,q_0,qd_0,qd
     % Anzahl der Freiheitsgrade
     ndof=size(M,1);
     
+    cons=constant;
+    
     % Überprüfe, ob alle notwendigen Parameter übergeben wurden
-    if nargin < 10
-        fprintf(2,'Fehler in newmark_integration: Zu wenige Parameter übergeben!');
-        return;
-    else
-        if nargin > 10
-            cons=constant;
-        else
-            % cons nicht übergeben wurde, nimm an, dass die Zeitschritte
-            % nicht konstant sind
-            cons=0;
-        end
+%     if nargin < 10
+%         fprintf(2,'Fehler in newmark_integration: Zu wenige Parameter übergeben!');
+%         return;
+%     else
+%         if nargin > 10
+%             cons=constant;
+%         else
+%             % cons nicht übergeben wurde, nimm an, dass die Zeitschritte
+%             % nicht konstant sind
+%             cons=0;
+%         end
         
         % Prüfe, ob M, D und K kompatibel sind
         if ~(size(D,1)==ndof && size(K,1)==ndof)
@@ -147,5 +149,5 @@ function [q,qd,qdd] = newmark_integration( beta , gamma, M, D, K,f,t,q_0,qd_0,qd
             fprintf(2,'Fehler in newmark_integration: Beta und Gamma müssen gültige Werte annehmen');
             return;
         end % Ende if gamma > 0...
-    end % Ende nargin < 10
+%     end % Ende nargin < 10
 end % Ende der function

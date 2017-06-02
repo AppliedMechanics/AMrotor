@@ -49,8 +49,12 @@ classdef Rotor < handle
         obj.matrizen.G=G;
         obj.matrizen.D=D;
         obj.matrizen.K=K;
-      end
-      
+      end   
+   end
+   
+   methods
+       [Jt,Dt,Kt] = compute_torsion_matrices(obj)
+       
       function [diameter] = get_diameter(obj,pos)
           nr_of_rows = size(obj.cnfg.rotor_dimensions,1);
           i= 1;

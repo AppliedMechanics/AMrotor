@@ -45,9 +45,41 @@ classdef Eigenschwingformen < handle
 %         end
 
       end
- 
-   end
-   methods(Access=private)
-       
+      
+      function plot_displacements(obj)
+          
+          n_ew=obj.modalsystem.n_ew;
+          nodes=obj.modalsystem.rotorsystem.rotor.nodes;
+          n_nodes=length(nodes);
+          
+          V_x = obj.modalsystem.eigenmatrizen.V(1:2:2*n_nodes,1:2:end,1);
+          D_x = obj.modalsystem.eigenmatrizen.D(1:2:2*n_ew,1:2:2*n_ew,1)
+          
+          V_y = obj.modalsystem.eigenmatrizen.V(2*n_nodes+1:2:4*n_nodes,1:2:end,1);
+          D_y = obj.modalsystem.eigenmatrizen.D(2*n_ew+1:2:4*n_ew,1:2:2*n_ew,1)
+          
+          %
+          disp('Eigenkreisfrequenzen')
+
+            for s=1:n_ew
+            disp(['x: ',num2str(imag(D_x(s,s,1))/(2*pi)),' Hz'])
+            disp(['y: ',num2str(imag(D_y(s,s,1))/(2*pi)),' Hz'])
+            end
+          
+          % 
+          figure()
+            ax1 = subplot(1,2,1);
+            hold on;
+            title(ax1,'Eigenmoden x-Richtung')
+            ax2 = subplot(1,2,2);
+            hold on;
+            title(ax2,'y-Richtung')
+            
+        for s=1:n_ew
+            plot(ax1,(real(V_x(:,s,1))/norm(V_x(:,s,1))))
+            plot(ax2,(real(V_y(:,s,1))/norm(V_y(:,s,1))))
+        end
+          
+      end
    end
 end

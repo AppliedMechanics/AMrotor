@@ -1,4 +1,4 @@
-classdef Lager < matlab.mixin.Heterogeneous
+classdef Lager < matlab.mixin.Heterogeneous & handle
    properties
       name
       position
@@ -21,5 +21,6 @@ classdef Lager < matlab.mixin.Heterogeneous
       function [M,K] = compute_matrices(obj)
         disp('Berechne Lagersteifigkeit')
       end
+      
    end
 end
