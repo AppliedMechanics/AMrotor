@@ -7,7 +7,7 @@ classdef Lager < matlab.mixin.Heterogeneous & handle
       %Konstruktor
        function obj = Lager(arg)
          if nargin == 0
-           obj.name = "starkes Lager!";
+           obj.name = 'starkes Lager!';
          else
            obj.name = arg.name;
            obj.position=arg.position;

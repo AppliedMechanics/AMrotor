@@ -24,7 +24,7 @@ classdef Rotorsystem < handle
        %Konstruktor
        function obj = Rotorsystem(a,name)
          if nargin == 0
-           obj.name = "Netter Rotorsystem Name";
+           obj.name = 'Netter Rotorsystem Name';
          else
            obj.cnfg = a;
            obj.name = name;

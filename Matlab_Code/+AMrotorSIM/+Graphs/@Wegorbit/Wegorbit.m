@@ -1,6 +1,6 @@
 classdef Wegorbit < AMrotorSIM.Graphs.Orbit
    properties
-    unit = "m"
+    unit = 'm'
    end
    methods
       function obj=Wegorbit(variable) 

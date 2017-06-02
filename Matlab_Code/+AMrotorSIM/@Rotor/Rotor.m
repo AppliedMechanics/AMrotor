@@ -15,7 +15,7 @@ classdef Rotor < handle
        %Konstruktor
        function obj = Rotor(a)
          if nargin == 0
-           obj.name = "Default Rotor";
+           obj.name = 'Default Rotor';
          else
            obj.cnfg = a;
            obj.name = obj.cnfg.name;
@@ -54,5 +54,21 @@ classdef Rotor < handle
    
    methods
        [Jt,Dt,Kt] = compute_torsion_matrices(obj)
+       
+      function [diameter] = get_diameter(obj,pos)
+          nr_of_rows = size(obj.cnfg.rotor_dimensions,1);
+          i= 1;
+           
+           while i ~= nr_of_rows
+                if pos >= obj.cnfg.rotor_dimensions(i,1) & pos < obj.cnfg.rotor_dimensions(i+1,1)
+                    diameter = obj.cnfg.rotor_dimensions(i,2);
+                    return
+                else
+                    i = i+1;
+  
+                end
+
+           end
+      end
    end
 end

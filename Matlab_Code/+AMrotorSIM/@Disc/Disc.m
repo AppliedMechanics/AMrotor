@@ -8,7 +8,7 @@ classdef Disc < handle
        %Konstruktor
        function obj = Disc(a)
          if nargin == 0
-           obj.name = "Mittelmäßige Massengewichtsscheibe";
+           obj.name = 'Mittelmäßige Massengewichtsscheibe';
          else
            obj.cnfg = a;
            obj.name = obj.cnfg.name;
