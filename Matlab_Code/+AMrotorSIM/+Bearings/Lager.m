@@ -1,4 +1,4 @@
-classdef Lager < matlab.mixin.Heterogeneous
+classdef Lager < matlab.mixin.Heterogeneous & handle
    properties
       name
       position

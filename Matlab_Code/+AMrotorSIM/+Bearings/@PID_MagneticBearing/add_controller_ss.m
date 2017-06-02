@@ -20,6 +20,9 @@ elseif dir == 3
    % Position im Zustandsvektor finden für x und dx
    [n_x,n_dx,n_y,n_dy]=rotorsystem.find_next_node_ss(z_pos);
    
+   obj.ss_position.n_x = n_x;
+   obj.ss_position.n_y = n_y;
+   
    ss_controller_x = zeros(length(ss_in)+2);
    ss_controller_y = zeros(length(ss_in)+2);
    
@@ -31,6 +34,9 @@ elseif dir == 3
    
    ss_controller_x(end-1,:) = Kd*[ss_in(n_dx,:),0,0]+ss_pi_x;
    ss_controller_y(end,:) = Kd*[ss_in(n_dy,:),0,0]+ss_pi_y;
+   
+   obj.ss_position.n_Ix = length(ss_controller_x)-1;
+   obj.ss_position.n_Iy = length(ss_controller_y);
    
    ss_out = [ss_in,zeros(length(ss_in),2);zeros(2,length(ss_in)+2)]+ss_controller_x+ss_controller_y;
 end

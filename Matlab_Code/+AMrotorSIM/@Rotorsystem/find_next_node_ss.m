@@ -13,10 +13,10 @@ n=2;
           n = n+1;
         end
         
-n_x = n*2;
-n_dx = n_nodes*4+n*2;
-n_y = n_nodes*2+n*2;
-n_dy = n_nodes*4+n_nodes*2+n*2;
+n_x = n*2-1;
+n_dx = n_nodes*4+n*2-1;
+n_y = n_nodes*2+n*2-1;
+n_dy = n_nodes*4+n_nodes*2+n*2-1;
         
 end
 

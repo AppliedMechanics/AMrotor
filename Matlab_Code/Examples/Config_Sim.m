@@ -5,7 +5,7 @@ cnfg.cnfg_rotor.name = "Testrotor";
 cnfg.cnfg_rotor.shear_def = 1;     % 1 = Timoshenko or 0 = Bernoulli beam theoy
 
 %rotor geometry             [z1,da,di;   z2,da,di]  
-cnfg.cnfg_rotor.rotor_dimensions = [0,15,0;400,15,0;450,150,0;600,15,0]*1e-3; %[m] %Angefangen bei 0, die Durchmessersprünge am ende des Abschnites eingeben
+cnfg.cnfg_rotor.rotor_dimensions = [0,10,0;400,10,0;410,150,0;600,10,0]*1e-3; %[m] %Angefangen bei 0, die Durchmessersprünge am ende des Abschnites eingeben
 cnfg.cnfg_rotor.shear_factor   = 0.9;  %!!!!!!!!!wird Automatisch korregiert wenn Kreisring.
                                 %!!!!!!!!!Schubkorrekrutfaktor für Kreisquerschnitt 0.9[-], Kreisring 0.5[-]
 
@@ -54,30 +54,36 @@ cnfg.cnfg_lager=[];
 cnfg.cnfg_lager(1).name = 'Locker lässiges Lager';
 cnfg.cnfg_lager(1).position=0e-3;                        %[m]
 cnfg.cnfg_lager(1).type=1;
-cnfg.cnfg_lager(1).stiffness=5e6;%7.0e5;              %[N/m]
+cnfg.cnfg_lager(1).stiffness=5e7;                     %[N/m]
 
-% Lager
-cnfg.cnfg_lager(2).name = 'Ein Lager';
+% Magnet-Lager links
+% cnfg.cnfg_lager(1).name = 'Magnetlager links';
+% cnfg.cnfg_lager(1).position=0e-3;                        %[m]
+% cnfg.cnfg_lager(1).type=3;
+% Config_Sim_Mag1
+% cnfg.cnfg_lager(1).mag=mag;
+
+% Magnet-Lager rechts
+cnfg.cnfg_lager(2).name = 'Magnetlager rechts';
 cnfg.cnfg_lager(2).position=600e-3;                        %[m]
 cnfg.cnfg_lager(2).type=3;
 Config_Sim_Mag1
 cnfg.cnfg_lager(2).mag=mag;
-%cnfg.cnfg_lager(2).stiffness=5e6;                  %[N/m]
 
 %% ========================================================================
 % Kraft in feste Richtung
 cnfg.cnfg_force_const_fix=[];
-% cnfg.cnfg_force_const_fix(1).name='Saubere Kraft';
-% cnfg.cnfg_force_const_fix(1).position=350e-3;
-% cnfg.cnfg_force_const_fix(1).betrag_x= 0;
-% cnfg.cnfg_force_const_fix(1).betrag_y= 100;
+cnfg.cnfg_force_const_fix(1).name='Saubere Kraft';
+cnfg.cnfg_force_const_fix(1).position=350e-3;
+cnfg.cnfg_force_const_fix(1).betrag_x= 0;
+cnfg.cnfg_force_const_fix(1).betrag_y= 10;
 
 % Unwuchten
 cnfg.cnfg_unbalance=[];
-cnfg.cnfg_unbalance(1).name = 'Geplante Unwucht';
-cnfg.cnfg_unbalance(1).position = 300e-3;
-cnfg.cnfg_unbalance(1).betrag = 5e-1;
-cnfg.cnfg_unbalance(1).winkellage = 0;
+% cnfg.cnfg_unbalance(1).name = 'Geplante Unwucht';
+% cnfg.cnfg_unbalance(1).position = 300e-3;
+% cnfg.cnfg_unbalance(1).betrag = 5e-5;
+% cnfg.cnfg_unbalance(1).winkellage = 0;
 
 %% Infos
 % %KoSy:

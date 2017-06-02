@@ -126,7 +126,7 @@ classdef Stationaere_Lsg < handle
         ss_G = obj.rotorsystem.systemmatrizen.ss_G;
         ss_h = obj.rotorsystem.systemmatrizen.ss_h;
         
-        ss=ss+[ss_G*omega,zeros(length(ss_G),2);zeros(2,length(ss_G)+2)];
+        ss=ss+[ss_G*omega,zeros(length(ss_G),length(ss)-length(ss_G));zeros(length(ss)-length(ss_G),length(ss_G)+length(ss)-length(ss_G))];
         
         %init Vector
         Z0 = zeros(length(ss),1);

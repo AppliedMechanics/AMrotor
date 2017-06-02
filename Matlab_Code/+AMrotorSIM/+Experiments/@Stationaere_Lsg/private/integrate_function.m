@@ -14,13 +14,14 @@ h_ges = (ss_h.h +(ss_h.h_ZPsin.*(omega^2) + ss_h.h_DBsin.*domega +ss_h.h_sin).*(
         for i=rotorsystem.lager
             if i.cnfg.type==3
                 
-            z_pos = i.position;
-   % Position im Zustandsvektor finden für x und y
-            [n_x,~,n_y,~]=rotorsystem.find_next_node_ss(z_pos);
+            n_x = i.ss_position.n_x;
+            n_Ix = i.ss_position.n_Ix;
+            n_y = i.ss_position.n_y;
+            n_Iy = i.ss_position.n_Iy;
 % x aus Zustandsvektor suchen
 % I aus Zustandsvektor suchen
 % Kraft F(x,I) berechnen 
-            [Fx,Fy]=i.compute_force( Z(n_x),Z(n_y),Z(end-1),Z(end));
+            [Fx,Fy]=i.compute_force( Z(n_x),Z(n_y),Z(n_Ix),Z(n_Iy));
 % F zu h_ges hinzufügen  
             h_ges(n_x)=h_ges(n_x)+Fx;
             h_ges(n_y)=h_ges(n_y)+Fy;

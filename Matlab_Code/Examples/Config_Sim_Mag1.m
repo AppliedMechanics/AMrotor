@@ -1,9 +1,9 @@
 %% Magnetlager Kennwerte
 
 % Reglerparameter
-mag.Kp=8000;% A/mm
-mag.Ki=1500;  % A/mm*s
-mag.Kd=5;   % A*s/mm
+mag.Kp=1e6;% A/m
+mag.Ki=10;  % A/m*s
+mag.Kd=5;   % A*s/m
 
 % Strombegrenzung
 mag.I_max = 5.0; 						%[A] maximaler Verstärkerstrom
