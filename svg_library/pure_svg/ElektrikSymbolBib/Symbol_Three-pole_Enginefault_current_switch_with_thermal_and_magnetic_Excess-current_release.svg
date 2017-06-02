@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.43"
+   width="32mm"
+   height="15mm"
+   version="1.0"
+   sodipodi:docbase="C:\Dokumente und Einstellungen\MovGP0\Desktop"
+   sodipodi:docname="Symbol_Induktor_(with_Tapping).svg">
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs5" />
+  <sodipodi:namedview
+     inkscape:window-height="742"
+     inkscape:window-width="1024"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     showgrid="true"
+     gridspacingy="1mm"
+     gridspacingx="1mm"
+     gridoriginy="0mm"
+     gridoriginx="0mm"
+     gridtolerance="0.5mm"
+     gridempspacing="10"
+     inkscape:grid-points="true"
+     inkscape:guide-points="true"
+     guidetolerance="0.5mm"
+     inkscape:zoom="5.6568543"
+     inkscape:cx="56.432"
+     inkscape:cy="20.5267"
+     inkscape:window-x="1020"
+     inkscape:window-y="-4"
+     inkscape:current-layer="svg2"
+     inkscape:document-units="mm" />
+  <path
+     style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="M 92.125984,49.606298 L 109.84252,49.606298"
+     id="path3096" />
+  <path
+     style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="M 88.582677,31.889761 L 21.259843,49.606298 L 3.5433071,49.606298"
+     id="path3106" />
+  <path
+     style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="M 66.701532,18.914946 L 65.992705,30.097425 L 72.843957,28.286226 L 66.701532,18.914946 z "
+     id="path1308" />
+  <path
+     style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="M 68.512732,25.766199 L 71.22953,36.043077"
+     id="path1310" />
+  <path
+     style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="M 53.149606,46.062991 L 46.062992,35.433069"
+     id="path2185" />
+  <text
+     xml:space="preserve"
+     style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+     x="37.476658"
+     y="32.289955"
+     id="text2187"><tspan
+       sodipodi:role="line"
+       id="tspan2189"
+       x="37.476658"
+       y="32.289955">3</tspan></text>
+  <path
+     style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000024px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="M 82.135624,33.426273 L 79.863825,26.71367 L 86.576429,24.441871 L 84.304631,17.729267 L 77.592027,20.001066 L 75.320229,13.288462"
+     id="path2195"
+     sodipodi:nodetypes="cccccc" />
+</svg>

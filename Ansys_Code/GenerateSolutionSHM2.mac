@@ -1,0 +1,9 @@
+!!GenerateSolutionSHM2.mac
+!!Generieren einer Lösung für den
+!!standardisierten Hufeisenmagneten 2
+!!Michael Mirza 09.03.2017
+/SOLU		!!Wechsenl in solution processor
+ANTYPE,0	!!statische Analyse
+/STATUS,SOLU	!!Statusmeldung
+SOLVE		!!Loesung durchfuehren
+FINISH		!!solution processor beenden

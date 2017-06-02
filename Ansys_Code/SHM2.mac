@@ -1,0 +1,14 @@
+!!SHM2.mac
+!!Generierung eines Punktes des Kennfeldes des
+!!Standardisierten Hufeisenmagneten 2
+!!Michael Mirza 05.03.2017
+!!
+x=arg1
+I=arg2
+GeomGenSHM2,x
+ElemMatMeshSHM2,x
+KompDefJochSHM2
+DefBCLoadSHM2,I
+GenerateSolutionSHM2
+WriteResultsSHM2,x,I
+DelAllSHM2

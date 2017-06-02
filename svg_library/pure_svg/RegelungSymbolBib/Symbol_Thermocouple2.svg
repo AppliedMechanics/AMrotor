@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="21.259842"
+   height="42.519684"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.44"
+   version="1.0"
+   sodipodi:docbase="G:\Users\MovGP0\Documents\SVG"
+   sodipodi:docname="Wirkleistungsschreiber.svg">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="11.2"
+     inkscape:cx="15.65865"
+     inkscape:cy="23.446544"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     width="6mm"
+     height="14mm"
+     units="mm"
+     showgrid="true"
+     gridspacingx="1mm"
+     gridspacingy="1mm"
+     grid_units="mm"
+     inkscape:object-bbox="true"
+     inkscape:object-points="true"
+     inkscape:object-nodes="true"
+     objecttolerance="10000"
+     inkscape:grid-points="true"
+     gridtolerance="10000"
+     inkscape:guide-points="true"
+     guidetolerance="10000"
+     inkscape:window-width="1024"
+     inkscape:window-height="748"
+     inkscape:window-x="1016"
+     inkscape:window-y="-8" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:black;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 17.716536,3.5433059 L 17.716536,24.803148 L 10.629921,38.976377 L 3.5433071,24.803148 L 3.5433071,3.5433059"
+       id="path2901" />
+    <path
+       style="fill:black;fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 3.5753661,24.867265 L 10.450366,38.617265"
+       id="path3790" />
+  </g>
+</svg>

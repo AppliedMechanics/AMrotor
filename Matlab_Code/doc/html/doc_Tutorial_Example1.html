@@ -1,0 +1,211 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Tutorialanwendung</title><meta name="generator" content="MATLAB 9.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-05-15"><meta name="DC.source" content="doc_Tutorial_Example1.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Tutorialanwendung</h1><!--introduction--><p>Zur Demonstration der AMrotorSIM-Toolbox</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Header</a></li><li><a href="#2">Import</a></li><li><a href="#3">Clean up</a></li><li><a href="#4">Compute Rotor</a></li><li><a href="#5">Running system analyses</a></li><li><a href="#6">Running Time Simulation</a></li></ul></div><h2 id="1">Header</h2><pre class="codeinput"><span class="comment">% Johannes Maierhofer</span>
+<span class="comment">% 28.03.2017,29.03.2017,30.03.2017,31.03.2017,03.04.2017,04.04.2017,05.04.2017,06.04.2017,12.04.2017</span>
+<span class="comment">%</span>
+<span class="comment">%         .o.       ooo        ooooo                        .</span>
+<span class="comment">%        .888.      `88.       .888'                      .o8</span>
+<span class="comment">%       .8"888.      888b     d'888  oooo d8b  .ooooo.  .o888oo  .ooooo.  oooo d8b</span>
+<span class="comment">%      .8' `888.     8 Y88. .P  888  `888""8P d88' `88b   888   d88' `88b `888""8P</span>
+<span class="comment">%     .88ooo8888.    8  `888'   888   888     888   888   888   888   888  888</span>
+<span class="comment">%    .8'     `888.   8    Y     888   888     888   888   888 . 888   888  888</span>
+<span class="comment">%   o88o     o8888o o8o        o888o d888b    `Y8bod8P'   "888" `Y8bod8P' d888b</span>
+</pre><h2 id="2">Import</h2><pre class="codeinput">import <span class="string">AMrotorSIM.*</span>
+</pre><h2 id="3">Clean up</h2><pre class="codeinput">close <span class="string">all</span>
+clear <span class="string">all</span>
+clc
+</pre><h2 id="4">Compute Rotor</h2><pre class="codeinput">doc_Tutorial_Example1_Config_Sim
+
+r=Rotorsystem(cnfg,<span class="string">'System'</span>);
+r.show;
+
+r.rotor.mesh()
+
+g=Graphs.Visu_Rotorsystem(r);
+g.show();
+
+r.compute_matrices();
+r.compute_loads();
+<span class="comment">%r.reduce_modal(10);</span>
+</pre><pre class="codeoutput">--------------- Rotorsystem --------------
+System
+Testrotor
+Locker l&auml;ssiges Lager
+Ein zweites Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Sepp
+Hans
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Berechne Lagersteifigkeit
+Berechne Lagersteifigkeit
+</pre><img vspace="5" hspace="5" src="doc_Tutorial_Example1_01.png" style="width:560px;height:420px;" alt=""> <h2 id="5">Running system analyses</h2><pre class="codeinput">m=Experiments.Modalanalyse(r);
+
+<span class="comment">% m.calculate_rotor_only(4,0:100:1000);</span>
+<span class="comment">% esf = Graphs.Eigenschwingformen(m);</span>
+<span class="comment">% esf.plot();</span>
+
+m.calculate_rotorsystem(4,0:100:1000);
+esf2= Graphs.Eigenschwingformen(m);
+esf2.plot();
+
+m.calculate_rotorsystem(3,0:100:3000);
+cmp = Graphs.Campbell(m);
+cmp.plot();
+</pre><pre class="codeoutput">Berechne Modalanalyse Rotorsystem
+Eigenkreisfrequenzen
+27.8692 Hz
+132.164 Hz
+249.2602 Hz
+735.7323 Hz
+Berechne Modalanalyse Rotorsystem
+</pre><img vspace="5" hspace="5" src="doc_Tutorial_Example1_02.png" style="width:560px;height:420px;" alt=""> <img vspace="5" hspace="5" src="doc_Tutorial_Example1_03.png" style="width:560px;height:420px;" alt=""> <h2 id="6">Running Time Simulation</h2><pre class="codeinput"> St_Lsg = Experiments.Stationaere_Lsg(r,1000,[0 2]);
+ St_Lsg.show()
+ St_Lsg.compute()
+
+ w = Graphs.Wegorbit(r);
+ w.plot(r.sensors);
+</pre><pre class="codeoutput">Station&auml;re L&ouml;sung
+Compute.... ode15 ....
+ ---   Plot Wegorbit   ---
+</pre><img vspace="5" hspace="5" src="doc_Tutorial_Example1_04.png" style="width:560px;height:420px;" alt=""> <img vspace="5" hspace="5" src="doc_Tutorial_Example1_05.png" style="width:560px;height:420px;" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Tutorialanwendung
+% Zur Demonstration der AMrotorSIM-Toolbox
+
+%% Header
+
+% Johannes Maierhofer
+% 28.03.2017,29.03.2017,30.03.2017,31.03.2017,03.04.2017,04.04.2017,05.04.2017,06.04.2017,12.04.2017
+%
+%         .o.       ooo        ooooo                        .                      
+%        .888.      `88.       .888'                      .o8                      
+%       .8"888.      888b     d'888  oooo d8b  .ooooo.  .o888oo  .ooooo.  oooo d8b 
+%      .8' `888.     8 Y88. .P  888  `888""8P d88' `88b   888   d88' `88b `888""8P 
+%     .88ooo8888.    8  `888'   888   888     888   888   888   888   888  888     
+%    .8'     `888.   8    Y     888   888     888   888   888 . 888   888  888     
+%   o88o     o8888o o8o        o888o d888b    `Y8bod8P'   "888" `Y8bod8P' d888b    
+
+%% Import
+
+import AMrotorSIM.*
+
+%% Clean up
+close all
+clear all
+clc
+
+%% Compute Rotor
+
+doc_Tutorial_Example1_Config_Sim
+
+r=Rotorsystem(cnfg,'System');
+r.show;
+
+r.rotor.mesh()
+
+g=Graphs.Visu_Rotorsystem(r);
+g.show();
+
+r.compute_matrices();
+r.compute_loads();
+%r.reduce_modal(10);
+
+%% Running system analyses
+
+m=Experiments.Modalanalyse(r);
+
+% m.calculate_rotor_only(4,0:100:1000);
+% esf = Graphs.Eigenschwingformen(m);
+% esf.plot();
+
+m.calculate_rotorsystem(4,0:100:1000);
+esf2= Graphs.Eigenschwingformen(m);
+esf2.plot();
+
+m.calculate_rotorsystem(3,0:100:3000);
+cmp = Graphs.Campbell(m);
+cmp.plot();
+
+%% Running Time Simulation
+
+ St_Lsg = Experiments.Stationaere_Lsg(r,1000,[0 2]);
+ St_Lsg.show()
+ St_Lsg.compute()
+
+ w = Graphs.Wegorbit(r);
+ w.plot(r.sensors);
+
+##### SOURCE END #####
+--></body></html>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.43"
+   width="18mm"
+   height="15mm"
+   version="1.0"
+   sodipodi:docbase="C:\Dokumente und Einstellungen\MovGP0\Desktop"
+   sodipodi:docname="Symbol_Photodiode.svg">
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs5" />
+  <sodipodi:namedview
+     inkscape:window-height="712"
+     inkscape:window-width="1024"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     showgrid="true"
+     gridspacingy="1mm"
+     gridspacingx="1mm"
+     gridoriginy="0mm"
+     gridoriginx="0mm"
+     gridtolerance="0.5mm"
+     gridempspacing="10"
+     inkscape:grid-points="true"
+     inkscape:guide-points="true"
+     guidetolerance="0.5mm"
+     inkscape:zoom="5.6568542"
+     inkscape:cx="48.123103"
+     inkscape:cy="32.008097"
+     inkscape:window-x="-4"
+     inkscape:window-y="-4"
+     inkscape:current-layer="svg2"
+     inkscape:document-units="mm" />
+  <path
+     style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="M 31.389764,25.303148 L 41.41175,20.292156 L 36.400757,15.281163 L 31.389764,25.303148 z "
+     id="path1308" />
+  <path
+     style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="M 39.084313,32.389763 L 49.106299,27.378769 L 44.095306,22.367776 L 39.084313,32.389763 z "
+     id="path2183" />
+  <path
+     style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="M 34.933071,21.759841 L 52.649606,4.043306"
+     id="path2185" />
+  <path
+     style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="M 42.019685,28.846455 L 59.73622,11.129921"
+     id="path2187" />
+  <path
+     style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="M 24.80315,14.173227 L 24.80315,49.606298"
+     id="path2189" />
+  <path
+     style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="M 24.80315,24.803148 L 3.543307,14.173227"
+     id="path2191"
+     sodipodi:nodetypes="cc" />
+  <path
+     style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="M 24.80315,38.976377 L 3.543307,49.606298"
+     id="path2196" />
+  <path
+     style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="M 23.735999,24.314344 L 15.879465,16.325285 L 12.657334,22.637016 L 23.735999,24.314344 z "
+     id="path2198" />
+</svg>

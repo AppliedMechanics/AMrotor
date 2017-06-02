@@ -5,7 +5,7 @@
 *.pdf
 *.pdf_tex
 
-# Build folder (includes only compiled .pdf-files)
+# Build folder (includes only compiled files)
 build/
 
 # SConscript_local-files in all subdirectories (no matter which depth) of directory 'documents'

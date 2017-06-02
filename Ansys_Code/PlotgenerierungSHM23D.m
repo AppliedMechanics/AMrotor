@@ -1,0 +1,23 @@
+%Generierung der Plots der analytischen Berechnung und der Simulationsdaten
+%des standardisierten hufeisenmagneten 2
+%Michael Mirza 03.04.2017
+KF=csvread('KF3DSHM2.csv')
+KF(:,3)=KF(:,3)/(-50)   %fuer analytische Berechnung auskommentieren
+pos1=25
+[xkf,ykf]=meshgrid(1:1:15,0.25:-0.01:0.01)
+zkf=[KF(pos1:-1:1,3),KF((2*pos1):-1:(pos1+1),3),...
+    KF((3*pos1):-1:(2*pos1+1),3),...
+    KF((4*pos1):-1:(3*pos1+1),3),KF((5*pos1):-1:(4*pos1+1),3),...
+    KF((6*pos1):-1:(5*pos1+1),3),KF((7*pos1):-1:(6*pos1+1),3),...
+    KF((8*pos1):-1:(7*pos1+1),3),KF((9*pos1):-1:(8*pos1+1),3),...
+    KF((10*pos1):-1:(9*pos1+1),3),KF((11*pos1):-1:(10*pos1+1),3),...
+    KF((12*pos1):-1:(11*pos1+1),3),KF((13*pos1):-1:(12*pos1+1),3),...
+    KF((14*pos1):-1:(13*pos1+1),3),KF((15*pos1):-1:(14*pos1+1),3)]
+    
+    
+mesh(xkf,ykf,zkf)
+xlabel('I [A]')
+ylabel('Luftspaltbreite [10^-^2m]')
+zlabel('F [N]')
+title('Kennfeld')
+print('Kennfeld', '-dpdf')

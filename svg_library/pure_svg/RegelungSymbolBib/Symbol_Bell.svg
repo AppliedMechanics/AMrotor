@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="38.976376"
+   height="38.976376"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.44"
+   version="1.0"
+   sodipodi:docbase="G:\Users\MovGP0\Documents\SVG"
+   sodipodi:docname="Wirkleistungsschreiber.svg">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="7.9195959"
+     inkscape:cx="33.40878"
+     inkscape:cy="31.053113"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     width="11mm"
+     height="11mm"
+     units="mm"
+     showgrid="true"
+     gridspacingx="0.5mm"
+     gridspacingy="0.5mm"
+     grid_units="mm"
+     inkscape:object-bbox="false"
+     inkscape:object-points="false"
+     inkscape:object-nodes="false"
+     objecttolerance="50"
+     inkscape:grid-points="true"
+     gridtolerance="10000"
+     inkscape:guide-points="false"
+     guidetolerance="50"
+     inkscape:window-width="1024"
+     inkscape:window-height="748"
+     inkscape:window-x="1016"
+     inkscape:window-y="-8"
+     inkscape:object-paths="false"
+     inkscape:guide-bbox="false"
+     gridempspacing="10" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       sodipodi:type="arc"
+       style="fill:none;fill-opacity:1;stroke:black;stroke-width:0.99921262;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path11779"
+       sodipodi:cx="35.433071"
+       sodipodi:cy="24.803146"
+       sodipodi:rx="17.716536"
+       sodipodi:ry="17.716536"
+       d="M 17.716785,24.709199 A 17.716536,17.716536 0 0 1 53.149554,24.846463 L 35.433071,24.803146 z"
+       sodipodi:start="3.1468955"
+       sodipodi:end="6.2856303"
+       transform="translate(-15.94488,-5.31496)" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:black;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 8.8582682,19.488187 L 8.8582682,37.204722"
+       id="path11781" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:black;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 30.11811,19.488187 L 30.11811,37.204722"
+       id="path11783" />
+  </g>
+</svg>

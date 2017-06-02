@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="31.889763"
+   height="35.433071"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.45"
+   version="1.0"
+   sodipodi:docbase="C:\Dokumente und Einstellungen\MovGP0\Desktop"
+   sodipodi:docname="NewOmegaInfrastructure.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   inkscape:export-filename="C:\Dokumente und Einstellungen\MovGP0\Desktop\NewOmegaInfrastructure.png"
+   inkscape:export-xdpi="153"
+   inkscape:export-ydpi="153"
+   sodipodi:modified="true">
+  <defs
+     id="defs4">
+    <marker
+       inkscape:stockid="TriangleOutM"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="TriangleOutM"
+       style="overflow:visible">
+      <path
+         id="path3336"
+         d="M 5.77,0 L -2.88,5 L -2.88,-5 L 5.77,0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="scale(0.4,0.4)" />
+    </marker>
+    <marker
+       inkscape:stockid="TriangleOutL"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="TriangleOutL"
+       style="overflow:visible">
+      <path
+         id="path3339"
+         d="M 5.77,0 L -2.88,5 L -2.88,-5 L 5.77,0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="scale(0.8,0.8)" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="11.2"
+     inkscape:cx="16.821796"
+     inkscape:cy="15.587714"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     width="9mm"
+     height="10mm"
+     units="mm"
+     showgrid="true"
+     gridspacingx="1mm"
+     gridspacingy="1mm"
+     gridanglex="8.4666669mm"
+     gridanglez="8.4666669mm"
+     grid_units="mm"
+     inkscape:object-paths="false"
+     inkscape:object-nodes="true"
+     objecttolerance="10000"
+     inkscape:grid-points="true"
+     gridtolerance="10000"
+     inkscape:grid-bbox="false"
+     inkscape:guide-bbox="false"
+     inkscape:window-width="1024"
+     inkscape:window-height="712"
+     inkscape:window-x="-4"
+     inkscape:window-y="-4" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 0,14.173228 C 0,14.173228 31.889764,14.173227 31.889764,14.173227"
+       id="path4315"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 0,21.259842 L 31.889764,21.259842"
+       id="path4317"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 21.259843,31.889763 C 21.259843,31.889763 17.716537,28.346456 17.716537,17.716535 C 17.716535,7.0866131 21.259843,3.543306 21.259843,3.543306"
+       id="path4319"
+       sodipodi:nodetypes="ccc" />
+    <path
+       style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 10.629922,31.889762 C 10.629922,31.889762 14.173228,28.346455 14.173228,17.716534 C 14.173228,7.0866131 10.629921,3.543306 10.629921,3.543306"
+       id="path4321"
+       sodipodi:nodetypes="ccc" />
+  </g>
+</svg>

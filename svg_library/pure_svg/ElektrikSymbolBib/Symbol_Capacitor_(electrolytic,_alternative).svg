@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.43"
+   width="14mm"
+   height="12mm"
+   version="1.0"
+   sodipodi:docbase="C:\Dokumente und Einstellungen\MovGP0\Desktop"
+   sodipodi:docname="Symbol Kondensator.svg">
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs5" />
+  <sodipodi:namedview
+     inkscape:window-height="742"
+     inkscape:window-width="1024"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     showgrid="true"
+     gridspacingy="1mm"
+     gridspacingx="1mm"
+     gridoriginy="0mm"
+     gridoriginx="0mm"
+     gridtolerance="0.5mm"
+     gridempspacing="10"
+     inkscape:grid-points="true"
+     inkscape:guide-points="true"
+     guidetolerance="0.5mm"
+     inkscape:zoom="8"
+     inkscape:cx="29.811277"
+     inkscape:cy="11.364104"
+     inkscape:window-x="1020"
+     inkscape:window-y="-4"
+     inkscape:current-layer="svg2"
+     inkscape:document-units="mm" />
+  <path
+     style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="M 17.716535,21.259841 L 3.5433071,21.259841"
+     id="path1307"
+     sodipodi:nodetypes="cc" />
+  <path
+     style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="M 31.889764,21.259841 L 46.062992,21.259841"
+     id="path1309"
+     sodipodi:nodetypes="cc" />
+  <rect
+     style="fill:none;fill-opacity:1;stroke:#000000;stroke-opacity:1"
+     id="rect1316"
+     width="3.5433071"
+     height="35.433071"
+     x="17.716536"
+     y="3.5433059" />
+  <rect
+     style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-opacity:1"
+     id="rect1318"
+     width="3.5433071"
+     height="35.433071"
+     x="28.346457"
+     y="3.5433059" />
+</svg>

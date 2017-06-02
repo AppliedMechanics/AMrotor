@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="195.20215"
+   height="51.625004"
+   id="svg14562"
+   sodipodi:version="0.32"
+   inkscape:version="0.45"
+   sodipodi:docbase="H:\Desktop\Arbeit\Mechanik_Bib\MechanikSymbolBib_Britz"
+   sodipodi:docname="Balken.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   version="1.0"
+   sodipodi:modified="true">
+  <defs
+     id="defs14564">
+    <marker
+       inkscape:stockid="StopM"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="StopM"
+       style="overflow:visible">
+      <path
+         id="path4864"
+         d="M 0,5.65 L 0,-5.65"
+         style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="scale(0.4,0.4)" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.8"
+     inkscape:cx="88.831503"
+     inkscape:cy="31.693812"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     inkscape:window-width="797"
+     inkscape:window-height="668"
+     inkscape:window-x="212"
+     inkscape:window-y="136" />
+  <metadata
+     id="metadata14567">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-92.398928,-370.88004)">
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:6;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 95.398928,419.50504 L 284.60107,419.50504"
+       id="path14555" />
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-weight:bold;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       x="122.85714"
+       y="379.50504"
+       id="text14682"><tspan
+         sodipodi:role="line"
+         id="tspan14684"
+         x="122.85714"
+         y="379.50504">Balken - Breite 6 px</tspan></text>
+  </g>
+</svg>

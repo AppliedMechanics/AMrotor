@@ -1,0 +1,6 @@
+!!KompDefJochSHM2.mac
+!!Definition der Komponente Joch des standardisierten
+!!Hufeisenmagneten 2 bestehend aus Elementen
+!!Michael Mirza 09.03.2017
+ESEL,S,MAT,,4	!!Auswahl von Elementen nach Material
+CM,Joch,ELEM	!!Definition einer Komponente Joch aus diesen Elementen 

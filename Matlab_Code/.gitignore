@@ -1,0 +1,17 @@
+#####################################################
+# Files to ignore
+#####################################################
+# Files generated
+
+*.asv
+*.pdf
+*.mat
+
+
+pfad
+
+# Example folder
+Examples/
+
+# Build folder (includes only compiled files)
+build/
