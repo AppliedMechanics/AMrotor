@@ -60,7 +60,7 @@ classdef Rotor < handle
           i= 1;
            
            while i ~= nr_of_rows
-                if pos >= obj.cnfg.rotor_dimensions(i,1) & pos < obj.cnfg.rotor_dimensions(i+1,1)
+                if pos >= obj.cnfg.rotor_dimensions(i,1) && pos < obj.cnfg.rotor_dimensions(i+1,1)
                     diameter = obj.cnfg.rotor_dimensions(i,2);
                     return
                 else
