@@ -68,11 +68,14 @@ r.transform_StateSpace();
 
 %% Running Time Simulation
 
-St_Lsg = Experiments.Stationaere_Lsg(r,1000,[0:0.01:1]);
+St_Lsg = Experiments.Stationaere_Lsg(r,1000,[0:0.01:10]);
 St_Lsg.show()
 % St_Lsg.compute()
 % St_Lsg.compute_newmark()
 St_Lsg.compute_ode15s_ss()
 
- w = Graphs.Wegorbit(r);
- w.plot(r.sensors);
+z= Graphs.TimeSignal(r);
+z.plot(r.sensors);
+
+w = Graphs.Wegorbit(r);
+w.plot(r.sensors);

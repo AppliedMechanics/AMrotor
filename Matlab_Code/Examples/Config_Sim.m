@@ -1,7 +1,7 @@
 %% ======================================================================
 % Rotor
 
-cnfg.cnfg_rotor.name = "Testrotor";
+cnfg.cnfg_rotor.name = 'Testrotor';
 cnfg.cnfg_rotor.shear_def = 1;     % 1 = Timoshenko or 0 = Bernoulli beam theoy
 
 %rotor geometry             [z1,da,di;   z2,da,di]  
@@ -32,11 +32,11 @@ cnfg.cnfg_disc=[];
 cnfg.cnfg_sensor=[];
 
 cnfg.cnfg_sensor(1).name = 'Sepp';
-cnfg.cnfg_sensor(1).position=0.050;
+cnfg.cnfg_sensor(1).position=0.0;
 cnfg.cnfg_sensor(1).type=1;
 
 cnfg.cnfg_sensor(2).name='Hans';
-cnfg.cnfg_sensor(2).position=0.550;
+cnfg.cnfg_sensor(2).position=0.600;
 cnfg.cnfg_sensor(2).type=1;
 
 % cnfg.cnfg_sensor(3).name='Maeir';
@@ -74,16 +74,16 @@ cnfg.cnfg_lager(2).mag=mag;
 % Kraft in feste Richtung
 cnfg.cnfg_force_const_fix=[];
 cnfg.cnfg_force_const_fix(1).name='Saubere Kraft';
-cnfg.cnfg_force_const_fix(1).position=350e-3;
-cnfg.cnfg_force_const_fix(1).betrag_x= 0;
-cnfg.cnfg_force_const_fix(1).betrag_y= 10;
+cnfg.cnfg_force_const_fix(1).position=300e-3;
+cnfg.cnfg_force_const_fix(1).betrag_x= 10;
+cnfg.cnfg_force_const_fix(1).betrag_y= 0;
 
 % Unwuchten
 cnfg.cnfg_unbalance=[];
-% cnfg.cnfg_unbalance(1).name = 'Geplante Unwucht';
-% cnfg.cnfg_unbalance(1).position = 300e-3;
-% cnfg.cnfg_unbalance(1).betrag = 5e-5;
-% cnfg.cnfg_unbalance(1).winkellage = 0;
+cnfg.cnfg_unbalance(1).name = 'Geplante Unwucht';
+cnfg.cnfg_unbalance(1).position = 300e-3;
+cnfg.cnfg_unbalance(1).betrag = 5e-5;
+cnfg.cnfg_unbalance(1).winkellage = 0;
 
 %% Infos
 % %KoSy:

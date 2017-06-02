@@ -9,7 +9,7 @@ function [Fx,Fy]= compute_force(obj, x,y,Ix,Iy)
             
 %            Ix = min(Ix,i_max); Ix = max(Ix,i_min);
 %            Iy = min(Iy,i_max); Iy = max(Iy,i_min);
-            
+%            k_s=0;
             %Kraftbestimmung
             Fx=k_s*x+k_i*Ix;
             Fy=k_s*y+k_i*Iy;

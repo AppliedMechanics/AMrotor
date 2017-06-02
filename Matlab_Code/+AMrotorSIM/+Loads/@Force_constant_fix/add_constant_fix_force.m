@@ -15,6 +15,9 @@ n=2;
           n = n+1;
         end
 
+%         h.h(n*2-1)=Fx;
+%         h.h(n*2*2-1)=Fy;
+        
 % Kraft greift an den Knoten n-1 und n an
 nPos1 = n*2; %revelante Koordinaten: nPos1-3 bis nPos1 in v-Richtung
 nPos2 = 2*length(nodes) + n*2; % relevante Koordinaten: nPos2-3 bis nPos2 in w-Richtung
