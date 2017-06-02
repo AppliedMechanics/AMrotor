@@ -2,6 +2,7 @@ classdef Lager < matlab.mixin.Heterogeneous & handle
    properties
       name
       position
+      color='black'
    end
    methods
       %Konstruktor

@@ -8,6 +8,8 @@ classdef PID_MagneticBearing < AMrotorSIM.Bearings.Lager
            obj = obj@AMrotorSIM.Bearings.Lager(arg);
            obj.cnfg = arg; 
            
+           obj.color = 'yellow';
+           
            obj.ss_position.n_x = 0;
            obj.ss_position.n_y = 0;
            obj.ss_position.n_Ix = 0;

@@ -9,7 +9,7 @@ for i=bearing
 
     
     % Zylinderfläche;
-    [x,y,z] = cylinder(diameter*1.2);
+    [x,y,z] = cylinder(diameter*1.4);
 
     h = surf(ax, x, y, z*0.01+zp);
 

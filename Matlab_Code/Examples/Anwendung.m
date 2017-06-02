@@ -33,8 +33,8 @@ r.show;
 
 r.rotor.mesh()
 
-% g=Graphs.Visu_Rotorsystem(r);
-% g.show();
+g=Graphs.Visu_Rotorsystem(r);
+g.show();
 
 r.compute_matrices();
 r.compute_loads();
