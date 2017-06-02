@@ -1,7 +1,7 @@
 classdef SimpleLager < AMrotorSIM.Bearings.Lager
    properties
        cnfg
-       color = 'blue'
+       color = 'black'
    end
    methods
         function obj=SimpleLager(arg) 
