@@ -2,21 +2,25 @@ classdef Sensor < matlab.mixin.Heterogeneous & handle
    properties
       cnfg=struct([])  
       name
+      type
+      
    end
    methods
       %Konstruktor
-       function obj = Sensor(arg)
+       function self = Sensor(config)
          if nargin == 0
-           obj.name = 'Depp';
+           self.name = 'Depp';
          else
-           assert(isscalar(arg));
-           obj.cnfg = arg;
-           obj.name = obj.cnfg.name;  
+           assert(isscalar(config));
+           self.cnfg = config;
+           self.name = self.cnfg.name;
+           self.type = self.cnfg.type;
          end
       end
       
-      function print(obj)
-         disp(obj.name);
+      function print(self)
+         disp(self.name);
       end
    end
+   
 end

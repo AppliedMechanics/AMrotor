@@ -57,14 +57,14 @@ classdef Rotor < handle
        
       function [diameter] = get_diameter(obj,pos)
           nr_of_rows = size(obj.cnfg.rotor_dimensions,1);
-          i= 1;
+          j= 1;
            
-           while i ~= nr_of_rows
-                if pos >= obj.cnfg.rotor_dimensions(i,1) && pos < obj.cnfg.rotor_dimensions(i+1,1)
-                    diameter = obj.cnfg.rotor_dimensions(i,2);
+           while j ~= nr_of_rows
+                if pos >= obj.cnfg.rotor_dimensions(j,1) && pos < obj.cnfg.rotor_dimensions(j+1,1)
+                    diameter = obj.cnfg.rotor_dimensions(j,2);
                     return
                 else
-                    i = i+1;
+                    j = j+1;
   
                 end
 

@@ -2,6 +2,7 @@ classdef Lager < matlab.mixin.Heterogeneous & handle
    properties
       name
       position
+      type
    end
    methods
       %Konstruktor
@@ -11,6 +12,7 @@ classdef Lager < matlab.mixin.Heterogeneous & handle
          else
            obj.name = arg.name;
            obj.position=arg.position;
+           obj.type = arg.type
          end
       end
       

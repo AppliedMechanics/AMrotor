@@ -29,17 +29,18 @@ clc
 Config_Sim
 
 r=Rotorsystem(cnfg,'System');
-r.show;
+%r.show;
 
 r.rotor.mesh()
 
-% g=Graphs.Visu_Rotorsystem(r);
-% g.show();
+%g=Graphs.Visu_Rotorsystem(r);
+%g.show();
 
 r.compute_matrices();
 r.compute_loads();
 
 r.transform_StateSpace();
+
 
 %r.reduce_modal(10);
 
