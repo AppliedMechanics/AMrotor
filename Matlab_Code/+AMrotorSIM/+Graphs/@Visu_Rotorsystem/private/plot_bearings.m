@@ -11,7 +11,8 @@ for i=bearing
     % Zylinderfläche;
     [x,y,z] = cylinder(diameter*1.2);
 
-    h = surf(ax, x, y, z*0.01+zp);
+    %h = surf(ax, x, y, z*0.01+zp);
+    h = surf(ax, z*0.01+zp, y,x )
 
     set(h, 'edgecolor','none')
     set(h, 'facecolor',i.color)

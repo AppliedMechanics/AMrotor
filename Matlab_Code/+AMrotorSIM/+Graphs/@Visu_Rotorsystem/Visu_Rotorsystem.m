@@ -21,8 +21,8 @@ classdef Visu_Rotorsystem < handle
          plot_sensors(figurehandle,obj.rotorsystem.sensors);
          plot_loads(figurehandle,obj.rotorsystem.loads);
          
-         %view (180,0)
-         %camroll (-90)
+         view (0,180)
+         
          
 %          xx = get(figurehandle, 'xData');
 %          zz = get(figurehandle, 'zData');
