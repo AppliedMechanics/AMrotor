@@ -110,7 +110,7 @@ hz(n) = surf(zzyl,yzyl, xzyl);
 set(hz(n), 'edgecolor','none')
 set(hz(n), 'facecolor','b')
 %Plote Deckel
-hs(n)=surf(z+nodes(n),y,x); 
+hs(n)=surf(z+nodes(n),y,x);
 set(hs(n), 'facecolor','b')
 
 if r(n) > r(n-1) 

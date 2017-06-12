@@ -19,6 +19,8 @@ for i=discs
 
     h = surf(ax, x, y, z*0.01+zp);
 
+
+
     set(h, 'edgecolor','none')
     set(h, 'facecolor','y')
 

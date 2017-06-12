@@ -31,10 +31,10 @@ Config_Sim
 r=Rotorsystem(cnfg,'System');
 %r.show;
 
-r.rotor.mesh()
+r.rotor.mesh();
 
-%g=Graphs.Visu_Rotorsystem(r);
-%g.show();
+g=Graphs.Visu_Rotorsystem(r);
+g.show();
 
 r.compute_matrices();
 r.compute_loads();
@@ -76,4 +76,12 @@ St_Lsg.show()
 St_Lsg.compute_ode15s_ss()
 
  w = Graphs.Wegorbit(r);
- w.plot(r.sensors);
+ k = Graphs.Lagerkraefte(r);
+ 
+ for sensor = r.sensors
+    if sensor.type == 1
+        w.plot(sensor);
+    elseif sensor.type == 2
+        k.plot(sensor);    
+    end
+ end   
