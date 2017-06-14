@@ -141,10 +141,14 @@ classdef Stationaere_Lsg < handle
             end
         end
 
-        [obj.rotorsystem.time_result.T,Z] = ode15s(@integrate_function,obj.time,Z0,options,ss,ss_h,n_nodes,omega_rot_const_force,obj.rotorsystem);
+%        [obj.rotorsystem.time_result.T,Z] = ode15s(@integrate_function,obj.time,Z0,options,ss,ss_h,n_nodes,omega_rot_const_force,obj.rotorsystem);
+        sol = ode15s(@integrate_function,obj.time,Z0,options,ss,ss_h,n_nodes,omega_rot_const_force,obj.rotorsystem);
 
-        obj.rotorsystem.time_result.X = Z(:,1:4*n_nodes)';
-        obj.rotorsystem.time_result.X_d = Z(:,4*n_nodes+1:2*4*n_nodes)';
+        [Z,Zp] = deval(sol,obj.time);
+        
+        obj.rotorsystem.time_result.X = Z(1:4*n_nodes,:);
+        obj.rotorsystem.time_result.X_d = Z(4*n_nodes+1:2*4*n_nodes,:);
+        obj.rotorsystem.time_result.X_dd= Zp(4*n_nodes+1:2*4*n_nodes,:);
      end
      
    end

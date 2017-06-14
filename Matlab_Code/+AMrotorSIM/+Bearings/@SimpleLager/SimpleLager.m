@@ -1,12 +1,12 @@
 classdef SimpleLager < AMrotorSIM.Bearings.Lager
    properties
        cnfg
-       color = 'black'
    end
    methods
         function obj=SimpleLager(arg) 
            obj = obj@AMrotorSIM.Bearings.Lager(arg);
            obj.cnfg = arg;
+           obj.color = 'green';
         end 
         
         function [M,G,D,K] = compute_matrices(obj)

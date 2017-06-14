@@ -15,16 +15,18 @@ h_ges = (ss_h.h +(ss_h.h_ZPsin.*(omega^2) + ss_h.h_DBsin.*domega +ss_h.h_sin).*(
             if i.cnfg.type==3
                 
             n_x = i.ss_position.n_x;
+            n_dx=i.ss_position.n_dx;
             n_Ix = i.ss_position.n_Ix;
             n_y = i.ss_position.n_y;
+            n_dy=i.ss_position.n_dy;
             n_Iy = i.ss_position.n_Iy;
 % x aus Zustandsvektor suchen
 % I aus Zustandsvektor suchen
 % Kraft F(x,I) berechnen 
             [Fx,Fy]=i.compute_force( Z(n_x),Z(n_y),Z(n_Ix),Z(n_Iy));
 % F zu h_ges hinzufügen  
-            h_ges(n_x)=h_ges(n_x)+Fx;
-            h_ges(n_y)=h_ges(n_y)+Fy;
+            h_ges(n_dx)=h_ges(n_dx)+Fx;
+            h_ges(n_dy)=h_ges(n_dy)+Fy;
             end
         end          
 

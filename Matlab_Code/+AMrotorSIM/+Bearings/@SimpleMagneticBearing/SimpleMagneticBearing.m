@@ -1,12 +1,12 @@
 classdef SimpleMagneticBearing < AMrotorSIM.Bearings.Lager
    properties
         cnfg
-        color = 'red'
    end
    methods
         function obj=SimpleMagneticBearing(arg) 
            obj = obj@AMrotorSIM.Bearings.Lager(arg);
-           obj.cnfg = arg; 
+           obj.cnfg = arg;
+           obj.color = 'red';
         end 
         
         function [M,G,D,K] = compute_matrices(obj)

@@ -7,8 +7,16 @@ ToDo: **Christian Looschen** (christian_looschen@hotmail.com)
 - Drehung der Visualisierung
 - Farbe der Lagerringe je nach Lagertyp ?ndern - Magnetlager (typ3) orange, Gleitlager (typ1)=blau
 - Klasse Kraftsensor generieren
-- Geschwindigkeitssensor und Stromsensor erstellen
 
+
+-----------------------------------------------------------------------------
+
+- Geschwindigkeitssensor 
+- Beschleunigungssensor
+- Stromsensor+Kraftsensor Magnetlager erstellen
+
+
+-----------------------
 
 
 

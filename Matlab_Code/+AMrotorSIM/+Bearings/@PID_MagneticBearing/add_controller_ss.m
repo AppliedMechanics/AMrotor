@@ -22,18 +22,20 @@ elseif dir == 3
    
    obj.ss_position.n_x = n_x;
    obj.ss_position.n_y = n_y;
+   obj.ss_position.n_dx = n_dx;
+   obj.ss_position.n_dy = n_dy;
    
    ss_controller_x = zeros(length(ss_in)+2);
    ss_controller_y = zeros(length(ss_in)+2);
    
    ss_pi_x = zeros(1,length(ss_in)+2);
-   ss_pi_x(n_x)=Ki; ss_pi_x(n_dx)=Kp;
+   ss_pi_x(n_x)=-Ki; ss_pi_x(n_dx)=-Kp;
    
    ss_pi_y = zeros(1,length(ss_in)+2);
-   ss_pi_y(n_y)=Ki; ss_pi_y(n_dy)=Kp;
+   ss_pi_y(n_y)=-Ki; ss_pi_y(n_dy)=-Kp;
    
-   ss_controller_x(end-1,:) = Kd*[ss_in(n_dx,:),0,0]+ss_pi_x;
-   ss_controller_y(end,:) = Kd*[ss_in(n_dy,:),0,0]+ss_pi_y;
+   ss_controller_x(end-1,:) =-Kd*[ss_in(n_dx,:),0,0]+ss_pi_x;
+   ss_controller_y(end,:) = -Kd*[ss_in(n_dy,:),0,0]+ss_pi_y;
    
    obj.ss_position.n_Ix = length(ss_controller_x)-1;
    obj.ss_position.n_Iy = length(ss_controller_y);

@@ -6,11 +6,16 @@ classdef Monitor < handle
    methods
        function obj=Monitor(a)
          if nargin == 0
-           obj.name = "Monitoring";
+           obj.name = 'Monitoring';
          else
            obj.name = a;
          end
        end
    
+       function auswerten(obj,daten)
+           disp(daten)
+           disp(obj.name)
+       end
+       
    end
 end
