@@ -77,11 +77,14 @@ St_Lsg.compute_ode15s_ss()
 
  w = Graphs.Wegorbit(r);
  k = Graphs.Lagerkraefte(r);
- 
+ v = Graphs.Velocity(r);
  for sensor = r.sensors
-    if sensor.type == 1
-        w.plot(sensor);
-    elseif sensor.type == 2
-        k.plot(sensor);    
+    switch sensor.type 
+        case  1
+            w.plot(sensor);
+        case 2
+            k.plot(sensor);
+        case 3
+            v.plot(sensor);
     end
  end   

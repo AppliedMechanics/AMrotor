@@ -14,7 +14,8 @@ classdef Lagerkraefte < AMrotorSIM.Graphs.Kraefte
               
            [f_x, f_y, f_z] = sensor.measure_force(obj.rotorsystem);
               
-            figure;
+            figure ('name',[sensor.name, ' at position ',num2str(sensor.AxialPosition)], 'NumberTitle', 'off');
+            %title(sensor.name);
             subplot(3,1,1);
             plot(f_x);
             xlabel ('Timestep')
@@ -34,7 +35,6 @@ classdef Lagerkraefte < AMrotorSIM.Graphs.Kraefte
             title('Force in z'); 
             hold on;
             
-            title(sensor.name);
             axis equal;
           end
       end

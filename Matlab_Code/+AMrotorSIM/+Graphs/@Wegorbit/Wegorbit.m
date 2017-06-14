@@ -7,12 +7,12 @@ classdef Wegorbit < AMrotorSIM.Graphs.Orbit
            obj = obj@AMrotorSIM.Graphs.Orbit(variable); 
       end
       
-      function plot(obj,sensors)
+      function plot(self,sensors)
       disp(' ---   Plot Wegorbit   ---')
       
           for i = sensors
               
-           [x_pos,beta_pos,y_pos,alpha_pos]=i.read_values(obj.rotorsystem);
+           [x_pos,beta_pos,y_pos,alpha_pos]=i.read_values(self.rotorsystem);
               
             figure;
             plot(x_pos,y_pos);
