@@ -232,6 +232,8 @@ classdef Rotorsystem < handle
                  obj.sensors(end+1) = AMrotorSIM.Sensors.Kraftsensor(arg,obj.lager);
               case 3
                   obj.sensors(end+1) = AMrotorSIM.Sensors.Velocitysensor(arg);
+              case 4
+                  obj.sensors(end+1) = AMrotorSIM.Sensors.Accelerationsensor(arg);
           end 
       end
       

@@ -34,6 +34,10 @@ classdef Sensor < matlab.mixin.Heterogeneous & handle
                 [x_val,y_val]=sensor.read_velocity_values(rotorsystem);
                 beta_pos = NaN;
                 alpha_pos = NaN;
+            case 4
+                [x_val,y_val]=sensor.read_acceleration_values(rotorsystem);
+                beta_pos = NaN;
+                alpha_pos = NaN;
         end
 
        end
