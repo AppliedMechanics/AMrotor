@@ -288,15 +288,15 @@ classdef Rotorsystem < handle
    end
    
    methods(Sealed)
-      function read_sensor_values(self)  
-            for sensor = self.sensors 
-                switch sensor.type
-                    case 1
-                        sensor.read_values(self);
-                    case 2
-                        sensor.measure_force(self);
-                end
-            end 
-      end    
+%       function read_sensor_values(self)  
+%             for sensor = self.sensors 
+%                 switch sensor.type
+%                     case 1
+%                         sensor.read_values(self);
+%                     case 2
+%                         sensor.measure_force(self);
+%                 end
+%             end 
+%       end    
    end
 end

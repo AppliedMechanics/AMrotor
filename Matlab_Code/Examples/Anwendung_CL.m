@@ -75,9 +75,9 @@ St_Lsg.show()
 % St_Lsg.compute_newmark()
 St_Lsg.compute_ode15s_ss()
 
- w = Graphs.Wegorbit(r);
- k = Graphs.Lagerkraefte(r);
- v = Graphs.Velocity(r);
+ w = Graphs.TimeSignal(r);
+ k = Graphs.TimeSignal(r);
+ v = Graphs.TimeSignal(r);
  for sensor = r.sensors
     switch sensor.type 
         case  1

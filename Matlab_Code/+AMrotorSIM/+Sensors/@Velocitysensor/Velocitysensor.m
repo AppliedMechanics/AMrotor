@@ -2,6 +2,7 @@ classdef Velocitysensor < AMrotorSIM.Sensors.Sensor
    properties
        unit = 'm/s'
        Position
+       measurementType = 'Velocity'  
    end
    methods
         function self=Velocitysensor(config) 
@@ -9,8 +10,8 @@ classdef Velocitysensor < AMrotorSIM.Sensors.Sensor
            self.Position = config.position;
         end 
         
-        function [v_x,v_y] = read_values(obj,rotorsystem)
-            [v_x,v_y] = velocity_calc_at_pos(obj.cnfg.position,rotorsystem);
+        function [x_val,y_val] = read_velocity_values(obj,rotorsystem)
+            [x_val,y_val] = velocity_calc_at_pos(obj.cnfg.position,rotorsystem);
         end
    end
 end

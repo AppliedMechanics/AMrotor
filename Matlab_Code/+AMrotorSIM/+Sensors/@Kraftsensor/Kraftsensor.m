@@ -3,6 +3,7 @@ classdef Kraftsensor < AMrotorSIM.Sensors.Sensor
        Unit = 'N'
        AxialPosition % Sensor Position in axial direction
        %Bearings % 1xN AMrotorSIM.Bearings.Lager
+       MeasurementType = 'Force'
    end
    methods
         function self = Kraftsensor(sensorConfig, bearings) 
@@ -10,7 +11,7 @@ classdef Kraftsensor < AMrotorSIM.Sensors.Sensor
            self.AxialPosition = sensorConfig.position;
         end 
         
-        function [f_x, f_y, f_z] = measure_force(self, rotorsystem)
+        function [x_val, y_val, z_val] = measure_force(self, rotorsystem)
              for bearing = rotorsystem.lager  % Check for every Sensor if following is true
                 if bearing.type == 1
                    if self.AxialPosition == bearing.position  % If the Sensor is at the same position as a bearing
@@ -29,14 +30,14 @@ classdef Kraftsensor < AMrotorSIM.Sensors.Sensor
                             y_force(j) = forces(3);
                             z_force(j) = forces(2);
                         end
-                        f_x = x_force;
-                        f_y = y_force;
-                        f_z = z_force;
+                        x_val = x_force;
+                        y_val = y_force;
+                        z_val = z_force;
                         return
                     else 
-                        f_x = 0;
-                        f_y = 0;
-                        f_z = 0;
+                        x_val = 0;
+                        y_val = 0;
+                        z_val = 0;
                    end
                 else
                     disp ('Forcesensor for Type 2 and 3 Bearing not implemented yet')

@@ -12,7 +12,7 @@ classdef Velocity < AMrotorSIM.Graphs.Geschwindigkeit
       
           for sensor = sensors
               
-           [v_x,v_y]=sensor.read_values(self.rotorsystem);
+           [v_x,v_y]=sensor.read_velocity_values(self.rotorsystem);
               
             figure ('name',[sensor.name, ' at position ',num2str(sensor.Position)], 'NumberTitle', 'off');
             subplot (2,1,1);
