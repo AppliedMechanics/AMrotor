@@ -76,15 +76,10 @@ St_Lsg.show()
 St_Lsg.compute_ode15s_ss()
 
  w = Graphs.TimeSignal(r);
- k = Graphs.TimeSignal(r);
- v = Graphs.TimeSignal(r);
+ k = Graphs.Orbitdarstellung(r);
  for sensor = r.sensors
-    switch sensor.type 
-        case  1
-            w.plot(sensor);
-        case 2
-            k.plot(sensor);
-        case 3
-            v.plot(sensor);
-    end
- end   
+         w.plot(sensor);
+         k.plot(sensor);
+
+ end
+   

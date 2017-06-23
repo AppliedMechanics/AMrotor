@@ -13,14 +13,11 @@ classdef TimeSignal < handle
       disp(self.name)
       
           for sensor = sensors
-            
-            if sensor.type == 1
-                [x_val,beta_pos,y_val,alpha_pos]=sensor.read_sensor_values(self.rotorsystem);
-            else
-                [x_val,beta_pos,y_val, alpha_pos] = sensor.read_sensor_values(self.rotorsystem);
-            end
+
+            [x_val,beta_pos,y_val,alpha_pos]=sensor.read_sensor_values(self.rotorsystem);
+
               
-            figure('name',[sensor.name, ' at position ',num2str(sensor.Position)], 'NumberTitle', 'off');;
+            figure('name',[sensor.name, ' at position ',num2str(sensor.Position), '; Timesignal'], 'NumberTitle', 'off');;
             subplot(2,1,1);
             plot(x_val);
             xlabel('timestep');
