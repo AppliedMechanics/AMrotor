@@ -75,11 +75,13 @@ St_Lsg.show()
 % St_Lsg.compute_newmark()
 St_Lsg.compute_ode15s_ss()
 
- w = Graphs.TimeSignal(r);
+ w = Graphs.TimeSignal(r, St_Lsg.time);
  k = Graphs.Orbitdarstellung(r);
+ f = Graphs.Fourierdarstellung(r, St_Lsg.time);
  for sensor = r.sensors
          w.plot(sensor);
-         k.plot(sensor);
+         %k.plot(sensor);
+         f.plot(sensor);
 
  end
    

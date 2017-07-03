@@ -3,10 +3,12 @@ classdef TimeSignal < handle
     unit
     rotorsystem
     name=' ---  Zeitsignale  --- '
+    time
    end
   methods
-  function self=TimeSignal(a) 
+  function self=TimeSignal(a, time) 
       self.rotorsystem = a;
+      self.time = time;
   end
   
   function plot(self,sensors)
@@ -19,13 +21,13 @@ classdef TimeSignal < handle
               
             figure('name',[sensor.name, ' at position ',num2str(sensor.Position), '; Timesignal'], 'NumberTitle', 'off');;
             subplot(2,1,1);
-            plot(x_val);
-            xlabel('timestep');
+            plot( self.time,x_val);
+            xlabel('time [s]');
             ylabel(sensor.unit);
             title([sensor.measurementType, ' in x']);
             subplot(2,1,2);
-            plot(y_val);
-            xlabel('timestep');
+            plot(self.time, y_val);
+            xlabel('time [s]');
             ylabel(sensor.unit);
             title([sensor.measurementType, ' in y']);
 
