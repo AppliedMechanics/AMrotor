@@ -69,7 +69,7 @@ r.transform_StateSpace();
 
 %% Running Time Simulation
 
-St_Lsg = Experiments.Stationaere_Lsg(r,1000,[0:0.01:1]);
+St_Lsg = Experiments.Stationaere_Lsg(r,1000,[0:0.001:0.1]);
 St_Lsg.show()
 % St_Lsg.compute()
 % St_Lsg.compute_newmark()
@@ -78,10 +78,13 @@ St_Lsg.compute_ode15s_ss()
  w = Graphs.TimeSignal(r, St_Lsg.time);
  k = Graphs.Orbitdarstellung(r);
  f = Graphs.Fourierdarstellung(r, St_Lsg.time);
+ fourier = Graphs.Fourierorbitdarstellung(r, St_Lsg.time, St_Lsg.drehzahl);
+    % Fourierorbitdarstellung < handle
+    % 
  for sensor = r.sensors
-         w.plot(sensor);
+         %w.plot(sensor);
          %k.plot(sensor);
-         f.plot(sensor);
-
+         %f.plot(sensor);
+         fourier.plot(sensor,1);
  end
    
