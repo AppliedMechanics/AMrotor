@@ -75,16 +75,16 @@ St_Lsg.show()
 % St_Lsg.compute_newmark()
 St_Lsg.compute_ode15s_ss()
 
- w = Graphs.TimeSignal(r, St_Lsg.time);
- k = Graphs.Orbitdarstellung(r);
+ t = Graphs.TimeSignal(r, St_Lsg.time);
+ o= Graphs.Orbitdarstellung(r);
  f = Graphs.Fourierdarstellung(r, St_Lsg.time);
  fourier = Graphs.Fourierorbitdarstellung(r, St_Lsg.time, St_Lsg.drehzahl);
-    % Fourierorbitdarstellung < handle
-    % 
+ w = Graphs.Waterfalldiagramm(r, St_Lsg.time, St_Lsg.drehzahl);
  for sensor = r.sensors
-         %w.plot(sensor);
-         %k.plot(sensor);
+         %t.plot(sensor);
+         %o.plot(sensor);
          %f.plot(sensor);
-         fourier.plot(sensor,1);
+         %fourier.plot(sensor,1);
+         w.plot(sensor);
  end
    
