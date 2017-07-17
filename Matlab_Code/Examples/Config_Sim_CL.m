@@ -86,18 +86,18 @@ cnfg.cnfg_lager(2).stiffness=5e7;%7.0e5;              %[N/m]
 %% ========================================================================
 % Kraft in feste Richtung
 cnfg.cnfg_force_const_fix=[];
-cnfg.cnfg_force_const_fix(1).name='Saubere Kraft';
-cnfg.cnfg_force_const_fix(1).position=300e-3;
-cnfg.cnfg_force_const_fix(1).betrag_x= 0;
-cnfg.cnfg_force_const_fix(1).betrag_y= 100;
+%cnfg.cnfg_force_const_fix(1).name='Saubere Kraft';
+%cnfg.cnfg_force_const_fix(1).position=300e-3;
+%cnfg.cnfg_force_const_fix(1).betrag_x= 0;
+%cnfg.cnfg_force_const_fix(1).betrag_y= 100;
 
 
 % Unwuchten
 cnfg.cnfg_unbalance=[];
-% cnfg.cnfg_unbalance(1).name = 'Geplante Unwucht';
-% cnfg.cnfg_unbalance(1).position = 300e-3;
-% cnfg.cnfg_unbalance(1).betrag = 5e-1;
-% cnfg.cnfg_unbalance(1).winkellage = 0;
+ cnfg.cnfg_unbalance(1).name = 'Geplante Unwucht';
+ cnfg.cnfg_unbalance(1).position = 300e-3;
+ cnfg.cnfg_unbalance(1).betrag = 5e-1;
+ cnfg.cnfg_unbalance(1).winkellage = 0;
 
 %% Infos
 % %KoSy:
