@@ -115,9 +115,11 @@ classdef Stationaere_Lsg < handle
           [obj.rotorsystem.time_result.X,obj.rotorsystem.time_result.X_d,x,x_d,beta,beta_d,y,y_d,alpha,alpha_d,omega_ode,phi_ode] = modal_back_transformation(Z,M,EVmr);
         end
       end
-     function compute_ode15s_ss(obj)
+     function mapObj = compute_ode15s_ss(obj)
         disp('Compute.... ode15s State Space ....')
-        obj.rotorsystem.clear_time_result() 
+        obj.rotorsystem.clear_time_result()
+        values = {};
+        j = 1;
        for drehzahl = obj.drehzahl 
         n_nodes = length(obj.rotorsystem.rotor.nodes);
         
@@ -150,7 +152,14 @@ classdef Stationaere_Lsg < handle
         obj.rotorsystem.time_result.X = Z(1:4*n_nodes,:);
         obj.rotorsystem.time_result.X_d = Z(4*n_nodes+1:2*4*n_nodes,:);
         obj.rotorsystem.time_result.X_dd= Zp(4*n_nodes+1:2*4*n_nodes,:);
+        
+        val = { obj.rotorsystem.time_result.X, obj.rotorsystem.time_result.X_d, obj.rotorsystem.time_result.X_dd};
+        values{j,1} = val;
+        j = j+1;
        end
+       mapObj = containers.Map(obj.drehzahl,values); 
+       % ähnlich zu Dictionary in Python. Jeder Drehzahl wird ein X, X_d
+       % und ein X_dd Array zugewiesen.
      end
      
    end

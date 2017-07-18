@@ -1,21 +1,21 @@
 classdef Kraftsensor < AMrotorSIM.Sensors.Sensor
    properties
        Unit = 'N'
-       AxialPosition % Sensor Position in axial direction
+       Position % Sensor Position in axial direction
        %Bearings % 1xN AMrotorSIM.Bearings.Lager
        MeasurementType = 'Force'
    end
    methods
         function self = Kraftsensor(sensorConfig, bearings) 
            self = self@AMrotorSIM.Sensors.Sensor(sensorConfig);
-           self.AxialPosition = sensorConfig.position;
+           self.Position = sensorConfig.position;
         end 
         
         function [x_val, y_val, z_val] = measure_force(self, rotorsystem)
              for bearing = rotorsystem.lager  % Check for every Sensor if following is true
                 if bearing.type == 1
-                   if self.AxialPosition == bearing.position  % If the Sensor is at the same position as a bearing
-                        [x_pos,beta_pos,y_pos,alpha_pos] = displacement_calc_at_pos(self.AxialPosition, rotorsystem);
+                   if self.Position == bearing.position  % If the Sensor is at the same position as a bearing
+                        [x_pos,beta_pos,y_pos,alpha_pos] = displacement_calc_at_pos(self.Position, rotorsystem);
                         
                         
                         [M,G,D,K] = compute_matrices(bearing);

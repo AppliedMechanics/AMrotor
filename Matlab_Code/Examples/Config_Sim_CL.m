@@ -43,9 +43,9 @@ cnfg.cnfg_sensor=[];
 % cnfg.cnfg_sensor(3).position=0.325;
 % cnfg.cnfg_sensor(3).type=1;
 
-% cnfg.cnfg_sensor(3).name='Kraftsensor 1';
-% cnfg.cnfg_sensor(3).position=0;
-% cnfg.cnfg_sensor(3).type=2;
+cnfg.cnfg_sensor(2).name='Kraftsensor 1';
+cnfg.cnfg_sensor(2).position=0;
+cnfg.cnfg_sensor(2).type=2;
 % 
 % cnfg.cnfg_sensor(4).name='Kraftsensor 2';
 % cnfg.cnfg_sensor(4).position=0.6;

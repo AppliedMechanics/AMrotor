@@ -69,21 +69,21 @@ r.transform_StateSpace();
 
 %% Running Time Simulation
 
-St_Lsg = Experiments.Stationaere_Lsg(r,[1000,1500],[0:0.001:0.1]);
+St_Lsg = Experiments.Stationaere_Lsg(r,[0:500:1000],[0:0.001:0.1]);
 St_Lsg.show()
 % St_Lsg.compute()
 % St_Lsg.compute_newmark()
-St_Lsg.compute_ode15s_ss()
+mapobj = St_Lsg.compute_ode15s_ss();
 
  t = Graphs.TimeSignal(r, St_Lsg.time);
  o= Graphs.Orbitdarstellung(r);
  f = Graphs.Fourierdarstellung(r, St_Lsg.time);
  fourier = Graphs.Fourierorbitdarstellung(r, St_Lsg.time, St_Lsg.drehzahl);
- w = Graphs.Waterfalldiagramm(r, St_Lsg.time, St_Lsg.drehzahl);
+ w = Graphs.Waterfalldiagramm(r, St_Lsg.time, St_Lsg.drehzahl, mapobj);
  for sensor = r.sensors
          %t.plot(sensor);
          %o.plot(sensor);
-         f.plot(sensor);
+         %f.plot(sensor);
          %fourier.plot(sensor,1);
          w.plot(sensor);
  end
