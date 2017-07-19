@@ -1,6 +1,6 @@
 classdef Kraftsensor < AMrotorSIM.Sensors.Sensor
    properties
-       Unit = 'N'
+       unit = 'N'
        Position % Sensor Position in axial direction
        %Bearings % 1xN AMrotorSIM.Bearings.Lager
        MeasurementType = 'Force'

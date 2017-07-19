@@ -32,7 +32,7 @@ classdef Waterfalldiagramm < handle
             
             [x_val,beta_pos,y_val,alpha_pos]=sensor.read_sensor_values(self.rotorsystem);
             fs = self.abtastrate;
-            value = {[x_val], [y_val]}; %%Hier ist was falsch, Immer nur die gleichen Werte werden Übergeben
+            value = {[x_val], [y_val]};
 
                     
                     
@@ -64,15 +64,17 @@ classdef Waterfalldiagramm < handle
          figure('name',[sensor.name, ' at position ',num2str(sensor.Position), '; Waterfall'], 'NumberTitle', 'off');  
          subplot(2,1,1)
          mesh(Drehzahl,F_x,AMPL_x)
+         ylim([0,150]);
          xlabel('Drehzahl [U/min]')
          ylabel('Frequenz [Hz]')
-         zlabel('Amplitude')
+         zlabel(['Amplitude [', sensor.unit,']'])
          title ('Waterfalldiagramm of x-values')
          subplot (2,1,2)
          mesh(Drehzahl,F_y,AMPL_y)
+         ylim([0,150]);
          xlabel('Drehzahl [U/min]')
          ylabel('Frequenz [Hz]')
-         zlabel('Amplitude')
+         zlabel(['Amplitude [', sensor.unit,']'])
          title ('Waterfalldiagramm of y-values')
  
        end
