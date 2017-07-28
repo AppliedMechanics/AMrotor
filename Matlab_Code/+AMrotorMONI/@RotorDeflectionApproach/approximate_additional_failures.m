@@ -12,11 +12,6 @@ for i1=1:size(dataset,1)
         
 end
 
-
-%% =====================
-%% Start Parameterschätzer
-%% =====================
-
 % Rotorparameter
 f1 = obj.cnfg.Eigenfrequenz*2*pi; %Eigenfrequenz
 m1 = obj.cnfg.ModaleMasse1EO; %Rotormasse des 1. Modes % amplitude erster mode ,modale masse
@@ -74,7 +69,7 @@ Revisedimbalancemarix = [zUnwucht BetragUnwuchtNeu phiUnwuchtNeu ];
 
 %% Aktuell gemessener quasi Schlag
 % Phase Schalg
-phiSchlagNeu = atan2(imag(xNeu(1)),real(xNeu(1)));
+phiSchlagNeu = atan2(imag(xNeu(2)),real(xNeu(2)));
 
 % Radius Schlag
 
@@ -110,7 +105,7 @@ Differentialimbalancematrix = [zUnwucht-InitialUnwucht(1) BetragUnwuchtDiff phiU
 
 %% Aktueller Differenz Schag
 % Phase Schalg
-phiSchlagDiff = atan2(imag(xDiff(1)),real(xDiff(1)));
+phiSchlagDiff = atan2(imag(xDiff(2)),real(xDiff(2)));
 
 % Radius Schlag
 

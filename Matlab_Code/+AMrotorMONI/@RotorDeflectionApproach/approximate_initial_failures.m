@@ -1,6 +1,5 @@
 function [InitialUnwuchtsMatrix,InitialSchlagMatrix] = approximate_initial_failures(obj,dataset,ESF1)
 
-
 for i1=1:size(dataset,1)    
         Input=permute(dataset,[2 3 1]);
         [DrehzahlMess(i1), RadiusMess(i1), PhaseMess(i1), OffsetXMess(i1), OffsetYMess(i1)] = analyse_deflection_fourier_coeff(obj,Input(:,:,i1));
@@ -11,11 +10,6 @@ for i1=1:size(dataset,1)
         OffsetYMess(i1) = OffsetYMess(i1)/1000;
         
 end
-
-
-%% =====================
-%% Start Parameterschätzer
-%% =====================
 
 % Rotorparameter
 f1 = obj.cnfg.Eigenfrequenz*2*pi; %Eigenfrequenz
@@ -55,7 +49,7 @@ InitialUnwuchtsMatrix = [zUnwucht BetragUnwucht phiUnwucht ];
 
 %% Aktuell gemessener quasi Schlag
 % Phase Schalg
-phiSchlag = atan2(imag(x(1)),real(x(1)));
+phiSchlag = atan2(imag(x(2)),real(x(2)));
 
 % Radius Schlag
 

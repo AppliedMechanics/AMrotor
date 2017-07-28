@@ -29,7 +29,7 @@ KraftMonitor.cnfg=cnfg;
 
 % Aufruf Berechnungsfunktionen
 KraftMonitor.initialize(dataset);
-KraftMonitor.revise(datasetNeu);
+KraftMonitor.revise(dataset);
 KraftMonitor.show;
 
 %% Positionsmessung
@@ -38,21 +38,19 @@ cnfg.ModaleMasse1EO = 5.817;
 cnfg.MasseRotorGesamt = 11.123;
 cnfg.zPosUnwucht = 0.095;
 cnfg.zPosSensor = 0.3050;
-cnfg.Unwuchtmatrix = [0.59/2, 1.176e-6, 145*pi/180];
-cnfg.GesamtUnwucht = 0;
 ESF1_path = ['.\+AMrotorMONI\RotorConfiguration\','ESF1','.mat'];
 load(ESF1_path);
 ESF1.uESF1=uESF1;
 ESF1.zESF1=zESF1;
-% Ende Parameter, Übergabe Parameter an Klasse
 
+% Ende Parameter, Übergabe Parameter an Klasse
 PosiMonitor = RotorDeflectionApproach('PositionsMonitor');
 PosiMonitor.cnfg = cnfg;
 PosiMonitor.ESF1 = ESF1;
 
 % Aufruf Berechnungsfunktionen
 PosiMonitor.initialize(dataset);
-PosiMonitor.revise(datasetNeu);
+PosiMonitor.revise(dataset);
 PosiMonitor.show;
 
 
