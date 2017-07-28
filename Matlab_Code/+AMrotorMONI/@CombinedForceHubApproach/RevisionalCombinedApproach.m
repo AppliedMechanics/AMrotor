@@ -1,0 +1,5 @@
+function [Pure_Revisedimbalancematrix,Pure_Differentialimbalancematrix,Pure_RevisedSchlagMatrix,Pure_DifferentialSchlagMatrix,Pure_RevisedKupplungsversatzMatrix,Pure_DifferentialKupplunsveratzMatrix] = RevisionalCombinedApproach(obj)
+
+
+
+end
