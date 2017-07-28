@@ -18,6 +18,7 @@ ToDo: **Christian Looschen** (christian_looschen@hotmail.com)
 - Stromsensor+Kraftsensor Magnetlager erstellen
 - ​
 - Anregungskräfte (Chirp/Step/Sine)
+- Ausgabe der "Messwerte"
 
 
 -----------------------
