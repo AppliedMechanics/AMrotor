@@ -1,9 +1,9 @@
-function [Revisedimbalancemarix,Differentialimbalancematrix,RevisedCoupledSchlagMatrix,DifferentialCoupledSchlagMatrix]=Positionsmessung_Revisional(obj,dataset,ESF1,InitialUnwucht,InitialSchlag)
+function [Revisedimbalancemarix,Differentialimbalancematrix,RevisedCoupledSchlagMatrix,DifferentialCoupledSchlagMatrix]=approximate_additional_failures(obj,dataset,ESF1,InitialUnwucht,InitialSchlag)
 
 
 for i1=1:size(dataset,1)    
         Input=permute(dataset,[2 3 1]);
-        [DrehzahlMess(i1), RadiusMess(i1), PhaseMess(i1), OffsetXMess(i1), OffsetYMess(i1)] = AnalysiereEO1(obj,Input(:,:,i1));
+        [DrehzahlMess(i1), RadiusMess(i1), PhaseMess(i1), OffsetXMess(i1), OffsetYMess(i1)] = analyse_deflection_fourier_coeff(obj,Input(:,:,i1));
         
         RadiusMess(i1) = RadiusMess(i1)/1000;
         PhaseMess(i1) = PhaseMess(i1) *pi/180;
@@ -18,17 +18,16 @@ end
 %% =====================
 
 % Rotorparameter
-f1 = obj.cnfg.Eigenfrequenz; %Eigenfrequenz
+f1 = obj.cnfg.Eigenfrequenz*2*pi; %Eigenfrequenz
 m1 = obj.cnfg.ModaleMasse1EO; %Rotormasse des 1. Modes % amplitude erster mode ,modale masse
-%m = obj.cnfg.MasseRotorGesamt; %Rotormasse gesamt
 L = obj.cnfg.Lagerabstand; %Lagerabstand
-load(ESF1) %1. ESF  % ev Schwingungsmoden [0 1 2 3 2 1 0]
 zUnwucht = obj.cnfg.zPosUnwucht; % Eingang in Funtion nicht bestimmmbar
                                  % durch Code, Nutzer legt Unwuchtsposition durch Schätzungen fest
 zSensor = obj.cnfg.zPosSensor; % Axiale Position des Sensors
 
 
-
+uESF1=ESF1.uESF1;
+zESF1=ESF1.zESF1;
 
     % Berechnet den Anteil der Unwucht aus der Initialisirungsmessung bei
     % der aktuelle Messung

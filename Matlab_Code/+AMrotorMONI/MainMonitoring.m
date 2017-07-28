@@ -1,89 +1,68 @@
-clear all
-clc
+%% Tutorialanwendung
+% Zur Demonstration der AMrotorSIM-Toolbox
+
+%% Header
+
+% Robert Höfer, Johannes Maierhofer
+% 28.07.2017
+
+%% Import
 import AMrotorMONI.*
 
-% Test Datenpaket für Initialisierungslauf
-data1800=['.\+AMrotorMONI\Configurations\','data1800','.mat'];
-load(data1800)
-dataset(1,:,:)=data;
-data1900=['.\+AMrotorMONI\Configurations\','data1900','.mat'];
-load(data1900)
-dataset(2,:,:)=data;
-data2000=['.\+AMrotorMONI\Configurations\','data2000','.mat'];
-load(data2000)
-dataset(3,:,:)=data;
+%% Clean up
+close all
+clear all
+clc
 
-% Test Datenpake für wiederholung des Monitorings
-data200=['.\+AMrotorMONI\Configurations\','data200','.mat'];
-load(data200)
-datasetNeu(1,:,:)=data;
-data300=['.\+AMrotorMONI\Configurations\','data300','.mat'];
-load(data300)
-datasetNeu(2,:,:)=data;
-data400=['.\+AMrotorMONI\Configurations\','data400','.mat'];
-load(data400)
-datasetNeu(3,:,:)=data;
+%% Datenvorbereitung
+[dataset, datasetNeu]=Datenaufbereitung;
 
+%% Lagerkrafmessung
+% Parameter
 
+cnfg.Lagerabstand = 0.59;               %Abstand zwischen den beiden Auflagern in Meter
+cnfg.Eigenfrequenz = 63.5*2*pi;         %Eigenfrequenz des Rotors in rad/sec.
 
-
-%--------------------------------------------------------------------------
-% Lagerkrafmessung
-%%  Implemeierug der Klasse
-NAME='KraftMonitor';
-KraftMonitor = BearingForceApproach(NAME);
-
-%% Parameter
-clear cnfg;
-cnfg.Lagerabstand = 0.59;   %Abstand zwischen den beiden Auflagern in Meter
-cnfg.Eigenfrequenz = 63.5*2*pi;       %Eigenfrequenz des Rotors in rad/sec.
-% Ende Parameter, Übergabe Parameter an Klasse
+% Instanzieren eines Objekts
+KraftMonitor = BearingForceApproach('KraftMonitor');
 KraftMonitor.cnfg=cnfg;
 
-%% Aufruf Berechnungsfunktionen
+% Aufruf Berechnungsfunktionen
 KraftMonitor.initialize(dataset);
 KraftMonitor.revise(datasetNeu);
 KraftMonitor.show;
 
-
-
-%--------------------------------------------------------------------------
-% Positionsmessung
-%% Implementierung der Klasse
-NAME='PositionMonitor';
-PosiMonitor = RotorHubApproach(NAME);
-
-%% Parameter
-clear cnfg;
-cnfg.Eigenfrequenz = 63.5;
+%% Positionsmessung
+% Parameter
 cnfg.ModaleMasse1EO = 5.817;
 cnfg.MasseRotorGesamt = 11.123;
-cnfg.Lagerabstand = 0.59;
 cnfg.zPosUnwucht = 0.095;
 cnfg.zPosSensor = 0.3050;
 cnfg.Unwuchtmatrix = [0.59/2, 1.176e-6, 145*pi/180];
 cnfg.GesamtUnwucht = 0;
-ESF1 = ['.\+AMrotorMONI\Configurations\','ESF1','.mat'];
+ESF1_path = ['.\+AMrotorMONI\RotorConfiguration\','ESF1','.mat'];
+load(ESF1_path);
+ESF1.uESF1=uESF1;
+ESF1.zESF1=zESF1;
 % Ende Parameter, Übergabe Parameter an Klasse
+
+PosiMonitor = RotorDeflectionApproach('PositionsMonitor');
 PosiMonitor.cnfg = cnfg;
 PosiMonitor.ESF1 = ESF1;
 
-%% Aufruf Berechnungsfunktionen
+% Aufruf Berechnungsfunktionen
 PosiMonitor.initialize(dataset);
 PosiMonitor.revise(datasetNeu);
 PosiMonitor.show;
 
 
+%% Kombination Lagerkraft und Positionsmessung
+% Implementierung der Klasse
 
-%--------------------------------------------------------------------------
-% Kombination Lagerkraft und Positionsmessung
-%% Implementierung der Klasse
-NAME = 'KombiniertesMonitoring';
-KombiMonitor = CombinedForceHubApproach(NAME);
+KombiMonitor = CombinedForceDeflectionApproach('KombiniertesMonitoring');
 
-%% Parameter
-clear cnfg;
-% Ende Parameter, Übergabe Parameter an Klasse
+% Parameter
+
 
 %% Aufruf Berechungsfunktionen
 %KombiMonitor.initialize;

@@ -8,8 +8,8 @@ classdef BearingForceApproach < handle
        InitialKupplungsversatz
        RevisedKupplungsversatz
        DifferentialKupplungsversatz
-       Bearing1_Initialforce   % = GL
-       Bearing2_Initialforce   % = WL
+       Bearing1_Initialforce
+       Bearing2_Initialforce 
    end
    methods
        function obj=BearingForceApproach(a)
@@ -21,13 +21,18 @@ classdef BearingForceApproach < handle
        end
        
        function obj=initialize(obj,DATASET)
-       [obj.InitialCoupledImbalanceMatrix,obj.Bearing1_Initialforce,obj.Bearing2_Initialforce,obj.InitialKupplungsversatz] = obj.Initial_Imbalance_Approximator(DATASET);
+       [obj.InitialCoupledImbalanceMatrix,obj.Bearing1_Initialforce,obj.Bearing2_Initialforce,obj.InitialKupplungsversatz] = obj.approximate_initial_failures(DATASET);
        end
+       
        function obj=revise(obj,DATASET)
-           [obj.RevisedCoupledImbalanceMatrix,obj.DifferentialCoupledImbalanceMatrix,obj.RevisedKupplungsversatz,obj.DifferentialKupplungsversatz] = obj.Revisional_Imbalance_Approximator(DATASET,obj.Bearing1_Initialforce,obj.Bearing2_Initialforce);
+           [obj.RevisedCoupledImbalanceMatrix,obj.DifferentialCoupledImbalanceMatrix,obj.RevisedKupplungsversatz,obj.DifferentialKupplungsversatz] = obj.approximate_additional_failures(DATASET,obj.Bearing1_Initialforce,obj.Bearing2_Initialforce);
        end
        
        function obj=show(obj)
+           disp('-------------- Monitoring Force ----------------')
+           disp('Name:')
+           disp(obj.name)
+           disp('------------')
            disp('InitialCoupledImbalanceMatrix:')
            disp(obj.InitialCoupledImbalanceMatrix)
            disp('RevisedCoupledImbalanceMatrix:')
@@ -40,8 +45,7 @@ classdef BearingForceApproach < handle
            disp(obj.RevisedKupplungsversatz)
            disp('DifferentialKupplungsversatz:')
            disp(obj.DifferentialKupplungsversatz)
-           disp('Name:')
-           disp(obj.name)
+           disp('--------------------------------------------------')
        end
    end
 end

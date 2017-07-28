@@ -1,4 +1,4 @@
-function [DrehzahlMess,OmegaExakt,Gleichlauf_FL1,Gegenlauf_FL1, Gleichlauf_FL2, Gegenlauf_FL2]=AnalysiereEO_3SensorenJM_v04(self,data)
+function [DrehzahlMess,OmegaExakt,Gleichlauf_FL1,Gegenlauf_FL1, Gleichlauf_FL2, Gegenlauf_FL2]=analyse_force_fourier_coeff(self,data)
 
 %Einlesen der Daten
 

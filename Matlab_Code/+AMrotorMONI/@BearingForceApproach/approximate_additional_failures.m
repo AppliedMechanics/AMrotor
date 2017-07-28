@@ -1,4 +1,4 @@
-function [Revisedimbalancemarix,Differentialimbalancematrix,RevisedKupplungsversatz,DifferentialKupplungsversatz]=Revisional_Imbalance_Approximator(obj,datasetNeu, F_GL_rest, F_WL_rest)
+function [Revisedimbalancemarix,Differentialimbalancematrix,RevisedKupplungsversatz,DifferentialKupplungsversatz]=approximate_additional_failures(obj,datasetNeu, F_GL_rest, F_WL_rest)
 % Berechnet gekoppelten Schlag+Unwucht und Kuplungsveratz aus Messwerten
 % dataset und vergleicht diese mit der Initialten Messung
 % Betrachtung nur von Gleichlauf!!
@@ -11,7 +11,7 @@ Eigenfrequenz =obj.cnfg.Eigenfrequenz;   %Eigenfrequenz des Rotors in rad/sec.
 %% Fourier transforamtion vom aktulellen Messwerte-Paket
 for i1=1:size(datasetNeu,1)
     Input=permute(datasetNeu,[2 3 1]);%Macht 3x10x10000 zu 10x10000x3
-    [~,OmegaExakt(i1),Gleichlauf_FGL(i1,:),Gegenlauf_FGL(i1,:), Gleichlauf_FWL(i1,:), Gegenlauf_FWL(i1,:)] = AnalysiereEO_3SensorenJM_v04(obj,Input(:,:,i1));
+    [~,OmegaExakt(i1),Gleichlauf_FGL(i1,:),Gegenlauf_FGL(i1,:), Gleichlauf_FWL(i1,:), Gegenlauf_FWL(i1,:)] = analyse_force_fourier_coeff(obj,Input(:,:,i1));
 end
 
 

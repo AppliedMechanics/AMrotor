@@ -1,4 +1,4 @@
-function [DrehzahlMess, RadiusMess, PhaseMess, OffsetXMess, OffsetYMess] = AnalysiereEO1(self,data)
+function [DrehzahlMess, RadiusMess, PhaseMess, OffsetXMess, OffsetYMess] = analyse_deflection_fourier_coeff(self,data)
 
 % 2.2.2011 Markus Rossner
 % Ziele:

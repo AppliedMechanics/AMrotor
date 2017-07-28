@@ -1,16 +1,16 @@
-function [AnfangsUnwuchtsmatrix,F_L1_rest,F_L2_rest,AnfangsKupplungsversatz]=Initial_Imbalance_Approximator(obj,dataset)
+function [AnfangsUnwuchtsmatrix,F_L1_rest,F_L2_rest,AnfangsKupplungsversatz]=approximate_initial_failures(obj,dataset)
 % Berechnet gekoppelte Unwucht+Schlag und Kupplungsversatz
 % Betrachtung nur von Gleichlauf!!
 
-% Paramtert Imporieren 
+% Parameter Importieren 
 Wellenlaenge=obj.cnfg.Lagerabstand; %Abstand zwischen den beiden Auflagern in Meter
 Eigenfrequenz =obj.cnfg.Eigenfrequenz;   %Eigenfrequenz des Rotors in rad/sec.
 
 
-%% Fourier transforamtion vom aktulellen Messwerte-Paket
+%% Fourier transformation vom aktulellen Messwerte-Paket
 for i1=1:size(dataset,1)
     Input=permute(dataset,[2 3 1]);%Macht 3x10x10000 zu 10x10000x3
-    [~,OmegaExakt(i1),Gleichlauf_FL1(i1,:),Gegenlauf_FL1(i1,:), Gleichlauf_FL2(i1,:), Gegenlauf_FL2(i1,:)] = AnalysiereEO_3SensorenJM_v04(obj,Input(:,:,i1));
+    [~,OmegaExakt(i1),Gleichlauf_FL1(i1,:),Gegenlauf_FL1(i1,:), Gleichlauf_FL2(i1,:), Gegenlauf_FL2(i1,:)] = analyse_force_fourier_coeff(obj,Input(:,:,i1));
 end
 
 

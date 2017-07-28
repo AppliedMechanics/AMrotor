@@ -1,4 +1,4 @@
-classdef CombinedForceHubApproach < handle
+classdef CombinedForceDeflectionApproach < handle
    properties
        cnfg=struct([])
        name
@@ -14,7 +14,7 @@ classdef CombinedForceHubApproach < handle
        
    end
    methods
-       function obj=CombinedForceHubApproach(a)
+       function obj=CombinedForceDeflectionApproach(a)
          if nargin == 0
            obj.name = 'MonitorKombi';
          else
@@ -31,6 +31,10 @@ classdef CombinedForceHubApproach < handle
        end
        
        function obj=show(obj)
+           disp('-------------- Monitoring Deflection & Force Combination ----------------')
+           disp('Name:')
+           disp(obj.name)
+           disp('---------')
            disp('Pure_Initialimbalancematrix:')
            disp(obj.Pure_Initialimbalancematrix)
            disp('Pure_Revisedimbalancematrix:')
@@ -49,8 +53,7 @@ classdef CombinedForceHubApproach < handle
            disp(obj.Pure_RevisedKupplungsversatzMatrix)
            disp('Pure_DifferentialKupplunsveratzMatrix:')
            disp(obj.Pure_DifferentialKupplunsveratzMatrix)
-           disp('Name:')
-           disp(obj.name)
+           disp('---------------------------------------------------')
        end
    end
 end
