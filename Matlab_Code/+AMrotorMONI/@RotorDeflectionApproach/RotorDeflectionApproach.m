@@ -8,6 +8,7 @@ classdef RotorDeflectionApproach < handle
        InitialCoupledSchlagMatrix
        RevisedCoupledSchlagMatrix
        DifferentialCoupledSchlagMatrix
+       Xalt
        ESF1
    end
    methods
@@ -20,11 +21,11 @@ classdef RotorDeflectionApproach < handle
        end
        
        function obj=initialize(obj,DATASET)
-       [obj.Initialimbalancematrix,obj.InitialCoupledSchlagMatrix] = obj.approximate_initial_failures(DATASET,obj.ESF1);
+       [obj.Initialimbalancematrix,obj.InitialCoupledSchlagMatrix,obj.Xalt] = obj.approximate_initial_failures(DATASET,obj.ESF1);
        end
        
        function obj=revise(obj,DATASET)
-       [obj.Revisedimbalancematrix,obj.Differentialimbalancematrix,obj.RevisedCoupledSchlagMatrix,obj.DifferentialCoupledSchlagMatrix] = obj.approximate_additional_failures(DATASET,obj.ESF1,obj.Initialimbalancematrix,obj.InitialCoupledSchlagMatrix);
+       [obj.Revisedimbalancematrix,obj.Differentialimbalancematrix,obj.RevisedCoupledSchlagMatrix,obj.DifferentialCoupledSchlagMatrix] = obj.approximate_additional_failures(DATASET,obj.ESF1,obj.Xalt);
        end
        
        function obj=show(obj)
@@ -33,17 +34,24 @@ classdef RotorDeflectionApproach < handle
            disp(obj.name)
            disp('--------')
            disp('Initialimbalancematrix:')
-           disp(obj.Initialimbalancematrix)
+           ANZ=[num2str(obj.Initialimbalancematrix(1)),' m   ' , num2str(obj.Initialimbalancematrix(2)),' gm   ',num2str(obj.Initialimbalancematrix(3)),' rad   '];
+           disp(ANZ)
            disp('Revisedimbalancematrix:')
-           disp(obj.Revisedimbalancematrix)
+           ANZ=[num2str(obj.Revisedimbalancematrix(1)),' m   ' , num2str(obj.Revisedimbalancematrix(2)),' gm   ',num2str(obj.Revisedimbalancematrix(3)),' rad   '];
+           disp(ANZ)
            disp('Differentialimbalancematrix:')
-           disp(obj.Differentialimbalancematrix)
+           ANZ=[num2str(obj.Differentialimbalancematrix(1)),' m   ' , num2str(obj.Differentialimbalancematrix(2)),' gm   ',num2str(obj.Differentialimbalancematrix(3)),' rad   '];
+           disp(ANZ)
+           disp(' ')
            disp('InitialCoupledSchlagMatrix:')
-           disp(obj.InitialCoupledSchlagMatrix)
-           disp('RevisedCoupledSchlagMatix:')
-           disp(obj.RevisedCoupledSchlagMatrix)
+           ANZ=[num2str(obj.InitialCoupledSchlagMatrix(1)),' Radius m   ' , num2str(obj.InitialCoupledSchlagMatrix(2)),' rad   '];
+           disp(ANZ)
+           disp('RevisedCoupledSchlagMatrix:')
+           ANZ=[num2str(obj.RevisedCoupledSchlagMatrix(1)),' Radius m   ' , num2str(obj.RevisedCoupledSchlagMatrix(2)),' rad   '];
+           disp(ANZ)
            disp('DifferentialCoupledSchlagMatrix:')
-           disp(obj.DifferentialCoupledSchlagMatrix)
+           ANZ=[num2str(obj.DifferentialCoupledSchlagMatrix(1)),' Radius m   ' , num2str(obj.DifferentialCoupledSchlagMatrix(2)),' rad   '];
+           disp(ANZ)
            disp('------------------------------------------------------')
        end
    end

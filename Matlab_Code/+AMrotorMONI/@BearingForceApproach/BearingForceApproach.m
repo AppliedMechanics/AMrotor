@@ -33,18 +33,25 @@ classdef BearingForceApproach < handle
            disp('Name:')
            disp(obj.name)
            disp('------------')
-           disp('InitialCoupledImbalanceMatrix:')
-           disp(obj.InitialCoupledImbalanceMatrix)
+           disp('InitialCoupledImbalanceMatrix:');
+           ANZ=[num2str(obj.InitialCoupledImbalanceMatrix(1)),' m   ' , num2str(obj.InitialCoupledImbalanceMatrix(2)),' gm   ',num2str(obj.InitialCoupledImbalanceMatrix(3)),' rad  '];
+           disp(ANZ)
            disp('RevisedCoupledImbalanceMatrix:')
-           disp(obj.RevisedCoupledImbalanceMatrix)
+           ANZ=[num2str(obj.RevisedCoupledImbalanceMatrix(1)),' m   ' , num2str(obj.RevisedCoupledImbalanceMatrix(2)),' gm   ',num2str(obj.RevisedCoupledImbalanceMatrix(3)),' rad   '];
+           disp(ANZ)
            disp('DifferentialCoupledImbalanceMatrix:')
-           disp(obj.DifferentialCoupledImbalanceMatrix)
+           ANZ=[num2str(obj.DifferentialCoupledImbalanceMatrix(1)),' m   ' , num2str(obj.DifferentialCoupledImbalanceMatrix(2)),' gm   ',num2str(obj.DifferentialCoupledImbalanceMatrix(3)),' rad   '];
+           disp(ANZ)
+           disp(' ')
            disp('InitialKupplungsversatz:')
-           disp(obj.InitialKupplungsversatz)
+           ANZ=[num2str(obj.InitialKupplungsversatz(1)),' m   ' , num2str(obj.InitialKupplungsversatz(2)),' N   ',num2str(obj.InitialKupplungsversatz(3)),' rad   '];
+           disp(ANZ)
            disp('RevisedKupplungsversatz:')
-           disp(obj.RevisedKupplungsversatz)
+           ANZ=[num2str(obj.RevisedKupplungsversatz(1)),' m   ' , num2str(obj.RevisedKupplungsversatz(2)),' N   ',num2str(obj.RevisedKupplungsversatz(3)),' rad   '];
+           disp(ANZ)
            disp('DifferentialKupplungsversatz:')
-           disp(obj.DifferentialKupplungsversatz)
+           ANZ=[num2str(obj.DifferentialKupplungsversatz(1)),' m   ' , num2str(obj.DifferentialKupplungsversatz(2)),' N   ',num2str(obj.DifferentialKupplungsversatz(3)),' rad   '];
+           disp(ANZ)
            disp('--------------------------------------------------')
        end
    end

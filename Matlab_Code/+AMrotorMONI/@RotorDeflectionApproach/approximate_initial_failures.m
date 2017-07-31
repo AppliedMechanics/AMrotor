@@ -1,4 +1,4 @@
-function [InitialUnwuchtsMatrix,InitialSchlagMatrix] = approximate_initial_failures(obj,dataset,ESF1)
+function [InitialUnwuchtsMatrix,InitialSchlagMatrix,Xalt] = approximate_initial_failures(obj,dataset,ESF1)
 
 for i1=1:size(dataset,1)    
         Input=permute(dataset,[2 3 1]);
@@ -60,7 +60,11 @@ if zSensor > L/2
 else
     R = abs(0.5*r0-zSensor/r0*(L/2-zSensor/2));
 end
+% XKreis=[0,zSensor,L];
+% YKreis=[0,r0,0];
+% [~, ~, R] = circfit(XKreis,YKreis);
 
 InitialSchlagMatrix = [ R phiSchlag ];
+Xalt=x;
 
 end

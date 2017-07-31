@@ -1,4 +1,4 @@
-function [Revisedimbalancemarix,Differentialimbalancematrix,RevisedCoupledSchlagMatrix,DifferentialCoupledSchlagMatrix]=approximate_additional_failures(obj,dataset,ESF1,InitialUnwucht,InitialSchlag)
+function [Revisedimbalancemarix,Differentialimbalancematrix,RevisedCoupledSchlagMatrix,DifferentialCoupledSchlagMatrix]=approximate_additional_failures(obj,dataset,ESF1,Xalt)
 
 
 for i1=1:size(dataset,1)    
@@ -26,11 +26,11 @@ zESF1=ESF1.zESF1;
 
     % Berechnet den Anteil der Unwucht aus der Initialisirungsmessung bei
     % der aktuelle Messung
-   U0_Initialisierungsmatix = interp1(zESF1,uESF1,InitialUnwucht(1),'spline')*InitialUnwucht(2)*exp(1i*InitialUnwucht(3));
+%    U0_Initialisierungsmatix = interp1(zESF1,uESF1,InitialUnwucht(1),'spline')*InitialUnwucht(2)*exp(1i*InitialUnwucht(3));
     
     % Berechnet den Anteil des Schlags aus der Initialisirungsmessung bei
     % der aktuelle Messung
-   S0_Initialisierungsmatix = (-sqrt(InitialSchlag(1)^2-(L/2)^2)+sqrt(InitialSchlag(1)^2-(L/2-zSensor)^2))*exp(1i*InitialSchlag(2));
+%    S0_Initialisierungsmatix = (-sqrt(InitialSchlag(1)^2-(L/2)^2)+sqrt(InitialSchlag(1)^2-(L/2-zSensor)^2))*exp(1i*InitialSchlag(2));
     % rechnet die Auswirkung einer Veschiebung des Sensors bei einer neuen
     % Messung für den Wert, den die Alte Messung an dieser Stelle gehabt 
     % hätte mit ein mi ein unter der Annahme: Wellenschlag kreissegment-förmig
@@ -56,7 +56,7 @@ g = 1./(1-eta.^2);
   rNeu = RadiusMess.*exp(1i*PhaseMess);
   ANeu = [f.'/m1*uMess*uUnwucht,g.'];
   xNeu = ANeu\rNeu'; % Lösung überbestimmtes gleichungssystem
-
+  xDiff = xNeu-Xalt;
   
 %% Aktuell gemessene Unwucht    
 % Phase Unwucht
@@ -80,6 +80,9 @@ if zSensor > L/2
 else
     RNeu = abs(0.5*r0Neu-zSensor/r0Neu*(L/2-zSensor/2));
 end
+% XKreisNeu=[0,zSensor,L];
+% YKreisNeu=[0,r0Neu,0];
+% [~, ~, RNeu] = circfit(XKreisNeu,YKreisNeu);
 
 RevisedCoupledSchlagMatrix = [ RNeu phiSchlagNeu];
 
@@ -89,10 +92,10 @@ RevisedCoupledSchlagMatrix = [ RNeu phiSchlagNeu];
   
   
 %--------------------------------------------------------------------------  
-%% Berechnung des differenz Wellenzustands
-rDiff = RadiusMess.*exp(1i*PhaseMess)-f./m1*uMess*U0_Initialisierungsmatix-g.*S0_Initialisierungsmatix;%% abziehen der Initialunwicht und Schlag Für Differenzmessung    
-ADiff = [f.'/m1*uMess*uUnwucht,g.'];
-xDiff = ADiff\rDiff';
+% %% Berechnung des differenz Wellenzustands
+% rDiff = RadiusMess.*exp(1i*PhaseMess)-f./m1*uMess*U0_Initialisierungsmatix-g.*S0_Initialisierungsmatix;%% abziehen der Initialunwicht und Schlag Für Differenzmessung    
+% ADiff = [f.'/m1*uMess*uUnwucht,g.'];
+% xDiff = ADiff\rDiff';
 
 
 %% Aktuelle Differenz Unwucht
@@ -101,7 +104,7 @@ phiUnwuchtDiff = atan2(imag(xDiff(1)),real(xDiff(1)));
 
 BetragUnwuchtDiff = abs(xDiff(1));
 
-Differentialimbalancematrix = [zUnwucht-InitialUnwucht(1) BetragUnwuchtDiff phiUnwuchtDiff ];
+Differentialimbalancematrix = [zUnwucht BetragUnwuchtDiff phiUnwuchtDiff ];
 
 %% Aktueller Differenz Schag
 % Phase Schalg
@@ -116,7 +119,9 @@ if zSensor > L/2
 else
     RDiff = abs(0.5*r0Diff-zSensor/r0Diff*(L/2-zSensor/2));
 end
-
+% XKreisDiff=[0,zSensor,L];
+% YKreisDiff=[0,r0Diff,0];
+% [~, ~, RDiff] = circfit(XKreisDiff,YKreisDiff);
 DifferentialCoupledSchlagMatrix = [ RDiff phiSchlagDiff];
 
 end

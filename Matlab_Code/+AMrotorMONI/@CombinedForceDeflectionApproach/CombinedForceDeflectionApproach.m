@@ -36,23 +36,32 @@ classdef CombinedForceDeflectionApproach < handle
            disp(obj.name)
            disp('---------')
            disp('Pure_Initialimbalancematrix:')
-           disp(obj.Pure_Initialimbalancematrix)
+           ANZ=[num2str(obj.Pure_Initialimbalancematrix(1)),' m   ' , num2str(obj.Pure_Initialimbalancematrix(2)),' g m   ',num2str(obj.Pure_Initialimbalancematrix(3)),' rad   '];
+           disp(ANZ)
            disp('Pure_Revisedimbalancematrix:')
-           disp(obj.Pure_Revisedimbalancematrix)
+           ANZ=[num2str(obj.Pure_Revisedimbalancematrix(1)),' m   ' , num2str(obj.Pure_Revisedimbalancematrix(2)),' g m   ',num2str(obj.Pure_Revisedimbalancematrix(3)),' rad   '];
+           disp(ANZ)
            disp('Pure_Differentialimbalancematrix:')
-           disp(obj.Pure_Differentialimbalancematrix)
+           ANZ=[num2str(obj.Pure_Differentialimbalancematrix(1)),' m   ' , num2str(obj.Pure_Differentialimbalancematrix(2)),' g m   ',num2str(obj.Pure_Differentialimbalancematrix(3)),' rad   '];
+           disp(ANZ)
            disp('Pure_InitialSchlagMatrix:')
-           disp(obj.Pure_InitialSchlagMatrix)
+           ANZ=[num2str(obj.Pure_InitialSchlagMatrix(1)),' Radius m   ' , num2str(obj.Pure_InitialSchlagMatrix(2)),' rad   '];
+           disp(ANZ)
            disp('Pure_RevisedSchlagMatrix:')
-           disp(obj.Pure_RevisedSchlagMatrix)
+           ANZ=[num2str(obj.Pure_RevisedSchlagMatrix(1)),' Radius m   ' , num2str(obj.Pure_RevisedSchlagMatrix(2)),' rad   '];
+           disp(ANZ)
            disp('Pure_DifferentialSchlagMatrix:')
-           disp(obj.Pure_DifferentialSchlagMatrix)
+           ANZ=[num2str(obj.Pure_DifferentialSchlagMatrix(1)),' Radius m   ' , num2str(obj.Pure_DifferentialSchlagMatrix(2)),' rad   '];
+           disp(ANZ)
            disp('Pure_InitialKupplungsversatzMatrix:')
-           disp(obj.Pure_InitialKupplungsversatzMatrix)
+           ANZ=[num2str(obj.Pure_InitialKupplungsversatzMatrix(1)),' m   ' , num2str(obj.Pure_InitialKupplungsversatzMatrix(2)),' KvBkv   ',num2str(obj.Pure_InitialKupplungsversatzMatrix(3)),' rad   '];
+           disp(ANZ)
            disp('Pure_RevisedKupplungsversatzMatrix:')
-           disp(obj.Pure_RevisedKupplungsversatzMatrix)
+           ANZ=[num2str(obj.Pure_RevisedKupplungsversatzMatrix(1)),' m   ' , num2str(obj.Pure_RevisedKupplungsversatzMatrix(2)),' KvBkv   ',num2str(obj.Pure_RevisedKupplungsversatzMatrix(3)),' rad   '];
+           disp(ANZ)
            disp('Pure_DifferentialKupplunsveratzMatrix:')
-           disp(obj.Pure_DifferentialKupplunsveratzMatrix)
+           ANZ=[num2str(obj.Pure_DifferentialKupplunsveratzMatrix(1)),' m   ' , num2str(obj.Pure_DifferentialKupplunsveratzMatrix(2)),' KvBkv   ',num2str(obj.Pure_DifferentialKupplunsveratzMatrix(3)),' rad   '];
+           disp(ANZ)
            disp('---------------------------------------------------')
        end
    end

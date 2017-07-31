@@ -16,7 +16,7 @@ phi = data(5,:).';
 DrehzahlMess = abs(mean(Tacho));
 
 %% Fitting der x/y-Auslenkung mit Fourierreihe
-fo = fitoptions('Method', 'NonlinearLeastSquares', 'Lower',[-1, -1, -1, 0.8*DrehzahlMess*pi/30],'Upper',[1, 1, 1, 1.2*DrehzahlMess*pi/30],'Startpoint',[0, 0, 0, DrehzahlMess*pi/30]);
+fo = fitoptions('Method', 'NonlinearLeastSquares', 'Lower',[-inf, -inf, -inf, 0.8*DrehzahlMess*pi/30],'Upper',[inf, inf, inf, 1.2*DrehzahlMess*pi/30],'Startpoint',[0, 0, 0, DrehzahlMess*pi/30]);
 FX = fit(Zeit,xPos, fittype('fourier1'),fo);
 if abs(FX.w-DrehzahlMess*pi/30)>1
     disp('Achtung: Fehler bei Frequenz der Fourierreihe in X')
@@ -29,7 +29,7 @@ else
     PhaseX0 = -atan(FX.b1/FX.a1)-pi;
 end
 
-fo = fitoptions('Method', 'NonlinearLeastSquares', 'Lower',[-1, -1, -1, 0.8*DrehzahlMess*pi/30],'Upper',[1, 1, 1, 1.2*DrehzahlMess*pi/30],'Startpoint',[0, 0, 0, DrehzahlMess*pi/30]);
+fo = fitoptions('Method', 'NonlinearLeastSquares', 'Lower',[-inf, -inf, -inf, 0.8*DrehzahlMess*pi/30],'Upper',[inf, inf, inf, 1.2*DrehzahlMess*pi/30],'Startpoint',[0, 0, 0, DrehzahlMess*pi/30]);
 FY = fit(Zeit,yPos, fittype('fourier1'),fo);
 if abs(FY.w-DrehzahlMess*pi/30)>1
     disp('Achtung: Fehler bei Frequenz der Fourierreihe in Y')
