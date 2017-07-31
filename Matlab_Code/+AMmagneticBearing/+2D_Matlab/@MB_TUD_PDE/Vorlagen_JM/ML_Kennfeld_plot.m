@@ -1,9 +1,16 @@
 %% Vorlage zum Plot des Kennfeldes
 
+data=csvread('simforceoutput.csv');
+%Skalierung auf Lagerbreite
+
+xscale=csvread('mgdat1.csv');
+yscale=csvread('mgdat2.csv');
+[xpkt, ypkt]=meshgrid(xscale,yscale);
+
 %meshgrid fuer plot
-xscale=itIsy;
-yscale=ity
-[xpkt ypkt]=meshgrid(itIsy,ity);
+%xscale=itIsy;
+%yscale=ity
+%[xpkt ypkt]=meshgrid(itIsy,ity);
 
 %% Plot erstellen
 pos=1;
