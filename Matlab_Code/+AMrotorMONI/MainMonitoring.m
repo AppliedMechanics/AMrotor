@@ -23,13 +23,16 @@ cnfg.Lagerabstand = 0.59;               %Abstand zwischen den beiden Auflagern i
 cnfg.Eigenfrequenz = 63.5*2*pi;         %Eigenfrequenz des Rotors in rad/sec.
 cnfg.ModaleMasse1EO = 5.817;
 cnfg.MasseRotorGesamt = 11.123;
-cnfg.zPosUnwucht = 0.095;
-cnfg.zPosSensor = 0.3050;
 % Eigenschwingform Rotor
 ESF1_path = ['.\+AMrotorMONI\RotorConfiguration\','ESF1','.mat'];
 load(ESF1_path);
 ESF1.uESF1=uESF1;
 ESF1.zESF1=zESF1;
+
+% Parameter für das Monitoring
+cnfg.zPosUnwucht = 0.095;
+cnfg.zPosSensor = 0.3050;
+
 
 
 %% Lagerkrafmessung
