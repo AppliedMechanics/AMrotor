@@ -33,7 +33,7 @@ r=Rotorsystem(cnfg,'System');
 
 r.rotor.mesh();
 
-g=Graphs.Visu_Rotorsystem(r);
+%g=Graphs.Visu_Rotorsystem(r);
 %g.show();
 
 r.compute_matrices();
@@ -69,11 +69,13 @@ r.transform_StateSpace();
 
 %% Running Time Simulation
 
-St_Lsg = Experiments.Stationaere_Lsg(r,[0:500:1000],[0:0.001:0.1]);
-St_Lsg.show()
+St_Lsg = Experiments.Stationaere_Lsg(r,[500,1000],[0:0.001:0.1]);
+%St_Lsg.show()
 % St_Lsg.compute()
 % St_Lsg.compute_newmark()
 mapobj = St_Lsg.compute_ode15s_ss();
+ d = Data.Data(r,St_Lsg.drehzahl);
+ dataset = d.aquire_data(r.sensors);
 
  t = Graphs.TimeSignal(r, St_Lsg.time);
  o= Graphs.Orbitdarstellung(r);
@@ -85,6 +87,6 @@ mapobj = St_Lsg.compute_ode15s_ss();
          %o.plot(sensor);
          %f.plot(sensor);
          %fourier.plot(sensor,1);
-         w.plot(sensor);
+         %w.plot(sensor);
  end
    

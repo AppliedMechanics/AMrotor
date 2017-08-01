@@ -67,6 +67,7 @@ classdef Waterfalldiagramm < handle
          ylim([0,150]);
          xlabel('Drehzahl [U/min]')
          ylabel('Frequenz [Hz]')
+         ylim([0 150]);
          zlabel(['Amplitude [', sensor.unit,']'])
          title ('Waterfalldiagramm of x-values')
          subplot (2,1,2)
@@ -74,6 +75,7 @@ classdef Waterfalldiagramm < handle
          ylim([0,150]);
          xlabel('Drehzahl [U/min]')
          ylabel('Frequenz [Hz]')
+         ylim([0 150]);
          zlabel(['Amplitude [', sensor.unit,']'])
          title ('Waterfalldiagramm of y-values')
  
