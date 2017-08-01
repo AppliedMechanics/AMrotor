@@ -1,4 +1,4 @@
-classdef Data < handle
+classdef TimeDataOutput < handle
     % Dataset n x i x m
     properties
         rotorsystem
@@ -7,7 +7,7 @@ classdef Data < handle
     end
     
     methods
-        function self=Data(a, drehzahl)  
+        function self= TimeDataOutput(a, drehzahl)  
             self.rotorsystem = a;
             self.drehzahl = drehzahl;
         end

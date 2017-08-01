@@ -74,7 +74,7 @@ St_Lsg = Experiments.Stationaere_Lsg(r,[500,1000],[0:0.001:0.1]);
 % St_Lsg.compute()
 % St_Lsg.compute_newmark()
 mapobj = St_Lsg.compute_ode15s_ss();
- d = Data.Data(r,St_Lsg.drehzahl);
+ d = Dataoutput.TimeDataOutput(r,St_Lsg.drehzahl);
  dataset = d.aquire_data(r.sensors);
 
  t = Graphs.TimeSignal(r, St_Lsg.time);
