@@ -8,11 +8,11 @@ classdef Waterfalldiagramm < handle
     timeresults
    end
   methods
-  function self=Waterfalldiagramm(a, time, drehzahl, mapobj)  
+  function self=Waterfalldiagramm(a, experiment)  
       self.rotorsystem = a;
-      self.abtastrate = 1/(time(2)-time(1));
-      self.drehzahl = drehzahl;
-      self.timeresults = mapobj;
+      self.abtastrate = 1/(experiment.time(2)-experiment.time(1));
+      self.drehzahl = experiment.drehzahl;
+      self.timeresults = experiment.result;
   end
   
   function plot(self,sensors)

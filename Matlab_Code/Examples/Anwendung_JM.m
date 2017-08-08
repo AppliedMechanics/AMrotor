@@ -59,9 +59,9 @@ r.transform_StateSpace();
 % esf2.plot();
 
 %
-% m.calculate_rotorsystem_ss(10,0:100:200);
-% esf2= Graphs.Eigenschwingformen(m);
-% esf2.plot_displacements();
+m.calculate_rotorsystem_ss(10,0:100:200);
+esf2= Graphs.Eigenschwingformen(m);
+esf2.plot_displacements();
 
 % m.calculate_rotorsystem(3,0:100:3000);
 % cmp = Graphs.Campbell(m);

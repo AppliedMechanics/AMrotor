@@ -3,8 +3,7 @@ classdef Stationaere_Lsg < handle
       name='Stationäre Lösung'
       rotorsystem
       drehzahl
-      time        % time steps [S]
-      
+      time        % time steps [S]      
       result
    end
    methods
@@ -115,7 +114,7 @@ classdef Stationaere_Lsg < handle
           [obj.rotorsystem.time_result.X,obj.rotorsystem.time_result.X_d,x,x_d,beta,beta_d,y,y_d,alpha,alpha_d,omega_ode,phi_ode] = modal_back_transformation(Z,M,EVmr);
         end
       end
-     function mapObj = compute_ode15s_ss(obj)
+     function compute_ode15s_ss(obj)
         disp('Compute.... ode15s State Space ....')
         obj.rotorsystem.clear_time_result()
         values = {};
@@ -157,7 +156,7 @@ classdef Stationaere_Lsg < handle
         values{j,1} = val;
         j = j+1;
        end
-       mapObj = containers.Map(obj.drehzahl,values); 
+       obj.result = containers.Map(obj.drehzahl,values); 
        % ähnlich zu Dictionary in Python. Jeder Drehzahl wird ein X, X_d
        % und ein X_dd Array zugewiesen.
      end

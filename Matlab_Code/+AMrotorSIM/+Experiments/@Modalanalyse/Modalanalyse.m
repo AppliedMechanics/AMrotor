@@ -56,7 +56,7 @@ classdef Modalanalyse < handle
       
       end
       
-      function calculate_rotorsystem_ss(obj,n_modes,drehzahl)
+      function calculate_rotorsystem_ss(obj,n_modes,drehzahl) %ss = State space, Zustandsraum (-trafo)
       
           disp('Berechne Modalanalyse Rotorsystem')
           
@@ -71,9 +71,9 @@ classdef Modalanalyse < handle
 
              ss=obj.rotorsystem.systemmatrizen.ss+obj.rotorsystem.systemmatrizen.ss_G*n1;
 
-             ss_mech = ss(1:2*4*n_nodes,1:2*4*n_nodes);
+             ss_mech = ss(1:2*4*n_nodes,1:2*4*n_nodes); % 4 --> Die vier werte der Verschiebung s_x, s_z, beta, alpha
               
-             %opts.tol = 1e-4;
+             opts.tol = 1e-4;
               opts.isreal =1;
              [V,D] = eigs(ss_mech,n_modes*4,'sm',opts);  
              %[V,D] = eig(ss_mech);

@@ -121,10 +121,10 @@ classdef Rotorsystem < handle
       
      function transform_StateSpace(obj)
          
-        M=obj.systemmatrizen.M;
-        D=obj.systemmatrizen.D;
-        G=obj.systemmatrizen.G;
-        K=obj.systemmatrizen.K;
+        M=obj.systemmatrizen.M; % Masse
+        D=obj.systemmatrizen.D; % Dämpfung
+        G=obj.systemmatrizen.G; % Gyroskopie
+        K=obj.systemmatrizen.K; % Steifigkeit
         
         n_nodes=length(obj.rotor.nodes);
         dim_ss=8*n_nodes;

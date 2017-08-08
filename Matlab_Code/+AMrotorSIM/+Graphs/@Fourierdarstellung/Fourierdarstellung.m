@@ -6,9 +6,9 @@ classdef Fourierdarstellung < handle
     abtastrate
    end
   methods
-  function self=Fourierdarstellung(a, time)  
+  function self=Fourierdarstellung(a, experiment)  
       self.rotorsystem = a;
-      self.abtastrate = 1/(time(2)-time(1));
+      self.abtastrate = 1/(experiment.time(2)-experiment.time(1));
   end
   
   function plot(self,sensors)

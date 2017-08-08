@@ -6,9 +6,9 @@ classdef TimeSignal < handle
     time
    end
   methods
-  function self=TimeSignal(a, time) 
+  function self=TimeSignal(a, experiment) 
       self.rotorsystem = a;
-      self.time = time;
+      self.time = experiment.time;
   end
   
   function plot(self,sensors)
