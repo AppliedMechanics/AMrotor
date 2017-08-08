@@ -21,6 +21,7 @@ A=result.NodalSolution;                 % A ist magnetisches Vektorpotential
 if debugMode
    fprintf('Berechne Energie im Simulationsgebiet ... \n') 
 end
+
 W=0.5*A'*FEM.K*A;
 
 end
