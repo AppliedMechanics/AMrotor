@@ -34,7 +34,7 @@ r=Rotorsystem(cnfg,'System');
 r.rotor.mesh();
 
 g=Graphs.Visu_Rotorsystem(r);
-g.show();
+%g.show();
 
 r.compute_matrices();
 r.compute_loads();
@@ -75,6 +75,7 @@ St_Lsg = Experiments.Stationaere_Lsg(r,[500,1000],[0:0.001:0.1]);
 % St_Lsg.compute_newmark()
 St_Lsg.compute_ode15s_ss
 d = Dataoutput.TimeDataOutput(r,St_Lsg);
+d.aquire_data;
  
 t = Graphs.TimeSignal(r, St_Lsg);
 o= Graphs.Orbitdarstellung(r);
@@ -82,7 +83,7 @@ f = Graphs.Fourierdarstellung(r, St_Lsg);
 fourier = Graphs.Fourierorbitdarstellung(r, St_Lsg);
 w = Graphs.Waterfalldiagramm(r, St_Lsg);
 for sensor = r.sensors
-         t.plot(sensor);
+         %t.plot(sensor);
          %o.plot(sensor);
          %f.plot(sensor);
          %fourier.plot(sensor,1);
