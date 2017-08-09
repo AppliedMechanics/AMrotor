@@ -26,7 +26,7 @@ clc
 
 %% Compute Rotor
 
-Config_Sim
+Config_Sim_CL
 
 r=Rotorsystem(cnfg,'System');
 %r.show;
@@ -46,7 +46,7 @@ r.transform_StateSpace();
 
 %% Running system analyses
 
-% m=Experiments.Modalanalyse(r);
+%m=Experiments.Modalanalyse(r);
 % 
 % m.calculate_rotor_only(4,0:100:1000);
 % esf = Graphs.Eigenschwingformen(m);
@@ -54,14 +54,14 @@ r.transform_StateSpace();
 % 
 
 % 
-% m.calculate_rotorsystem(5,0:100:200);
+%m.calculate_rotorsystem(5,0:100:200);
 % esf2= Graphs.Eigenschwingformen(m);
 % esf2.plot();
 
 %
-m.calculate_rotorsystem_ss(10,0:100:200);
-esf2= Graphs.Eigenschwingformen(m);
-esf2.plot_displacements();
+%m.calculate_rotorsystem_ss(10,0:100:200);
+%esf2= Graphs.Eigenschwingformen(m);
+%esf2.plot_displacements();
 
 % m.calculate_rotorsystem(3,0:100:3000);
 % cmp = Graphs.Campbell(m);
@@ -69,30 +69,31 @@ esf2.plot_displacements();
 
 %% Running Time Simulation
 
-St_Lsg = Experiments.Stationaere_Lsg(r,1000,[0:0.01:10]);
+St_Lsg = Experiments.Stationaere_Lsg(r,[500,1000],[0:0.001:0.1]);
 St_Lsg.show()
 % St_Lsg.compute()
 % St_Lsg.compute_newmark()
-St_Lsg.compute_ode15s_ss()
+St_Lsg.compute_ode15s_ss
 
-<<<<<<< HEAD:Matlab_Code/Examples/Anwendung.m
- w = Graphs.Wegorbit(r);
- k = Graphs.Lagerkraefte(r);
- v = Graphs.Velocity(r);
- for sensor = r.sensors
-    switch sensor.type 
-        case  1
-            w.plot(sensor);
-        case 2
-            k.plot(sensor);
-        case 3
-            v.plot(sensor);
-    end
- end   
-=======
-z= Graphs.TimeSignal(r);
-z.plot(r.sensors);
+%------------- Erzeuge Ausgabeformat der Lösung ---------------
 
-w = Graphs.Wegorbit(r);
-w.plot(r.sensors);
->>>>>>> developer:Matlab_Code/Examples/Anwendung_JM.m
+d = Dataoutput.TimeDataOutput(r,St_Lsg);
+dataset_monitoring = d.aquire_data;
+
+
+%------------- Erzeuge Grafiken aus Lösung -------------------
+
+%t = Graphs.TimeSignal(r, St_Lsg);
+%o= Graphs.Orbitdarstellung(r, St_Lsg);
+%f = Graphs.Fourierdarstellung(r, St_Lsg);
+%fo = Graphs.Fourierorbitdarstellung(r, St_Lsg);
+%w = Graphs.Waterfalldiagramm(r, St_Lsg);
+
+for sensor = r.sensors
+%          t.plot(sensor);
+%          o.plot(sensor);
+%          f.plot(sensor);
+%          fo.plot(sensor,1);
+%          w.plot(sensor);
+end
+   

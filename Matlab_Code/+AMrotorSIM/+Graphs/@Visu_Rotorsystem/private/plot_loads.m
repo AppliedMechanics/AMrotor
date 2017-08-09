@@ -11,7 +11,9 @@ for i=load
     yp = R*sin(phi);
     % Kugel;
     [x,y,z] = sphere();
-    h = surf(ax, x*r+xp, y*r+yp, z*r+zp);
+    %h = surf(ax, x*r+xp, y*r+yp, z*r+zp);
+    h = surf(ax, z*r+zp, y*r+yp, x*r+xp); %Vertauschung x und z
+
     % Linie;
     line(ax,[0,xp], [0,yp], [zp,zp]);
     
@@ -25,7 +27,8 @@ for i=load
     ly = i.cnfg.betrag_y;
     
     %Vektoren;
-    h=quiver3(ax,0,0,zp,lx*0.003,ly*0.003,0);
+    %h=quiver3(ax,0,0,zp,lx*0.003,ly*0.003,0);
+    h=quiver3(ax,zp,0,0,lx*0.003,ly*0.003,0);
     % Linie;
     
     h.Color='green';

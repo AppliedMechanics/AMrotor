@@ -1,27 +1,35 @@
 classdef TimeSignal < handle
    properties
-    unit='m'
+    unit
     rotorsystem
-    name=' ---  Zeitsignale  --- '
+    name=' --- Graphobject Zeitsignale  --- '
+    time
    end
   methods
-  function obj=TimeSignal(a) 
-      obj.rotorsystem = a;
+  function self=TimeSignal(r, experiment) 
+      self.rotorsystem = r;
+      self.time = experiment.time;
   end
   
-  function plot(obj,sensors)
-      disp(obj.name)
+  function plot(self,sensors)
+      disp(' --- Plot Graph Timesignal  --- ')
       
-          for i = sensors
+          for sensor = sensors
+
+            [x_val,beta_pos,y_val,alpha_pos]=sensor.read_sensor_values(self.rotorsystem);
               
-           [x_pos,beta_pos,y_pos,alpha_pos]=i.read_values(obj.rotorsystem);
-              
-            figure;
-            plot(x_pos);
-            hold on;
-            plot(y_pos);
-            legend('X-Richtung','Y-Richtung');
-            title(i.name);
+            figure('name',[sensor.name, ' at position ',num2str(sensor.Position), '; Timesignal'], 'NumberTitle', 'off');;
+            subplot(2,1,1);
+            plot( self.time,x_val);
+            xlabel('time [s]');
+            ylabel(sensor.unit);
+            title([sensor.measurementType, ' in x']);
+            subplot(2,1,2);
+            plot(self.time, y_val);
+            xlabel('time [s]');
+            ylabel(sensor.unit);
+            title([sensor.measurementType, ' in y']);
+
           end
       end
       

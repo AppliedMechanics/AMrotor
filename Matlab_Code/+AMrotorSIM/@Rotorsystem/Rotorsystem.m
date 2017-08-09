@@ -121,10 +121,10 @@ classdef Rotorsystem < handle
       
      function transform_StateSpace(obj)
          
-        M=obj.systemmatrizen.M;
-        D=obj.systemmatrizen.D;
-        G=obj.systemmatrizen.G;
-        K=obj.systemmatrizen.K;
+        M=obj.systemmatrizen.M; % Masse
+        D=obj.systemmatrizen.D; % Dämpfung
+        G=obj.systemmatrizen.G; % Gyroskopie
+        K=obj.systemmatrizen.K; % Steifigkeit
         
         n_nodes=length(obj.rotor.nodes);
         dim_ss=8*n_nodes;
@@ -229,7 +229,11 @@ classdef Rotorsystem < handle
               case 1
                 obj.sensors(end+1) = AMrotorSIM.Sensors.Wegsensor(arg);
               case 2
-                 obj.sensors(end+1) = AMrotorSIM.Sensors.Kraftsensor(arg,obj.lager);
+                 obj.sensors(end+1) = AMrotorSIM.Sensors.Kraftsensor(arg);
+              case 3
+                  obj.sensors(end+1) = AMrotorSIM.Sensors.Velocitysensor(arg);
+              case 4
+                  obj.sensors(end+1) = AMrotorSIM.Sensors.Accelerationsensor(arg);
           end 
       end
       
@@ -284,4 +288,5 @@ classdef Rotorsystem < handle
             end
        end
    end
+   
 end

@@ -1,6 +1,6 @@
-function [x_pos,beta_pos,y_pos,alpha_pos] = velocity_calc_at_pos(Position,rotorsystem)
+function [v_x,v_y] = velocity_calc_at_pos(Position,rotorsystem)
 
-Z=rotorsystem.time_result.dX;
+Z=rotorsystem.time_result.X_d;
 rotorpar = rotorsystem.rotor.cnfg;
 moment_of_inertia = rotorsystem.rotor.moment_of_inertia;
 nodes = rotorsystem.rotor.nodes;
@@ -53,22 +53,9 @@ z2 = n0*2+2;
 z3 = 2*n_nodes+n0*2-1;
 z4 = 2*n_nodes+n0*2+2;
 
-x_pos = bv*Z(z1:z2,:);
-y_pos = bw*Z(z3:z4,:);
+v_x = bv*Z(z1:z2,:);
+v_y = bw*Z(z3:z4,:);
 
-% h = [B_V' * My; -B_W' * Mx] Moment
-
-cw=(1/(1+PhiS))*[(-PhiS-6*kappa+6*kappa^2)/l_Ele, -(3*kappa^2-4*kappa+0.5*PhiS*(1-2*kappa)+1), (6*kappa-6*kappa^2+PhiS)/l_Ele, -(3*kappa^2-2*kappa-0.5*PhiS*(1-2*kappa))];
-cv=[-cw(1), cw(2), -cw(3), cw(4)];
-
-
-% cw=[(-6*kappa+6*kappa^2)/l_Ele ,  (3*kappa^2-4*kappa+1)    , (6*kappa-6*kappa^2)/l_Ele ,(3*kappa^2-2*kappa)];
-% cv=[-(-6*kappa+6*kappa^2)/l_Ele, -(-3*kappa^2+4*kappa-1)   ,-(6*kappa-6*kappa^2)/l_Ele ,-(-3*kappa^2+2*kappa)];
-%              -cw(1)                       cw(2)                     -cw(3)                   cw(4)
-
-
-alpha_pos =cv*Z(z1:z2,:);
-beta_pos = cw*Z(z3:z4,:);
 end
 % 
 % % h = [B_V * Fx; B_W * Fy] Kraft

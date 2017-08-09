@@ -1,14 +1,17 @@
 classdef Wegsensor < AMrotorSIM.Sensors.Sensor
    properties
        unit = 'm'
+       Position
+       measurementType = 'Distance'
    end
    methods
-        function obj=Wegsensor(config) 
-           obj = obj@AMrotorSIM.Sensors.Sensor(config); 
+        function self=Wegsensor(config) 
+           self = self@AMrotorSIM.Sensors.Sensor(config); 
+           self.Position = config.position;
         end 
         
-        function [x_pos,beta_pos,y_pos,alpha_pos] = read_values(obj,rotorsystem)
-            [x_pos,beta_pos,y_pos,alpha_pos] = ...
+        function [x_val,beta_pos,y_val,alpha_pos] = read_values(obj,rotorsystem)
+            [x_val,beta_pos,y_val,alpha_pos] = ...
                 displacement_calc_at_pos(obj.cnfg.position, rotorsystem);
         end
    end

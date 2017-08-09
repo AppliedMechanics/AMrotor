@@ -46,9 +46,9 @@ view(3);
 grid on;
 axis equal;
 hold on
-xlabel('z')
+xlabel('x')
 ylabel('y')
-zlabel('x')
+zlabel('z')
 
 dim_r=size(r);
 
@@ -69,7 +69,8 @@ rs = linspace(0,r(1),2);
  
  z=z*0;
 
-hs(1)=surf(z+nodes(1),y,x);
+%hs(1)=surf(z+nodes(1),y,x);
+hs(1)=surf(x,y,z+nodes(1));
 set(hs(1), 'edgecolor','none')
 set(hs(1), 'facecolor','b')
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -106,11 +107,13 @@ rs = linspace(0,r(n),2);
 
 
 %plote Zylinder
-hz(n) = surf(zzyl,yzyl, xzyl);
+%hz(n) = surf(zzyl,yzyl, xzyl);
+hz(n) = surf(xzyl,yzyl, zzyl);
 set(hz(n), 'edgecolor','none')
 set(hz(n), 'facecolor','b')
 %Plote Deckel
-hs(n)=surf(z+nodes(n),y,x); 
+%hs(n)=surf(z+nodes(n),y,x);
+hs(n)=surf(x,y,z+nodes(n));
 set(hs(n), 'facecolor','b')
 
 if r(n) > r(n-1) 
