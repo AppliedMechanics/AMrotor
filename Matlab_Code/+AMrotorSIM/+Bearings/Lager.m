@@ -2,6 +2,7 @@ classdef Lager < matlab.mixin.Heterogeneous & handle
    properties
       name
       position
+      type
       color='black'
    end
    methods
@@ -12,6 +13,7 @@ classdef Lager < matlab.mixin.Heterogeneous & handle
          else
            obj.name = arg.name;
            obj.position=arg.position;
+           obj.type = arg.type;
          end
       end
       
@@ -20,7 +22,7 @@ classdef Lager < matlab.mixin.Heterogeneous & handle
       end
       
       function [M,K] = compute_matrices(obj)
-        disp('Berechne Lagersteifigkeit')
+        disp('Compute Matrices Bearings')
       end
       
    end

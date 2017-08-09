@@ -32,6 +32,7 @@ classdef Rotor < handle
       end
       
       function [M,G,D,K] = compute_matrices(obj)
+          disp('Compute Matrices Rotor')
         [obj.moment_of_inertia] = compute_moment_of_inertia(obj.cnfg); %column_1 cross section area; column_2 I_xi; column_3 I_eta; column_4 I_p; column_5 PhiS
         %massmatrix
         M  = compute_mass_matrix(obj.cnfg,obj.moment_of_inertia, obj.nodes);
@@ -57,14 +58,14 @@ classdef Rotor < handle
        
       function [diameter] = get_diameter(obj,pos)
           nr_of_rows = size(obj.cnfg.rotor_dimensions,1);
-          i= 1;
+          j= 1;
            
-           while i ~= nr_of_rows
-                if pos >= obj.cnfg.rotor_dimensions(i,1) && pos < obj.cnfg.rotor_dimensions(i+1,1)
-                    diameter = obj.cnfg.rotor_dimensions(i,2);
+           while j ~= nr_of_rows
+                if pos >= obj.cnfg.rotor_dimensions(j,1) && pos < obj.cnfg.rotor_dimensions(j+1,1)
+                    diameter = obj.cnfg.rotor_dimensions(j,2);
                     return
                 else
-                    i = i+1;
+                    j = j+1;
   
                 end
 

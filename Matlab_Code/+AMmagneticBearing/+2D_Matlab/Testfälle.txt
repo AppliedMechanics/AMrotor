@@ -1,0 +1,45 @@
+Hinweise zur Kennfeldgenerierung für Semesterarbeit Paul Schuler
+Johannes Maierhofer
+31.07.2017
+
+
+Folgende Kennfelder/Kenngrößen sollten erzeugt werden:
+
+----------------------------------------------------------------------------------
+Check zur Abhängigkeit der virtuellen Verschiebung:
+- Kraft in der Mittenlage, Ivormag = 2,5A, mu = 10 000, mu_rest = 1, Iy_diff=1A
+
+Variation der virtuellen Verschiebung. Berechnung der Kraft.
+Plot Kraft vs virtuelle Verschiebung.
+----------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------
+Kennfelder zum Vergleich mit Ansys und Analytischer Lösung:
+
+In y-Richtung. x-Richtung komplett stromlos:
+
+mu_Fe = 10 000
+mu_rest = 1
+
+Ivormag = 2,5A (Standard)
+Ivormag = 5A
+
+y zwischen -0.7 und +0.7mm variieren. in Schritten 0.1mm
+Strom in y-Richtung differenzangesteuert in Schritte von 0,25A variieren.
+
+-------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------
+Veränderung zu nichtlinearer mu Kennlinie
+
+Formelzusammenhang motivieren.
+Standard Kennfeld erzeugen. 
+--------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------
+Neue Art der Kennfelder:
+
+"2D-Weg-1D-Kraft-1D-Stromzusammenhang"
+Verschiebung auch in x-Richtung (Strom und alles wie gehabt nur in y-Richtung)
+Darstellung??? Kreativität :)
+--------------------------------------------------------------------------------------
