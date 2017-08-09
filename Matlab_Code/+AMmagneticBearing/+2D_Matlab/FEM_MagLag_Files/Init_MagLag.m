@@ -1,4 +1,4 @@
-function [ model ] = Init_MagLag(dl,bt,RB1,csgPole, mu_Luft,mu_Eisen,mu_Kupfer, n_Windungen,ASpule,model,IArray )
+function [ model, GitterZellen ] = Init_MagLag(dl,bt,RB1,csgPole, ASpule, SpulenStrom,model, nonlinMu)
 %   Name: Init_MagLag.m
 
 %   Beschreibung: legt die Randbedingungen fest und definiert Koeffizienten
@@ -7,46 +7,49 @@ function [ model ] = Init_MagLag(dl,bt,RB1,csgPole, mu_Luft,mu_Eisen,mu_Kupfer, 
 %   Bearbeiter: Paul Schuler
 
 %   Benoetigte Toolbox: PDE
-%   Benoetigte Funktionen und Skripten:
+%   Benoetigte Funktionen/Skripten: pdVA_MagLag.m, FEM_MagLag.m,
+%   Stoffwerte_MagLag.m, Geometrie_MagLag.m, Solve_MagLag.m, (SolveNonLin_MagLag.m)
 %%%%%%%%%%%%%
-global debugMode;
+global debugMode;               % globale Variable; dient als Schalter
 
 if debugMode
    fprintf('Init_MagLag.m gestartet ... \n'); 
 end
+
+% Hole Stoff- und Geometriewerte
+[mu_Luft,mu_Eisen,mu_Kupfer,mu_0, n_Windungen, dTiefe]=Stoffwerte_MagLag();     
+
 %%%%%% PDE-Koeffizienten und Randbedingungen
 
 % Kantennummern der Systemgrenze
 KantenSG=zeros(1,4);
 zaehler=1;
 for i=1:size(dl,2)
-   if ((dl(6,i)==0) || dl(7,i)==0)
+   if ((dl(6,i)==0) || dl(7,i)==0)          % wenn Gebiet rechts oder links einer Kante die FlaechenID Null hat
    KantenSG(zaehler)=i;
    zaehler=zaehler+1;
-
    end
 end
 
 % Phasenzuweisung der Welle
 zaehler=2;
-FEisen=zeros(1,2);
-FEisen(1)=2;
-for i=1:size(bt,1)
-    if (bt(i,3)==1)      % Bohrung in der Welle hat nur einen Eintrag, weil kleinster Koerper ohne Ueberschneidungen
+FEisen=zeros(1,2);              % Es gibt zwei Eisenflaechen; Rotor und Stator
+FEisen(1)=2;                    % Stator; ID ist immer gleich
+for i=1:size(bt,1)              % Spalte 2 und 3 sind die beiden Geometrien (Eisen/Luft) des Rotors
+    if (bt(i,3)==1)             % Bohrung in der Welle hat nur einen Eintrag, weil kleinster Koerper ohne Ueberschneidungen
         FLuft=[1,16,i];
     end
-    if (bt(i,2)==1)&&bt(i,3)==0
+    if (bt(i,2)==1)&&bt(i,3)==0 % Eisenflaeche des Rotors besteht aus den Kreisen RB1 und RB2
          FEisen(zaehler)=i;     
          zaehler=zaehler+1;
     end
 end
 
 % Gruppieren der Spulen fuer Unterscheidung der Stromrichtung in den Spulen
-% die zueinander zeigenden Teile des Querschnitts eines Spulenpaars Spulen wird als positiv bezeichnet
-
+% die zueinander zeigenden Teile des Querschnitts eines Spulenpaars Spulen werden als positiv bezeichnet
 [FSpObenPos,FSpObenNeg, FSpRechtsPos, FSpRechtsNeg, FSpUntenPos, FSpUntenNeg, FSpLinksPos, FSpLinksNeg]=deal(zeros(1,2));       % leere Arrays fuer Phasennummern
 
-tol=1*1E-5;
+tol=1*1E-5;                           % wegen Maschinengenauigkeit bei Formulierung der Edges
 for i=size(dl,2):-1:1                 % Schleife ueber alle Edges
     
     % Oberes Polpaar
@@ -100,7 +103,6 @@ for i=size(dl,2):-1:1                 % Schleife ueber alle Edges
 
     elseif (abs(dl(3,i)-csgPole(9,7))<tol && abs(dl(5,i)-csgPole(28,7))<tol )      % SpulenQS links vom 7. Pol
         FSpRechtsNeg(2)=dl(6,i); 
-    
     end
 
 end
@@ -108,51 +110,51 @@ end
 if debugMode
    fprintf('Präge Randbedingung(en) auf ...  \n'); 
 end
+
 applyBoundaryCondition(model,'dirichlet','Edge',KantenSG,'r',0,'h',1); % Dirichlet-RB am Rand des Berechnungsgebietes
 
 if debugMode
    fprintf('Weise PDE-Koeffizienten zu: \t'); 
 end
-specifyCoefficients(model,'m',0,'d',0,'c',1/(mu_Luft),'a',0,'f',0,'Face',FLuft);         % Luftphase
-specifyCoefficients(model,'m',0,'d',0,'c',1/(mu_Eisen),'a',0,'f',0,'Face',FEisen);       % Eisenkern und Rotorbuechse
 
-if debugMode
-   fprintf('Luft- und Eisenphase \t'); 
+% Koeffezienten der Eisenphase / Unterscheidung: nichtlinear oder lineares Model
+if nonlinMu  
+    cCoef = @(region,state) (mu_Eisen./(1+0.05*(state.ux.^2 +state.uy.^2))+200*mu_0);    % nicht konstanter Koeffizient C (Permeabilitaet)
+%      cCoef = @(region,state) (5000./(1+0.05*(state.ux.^2+state.uy.^2))+200);
+    specifyCoefficients(model,'m',0,'d',0,'c',cCoef,'a',0,'f',0,'Face',FEisen);       % Eisenkern und Rotorbuechse
+    if debugMode
+        fprintf('nicht-konstante Permeabilitaet fuer Eisen \n'); 
+    end
+else 
+      specifyCoefficients(model,'m',0,'d',0,'c',1/(mu_Eisen),'a',0,'f',0,'Face',FEisen);       % Eisenkern und Rotorbuechse
+      if debugMode
+         fprintf('konstante Permeabilitaet fuer Eisen \n'); 
+      end
+
 end
 
-% obere Spulen
-specifyCoefficients(model,'m',0,'d',0,'c',1/(mu_Kupfer),'a',0,'f',n_Windungen*IArray(1)/ASpule,'Face',FSpObenPos); % Kupfer-Spule
-specifyCoefficients(model,'m',0,'d',0,'c',1/(mu_Kupfer),'a',0,'f',-n_Windungen*IArray(1)/ASpule,'Face',FSpObenNeg);
+% Koeffizienten fuer Luftphase
+specifyCoefficients(model,'m',0,'d',0,'c',1/(mu_Luft),'a',0,'f',0,'Face',FLuft);         
 
-% Spulen unten
-specifyCoefficients(model,'m',0,'d',0,'c',1/(mu_Kupfer),'a',0,'f',n_Windungen*IArray(2)/ASpule,'Face',FSpUntenPos); % Kupfer-Spule
-specifyCoefficients(model,'m',0,'d',0,'c',1/(mu_Kupfer),'a',0,'f',-n_Windungen*IArray(2)/ASpule,'Face',FSpUntenNeg);
+% Koeffizienten fuer Spule
+ArrayFSpPos=[FSpObenPos; FSpRechtsPos; FSpUntenPos; FSpLinksPos];
+ArrayFSpNeg=[FSpObenNeg; FSpRechtsNeg; FSpUntenNeg; FSpLinksNeg];
+   % Schleife ueber alle Spulenteile. Reihenfolge: oben, rechts, unten, links
+    for j=1:size(ArrayFSpPos,1)
+        specifyCoefficients(model,'m',0,'d',0,'c',1/(mu_Kupfer),'a',0,'f',n_Windungen*SpulenStrom(j)/ASpule,'Face',ArrayFSpPos(j,:)); % "Positive" Spulenteile
+        specifyCoefficients(model,'m',0,'d',0,'c',1/(mu_Kupfer),'a',0,'f',-n_Windungen*SpulenStrom(j)/ASpule,'Face',ArrayFSpNeg(j,:)); % "Negative" Spulenteile
+    end
 
-% Spulen rechts
-specifyCoefficients(model,'m',0,'d',0,'c',1/(mu_Kupfer),'a',0,'f',n_Windungen*IArray(3)/ASpule,'Face',FSpRechtsPos); % Kupfer-Spule
-specifyCoefficients(model,'m',0,'d',0,'c',1/(mu_Kupfer),'a',0,'f',-n_Windungen*IArray(3)/ASpule,'Face',FSpRechtsNeg);
-
-% Spulen links
-specifyCoefficients(model,'m',0,'d',0,'c',1/(mu_Kupfer),'a',0,'f',n_Windungen*IArray(4)/ASpule,'Face',FSpLinksPos); % Kupfer-Spule
-specifyCoefficients(model,'m',0,'d',0,'c',1/(mu_Kupfer),'a',0,'f',-n_Windungen*IArray(4)/ASpule,'Face',FSpLinksNeg);
-
-if debugMode
-   fprintf('Spulen  \n'); 
-end
-
-
-%%%%% Anlegen des Netzes
+%%%%% Erueigem des Netzes
 if debugMode
    fprintf('Erzeuge Netz ...  \n'); 
 end
 generateMesh(model);
 [p,e,t]=meshToPet(model.Mesh);                          % points, edges (die mit Koerperkante zusammenfallen), triangles
-
+GitterZellen=size(t,2);
 
 if debugMode
-   fprintf('Netz mit %d Elementen erzeugt  \n', size(t,2)); 
+        fprintf('Netz mit %d Elementen erzeugt  \n', size(t,2));  
 end
-%%% HIER GEHTS WEITER
-
 end
 

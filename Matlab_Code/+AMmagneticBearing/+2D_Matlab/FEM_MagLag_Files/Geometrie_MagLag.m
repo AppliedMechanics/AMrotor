@@ -1,30 +1,26 @@
-function [model, dl, bt,ASpule,AxLimits,RB1,csgPole]=Geometrie_MagLag(Position,Verschiebung)
+function [model, dl, bt,ASpule,RB1,csgPole]=Geometrie_MagLag(Position,Verschiebung)
 %   Name: Geometrie_MagLag.m
 
-%   Beschreibung: Erzeugt die Geometrie des Magnetlagers und definiert Koeffizienten / wird aus
-%   FEM_MagLag.m aufgerufen
+%   Beschreibung: Erzeugt die Geometrie des Magnetlagers  
 
 %   Bearbeiter: Paul Schuler
 
 %   Benoetigte Toolbox: PDE
+%   Benoetigte Funktionen/Skripten: pdVA_MagLag.m, FEM_MagLag.m,
+%   Stoffwerte_MagLag.m, Init_MagLag.m, Solve_MagLag.m, (SolveNonLin_MagLag.m)
 %%%%%%%%%%%%%
 %%%%%% Anlegen der Geometrie
 
-% Geometrie-Begrenzung für die Darstellung
-XLim1=-0.085;
-XLim2=0.085;
-YLim1=-0.085;
-YLim2=0.085;
-AxLimits=[XLim1 XLim2 YLim1 YLim2];
-global debugMode;
+global debugMode;           % globale Variable; dient als Schalter
+
 if debugMode
    fprintf('Geometrie_MagLag.m gestartet ... \n'); 
 end
 
 % Definition der Geometrie (in Metern)
-dLagerringAussen=140*1E-3;
+dLagerringAussen=140*1E-3;              
 dLagerringInnen=118*1E-3;
-sysGrenze=dLagerringAussen/2+10*1e-3;   % Luftphase um das Lager
+sysGrenze=dLagerringAussen/2+10*1e-3;   % Abstand vom Lagerring zur Systemgrenze
 dBohrung=57.6*1E-3;
 
 bPol=10*1E-3;               % Breite des Pols
@@ -32,18 +28,19 @@ bPolFuss=12.3*1E-3;         % Breite des Pols an der Ausbauchung
 alpha1=22.5;                % Verdrehung des ersten Pols zur Y-Achse
 ausbauchung=3*1E-3;         % Ausbauchung der Wicklung
 dRB1=56*1E-3;               % Aussendurchmesser der Rotorbuechse
-dRB2=33*1E-3;               % Innendurchmesser der Rotorbuechse
+dRB2=15*1E-3;               % Innendurchmesser der Rotorbuechse
 if debugMode
    fprintf('Erzeuge PDE ... \n'); 
 end
 model=createpde();          % Anlegen der PDE
+
 %%%%%% KREISE
-LR1=[1, 0, 0, dLagerringAussen/2]';                                    % aeussere Berandung des Lagerrings
-LR2=[1, 0, 0, dLagerringInnen/2]';                                     % innere Berandung
+LR1=[1, 0, 0, dLagerringAussen/2]';                                        % aeussere Berandung des Lagerrings
+LR2=[1, 0, 0, dLagerringInnen/2]';                                         % innere Berandung
 RB1=[1,Position(1)+Verschiebung(1),Position(2)+Verschiebung(2),dRB1/2]';   % Aussendurchmesser Rotorbüchse
 RB2=[1,Position(1)+Verschiebung(1),Position(2)+Verschiebung(2),dRB2/2]';   % Innendurchmesser Rotorbüchse
 
-sG=[3, 4, sysGrenze*[-1, 1, 1, -1, -1, -1, 1, 1]]';                    % Systemgrenze
+sG=[3, 4, sysGrenze*[-1, 1, 1, -1, -1, -1, 1, 1]]';                        % Systemgrenze
 
 %%%%%% POLE: hier werden die Eckpunkte eines Pols definiert
 xP1=bPolFuss/2-(0.0305-dBohrung/2)*sind(alpha1);
@@ -123,11 +120,11 @@ pktePoleRot=zeros(length(pktePole),2,8);          % Matrix fuer alle (durch Rota
 pkteSpuleReRot=zeros(length(pkteSpuleRe),2,8);    % ... fuer die rechten Spulenhaelften
 pkteSpuleLiRot=zeros(length(pkteSpuleLi),2,8);    % ... fuer die linken Spulenhaelften
 
-csgPole=zeros(2*length(pktePole)+2,8);            % Matrix fuer CSG-Formulierung der Pole
+csgPole=zeros(2*length(pktePole)+2,8);            % leere Matrix fuer CSG-Formulierung der Pole
 csgSpuleRe=zeros(2*length(pkteSpuleRe)+2,8);
 csgSpuleLi=zeros(2*length(pkteSpuleLi)+2,8);
 for i=1:size(pktePoleRot,3)
-    rotMat=[cosd(-alpha) -sind(-alpha);sind(-alpha) cosd(-alpha)];
+    rotMat=[cosd(-alpha) -sind(-alpha);sind(-alpha) cosd(-alpha)];  % Drehmatrix
     pktePoleRot(:,:,i)=pktePole*rotMat;
     pkteSpuleReRot(:,:,i)=pkteSpuleRe*rotMat;
     pkteSpuleLiRot(:,:,i)=pkteSpuleLi*rotMat;
@@ -150,8 +147,8 @@ gm=[sG,RB1,RB2,LR1,LR2,csgPole(:,1:8),csgSpuleRe(:,1:8),csgSpuleLi(:,1:8)];     
 ns=(char('SystemGrenze','Rotorbuechse','RB2','LR1','LR2','P1','P2','P3','P4','P5','P6','P7', ...        % Zuweisung der Namen          
     'P8','SR1','SR2','SR3','SR4','SR5','SR6','SR7','SR8','SL1','SL2','SL3','SL4','SL5','SL6','SL7','SL8'))'; 
 sf='Rotorbuechse+LR1-LR2+SystemGrenze+(P1+P2+P3+P4+P5+P6+P7+P8)-RB2+(SR1+SR2+SR3+SR4+SR5+SR6+SR7+SR8)+(SL1+SL2+SL3+SL4+SL5+SL6+SL7+SL8)'; % Setzen der Formel, wie die Koerper zusammenspielen
- 
-[dl,bt]=decsg(gm,sf,ns);                       % Erzeugen der Geometrie / Matrix g ist decompo
+
+[dl,bt]=decsg(gm,sf,ns);                       % Erzeugen der Geometrie 
 
 if debugMode
    fprintf('Lösche überflüssige Kanten ... \n'); 
@@ -161,7 +158,7 @@ zaehler=1;
 KantenDel=zeros(1,size(csgPole,2));      % es muessen pro Pol zwei Linien geloescht werden. 
 tol=1*1E-5;
 for i=size(dl,2):-1:1
-    for j=1:size(csgPole,2)     % if-Schleife: wenn vorhandende Kante mit Start- und Endpunkt einer zu loeschenden Linie zusammenfaellt ...
+    for j=1:size(csgPole,2)     % if-Schleife: wenn vorhandende Kante mit Start- und Endpunkt einer zu loeschenden Linie zusammenfaellt. If/Else wegen Umlaufrichtung der Kanten
         if( (abs(dl(2,i)-csgPole(7,j))<tol) && (abs(dl(3,i)-csgPole(8,j))<tol) && ((abs(dl(4,i)-csgPole(26,j))<tol)||(abs((dl(4,i)-csgPole(27,j)))<tol)))    % 5. und 6. Punkt in der CSG-Formulierung der Pole. Also Eintraege 7,8 (x) und 26,27 (y) in csgPole
             KantenDel(zaehler)=i;
             zaehler=zaehler+1;
@@ -172,16 +169,17 @@ for i=size(dl,2):-1:1
     end
 end
 
-[dl,bt]=csgdel(dl,bt,KantenDel);
+[dl,bt]=csgdel(dl,bt,KantenDel);            % Loesche alle Kanten aus dem Array "KantenDel"
 
 if debugMode
    fprintf('Erzeuge Geometrie ...  \n'); 
 end
-geometryFromEdges(model,dl);                             % Erzeugen der Geometrie
 
+geometryFromEdges(model,dl);                             % Erzeugen der Geometrie
 %%%%%% Geometrie fertig angelegt
 
-% Berechnung der Spulengroesse
+% Berechnung der Spulengroesse (wird fuer Ermittlung der Stromdichte
+% benoetigt
 ASpule=0.5*( (xS96-xS97)*(yS96+yS97)+(xS97-xS160)*(yS97+yS160)+(xS160-xS98)*(yS160+yS98)+(xS98-xS99)* ...       
    (yS98+yS99)+(xS99-xP7)*(yS99+yP7)+(xP7-xP5)*(yP7+yP5)+(xP5-xS96)*(yP5+yS96))   ;          
 

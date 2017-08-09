@@ -1,44 +1,43 @@
 %   Name: Plots_MagLag.m
 
-%   Beschreibung: erstellt einige Plots innerhalb des MagLag-Moduls ...
+%   Beschreibung: erstellt einige Plots innerhalb einer einzelnen Simulation. Geplottet werden koennen Geometrie, Rechengitter und Vektorpotential ...
 
 %   Bearbeiter: Paul Schuler
 
 %   Benoetigte Toolbox: PDE
+%   Benoetigte Funktionen/Skripten: pdVA_MagLag.m, FEM_MagLag.m,
+%   Stoffwerte_MagLag.m, Geometrie_MagLag.m, Init_MagLag.m, Solve_MagLag.m
+%   (SolveNonLin_MagLag.m)
 
+%%%%%%%%%%
+% Geometrie-Begrenzung für die Darstellung
+XLim1=-0.085;
+XLim2=0.085;
+YLim1=-0.085;
+YLim2=0.085;
+AxLimits=[XLim1 XLim2 YLim1 YLim2];
 
-%%%%%%%%% Plotten der Geometrie
 if debugMode
    fprintf('Erstelle Plots ... \n \n') 
 end
+
+% Plotten der Geometrie mit Kanten- oder Flächenbeschriftung
 if plotGeometry
     
    figure();
     title('Geometrie','Interpreter','latex');
-    pdegplot(model,'EdgeLabels','off','FaceLabels','on');    % Plotten der Geometrie mit Fasen-Beschriftung
+    pdegplot(model,'EdgeLabels','off','FaceLabels','on');    % Plotten der Geometrie mit Flächen-Beschriftung / eines von beiden auswaehlen
 %   pdegplot(model,'EdgeLabels','on','FaceLabels','off');    % Plotten der Geometrie mit Kanten-Beschriftung
-    hold on;
     grid on;
     axis equal;
     axis (AxLimits(:));
     xlabel('x / m','Interpreter','latex');
     ylabel('y / m','Interpreter','latex');
-    
-%%%%%     HIER koennen einzelne Punkte der Geometrieerzeugung in den Plot einkommentiert werden 
-%     scatter(xP6,yP6,'red','filled');
-%     scatter(xP8,yP8,'blue','filled');
-%     scatter(xS103,yS103,'black','filled');
-%     scatter(xS102,yS102,'yellow','filled');
-%     scatter(xS161,yS161,'red');
-%     scatter(xS101,yS101,'blue');
-%     scatter(xS100,yS100,'black');
-%     scatter(xP19,yP19,'yellow');
-% %%%    
-    hold off;    
+   
 end
 
+% Plotten der Geometrie mit dem FEM-Gitter
 if plotMesh
-
     figure
     pdemesh(model);
         axis equal;
@@ -48,14 +47,13 @@ if plotMesh
         ylabel('y / m','Interpreter','latex');
 end
 
+% Plotten des Vektorpotentials 
 if plotVektorPot
-    
     figure
     [xaeq,yaeq]=meshgrid(AxLimits(1):0.0005:AxLimits(2),AxLimits(3):0.0005:AxLimits(4)); 
     Aaeq=griddata(model.Mesh.Nodes(1,:),model.Mesh.Nodes(2,:),A,xaeq,yaeq); % Interpolation von A fuer bessere Darstellung
     xaeqIm=[AxLimits(1) AxLimits(2)];
     yaeqIm=[AxLimits(3) AxLimits(4)];
-%     imagesc(xaeqIm,yaeqIm,Aaeq);                                  % farbige Darstellung von A
     hold on
     contour(xaeq,yaeq,Aaeq,35);
     pdegplot(model,'EdgeLabels','off','FaceLabels','off');    % Plotten der Geometrie mit Fasen-Beschriftung
@@ -66,6 +64,5 @@ if plotVektorPot
     axis (AxLimits(:) );
     xlabel('x / m','Interpreter','latex');
     ylabel('y / m','Interpreter','latex');
-    hold off;
-    
+    hold off;    
 end
