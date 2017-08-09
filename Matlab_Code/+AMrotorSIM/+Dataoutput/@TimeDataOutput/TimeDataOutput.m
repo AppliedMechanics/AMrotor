@@ -4,14 +4,12 @@ classdef TimeDataOutput < handle
         rotorsystem
         experiment
         dataset
-        solution
     end
     
     methods
-        function self= TimeDataOutput(r, solution)  
+        function self= TimeDataOutput(r, experiment)  
             self.rotorsystem = r;
             self.experiment = experiment;
-            self.drehzahlen = solution.drehzahl;
        end
         
         function dataset = aquire_data(self)
@@ -58,12 +56,12 @@ classdef TimeDataOutput < handle
              data_cell{1,j} = sensor_data;
              j = j+1;
          end
-         self.dataset = containers.Map(self.experiment.drehzahl, data_cell);
+         dataset = containers.Map(self.experiment.drehzahl, data_cell);
 
             for drehzahl = self.experiment.drehzahl     
                 tmp = dataset(drehzahl);
                 
-                    ds = self.solution.result(drehzahl);
+                    ds = self.experiment.result(drehzahl);
                 tmp('Phi')= ds{4};
                 tmp('Phi_d')= ds{5};
                 
