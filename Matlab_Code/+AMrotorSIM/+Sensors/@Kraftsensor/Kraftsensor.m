@@ -6,7 +6,7 @@ classdef Kraftsensor < AMrotorSIM.Sensors.Sensor
        measurementType = 'Force'
    end
    methods
-        function self = Kraftsensor(sensorConfig, bearings) 
+        function self = Kraftsensor(sensorConfig) 
            self = self@AMrotorSIM.Sensors.Sensor(sensorConfig);
            self.Position = sensorConfig.position;
         end 

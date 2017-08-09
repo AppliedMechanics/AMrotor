@@ -32,6 +32,7 @@ classdef Rotor < handle
       end
       
       function [M,G,D,K] = compute_matrices(obj)
+          disp('Compute Matrices Rotor')
         [obj.moment_of_inertia] = compute_moment_of_inertia(obj.cnfg); %column_1 cross section area; column_2 I_xi; column_3 I_eta; column_4 I_p; column_5 PhiS
         %massmatrix
         M  = compute_mass_matrix(obj.cnfg,obj.moment_of_inertia, obj.nodes);
