@@ -34,7 +34,7 @@ r=Rotorsystem(cnfg,'System');
 r.rotor.mesh();
 
 g=Graphs.Visu_Rotorsystem(r);
-g.show();
+%g.show();
 
 r.compute_matrices();
 r.compute_loads();

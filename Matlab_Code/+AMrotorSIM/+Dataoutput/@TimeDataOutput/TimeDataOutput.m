@@ -16,47 +16,14 @@ classdef TimeDataOutput < handle
          
             disp(' --- Compose Dataset Timesignal  --- ')
             
-         sensor_value_names = {'n','time'};
-         counter = 3;
-         for sensor = self.rotorsystem.sensors
-             switch sensor.type
-                 case 1
-                     sensor_value_names{1,counter} = ['s_x(',sensor.name,')'];
-                     counter = counter + 1;
-                     sensor_value_names{1,counter} = ['s_y (',sensor.name,')'];
-                     counter = counter + 1;
-                     sensor_value_names{1,counter} = ['s_alpha (',sensor.name,')'];
-                     counter = counter + 1;
-                     sensor_value_names{1,counter} = ['s_beta (',sensor.name,')'];
-                     counter = counter + 1;
-                 case 2
-                     sensor_value_names{1,counter} = ['F_x (',sensor.name,')'];
-                     counter = counter + 1;
-                     sensor_value_names{1,counter} = ['F_y (',sensor.name,')'];
-                     counter = counter + 1;
-                 case 3
-                     sensor_value_names{1,counter} = ['v_x (',sensor.name,')'];
-                     counter = counter + 1;
-                     sensor_value_names{1,counter} = ['v_y (',sensor.name,')'];
-                     counter = counter + 1;
-                 case 4
-                     sensor_value_names{1,counter} = ['a_x (',sensor.name,')'];
-                     counter = counter + 1;
-                     sensor_value_names{1,counter} = ['a_y (',sensor.name,')'];
-                     counter = counter + 1;
-             end    
-         end
+          sensor_value_names = {'n'};
          
-         sensor_values = cell(1,length(sensor_value_names));
-         sensor_data = containers.Map(sensor_value_names,sensor_values);         
+         sensor_values = cell(1,1);
 
-         j = 1;
-         data_cell = {};
+         dataset = containers.Map('KeyType','double','ValueType','any');
          for drehzahl = self.experiment.drehzahl
-             data_cell{1,j} = sensor_data;
-             j = j+1;
+          dataset(drehzahl)= containers.Map(sensor_value_names,sensor_values);
          end
-         dataset = containers.Map(self.experiment.drehzahl, data_cell);
 
             for drehzahl = self.experiment.drehzahl     
                 tmp = dataset(drehzahl);
