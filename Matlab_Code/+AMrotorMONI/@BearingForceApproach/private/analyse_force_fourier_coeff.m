@@ -1,20 +1,20 @@
-function [DrehzahlMess,OmegaExakt,Gleichlauf_FL1,Gegenlauf_FL1, Gleichlauf_FL2, Gegenlauf_FL2]=analyse_force_fourier_coeff(self,data)
+function [DrehzahlMess,OmegaExakt,Gleichlauf_FL1,Gegenlauf_FL1, Gleichlauf_FL2, Gegenlauf_FL2]=analyse_force_fourier_coeff(self,Zeit,Tacho,phi,data_Kraft_L1_1,data_Kraft_L1_2,data_Kraft_L2_1,data_Kraft_L2_2)
 
 %Einlesen der Daten
 
-Zeit=data(1,:);
-Tacho = data(4,:); %Drehzahl [1/min]
-phi = data(5,:);   %Winkel [°]
+% Zeit=data(1,:);
+% Tacho = data(4,:); %Drehzahl [1/min]
+% phi = data(5,:);   %Winkel [°]
 
-data_Kraft_L1_1=data(7,:); %Kraft in [N]
-data_Kraft_L1_2=data(8,:);
+% data_Kraft_L1_1=data(7,:); %Kraft in [N]
+% data_Kraft_L1_2=data(8,:);
 
-data_Kraft_L2_1=data(9,:); %Kraft in [N]
-data_Kraft_L2_2=data(10,:);
+% data_Kraft_L2_1=data(9,:); %Kraft in [N]
+% data_Kraft_L2_2=data(10,:);
 
-%Messwinkel=[90,180]*pi/180;
+% Messwinkel=[90,180]*pi/180;
 
-DrehzahlMess = abs(mean(Tacho));
+ DrehzahlMess = abs(mean(Tacho));
 
 %% Analysiere Winkel und Drehzahl
 phi2 = 180/pi*unwrap(phi*pi/180);

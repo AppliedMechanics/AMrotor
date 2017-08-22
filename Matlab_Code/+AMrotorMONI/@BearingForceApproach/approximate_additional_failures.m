@@ -1,4 +1,4 @@
-function [Revisedimbalancemarix,Differentialimbalancematrix,RevisedKupplungsversatz,DifferentialKupplungsversatz]=approximate_additional_failures(obj,datasetNeu, F_L1_rest, F_L2_rest)
+function [Bearing1_Revisionalforce,Bearing2_Revisionalforce,Bearing1_Differentialforce,Bearing2_Differentialforce,Revisedimbalancemarix,Differentialimbalancematrix,RevisedKupplungsversatz,DifferentialKupplungsversatz]=approximate_additional_failures(obj,datasetNeu, F_L1_rest, F_L2_rest)
 % Berechnet gekoppelten Schlag+Unwucht und Kuplungsveratz aus Messwerten
 % dataset und vergleicht diese mit der Initialten Messung
 % Betrachtung nur von Gleichlauf!!
@@ -9,9 +9,17 @@ Eigenfrequenz =obj.cnfg.Eigenfrequenz;   %Eigenfrequenz des Rotors in rad/sec.
 
 
 %% Fourier transforamtion vom aktulellen Messwerte-Paket
-for i1=1:size(datasetNeu,1)
-    Input=permute(datasetNeu,[2 3 1]);%Macht 3x10x10000 zu 10x10000x3
-    [~,OmegaExakt(i1),Gleichlauf_FL1(i1,:),Gegenlauf_FL1(i1,:), Gleichlauf_FL2(i1,:), Gegenlauf_FL2(i1,:)] = analyse_force_fourier_coeff(obj,Input(:,:,i1));
+Schluessel=keys(datasetNeu);
+for i1=1:size(keys(datasetNeu),2)
+    temp=datasetNeu(Schluessel{i1});
+    Zeit=temp('time');
+    Tacho=temp('omega');
+    phi=temp('phi');
+    Kraft_L1_1=temp('F_x (Lager 1)');
+    Kraft_L1_2=temp('F_y (Lager 1)');
+    Kraft_L2_1=temp('F_x (Lager 2)');
+    Kraft_L2_2=temp('F_y (Lager 2)');
+    [~,OmegaExakt(i1),Gleichlauf_FL1(i1,:),Gegenlauf_FL1(i1,:), Gleichlauf_FL2(i1,:), Gegenlauf_FL2(i1,:)] = analyse_force_fourier_coeff(obj,Zeit,Tacho,phi,Kraft_L1_1,Kraft_L1_2,Kraft_L2_1,Kraft_L2_2);
 end
 
 
@@ -112,5 +120,15 @@ A = [c', d'];
 
     % Ausgabeformat neuer Kupplungsversatz
     RevisedKupplungsversatz = [Neu_z1_BKV, NeuBKV, Neu_phi_BKV];
+    
+    
+%% ------------------------------------------------------------------------
+
+    % Datensätze für Übergabe an gekoppelte Brechnung
+    
+    Bearing1_Revisionalforce=F_L1_trenn;
+    Bearing2_Revisionalforce=F_L2_trenn;
+    Bearing1_Differentialforce=F_L1_zusatz;
+    Bearing2_Differentialforce=F_L2_zusatz;
 
 end

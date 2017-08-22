@@ -2,15 +2,36 @@ classdef CombinedForceDeflectionApproach < handle
    properties
        cnfg=struct([])
        name
-       Pure_Initialimbalancematrix
-       Pure_Revisedimbalancematrix
-       Pure_Differentialimbalancematrix
-       Pure_InitialSchlagMatrix
-       Pure_RevisedSchlagMatrix
-       Pure_DifferentialSchlagMatrix
-       Pure_InitialKupplungsversatzMatrix
-       Pure_RevisedKupplungsversatzMatrix
-       Pure_DifferentialKupplunsveratzMatrix
+       
+       Init.Imbalancebased_Imbalancematrix
+       Init.Imbalancebased_SchlagMatrix
+       Init.Imbalancebased_ComparativeKupplungsversatzMatrix
+       Init.Imbalancebased_KupplungsversatzMatrix
+       
+       Init.Kupplungsbased_KupplungsversatzMatrix
+       Init.Kupplungsbased_SchlagMatrix
+       Init.Kupplungsbased_ComparativeImbalancematrix
+       Init.Kupplungsbased_Imbalancematrix
+       
+%        Revise_Imbalancebased_Imbalancematrix
+%        Revise_Imbalancebased_SchlagMatrix
+%        Revise_Imbalancebased_KupplungsversatzMatrix
+%        Revise_Imbalancebased_ComparativeImbalancematrix
+%        
+%        Revise_Kupplungsbased_KupplungsversatzMatrix
+%        Revise_Kupplungsbased_SchlagMatrix
+%        Revise_Kupplungsbased_Imbalanvcematrix
+%        Revise_Kupplungsbased_ComparativeKupplungsversatzMatrix
+%        
+%        Diff_Imbalancebased_Imbalancematrix
+%        Diff_Imbalancebased_SchlagMatrix
+%        Diff_Imbalancebased_KupplungsversatzMatrix
+%        Diff_Imbalancebased_ComparativeImbalancematrix
+%        
+%        DIff_Kupplungsbased_KupplungsversatzMatrix
+%        Diff_Kupplungsbased_SchlagMatrix
+%        Diff_Kupplungsbased_Imbalanvcematrix
+%        Diff_Kupplungsbased_ComparativeKupplungsversatzMatrix
        
    end
    methods
@@ -21,25 +42,30 @@ classdef CombinedForceDeflectionApproach < handle
            obj.name = a;
          end
        end
+       function obj=initialize(obj,XInitial,Bearing1_Initialforce,Bearing2_Initialforce)
+           disp('Iniial Calculation')
+       [obj.Init.Imbalancebased_Imbalancematrix
+       obj.Init.Imbalancebased_SchlagMatrix
+       obj.Init.Imbalancebased_ComparativeKupplungsversatzMatrix
+       obj.Imbalancebased_KupplungsversatzMatrix] = obj.calculate_Imbalancebased(XInitial,Bearing1_Initialforce,Bearing2_Initialforce);
        
-       function obj=initialize(obj)
-       [obj.Pure_Initialimbalancematrix,obj.Pure_InitialSchlagMatrix,obj.Pure_InitialKupplungsversatzMatrix] = obj.InitialCombinedApproach();
+       [obj.Init.Kupplungsbased_KupplungsversatzMatrix
+       obj.Init.Kupplungsbased_SchlagMatrix
+       obj.Init.Kupplungsbased_ComparativeImbalancematrix
+       obj.Init.Kupplungsbased_Imbalancematrix] = obj.calculate_Kupplungsbased(XInitial,Bearing1_Initialforce,Bearing2_Initialforce);
        end
        
-       function obj=revise(obj)
-       [obj.Pure_Revisedimbalancematrix,obj.Pure_Differentialimbalancematrix,obj.Pure_RevisedSchlagMatrix,obj.Pure_DifferentialSchlagMatrix,obj.Pure_RevisedKupplungsversatzMatrix,obj.Pure_DifferentialKupplunsveratzMatrix] = obj.RevisionalCombinedApproach();
-       end
        
-       function obj=show(obj)
+       function obj=showInitialisation(obj)
            disp('-------------- Monitoring Deflection & Force Combination ----------------')
            disp('Name:')
            disp(obj.name)
            disp('---------')
            disp('Pure_Initialimbalancematrix:')
-           ANZ=[num2str(obj.Pure_Initialimbalancematrix(1)),' m   ' , num2str(obj.Pure_Initialimbalancematrix(2)),' g m   ',num2str(obj.Pure_Initialimbalancematrix(3)),' rad   '];
+           ANZ=[num2str(obj.Imbalancebased_Imbalancematrix(1)),' m   ' , num2str(obj.Imbalancebased_Imbalancematrix(2)),' g m   ',num2str(obj.Imbalancebased_Imbalancematrix(3)),' rad   '];
            disp(ANZ)
            disp('Pure_Revisedimbalancematrix:')
-           ANZ=[num2str(obj.Pure_Revisedimbalancematrix(1)),' m   ' , num2str(obj.Pure_Revisedimbalancematrix(2)),' g m   ',num2str(obj.Pure_Revisedimbalancematrix(3)),' rad   '];
+           ANZ=[num2str(obj.Imbalancebased_SchlagMatrix(1)),' m   ' , num2str(obj.Imbalancebased_SchlagMatrix(2)),' g m   '];
            disp(ANZ)
            disp('Pure_Differentialimbalancematrix:')
            ANZ=[num2str(obj.Pure_Differentialimbalancematrix(1)),' m   ' , num2str(obj.Pure_Differentialimbalancematrix(2)),' g m   ',num2str(obj.Pure_Differentialimbalancematrix(3)),' rad   '];

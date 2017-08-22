@@ -14,8 +14,7 @@ close all
 clear all
 clc
 
-%% Datenvorbereitung
-[dataset, datasetNeu]=Datenaufbereitung;
+Daten_Zusammenstellen
 
 %% Parameter
 % Rotorparameter
@@ -23,16 +22,13 @@ cnfg.Lagerabstand = 0.59;               %Abstand zwischen den beiden Auflagern i
 cnfg.Eigenfrequenz = 63.5*2*pi;         %Eigenfrequenz des Rotors in rad/sec.
 cnfg.ModaleMasse1EO = 5.817;
 cnfg.MasseRotorGesamt = 11.123;
+cnfg.zPosUnwucht = 0.095;
+cnfg.zPosSensor = 0.3050;
 % Eigenschwingform Rotor
 ESF1_path = ['.\+AMrotorMONI\RotorConfiguration\','ESF1','.mat'];
 load(ESF1_path);
 ESF1.uESF1=uESF1;
 ESF1.zESF1=zESF1;
-
-% Parameter für das Monitoring
-cnfg.zPosUnwucht = 0.095;
-cnfg.zPosSensor = 0.3050;
-
 
 
 %% Lagerkrafmessung
@@ -41,10 +37,10 @@ KraftMonitor = BearingForceApproach('KraftMonitor');
 KraftMonitor.cnfg=cnfg;
 
 % Aufruf Berechnungsfunktionen
-KraftMonitor.initialize(dataset);
-KraftMonitor.revise(datasetNeu);
+KraftMonitor.initialize(DataSetAlt);
+KraftMonitor.revise(DataSetNeu);
 KraftMonitor.show;
-
+KraftMonitor;
 
 %% Positionsmessung
 % Ende Parameter, Übergabe Parameter an Klasse
@@ -53,16 +49,18 @@ PosiMonitor.cnfg = cnfg;
 PosiMonitor.ESF1 = ESF1;
 
 % Aufruf Berechnungsfunktionen
-PosiMonitor.initialize(dataset);
-PosiMonitor.revise(datasetNeu);
+PosiMonitor.initialize(DataSetAlt);
+PosiMonitor.revise(DataSetNeu);
 PosiMonitor.show;
+PosiMonitor;
 
 
 %% Kombination Lagerkraft und Positionsmessung
 % Implementierung der Klasse
-KombiMonitor = CombinedForceDeflectionApproach('KombiniertesMonitoring');
+% KombiMonitor = CombinedForceDeflectionApproach('KombiniertesMonitoring');
 
 % Aufruf Berechungsfunktionen
-%KombiMonitor.initialize;
-%KombiMonitor.revise;
+%KombiMonitor.initialize(PosiMonitor.XInitial,KraftMonitor.Bearing1_Initialforce,KraftMonitor.Bearing2_Initialforce);
+%KombiMonitor.revise(PosiMonitor.XRevisional,KraftMonitor.Bearing1_Revisionalforce,KraftMonitor.Bearing2_Revisionalforce);
+%KombiMonitor.differenz(PosiMonitor.XDifferential,KraftMonitor.Bearing1_Differentialforce,KraftMonitor.Bearing2_Differentialforce);
 %KombiMonitor.show;

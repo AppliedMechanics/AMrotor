@@ -1,4 +1,4 @@
-function [DrehzahlMess, RadiusMess, PhaseMess, OffsetXMess, OffsetYMess] = analyse_deflection_fourier_coeff(self,data)
+function [DrehzahlMess, RadiusMess, PhaseMess, OffsetXMess, OffsetYMess] = analyse_deflection_fourier_coeff(self,Zeit,xPos,yPos,Tacho,phi)
 
 % 2.2.2011 Markus Rossner
 % Ziele:
@@ -6,18 +6,18 @@ function [DrehzahlMess, RadiusMess, PhaseMess, OffsetXMess, OffsetYMess] = analy
 % - Berechnen Fourierreihe
 % - Analyse der Erregerordnungen
 
-Zeit = data(1,:).';
-xPos = data(2,:).';
-yPos = data(3,:).';
-Tacho = data(4,:).';
-phi = data(5,:).';
+% Zeit = data(1,:);
+% xPos = data(2,:);
+% yPos = data(3,:);
+% Tacho = data(4,:);
+% phi = data(5,:);
 
 % Analysiere Drehzahl
 DrehzahlMess = abs(mean(Tacho));
 
 %% Fitting der x/y-Auslenkung mit Fourierreihe
 fo = fitoptions('Method', 'NonlinearLeastSquares', 'Lower',[-inf, -inf, -inf, 0.8*DrehzahlMess*pi/30],'Upper',[inf, inf, inf, 1.2*DrehzahlMess*pi/30],'Startpoint',[0, 0, 0, DrehzahlMess*pi/30]);
-FX = fit(Zeit,xPos, fittype('fourier1'),fo);
+FX = fit(Zeit.',xPos.', fittype('fourier1'),fo);
 if abs(FX.w-DrehzahlMess*pi/30)>1
     disp('Achtung: Fehler bei Frequenz der Fourierreihe in X')
 end
@@ -30,7 +30,7 @@ else
 end
 
 fo = fitoptions('Method', 'NonlinearLeastSquares', 'Lower',[-inf, -inf, -inf, 0.8*DrehzahlMess*pi/30],'Upper',[inf, inf, inf, 1.2*DrehzahlMess*pi/30],'Startpoint',[0, 0, 0, DrehzahlMess*pi/30]);
-FY = fit(Zeit,yPos, fittype('fourier1'),fo);
+FY = fit(Zeit.',yPos.', fittype('fourier1'),fo);
 if abs(FY.w-DrehzahlMess*pi/30)>1
     disp('Achtung: Fehler bei Frequenz der Fourierreihe in Y')
 end

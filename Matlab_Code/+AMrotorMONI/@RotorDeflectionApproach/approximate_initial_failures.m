@@ -1,8 +1,17 @@
-function [InitialUnwuchtsMatrix,InitialSchlagMatrix,Xalt] = approximate_initial_failures(obj,dataset,ESF1)
+function [InitialUnwuchtsMatrix,InitialSchlagMatrix,XInitial] = approximate_initial_failures(obj,dataset,ESF1)
 
-for i1=1:size(dataset,1)    
-        Input=permute(dataset,[2 3 1]);
-        [DrehzahlMess(i1), RadiusMess(i1), PhaseMess(i1), OffsetXMess(i1), OffsetYMess(i1)] = analyse_deflection_fourier_coeff(obj,Input(:,:,i1));
+Schluessel=keys(dataset);
+
+for i1=1:size(keys(dataset),2)
+    
+        temp=dataset(Schluessel{i1});
+        Zeit=temp('time');
+        Tacho=temp('omega');
+        phi=temp('phi');
+        xPos=temp('s_x (Positionssensor)');
+        yPos=temp('s_y (Positionssensor)');
+    
+        [DrehzahlMess(i1), RadiusMess(i1), PhaseMess(i1), OffsetXMess(i1), OffsetYMess(i1)] = analyse_deflection_fourier_coeff(obj,Zeit,xPos,yPos,Tacho,phi);
         
         RadiusMess(i1) = RadiusMess(i1)/1000;
         PhaseMess(i1) = PhaseMess(i1) *pi/180;
@@ -65,6 +74,9 @@ end
 % [~, ~, R] = circfit(XKreis,YKreis);
 
 InitialSchlagMatrix = [ R phiSchlag ];
-Xalt=x;
+
+% Übergabe für endberechnung
+
+XInitial=[zUnwucht x(1);zSensor x(2)];
 
 end

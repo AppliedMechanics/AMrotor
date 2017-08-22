@@ -1,9 +1,19 @@
-function [Revisedimbalancemarix,Differentialimbalancematrix,RevisedCoupledSchlagMatrix,DifferentialCoupledSchlagMatrix]=approximate_additional_failures(obj,dataset,ESF1,Xalt)
+function [Revisedimbalancemarix,Differentialimbalancematrix,RevisedCoupledSchlagMatrix,DifferentialCoupledSchlagMatrix,XRevisional,XDifferential]=approximate_additional_failures(obj,dataset,ESF1,XInitial)
 
 
-for i1=1:size(dataset,1)    
-        Input=permute(dataset,[2 3 1]);
-        [DrehzahlMess(i1), RadiusMess(i1), PhaseMess(i1), OffsetXMess(i1), OffsetYMess(i1)] = analyse_deflection_fourier_coeff(obj,Input(:,:,i1));
+Schluessel=keys(dataset);
+
+for i1=1:size(keys(dataset),2)
+    
+        temp=dataset(Schluessel{i1});
+        Zeit=temp('time');
+        Tacho=temp('omega');
+        phi=temp('phi');
+        xPos=temp('s_x (Positionssensor)');
+        yPos=temp('s_y (Positionssensor)');
+        
+        
+        [DrehzahlMess(i1), RadiusMess(i1), PhaseMess(i1), OffsetXMess(i1), OffsetYMess(i1)] = analyse_deflection_fourier_coeff(obj,Zeit,xPos,yPos,Tacho,phi);
         
         RadiusMess(i1) = RadiusMess(i1)/1000;
         PhaseMess(i1) = PhaseMess(i1) *pi/180;
@@ -56,7 +66,7 @@ g = 1./(1-eta.^2);
   rNeu = RadiusMess.*exp(1i*PhaseMess);
   ANeu = [f.'/m1*uMess*uUnwucht,g.'];
   xNeu = ANeu\rNeu'; % Lösung überbestimmtes gleichungssystem
-  xDiff = xNeu-Xalt;
+  xDiff = xNeu-XInitial(:,2);
   
 %% Aktuell gemessene Unwucht    
 % Phase Unwucht
@@ -123,5 +133,12 @@ end
 % YKreisDiff=[0,r0Diff,0];
 % [~, ~, RDiff] = circfit(XKreisDiff,YKreisDiff);
 DifferentialCoupledSchlagMatrix = [ RDiff phiSchlagDiff];
+
+%% ------------------------------------------------------------------------
+
+% Übergabe Werte Für gekoppelte Berechnugn
+
+XRevisional=[zUnwucht xNeu(1);zSensor xNeu(2)];
+XDifferential=[zUnwucht xDiff(1);zSensor xDiff(2)];
 
 end

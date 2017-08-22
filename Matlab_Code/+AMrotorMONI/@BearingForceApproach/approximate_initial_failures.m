@@ -8,9 +8,18 @@ Eigenfrequenz =obj.cnfg.Eigenfrequenz;   %Eigenfrequenz des Rotors in rad/sec.
 
 
 %% Fourier transformation vom aktulellen Messwerte-Paket
-for i1=1:size(dataset,1)
-    Input=permute(dataset,[2 3 1]);%Macht 3x10x10000 zu 10x10000x3
-    [~,OmegaExakt(i1),Gleichlauf_FL1(i1,:),Gegenlauf_FL1(i1,:), Gleichlauf_FL2(i1,:), Gegenlauf_FL2(i1,:)] = analyse_force_fourier_coeff(obj,Input(:,:,i1));
+Schluessel=keys(dataset);
+for i1=1:size(keys(dataset),2)
+    temp=dataset(Schluessel{i1});
+    Zeit=temp('time');
+    Tacho=temp('omega');
+    phi=temp('phi');
+    Kraft_L1_1=temp('F_x (Lager 1)');
+    Kraft_L1_2=temp('F_y (Lager 1)');
+    Kraft_L2_1=temp('F_x (Lager 2)');
+    Kraft_L2_2=temp('F_y (Lager 2)');
+    
+    [~,OmegaExakt(i1),Gleichlauf_FL1(i1,:),Gegenlauf_FL1(i1,:), Gleichlauf_FL2(i1,:), Gegenlauf_FL2(i1,:)] = analyse_force_fourier_coeff(obj,Zeit,Tacho,phi,Kraft_L1_1,Kraft_L1_2,Kraft_L2_1,Kraft_L2_2);
 end
 
 
