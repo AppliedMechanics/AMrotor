@@ -4,7 +4,7 @@
 %% Header
 
 % Robert Höfer, Johannes Maierhofer
-% 28.07.2017
+% 28.07.2017, 22.08.2017
 
 %% Import
 import AMrotorMONI.*
@@ -14,7 +14,10 @@ close all
 clear all
 clc
 
-Daten_Zusammenstellen
+%% Load Data
+
+load('./+AMrotorMONI/MeasurementData/DataSet_RunA.mat');
+load('./+AMrotorMONI/MeasurementData/DataSet_RunB.mat');
 
 %% Parameter
 % Rotorparameter
@@ -32,7 +35,7 @@ ESF1.zESF1=zESF1;
 
 
 %% Lagerkrafmessung
-% Instanzieren eines Objekts
+% Instanzieren des Objekts
 KraftMonitor = BearingForceApproach('KraftMonitor');
 KraftMonitor.cnfg=cnfg;
 
@@ -40,10 +43,13 @@ KraftMonitor.cnfg=cnfg;
 KraftMonitor.initialize(DataSetAlt);
 KraftMonitor.revise(DataSetNeu);
 KraftMonitor.show;
-KraftMonitor;
+
+% Darstellung im Polarplot
+gF = Graphs.UnbalancePolarplot('Plot Kraftmessung', KraftMonitor);
+gF.plot;
 
 %% Positionsmessung
-% Ende Parameter, Übergabe Parameter an Klasse
+% Instanzieren des Objekts
 PosiMonitor = RotorDeflectionApproach('PositionsMonitor');
 PosiMonitor.cnfg = cnfg;
 PosiMonitor.ESF1 = ESF1;
@@ -52,11 +58,10 @@ PosiMonitor.ESF1 = ESF1;
 PosiMonitor.initialize(DataSetAlt);
 PosiMonitor.revise(DataSetNeu);
 PosiMonitor.show;
-PosiMonitor;
 
 
 %% Kombination Lagerkraft und Positionsmessung
-% Implementierung der Klasse
+% Instanzieren des Objekts
 % KombiMonitor = CombinedForceDeflectionApproach('KombiniertesMonitoring');
 
 % Aufruf Berechungsfunktionen

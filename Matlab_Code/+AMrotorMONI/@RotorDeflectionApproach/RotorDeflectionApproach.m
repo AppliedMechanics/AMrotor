@@ -36,13 +36,13 @@ classdef RotorDeflectionApproach < handle
            disp(obj.name)
            disp('--------')
            disp('Initialimbalancematrix:')
-           ANZ=[num2str(obj.Initialimbalancematrix(1)),' Zpos m   ' , num2str(obj.Initialimbalancematrix(2)),' m   ',num2str(obj.Initialimbalancematrix(3)),' rad   '];
+           ANZ=[num2str(obj.Initialimbalancematrix(1)),' Zpos m   ' , num2str(obj.Initialimbalancematrix(2)),' gm   ',num2str(obj.Initialimbalancematrix(3)),' rad   '];
            disp(ANZ)
            disp('Revisedimbalancematrix:')
-           ANZ=[num2str(obj.Revisedimbalancematrix(1)),' Zpos m   ' , num2str(obj.Revisedimbalancematrix(2)),' m   ',num2str(obj.Revisedimbalancematrix(3)),' rad   '];
+           ANZ=[num2str(obj.Revisedimbalancematrix(1)),' Zpos m   ' , num2str(obj.Revisedimbalancematrix(2)),' gm   ',num2str(obj.Revisedimbalancematrix(3)),' rad   '];
            disp(ANZ)
            disp('Differentialimbalancematrix:')
-           ANZ=[num2str(obj.Differentialimbalancematrix(1)),' Zpos m   ' , num2str(obj.Differentialimbalancematrix(2)),' m   ',num2str(obj.Differentialimbalancematrix(3)),' rad   '];
+           ANZ=[num2str(obj.Differentialimbalancematrix(1)),' Zpos m   ' , num2str(obj.Differentialimbalancematrix(2)),' gm   ',num2str(obj.Differentialimbalancematrix(3)),' rad   '];
            disp(ANZ)
            disp(' ')
            disp('InitialCoupledSchlagMatrix:')
