@@ -1,0 +1,132 @@
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Kraftsensor rechts
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Berechne Modalanalyse Rotorsystem
+
+D_x =
+
+   1.0e+03 *
+
+  Columns 1 through 7
+
+  -0.0008 - 0.0408i   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i
+   0.0000 + 0.0000i  -0.0009 - 0.0414i   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i
+   0.0000 + 0.0000i   0.0000 + 0.0000i  -0.3870 - 0.7901i   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i
+   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i  -0.3870 - 0.7902i   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i
+   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i  -1.0816 - 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i
+   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i  -1.0213 - 0.0000i   0.0000 + 0.0000i
+   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i  -1.0078 - 0.0000i
+   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i
+   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i
+   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i
+
+  Columns 8 through 10
+
+   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i
+   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i
+   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i
+   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i
+   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i
+   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i
+   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i
+  -1.0037 - 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i
+   0.0000 + 0.0000i  -1.0025 - 0.0000i   0.0000 + 0.0000i
+   0.0000 + 0.0000i   0.0000 + 0.0000i  -1.0016 - 0.0000i
+
+
+D_y =
+
+     0     0     0     0     0     0     0     0     0     0
+     0     0     0     0     0     0     0     0     0     0
+     0     0     0     0     0     0     0     0     0     0
+     0     0     0     0     0     0     0     0     0     0
+     0     0     0     0     0     0     0     0     0     0
+     0     0     0     0     0     0     0     0     0     0
+     0     0     0     0     0     0     0     0     0     0
+     0     0     0     0     0     0     0     0     0     0
+     0     0     0     0     0     0     0     0     0     0
+     0     0     0     0     0     0     0     0     0     0
+
+Eigenkreisfrequenzen
+x: -6.4937 Hz
+y: 0 Hz
+x: -6.5821 Hz
+y: 0 Hz
+x: -125.7555 Hz
+y: 0 Hz
+x: -125.7566 Hz
+y: 0 Hz
+x: -7.3419e-05 Hz
+y: 0 Hz
+x: -3.2189e-05 Hz
+y: 0 Hz
+x: -2.028e-05 Hz
+y: 0 Hz
+x: -1.6213e-05 Hz
+y: 0 Hz
+x: -1.5038e-05 Hz
+y: 0 Hz
+x: -8.9717e-06 Hz
+y: 0 Hz
+Stationäre Lösung
+Compute.... ode15s State Space ....
+... rotational speed: 1 U/min
+... rotational speed: 101 U/min
+... rotational speed: 201 U/min
+... rotational speed: 301 U/min
+... rotational speed: 401 U/min
+... rotational speed: 501 U/min
+... rotational speed: 601 U/min
+... rotational speed: 701 U/min
+... rotational speed: 801 U/min
+... rotational speed: 901 U/min
+... rotational speed: 1001 U/min
+ --- Compose Dataset Timesignal  --- 
+Compute Matrices Bearings
+Compute Matrices Bearings
+Compute Matrices Bearings
+Compute Matrices Bearings
+Compute Matrices Bearings
+Compute Matrices Bearings
+Compute Matrices Bearings
+Compute Matrices Bearings
+Compute Matrices Bearings
+Compute Matrices Bearings
+Compute Matrices Bearings
+Compute Matrices Bearings
+Compute Matrices Bearings
+Compute Matrices Bearings
+Compute Matrices Bearings
+Compute Matrices Bearings
+Compute Matrices Bearings
+Compute Matrices Bearings
+Compute Matrices Bearings
+Compute Matrices Bearings
+Compute Matrices Bearings
+Compute Matrices Bearings
+ --- Plot Graph Timesignal  --- 
+ ---  Orbitdarstellung  --- 
+ --- Plot Graph Timesignal  --- 
+Compute Matrices Bearings
+ ---  Orbitdarstellung  --- 
+Compute Matrices Bearings
+ --- Plot Graph Timesignal  --- 
+Compute Matrices Bearings
+ ---  Orbitdarstellung  --- 
+Compute Matrices Bearings
