@@ -7,13 +7,18 @@ ToDo: **Christian Looschen** (christian_looschen@hotmail.com)
 - Drehung der Visualisierung
 - Farbe der Lagerringe je nach Lagertyp ?ndern - Magnetlager (typ3) orange, Gleitlager (typ1)=blau
 - Klasse Kraftsensor generieren
+- Geschwindigkeitssensor 
+- Beschleunigungssensor
+- TimeSignal - OrbitSignal Darstellung vereinheitlichen
 
 
 -----------------------------------------------------------------------------
 
-- Geschwindigkeitssensor 
-- Beschleunigungssensor
+- Fourierdarstellung der Signale
 - Stromsensor+Kraftsensor Magnetlager erstellen
+- ​
+- Anregungskräfte (Chirp/Step/Sine)
+- Ausgabe der "Messwerte"
 
 
 -----------------------
