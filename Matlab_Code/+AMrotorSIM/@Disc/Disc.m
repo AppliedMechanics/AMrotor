@@ -20,7 +20,7 @@ classdef Disc < handle
       end
       
       function [M,G,D,K] = compute_matrices(obj)
-        
+        disp('Compute Matrices Discs')
         M(1,1)=obj.cnfg.m;
         M(2,2)=obj.cnfg.Ix;
         M(3,3)=obj.cnfg.m;
@@ -32,10 +32,6 @@ classdef Disc < handle
        K = zeros(4,4);
        D = zeros(4,4);
       end
-      
-      function visu(obj)
-         disp('Start visualization');
-      end 
       
    end
 end

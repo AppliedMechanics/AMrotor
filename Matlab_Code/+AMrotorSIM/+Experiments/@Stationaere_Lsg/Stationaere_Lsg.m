@@ -3,8 +3,7 @@ classdef Stationaere_Lsg < handle
       name='Stationäre Lösung'
       rotorsystem
       drehzahl
-      time        % time steps [S]
-      
+      time        % time steps [S]      
       result
    end
    methods
@@ -94,18 +93,6 @@ classdef Stationaere_Lsg < handle
             nwmrk = AMrotorSIM.Solvers.Newmark();
         
             [q,qd,qdd] = nwmrk.newmark_integration( beta , gamma, M, D, K,f,t,q_0,qd_0,qdd_0,constant);
-        
-%           nwmrk.setupImpl;
-%           for n = 2:nsteps
-%           y(n) = nwmrk.stepImpl(u);
-%           end
-%           nwmrk.resetImpl;
-        
-%           for i=obj.rotorsystem.lager
-%                 if i.type==3
-%                 
-%               end
-%           end
 
             obj.rotorsystem.time_result.T= obj.time';
         
@@ -115,12 +102,13 @@ classdef Stationaere_Lsg < handle
           [obj.rotorsystem.time_result.X,obj.rotorsystem.time_result.X_d,x,x_d,beta,beta_d,y,y_d,alpha,alpha_d,omega_ode,phi_ode] = modal_back_transformation(Z,M,EVmr);
         end
       end
-     function mapObj = compute_ode15s_ss(obj)
+     function compute_ode15s_ss(obj)
         disp('Compute.... ode15s State Space ....')
         obj.rotorsystem.clear_time_result()
         values = {};
         j = 1;
        for drehzahl = obj.drehzahl 
+        disp(['... rotational speed: ',num2str(drehzahl),' U/min'])
         n_nodes = length(obj.rotorsystem.rotor.nodes);
         
         omega = drehzahl*pi/60;           
@@ -153,11 +141,14 @@ classdef Stationaere_Lsg < handle
         obj.rotorsystem.time_result.X_d = Z(4*n_nodes+1:2*4*n_nodes,:);
         obj.rotorsystem.time_result.X_dd= Zp(4*n_nodes+1:2*4*n_nodes,:);
         
-        val = { obj.rotorsystem.time_result.X, obj.rotorsystem.time_result.X_d, obj.rotorsystem.time_result.X_dd};
+        obj.rotorsystem.time_result.Phi = Z(8*n_nodes+1,:);
+        obj.rotorsystem.time_result.Phi_d = Z(8*n_nodes+2,:);
+        
+        val = { obj.rotorsystem.time_result.X, obj.rotorsystem.time_result.X_d, obj.rotorsystem.time_result.X_dd, obj.rotorsystem.time_result.Phi, obj.rotorsystem.time_result.Phi_d};
         values{j,1} = val;
         j = j+1;
        end
-       mapObj = containers.Map(obj.drehzahl,values); 
+       obj.result = containers.Map(obj.drehzahl,values); 
        % ähnlich zu Dictionary in Python. Jeder Drehzahl wird ein X, X_d
        % und ein X_dd Array zugewiesen.
      end

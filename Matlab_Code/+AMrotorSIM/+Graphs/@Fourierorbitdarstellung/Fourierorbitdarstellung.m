@@ -10,10 +10,10 @@ classdef Fourierorbitdarstellung < handle
    
  methods
     
-     function self=Fourierorbitdarstellung(a, time, drehzahl) 
+     function self=Fourierorbitdarstellung(a, experiment) 
           self.rotorsystem = a;
-          self.time = time;
-          self.drehzahl = drehzahl;
+          self.time = experiment.time;
+          self.drehzahl = experiment.drehzahl;
      end
      
 

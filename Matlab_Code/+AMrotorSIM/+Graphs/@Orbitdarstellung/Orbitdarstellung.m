@@ -3,10 +3,12 @@ classdef Orbitdarstellung < handle
     unit
     rotorsystem
     name=' ---  Orbitdarstellung  --- '
+    experiment
    end
   methods
-  function self=Orbitdarstellung(a) 
+  function self=Orbitdarstellung(a, experiment) 
       self.rotorsystem = a;
+      self.experiment = experiment;
   end
   
   function plot(self,sensors)
