@@ -16,7 +16,7 @@ classdef TimeDataOutput < handle
          
             disp(' --- Compose Dataset Timesignal  --- ')
             
-          sensor_value_names = {'n'};
+         sensor_value_names = {'n'};
          
          sensor_values = cell(1,1);
 
@@ -28,7 +28,8 @@ classdef TimeDataOutput < handle
             for drehzahl = self.experiment.drehzahl     
                 tmp = dataset(drehzahl);
                 
-                    ds = self.experiment.result(drehzahl);
+                ds = self.experiment.result(drehzahl);
+                
                 tmp('Phi')= ds{4};
                 tmp('Phi_d')= ds{5};
                 
