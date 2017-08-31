@@ -1,61 +1,60 @@
 classdef TimeDataOutput < handle
-    % Dataset n x i x m
+
     properties
         rotorsystem
+        experiment_result
         experiment
         dataset
     end
     
     methods
-        function self= TimeDataOutput(r, experiment)  
-            self.rotorsystem = r;
+        function self= TimeDataOutput(experiment)  
             self.experiment = experiment;
+            self.rotorsystem = experiment.rotorsystem;
+            self.experiment_result = experiment.result;
        end
         
-        function dataset = aquire_data(self)
+        function dataset = compose_data(self)
          
             disp(' --- Compose Dataset Timesignal  --- ')
-            
-         sensor_value_names = {'n'};
-         
-         sensor_values = cell(1,1);
 
          dataset = containers.Map('KeyType','double','ValueType','any');
-         for drehzahl = self.experiment.drehzahl
-          dataset(drehzahl)= containers.Map(sensor_value_names,sensor_values);
-         end
-
-            for drehzahl = self.experiment.drehzahl     
+         
+            for drehzahl = self.experiment.drehzahlen 
+                
+                dataset(drehzahl)= containers.Map;
                 tmp = dataset(drehzahl);
                 
-                ds = self.experiment.result(drehzahl);
+                ds = self.experiment_result(drehzahl);
                 
-                tmp('Phi')= ds{4};
-                tmp('Phi_d')= ds{5};
+                tmp('n')= ones(1, length(self.experiment.time))*drehzahl;
+                tmp('time') = self.experiment.time;
                 
+                tmp('Phi')= ds.Phi;
+                tmp('Phi_d')= ds.Phi_d;
+ 
                 for sensor = self.rotorsystem.sensors
-                    [x_val,beta_pos,y_val,alpha_pos]=sensor.read_sensor_values(self.rotorsystem);
+                    [x_val,beta_pos,y_val,alpha_pos]=sensor.read_sensor_values(self.experiment);
 
                     switch sensor.type
                         case 1 %Wegsensor
-                            tmp(['s_x (',sensor.name,')']) = x_val;
-                            tmp(['s_y (',sensor.name,')']) = y_val;
-                            tmp(['s_beta (',sensor.name,')']) = beta_pos;
-                            tmp(['s_alpha (',sensor.name,')']) = alpha_pos;
+                            tmp(['s_x (',sensor.name,')']) = x_val(drehzahl);
+                            tmp(['s_y (',sensor.name,')']) = y_val(drehzahl);
+                            tmp(['s_beta (',sensor.name,')']) = beta_pos(drehzahl);
+                            tmp(['s_alpha (',sensor.name,')']) = alpha_pos(drehzahl);
                         case 2 %Kraftsensor
-                            tmp(['F_x (',sensor.name,')']) = x_val;
-                            tmp(['F_y (',sensor.name,')']) = y_val;
+                            tmp(['F_x (',sensor.name,')']) = x_val(drehzahl);
+                            tmp(['F_y (',sensor.name,')']) = y_val(drehzahl);
                         case 3 %Geschwindigkeitssensor
-                            tmp(['v_x (',sensor.name,')']) = x_val;
-                            tmp(['v_y (',sensor.name,')']) = y_val;
+                            tmp(['v_x (',sensor.name,')']) = x_val(drehzahl);
+                            tmp(['v_y (',sensor.name,')']) = y_val(drehzahl);
                         case 4 %Beschleunigungssensor
-                            tmp(['a_x (',sensor.name,')']) = x_val;
-                            tmp(['a_y (',sensor.name,')']) = y_val;
+                            tmp(['a_x (',sensor.name,')']) = x_val(drehzahl);
+                            tmp(['a_y (',sensor.name,')']) = y_val(drehzahl);
                     end
                                     
                 end
-                tmp('n')= ones(1, length(x_val))*drehzahl;
-                tmp('time') = self.experiment.time;
+
             end               
         end
     end

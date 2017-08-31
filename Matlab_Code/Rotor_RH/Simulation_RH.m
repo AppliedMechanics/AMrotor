@@ -4,7 +4,7 @@
 %% Header
 
 % Johannes Maierhofer
-% 23.08.2017
+% 23.08.2017, 29.08.2017
 
 %% Import
 
@@ -43,56 +43,37 @@ r.compute_loads();
 r.transform_StateSpace();
 
 
-%r.reduce_modal(10);
-
 %% Running system analyses
 
-m=Experiments.Modalanalyse(r);
+% m=Experiments.Modalanalyse(r);
 % 
-% m.calculate_rotor_only(4,0:100:1000);
-% esf = Graphs.Eigenschwingformen(m);
-% esf.plot();
-% 
-
-% 
-% m.calculate_rotorsystem(5,0:100:200);
+% m.calculate_rotorsystem_ss(10,0:100:200);
 % esf2= Graphs.Eigenschwingformen(m);
-% esf2.plot();
-
-%
-m.calculate_rotorsystem_ss(10,0:100:200);
-esf2= Graphs.Eigenschwingformen(m);
-esf2.plot_displacements();
-
-% m.calculate_rotorsystem(3,0:100:3000);
-% cmp = Graphs.Campbell(m);
-% cmp.plot();
+% esf2.plot_displacements();
 
 %% Running Time Simulation
 
-St_Lsg = Experiments.Stationaere_Lsg(r,[1:100:1001],[0:0.001:1]);
+St_Lsg = Experiments.Stationaere_Lsg(r,[100:50:500],[0:0.001:1]);
 St_Lsg.show()
-% St_Lsg.compute()
-% St_Lsg.compute_newmark()
 St_Lsg.compute_ode15s_ss
 
 %------------- Erzeuge Ausgabeformat der Lösung ---------------
 
-d = Dataoutput.TimeDataOutput(r,St_Lsg);
-dataset_monitoring = d.aquire_data;
+d = Dataoutput.TimeDataOutput(St_Lsg);
+dataset_monitoring = d.compose_data;
 save 'dataset_monitoring_Unwucht1e-3_0.mat' dataset_monitoring
 
 %------------- Erzeuge Grafiken aus Lösung -------------------
 
-t = Graphs.TimeSignal(r, St_Lsg);
-o= Graphs.Orbitdarstellung(r, St_Lsg);
+%t = Graphs.TimeSignal(r, St_Lsg);
+%o= Graphs.Orbitdarstellung(r, St_Lsg);
 % f = Graphs.Fourierdarstellung(r, St_Lsg);
 % fo = Graphs.Fourierorbitdarstellung(r, St_Lsg);
 % w = Graphs.Waterfalldiagramm(r, St_Lsg);
 
 for sensor = r.sensors
-         t.plot(sensor);
-         o.plot(sensor);
+%         t.plot(sensor);
+%         o.plot(sensor);
 %          f.plot(sensor);
 %          fo.plot(sensor,1);
 %          w.plot(sensor);

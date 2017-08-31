@@ -1,13 +1,12 @@
-close all
-clear all
-clc
+%close all
+%clear all
+%clc
 % Alle Namen der Simulationsreihen erhalten
-liste=dir('D:\Simulation_RH_v01\*.mat');
-name= {liste.name};
-for z=1:size(name,2)
-    figure('name',name{z});
-    DateipfadName=(['D:\Simulation_RH_v01\',name{z},]);
-    load(DateipfadName);
+%liste=dir('D:\Simulation_RH_v01\*.mat');
+%name= {liste.name};
+
+%for z=1
+    figure();
     temp=dataset_monitoring;
     schluessel=keys(temp);
         for K=1:12   % Anzahl Simulationsparameter
@@ -24,4 +23,4 @@ for z=1:size(name,2)
                 end
             hold off;
         end
-end
+%end
