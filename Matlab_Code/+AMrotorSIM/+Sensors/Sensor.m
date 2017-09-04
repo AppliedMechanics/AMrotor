@@ -9,7 +9,7 @@ classdef Sensor < matlab.mixin.Heterogeneous & handle
       %Konstruktor
        function self = Sensor(config)
          if nargin == 0
-           self.name = 'Depp';
+           self.name = 'Sensor';
          else
            assert(isscalar(config));
            self.cnfg = config;
@@ -22,20 +22,20 @@ classdef Sensor < matlab.mixin.Heterogeneous & handle
          disp(self.name);
       end
       
-      function [x_val,beta_pos,y_val,alpha_pos] = read_sensor_values( sensor, rotorsystem )
+      function [x_val,beta_pos,y_val,alpha_pos] = read_sensor_values( sensor, experiment )
         switch sensor.type
             case 1
-                [x_val,beta_pos,y_val,alpha_pos]= sensor.read_values(rotorsystem);
+                [x_val,beta_pos,y_val,alpha_pos]= sensor.read_values(experiment);
             case 2
-                [x_val,y_val]= sensor.measure_force(rotorsystem);
+                [x_val,y_val]= sensor.measure_force(experiment);
                 beta_pos = NaN;
                 alpha_pos = NaN;
             case 3
-                [x_val,y_val]=sensor.read_velocity_values(rotorsystem);
+                [x_val,y_val]=sensor.read_velocity_values(experiment);
                 beta_pos = NaN;
                 alpha_pos = NaN;
             case 4
-                [x_val,y_val]=sensor.read_acceleration_values(rotorsystem);
+                [x_val,y_val]=sensor.read_acceleration_values(experiment);
                 beta_pos = NaN;
                 alpha_pos = NaN;
         end
