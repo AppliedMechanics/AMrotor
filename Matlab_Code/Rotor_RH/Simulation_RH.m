@@ -4,7 +4,7 @@
 %% Header
 
 % Johannes Maierhofer
-% 23.08.2017, 29.08.2017
+% 23.08.2017, 29.08.2017, 04.09.2017
 
 %% Import
 
@@ -20,11 +20,12 @@ diary on
 
 %% Compute Rotor
 
-Config_Sim_RH
+%Config_Sim_RH
+Config_Sim_RH_a
 
 % Unwucht -----------------------------------------------------------------
  cnfg.cnfg_unbalance(1).name = 'Geplante Unwucht';
- cnfg.cnfg_unbalance(1).position = 507.5e-3;    %[m]
+ cnfg.cnfg_unbalance(1).position = 400e-3;    %[m]
  cnfg.cnfg_unbalance(1).betrag = 1e-3;          %[kgm]
  cnfg.cnfg_unbalance(1).winkellage = 0;         %[rad]
 %--------------------------------------------------------------------------
@@ -63,10 +64,19 @@ d = Dataoutput.TimeDataOutput(St_Lsg);
 dataset_monitoring = d.compose_data;
 save 'dataset_monitoring_Unwucht1e-3_0.mat' dataset_monitoring
 
+temp=dataset_monitoring(300);
+sx_r=temp('s_x (Positionssensor rechts)');
+sx_l=temp('s_x (Positionssensor links)');
+figure();
+plot(sx_l)
+hold on
+plot(sx_r)
+
+
 %------------- Erzeuge Grafiken aus Lösung -------------------
 
-%t = Graphs.TimeSignal(r, St_Lsg);
-%o= Graphs.Orbitdarstellung(r, St_Lsg);
+% t = Graphs.TimeSignal(r, St_Lsg);
+% o= Graphs.Orbitdarstellung(r, St_Lsg);
 % f = Graphs.Fourierdarstellung(r, St_Lsg);
 % fo = Graphs.Fourierorbitdarstellung(r, St_Lsg);
 % w = Graphs.Waterfalldiagramm(r, St_Lsg);
