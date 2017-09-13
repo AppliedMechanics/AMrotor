@@ -75,9 +75,10 @@ classdef Eigenschwingformen < handle
             hold on;
             title(ax2,'y-Richtung')
 
+            x = obj.modalsystem.rotorsystem.rotor.nodes;
         for s=1:n_ew
-            plot(ax1,(real(V_x(:,s,1))/norm(V_x(:,s,1))),'DisplayName',[num2str(imag(D_x(s,s,1))/(2*pi)),' Hz'])
-            plot(ax2,(real(V_y(:,s,1))/norm(V_y(:,s,1))),'DisplayName',[num2str(imag(D_y(s,s,1))/(2*pi)),' Hz'])
+            plot(ax1,x,(real(V_x(:,s,1))/norm(V_x(:,s,1))),'DisplayName',[num2str(imag(D_x(s,s,1))/(2*pi)),' Hz'])
+            plot(ax2,x,(real(V_y(:,s,1))/norm(V_y(:,s,1))),'DisplayName',[num2str(imag(D_y(s,s,1))/(2*pi)),' Hz'])
             
         end
             legend(ax1,'show')
