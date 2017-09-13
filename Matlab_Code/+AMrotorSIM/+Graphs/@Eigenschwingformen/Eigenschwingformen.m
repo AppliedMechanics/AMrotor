@@ -53,10 +53,10 @@ classdef Eigenschwingformen < handle
           n_nodes=length(nodes);
           
           V_x = obj.modalsystem.eigenmatrizen.V(1:2:2*n_nodes,1:2:end,1); %Eigenvektoren
-          D_x = obj.modalsystem.eigenmatrizen.D(1:2:2*n_ew,1:2:2*n_ew,1)  % Eigenwerte in Diagonalmatrix
+          D_x = obj.modalsystem.eigenmatrizen.D(1:2:2*n_ew,1:2:2*n_ew,1);  % Eigenwerte in Diagonalmatrix
           
           V_y = obj.modalsystem.eigenmatrizen.V(2*n_nodes+1:2:4*n_nodes,1:2:end,1);
-          D_y = obj.modalsystem.eigenmatrizen.D(2*n_ew+1:2:4*n_ew,1:2:2*n_ew,1)
+          D_y = obj.modalsystem.eigenmatrizen.D(2*n_ew+1:2:4*n_ew,1:2:2*n_ew,1);
           
           %
           disp('Eigenkreisfrequenzen')
