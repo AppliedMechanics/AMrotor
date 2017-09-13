@@ -129,7 +129,7 @@ classdef Rotorsystem < handle
         n_nodes=length(obj.rotor.nodes);
         dim_ss=8*n_nodes;
         
-        M_inv = inv(M);
+        M_inv = M\eye(size(M));
         obj.systemmatrizen.M_inv=M_inv;
         
         obj.systemmatrizen.ss = [zeros(length(M)),eye(length(M));-M_inv*K,-M_inv*D];
