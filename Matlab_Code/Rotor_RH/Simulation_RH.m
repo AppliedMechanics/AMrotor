@@ -20,13 +20,13 @@ diary on
 
 %% Compute Rotor
 
-%Config_Sim_RH
-Config_Sim_RH_a
+Config_Sim_RH
+%Config_Sim_RH_a
 
 % Unwucht -----------------------------------------------------------------
  cnfg.cnfg_unbalance(1).name = 'Geplante Unwucht';
  cnfg.cnfg_unbalance(1).position = 400e-3;    %[m]
- cnfg.cnfg_unbalance(1).betrag = 1e-3;          %[kgm]
+ cnfg.cnfg_unbalance(1).betrag = 1e-4;          %[kgm]
  cnfg.cnfg_unbalance(1).winkellage = 0;         %[rad]
 %--------------------------------------------------------------------------
 
@@ -62,11 +62,11 @@ St_Lsg.compute_ode15s_ss
 
 d = Dataoutput.TimeDataOutput(St_Lsg);
 dataset_monitoring = d.compose_data;
-save 'dataset_monitoring_Unwucht1e-3_0.mat' dataset_monitoring
+save 'dataset_monitoring_Unwucht1e-4_0.mat' dataset_monitoring
 
 temp=dataset_monitoring(300);
-sx_r=temp('s_x (Positionssensor rechts)');
-sx_l=temp('s_x (Positionssensor links)');
+sx_r=temp('F_x (Kraftsensor rechts)');
+sx_l=temp('F_x (Kraftsensor links)');
 figure();
 plot(sx_l)
 hold on

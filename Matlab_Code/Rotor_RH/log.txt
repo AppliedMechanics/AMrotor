@@ -619,3 +619,207 @@ Compute.... ode15s State Space ....
 ... rotational speed: 450 U/min
 ... rotational speed: 500 U/min
  --- Compose Dataset Timesignal  --- 
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Positionssensor links
+Positionssensor rechts
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Stationäre Lösung
+Compute.... ode15s State Space ....
+... rotational speed: 100 U/min
+... rotational speed: 150 U/min
+... rotational speed: 200 U/min
+... rotational speed: 250 U/min
+... rotational speed: 300 U/min
+... rotational speed: 350 U/min
+... rotational speed: 400 U/min
+... rotational speed: 450 U/min
+... rotational speed: 500 U/min
+ --- Compose Dataset Timesignal  --- 
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Positionssensor links
+Positionssensor rechts
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Stationäre Lösung
+Compute.... ode15s State Space ....
+... rotational speed: 100 U/min
+... rotational speed: 150 U/min
+... rotational speed: 200 U/min
+... rotational speed: 250 U/min
+... rotational speed: 300 U/min
+... rotational speed: 350 U/min
+... rotational speed: 400 U/min
+... rotational speed: 450 U/min
+... rotational speed: 500 U/min
+ --- Compose Dataset Timesignal  --- 
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Positionssensor links
+Positionssensor rechts
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Stationäre Lösung
+Compute.... ode15s State Space ....
+... rotational speed: 100 U/min
+... rotational speed: 150 U/min
+... rotational speed: 200 U/min
+... rotational speed: 250 U/min
+... rotational speed: 300 U/min
+... rotational speed: 350 U/min
+... rotational speed: 400 U/min
+... rotational speed: 450 U/min
+... rotational speed: 500 U/min
+ --- Compose Dataset Timesignal  --- 
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Positionssensor links
+Positionssensor rechts
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Stationäre Lösung
+Compute.... ode15s State Space ....
+... rotational speed: 100 U/min
+... rotational speed: 150 U/min
+... rotational speed: 200 U/min
+... rotational speed: 250 U/min
+... rotational speed: 300 U/min
+... rotational speed: 350 U/min
+... rotational speed: 400 U/min
+... rotational speed: 450 U/min
+... rotational speed: 500 U/min
+ --- Compose Dataset Timesignal  --- 
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Kraftsensor rechts
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Stationäre Lösung
+Compute.... ode15s State Space ....
+... rotational speed: 100 U/min
+... rotational speed: 150 U/min
+... rotational speed: 200 U/min
+... rotational speed: 250 U/min
+... rotational speed: 300 U/min
+... rotational speed: 350 U/min
+... rotational speed: 400 U/min
+... rotational speed: 450 U/min
+... rotational speed: 500 U/min
+ --- Compose Dataset Timesignal  --- 
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('containers.Map/subsref')" style="font-weight:bold">containers.Map/subsref</a>
+The specified key is not present in this container.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Simulation_RH', 'H:\AMrotor\Matlab_Code\Rotor_RH\Simulation_RH.m', 68)" style="font-weight:bold">Simulation_RH</a> (<a href="matlab: opentoline('H:\AMrotor\Matlab_Code\Rotor_RH\Simulation_RH.m',68,0)">line 68</a>)
+sx_r=temp('s_x (Positionssensor rechts)');
+} 
+temp=dataset_monitoring(300);
+sx_r=temp('F_x (Kraftsensor rechts)');
+sx_l=temp('F_x (Kraftsensor links)');
+figure();
+plot(sx_l)
+hold on
+plot(sx_r)
+Simulation_RH
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Kraftsensor rechts
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Stationäre Lösung
+Compute.... ode15s State Space ....
+... rotational speed: 100 U/min
+... rotational speed: 150 U/min
+... rotational speed: 200 U/min
+... rotational speed: 250 U/min
+... rotational speed: 300 U/min
+... rotational speed: 350 U/min
+... rotational speed: 400 U/min
+... rotational speed: 450 U/min
+... rotational speed: 500 U/min
+ --- Compose Dataset Timesignal  --- 
