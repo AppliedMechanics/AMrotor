@@ -25,7 +25,7 @@ Config_Sim_RH
 
 % Unwucht -----------------------------------------------------------------
  cnfg.cnfg_unbalance(1).name = 'Geplante Unwucht';
- cnfg.cnfg_unbalance(1).position = 400e-3;    %[m]
+ cnfg.cnfg_unbalance(1).position = 507.5e-3;    %[m]
  cnfg.cnfg_unbalance(1).betrag = 1e-4;          %[kgm]
  cnfg.cnfg_unbalance(1).winkellage = 0;         %[rad]
 %--------------------------------------------------------------------------
@@ -46,9 +46,16 @@ r.transform_StateSpace();
 
 %% Running system analyses
 
-% m=Experiments.Modalanalyse(r);
+m=Experiments.Modalanalyse(r);
 % 
-% m.calculate_rotorsystem_ss(10,0:100:200);
+m.calculate_rotor_only(1,200);
+
+Aev= m.eigenmatrizen.Aev_x;
+eigenvektor= Aev;
+eigenwert = m.eigenmatrizen.Aew;
+
+plot(abs(eigenvektor));
+
 % esf2= Graphs.Eigenschwingformen(m);
 % esf2.plot_displacements();
 
