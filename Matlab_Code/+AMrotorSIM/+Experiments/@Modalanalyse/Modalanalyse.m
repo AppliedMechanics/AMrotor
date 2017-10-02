@@ -57,7 +57,7 @@ classdef Modalanalyse < handle
       end
       
       function calculate_rotorsystem_ss(obj,n_modes,drehzahl) %ss = State space, Zustandsraum (-trafo)
-      
+       
           disp('Berechne Modalanalyse Rotorsystem')
           
           obj.n_ew = n_modes;
@@ -71,16 +71,23 @@ classdef Modalanalyse < handle
 
              ss=obj.rotorsystem.systemmatrizen.ss+obj.rotorsystem.systemmatrizen.ss_G*n1;
 
-             indizes = 1:2*4*n_nodes;
-             ss_mech = ss(indizes,indizes); % 4 --> Die vier werte der Verschiebung s_x, s_z, beta, alpha
-              
-             opts.tol = 1e-4;
-             opts.isreal = 1;
-             [V,D] = eigs(ss_mech,n_modes*4,'sm',opts);  
-             %[V,D] = eig(ss_mech);
-             
-             obj.eigenmatrizen.V(:,:,n1) = V;
-             obj.eigenmatrizen.D(:,:,n1) = D;
+             for start = 1:2
+                 if start == 1
+                    indizes = 4*n_nodes+1:2:2*4*n_nodes-2*n_nodes;
+                 elseif start == 2
+                     indizes = (4+2)*n_nodes+start:2:2*4*n_nodes;
+                 end
+                 
+                 ss_mech = ss(indizes,indizes); % 4 --> Die vier werte der Verschiebung s_x, s_z, beta, alpha
+
+                 opts.tol = 1e-4;
+                 opts.isreal = 1;
+                 [V,D] = eigs(ss_mech,n_modes,'sm',opts);  
+                 %[V,D] = eig(ss_mech);
+
+                 obj.eigenmatrizen.V{start}(:,:,n1) = V;
+                 obj.eigenmatrizen.D{start}(:,:,n1) = D;
+             end
           end   
       end
       
