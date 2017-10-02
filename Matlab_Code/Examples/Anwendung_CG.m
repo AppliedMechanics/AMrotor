@@ -54,7 +54,7 @@ r.transform_StateSpace();
 
 m=Experiments.Modalanalyse(r);
 
-m.calculate_rotorsystem_ss(10,0:100:200);
+m.calculate_rotorsystem_ss(6,0:100:200);
 esf2= Graphs.Eigenschwingformen(m); %Hier ist auch irgendetwas durcheinander gekommen.
 esf2.plot_displacements();
 
