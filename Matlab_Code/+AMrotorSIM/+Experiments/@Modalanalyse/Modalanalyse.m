@@ -52,9 +52,9 @@ classdef Modalanalyse < handle
                  Aev_y(:,s,n1)=EV(end/2+1:2:end,s*4-3);
                  Aev_beta(:,s,n1)=EV(end/2+2:2:end,s*4-3);
 
-                 Aew(:,s,n1)=-imag(EW(1:2:s*4));
-
              end
+             
+            Aew(:,n1)=-imag(EW(1:2:s*4));
              
             obj.eigenmatrizen.Aev_x=Aev_x;
             obj.eigenmatrizen.Aew=Aew;

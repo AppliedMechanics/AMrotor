@@ -48,13 +48,16 @@ r.transform_StateSpace();
 
 m=Experiments.Modalanalyse(r);
 % 
-m.calculate_rotor_only(1,200);
+m.calculate_rotor_only(6,200);
 
 Aev= m.eigenmatrizen.Aev_x;
-eigenvektor= Aev;
+eigenvektor= Aev(:,4);
 eigenwert = m.eigenmatrizen.Aew;
 
-plot(abs(eigenvektor));
+plot(real(eigenvektor));
+eigenvektor_real = real(eigenvektor);
+
+save 'Eigenvektor_25.09.2017_modex.mat' eigenvektor_real
 
 % esf2= Graphs.Eigenschwingformen(m);
 % esf2.plot_displacements();
