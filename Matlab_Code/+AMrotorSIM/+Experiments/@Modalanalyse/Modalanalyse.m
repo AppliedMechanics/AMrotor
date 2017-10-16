@@ -73,12 +73,14 @@ classdef Modalanalyse < handle
 
              for start = 1:2
                  if start == 1
-                    indizes = 4*n_nodes+1:2:2*4*n_nodes-2*n_nodes;
+                     indizes.row = 4*n_nodes+1:2:2*4*n_nodes-2*n_nodes;
+                     indizes.col = 1:2:2*n_nodes;
                  elseif start == 2
-                     indizes = (4+2)*n_nodes+start:2:2*4*n_nodes;
+                     indizes.row = (4+2)*n_nodes+start:2:2*4*n_nodes;
+                     indizes.col = 2*n_nodes+1:2:4*n_nodes;
                  end
                  
-                 ss_mech = ss(indizes,indizes); % 4 --> Die vier werte der Verschiebung s_x, s_z, beta, alpha
+                 ss_mech = ss(indizes.row,indizes.col); % 4 --> Die vier werte der Verschiebung s_x, s_z, beta, alpha
 
                  opts.tol = 1e-4;
                  opts.isreal = 1;
