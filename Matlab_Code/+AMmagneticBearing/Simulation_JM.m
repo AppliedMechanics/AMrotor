@@ -9,12 +9,11 @@ clc;
 
 %% Importieren der Bibliothek
 
-import AMB_Sim.*
+import AMmagneticBearing.2D_Matlab.*
 
 %% Berechnen einer Kraft
 
 Configuration_ML_ANTON
-
 ML=MagneticBearing('Anton',cnfg);
 
 ML.init();
