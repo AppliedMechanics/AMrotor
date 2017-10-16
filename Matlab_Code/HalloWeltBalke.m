@@ -1,2 +1,3 @@
 %% Erstes Projekt %%
-fprintf('Hallo Welt')
+syms x
+ezplot(sin(x))
