@@ -14,7 +14,7 @@ cnfg.cnfg_rotor.E_module = 211e9;  %[N/m^2]
 cnfg.cnfg_rotor.density  = 7446;   %[kg/m^3]
 cnfg.cnfg_rotor.poisson  = 0.3;    %steel 0.27...0.3 [-]
 
-cnfg.cnfg_rotor.dz=0.01;           %set elemet length for meshing
+cnfg.cnfg_rotor.dz=0.1;           %set elemet length for meshing
 
     
 %% ========================================================================
