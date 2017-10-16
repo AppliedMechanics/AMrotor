@@ -58,12 +58,15 @@ classdef Eigenschwingformen < handle
           V_y = obj.modalsystem.eigenmatrizen.V{1}(:,:,1);
           D_y = obj.modalsystem.eigenmatrizen.D{1}(:,:,1);
           
+          D_x = sqrt(D_x);
+          D_y = sqrt(D_y);
+          
           %
           disp('Eigenkreisfrequenzen')
 
             for s=1:n_ew
-            disp(['x: ',num2str((D_x(s,s,1))/(2*pi)),' Hz'])
-            disp(['y: ',num2str((D_y(s,s,1))/(2*pi)),' Hz'])
+            disp(['x: ',num2str(imag((D_x(s,s,1)))/(2*pi)),' Hz'])
+            disp(['y: ',num2str(imag((D_y(s,s,1)))/(2*pi)),' Hz'])
             end
           
           % 
@@ -77,8 +80,8 @@ classdef Eigenschwingformen < handle
 
             x = obj.modalsystem.rotorsystem.rotor.nodes;
         for s=1:n_ew
-            plot(ax1,x,(real(V_x(:,s,1))/norm(V_x(:,s,1))),'DisplayName',[num2str((D_x(s,s,1))/(2*pi)),' Hz'])
-            plot(ax2,x,(real(V_y(:,s,1))/norm(V_y(:,s,1))),'DisplayName',[num2str((D_y(s,s,1))/(2*pi)),' Hz'])
+            plot(ax1,x,(real(V_x(:,s,1))/norm(V_x(:,s,1))),'DisplayName',[num2str(imag((D_x(s,s,1)))/(2*pi)),' Hz'])
+            plot(ax2,x,(real(V_y(:,s,1))/norm(V_y(:,s,1))),'DisplayName',[num2str(imag((D_y(s,s,1)))/(2*pi)),' Hz'])
             
         end
             legend(ax1,'show')
