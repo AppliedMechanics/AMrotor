@@ -1,0 +1,11 @@
+function set_load( self, load, faces, cnfg_material )
+%SET_LOAD Summary of this function goes here
+%   Detailed explanation goes here
+
+    specifyCoefficients(self.model,'m',0,'d',0,'c',1/(cnfg_material.mu_Kupfer),'a',0,'f',load.SpuleA_1,'Face',faces.SpuleA_1); % "Positive" Spulenteile
+    specifyCoefficients(self.model,'m',0,'d',0,'c',1/(cnfg_material.mu_Kupfer),'a',0,'f',load.SpuleB_2,'Face',faces.SpuleB_1); % "Negative" Spulenteile
+
+
+    
+end
+
