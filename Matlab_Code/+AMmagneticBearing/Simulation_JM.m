@@ -19,21 +19,22 @@ ML=MagneticBearing('Anton',cnfg);
 
 ML.init(); %cnfg --> model
 
-%ML.generate_geometry(cnfg.geometry); %model-->mesh
-                                       % in calculate_energy werden den
-                                       % spulen die faces zugeordnet!! 
-%ML.show_geometry();
+ML.generate_geometry(cnfg.geometry); %aus den punkten in cnfg werden kanten generiert, wird eine geometrie errechnet
+%HIER ist die Stelle zum Importieren                                       
+ML.show_geometry();
 %ML.show_mesh();
 %ML.show_solution(result);
 
-%[result,W] = ML.calculate_energy([0,0.001],[0,2],[0,1]);
+%[result,W] = ML.calculate_energy([0,0.001],[0,2],[0,1]);% in calculate_energy werden den
+                                       % spulen die faces zugeordnet!! 
 
 %[Fx,Fy]=ML.calculate_force([0,0],[0,1],[0,2],1e-9);
 
 
 %% Berechnen der Kennfelder
 
-charmap_lin = gen_lin_map(ML,[-0.0005:0.0001:0.0005],[-2:0.5:2],[0],[0],2,1e-5);
+%charmap_lin = gen_lin_map(ML,[-0.0005:0.0001:0.0005],[-2:0.5:2],[0],[0],2,1e-5);
+charmap_lin = gen_lin_map(ML,[-0.0005:0.0005:0.0005],[-1:0.5:1],[0],[0],2,1e-3);
 
 save daten_Kennfeld.mat charmap_lin
 

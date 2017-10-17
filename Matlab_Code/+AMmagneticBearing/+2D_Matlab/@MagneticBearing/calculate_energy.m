@@ -1,12 +1,15 @@
 function [W] = calculate_energy(self,position,I_wire_pre,I_wire_use )
 %CALCULATE_FORCE Summary of this function goes here
 %   Detailed explanation goes here
+%   self entspricht ML im Hauptprogramm
 
 self.cnfg.geometry.circ(10).geo=[1,position(1),position(2),0.023,0,0,0,0,0,0];
 
 self.generate_geometry(self.cnfg.geometry);
 
-
+%faces wird hier als struct erzeugt. 
+%Die Nummern der Flächen (im Plot ersichtlich) werden nach Material
+%sortiert.
     faces.Luft=[3,24,27,30,28,25,26,23,29];
     faces.Eisen=[1,2,6,4,5];
     
