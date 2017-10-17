@@ -14,11 +14,14 @@ import AMmagneticBearing.2D_Matlab.*
 %% Berechnen einer Kraft
 
 Configuration_ML_ANTON
+
 ML=MagneticBearing('Anton',cnfg);
 
-ML.init();
+ML.init(); %cnfg --> model
 
-%ML.generate_geometry(cnfg.geometry);
+%ML.generate_geometry(cnfg.geometry); %model-->mesh
+                                       % in calculate_energy werden den
+                                       % spulen die faces zugeordnet!! 
 %ML.show_geometry();
 %ML.show_mesh();
 %ML.show_solution(result);
