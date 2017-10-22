@@ -6,37 +6,53 @@ E = 211e9;
 nu = 0.3;
 G = 1/2/(1+nu)*E;
 % geometry
-R = 0.01;
+R = 0.005;
 r = 0;
 A = pi*(R^2-r^2);
-L = 0.6;
+L = 1;
 I = pi/4*(R^4-r^4);
 % mesh
-ele.num = 12;
+ele.num = 30;
 ele.n = ele.num+1;
-ele.mo = 7;
+ele.mo = 4;
 ele.l = L/ele.num;
 ele.m = A*ele.l*rho;
 x = linspace(0,L,ele.n);
 %% assembly
-[ele.Me,ele.Ke] = getMatrices(ele.m,ele.l,I,E,G,A,R);
+[ele.Me,ele.Ke,ele.Me1,ele.Ke1] = getMatrices(ele.m,ele.l,I,E);
 [row,~] = size(ele.Me);
-M = zeros((ele.num+1)*row/2);
-K = zeros((ele.num+1)*row/2);
+M = zeros(ele.n*row/2);
+K = zeros(ele.n*row/2);
+M1 = zeros(ele.n*row/2/2);
+K1 = zeros(ele.n*row/2/2);
 for e = 1:ele.num
     indices = 1+(e-1)*row/2:row+(e-1)*row/2;
+    indices1 = 1+(e-1)*row/2/2:row/2+(e-1)*row/2/2;
     M(indices,indices) = M(indices,indices) + ele.Me;
     K(indices,indices) = K(indices,indices) + ele.Ke;
+    M1(indices1,indices1) = M1(indices1,indices1) + ele.Me1;
+    K1(indices1,indices1) = K1(indices1,indices1) + ele.Ke1;
 end
 %% create matrix and get right columns and rows
+tmp = 1:length(M);
+tmp1 = 1:length(M1);
 % x richtung
-K(1,1) = K(1,1)+1e17;
-K(end-3,end-3) = K(end-3,end-3)+1e17;
+tmp(1) = NaN; tmp(3) = NaN;
+tmp(end-3) = NaN; tmp(end-1) = NaN;
+tmp1(1) = NaN; tmp1(2) = NaN;
 % y Richtung
-% K(2,2) = K(2,2)+1e17;
-% K(end-2,end-2) = K(end-2,end-2)+1e17;
+tmp(2) = NaN; tmp(4) = NaN;
+tmp(end-2) = NaN; tmp(end) = NaN;
+tmp1(end-1) = NaN; tmp1(end) = NaN;
+ind = tmp(~isnan(tmp));
+ind1=tmp1(~isnan(tmp1));
 
 mat = (M\eye(size(M)))*K;
+mat1 = (M1\eye(size(M1)))*K1;
+[V,D] = eigs(K(ind,ind),M(ind,ind),4,'sm');
+real(sqrt(diag(D))/2/pi)
+[V1,D1] = eigs(K1(ind1,ind1),M1(ind1,ind1),4,'sm');
+real(sqrt(diag(D1))/2/pi)
 
 if row == 12
     start.x = 2; start.y = 3;    
@@ -75,7 +91,16 @@ i = index.y;
 
 Dx = sqrt(Dx);
 Dy = sqrt(Dy);
-
+%% first own frequencies
+omegaSquare(1,:) = [500.55 , 504.67];
+omegaSquare(2,:) = [3803.1 , 3956.9];
+omegaSquare(3,:) = [14620  , 21405];
+omegaSquare(4,:) = [39944  , 84537];
+omegaSquare = omegaSquare*E*I/L^3/(ele.num*ele.m);
+omega = sqrt(omegaSquare)/(2*pi);
+for i = 1:4
+    fprintf('w_%1.0f = %07.3f ---- w_fe,%1.0f = %07.3f\n',i,omega(i,1),i,omega(i,2));
+end
 %% plotten
 figure()
     ax1 = subplot(1,2,1);
@@ -87,9 +112,11 @@ figure()
    
 for m = 1:ele.mo
     plot(ax1,x,real(Vx(:,m))/norm(Vx(:,m)),...
-        'DisplayName',sprintf('%1.2f MHz',((Dx(m,m)))/(2*pi)/1000))
+        'DisplayName',sprintf('%1.2f kHz',((Dx(m,m)))/(2*pi)/1000))
     plot(ax2,x,real(Vy(:,m))/norm(Vy(:,m)),...
-        'DisplayName',sprintf('%1.2f MHz',((Dy(m,m)))/(2*pi)/1000))
+        'DisplayName',sprintf('%1.2f kHz',((Dy(m,m)))/(2*pi)/1000))
 end
+
 legend(ax1,'show')
 legend(ax2,'show')
+
