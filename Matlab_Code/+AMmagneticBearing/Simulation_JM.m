@@ -1,5 +1,10 @@
 %% Simulation Magnetlager_ANTON
-
+% Geometrie nicht bearbeitbar. Mögliche Lösungen:
+% dxf importieren
+% Stl bearbeiten
+% stl's addieren
+% diskret+analytisch kombinieren
+% aus dem Mesh zurück
 %% Aufräumen
 clear all;
 close all;
