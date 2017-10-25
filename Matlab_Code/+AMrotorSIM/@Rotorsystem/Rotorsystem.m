@@ -246,6 +246,16 @@ classdef Rotorsystem < handle
                 obj.lager(end+1) = AMrotorSIM.Bearings.SimpleMagneticBearing(arg);
               case 3
                 obj.lager(end+1) = AMrotorSIM.Bearings.PID_MagneticBearing(arg);
+              case 4
+                obj.lager(end+1) = AMrotorSIM.Bearings.TwoWayLager(arg);
+              otherwise
+                a = dbstack;
+                errorMessage = sprintf(...
+                      "Das ist keine valide Auswahl fuer ein Lager!\n" + ...
+                      "Fehler tritt in der Datei %s in der Zeile %1.0f auf.\n" + ...
+                      "Der fehlerhafter Aufruf kommt aus %s mit Zeile %1.0f",...
+                      a(1).file,a(1).line,a(2).file,a(2).line);
+                error(char(errorMessage))
           end 
       end
       % Loads
