@@ -61,7 +61,7 @@ classdef Eigenschwingformen < handle
                 displayFrequencies('y',D.y,s)
             end
           % plotten der Moden
-          figure()
+          figure('Name','Eigenschwingformen','NumberTitle','off');
             ax1 = subplot(1,2,1);
             hold on;
             title(ax1,'Eigenmoden x-Richtung')
