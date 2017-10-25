@@ -49,27 +49,18 @@ classdef Eigenschwingformen < handle
       function plot_displacements(obj)
           
           n_ew=obj.modalsystem.n_ew;
-          nodes=obj.modalsystem.rotorsystem.rotor.nodes;
-          n_nodes=length(nodes);
           
-          V_x = obj.modalsystem.eigenmatrizen.V{1}(:,:,1); %Eigenvektoren
-          D_x = obj.modalsystem.eigenmatrizen.D{1}(:,:,1);  % Eigenwerte in Diagonalmatrix
-          
-          V_y = obj.modalsystem.eigenmatrizen.V{1}(:,:,1);
-          D_y = obj.modalsystem.eigenmatrizen.D{1}(:,:,1);
-          
-          D_x = sqrt(D_x);
-          D_y = sqrt(D_y);
-          
+          [V.x,D.x] = getEigenform( obj, n_ew, 'x' );
+          [V.y,D.y] = getEigenform( obj, n_ew, 'y' );          
           %
           disp('Eigenkreisfrequenzen')
-
             for s=1:n_ew
-            disp(['x: ',num2str(imag((D_x(s,s,1)))/(2*pi)),' Hz'])
-            disp(['y: ',num2str(imag((D_y(s,s,1)))/(2*pi)),' Hz'])
+                disp(' ')
+                disp([num2str(s),'. Eigenfrequenz'])
+                displayFrequencies('x',D.x,s)
+                displayFrequencies('y',D.y,s)
             end
-          
-          % 
+          % plotten der Moden
           figure()
             ax1 = subplot(1,2,1);
             hold on;
@@ -80,9 +71,8 @@ classdef Eigenschwingformen < handle
 
             x = obj.modalsystem.rotorsystem.rotor.nodes;
         for s=1:n_ew
-            plot(ax1,x,(real(V_x(:,s,1))/norm(V_x(:,s,1))),'DisplayName',[num2str(imag((D_x(s,s,1)))/(2*pi)),' Hz'])
-            plot(ax2,x,(real(V_y(:,s,1))/norm(V_y(:,s,1))),'DisplayName',[num2str(imag((D_y(s,s,1)))/(2*pi)),' Hz'])
-            
+            plotMode(ax1,x,V.x(1:2:end,s),D.x(s))
+            plotMode(ax2,x,V.y(1:2:end,s),D.y(s))
         end
             legend(ax1,'show')
             legend(ax2,'show')
