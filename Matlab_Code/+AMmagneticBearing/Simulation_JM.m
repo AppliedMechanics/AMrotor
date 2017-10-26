@@ -5,6 +5,7 @@
 % stl's addieren
 % diskret+analytisch kombinieren
 % aus dem Mesh zurück
+% programm mit parfor beschleunigen??
 %% Aufräumen
 clear all;
 close all;
@@ -24,8 +25,8 @@ ML.init(); %cnfg --> model
 
 %ML.generate_geometry(cnfg.geometry); %aus den punkten in cnfg werden kanten generiert, wird eine geometrie errechnet
 %HIER ist die Stelle zum Importieren   
-importGeometry(ML.model,'Schnitt.stl');
-ML.show_geometry();
+%importGeometry(ML.model,'Schnitt.stl');
+%ML.show_geometry();
 
 [result,W] = ML.calculate_energy([0.02,0.001],[0,2],[0,1]);% in calculate_energy werden den
   
