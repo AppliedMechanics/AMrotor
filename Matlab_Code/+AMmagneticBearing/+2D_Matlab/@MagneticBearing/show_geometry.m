@@ -3,7 +3,7 @@ function show_geometry( self )
 %   Detailed explanation goes here
 
 figure()
-pdegplot(self.model,'EdgeLabels','on','FaceLabels','on','SubdomainLabels','on')
+pdegplot(self.model,'EdgeLabels','off','FaceLabels','on')%,'SubdomainLabels','on')
 axis equal
 
 end
