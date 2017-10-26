@@ -4,7 +4,7 @@ function [Ausgabe,GitterZellen ] = mesh( self )
 
 
 %generateMesh(self.model,'MesherVersion','R2013a');
-generateMesh(self.model)
+generateMesh(self.model);
 [p,e,t]=meshToPet(self.model.Mesh); % points, edges (die mit Koerperkante zusammenfallen), triangles
 
 GitterZellen=size(t,2);
