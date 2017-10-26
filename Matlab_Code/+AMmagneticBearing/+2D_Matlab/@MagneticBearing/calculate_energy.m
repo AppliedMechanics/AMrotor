@@ -5,7 +5,7 @@ function [result, W] = calculate_energy(self,position,I_wire_pre,I_wire_use )
 %Die beiden zurückkommentieren:
 self.cnfg.geometry.circ(10).geo=[1,position(1),position(2),0.023,0,0,0,0,0,0];
 self.generate_geometry(self.cnfg.geometry);
-self.show_geometry()
+
 %faces wird hier als struct er.zeugt. 
 %Die Nummern der Flächen (im Plot ersichtlich) werden nach Material
 %sortiert.
