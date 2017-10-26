@@ -29,7 +29,9 @@ ML.init();
 
 
 %% Berechnen der Kennfelder
-
+% tic
+% charmap_lin = gen_lin_map(ML,[-0.0005:0.0005:0.0005],[-2:2:2],[0],[0],2,1e-5);
+% toc
 %charmap_lin = gen_lin_map(ML,[-0.0005:0.0001:0.0005],[-2:0.5:2],[0],[0],2,1e-5);
 
 %save daten_Kennfeld.mat charmap_lin

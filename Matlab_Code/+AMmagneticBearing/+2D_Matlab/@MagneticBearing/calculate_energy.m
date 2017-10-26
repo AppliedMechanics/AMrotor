@@ -1,4 +1,4 @@
-function [result, W] = calculate_energy(self,position,I_wire_pre,I_wire_use )
+function [result,W] = calculate_energy(self,position,I_wire_pre,I_wire_use )
 %CALCULATE_FORCE Summary of this function goes here
 %   Detailed explanation goes here
 %   self entspricht ML im Hauptprogramm
