@@ -88,10 +88,10 @@ cnfg.cnfg_lager(2).stiffness.y=2e3;%7.0e5;              %[N/m]
 %% ========================================================================
 % Kraft in feste Richtung
 cnfg.cnfg_force_const_fix=[];
-cnfg.cnfg_force_const_fix(1).name='Saubere Kraft';
-cnfg.cnfg_force_const_fix(1).position=300e-3;
-cnfg.cnfg_force_const_fix(1).betrag_x= 100;
-cnfg.cnfg_force_const_fix(1).betrag_y= 100;
+% cnfg.cnfg_force_const_fix(1).name='Saubere Kraft';
+% cnfg.cnfg_force_const_fix(1).position=300e-3;
+% cnfg.cnfg_force_const_fix(1).betrag_x= 100;
+% cnfg.cnfg_force_const_fix(1).betrag_y= 100;
 
 
 % Unwuchten

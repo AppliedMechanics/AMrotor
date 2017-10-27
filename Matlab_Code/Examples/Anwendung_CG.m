@@ -54,8 +54,8 @@ r.transform_StateSpace();
 
 m=Experiments.Modalanalyse(r);
 
-m.calculate_rotorsystem_ss(6,0:100:200);
-esf2= Graphs.Eigenschwingformen(m); %Hier ist auch irgendetwas durcheinander gekommen.
+m.calculate_rotorsystem_ss(3,0:100:200);
+esf2= Graphs.Eigenschwingformen(m);
 esf2.plot_displacements();
 
 % Der Campbell-plot müsste im Prinzip komplett neu aufgebaut werden:

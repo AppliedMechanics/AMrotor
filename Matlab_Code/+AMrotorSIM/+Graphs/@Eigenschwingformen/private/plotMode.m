@@ -4,5 +4,6 @@ function plotMode( axFigure, x, V, D )
 
 plot(axFigure,x,V/norm(V),...
             'DisplayName',sprintf('%1.2f Hz',D/(2*pi)))
+
 end
 
