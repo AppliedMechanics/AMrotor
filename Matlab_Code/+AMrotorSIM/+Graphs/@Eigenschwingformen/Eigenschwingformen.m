@@ -21,15 +21,13 @@ classdef Eigenschwingformen < handle
           
           n_ew=obj.modalsystem.n_ew;
           
-          [V.x,D.x] = getEigenform( obj, n_ew, 'x' );
-          [V.y,D.y] = getEigenform( obj, n_ew, 'y' );          
           %
           disp('Eigenkreisfrequenzen')
             for s=1:n_ew
                 disp(' ')
                 disp([num2str(s),'. Eigenfrequenz'])
-                displayFrequencies('x',D.x,s)
-                displayFrequencies('y',D.y,s)
+                displayFrequencies('x',obj.modalsystem.eigenValues.x,s)
+                displayFrequencies('y',obj.modalsystem.eigenValues.y,s)
             end
           % plotten der Moden
           figure('Name','Eigenschwingformen','NumberTitle','off');
@@ -42,8 +40,10 @@ classdef Eigenschwingformen < handle
 
             x = obj.modalsystem.rotorsystem.rotor.nodes;
         for s=1:n_ew
-            plotMode(ax1,x,V.x(1:2:end,s),D.x(s))
-            plotMode(ax2,x,V.y(1:2:end,s),D.y(s))
+            plotMode(ax1,x,obj.modalsystem.eigenVectors.x(1:2:end,s),...
+                           obj.modalsystem.eigenValues.x(s))
+            plotMode(ax2,x,obj.modalsystem.eigenVectors.y(1:2:end,s),...
+                           obj.modalsystem.eigenValues.y(s))
         end
             legend(ax1,'show')
             legend(ax2,'show')

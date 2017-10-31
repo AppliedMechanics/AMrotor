@@ -47,14 +47,14 @@ g.show();                       %Hier scheint ein Bug für die Darstellung der Un
 r.compute_matrices();
 r.compute_loads();
 
-r.transform_StateSpace();
+% r.transform_StateSpace();
 
 
 %% Running system analyses
 
 m=Experiments.Modalanalyse(r);
 
-m.calculate_rotorsystem_ss(3,0:100:200);
+m.calculate_rotorsystem(8);
 esf2= Graphs.Eigenschwingformen(m);
 esf2.plot_displacements();
 
