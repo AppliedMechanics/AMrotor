@@ -1,4 +1,4 @@
-function msh = generateMeshFacettedAnalyticCustom(self, Hmax, Hmin, Hgrad, geomOrder)     
+function msh = generateMeshFAC(self, Hmax, Hmin, Hgrad, geomOrder)     
 % generateMeshFacettedAnalytic - Generate a mesh by first facetting the
 % analytic geometry and then meshing the facetted geometry.
 %
@@ -8,7 +8,7 @@ function msh = generateMeshFacettedAnalyticCustom(self, Hmax, Hmin, Hgrad, geomO
 gm = self.Geometry;
 F = self.facetAnalyticGeometry(gm);
 [nodes, tri, cas, fas, eas, vas, Hmax, Hmin, Hgrad, esense] = genMeshFromFacetRep(F, Hmax, Hmin, Hgrad, geomOrder);
-assoc = pde.FEMeshAssociation(tri, cas, fas, eas, vas, esense) 
+assoc = pde.FEMeshAssociation(tri, cas, fas, eas, vas, esense)%; 
 [nodes, ndparams] = projectEdgeNodesToCurves(nodes, gm, assoc);
 msh = pde.FEMesh(nodes,tri,Hmax,Hmin, Hgrad, geomOrder,assoc, ndparams);
 end

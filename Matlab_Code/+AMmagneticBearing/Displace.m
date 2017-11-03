@@ -58,17 +58,11 @@ figure(2),pdemesh(A.Mesh)
 Geo=ML.model.Geometry;
 
 Knotenmatrix=A.Mesh.Nodes;
-Knotenmatrix(1,1:1000)=Knotenmatrix(1,1:1000)+1;
+Knotenmatrix(1,100:200)=Knotenmatrix(1,100:200)+0.0001;  %Verschiebung, Linienmittel bleiben erhalten??
 
-ML.model=createpde(1); %anstatt ML.init();
-ML.generate_geometry(cnfg.geometry);
-generateMeshCustom(ML.model,Knotenmatrix)
-figure(3),pdemesh(ML.model.Mesh)
 % in generateMeshCustom wird generateMeshFacettedAnalytic aufgerufen. dort
 % wird die assoc (assoziationsstruct) erstellt die für die meshgenerierung
 % wichtig ist.
-
-%MyCustomMesh= pde.FEMesh(A.Mesh.Nodes,A.Mesh.Elements,A.Mesh.MaxElementSize,A.Mesh.MinElementSize,A.Mesh.MeshGradation,'quadratic');
 
 % Lösung vielleicht unter https://de.mathworks.com/matlabcentral/answers/261699-how-to-create-custom-mesh-for-pde-model
 % MyCustomMesh= pde.FEMesh(A.Mesh.Nodes,A.Mesh.Elements,A.Mesh.MaxElementSize,A.Mesh.MinElementSize,A.Mesh.MeshGradation,'quadratic');
@@ -78,20 +72,24 @@ figure(3),pdemesh(ML.model.Mesh)
 %Geo=ML.model.Geometry
 % FEMesh weitergeben, TODO: Neue Mesh extrahieren.
 %% Magnetische Lösung
-% %set_material besteht aus "specifyCoefficients am model 
-%  ML.model=createpde();
-%  ML.model.Mesh=A.Mesh
-%  ML.model.Geometry=Geo
-%  ML.set_material(faces);
-%  edges.Dirichlet=[1,2,10,11];
-%  ML.set_boundary(edges);
-%     load.SpuleA_1=1;%(I_wire_pre(2)+I_wire_use(2))*self.cnfg.coil.n_Windungen/self.cnfg.coil.area;           %y-oben 
-%     load.SpuleB_1=1;%-(I_wire_pre(2)+I_wire_use(2))*self.cnfg.coil.n_Windungen/self.cnfg.coil.area;        %y-oben 
-%     load.SpuleA_2=1;%(I_wire_pre(1)-I_wire_use(1))*self.cnfg.coil.n_Windungen/self.cnfg.coil.area;           %x-links
-%     load.SpuleB_2=1;%-(I_wire_pre(1)-I_wire_use(1))*self.cnfg.coil.n_Windungen/self.cnfg.coil.area;         %x-links
-%     load.SpuleA_3=1;%(I_wire_pre(2)-I_wire_use(2))*self.cnfg.coil.n_Windungen/self.cnfg.coil.area;            %y-unten
-%     load.SpuleB_3=1;%-(I_wire_pre(2)-I_wire_use(2))*self.cnfg.coil.n_Windungen/self.cnfg.coil.area;           %y-unten
-%     load.SpuleA_4=1;%(I_wire_pre(1)+I_wire_use(1))*self.cnfg.coil.n_Windungen/self.cnfg.coil.area;            %x-rechts
-%     load.SpuleB_4=1;%-(I_wire_pre(1)+I_wire_use(1))*self.cnfg.coil.n_Windungen/self.cnfg.coil.area;         %x-rechts
-%  ML.set_load(load,faces);
-%  ML.solve()
+%set_material besteht aus "specifyCoefficients" am model 
+ML.model=createpde(1); %anstatt ML.init();
+ML.model.Geometry=Geo;
+load('assoc_Beispiel.mat', 'assoc');    %wurde durch einen Breakpoint extrahiert und gesichert
+% generateMeshCustom(ML.model,Knotenmatrix) anstatt Folgezeile
+ML.model.Mesh= pde.FEMesh(Knotenmatrix,A.Mesh.Elements,A.Mesh.MaxElementSize,A.Mesh.MinElementSize,A.Mesh.MeshGradation,'quadratic',assoc);
+figure(3),pdeplot(ML.model.Mesh)
+
+ ML.set_material(faces);
+ edges.Dirichlet=[1,2,10,11];
+ ML.set_boundary(edges);
+    load.SpuleA_1=1;%(I_wire_pre(2)+I_wire_use(2))*self.cnfg.coil.n_Windungen/self.cnfg.coil.area;           %y-oben 
+    load.SpuleB_1=1;%-(I_wire_pre(2)+I_wire_use(2))*self.cnfg.coil.n_Windungen/self.cnfg.coil.area;        %y-oben 
+    load.SpuleA_2=1;%(I_wire_pre(1)-I_wire_use(1))*self.cnfg.coil.n_Windungen/self.cnfg.coil.area;           %x-links
+    load.SpuleB_2=1;%-(I_wire_pre(1)-I_wire_use(1))*self.cnfg.coil.n_Windungen/self.cnfg.coil.area;         %x-links
+    load.SpuleA_3=1;%(I_wire_pre(2)-I_wire_use(2))*self.cnfg.coil.n_Windungen/self.cnfg.coil.area;            %y-unten
+    load.SpuleB_3=1;%-(I_wire_pre(2)-I_wire_use(2))*self.cnfg.coil.n_Windungen/self.cnfg.coil.area;           %y-unten
+    load.SpuleA_4=1;%(I_wire_pre(1)+I_wire_use(1))*self.cnfg.coil.n_Windungen/self.cnfg.coil.area;            %x-rechts
+    load.SpuleB_4=1;%-(I_wire_pre(1)+I_wire_use(1))*self.cnfg.coil.n_Windungen/self.cnfg.coil.area;         %x-rechts
+ ML.set_load(load,faces);
+ ML.solve()
