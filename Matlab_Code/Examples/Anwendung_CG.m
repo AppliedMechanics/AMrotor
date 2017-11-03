@@ -31,7 +31,8 @@ import AMrotorSIM.*
 close all
 clear all
 clc
-
+Janitor = AMrotorTools.PlotJanitor();
+Janitor.setLayout(2,3);
 %% Compute Rotor
 
 Config_Sim_CG
@@ -43,6 +44,7 @@ r.rotor.mesh();
 
 g=Graphs.Visu_Rotorsystem(r);
 g.show();                       %Hier scheint ein Bug für die Darstellung der Unwucht zu sein!
+Janitor.cleanFigures();
 
 r.compute_matrices();
 r.compute_loads();
@@ -54,9 +56,10 @@ r.compute_loads();
 
 m=Experiments.Modalanalyse(r);
 
-m.calculate_rotorsystem(8);
+m.calculate_rotorsystem(3);
 esf2= Graphs.Eigenschwingformen(m);
 esf2.plot_displacements();
+Janitor.cleanFigures();
 
 % Der Campbell-plot müsste im Prinzip komplett neu aufgebaut werden:
 
