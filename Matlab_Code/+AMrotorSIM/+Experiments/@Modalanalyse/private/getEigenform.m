@@ -12,13 +12,7 @@ switch selection
         start = row/2+1;
         ende  = row;
     otherwise
-        a = dbstack;
-        errorMessage = sprintf(...
-              "Das ist keine valide Auswahl fuer die Berechnung der Eigenformen!\n" + ...
-              "Fehler tritt in der Datei %s in der Zeile %1.0f auf.\n" + ...
-              "Der fehlerhafter Aufruf kommt aus %s mit Zeile %1.0f",...
-              a(1).file,a(1).line,a(2).file,a(2).line);
-        error(char(errorMessage))
+        error('You choose an option which is not implemented yet!')
 end
     
 indices = start:ende;
