@@ -31,6 +31,7 @@ import AMrotorSIM.*
 close all
 clear all
 clc
+Timer = AMrotorTools.Timer();
 Janitor = AMrotorTools.PlotJanitor();
 Janitor.setLayout(2,3);
 %% Compute Rotor
@@ -55,8 +56,8 @@ r.compute_loads();
 %% Running system analyses
 
 m=Experiments.Modalanalyse(r);
-
 m.calculate_rotorsystem(3);
+
 esf2= Graphs.Eigenschwingformen(m);
 esf2.plot_displacements();
 Janitor.cleanFigures();
