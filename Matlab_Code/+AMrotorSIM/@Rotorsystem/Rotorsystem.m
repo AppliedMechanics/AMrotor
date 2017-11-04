@@ -75,9 +75,12 @@ classdef Rotorsystem < handle
             M=M+Ml; G=G+Gl; D=D+Dl; K=K+Kl;
         end
         
-        obj.systemmatrizen.M=M; obj.systemmatrizen.G=G; obj.systemmatrizen.D=D; obj.systemmatrizen.K=K;
+        obj.systemmatrizen.M=sparse(M); 
+        obj.systemmatrizen.G=sparse(G);
+        obj.systemmatrizen.D=sparse(D);
+        obj.systemmatrizen.K=sparse(K);
 
-        obj.reduktionsmatrizen.EVmr = eye(size(M));
+        obj.reduktionsmatrizen.EVmr = sparse(eye(size(M)));
         obj.reduktionsmatrizen.EWmr=0;
       
     end
