@@ -1,4 +1,4 @@
-function set_material( self, faces )
+function set_material_Displace( self, faces )
 %SET_MATERIAL Summary of this function goes here
 %   Detailed explanation goes here
 

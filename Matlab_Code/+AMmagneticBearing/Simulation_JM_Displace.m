@@ -18,26 +18,31 @@ Hmin=0; %0:Automatisch
 Hgrad=1.5; %Default: 1.5
 
 %% Geometrie erzeugen, meshen
-Configuration_ML_ANTON;
+Configuration_ML_ANTON_Displace;
 ML=MagneticBearing('Anton',cnfg);
 ML.model=createpde();
 ML.generate_geometry(cnfg.geometry);
 generateMesh(ML.model,'Hmax',Hmax,'Hmin',Hmin,'Hgrad',1.5,'GeometricOrder',geoOrder);
+
+ML.set_boundary_Displace(ML.cnfg.edges); %an edges-Definition anpassen
+ML.set_material_Displace(ML.cnfg.faces); %an faces-Definition anpassen
+
+
 %pdegplot(ML.model,'EdgeLabels','on');
 
 %% Assoc extrahieren
-global assoc
 F = ML.model.facetAnalyticGeometry(ML.model.Geometry);
 [nodes, tri, cas, fas, eas, vas, Hmax, Hmin, Hgrad, esense] = genMeshFromFacetRep(F, Hmax, Hmin, Hgrad, geoOrder);
-assoc= pde.FEMeshAssociation(tri, cas, fas, eas, vas, esense);
-global default_Nodes
-default_Nodes=ML.model.Mesh.Nodes;
+ML.cnfg.mesh.assoc= pde.FEMeshAssociation(tri, cas, fas, eas, vas, esense);
+ML.cnfg.mesh.default_Nodes=ML.model.Mesh.Nodes;
+
+%% Energieberechnung (Testzwecke)
 %ML.generate_geometry(cnfg.geometry);
 %ML.show_geometry();
 %ML.show_mesh();
 %ML.show_solution(result);
 
-% [result,W] = ML.calculate_energy([0,0.001],[0,2],[0,1])
+% [W] = ML.calculate_energy_Displace([0,0.001],[0,2],[0,1])
 
 %[Fx,Fy]=ML.calculate_force([0,0],[0,1],[0,2],1e-9);
 
@@ -46,8 +51,9 @@ default_Nodes=ML.model.Mesh.Nodes;
 tic
 charmap_lin = gen_lin_map_Displace(ML,[-0.0005:0.0005:0.0005],[-2:2:2],[0],[0],2,1e-5);
 toc
+% tic
 % charmap_lin = gen_lin_map(ML,[-0.0005:0.0001:0.0005],[-2:0.5:2],[0],[0],2,1e-5);
-
+% toc
 %save daten_Kennfeld.mat charmap_lin
 
 %charmap_nonlin = gen_nonlin_map([-0.0003:0.0001:0.0003],[-2:1:2],[0],[0],1,1e-9);

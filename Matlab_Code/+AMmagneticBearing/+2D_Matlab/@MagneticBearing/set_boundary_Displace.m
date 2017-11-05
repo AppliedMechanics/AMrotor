@@ -1,4 +1,4 @@
-function set_boundary( self,edges )
+function set_boundary_Displace( self,edges )
 %SET_BOUNDARY Summary of this function goes here
 %   Detailed explanation goes here
 

@@ -1,4 +1,4 @@
-function [ Fx,Fy ] = calculate_force(self, position, I_vormag, I_nutz, virtual_displacement)
+function [ Fx,Fy ] = calculate_force_Displace(self, position, I_vormag, I_nutz, virtual_displacement)
 %CALCULATE_FORCE Summary of this function goes here
 %   Detailed explanation goes here
 

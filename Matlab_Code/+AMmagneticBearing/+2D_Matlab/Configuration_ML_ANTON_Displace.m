@@ -128,3 +128,17 @@
      cnfg.material.mu_Luft =  cnfg.material.mu_rLuft* cnfg.material.mu_0; 
      cnfg.material.mu_Eisen =  cnfg.material.mu_rEisen* cnfg.material.mu_0;
      cnfg.material.mu_Kupfer =  cnfg.material.mu_rKupfer* cnfg.material.mu_0;
+
+%% Flächenzuornungen
+cnfg.faces.Luft=[3,24,27,30,28,25,26,23,29];
+cnfg.faces.Eisen=[1,2,6,4,5];
+cnfg.faces.SpuleA_1=[7,9];
+cnfg.faces.SpuleB_1=[8,11];
+cnfg.faces.SpuleA_2=[15,21];
+cnfg.faces.SpuleB_2=[17,19];
+cnfg.faces.SpuleA_3=[12,14];
+cnfg.faces.SpuleB_3=[13,10];
+cnfg.faces.SpuleA_4=[22,16];
+cnfg.faces.SpuleB_4=[20,18];
+cnfg.Wellenknoten=[133:148,556:563];
+cnfg.edges.Dirichlet=[1,2,10,11];
