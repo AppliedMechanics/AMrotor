@@ -1,4 +1,4 @@
-function generateMeshCustom(self,knoten, varargin)    
+function msh = generateMeshCustom(self, varargin)    
 % generateMesh            - Generate a mesh from the geometry        
 %    MSH = generateMesh(PDEM) Generates a mesh object from the geometry stored        
 %    in the Geometry property. The mesh created is assigned to the Mesh 

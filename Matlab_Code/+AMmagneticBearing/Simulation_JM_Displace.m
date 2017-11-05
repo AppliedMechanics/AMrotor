@@ -11,13 +11,27 @@ clc;
 
 import AMmagneticBearing.2D_Matlab.*
 
-%% Berechnen einer Kraft
+%% FEM-Parameter
+geoOrder='linear'; %Default: Linear
+Hmax=0.02; %0: Automatisch
+Hmin=0; %0:Automatisch
+Hgrad=1.5; %Default: 1.5
 
-Configuration_ML_ANTON
+%% Geometrie erzeugen, meshen
+Configuration_ML_ANTON;
 ML=MagneticBearing('Anton',cnfg);
+ML.model=createpde();
+ML.generate_geometry(cnfg.geometry);
+generateMesh(ML.model,'Hmax',Hmax,'Hmin',Hmin,'Hgrad',1.5,'GeometricOrder',geoOrder);
+%pdegplot(ML.model,'EdgeLabels','on');
 
-ML.init();
-
+%% Assoc extrahieren
+global assoc
+F = ML.model.facetAnalyticGeometry(ML.model.Geometry);
+[nodes, tri, cas, fas, eas, vas, Hmax, Hmin, Hgrad, esense] = genMeshFromFacetRep(F, Hmax, Hmin, Hgrad, geoOrder);
+assoc= pde.FEMeshAssociation(tri, cas, fas, eas, vas, esense);
+global default_Nodes
+default_Nodes=ML.model.Mesh.Nodes;
 %ML.generate_geometry(cnfg.geometry);
 %ML.show_geometry();
 %ML.show_mesh();

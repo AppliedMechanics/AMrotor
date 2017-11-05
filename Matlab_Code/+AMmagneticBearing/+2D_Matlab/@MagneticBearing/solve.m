@@ -1,4 +1,4 @@
-function [ result,W] = solve( self )
+function [W] = solve( self )
 %SOLVE Summary of this function goes here
 %   Detailed explanation goes here
 

@@ -1,4 +1,4 @@
-function [result,W] = calculate_energy(self,position,I_wire_pre,I_wire_use )
+function [W] = calculate_energy(self,position,I_wire_pre,I_wire_use )
 %CALCULATE_FORCE Summary of this function goes here
 %   Detailed explanation goes here
 %   self entspricht ML im Hauptprogramm
@@ -50,7 +50,7 @@ self.show_mesh;
     load.SpuleB_4=-(I_wire_pre(1)+I_wire_use(1))*self.cnfg.coil.n_Windungen/self.cnfg.coil.area;         %x-rechts
 
 self.set_load(load,faces);
-[result,W]=self.solve();
+[W]=self.solve();
 
 
 end
