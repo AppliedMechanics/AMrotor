@@ -102,7 +102,8 @@
  %Rotorwelle
   cnfg.geometry.circ(10).name='Rotor';
   cnfg.geometry.circ(10).geo=[1,0,0,0.023,0,0,0,0,0,0];
- 
+%   cnfg.geometry.circ(11).name='Rotor2';
+%   cnfg.geometry.circ(11).geo=[1,0,0,0.0225,0,0,0,0,0,0];
  % Formel
  cnfg.geometry.sf=['Kontrollraum', ...
    '+Polvoll_1+Polvoll_2+Polvoll_3+Polvoll_3', ...
