@@ -103,15 +103,14 @@
   cnfg.geometry.circ(10).name='Rotor';
   cnfg.geometry.circ(10).geo=[1,0,0,0.023,0,0,0,0,0,0];
 %   cnfg.geometry.circ(11).name='Rotor2';
-%   cnfg.geometry.circ(11).geo=[1,0,0,0.0225,0,0,0,0,0,0];
+%   cnfg.geometry.circ(11).geo=[1,0,0,0.0228,0,0,0,0,0,0];
  % Formel
  cnfg.geometry.sf=['Kontrollraum', ...
    '+Polvoll_1+Polvoll_2+Polvoll_3+Polvoll_3', ...
    '-Polabzug_1-Polabzug_2-Polabzug_3-Polabzug_4', ...
    '-Loch1_1-Loch2_1-Loch1_2-Loch2_2-Loch1_3-Loch2_3-Loch1_4-Loch2_4', ...
    '-KreisAbzug', ...
-   '+Spule1_1+Spule2_1+Spule3_1+Spule4_1+Spule1_2+Spule2_2+Spule3_2+Spule4_2+Spule1_3+Spule2_3+Spule3_3+Spule4_3+Spule1_4+Spule2_4+Spule3_4+Spule4_4', ...
-   '+Rotor'];
+   '+Spule1_1+Spule2_1+Spule3_1+Spule4_1+Spule1_2+Spule2_2+Spule3_2+Spule4_2+Spule1_3+Spule2_3+Spule3_3+Spule4_3+Spule1_4+Spule2_4+Spule3_4+Spule4_4'];
 
 %% Material 
 
@@ -141,5 +140,5 @@ cnfg.faces.SpuleA_3=[12,14];
 cnfg.faces.SpuleB_3=[13,10];
 cnfg.faces.SpuleA_4=[22,16];
 cnfg.faces.SpuleB_4=[20,18];
-cnfg.Wellenknoten=[133:148,556:563];
+cnfg.faces.Welle=6;
 cnfg.edges.Dirichlet=[1,2,10,11];

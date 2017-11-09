@@ -2,35 +2,32 @@
 %mit parfor beschleunigen?
 
 %% Aufräumen
-
 clear all;
 close all;
 clc;
 
 %% Importieren der Bibliothek
-
 import AMmagneticBearing.2D_Matlab.*
 
 %% FEM-Parameter
 geoOrder='linear'; %Default: Linear
-Hmax=0.02; %0: Automatisch
+Hmax=0.00; %0: Automatisch
 Hmin=0; %0:Automatisch
-Hgrad=1.5; %Default: 1.5
+Hgrad=1.3; %Default: 1.3
 
 %% Geometrie erzeugen, meshen
 Configuration_ML_ANTON_Displace;
 ML=MagneticBearing('Anton',cnfg);
 ML.model=createpde();
 ML.generate_geometry(cnfg.geometry);
-generateMesh(ML.model,'Hmax',Hmax,'Hmin',Hmin,'Hgrad',1.5,'GeometricOrder',geoOrder);
 
 ML.set_boundary_Displace(ML.cnfg.edges); %an edges-Definition anpassen
 ML.set_material_Displace(ML.cnfg.faces); %an faces-Definition anpassen
 
-
 %pdegplot(ML.model,'EdgeLabels','on');
 
 %% Assoc extrahieren
+generateMesh(ML.model,'Hmax',Hmax,'Hmin',Hmin,'Hgrad',Hgrad,'GeometricOrder',geoOrder);
 F = ML.model.facetAnalyticGeometry(ML.model.Geometry);
 [nodes, tri, cas, fas, eas, vas, Hmax, Hmin, Hgrad, esense] = genMeshFromFacetRep(F, Hmax, Hmin, Hgrad, geoOrder);
 ML.cnfg.mesh.assoc= pde.FEMeshAssociation(tri, cas, fas, eas, vas, esense);
@@ -49,11 +46,8 @@ ML.cnfg.mesh.default_Nodes=ML.model.Mesh.Nodes;
 
 %% Berechnen der Kennfelder
 tic
-charmap_lin = gen_lin_map_Displace(ML,[-0.0005:0.0005:0.0005],[-2:2:2],[0],[0],2,1e-5);
+charmap_lin = gen_lin_map_Displace(ML,[-0.0005:0.0001:0.0005],[-2:0.5:2],[0],[0],2,1e-5);
 toc
-% tic
-% charmap_lin = gen_lin_map(ML,[-0.0005:0.0001:0.0005],[-2:0.5:2],[0],[0],2,1e-5);
-% toc
 %save daten_Kennfeld.mat charmap_lin
 
 %charmap_nonlin = gen_nonlin_map([-0.0003:0.0001:0.0003],[-2:1:2],[0],[0],1,1e-9);
