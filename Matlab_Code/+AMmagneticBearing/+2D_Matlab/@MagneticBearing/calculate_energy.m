@@ -49,7 +49,7 @@ self.mesh();
     load.SpuleA_4=(I_wire_pre(1)+I_wire_use(1))*self.cnfg.coil.n_Windungen/self.cnfg.coil.area;            %x-rechts
     load.SpuleB_4=-(I_wire_pre(1)+I_wire_use(1))*self.cnfg.coil.n_Windungen/self.cnfg.coil.area;         %x-rechts
 
-self.set_load(load,faces);
+self.set_load(load);
 [W]=self.solve();
 
 

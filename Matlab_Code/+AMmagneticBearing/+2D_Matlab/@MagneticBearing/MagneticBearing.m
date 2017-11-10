@@ -6,6 +6,7 @@ classdef MagneticBearing < handle
         name
         cnfg
         model=createpde()
+        
     end
     
     methods
