@@ -18,4 +18,3 @@ W_y = self.calculate_energy_Displace(position_y,I_vormag,I_nutz);
 Fx=(W_x-W_0)/virtual_displacement*self.cnfg.geometry.dTiefe;       
 Fy=(W_y-W_0)/virtual_displacement*self.cnfg.geometry.dTiefe; 
 end
-

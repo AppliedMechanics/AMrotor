@@ -35,7 +35,6 @@ F = ML.model.facetAnalyticGeometry(ML.model.Geometry);
 [nodes, tri, cas, fas, eas, vas, Hmax, Hmin, Hgrad, esense] = genMeshFromFacetRep(F, Hmax, Hmin, Hgrad, geoOrder);
 ML.cnfg.mesh.assoc= pde.FEMeshAssociation(tri, cas, fas, eas, vas, esense);
 ML.cnfg.mesh.default_Nodes=ML.model.Mesh.Nodes;
-
 % assoc verknüpft das erstellte Modell zum Mesh und muss bei der Erzeugung
 % eines neuen FEMesh an dessen Konstruktor übergeben werden.
 %% Energieberechnung (Testzwecke)
@@ -51,7 +50,7 @@ ML.cnfg.mesh.default_Nodes=ML.model.Mesh.Nodes;
 %% Berechnen der Kennfelder
 
 tic
-charmap_lin = gen_lin_map_Displace(ML,-0.0005:0.0001:0.0005,-2:0.3:2,0,0,2,1e-5);
+charmap_lin = gen_lin_map_Displace(ML,-0.0005:0.0001:0.0005,-2:0.5:2,0,0,2,1e-9);
 toc
 %save daten_Kennfeld.mat charmap_lin
 %charmap_nonlin noch nicht geändert

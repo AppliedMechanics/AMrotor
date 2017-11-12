@@ -23,7 +23,7 @@ map_yIyFx=zeros(Size_Y);
 %% Kräfte berechnen
 y=0;Iy=0;
 for n1=1:Size_X(2)
-   parfor n=1:Size_X(1)
+   for n=1:Size_X(1)
     [Fx,Fy] = self.calculate_force_Displace([posx_array(n),y], [I_vormag,I_vormag],[Ix_nutz_array(n1),Iy], virtual_displacement);
     x_vec(n,n1)=posx_array(n);
     Ix_vec(n,n1)=Ix_nutz_array(n1);
@@ -54,3 +54,12 @@ map('Iy')=Iy_vec;
 
 end
 
+%% Untersuchung des Fehlers in Abh. von virtual_Displacement Distanz
+% mit Breakpoint in Schleife ausführen
+    % for i=1:15
+    % [~,Fy_Vector(i)] = self.calculate_force_Displace([posx_array(n),y], [I_vormag,I_vormag],[Ix_nutz_array(n1),Iy], 10^(-i))
+    % end
+    % figure(1),xlabel('Virtual Displacement'),ylabel('Fy Ergebnis')
+    % loglog(10.^(-1:-1:-15),Fy_Vector)
+    % figure(2),xlabel('Virtual Displacement'),ylabel('Fy Ergebnis')
+    % semilogx(10.^(-5:-1:-13),Fy_Vector(5:13))
