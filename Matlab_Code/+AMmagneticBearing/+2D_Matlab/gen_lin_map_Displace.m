@@ -33,7 +33,7 @@ for n1=1:Size_X(2)
 end
 x=0;Ix=0;
 for n1=1:Size_Y(2)
-   parfor n=1:Size_Y(1)
+   for n=1:Size_Y(1)
     [Fx,Fy] = self.calculate_force_Displace([x,posy_array(n)], [I_vormag,I_vormag],[Ix,Iy_nutz_array(n1)], virtual_displacement);
     y_vec(n,n1)=posy_array(n);
     Iy_vec(n,n1)=Iy_nutz_array(n1);
@@ -41,8 +41,6 @@ for n1=1:Size_Y(2)
     map_yIyFx(n,n1)=Fx;
     end
 end
-
-clc;
 map('xIxFx')=map_xIxFx;
 map('xIxFy')=map_xIxFy;
 map('x')=x_vec;

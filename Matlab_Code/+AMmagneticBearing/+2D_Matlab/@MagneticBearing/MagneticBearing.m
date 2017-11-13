@@ -11,8 +11,8 @@ classdef MagneticBearing < handle
     
     methods
         %Konstruktor
-       function obj = MagneticBearing(name,cnfg)
-            obj.name=name;
+       function obj = MagneticBearing(cnfg)
+            obj.name=cnfg.name;
             obj.cnfg=cnfg;
           %
        end

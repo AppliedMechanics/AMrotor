@@ -8,8 +8,8 @@ if isempty(MechanicModel) %Nur ein mal ausführen, spart rechenzeit
     Hmin=0; %0:Automatisch
     Hgrad=1.3; %Default: 1.3
     %% Geometrie definieren
-    C1 = [1,0,0,.023]'; %[Kreis:1;Mitelpunkt 0,0;radius 0.023]
-    C2 = [1,0,0,.025]';
+    C1 = [1,0,0,self.cnfg.geometry.r_Welle]'; %[Kreis:1;Mitelpunkt 0,0;radius]
+    C2 = [1,0,0,self.cnfg.geometry.r_Luftspalt_Aussen]';
     geom = [C1,C2];   % zu Geometrie zusammenfügen
     ns = (char('C1','C2'))'; %Namen
     sf = 'C2-C1'; %Geometrieformel
@@ -23,7 +23,9 @@ if isempty(MechanicModel) %Nur ein mal ausführen, spart rechenzeit
     structuralBC(MechanicModel,'Edge',5:9,'Constraint','fixed'); %Ränder des Definitionsbereichs fixieren
     %% Bestimmung der zur Welle gehörigen Knoten
     [~,~,t]=meshToPet(self.model.Mesh); 
-    WellenNodes=t(1,t(4,:)==self.cnfg.faces.Welle);
+    for i=self.cnfg.faces.Welle
+        WellenNodes=[WellenNodes,t(1,t(4,:)==i)];
+    end
 
 end
 %% FEM:Spezielle Randbedingung
