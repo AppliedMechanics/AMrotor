@@ -23,7 +23,7 @@ map_yIyFx=zeros(Size_Y);
 %% Kräfte berechnen
 y=0;Iy=0;
 for n1=1:Size_X(2)
-   for n=1:Size_X(1)
+   parfor n=1:Size_X(1)
     [Fx,Fy] = self.calculate_force_Displace([posx_array(n),y], [I_vormag,I_vormag],[Ix_nutz_array(n1),Iy], virtual_displacement);
     x_vec(n,n1)=posx_array(n);
     Ix_vec(n,n1)=Ix_nutz_array(n1);
@@ -33,7 +33,7 @@ for n1=1:Size_X(2)
 end
 x=0;Ix=0;
 for n1=1:Size_Y(2)
-   for n=1:Size_Y(1)
+   parfor n=1:Size_Y(1)
     [Fx,Fy] = self.calculate_force_Displace([x,posy_array(n)], [I_vormag,I_vormag],[Ix,Iy_nutz_array(n1)], virtual_displacement);
     y_vec(n,n1)=posy_array(n);
     Iy_vec(n,n1)=Iy_nutz_array(n1);

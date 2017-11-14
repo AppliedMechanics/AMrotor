@@ -1,4 +1,4 @@
-function config=Configuration_ML_Neu()
+function config=Conf_ML_Darmstadt()
 %   Beschreibung: Erzeugt die Geometrie des Magnetlagers  
 
 %   Bearbeiter: Paul Schuler
@@ -180,7 +180,8 @@ cnfg.geometry.dl=dl;
 
 %% Geometriezuornungen
 cnfg.faces.Luft=[1,16,19];
-cnfg.faces.Eisen=[2,17,18]; %Welle und Stator
+cnfg.faces.Eisen=[2,17,18]; % Alle Bauteile aus Eisen
+cnfg.faces.Welle=[17,18,19]; % Fl‰chen die sich mit der Welle bewegen
 cnfg.faces.SpuleA_1=[3,22];
 cnfg.faces.SpuleB_1=[4,11];
 cnfg.faces.SpuleA_2=[5,20];
@@ -189,7 +190,7 @@ cnfg.faces.SpuleA_3=[7,12];
 cnfg.faces.SpuleB_3=[8,15];
 cnfg.faces.SpuleA_4=[9,14];
 cnfg.faces.SpuleB_4=[10,13];
-cnfg.faces.Welle=[17,18,19];
+
 cnfg.edges.Dirichlet=[1,2,210,209];
 
 cnfg.geometry.r_Welle=dRB1/2;
@@ -200,6 +201,5 @@ cnfg.geometry.dTiefe=0.032;
 config=cnfg;
 end
 %% Fragen
-%heiﬂt es Darmstadt?
-%ist F19 Luft?
+
 %Spulenzuornungen

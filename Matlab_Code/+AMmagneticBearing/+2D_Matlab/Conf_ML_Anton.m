@@ -1,4 +1,4 @@
-function config=Configuration_ML_ANTON_Displace()
+function config=Conf_ML_Anton()
 
 %% Configuration of the MagneticBearing
 cnfg.name='Anton';

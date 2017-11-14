@@ -22,9 +22,9 @@ Hgrad=1.3; %Default: 1.3
 
 %% Geometrie erzeuge
 
-cnfg=Configuration_ML_ANTON_Displace; %cnfg-Variable erzeugt
+%cnfg=Configuration_ML_ANTON_Displace; %cnfg-Variable erzeugt
 %ODER
-%cnfg=Configuration_ML_Neu;
+cnfg=Configuration_ML_Neu;
 
 ML=MagneticBearing(cnfg); %createpde schon im Konstruktor ausgeführt
 ML.generate_geometry();  
@@ -42,15 +42,6 @@ ML.cnfg.mesh.default_Nodes=ML.model.Mesh.Nodes;
 % assoc verknüpft das erstellte Modell zum Mesh und muss bei der Erzeugung
 % eines neuen FEMesh an dessen Konstruktor übergeben werden.
 clear cas eas esense F fas tri vas cnfg % Workspace sauber halten
-%% Energieberechnung (Testzwecke)
-%ML.generate_geometry(cnfg.geometry);
-%ML.show_geometry();
-%ML.show_mesh();
-%ML.show_solution(result);
-
-% [W] = ML.calculate_energy_Displace([0,0.001],[0,2],[0,1])
-
-%[Fx,Fy]=ML.calculate_force([0,0],[0,1],[0,2],1e-9);
 
 %% Berechnen der Kennfelder
 tic
@@ -63,3 +54,13 @@ toc
 %% Grafiken erstellen
 Kp = Graphics.CharacteristicMap('Kennlinie linear',charmap_lin);
 Kp.plot
+
+%% Energieberechnung (Testzwecke)
+%ML.generate_geometry(cnfg.geometry);
+%ML.show_geometry();
+%ML.show_mesh();
+%ML.show_solution(result);
+
+% [W] = ML.calculate_energy_Displace([0,0.001],[0,2],[0,1])
+
+%[Fx,Fy]=ML.calculate_force_Displace([0,0],[0,1],[0,2],1e-9);
