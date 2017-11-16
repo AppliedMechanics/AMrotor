@@ -19,8 +19,10 @@ classdef Eigenschwingformen < handle
       
       function plot_displacements(obj)
           
-          n_ew=obj.modalsystem.n_ew;
+          ColorHandler = AMrotorTools.PlotColors();
           
+          n_ew=obj.modalsystem.n_ew;
+          ColorHandler.setUp(n_ew);
           %
           disp('Eigenkreisfrequenzen')
             for s=1:n_ew
@@ -41,9 +43,11 @@ classdef Eigenschwingformen < handle
             x = obj.modalsystem.rotorsystem.rotor.nodes;
         for s=1:n_ew
             plotMode(ax1,x,obj.modalsystem.eigenVectors.x(1:2:end,s),...
-                           obj.modalsystem.eigenValues.x(s))
+                           obj.modalsystem.eigenValues.x(s),...
+                           ColorHandler.getColor(s))
             plotMode(ax2,x,obj.modalsystem.eigenVectors.y(1:2:end,s),...
-                           obj.modalsystem.eigenValues.y(s))
+                           obj.modalsystem.eigenValues.y(s),...
+                           ColorHandler.getColor(s))
         end
             legend(ax1,'show')
             legend(ax2,'show')

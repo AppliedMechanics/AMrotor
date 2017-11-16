@@ -1,4 +1,4 @@
-function plotMode( axFigure, x, V, D )
+function plotMode( axFigure, x, V, D , color)
 %PLOTMODE Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -8,7 +8,8 @@ function plotMode( axFigure, x, V, D )
 V = sign(V(index))*V;
 % plot
 plot(axFigure,x,V/norm(V),...
-            'DisplayName',sprintf('%1.2f Hz',D/(2*pi)))
+            'DisplayName',sprintf('%1.2f Hz',D/(2*pi)),...
+            'Color',color)
 
 end
 
