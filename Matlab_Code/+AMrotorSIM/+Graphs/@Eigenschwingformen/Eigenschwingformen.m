@@ -1,5 +1,5 @@
 classdef Eigenschwingformen < handle
-   properties
+   properties (Access = private)
       name='Rotor Eigenschwingformen'
       modalsystem
    end

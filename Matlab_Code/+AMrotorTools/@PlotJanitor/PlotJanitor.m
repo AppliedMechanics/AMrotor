@@ -21,7 +21,7 @@ classdef PlotJanitor < handle
     %   of the plot underneath it. This values can be again changed with
     %   PlotJanitor.setOffset([x,y]) in normalized coordinates.
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    properties
+    properties (Access = private)
         rows;
         cols;
         offset;
