@@ -136,8 +136,8 @@ zz=1:50;
 % shows axis system for reference
 quiver3(zeros(3,1),zeros(3,1),zeros(3,1),[0.1;0;0],[0;0.1;0],[0;0;0.1],'k')
 text(0.1,0.0,0.0,'z')
-text(0.0,0.1,0.0,'y')
-text(0.0,0.0,0.1,'x')
+text(0.0,0.1,0.0,'x')
+text(0.0,0.0,0.1,'y')
 end
 
 
