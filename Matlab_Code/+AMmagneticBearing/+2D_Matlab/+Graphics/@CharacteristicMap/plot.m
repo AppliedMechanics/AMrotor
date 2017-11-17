@@ -28,19 +28,19 @@ xlabel('Differenzstrom in x-Richtung / A', 'Interpreter', 'latex');
 ylabel('Wellenposition in x-Richtung / m', 'Interpreter', 'latex');
 zlabel('Kraft in y-Richtung / N','Interpreter','latex');
 
-% subplot(2,2,3)
-% surf(Iy_vec(1,:),y_vec(:,1)',map_yIyFy);
-% title('Kennfeld y-Richtung','Interpreter','latex');
-% xlabel('Differenzstrom in y-Richtung / A', 'Interpreter', 'latex');
-% ylabel('Wellenposition in y-Richtung / m', 'Interpreter', 'latex');
-% zlabel('Kraft in y-Richtung / N','Interpreter','latex');
-% 
-% subplot(2,2,4)
-% surf(Iy_vec(1,:),y_vec(:,1)',map_yIyFx);
-% title('Kennfeld y-Richtung','Interpreter','latex');
-% xlabel('Differenzstrom in y-Richtung / A', 'Interpreter', 'latex');
-% ylabel('Wellenposition in y-Richtung / m', 'Interpreter', 'latex');
-% zlabel('Kraft in x-Richtung / N','Interpreter','latex');
+subplot(2,2,3)
+surf(Iy_vec(1,:),y_vec(:,1)',map_yIyFy);
+title('Kennfeld y-Richtung','Interpreter','latex');
+xlabel('Differenzstrom in y-Richtung / A', 'Interpreter', 'latex');
+ylabel('Wellenposition in y-Richtung / m', 'Interpreter', 'latex');
+zlabel('Kraft in y-Richtung / N','Interpreter','latex');
+
+subplot(2,2,4)
+surf(Iy_vec(1,:),y_vec(:,1)',map_yIyFx);
+title('Kennfeld y-Richtung','Interpreter','latex');
+xlabel('Differenzstrom in y-Richtung / A', 'Interpreter', 'latex');
+ylabel('Wellenposition in y-Richtung / m', 'Interpreter', 'latex');
+zlabel('Kraft in x-Richtung / N','Interpreter','latex');
 
 end
 

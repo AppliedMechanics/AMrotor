@@ -3,6 +3,7 @@ function [ Fx,Fy ] = calculate_force_Displace(self, position, I_vormag, I_nutz, 
 % [ Fx,Fy ] = Magnetlager.calculate_force_Displace(position, I_vormag, I_nutz, virtual_displacement)
 % Durch den Vergleich der Magnetischen Potentiale eines Ortes und eines
 % benachbarten Ortes wird die Kraft in Richtung der Verschiebung bestimmt.
+% Benötigte Toolboxen: PDE (Unterfunktionen)
 %% Energie am Ursprungsort 
 W_0 = self.calculate_energy_Displace(position,I_vormag,I_nutz);
 

@@ -1,6 +1,7 @@
 function set_boundary( self)
-%SET_BOUNDARY Summary of this function goes here
-%   Detailed explanation goes here
+% set_boundary ist eine Methode der Klasse MagneticBearing
+% Anwenden der Randbedingungen auf die Ränder des Definitionsbereichs.
+% Benoetigte Toolbox: PDE
 
 applyBoundaryCondition(self.model,'dirichlet','Edge',self.cnfg.edges.Dirichlet,'r',0,'h',1);
 

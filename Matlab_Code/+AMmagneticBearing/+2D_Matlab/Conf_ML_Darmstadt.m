@@ -1,12 +1,12 @@
 function config=Conf_ML_Darmstadt()
-%   Beschreibung: Erzeugt die Geometrie des Magnetlagers  
+% Erzeugung der Konfigurationsvariable für ein Magnetlager der Klasse
+% MagneticBearing
+% Für Eigenschaften der cnfg-Variable siehe Hauptcode
+% Simulation_JM_Diplace.m
 
 %   Bearbeiter: Paul Schuler
 
 %   Benoetigte Toolbox: PDE
-%   Benoetigte Funktionen/Skripten: pdVA_MagLag.m, FEM_MagLag.m,
-%   Stoffwerte_MagLag.m, Init_MagLag.m, Solve_MagLag.m, (SolveNonLin_MagLag.m)
-
 %% Definition der Geometrie (in Metern)
 cnfg.name='Darmstadt';
 
@@ -153,7 +153,7 @@ for i=size(dl,2):-1:1
         end
     end
 end
-[dl,~]=csgdel(dl,bt,KantenDel);            % Loesche alle Kanten aus dem Array "KantenDel"
+[dl,~]=csgdel(dl,bt,[KantenDel,242]);            % Loesche alle Kanten aus dem Array "KantenDel", 242: Hilfskante in Welle
 %% Geometrie in cnfg sichern
 % Berechnung der Spulengroesse (wird fuer Ermittlung der Stromdichte
 % benoetigt
@@ -179,19 +179,20 @@ cnfg.geometry.dl=dl;
      cnfg.material.mu_Kupfer =  cnfg.material.mu_rKupfer* cnfg.material.mu_0;
 
 %% Geometriezuornungen
-cnfg.faces.Luft=[1,16,19];
-cnfg.faces.Eisen=[2,17,18]; % Alle Bauteile aus Eisen
-cnfg.faces.Welle=[17,18,19]; % Flächen die sich mit der Welle bewegen
-cnfg.faces.SpuleA_1=[3,22];
+cnfg.faces.Luft=[1,16,18];
+cnfg.faces.Eisen=[2,17]; % Alle Bauteile aus Eisen
+cnfg.faces.Welle=[17,18]; % Flächen die sich mit der Welle bewegen
+cnfg.faces.SpuleA_1=[3,21];
 cnfg.faces.SpuleB_1=[4,11];
-cnfg.faces.SpuleA_2=[5,20];
-cnfg.faces.SpuleB_2=[21,6];
+cnfg.faces.SpuleA_2=[5,19];
+cnfg.faces.SpuleB_2=[20,6];
 cnfg.faces.SpuleA_3=[7,12];
 cnfg.faces.SpuleB_3=[8,15];
 cnfg.faces.SpuleA_4=[9,14];
 cnfg.faces.SpuleB_4=[10,13];
 
-cnfg.edges.Dirichlet=[1,2,210,209];
+cnfg.edges.Dirichlet=[1,2,210,209]; %Ränder des Simulationsbereichs
+
 
 cnfg.geometry.r_Welle=dRB1/2;
 cnfg.geometry.r_Luftspalt_Aussen=dBohrung/2;

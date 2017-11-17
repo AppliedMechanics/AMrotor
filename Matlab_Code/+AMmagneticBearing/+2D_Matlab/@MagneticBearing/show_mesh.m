@@ -1,6 +1,8 @@
 function show_mesh( self )
-%SHOW_MESH Summary of this function goes here
-%   Detailed explanation goes here
+% show_mesh ist eine Methode der Klasse MagneticBearing
+% Darstellung der Magnetlagervernetzung
+% Benoetigte Toolbox: PDE
+
  figure
     pdemesh(self.model);
         axis equal;

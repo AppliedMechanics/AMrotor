@@ -1,5 +1,8 @@
 function config=Conf_ML_Anton()
-
+% Erzeugung der Konfigurationsvariable für ein Magnetlager der Klasse
+% MagneticBearing
+% Für Eigenschaften der cnfg-Variable siehe Hauptcode
+% Simulation_JM_Diplace.m
 %% Configuration of the MagneticBearing
 cnfg.name='Anton';
 

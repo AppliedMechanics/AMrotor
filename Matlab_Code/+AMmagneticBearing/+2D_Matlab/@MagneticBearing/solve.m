@@ -1,11 +1,11 @@
 function [W] = solve( self )
-%SOLVE Summary of this function goes here
-%   Detailed explanation goes here
-FEM=assembleFEMatrices(self.model);         % Erzeugen der K-Matrix, ist abhängig vom Mesh
-J=FEM.F;
-result=solvepde(self.model);                 % Loesen des Problems
-A=result.NodalSolution;                 % A ist magnetisches Vektorpotential
-W=0.5*A'*J;
-end
-% in J gibt es keine Bereiche, die bei alle Wellenpositionen gleich sind.
+% solve ist eine Methode der Klasse MagneticBearing
+% Berechnung der magnetischen Kräfte auf den Rotor des Magnetlagers
+% Benoetigte Toolbox: PDE
+FEM=assembleFEMatrices(self.model);         % Erzeugen der K-Matrix
+J=sparse(FEM.F);                            % sparse spart Speicher und Rechenzeit
+result=solvepde(self.model);                % Loesen des Problems  
 
+W=0.5*result.NodalSolution'*J;              % result.NodalSolution ist magnetisches Vektorpotential
+% self.show_solution(result)
+end

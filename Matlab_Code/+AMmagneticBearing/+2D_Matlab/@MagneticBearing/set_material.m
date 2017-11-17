@@ -1,7 +1,8 @@
 function set_material( self )
-%SET_MATERIAL Summary of this function goes here
-%   Detailed explanation goes here
-
+% set_material ist eine Methode der klasse MagneticBearing
+% Zuweisen der Koeffizienten zu den Flächen der Lagergeometrie
+% alle benötigten Informationen wurden in self.cnfg hinterlegt.
+% Benoetigte Toolbox: PDE
 
 % Koeffizienten fuer Luftphase
 specifyCoefficients(self.model,'m',0,'d',0,'c',1/(self.cnfg.material.mu_Luft),'a',0,'f',0,'Face',self.cnfg.faces.Luft);         
