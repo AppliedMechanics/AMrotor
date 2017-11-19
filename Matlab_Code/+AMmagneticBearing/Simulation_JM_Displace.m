@@ -1,7 +1,7 @@
 %% Simulation Magnetlager
 % Beschreibung: Kennfeldberechnung von Magnetlagern als MagneticBearing Objekt
 % Bearbeiter: Paul Schuler, Georg Balke
-% Benoetigte Toolbox: PDE, Parallel Computing (fakultativ)
+% Benoetigte Toolbox: PDE, Parallel Computing (fakultativ, in Z. 54 auswählen)
 
 % Um die realen und virtuellen Verschiebungen zu simulieren wird die einmalig
 % erzeugte Meshform verzerrt. Für jede Position werden die Knoten an
@@ -9,10 +9,12 @@
 % Geometrie erzeugt.
 %
 % Im internen Lösungsalgorithmus wird das FEMesh wieder ins [p e t] Format
-% konvertiert. (siehe meshToPet() )
+% konvertiert. (siehe meshToPet() ) Dadurch werden die verschobenen Nodes
+% als veränderte Geometrie wahrgenommen.
 %
 % Um ein neues Magnetlager zu simulieren muss dafür eine Funktion erstellt
 % werden, die die cnfg-Variable erzeugt.
+% 
 % cnfg = 
 % 
 %   struct with fields:
@@ -40,9 +42,9 @@ clear all
 import AMmagneticBearing.2D_Matlab.*
 
 %% Parameter
-%cnfg=Conf_ML_Anton; %cnfg-Variable erzeugt
-%ODER
-cnfg=Conf_ML_Darmstadt;
+cnfg=Conf_ML_Anton; %cnfg-Variable erzeugt
+% ODER
+% cnfg=Conf_ML_Darmstadt;
 
 geoOrder='linear';  % Bitte wegen Verschiebealgorithmus linear Lassen!
 Hmax=0.002;         %0: Automatisch
@@ -50,17 +52,18 @@ Hmin=0;             %0:Automatisch
 Hgrad=1.5;          %Default: 1.3
 % Bei Darmstadt gut:lin/0.0015/0/1.3(performance),lin/0.001/0/1.1(mitte),lin/0.0005/0/1.7 (Genauigkeit)
 % Bei Anton gut: lin/0.002/0/1.5 (Hgrad kaum Einfluss;0.02 höchste Triangle-Qualität)
-Parallel_Computing=0;
+Parallel_Computing=0;  % 0: Einfache Berechnung mit Fortschrittsanzeige
+                       % 1: Berechnung auf allen Rechnerkernen ohne Fortschrittsanzeige
+                       
 %% Magnetlager erzeugen
 ML=MagneticBearing(cnfg); % createpde wird nur einmalig im Konstruktor ausgeführt
 ML.generate_geometry();   % aus der dl-Matrix wird die Geometrie der Simulation erzeugt
 ML.set_boundary();        % Randbedingungen der PDE einmalig festlegen
 ML.set_material();        % Subdomain-Eigenschaften der PDE einmalig festlegen
 
-%pdegplot(ML.model,'EdgeLabels','on');
-
 %% Assoc extrahieren und meshen
-[~]=generateMesh(ML.model,'Hmax',Hmax,'Hmin',Hmin,'Hgrad',Hgrad,'GeometricOrder',geoOrder,'MesherVersion','R2013a');
+[~]=generateMesh(ML.model,'Hmax',Hmax,'Hmin',Hmin,...
+                'Hgrad',Hgrad,'GeometricOrder',geoOrder,'MesherVersion','R2013a');
 F = ML.model.facetAnalyticGeometry(ML.model.Geometry);
 [~, tri, cas, fas, eas, vas, ~,~,~, esense] = genMeshFromFacetRep(F, Hmax, Hmin, Hgrad, geoOrder);
 ML.cnfg.mesh.assoc= pde.FEMeshAssociation(tri, cas, fas, eas, vas, esense);
@@ -72,27 +75,29 @@ clear cas eas esense F fas tri vas cnfg % Workspace sauber halten
 %% Berechnen der Kennfelder
 % charmap_lin fasst die Berechnungen in Iterationen zusammen und gibt ein
 % Kennfeld zurück.
-charmap_lin = gen_lin_map_Displace(ML,-0.0005:0.0001:0.0005,-2:0.5:2,0,0,2,1e-9,Parallel_Computing); %Letzte Zahl: 1: Parallel Computing, 0: nichtparallel
+%charmap_lin = gen_lin_map_Displace(ML,-0.0005:0.0001:0.0005,-2:0.5:2,0,0,2,1e-9,Parallel_Computing); %Letzte Zahl: 1: Parallel Computing, 0: nichtparallel
 % save daten_Kennfeld_Anton.mat charmap_lin
+ load('daten_Kennfeld_Anton.mat')
 
-% gen_nonlin_map noch nicht auf Verschiebungsalgorithmus  geändert
+% gen_nonlin_map noch nicht auf Verschiebungsalgorithmus geändert.
+% Prinzipiell muss dafür nur calculate_force auf calculate_force_Displace geändert werden.
 % charmap_nonlin = gen_nonlin_map([-0.0003:0.0001:0.0003],[-2:1:2],[0],[0],1,1e-9);
 
 %% Grafiken erstellen
-Kp = Graphics.CharacteristicMap('Kennlinie linear',charmap_lin);
+Kp = Graphics.CharacteristicMap(['Kennlinie linear ',ML.name],charmap_lin); % Erste Variable: Name des Plotfensters.
 Kp.plot
 
 %% Energieberechnung (Testzwecke)
-%ML.generate_geometry(cnfg.geometry);
-%ML.show_geometry();
-%ML.show_mesh();
-%ML.show_solution(result);
-
 %[W] = ML.calculate_energy_Displace([0,0.001],[0,2],[0,1])
 
 %[Fx,Fy]=ML.calculate_force_Displace([0,0],[0,1],[0,2],1e-9);
 
-%% Meshqualitaet untersuchen (Testzwecke
+% figure(2)
+% ML.show_solution(result); % Dazu die Rückgabewerte von
+        % calculate_energy_Displace um result ergänzen. 
+        % (Zweiter Rückgabewert von self.solve)
+
+%% Meshqualitaet untersuchen (Testzwecke)
 % for grad=1:9
 % for size=1:8
 % A=generateMesh(ML.model,'Hmax',size/2000,'Hmin',Hmin,'Hgrad',1+grad/10,'GeometricOrder',geoOrder,'MesherVersion','R2013a');

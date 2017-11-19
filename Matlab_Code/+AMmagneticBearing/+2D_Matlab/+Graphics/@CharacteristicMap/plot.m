@@ -1,7 +1,8 @@
 function plot(self)
-%PLOT Summary of this function goes here
-%   Detailed explanation goes here
+% Darstellung der Kennfelder eines Magnetlagers
+% Ergebnisse sind in einem Objekt der Klasse CharacteristicMap gespeichert
 
+%% Extraktion der Zahlenwerte
 map_xIxFx=self.map('xIxFx');
 map_xIxFy=self.map('xIxFy');
 x_vec=self.map('x');
@@ -13,34 +14,53 @@ y_vec=self.map('y');
 Iy_vec=self.map('Iy');
 
 %% Plot
-figure()
-subplot(2,2,1)
+figure('Name',self.name)
+try
+p1=subplot(2,2,1);
 surf(Ix_vec(1,:),x_vec(:,1)',map_xIxFx);
 title('Kennfeld x-Richtung','Interpreter','latex');
 xlabel('Differenzstrom in x-Richtung / A', 'Interpreter', 'latex');
 ylabel('Wellenposition in x-Richtung / m', 'Interpreter', 'latex');
 zlabel('Kraft in x-Richtung / N','Interpreter','latex');
+catch
+fprintf('Achtung:Keine Daten für Fx(x,Ix) errechnet.\n')    
+delete(p1)
+end
 
-subplot(2,2,2)
+try
+p2=subplot(2,2,2);
 surf(Ix_vec(1,:),x_vec(:,1)',map_xIxFy);
 title('Kennfeld x-Richtung','Interpreter','latex');
 xlabel('Differenzstrom in x-Richtung / A', 'Interpreter', 'latex');
 ylabel('Wellenposition in x-Richtung / m', 'Interpreter', 'latex');
 zlabel('Kraft in y-Richtung / N','Interpreter','latex');
+catch
+fprintf('Achtung:Keine Daten für Fy(x,Ix) errechnet.\n')    
+delete(p2)
+end
 
-subplot(2,2,3)
+try
+p3=subplot(2,2,3);
 surf(Iy_vec(1,:),y_vec(:,1)',map_yIyFy);
 title('Kennfeld y-Richtung','Interpreter','latex');
 xlabel('Differenzstrom in y-Richtung / A', 'Interpreter', 'latex');
 ylabel('Wellenposition in y-Richtung / m', 'Interpreter', 'latex');
 zlabel('Kraft in y-Richtung / N','Interpreter','latex');
+catch
+fprintf('Achtung:Keine Daten für Fy(y,Iy) errechnet.\n')    
+delete(p3)
+end
 
-subplot(2,2,4)
+try
+p4=subplot(2,2,4);
 surf(Iy_vec(1,:),y_vec(:,1)',map_yIyFx);
 title('Kennfeld y-Richtung','Interpreter','latex');
 xlabel('Differenzstrom in y-Richtung / A', 'Interpreter', 'latex');
 ylabel('Wellenposition in y-Richtung / m', 'Interpreter', 'latex');
 zlabel('Kraft in x-Richtung / N','Interpreter','latex');
-
+catch
+fprintf('Achtung:Keine Daten für Fx(y,Iy) errechnet.\n')  
+delete(p4)
+end
 end
 

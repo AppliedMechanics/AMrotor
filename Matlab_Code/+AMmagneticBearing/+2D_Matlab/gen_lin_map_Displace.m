@@ -1,5 +1,5 @@
 function [ map ] = gen_lin_map_Displace(self, posx_array, Ix_nutz_array,posy_array, Iy_nutz_array, I_vormag, virtual_displacement,parallel)
-% [ map ] = Magnetlager.gen_lin_map_Displace(Position_x, Ix,Position_y, Iy, I_vormag, virtual_Displacement)
+% [ map ] = Magnetlager.gen_lin_map_Displace(Position_x, Ix,Position_y, Iy, I_vormag, virtual_Displacement,Parallel_Computing)
 % gen_lin_map_Displace Systematisiert die Kraftberechnung am Magnetlager
 % der Klasse MagneticBearing
 % Erzeugung eines Kennfeldes des Magnetlagers.
@@ -59,6 +59,7 @@ for n1=1:Size_X(2)
     Ix_vec(n,n1)=Ix_nutz_array(n1);
     map_xIxFx(n,n1)=Fx;
     map_xIxFy(n,n1)=Fy;
+    
     Schritt=Schritt+1;
     Zeit=Zeit+toc;
     Restzeit=(Zeit/Schritt)*(Rechnungen-Schritt);
@@ -73,6 +74,7 @@ for n1=1:Size_Y(2)
     Iy_vec(n,n1)=Iy_nutz_array(n1);
     map_yIyFy(n,n1)=Fy;
     map_yIyFx(n,n1)=Fx;
+    
     Schritt=Schritt+1;
     Zeit=Zeit+toc;
     Restzeit=(Zeit/Schritt)*(Rechnungen-Schritt);
@@ -90,7 +92,6 @@ map('yIyFy')=map_yIyFy;
 map('yIyFx')=map_yIyFx;
 map('y')=y_vec;
 map('Iy')=Iy_vec;
-
 end
 
 %% Untersuchung des Fehlers in Abh. von virtual_Displacement Distanz
