@@ -162,9 +162,6 @@ cnfg.coil.area=0.5*( (xS96-xS97)*(yS96+yS97)+(xS97-xS160)*(yS97+yS160)+(xS160-xS
 cnfg.geometry.dl=dl;
 
 %% Material 
-
-     cnfg.material.nonlinMu =0;
-
 % Permeabilität im Vakuum   
      cnfg.material.mu_0=4*pi*10^(-7);
     

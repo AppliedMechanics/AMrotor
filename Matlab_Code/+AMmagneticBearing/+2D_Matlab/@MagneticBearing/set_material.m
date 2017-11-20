@@ -9,9 +9,16 @@ specifyCoefficients(self.model,'m',0,'d',0,'c',1/(self.cnfg.material.mu_Luft),'a
 
 % Koeffezienten der Eisenphase / Unterscheidung: nichtlinear oder lineares Model
 if self.cnfg.material.nonlinMu  
-    cCoef = @(region,state) (mu_0*(mu_rEisen./(1+0.05*(state.ux.^2 +state.uy.^2))+200));    % nicht konstanter Koeffizient C (Permeabilitaet)
-        %ï¿½ = 4*pi*10^(-7)*(5000./(1+0.05*(ux.^2+uy.^2))+200) 
-    specifyCoefficients(self.model,'m',0,'d',0,'c',cCoef,'a',0,'f',0,'Face',self.cnfg.faces.Eisen);       % Eisenkern und Rotorbuechse
+    % For 2-D systems, c is a tensor with 4N² elements. ==> 4x4
+    % Matlab interpretiert Skalare als x*eye(Passende Größe), Vektoren als
+    % diag(...) und mehr.
+    % Koeffizienten sind eine Funktion der Lösung
+    cCoef = @(region,state)  (self.cnfg.material.mu_0*...
+        (self.cnfg.material.mu_rEisen./...
+        (1+0.05*(state.ux.^2 +state.uy.^2))+200));    % nicht konstanter Koeffizient C (Permeabilitaet)
+                                                      %ï¿½ = 4*pi*10^(-7)*(5000./(1+0.05*(ux.^2+uy.^2))+200) 
+    specifyCoefficients(self.model,'m',0,'d',0,'c',cCoef,...
+        'a',0,'f',0,'Face',self.cnfg.faces.Eisen);       % Eisenkern und Rotorbuechse
 
 else 
       specifyCoefficients(self.model,'m',0,'d',0,'c',1/(self.cnfg.material.mu_Eisen),'a',0,'f',0,'Face',self.cnfg.faces.Eisen);       % Eisenkern und Rotorbuechse

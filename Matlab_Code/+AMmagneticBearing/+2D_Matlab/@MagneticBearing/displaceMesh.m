@@ -14,8 +14,8 @@ function [NewNodes]=displaceMesh(self,position)
 % Bearbeiter: Georg Balke
 % Benötigte Toolboxen: PDE
 %% Variablen
-persistent MechanicModel WellenNodes
-if isempty(MechanicModel) %Modell nur ein Mal erzeugen, spart Rechenzeit
+persistent mechanicalModel WellenNodes
+if isempty(mechanicalModel) %Modell nur ein Mal erzeugen, spart Rechenzeit
     %% Nebenrechnung-Mesh-Parameter
     % Parameter des Hilfsmodells, unabhängig vom Hauptmodell
     geoOrder='linear'; %Default: Linear
@@ -30,12 +30,12 @@ if isempty(MechanicModel) %Modell nur ein Mal erzeugen, spart Rechenzeit
     sf = 'C2-C1';                                         % Strukturformel
     gd = decsg(geom,sf,ns);                               % Geometriematrix erzeugen
 
-    MechanicModel=createpde('structural','static-planestrain');  % static-planestrain erlaubt Nutzung von mechanischen Randbedingungen.
-    geometryFromEdges(MechanicModel,gd);                         % PDE-Geometrie erzeugen    
-    generateMesh(MechanicModel,'Hmax',Hmax,'Hmin',Hmin,'Hgrad',Hgrad,'GeometricOrder',geoOrder,'MesherVersion','R2013a');
+    mechanicalModel=createpde('structural','static-planestrain');  % static-planestrain erlaubt Nutzung von mechanischen Randbedingungen.
+    geometryFromEdges(mechanicalModel,gd);                         % PDE-Geometrie erzeugen    
+    generateMesh(mechanicalModel,'Hmax',Hmax,'Hmin',Hmin,'Hgrad',Hgrad,'GeometricOrder',geoOrder,'MesherVersion','R2013a');
     %% Nebenrechnung-FEM:Basis Randbedingungen
-    structuralProperties(MechanicModel,'YoungsModulus',1,'PoissonsRatio',0.3,'MassDensity',1e-10,'Face',1);   % Weicher Luftspalt
-    structuralBC(MechanicModel,'Edge',5:9,'Constraint','fixed');                                              % Ränder des Definitionsbereichs fixieren
+    structuralProperties(mechanicalModel,'YoungsModulus',1,'PoissonsRatio',0.3,'MassDensity',1e-10,'Face',1);   % Weicher Luftspalt
+    structuralBC(mechanicalModel,'Edge',5:9,'Constraint','fixed');                                              % Ränder des Definitionsbereichs fixieren
     %% Hauptmodell-Bestimmung der zur Welle gehörigen Knoten
     [~,~,t]=meshToPet(self.model.Mesh);    % Pet: Points-Edges-Triangles Darstellung eines Meshs. 
     for i=self.cnfg.faces.Welle
@@ -44,8 +44,8 @@ if isempty(MechanicModel) %Modell nur ein Mal erzeugen, spart Rechenzeit
 
 end
 %% Nebenrechnung-FEM:Spezielle Randbedingung und Lösung
-structuralBC(MechanicModel,'Edge',1:4,'Displacement',position); % "Loch" dass den Rotor repräsentiert bewegen
-Lo=solve(MechanicModel);
+structuralBC(mechanicalModel,'Edge',1:4,'Displacement',position); % "Loch" dass den Rotor repräsentiert bewegen
+Lo=solve(mechanicalModel);
 %% Hauptmodell-Übertragung
 Dis=interpolateDisplacement(Lo,self.cnfg.mesh.default_Nodes(1,:),self.cnfg.mesh.default_Nodes(2,:));
 Dis.ux(isnan(Dis.ux))=0;                % das Displacement an den Knoten des Hauptmodells wird berechnet.

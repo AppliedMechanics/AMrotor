@@ -118,9 +118,6 @@ cnfg.name='Anton';
    '+Spule1_1+Spule2_1+Spule3_1+Spule4_1+Spule1_2+Spule2_2+Spule3_2+Spule4_2+Spule1_3+Spule2_3+Spule3_3+Spule4_3+Spule1_4+Spule2_4+Spule3_4+Spule4_4'];
 
 %% Material 
-
-cnfg.material.nonlinMu =0;
-
 % Permeabilität im Vakuum   
 cnfg.material.mu_0=4*pi*10^(-7);
 

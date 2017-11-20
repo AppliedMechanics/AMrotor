@@ -1,4 +1,4 @@
-function [ map ] = gen_lin_map_Displace(self, posx_array, Ix_nutz_array,posy_array, Iy_nutz_array, I_vormag, virtual_displacement,parallel)
+function [ map ] = gen_map_Displace(self, posx_array, Ix_nutz_array,posy_array, Iy_nutz_array, I_vormag, virtual_displacement,parallel)
 % [ map ] = Magnetlager.gen_lin_map_Displace(Position_x, Ix,Position_y, Iy, I_vormag, virtual_Displacement,Parallel_Computing)
 % gen_lin_map_Displace Systematisiert die Kraftberechnung am Magnetlager
 % der Klasse MagneticBearing
@@ -22,9 +22,11 @@ Iy_vec=zeros(Size_Y);
 map_yIyFy=zeros(Size_Y);
 map_yIyFx=zeros(Size_Y);
 
+[~]= self.calculate_energy_Displace([0,0],[2,2],[2,2]); %Erste Rechnung um persistent-var in solve und displaceMesh zu initialisieren.
+
 %% Kräfte berechnen
 % Parallel
-if parallel==1
+if parallel
 y=0;Iy=0;
 for n1=1:Size_X(2)
    parfor n=1:Size_X(1)
