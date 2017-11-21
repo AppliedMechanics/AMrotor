@@ -99,7 +99,20 @@ cnfg.cnfg_unbalance=[];
 %  cnfg.cnfg_unbalance(1).name = 'Geplante Unwucht';
 %  cnfg.cnfg_unbalance(1).position = 300e-3;
 %  cnfg.cnfg_unbalance(1).betrag = 5e-1;
-%  cnfg.cnfg_unbalance(1).winkellage = 0;
+%  cnfg.cnfg_unbalance(1).color = 'r';
+%  cnfg.cnfg_unbalance(1).winkellage = pi/4;
+%  
+%  cnfg.cnfg_unbalance(2).name = 'Geplante Unwucht';
+%  cnfg.cnfg_unbalance(2).position = 300e-3;
+%  cnfg.cnfg_unbalance(2).betrag = 7e-1;
+%  cnfg.cnfg_unbalance(2).color = 'g';
+%  cnfg.cnfg_unbalance(2).winkellage = pi/3;
+%  
+%  cnfg.cnfg_unbalance(3).name = 'Geplante Unwucht';
+%  cnfg.cnfg_unbalance(3).position = 300e-3;
+%  cnfg.cnfg_unbalance(3).betrag = 10e-1;
+%  cnfg.cnfg_unbalance(3).color = 'm';
+%  cnfg.cnfg_unbalance(3).winkellage = pi/2;
 
 %% Infos
 % %KoSy:

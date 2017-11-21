@@ -55,18 +55,25 @@ r.compute_loads();
 
 %% Running system analyses
 
-m=Experiments.Modalanalyse(r);
-m.calculate_rotorsystem(3);
+Mod=Experiments.Modalanalyse(r);
+Mod.calculate_rotorsystem(5);
 
-esf2= Graphs.Eigenschwingformen(m);
+esf2= Graphs.Eigenschwingformen(Mod);
 esf2.plot_displacements();
 Janitor.cleanFigures();
 
 % Der Campbell-plot müsste im Prinzip komplett neu aufgebaut werden:
 
-% m.calculate_rotorsystem_ss(3,0:100:3000);
-% cmp = Graphs.Campbell(m);
-% cmp.plot();
+cmp = Experiments.Campbell(r);
+cmp.setUp(0:5e2:1e4,...
+          4); % input is 1/min
+cmp.calculate();
+
+cmpDiagramm = Graphs.Campbell(cmp);
+cmpDiagramm.setPlots('all');
+cmpDiagramm.setPlots('backward');
+cmpDiagramm.setPlots('forward');
+Janitor.cleanFigures();
 
 %% Running Time Simulation
 
