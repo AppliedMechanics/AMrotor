@@ -19,11 +19,11 @@ zero=[0,0;0,0];
 A=[M,zero;zero,K];
 B=[G,K;-K,zero];
 
-[V(:,:,n),lambda0]=polyeig(K,G*0,M);
-lambda(:,n)=(lambda0);
+% [V(:,:,n),lambda0]=polyeig(K,G*0,M);
+% lambda(:,n)=(lambda0);
 
-% [V(:,:,n),lambda0]=eig(B,A)
-% lambda(:,n)=diag(lambda0);
+[V(:,:,n),lambda0]=eig(B,A);
+lambda(:,n)=diag(lambda0);
 winkel(:,:,n)=360*angle(V(:,:,n))/(2*pi);
 kriterium(:,:,n)=sign(winkel(1,:,n)-winkel(2,:,n));
 % Wenn Kriterium +1, dann Gleichlauf, wenn Kriterium gleich -1 dann
