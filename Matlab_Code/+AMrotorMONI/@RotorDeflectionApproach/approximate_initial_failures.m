@@ -119,7 +119,7 @@ x(1)= x(1)*m1/m/uMess/uUnwucht;
 %       s=gcf;
 %      set(s,'PaperPositionMode','auto');
 %      %print(s,'-djpeg',[pfad,name_str])
-     save Posi r eta x g f
+%     save Posi r eta x g f
  end
  % ++++++Ende Debugging++++  
 

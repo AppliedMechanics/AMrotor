@@ -145,7 +145,7 @@ A = [c', d'];
 %      s=gcf;
 %      set(s,'PaperPositionMode','auto');
 %      %print(s,'-djpeg',[pfad,name_str])
-     save Kraft Gleichlauf_FL1 eta c d F_L1_trenn F_L2_trenn
+     %save Kraft Gleichlauf_FL1 eta c d F_L1_trenn F_L2_trenn
  end
  % ++++++Ende Debugging++++
  

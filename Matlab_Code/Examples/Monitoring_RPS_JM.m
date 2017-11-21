@@ -43,7 +43,7 @@ KraftMonitor.Debugging=Debugging;
 KraftMonitor.initialize(DataSetAlt);
 KraftMonitor.revise(DataSetNeu);
 KraftMonitor.show;
-KraftMonitor;
+% KraftMonitor;
 
 
 %% Positionsmessung
@@ -56,7 +56,7 @@ PosiMonitor.Debugging=Debugging;
 PosiMonitor.initialize(DataSetAlt);
 PosiMonitor.revise(DataSetNeu);
 PosiMonitor.show;
-PosiMonitor;
+% PosiMonitor;
 
 
 %% Kombination Lagerkraft und Positionsmessung
@@ -75,7 +75,7 @@ KombiMonitorInitial.show;
 KombiMonitorRevisional.calculation(PosiMonitor.XRevisional,KraftMonitor.Bearing1_Revisionalforce,KraftMonitor.Bearing2_Revisionalforce);
 KombiMonitorRevisional.show;
 KombiMonitorDifferential.calculation(PosiMonitor.XDifferential,KraftMonitor.Bearing1_Differentialforce,KraftMonitor.Bearing2_Differentialforce);
-KombiMonitorDifferential.show
+KombiMonitorDifferential.show;
  
 
 %% Plot von Vektoren
