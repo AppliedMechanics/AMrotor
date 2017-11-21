@@ -7,8 +7,6 @@ Lagerabstand=obj.cnfg.Lagerabstand; %Abstand zwischen den beiden Auflagern in Me
 Eigenfrequenz =obj.cnfg.Eigenfrequenz;   %Eigenfrequenz des Rotors in rad/sec.
 zLinkesLager = obj.cnfg.zLinkesLager;
 Debugging=obj.Debugging;
-TUM=obj.cnfg.TUM;
-%pfad = obj.cnfg.pfad;
 
 %% Fourier transformation vom aktulellen Messwerte-Paket
 Schluessel=keys(dataset);

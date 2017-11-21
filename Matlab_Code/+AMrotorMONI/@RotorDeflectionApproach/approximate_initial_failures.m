@@ -11,8 +11,7 @@ zSensor = obj.cnfg.zPosSensor;
 zLinkesLager = obj.cnfg.zLinkesLager;
 uESF1=obj.ESF1.uESF1;
 zESF1=obj.ESF1.zESF1;
-TUM = obj.cnfg.TUM;
-%pfad = obj.cnfg.pfad;
+
 
 Schluessel=keys(dataset);
 
@@ -26,9 +25,7 @@ for i1=1:(size(keys(dataset),2))
         yPos=temp('s_y (Positionssensor Scheibe)');
     
         [DrehzahlMess(i1), Gleichlauf_Auslenkung(i1), Gegenlauf_Auslenkung(i1), StatischeAuslenkung(i1),fourier(i1)] = analyse_deflection_fourier_coeff(obj,Zeit,xPos,yPos,Tacho,phi);
-        
-  
-        
+      
 end
 
 
@@ -44,9 +41,6 @@ uUnwucht = interp1(zESF1,uESF1,zUnwucht,'spline');
     f = eta.^2./(1-eta.^2);
     g = 1./(1-eta.^2);
     r = Gleichlauf_Auslenkung.';
-
- 
-
 
 A = [f.',g.'];
 x = A\r;
