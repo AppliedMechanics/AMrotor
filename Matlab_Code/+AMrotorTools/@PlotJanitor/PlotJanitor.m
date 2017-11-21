@@ -73,6 +73,7 @@ classdef PlotJanitor < handle
                     [fac*obj.offset + obj.positions{pos}(1:2),...
                      0.98*obj.positions{pos}(3:4)]);
             end
+            pause(0.1);
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     end
