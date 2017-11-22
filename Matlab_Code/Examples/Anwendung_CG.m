@@ -70,8 +70,8 @@ cmp.calculate();
 
 cmpDiagramm = Graphs.Campbell(cmp);
 cmpDiagramm.setPlots('all');
-cmpDiagramm.setPlots('backward');
-cmpDiagramm.setPlots('forward');
+%cmpDiagramm.setPlots('backward');
+%cmpDiagramm.setPlots('forward');
 Janitor.cleanFigures();
 
 %% Running Time Simulation

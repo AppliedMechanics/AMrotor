@@ -1,4 +1,4 @@
-function [ EV_for,EW_for,EV_back,EW_back, EV_0, EW_0, Phase_xy, Phase_xy_mean ] = getSeparationEigenVectors(obj,EV,EW )
+function [ EV_for,EW_for,EV_back,EW_back, EV_0, EW_0, Phase_xy, Phase_xy_mean ] = getSeparationEigenVectors(obj,EV_raw,EW_raw )
 %Input: Matrix of EVs (format: [x1;b1;x2;b2;...y1;a1;..., next EV]) and corresponding EWs; imag(EW) has to be positive!
 %Process: calculates the phase between the entries of x and y and decides,
 %if backward or forward-whirl or no whirl at all; the mean of all phases is
@@ -17,14 +17,14 @@ function [ EV_for,EW_for,EV_back,EW_back, EV_0, EW_0, Phase_xy, Phase_xy_mean ] 
 % -> |phi_y-phi_x|~=pi/2: the main axes is no longer in x and y direction
 
 % Determine size of problem
-s=size(EV);
+s=size(EV_raw);
 n_DOF=s(1);
 n_EW=s(2)/2;
 
 %Entferne alle negativen Eigenwerte
-I_p=(imag(EW)>0);
-EW=EW(I_p);
-EV=EV(:,I_p);
+I_p=(imag(EW_raw)>0);
+EW=EW_raw(I_p);
+EV=EV_raw(:,I_p);
 
 % Initiate variables
 [Phase_x,Phase_y,Phase_a, Phase_b]=deal(NaN(n_DOF/4,n_EW));
