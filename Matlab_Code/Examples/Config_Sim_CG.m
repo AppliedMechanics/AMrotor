@@ -64,17 +64,24 @@ cnfg.cnfg_sensor=[];
 % Lager
 cnfg.cnfg_lager=[];
 
-cnfg.cnfg_lager(1).name = '1-Wege Lager';
+cnfg.cnfg_lager(1).name = 'Isotropes Lager 1';
 cnfg.cnfg_lager(1).position=0e-3;                        %[m]
 cnfg.cnfg_lager(1).type=1;
 cnfg.cnfg_lager(1).stiffness=5e7;                     %[N/m]
 
 
-cnfg.cnfg_lager(2).name = '2-Wege Lager';
+cnfg.cnfg_lager(2).name = 'Isotropes Lager 2';
 cnfg.cnfg_lager(2).position=600e-3;                        %[m]
-cnfg.cnfg_lager(2).type=4;
-cnfg.cnfg_lager(2).stiffness.x=5e7;%7.0e5;              %[N/m]
-cnfg.cnfg_lager(2).stiffness.y=2e3;%7.0e5;              %[N/m]
+cnfg.cnfg_lager(2).type=1;
+cnfg.cnfg_lager(2).stiffness=5e7;                     %[N/m]
+
+
+% cnfg.cnfg_lager(2).name = 'Orthotropes Lager';
+% cnfg.cnfg_lager(2).position=600e-3;                        %[m]
+% cnfg.cnfg_lager(2).type=4;
+% cnfg.cnfg_lager(2).stiffness.x=5e7;%7.0e5;              %[N/m]
+% cnfg.cnfg_lager(2).stiffness.y=2e3;%7.0e5;              %[N/m]
+
 % Lager
 %cnfg.cnfg_lager(2).name = 'Ein Magnet-Lager';
 %cnfg.cnfg_lager(2).position=600e-3;                        %[m]

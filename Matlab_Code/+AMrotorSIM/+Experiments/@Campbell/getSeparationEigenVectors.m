@@ -19,7 +19,12 @@ function [ EV_for,EW_for,EV_back,EW_back, EV_0, EW_0, Phase_xy, Phase_xy_mean ] 
 % Determine size of problem
 s=size(EV);
 n_DOF=s(1);
-n_EW=s(2);
+n_EW=s(2)/2;
+
+%Entferne alle negativen Eigenwerte
+I_p=(imag(EW)>0);
+EW=EW(I_p);
+EV=EV(:,I_p);
 
 % Initiate variables
 [Phase_x,Phase_y,Phase_a, Phase_b]=deal(NaN(n_DOF/4,n_EW));
@@ -36,6 +41,18 @@ end
 %Calculate the relative phases between the directions
 Phase_xy=Phase_x-Phase_y;
 Phase_ab=Phase_b-Phase_a;
+
+for k=1:3  % Drag the phases iteratively to the smallest value
+    I=find(abs(Phase_xy-2*pi)<abs(Phase_xy));    %case phi-2*pi is better
+    Phase_xy(I)=Phase_xy(I)-2*pi;
+    I=find(abs(Phase_ab-2*pi)<abs(Phase_ab));
+    Phase_ab(I)=Phase_ab(I)-2*pi;
+
+    I=find(abs(Phase_xy+2*pi)<abs(Phase_xy));    %case phi+2*pi is better
+    Phase_xy(I)=Phase_xy(I)+2*pi;
+    I=find(abs(Phase_ab+2*pi)<abs(Phase_ab));   
+    Phase_ab(I)=Phase_ab(I)+2*pi;
+end
 
 % Calculate the mean of the Phases
 for k=1:n_EW
@@ -60,8 +77,6 @@ EW_back=EW(I_b);
 
 EV_0=EV(:,I_0);
 EW_0=EW(I_0);
-
-
 
 end
 

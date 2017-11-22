@@ -12,7 +12,7 @@ classdef Campbell < handle
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         function obj = Campbell(experimentCampbell)
             if nargin == 0
-                disp(['Without a Campell analaysis a Campbell-Diagreamm' ...
+                disp(['Without a Campell analaysis a Campbell-Diagram' ...
                       ' is not possible'])
             else
                 obj.experimentCampbell = experimentCampbell;
@@ -30,7 +30,7 @@ classdef Campbell < handle
                     obj.setAllPlots();
                 otherwise
                     error(['You try to reach a selection for the Campbell-' ...
-                          'Diagramm which is not implemented.']);
+                          'Diagram which is not implemented.']);
             end
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
