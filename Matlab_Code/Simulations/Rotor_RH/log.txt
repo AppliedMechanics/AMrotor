@@ -1,0 +1,1210 @@
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Kraftsensor rechts
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Stationäre Lösung
+Compute.... ode15s State Space ....
+... rotational speed: 100 U/min
+... rotational speed: 150 U/min
+... rotational speed: 200 U/min
+... rotational speed: 250 U/min
+... rotational speed: 300 U/min
+... rotational speed: 350 U/min
+... rotational speed: 400 U/min
+... rotational speed: 450 U/min
+... rotational speed: 500 U/min
+ --- Compose Dataset Timesignal  --- 
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Kraftsensor rechts
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Stationäre Lösung
+Compute.... ode15s State Space ....
+... rotational speed: 100 U/min
+... rotational speed: 150 U/min
+... rotational speed: 200 U/min
+... rotational speed: 250 U/min
+... rotational speed: 300 U/min
+if system_dependent('IsDebugMode')==1, dbquit; end
+Simulation_RH
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Kraftsensor rechts
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Stationäre Lösung
+Compute.... ode15s State Space ....
+... rotational speed: 100 U/min
+... rotational speed: 150 U/min
+... rotational speed: 200 U/min
+... rotational speed: 250 U/min
+... rotational speed: 300 U/min
+... rotational speed: 350 U/min
+... rotational speed: 400 U/min
+... rotational speed: 450 U/min
+... rotational speed: 500 U/min
+ --- Compose Dataset Timesignal  --- 
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Kraftsensor links2
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Stationäre Lösung
+Compute.... ode15s State Space ....
+... rotational speed: 100 U/min
+... rotational speed: 150 U/min
+... rotational speed: 200 U/min
+... rotational speed: 250 U/min
+... rotational speed: 300 U/min
+... rotational speed: 350 U/min
+... rotational speed: 400 U/min
+... rotational speed: 450 U/min
+... rotational speed: 500 U/min
+ --- Compose Dataset Timesignal  --- 
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Kraftsensor links2
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Stationäre Lösung
+Compute.... ode15s State Space ....
+... rotational speed: 100 U/min
+... rotational speed: 150 U/min
+... rotational speed: 200 U/min
+... rotational speed: 250 U/min
+... rotational speed: 300 U/min
+... rotational speed: 350 U/min
+... rotational speed: 400 U/min
+... rotational speed: 450 U/min
+... rotational speed: 500 U/min
+ --- Compose Dataset Timesignal  --- 
+{Index exceeds matrix dimensions.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('AMrotorSIM.Dataoutput.TimeDataOutput/compose_data', 'H:\AMrotor\Matlab_Code\+AMrotorSIM\+Dataoutput\@TimeDataOutput\TimeDataOutput.m', 46)" style="font-weight:bold">AMrotorSIM.Dataoutput.TimeDataOutput/compose_data</a> (<a href="matlab: opentoline('H:\AMrotor\Matlab_Code\+AMrotorSIM\+Dataoutput\@TimeDataOutput\TimeDataOutput.m',46,0)">line 46</a>)
+                            tmp(['F_x (',sensor.name,')']) = x_val(drehzahl);
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Simulation_RH', 'H:\AMrotor\Matlab_Code\Rotor_RH\Simulation_RH.m', 64)" style="font-weight:bold">Simulation_RH</a> (<a href="matlab: opentoline('H:\AMrotor\Matlab_Code\Rotor_RH\Simulation_RH.m',64,0)">line 64</a>)
+dataset_monitoring = d.compose_data;
+} 
+Simulation_RH
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Kraftsensor links2
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Stationäre Lösung
+Compute.... ode15s State Space ....
+... rotational speed: 100 U/min
+... rotational speed: 150 U/min
+... rotational speed: 200 U/min
+... rotational speed: 250 U/min
+... rotational speed: 300 U/min
+... rotational speed: 350 U/min
+... rotational speed: 400 U/min
+... rotational speed: 450 U/min
+... rotational speed: 500 U/min
+ --- Compose Dataset Timesignal  --- 
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links2
+Kraftsensor links
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Stationäre Lösung
+Compute.... ode15s State Space ....
+... rotational speed: 100 U/min
+... rotational speed: 150 U/min
+... rotational speed: 200 U/min
+... rotational speed: 250 U/min
+... rotational speed: 300 U/min
+... rotational speed: 350 U/min
+... rotational speed: 400 U/min
+... rotational speed: 450 U/min
+... rotational speed: 500 U/min
+ --- Compose Dataset Timesignal  --- 
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor rechts
+Kraftsensor links
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Stationäre Lösung
+Compute.... ode15s State Space ....
+... rotational speed: 100 U/min
+... rotational speed: 150 U/min
+... rotational speed: 200 U/min
+... rotational speed: 250 U/min
+... rotational speed: 300 U/min
+... rotational speed: 350 U/min
+... rotational speed: 400 U/min
+... rotational speed: 450 U/min
+... rotational speed: 500 U/min
+ --- Compose Dataset Timesignal  --- 
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Kraftsensor rechts
+Positionssensor links
+Positionssensor rechts
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Stationäre Lösung
+Compute.... ode15s State Space ....
+... rotational speed: 100 U/min
+... rotational speed: 150 U/min
+... rotational speed: 200 U/min
+... rotational speed: 250 U/min
+... rotational speed: 300 U/min
+... rotational speed: 350 U/min
+... rotational speed: 400 U/min
+... rotational speed: 450 U/min
+... rotational speed: 500 U/min
+ --- Compose Dataset Timesignal  --- 
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Kraftsensor rechts
+Positionssensor links
+Positionssensor rechts
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Stationäre Lösung
+Compute.... ode15s State Space ....
+... rotational speed: 100 U/min
+... rotational speed: 150 U/min
+... rotational speed: 200 U/min
+... rotational speed: 250 U/min
+... rotational speed: 300 U/min
+... rotational speed: 350 U/min
+... rotational speed: 400 U/min
+... rotational speed: 450 U/min
+... rotational speed: 500 U/min
+ --- Compose Dataset Timesignal  --- 
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Kraftsensor rechts
+Positionssensor links
+Positionssensor rechts
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Stationäre Lösung
+Compute.... ode15s State Space ....
+... rotational speed: 100 U/min
+... rotational speed: 150 U/min
+... rotational speed: 200 U/min
+... rotational speed: 250 U/min
+... rotational speed: 300 U/min
+... rotational speed: 350 U/min
+... rotational speed: 400 U/min
+... rotational speed: 450 U/min
+... rotational speed: 500 U/min
+ --- Compose Dataset Timesignal  --- 
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Rechtes Simple Lager
+Linkes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Kraftsensor rechts
+Positionssensor links
+Positionssensor rechts
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Stationäre Lösung
+Compute.... ode15s State Space ....
+... rotational speed: 100 U/min
+... rotational speed: 150 U/min
+... rotational speed: 200 U/min
+... rotational speed: 250 U/min
+... rotational speed: 300 U/min
+... rotational speed: 350 U/min
+... rotational speed: 400 U/min
+... rotational speed: 450 U/min
+... rotational speed: 500 U/min
+ --- Compose Dataset Timesignal  --- 
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Kraftsensor rechts
+Positionssensor links
+Positionssensor rechts
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Stationäre Lösung
+Compute.... ode15s State Space ....
+... rotational speed: 100 U/min
+... rotational speed: 150 U/min
+... rotational speed: 200 U/min
+... rotational speed: 250 U/min
+... rotational speed: 300 U/min
+... rotational speed: 350 U/min
+... rotational speed: 400 U/min
+... rotational speed: 450 U/min
+... rotational speed: 500 U/min
+ --- Compose Dataset Timesignal  --- 
+{Index exceeds matrix dimensions.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('AMrotorSIM.Dataoutput.TimeDataOutput/compose_data', 'H:\AMrotor\Matlab_Code\+AMrotorSIM\+Dataoutput\@TimeDataOutput\TimeDataOutput.m', 46)" style="font-weight:bold">AMrotorSIM.Dataoutput.TimeDataOutput/compose_data</a> (<a href="matlab: opentoline('H:\AMrotor\Matlab_Code\+AMrotorSIM\+Dataoutput\@TimeDataOutput\TimeDataOutput.m',46,0)">line 46</a>)
+                            tmp(['F_x (',sensor.name,')']) = x_val(drehzahl);
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Simulation_RH', 'H:\AMrotor\Matlab_Code\Rotor_RH\Simulation_RH.m', 64)" style="font-weight:bold">Simulation_RH</a> (<a href="matlab: opentoline('H:\AMrotor\Matlab_Code\Rotor_RH\Simulation_RH.m',64,0)">line 64</a>)
+dataset_monitoring = d.compose_data;
+} 
+Simulation_RH
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Kraftsensor rechts
+Positionssensor links
+Positionssensor rechts
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Stationäre Lösung
+Compute.... ode15s State Space ....
+... rotational speed: 100 U/min
+... rotational speed: 150 U/min
+... rotational speed: 200 U/min
+... rotational speed: 250 U/min
+... rotational speed: 300 U/min
+... rotational speed: 350 U/min
+... rotational speed: 400 U/min
+... rotational speed: 450 U/min
+... rotational speed: 500 U/min
+ --- Compose Dataset Timesignal  --- 
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Positionssensor links
+Positionssensor rechts
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Stationäre Lösung
+Compute.... ode15s State Space ....
+... rotational speed: 100 U/min
+... rotational speed: 150 U/min
+... rotational speed: 200 U/min
+... rotational speed: 250 U/min
+... rotational speed: 300 U/min
+... rotational speed: 350 U/min
+... rotational speed: 400 U/min
+... rotational speed: 450 U/min
+... rotational speed: 500 U/min
+ --- Compose Dataset Timesignal  --- 
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Positionssensor links
+Positionssensor rechts
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Stationäre Lösung
+Compute.... ode15s State Space ....
+... rotational speed: 100 U/min
+... rotational speed: 150 U/min
+... rotational speed: 200 U/min
+... rotational speed: 250 U/min
+... rotational speed: 300 U/min
+... rotational speed: 350 U/min
+... rotational speed: 400 U/min
+... rotational speed: 450 U/min
+... rotational speed: 500 U/min
+ --- Compose Dataset Timesignal  --- 
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Positionssensor links
+Positionssensor rechts
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Stationäre Lösung
+Compute.... ode15s State Space ....
+... rotational speed: 100 U/min
+... rotational speed: 150 U/min
+... rotational speed: 200 U/min
+... rotational speed: 250 U/min
+... rotational speed: 300 U/min
+... rotational speed: 350 U/min
+... rotational speed: 400 U/min
+... rotational speed: 450 U/min
+... rotational speed: 500 U/min
+ --- Compose Dataset Timesignal  --- 
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Positionssensor links
+Positionssensor rechts
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Stationäre Lösung
+Compute.... ode15s State Space ....
+... rotational speed: 100 U/min
+... rotational speed: 150 U/min
+... rotational speed: 200 U/min
+... rotational speed: 250 U/min
+... rotational speed: 300 U/min
+... rotational speed: 350 U/min
+... rotational speed: 400 U/min
+... rotational speed: 450 U/min
+... rotational speed: 500 U/min
+ --- Compose Dataset Timesignal  --- 
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Positionssensor links
+Positionssensor rechts
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Stationäre Lösung
+Compute.... ode15s State Space ....
+... rotational speed: 100 U/min
+... rotational speed: 150 U/min
+... rotational speed: 200 U/min
+... rotational speed: 250 U/min
+... rotational speed: 300 U/min
+... rotational speed: 350 U/min
+... rotational speed: 400 U/min
+... rotational speed: 450 U/min
+... rotational speed: 500 U/min
+ --- Compose Dataset Timesignal  --- 
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Positionssensor links
+Positionssensor rechts
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Stationäre Lösung
+Compute.... ode15s State Space ....
+... rotational speed: 100 U/min
+... rotational speed: 150 U/min
+... rotational speed: 200 U/min
+... rotational speed: 250 U/min
+... rotational speed: 300 U/min
+... rotational speed: 350 U/min
+... rotational speed: 400 U/min
+... rotational speed: 450 U/min
+... rotational speed: 500 U/min
+ --- Compose Dataset Timesignal  --- 
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Positionssensor links
+Positionssensor rechts
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Stationäre Lösung
+Compute.... ode15s State Space ....
+... rotational speed: 100 U/min
+... rotational speed: 150 U/min
+... rotational speed: 200 U/min
+... rotational speed: 250 U/min
+... rotational speed: 300 U/min
+... rotational speed: 350 U/min
+... rotational speed: 400 U/min
+... rotational speed: 450 U/min
+... rotational speed: 500 U/min
+ --- Compose Dataset Timesignal  --- 
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Positionssensor links
+Positionssensor rechts
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Stationäre Lösung
+Compute.... ode15s State Space ....
+... rotational speed: 100 U/min
+... rotational speed: 150 U/min
+... rotational speed: 200 U/min
+... rotational speed: 250 U/min
+... rotational speed: 300 U/min
+... rotational speed: 350 U/min
+... rotational speed: 400 U/min
+... rotational speed: 450 U/min
+... rotational speed: 500 U/min
+ --- Compose Dataset Timesignal  --- 
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Positionssensor links
+Positionssensor rechts
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Stationäre Lösung
+Compute.... ode15s State Space ....
+... rotational speed: 100 U/min
+... rotational speed: 150 U/min
+... rotational speed: 200 U/min
+... rotational speed: 250 U/min
+... rotational speed: 300 U/min
+... rotational speed: 350 U/min
+... rotational speed: 400 U/min
+... rotational speed: 450 U/min
+... rotational speed: 500 U/min
+ --- Compose Dataset Timesignal  --- 
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Kraftsensor rechts
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Stationäre Lösung
+Compute.... ode15s State Space ....
+... rotational speed: 100 U/min
+... rotational speed: 150 U/min
+... rotational speed: 200 U/min
+... rotational speed: 250 U/min
+... rotational speed: 300 U/min
+... rotational speed: 350 U/min
+... rotational speed: 400 U/min
+... rotational speed: 450 U/min
+... rotational speed: 500 U/min
+ --- Compose Dataset Timesignal  --- 
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('containers.Map/subsref')" style="font-weight:bold">containers.Map/subsref</a>
+The specified key is not present in this container.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Simulation_RH', 'H:\AMrotor\Matlab_Code\Rotor_RH\Simulation_RH.m', 68)" style="font-weight:bold">Simulation_RH</a> (<a href="matlab: opentoline('H:\AMrotor\Matlab_Code\Rotor_RH\Simulation_RH.m',68,0)">line 68</a>)
+sx_r=temp('s_x (Positionssensor rechts)');
+} 
+temp=dataset_monitoring(300);
+sx_r=temp('F_x (Kraftsensor rechts)');
+sx_l=temp('F_x (Kraftsensor links)');
+figure();
+plot(sx_l)
+hold on
+plot(sx_r)
+Simulation_RH
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Kraftsensor rechts
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Stationäre Lösung
+Compute.... ode15s State Space ....
+... rotational speed: 100 U/min
+... rotational speed: 150 U/min
+... rotational speed: 200 U/min
+... rotational speed: 250 U/min
+... rotational speed: 300 U/min
+... rotational speed: 350 U/min
+... rotational speed: 400 U/min
+... rotational speed: 450 U/min
+... rotational speed: 500 U/min
+ --- Compose Dataset Timesignal  --- 
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Kraftsensor rechts
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Stationäre Lösung
+Compute.... ode15s State Space ....
+... rotational speed: 100 U/min
+... rotational speed: 150 U/min
+... rotational speed: 200 U/min
+... rotational speed: 250 U/min
+... rotational speed: 300 U/min
+... rotational speed: 350 U/min
+... rotational speed: 400 U/min
+... rotational speed: 450 U/min
+... rotational speed: 500 U/min
+ --- Compose Dataset Timesignal  --- 
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Kraftsensor rechts
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+{No appropriate method, property, or field 'calculate_rotorsystem_only' for class 'AMrotorSIM.Experiments.Modalanalyse'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Simulation_RH', 'H:\AMrotor\Matlab_Code\Rotor_RH\Simulation_RH.m', 51)" style="font-weight:bold">Simulation_RH</a> (<a href="matlab: opentoline('H:\AMrotor\Matlab_Code\Rotor_RH\Simulation_RH.m',51,0)">line 51</a>)
+m.calculate_rotorsystem_only(1,300);
+} 
+m.calculate_rotor_only(1,300);
+Berechne Modalanalyse Rotor
+Simulation_RH
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Kraftsensor rechts
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Berechne Modalanalyse Rotor
+Stationäre Lösung
+Compute.... ode15s State Space ....
+... rotational speed: 100 U/min
+... rotational speed: 150 U/min
+... rotational speed: 200 U/min
+... rotational speed: 250 U/min
+... rotational speed: 300 U/min
+... rotational speed: 350 U/min
+... rotational speed: 400 U/min
+... rotational speed: 450 U/min
+... rotational speed: 500 U/min
+ --- Compose Dataset Timesignal  --- 
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Kraftsensor rechts
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Berechne Modalanalyse Rotor
+plot(eigenvektor)
+plot(abs(eigenvektor))
+eigenvektor= m.eigenmatrizen.Aev(1:2:end/2);
+plot(abs(eigenvektor));
+m=Experiments.Modalanalyse(r);
+% 
+m.calculate_rotor_only(1,200);
+Berechne Modalanalyse Rotor
+
+eigenvektor= m.eigenmatrizen.Aev(1:2:end/2);
+eigenwert = m.eigenmatrizen.Aew;
+
+plot(abs(eigenvektor));
+g.show();
+Rotor Gesamtsystem
+plot(abs(eigenvektor));
+plot(real(eigenvektor));
+plot(imag(eigenvektor));
+plot(imag(eigenvektor));
+Aev= m.eigenmatrizen.Aev;
+eigenvektor= Aev(1:2:end/2);
+Aev= m.eigenmatrizen.Aev;
+eigenvektor= Aev(1:2:end/2,1);
+m.calculate_rotor_only(1,200);
+Berechne Modalanalyse Rotor
+<a href="matlab: opentoline('H:\AMrotor\Matlab_Code\+AMrotorSIM\+Experiments\@Modalanalyse\private\compute_EW_EV.m',33,1)">33  </a>    Aev(:,s1:s2)=  EVrot(:,end/2 - 2*n_ew + 1:2:end/2);
+if system_dependent('IsDebugMode')==1, dbquit; end
+m.calculate_rotor_only(1,200);
+Berechne Modalanalyse Rotor
+<a href="matlab: opentoline('H:\AMrotor\Matlab_Code\+AMrotorSIM\+Experiments\@Modalanalyse\Modalanalyse.m',48,1)">48  </a>            obj.eigenmatrizen.Aev=abs(EVrot(:,1:2:2*n_modes));
+[EVrot,EWrot] = polyeig(K,G_rot,M);
+obj.eigenmatrizen.Aev=abs(EVrot(:,1:2:2*n_modes));
+m.calculate_rotor_only(1,200);
+Berechne Modalanalyse Rotor
+<a href="matlab: opentoline('H:\AMrotor\Matlab_Code\+AMrotorSIM\+Experiments\@Modalanalyse\Modalanalyse.m',48,1)">48  </a>            obj.eigenmatrizen.Aev=abs(EVrot(:,1:2:2*n_modes));
+[EVrot,EWrot] = polyeig(K,G_rot,M);
+m=Experiments.Modalanalyse(r);
+{Undefined variable "Experiments" or class "Experiments.Modalanalyse".
+} 
+Simulation_RH
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Kraftsensor rechts
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Berechne Modalanalyse Rotor
+{Subscripted assignment dimension mismatch.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('AMrotorSIM.Experiments.Modalanalyse/calculate_rotor_only', 'H:\AMrotor\Matlab_Code\+AMrotorSIM\+Experiments\@Modalanalyse\Modalanalyse.m', 55)" style="font-weight:bold">AMrotorSIM.Experiments.Modalanalyse/calculate_rotor_only</a> (<a href="matlab: opentoline('H:\AMrotor\Matlab_Code\+AMrotorSIM\+Experiments\@Modalanalyse\Modalanalyse.m',55,0)">line 55</a>)
+                 Aew(1,s,n1)=-imag(EWrot(1:2:s*4));
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Simulation_RH', 'H:\AMrotor\Matlab_Code\Rotor_RH\Simulation_RH.m', 51)" style="font-weight:bold">Simulation_RH</a> (<a href="matlab: opentoline('H:\AMrotor\Matlab_Code\Rotor_RH\Simulation_RH.m',51,0)">line 51</a>)
+m.calculate_rotor_only(1,200);
+} 
+opentoline('H:\AMrotor\Matlab_Code\+AMrotorSIM\+Experiments\@Modalanalyse\Modalanalyse.m',55,0)
+m=Experiments.Modalanalyse(r);
+{Undefined variable "Experiments" or class "Experiments.Modalanalyse".
+} 
+Simulation_RH
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Kraftsensor rechts
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Berechne Modalanalyse Rotor
+[EVrot,EWrot] = polyeig(K,G_rot,M);
+Simulation_RH
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Kraftsensor rechts
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Berechne Modalanalyse Rotor
+Aew(:,s,n1)=-imag(EWrot(1:2:s*4));
+m=Experiments.Modalanalyse(r);
+{Undefined variable "Experiments" or class "Experiments.Modalanalyse".
+} 
+Simulation_RH
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Kraftsensor rechts
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Berechne Modalanalyse Rotor
+{Reference to non-existent field 'Aev'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Simulation_RH', 'H:\AMrotor\Matlab_Code\Rotor_RH\Simulation_RH.m', 53)" style="font-weight:bold">Simulation_RH</a> (<a href="matlab: opentoline('H:\AMrotor\Matlab_Code\Rotor_RH\Simulation_RH.m',53,0)">line 53</a>)
+Aev= m.eigenmatrizen.Aev;
+} 
+Aev= m.eigenmatrizen.Aev_x;
+eigenvektor= Aev;
+plot(imag(eigenvektor));
+plot(abs(eigenvektor));
+Simulation_RH
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Kraftsensor rechts
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Berechne Modalanalyse Rotor
+{Undefined function or variable 'EWrot'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('AMrotorSIM.Experiments.Modalanalyse/calculate_rotor_only', 'H:\AMrotor\Matlab_Code\+AMrotorSIM\+Experiments\@Modalanalyse\Modalanalyse.m', 43)" style="font-weight:bold">AMrotorSIM.Experiments.Modalanalyse/calculate_rotor_only</a> (<a href="matlab: opentoline('H:\AMrotor\Matlab_Code\+AMrotorSIM\+Experiments\@Modalanalyse\Modalanalyse.m',43,0)">line 43</a>)
+             [~,I]=sort((abs(EWrot())));
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Simulation_RH', 'H:\AMrotor\Matlab_Code\Rotor_RH\Simulation_RH.m', 51)" style="font-weight:bold">Simulation_RH</a> (<a href="matlab: opentoline('H:\AMrotor\Matlab_Code\Rotor_RH\Simulation_RH.m',51,0)">line 51</a>)
+m.calculate_rotor_only(1,200);
+} 
+Simulation_RH
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Kraftsensor rechts
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Berechne Modalanalyse Rotor
+dbcont
+<a href="matlab: opentoline('H:\AMrotor\Matlab_Code\Rotor_RH\Simulation_RH.m',54,1)">54  </a>eigenvektor= Aev;
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbquit; end
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Kraftsensor rechts
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Berechne Modalanalyse Rotor
+{Subscripted assignment dimension mismatch.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('AMrotorSIM.Experiments.Modalanalyse/calculate_rotor_only', 'H:\AMrotor\Matlab_Code\+AMrotorSIM\+Experiments\@Modalanalyse\Modalanalyse.m', 55)" style="font-weight:bold">AMrotorSIM.Experiments.Modalanalyse/calculate_rotor_only</a> (<a href="matlab: opentoline('H:\AMrotor\Matlab_Code\+AMrotorSIM\+Experiments\@Modalanalyse\Modalanalyse.m',55,0)">line 55</a>)
+                 Aew(:,s,n1)=-imag(EW(1:2:s*4));
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Simulation_RH', 'H:\AMrotor\Matlab_Code\Rotor_RH\Simulation_RH.m', 51)" style="font-weight:bold">Simulation_RH</a> (<a href="matlab: opentoline('H:\AMrotor\Matlab_Code\Rotor_RH\Simulation_RH.m',51,0)">line 51</a>)
+m.calculate_rotor_only(6,200);
+} 
+Simulation_RH
+--------------- Rotorsystem --------------
+RotorSystem
+Akademisches Beispiel
+Linkes Simple Lager
+Rechtes Simple Lager
+----------------------------------------------
+--------------- Sensors ------------------------
+Positionssensor Scheibe
+Kraftsensor links
+Kraftsensor rechts
+----------------------------------------------
+--------------- Loads ------------------------
+Geplante Unwucht
+----------------------------------------------
+Mesh ....
+Rotor Gesamtsystem
+Compute Matrices Rotor
+Compute Matrices Bearings
+Compute Matrices Bearings
+Berechne Modalanalyse Rotor
+Aew(:,s,n1)=-imag(EW(1:2:s*4));
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+if system_dependent('IsDebugMode')==1, dbstep; end
+Aew(:,s,n1)=-imag(EW(1:2:s*4));
+{Subscripted assignment dimension mismatch.
+} 
+-imag(EW(1:2:s*4));
+-imag(EW(1:2:s*4))
+
+ans =
+
+         0
+   -0.0040
+         0
+  -12.9267
+
+Simulation_RH

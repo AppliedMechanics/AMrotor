@@ -1,8 +1,0 @@
-function [Imbalancebased_Imbalancematrix,Imbalancebased_SchlagMatrix,Imbalancebased_ComparativeKupplungsversatzMatrix,Imbalancebased_KupplungsversatzMatrix] = calculate_Imbalancebased(obj,X,Bearing1_force,Bearing2_force)
-
-
-
-
-
-
-end

@@ -5,26 +5,27 @@ function [Bearing1_Revisionalforce,Bearing2_Revisionalforce,Bearing1_Differentia
 
 % Paraeter Importieren
 Wellenlaenge=obj.cnfg.Lagerabstand; %Abstand zwischen den beiden Auflagern in Meter
-Eigenfrequenz =obj.cnfg.Eigenfrequenz;   %Eigenfrequenz des Rotors in rad/sec.
+Eigenfrequenz =obj.cnfg.Eigenfrequenz; %Eigenfrequenz des Rotors in rad/sec.
+zLinkesLager = obj.cnfg.zLinkesLager;
 
 
 %% Fourier transforamtion vom aktulellen Messwerte-Paket
 Schluessel=keys(datasetNeu);
-for i1=1:size(keys(datasetNeu),2)
+for i1=1:(size(keys(datasetNeu),2))
     temp=datasetNeu(Schluessel{i1});
     Zeit=temp('time');
-    Tacho=temp('omega');
-    phi=temp('phi');
-    Kraft_L1_1=temp('F_x (Lager 1)');
-    Kraft_L1_2=temp('F_y (Lager 1)');
-    Kraft_L2_1=temp('F_x (Lager 2)');
-    Kraft_L2_2=temp('F_y (Lager 2)');
-    [~,OmegaExakt(i1),Gleichlauf_FL1(i1,:),Gegenlauf_FL1(i1,:), Gleichlauf_FL2(i1,:), Gegenlauf_FL2(i1,:)] = analyse_force_fourier_coeff(obj,Zeit,Tacho,phi,Kraft_L1_1,Kraft_L1_2,Kraft_L2_1,Kraft_L2_2);
+    Tacho=temp('n');
+    phi=temp('Phi');
+    Kraft_L1_1=temp('F_x (Kraftsensor links)');
+    Kraft_L1_2=temp('F_y (Kraftsensor links)');
+    Kraft_L2_1=temp('F_x (Kraftsensor rechts)');
+    Kraft_L2_2=temp('F_y (Kraftsensor rechts)');
+    [Drehzahlmess(i1),OmegaExakt(i1),Gleichlauf_FL1(i1,:),Gegenlauf_FL1(i1,:), Gleichlauf_FL2(i1,:), Gegenlauf_FL2(i1,:),StatischeKraft_FL1(i1,:),StatischeKraft_FL2(i1,:),fourier(i1)] = analyse_force_fourier_coeff(obj,Zeit,Tacho,phi,Kraft_L1_1,Kraft_L1_2,Kraft_L2_1,Kraft_L2_2);
 end
 
 
 %% Aufstellen des Gleichungssystem
-eta = OmegaExakt./Eigenfrequenz;
+eta = 2*pi/60*Drehzahlmess./Eigenfrequenz;
 
 c = 1./(1-eta.^2);
 d = eta.^2./(1-eta.^2); % quadratischer Anteil
@@ -49,17 +50,15 @@ A = [c', d'];
     DifferenzUnwucht = abs(F_L1_zusatz(2)+F_L2_zusatz(2))/Eigenfrequenz^2;
     
     %Position der Unwucht über beide Momentenggw.:
-    Differenzpos_rel = abs(F_L2_zusatz(2))/(abs(F_L1_zusatz(2))+abs(F_L2_zusatz(2)));
-    Differenzz1 = Differenzpos_rel*Wellenlaenge;
+    Differenzpos_rel_Unw = abs(F_L2_zusatz(2))/(abs(F_L1_zusatz(2))+abs(F_L2_zusatz(2)));
+    Differenzz1_Unw = Differenzpos_rel_Unw*Wellenlaenge + zLinkesLager;
    
     %Phase der Unwucht
-    Differenzphi_1 = atan2(imag(F_L1_zusatz(2)),real(F_L1_zusatz(2)));
-    Differenzphi_2 = atan2(imag(F_L2_zusatz(2)),real(F_L2_zusatz(2)));
-    
-    Differenzphi = 0.5*(Differenzphi_1+Differenzphi_2); %gemittelte Phase
+    vektorDifferenzUnwucht = F_L1_zusatz(2)+F_L2_zusatz(2);
+    Differenzphi_Unw = atan2(imag(vektorDifferenzUnwucht),real(vektorDifferenzUnwucht));
     
     % Ausgabeformat Unwuchtsmatrix
-    Differentialimbalancematrix = [Differenzz1, DifferenzUnwucht, Differenzphi];
+    Differentialimbalancematrix = [Differenzz1_Unw, DifferenzUnwucht, Differenzphi_Unw];
  
     
     
@@ -69,17 +68,15 @@ A = [c', d'];
     NeueUnwucht = abs(F_L1_trenn(2)+F_L2_trenn(2))/Eigenfrequenz^2;
     
     %Position der Unwucht über beide Momentenggw.:
-    Neuepos_rel = abs(F_L2_trenn(2))/(abs(F_L1_trenn(2))+abs(F_L2_trenn(2)));
-    Neuez1 = Neuepos_rel*Wellenlaenge;
+    Neuepos_rel_Unw = abs(F_L2_trenn(2))/(abs(F_L1_trenn(2))+abs(F_L2_trenn(2)));
+    Neuez1_Unw = Neuepos_rel_Unw*Wellenlaenge + zLinkesLager;
    
     %Phase der Unwucht
-    Neuephi_1 = atan2(imag(F_L1_trenn(2)),real(F_L1_trenn(2)));
-    Neuephi_2 = atan2(imag(F_L2_trenn(2)),real(F_L2_trenn(2)));
-    
-    Neuephi = 0.5*(Neuephi_1+Neuephi_2); %gemittelte Phase
+    vektorNeueUnwucht = F_L1_trenn(2)+F_L2_trenn(2);
+    Neuephi_Unw = atan2(imag(vektorNeueUnwucht),real(vektorNeueUnwucht));
     
     % Ausgabeformat neue Uwucht 
-    Revisedimbalancemarix = [Neuez1, NeueUnwucht, Neuephi];
+    Revisedimbalancemarix = [Neuez1_Unw, NeueUnwucht, Neuephi_Unw];
    
     
     
@@ -89,17 +86,15 @@ A = [c', d'];
     Differenz_BKV = abs(F_L1_zusatz(1)+F_L2_zusatz(1));
 
     % Z Position Kupplungsversatz Differenz durch Momentengleichgewicht
-    Differenzpos_rel_BKV = abs(F_L2_zusatz(1))/(abs(F_L1_zusatz(1))+abs(F_L2_zusatz(1)));
-    Differenzz1_BKV = Differenzpos_rel_BKV*Wellenlaenge;
+    Differen_zpos_rel_BKV = abs(F_L2_zusatz(1))/(abs(F_L1_zusatz(1))+abs(F_L2_zusatz(1)));
+    Differenz_z1_BKV = Differen_zpos_rel_BKV*Wellenlaenge + zLinkesLager;
 
     % Phase Kupplungsveratz Differenz
-    Differenzphi_1_BKV = atan2(imag(F_L1_zusatz(1)),real(F_L1_zusatz(1)));
-    Differenzphi_2_BKV = atan2(imag(F_L2_zusatz(1)),real(F_L2_zusatz(1)));
-    
-    Differenzphi_BKV = 0.5*(Differenzphi_1_BKV+Differenzphi_2_BKV); %gemittelte Phase
+    vektorDifferenz_BKV =F_L1_zusatz(1)+F_L2_zusatz(1);
+    Differenz_phi_BKV = atan2(imag(vektorDifferenz_BKV),real(vektorDifferenz_BKV));
     
     % Ausgabeformat Kupplungsversatz Differenz
-    DifferentialKupplungsversatz = [Differenzz1_BKV, Differenz_BKV, Differenzphi_BKV];
+    DifferentialKupplungsversatz = [Differenz_z1_BKV, Differenz_BKV, Differenz_phi_BKV];
     
     
     
@@ -110,14 +105,12 @@ A = [c', d'];
     
     % Z Position neuer Kupplungsversatz durch Momentengleichgewicht
     Neu_pos_rel_BKV = abs(F_L2_trenn(1))/(abs(F_L1_trenn(1))+abs(F_L2_trenn(1)));
-    Neu_z1_BKV = Neu_pos_rel_BKV*Wellenlaenge;
+    Neu_z1_BKV = Neu_pos_rel_BKV*Wellenlaenge + zLinkesLager;
     
     % Phase neuer Kupplungsveratz
-    Neu_phi_1_BKV = atan2(imag(F_L1_trenn(1)),real(F_L1_trenn(1)));
-    Neu_phi_2_BKV = atan2(imag(F_L2_trenn(1)),real(F_L2_trenn(1)));
+    vektorNeuBKV = F_L1_trenn(1)+F_L2_trenn(1);
+    Neu_phi_BKV = atan2(imag(vektorNeuBKV),real(vektorNeuBKV));
     
-    Neu_phi_BKV = 0.5*(Neu_phi_1_BKV+Neu_phi_2_BKV); %gemittelte Phase
-
     % Ausgabeformat neuer Kupplungsversatz
     RevisedKupplungsversatz = [Neu_z1_BKV, NeuBKV, Neu_phi_BKV];
     

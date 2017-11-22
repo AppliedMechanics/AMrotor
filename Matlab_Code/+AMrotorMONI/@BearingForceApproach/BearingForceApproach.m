@@ -1,7 +1,9 @@
 classdef BearingForceApproach < handle
    properties
        cnfg=struct([])
+       Debugging
        name
+       InitialAchsversatz
        InitialCoupledImbalanceMatrix
        RevisedCoupledImbalanceMatrix
        DifferentialCoupledImbalanceMatrix
@@ -25,7 +27,7 @@ classdef BearingForceApproach < handle
        end
        
        function obj=initialize(obj,DATASET)
-       [obj.InitialCoupledImbalanceMatrix,obj.Bearing1_Initialforce,obj.Bearing2_Initialforce,obj.InitialKupplungsversatz] = obj.approximate_initial_failures(DATASET);
+       [obj.Bearing1_Initialforce,obj.Bearing2_Initialforce,obj.InitialCoupledImbalanceMatrix,obj.InitialKupplungsversatz,obj.InitialAchsversatz] = obj.approximate_initial_failures(DATASET);
        end
        
        function obj=revise(obj,DATASET)
@@ -37,14 +39,18 @@ classdef BearingForceApproach < handle
            disp('Name:')
            disp(obj.name)
            disp('------------')
+           disp('InitialAchsversatz:');
+           ANZ=[num2str(obj.InitialAchsversatz(1)),' Zpos m   ' , num2str(obj.InitialAchsversatz(2)),' N   ',num2str(obj.InitialAchsversatz(3)),' rad  '];
+           disp(ANZ)
+           disp(' ')
            disp('InitialCoupledImbalanceMatrix:');
-           ANZ=[num2str(obj.InitialCoupledImbalanceMatrix(1)),' Zpos m   ' , num2str(obj.InitialCoupledImbalanceMatrix(2)),' gm   ',num2str(obj.InitialCoupledImbalanceMatrix(3)),' rad  '];
+           ANZ=[num2str(obj.InitialCoupledImbalanceMatrix(1)),' Zpos m   ' , num2str(obj.InitialCoupledImbalanceMatrix(2)),' kgm   ',num2str(obj.InitialCoupledImbalanceMatrix(3)),' rad  '];
            disp(ANZ)
            disp('RevisedCoupledImbalanceMatrix:')
-           ANZ=[num2str(obj.RevisedCoupledImbalanceMatrix(1)),' Zpos m   ' , num2str(obj.RevisedCoupledImbalanceMatrix(2)),' gm   ',num2str(obj.RevisedCoupledImbalanceMatrix(3)),' rad   '];
+           ANZ=[num2str(obj.RevisedCoupledImbalanceMatrix(1)),' Zpos m   ' , num2str(obj.RevisedCoupledImbalanceMatrix(2)),' kgm   ',num2str(obj.RevisedCoupledImbalanceMatrix(3)),' rad   '];
            disp(ANZ)
            disp('DifferentialCoupledImbalanceMatrix:')
-           ANZ=[num2str(obj.DifferentialCoupledImbalanceMatrix(1)),' Zpos m   ' , num2str(obj.DifferentialCoupledImbalanceMatrix(2)),' gm   ',num2str(obj.DifferentialCoupledImbalanceMatrix(3)),' rad   '];
+           ANZ=[num2str(obj.DifferentialCoupledImbalanceMatrix(1)),' Zpos m   ' , num2str(obj.DifferentialCoupledImbalanceMatrix(2)),' kgm   ',num2str(obj.DifferentialCoupledImbalanceMatrix(3)),' rad   '];
            disp(ANZ)
            disp(' ')
            disp('InitialKupplungsversatz:')
@@ -57,6 +63,7 @@ classdef BearingForceApproach < handle
            ANZ=[num2str(obj.DifferentialKupplungsversatz(1)),' Zpos m   ' , num2str(obj.DifferentialKupplungsversatz(2)),' N   ',num2str(obj.DifferentialKupplungsversatz(3)),' rad   '];
            disp(ANZ)
            disp('--------------------------------------------------')
+           
        end
    end
 end

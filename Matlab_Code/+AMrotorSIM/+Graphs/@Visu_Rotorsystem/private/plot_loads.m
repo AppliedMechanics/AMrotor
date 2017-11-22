@@ -15,7 +15,7 @@ for i=load
     h = surf(ax, z*r+zp, y*r+yp, x*r+xp); %Vertauschung x und z
 
     % Linie;
-    line(ax,[0,xp], [0,yp], [zp,zp]);
+    line(ax,[xp,xp], [0,yp], [0,zp]);
     
     set(h, 'edgecolor','none')
     set(h, 'facecolor','r')

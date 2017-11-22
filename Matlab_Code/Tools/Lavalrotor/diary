@@ -1,0 +1,640 @@
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ Unwucht: 0.001+0.001i   Schlag: 0   Kupplungsversatz: 0   Achsversatz: -0.001+0.001i
+--------------------------------------------------------------------
+-------------- Monitoring Force ----------------
+Name:
+KraftMonitor
+------------
+InitialCoupledImbalanceMatrix:
+0.4075 Zpos m   0.0025375 kgm   0.7854 rad  
+RevisedCoupledImbalanceMatrix:
+0.4075 Zpos m   0.0025375 kgm   0.7854 rad   
+DifferentialCoupledImbalanceMatrix:
+NaN Zpos m   0 kgm   0 rad   
+ 
+InitialKupplungsversatz:
+0.41377 Zpos m   8.0061e-15 N   -0.70204 rad   
+RevisedKupplungsversatz:
+0.41377 Zpos m   8.0061e-15 N   -0.70204 rad   
+DifferentialKupplungsversatz:
+NaN Zpos m   0 N   0 rad   
+--------------------------------------------------
+-------------- Monitoring Deflection ----------------
+Name:
+PositionsMonitor
+--------
+Initialimbalancematrix:
+0.5075 Zpos m   0.0027913 kgm   0.7854 rad   
+Revisedimbalancematrix:
+0.5075 Zpos m   0.0027913 kgm   0.7854 rad   
+Differentialimbalancematrix:
+0.5075 Zpos m   0 kgm   0 rad   
+ 
+InitialCoupledSchlagMatrix:
+3.372361448672598e+16 Radius m   -0.75663 rad   
+RevisedCoupledSchlagMatrix:
+3.372361448672598e+16 Radius m   -0.75663 rad   
+DifferentialCoupledSchlagMatrix:
+Inf Radius m   0 rad   
+------------------------------------------------------
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ Unwucht: 0.001+0.001i   Schlag: 0   Kupplungsversatz: 0   Achsversatz: -0.001+0.001i
+--------------------------------------------------------------------
+-------------- Monitoring Force ----------------
+Name:
+KraftMonitor
+------------
+InitialCoupledImbalanceMatrix:
+0.4075 Zpos m   0.0025375 kgm   0.7854 rad  
+RevisedCoupledImbalanceMatrix:
+0.4075 Zpos m   0.0025375 kgm   0.7854 rad   
+DifferentialCoupledImbalanceMatrix:
+NaN Zpos m   0 kgm   0 rad   
+ 
+InitialKupplungsversatz:
+0.43101 Zpos m   2.2047e-13 N   -2.4377 rad   
+RevisedKupplungsversatz:
+0.43101 Zpos m   2.2047e-13 N   -2.4377 rad   
+DifferentialKupplungsversatz:
+NaN Zpos m   0 N   0 rad   
+--------------------------------------------------
+-------------- Monitoring Deflection ----------------
+Name:
+PositionsMonitor
+--------
+Initialimbalancematrix:
+0.5075 Zpos m   0.0027913 kgm   0.7854 rad   
+Revisedimbalancematrix:
+0.5075 Zpos m   0.0027913 kgm   0.7854 rad   
+Differentialimbalancematrix:
+0.5075 Zpos m   0 kgm   0 rad   
+ 
+InitialCoupledSchlagMatrix:
+9256263991252806 Radius m   2.4052 rad   
+RevisedCoupledSchlagMatrix:
+9256263991252806 Radius m   2.4052 rad   
+DifferentialCoupledSchlagMatrix:
+Inf Radius m   0 rad   
+------------------------------------------------------
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ Unwucht: 0.001+0.001i   Schlag: 0   Kupplungsversatz: 0   Achsversatz: -0.001+0.001i
+--------------------------------------------------------------------
+-------------- Monitoring Force ----------------
+Name:
+KraftMonitor
+------------
+InitialCoupledImbalanceMatrix:
+0.4075 Zpos m   0.0025375 kgm   0.7854 rad  
+RevisedCoupledImbalanceMatrix:
+0.4075 Zpos m   0.0025375 kgm   0.7854 rad   
+DifferentialCoupledImbalanceMatrix:
+NaN Zpos m   0 kgm   0 rad   
+ 
+InitialKupplungsversatz:
+0.39982 Zpos m   4.1916e-13 N   -0.6624 rad   
+RevisedKupplungsversatz:
+0.39982 Zpos m   4.1916e-13 N   -0.6624 rad   
+DifferentialKupplungsversatz:
+NaN Zpos m   0 N   0 rad   
+--------------------------------------------------
+-------------- Monitoring Deflection ----------------
+Name:
+PositionsMonitor
+--------
+Initialimbalancematrix:
+0.5075 Zpos m   0.0027913 kgm   0.7854 rad   
+Revisedimbalancematrix:
+0.5075 Zpos m   0.0027913 kgm   0.7854 rad   
+Differentialimbalancematrix:
+0.5075 Zpos m   0 kgm   0 rad   
+ 
+InitialCoupledSchlagMatrix:
+686024620762581.9 Radius m   -0.77615 rad   
+RevisedCoupledSchlagMatrix:
+686024620762581.9 Radius m   -0.77615 rad   
+DifferentialCoupledSchlagMatrix:
+Inf Radius m   0 rad   
+------------------------------------------------------
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ Unwucht: 0.001+0.001i   Schlag: 0   Kupplungsversatz: 0   Achsversatz: -0.001+0.001i
+--------------------------------------------------------------------
+-------------- Monitoring Force ----------------
+Name:
+KraftMonitor
+------------
+InitialCoupledImbalanceMatrix:
+0.4075 Zpos m   0.0025375 kgm   0.7854 rad  
+RevisedCoupledImbalanceMatrix:
+0.4075 Zpos m   0.0025375 kgm   0.7854 rad   
+DifferentialCoupledImbalanceMatrix:
+NaN Zpos m   0 kgm   0 rad   
+ 
+InitialKupplungsversatz:
+0.40252 Zpos m   8.994e-14 N   2.5686 rad   
+RevisedKupplungsversatz:
+0.40252 Zpos m   8.994e-14 N   2.5686 rad   
+DifferentialKupplungsversatz:
+NaN Zpos m   0 N   0 rad   
+--------------------------------------------------
+-------------- Monitoring Deflection ----------------
+Name:
+PositionsMonitor
+--------
+Initialimbalancematrix:
+0.5075 Zpos m   0.0027913 kgm   0.7854 rad   
+Revisedimbalancematrix:
+0.5075 Zpos m   0.0027913 kgm   0.7854 rad   
+Differentialimbalancematrix:
+0.5075 Zpos m   0 kgm   0 rad   
+ 
+InitialCoupledSchlagMatrix:
+3225351188073410 Radius m   2.2509 rad   
+RevisedCoupledSchlagMatrix:
+3225351188073410 Radius m   2.2509 rad   
+DifferentialCoupledSchlagMatrix:
+Inf Radius m   0 rad   
+------------------------------------------------------
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ Unwucht: 0   Schlag: 0.001-0.001i   Kupplungsversatz: 0   Achsversatz: -0.001+0.001i
+--------------------------------------------------------------------
+-------------- Monitoring Force ----------------
+Name:
+KraftMonitor
+------------
+InitialCoupledImbalanceMatrix:
+0.4075 Zpos m   0.0025375 kgm   -0.7854 rad  
+RevisedCoupledImbalanceMatrix:
+0.4075 Zpos m   0.0025375 kgm   -0.7854 rad   
+DifferentialCoupledImbalanceMatrix:
+NaN Zpos m   0 kgm   0 rad   
+ 
+InitialKupplungsversatz:
+0.4075 Zpos m   1.5879 N   2.3562 rad   
+RevisedKupplungsversatz:
+0.4075 Zpos m   1.5879 N   2.3562 rad   
+DifferentialKupplungsversatz:
+NaN Zpos m   0 N   0 rad   
+--------------------------------------------------
+-------------- Monitoring Deflection ----------------
+Name:
+PositionsMonitor
+--------
+Initialimbalancematrix:
+0.5075 Zpos m   2.7468e-17 kgm   0.73825 rad   
+Revisedimbalancematrix:
+0.5075 Zpos m   2.7468e-17 kgm   0.73825 rad   
+Differentialimbalancematrix:
+0.5075 Zpos m   0 kgm   0 rad   
+ 
+InitialCoupledSchlagMatrix:
+18.2562 Radius m   -0.7854 rad   
+RevisedCoupledSchlagMatrix:
+18.2562 Radius m   -0.7854 rad   
+DifferentialCoupledSchlagMatrix:
+Inf Radius m   0 rad   
+------------------------------------------------------
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ Unwucht: 0   Schlag: 0.001-0.001i   Kupplungsversatz: 0   Achsversatz: -0.001+0.001i
+--------------------------------------------------------------------
+-------------- Monitoring Force ----------------
+Name:
+KraftMonitor
+------------
+InitialCoupledImbalanceMatrix:
+0.4075 Zpos m   0.0025375 kgm   -0.7854 rad  
+RevisedCoupledImbalanceMatrix:
+0.4075 Zpos m   0.0025375 kgm   -0.7854 rad   
+DifferentialCoupledImbalanceMatrix:
+NaN Zpos m   0 kgm   0 rad   
+ 
+InitialKupplungsversatz:
+0.4075 Zpos m   1.5879 N   2.3562 rad   
+RevisedKupplungsversatz:
+0.4075 Zpos m   1.5879 N   2.3562 rad   
+DifferentialKupplungsversatz:
+NaN Zpos m   0 N   0 rad   
+--------------------------------------------------
+-------------- Monitoring Deflection ----------------
+Name:
+PositionsMonitor
+--------
+Initialimbalancematrix:
+0.5075 Zpos m   1.7586e-17 kgm   -2.7709 rad   
+Revisedimbalancematrix:
+0.5075 Zpos m   1.7586e-17 kgm   -2.7709 rad   
+Differentialimbalancematrix:
+0.5075 Zpos m   0 kgm   0 rad   
+ 
+InitialCoupledSchlagMatrix:
+18.2562 Radius m   -0.7854 rad   
+RevisedCoupledSchlagMatrix:
+18.2562 Radius m   -0.7854 rad   
+DifferentialCoupledSchlagMatrix:
+Inf Radius m   0 rad   
+------------------------------------------------------
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ Unwucht: 0   Schlag: 0.001-0.001i   Kupplungsversatz: 0   Achsversatz: -0.001+0.001i
+--------------------------------------------------------------------
+-------------- Monitoring Force ----------------
+Name:
+KraftMonitor
+------------
+InitialCoupledImbalanceMatrix:
+0.4075 Zpos m   0.0025375 kgm   -0.7854 rad  
+RevisedCoupledImbalanceMatrix:
+0.4075 Zpos m   0.0025375 kgm   -0.7854 rad   
+DifferentialCoupledImbalanceMatrix:
+NaN Zpos m   0 kgm   0 rad   
+ 
+InitialKupplungsversatz:
+0.4075 Zpos m   1.5879 N   2.3562 rad   
+RevisedKupplungsversatz:
+0.4075 Zpos m   1.5879 N   2.3562 rad   
+DifferentialKupplungsversatz:
+NaN Zpos m   0 N   0 rad   
+--------------------------------------------------
+-------------- Monitoring Deflection ----------------
+Name:
+PositionsMonitor
+--------
+Initialimbalancematrix:
+0.5075 Zpos m   9.9633e-18 kgm   0.82596 rad   
+Revisedimbalancematrix:
+0.5075 Zpos m   9.9633e-18 kgm   0.82596 rad   
+Differentialimbalancematrix:
+0.5075 Zpos m   0 kgm   0 rad   
+ 
+InitialCoupledSchlagMatrix:
+18.2562 Radius m   -0.7854 rad   
+RevisedCoupledSchlagMatrix:
+18.2562 Radius m   -0.7854 rad   
+DifferentialCoupledSchlagMatrix:
+Inf Radius m   0 rad   
+------------------------------------------------------
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ Unwucht: 0   Schlag: 0.001-0.001i   Kupplungsversatz: 0   Achsversatz: -0.001+0.001i
+--------------------------------------------------------------------
+-------------- Monitoring Force ----------------
+Name:
+KraftMonitor
+------------
+InitialCoupledImbalanceMatrix:
+0.4075 Zpos m   0.0025375 kgm   -0.7854 rad  
+RevisedCoupledImbalanceMatrix:
+0.4075 Zpos m   0.0025375 kgm   -0.7854 rad   
+DifferentialCoupledImbalanceMatrix:
+NaN Zpos m   0 kgm   0 rad   
+ 
+InitialKupplungsversatz:
+0.4075 Zpos m   1.5879 N   2.3562 rad   
+RevisedKupplungsversatz:
+0.4075 Zpos m   1.5879 N   2.3562 rad   
+DifferentialKupplungsversatz:
+NaN Zpos m   0 N   0 rad   
+--------------------------------------------------
+-------------- Monitoring Deflection ----------------
+Name:
+PositionsMonitor
+--------
+Initialimbalancematrix:
+0.5075 Zpos m   8.9896e-18 kgm   -2.2519 rad   
+Revisedimbalancematrix:
+0.5075 Zpos m   8.9896e-18 kgm   -2.2519 rad   
+Differentialimbalancematrix:
+0.5075 Zpos m   0 kgm   0 rad   
+ 
+InitialCoupledSchlagMatrix:
+18.2562 Radius m   -0.7854 rad   
+RevisedCoupledSchlagMatrix:
+18.2562 Radius m   -0.7854 rad   
+DifferentialCoupledSchlagMatrix:
+Inf Radius m   0 rad   
+------------------------------------------------------
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ Unwucht: 0   Schlag: 0   Kupplungsversatz: -0.001-0.001i   Achsversatz: -0.001+0.001i
+--------------------------------------------------------------------
+-------------- Monitoring Force ----------------
+Name:
+KraftMonitor
+------------
+InitialCoupledImbalanceMatrix:
+0.41216 Zpos m   2.4293e-18 kgm   -0.7646 rad  
+RevisedCoupledImbalanceMatrix:
+0.41216 Zpos m   2.4293e-18 kgm   -0.7646 rad   
+DifferentialCoupledImbalanceMatrix:
+NaN Zpos m   0 kgm   0 rad   
+ 
+InitialKupplungsversatz:
+0.4075 Zpos m   1.5879 N   -2.3562 rad   
+RevisedKupplungsversatz:
+0.4075 Zpos m   1.5879 N   -2.3562 rad   
+DifferentialKupplungsversatz:
+NaN Zpos m   0 N   0 rad   
+--------------------------------------------------
+-------------- Monitoring Deflection ----------------
+Name:
+PositionsMonitor
+--------
+Initialimbalancematrix:
+0.5075 Zpos m   2.8368e-18 kgm   -0.83281 rad   
+Revisedimbalancematrix:
+0.5075 Zpos m   2.8368e-18 kgm   -0.83281 rad   
+Differentialimbalancematrix:
+0.5075 Zpos m   0 kgm   0 rad   
+ 
+InitialCoupledSchlagMatrix:
+182.5683 Radius m   -2.3562 rad   
+RevisedCoupledSchlagMatrix:
+182.5683 Radius m   -2.3562 rad   
+DifferentialCoupledSchlagMatrix:
+Inf Radius m   0 rad   
+------------------------------------------------------
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ Unwucht: 0   Schlag: 0   Kupplungsversatz: -0.001-0.001i   Achsversatz: -0.001+0.001i
+--------------------------------------------------------------------
+-------------- Monitoring Force ----------------
+Name:
+KraftMonitor
+------------
+InitialCoupledImbalanceMatrix:
+0.42594 Zpos m   3.8213e-18 kgm   1.1061 rad  
+RevisedCoupledImbalanceMatrix:
+0.42594 Zpos m   3.8213e-18 kgm   1.1061 rad   
+DifferentialCoupledImbalanceMatrix:
+NaN Zpos m   0 kgm   0 rad   
+ 
+InitialKupplungsversatz:
+0.4075 Zpos m   1.5879 N   -2.3562 rad   
+RevisedKupplungsversatz:
+0.4075 Zpos m   1.5879 N   -2.3562 rad   
+DifferentialKupplungsversatz:
+NaN Zpos m   0 N   0 rad   
+--------------------------------------------------
+-------------- Monitoring Deflection ----------------
+Name:
+PositionsMonitor
+--------
+Initialimbalancematrix:
+0.5075 Zpos m   1.2269e-18 kgm   1.9993 rad   
+Revisedimbalancematrix:
+0.5075 Zpos m   1.2269e-18 kgm   1.9993 rad   
+Differentialimbalancematrix:
+0.5075 Zpos m   0 kgm   0 rad   
+ 
+InitialCoupledSchlagMatrix:
+182.5683 Radius m   -2.3562 rad   
+RevisedCoupledSchlagMatrix:
+182.5683 Radius m   -2.3562 rad   
+DifferentialCoupledSchlagMatrix:
+Inf Radius m   0 rad   
+------------------------------------------------------
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ Unwucht: 0   Schlag: 0   Kupplungsversatz: -0.001-0.001i   Achsversatz: -0.001+0.001i
+--------------------------------------------------------------------
+-------------- Monitoring Force ----------------
+Name:
+KraftMonitor
+------------
+InitialCoupledImbalanceMatrix:
+0.41048 Zpos m   8.9215e-19 kgm   -0.79344 rad  
+RevisedCoupledImbalanceMatrix:
+0.41048 Zpos m   8.9215e-19 kgm   -0.79344 rad   
+DifferentialCoupledImbalanceMatrix:
+NaN Zpos m   0 kgm   0 rad   
+ 
+InitialKupplungsversatz:
+0.4075 Zpos m   1.5879 N   -2.3562 rad   
+RevisedKupplungsversatz:
+0.4075 Zpos m   1.5879 N   -2.3562 rad   
+DifferentialKupplungsversatz:
+NaN Zpos m   0 N   0 rad   
+--------------------------------------------------
+-------------- Monitoring Deflection ----------------
+Name:
+PositionsMonitor
+--------
+Initialimbalancematrix:
+0.5075 Zpos m   1.0484e-18 kgm   -0.72463 rad   
+Revisedimbalancematrix:
+0.5075 Zpos m   1.0484e-18 kgm   -0.72463 rad   
+Differentialimbalancematrix:
+0.5075 Zpos m   0 kgm   0 rad   
+ 
+InitialCoupledSchlagMatrix:
+182.5683 Radius m   -2.3562 rad   
+RevisedCoupledSchlagMatrix:
+182.5683 Radius m   -2.3562 rad   
+DifferentialCoupledSchlagMatrix:
+Inf Radius m   0 rad   
+------------------------------------------------------
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ Unwucht: 0   Schlag: 0   Kupplungsversatz: -0.001-0.001i   Achsversatz: -0.001+0.001i
+--------------------------------------------------------------------
+-------------- Monitoring Force ----------------
+Name:
+KraftMonitor
+------------
+InitialCoupledImbalanceMatrix:
+0.41933 Zpos m   8.3996e-19 kgm   2.77 rad  
+RevisedCoupledImbalanceMatrix:
+0.41933 Zpos m   8.3996e-19 kgm   2.77 rad   
+DifferentialCoupledImbalanceMatrix:
+NaN Zpos m   0 kgm   0 rad   
+ 
+InitialKupplungsversatz:
+0.4075 Zpos m   1.5879 N   -2.3562 rad   
+RevisedKupplungsversatz:
+0.4075 Zpos m   1.5879 N   -2.3562 rad   
+DifferentialKupplungsversatz:
+NaN Zpos m   0 N   0 rad   
+--------------------------------------------------
+-------------- Monitoring Deflection ----------------
+Name:
+PositionsMonitor
+--------
+Initialimbalancematrix:
+0.5075 Zpos m   8.4663e-19 kgm   2.4452 rad   
+Revisedimbalancematrix:
+0.5075 Zpos m   8.4663e-19 kgm   2.4452 rad   
+Differentialimbalancematrix:
+0.5075 Zpos m   0 kgm   0 rad   
+ 
+InitialCoupledSchlagMatrix:
+182.5683 Radius m   -2.3562 rad   
+RevisedCoupledSchlagMatrix:
+182.5683 Radius m   -2.3562 rad   
+DifferentialCoupledSchlagMatrix:
+Inf Radius m   0 rad   
+------------------------------------------------------
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ Unwucht: 0.001+0.001i   Schlag: 0.001-0.001i   Kupplungsversatz: -0.001-0.001i   Achsversatz: -0.001+0.001i
+--------------------------------------------------------------------
+-------------- Monitoring Force ----------------
+Name:
+KraftMonitor
+------------
+InitialCoupledImbalanceMatrix:
+0.4075 Zpos m   0.0035886 kgm   3.2546e-15 rad  
+RevisedCoupledImbalanceMatrix:
+0.4075 Zpos m   0.0035886 kgm   3.2546e-15 rad   
+DifferentialCoupledImbalanceMatrix:
+NaN Zpos m   0 kgm   0 rad   
+ 
+InitialKupplungsversatz:
+0.4075 Zpos m   2.2457 N   -3.1416 rad   
+RevisedKupplungsversatz:
+0.4075 Zpos m   2.2457 N   -3.1416 rad   
+DifferentialKupplungsversatz:
+NaN Zpos m   0 N   0 rad   
+--------------------------------------------------
+-------------- Monitoring Deflection ----------------
+Name:
+PositionsMonitor
+--------
+Initialimbalancematrix:
+0.5075 Zpos m   0.0027913 kgm   0.7854 rad   
+Revisedimbalancematrix:
+0.5075 Zpos m   0.0027913 kgm   0.7854 rad   
+Differentialimbalancematrix:
+0.5075 Zpos m   0 kgm   0 rad   
+ 
+InitialCoupledSchlagMatrix:
+18.1656 Radius m   -0.88507 rad   
+RevisedCoupledSchlagMatrix:
+18.1656 Radius m   -0.88507 rad   
+DifferentialCoupledSchlagMatrix:
+Inf Radius m   0 rad   
+------------------------------------------------------
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ Unwucht: 0.001+0.001i   Schlag: 0.001-0.001i   Kupplungsversatz: -0.001-0.001i   Achsversatz: -0.001+0.001i
+--------------------------------------------------------------------
+-------------- Monitoring Force ----------------
+Name:
+KraftMonitor
+------------
+InitialCoupledImbalanceMatrix:
+0.4075 Zpos m   0.0035886 kgm   -1.0847e-15 rad  
+RevisedCoupledImbalanceMatrix:
+0.4075 Zpos m   0.0035886 kgm   -1.0847e-15 rad   
+DifferentialCoupledImbalanceMatrix:
+NaN Zpos m   0 kgm   0 rad   
+ 
+InitialKupplungsversatz:
+0.4075 Zpos m   2.2457 N   3.1416 rad   
+RevisedKupplungsversatz:
+0.4075 Zpos m   2.2457 N   3.1416 rad   
+DifferentialKupplungsversatz:
+NaN Zpos m   0 N   0 rad   
+--------------------------------------------------
+-------------- Monitoring Deflection ----------------
+Name:
+PositionsMonitor
+--------
+Initialimbalancematrix:
+0.5075 Zpos m   0.0027913 kgm   0.7854 rad   
+Revisedimbalancematrix:
+0.5075 Zpos m   0.0027913 kgm   0.7854 rad   
+Differentialimbalancematrix:
+0.5075 Zpos m   0 kgm   0 rad   
+ 
+InitialCoupledSchlagMatrix:
+18.1656 Radius m   -0.88507 rad   
+RevisedCoupledSchlagMatrix:
+18.1656 Radius m   -0.88507 rad   
+DifferentialCoupledSchlagMatrix:
+Inf Radius m   0 rad   
+------------------------------------------------------
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ Unwucht: 0.001+0.001i   Schlag: 0.001-0.001i   Kupplungsversatz: -0.001-0.001i   Achsversatz: -0.001+0.001i
+--------------------------------------------------------------------
+-------------- Monitoring Force ----------------
+Name:
+KraftMonitor
+------------
+InitialCoupledImbalanceMatrix:
+0.4075 Zpos m   0.0035886 kgm   1.2025e-14 rad  
+RevisedCoupledImbalanceMatrix:
+0.4075 Zpos m   0.0035886 kgm   1.2025e-14 rad   
+DifferentialCoupledImbalanceMatrix:
+NaN Zpos m   0 kgm   0 rad   
+ 
+InitialKupplungsversatz:
+0.4075 Zpos m   2.2457 N   -3.1416 rad   
+RevisedKupplungsversatz:
+0.4075 Zpos m   2.2457 N   -3.1416 rad   
+DifferentialKupplungsversatz:
+NaN Zpos m   0 N   0 rad   
+--------------------------------------------------
+-------------- Monitoring Deflection ----------------
+Name:
+PositionsMonitor
+--------
+Initialimbalancematrix:
+0.5075 Zpos m   0.0027913 kgm   0.7854 rad   
+Revisedimbalancematrix:
+0.5075 Zpos m   0.0027913 kgm   0.7854 rad   
+Differentialimbalancematrix:
+0.5075 Zpos m   0 kgm   0 rad   
+ 
+InitialCoupledSchlagMatrix:
+18.1656 Radius m   -0.88507 rad   
+RevisedCoupledSchlagMatrix:
+18.1656 Radius m   -0.88507 rad   
+DifferentialCoupledSchlagMatrix:
+Inf Radius m   0 rad   
+------------------------------------------------------
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ Unwucht: 0.001+0.001i   Schlag: 0.001-0.001i   Kupplungsversatz: -0.001-0.001i   Achsversatz: -0.001+0.001i
+--------------------------------------------------------------------
+-------------- Monitoring Force ----------------
+Name:
+KraftMonitor
+------------
+InitialCoupledImbalanceMatrix:
+0.4075 Zpos m   0.0035886 kgm   -1.9718e-15 rad  
+RevisedCoupledImbalanceMatrix:
+0.4075 Zpos m   0.0035886 kgm   -1.9718e-15 rad   
+DifferentialCoupledImbalanceMatrix:
+NaN Zpos m   0 kgm   0 rad   
+ 
+InitialKupplungsversatz:
+0.4075 Zpos m   2.2457 N   3.1416 rad   
+RevisedKupplungsversatz:
+0.4075 Zpos m   2.2457 N   3.1416 rad   
+DifferentialKupplungsversatz:
+NaN Zpos m   0 N   0 rad   
+--------------------------------------------------
+-------------- Monitoring Deflection ----------------
+Name:
+PositionsMonitor
+--------
+Initialimbalancematrix:
+0.5075 Zpos m   0.0027913 kgm   0.7854 rad   
+Revisedimbalancematrix:
+0.5075 Zpos m   0.0027913 kgm   0.7854 rad   
+Differentialimbalancematrix:
+0.5075 Zpos m   0 kgm   0 rad   
+ 
+InitialCoupledSchlagMatrix:
+18.1656 Radius m   -0.88507 rad   
+RevisedCoupledSchlagMatrix:
+18.1656 Radius m   -0.88507 rad   
+DifferentialCoupledSchlagMatrix:
+Inf Radius m   0 rad   
+------------------------------------------------------
