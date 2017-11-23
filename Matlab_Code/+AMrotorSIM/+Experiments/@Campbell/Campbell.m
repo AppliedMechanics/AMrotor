@@ -37,9 +37,10 @@ classdef Campbell < handle
                 [mat.A,mat.B] = obj.getStateSpaceMatrices(w);
                 [V,D] = obj.performEigenAnalysis(mat);
                 Vpos = obj.getPositionEntries(V);
-                [~,obj.EWf(:,count),...
-                 ~,obj.EWb(:,count),...
-                 ~,~,~,~] = obj.getSeparationEigenVectors(Vpos,D*2*pi);
+                [ ~,EW_for,~,EW_back, ~, ~, ~, ~ ] = ...
+                    obj.getSeparationEigenVectors(Vpos,D*2*pi);
+%                 obj.EWf(:,count) = EW_for;
+%                 obj.EWb(:,count) = EW_back;
                 count = count + 1;
             end
         end
