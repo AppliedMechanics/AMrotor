@@ -65,13 +65,13 @@ r.compute_loads();
 % Der Campbell-plot müsste im Prinzip komplett neu aufgebaut werden:
 
 cmp = Experiments.Campbell(r);
-cmp.setUp(0:5e2:1e4,2); % input is 1/min, Number of Modes
+cmp.setUp(0:2e2:1e3,6); % input is 1/min, Number of Modes
 cmp.calculate();
 
 cmpDiagramm = Graphs.Campbell(cmp);
 cmpDiagramm.setPlots('all');
-%cmpDiagramm.setPlots('backward');
-%cmpDiagramm.setPlots('forward');
+% cmpDiagramm.setPlots('backward');
+% cmpDiagramm.setPlots('forward');
 Janitor.cleanFigures();
 
 %% Running Time Simulation
