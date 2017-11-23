@@ -29,6 +29,11 @@ for b = 1:num.backward
     plotOmegas(axAll,omega,EW.backward(b,:),...
                obj.ColorHandler.getColor(b+num.forward))
 end
-
+pause(0.1) % somehow needed for setting limits
+lim.forward = max(max(imag(EW.forward)));
+lim.backward =max(max(imag(EW.backward)));
+ylim(axForward,[0 1.05*lim.forward/2/pi]);
+ylim(axBackward,[0 1.05*lim.backward/2/pi]);
+ylim(axAll,[0 1.05*max(lim.forward,lim.backward)/2/pi]);
 end
 

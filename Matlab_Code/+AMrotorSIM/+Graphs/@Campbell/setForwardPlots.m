@@ -15,5 +15,10 @@ for f = 1:num.forward
     plotOmegas(axForward,omega,EW.forward(f,:),...
                obj.ColorHandler.getColor(f))
 end
+
+pause(0.1) % somehow needed for setting limits
+lim.forward = max(max(imag(EW.forward)));
+ylim(axForward,[0 1.05*lim.forward/2/pi]);
+
 end
 
