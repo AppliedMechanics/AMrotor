@@ -18,7 +18,7 @@ end
 indices = start:ende;
 M = obj.rotorsystem.systemmatrizen.M(indices,indices);
 K = obj.rotorsystem.systemmatrizen.K(indices,indices);
-[V,tmp] = eigs(K,M,nModes,'sm');
+[V,tmp] = eigs(-K,M,nModes,'sm');
 [D,order] = sort(sqrt(diag(tmp)));
 % sorting
 for i = 1:length(order)
