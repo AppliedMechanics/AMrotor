@@ -166,9 +166,9 @@ cnfg.geometry.dl=dl;
      cnfg.material.mu_0=4*pi*10^(-7);
     
 % relative Permeabilitaeten
-     cnfg.material.mu_rLuft=1+4E-7;
+     cnfg.material.mu_rLuft=1;
      cnfg.material.mu_rEisen=10000;
-     cnfg.material.mu_rKupfer=1-6E-6;    
+     cnfg.material.mu_rKupfer=1;    
 
 % Absolute Permeabilitaeten
      cnfg.material.mu_Luft =  cnfg.material.mu_rLuft* cnfg.material.mu_0; 
@@ -179,14 +179,14 @@ cnfg.geometry.dl=dl;
 cnfg.faces.Luft=[1,16,18];
 cnfg.faces.Eisen=[2,17]; % Alle Bauteile aus Eisen
 cnfg.faces.Welle=[17,18]; % Flächen die sich mit der Welle bewegen
-cnfg.faces.SpuleA_1=[3,21];
-cnfg.faces.SpuleB_1=[4,11];
-cnfg.faces.SpuleA_2=[5,19];
-cnfg.faces.SpuleB_2=[20,6];
-cnfg.faces.SpuleA_3=[7,12];
-cnfg.faces.SpuleB_3=[8,15];
-cnfg.faces.SpuleA_4=[9,14];
-cnfg.faces.SpuleB_4=[10,13];
+cnfg.faces.SpuleA_1=[10,11];
+cnfg.faces.SpuleB_1=[3,14];
+cnfg.faces.SpuleA_2=[4,20];
+cnfg.faces.SpuleB_2=[21,5];
+cnfg.faces.SpuleA_3=[6,15];
+cnfg.faces.SpuleB_3=[7,19];
+cnfg.faces.SpuleA_4=[13,8];
+cnfg.faces.SpuleB_4=[9,12];
 
 cnfg.edges.Dirichlet=[1,2,210,209]; %Ränder des Simulationsbereichs
 

@@ -98,10 +98,10 @@ end
 
 %% Untersuchung des Fehlers in Abh. von virtual_Displacement Distanz
 % mit Breakpoint in Schleife ausführen
-    % for i=1:15
-    % [~,Fy_Vector(i)] = self.calculate_force_Displace([posx_array(n),y], [I_vormag,I_vormag],[Ix_nutz_array(n1),Iy], 10^(-i))
-    % end
-    % figure(1),xlabel('Virtual Displacement'),ylabel('Fy Ergebnis')
-    % loglog(10.^(-1:-1:-15),Fy_Vector)
-    % figure(2),xlabel('Virtual Displacement'),ylabel('Fy Ergebnis')
-    % semilogx(10.^(-5:-1:-13),Fy_Vector(5:13))
+% for i=4:15
+%     [~,Fy_Vector(i)] = self.calculate_force_Displace([0,0], [2.5,2.5],[0,1], 10^(-i));
+%     end
+%     figure(1),xlabel('Virtual Displacement'),ylabel('Fy Ergebnis')
+%     loglog(10.^(-1:-1:-15),Fy_Vector)
+%     figure(2),xlabel('Virtual Displacement'),ylabel('Fy Ergebnis')
+%     semilogx(10.^(-5:-1:-13),Fy_Vector(5:13))

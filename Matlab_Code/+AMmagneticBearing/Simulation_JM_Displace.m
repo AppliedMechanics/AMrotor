@@ -48,12 +48,12 @@ import AMmagneticBearing.2D_Matlab.*
 % ODER
  cnfg=Conf_ML_Darmstadt;
 
-cnfg.material.nonlinMu=true; % Nichtlinearität       
+cnfg.material.nonlinMu=false; % Nichtlinearität       
 
 geoOrder='linear';  % Bitte wegen Verschiebealgorithmus linear Lassen!
-Hmax=0.002;         % 0: Automatisch
+Hmax=0.0015;         % 0: Automatisch
 Hmin=0;             % 0: Automatisch
-Hgrad=1.5;          % Default: 1.3
+Hgrad=1.3;          % Default: 1.3
 % Bei Darmstadt gut:lin/0.0015/0/1.3(performance),lin/0.001/0/1.1(mitte),lin/0.0005/0/1.7 (Genauigkeit)
 % Bei Anton gut: lin/0.002/0/1.5 (Hgrad kaum Einfluss;0.02 höchste Triangle-Qualität)
 Parallel_Computing=false;  % false: Einfache Berechnung mit Fortschrittsanzeige
