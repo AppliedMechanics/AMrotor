@@ -7,11 +7,14 @@ mkdir('.\SVG')
 
 currentFolder=pwd;
 files = dir(fullfile(currentFolder, '*.fig'));
-
+size=10;
 for i=1:length(files)
 h=openfig(files(i).name);
+h.PaperUnits='centimeters';
+h.PaperPosition=[1 1 size size];
 newfilename = strrep(files(i).name,'.fig','');
 print(h,'-dpdf',strcat('.\PDF\',newfilename,'.pdf'));
 print(h,'-dsvg',strcat('.\SVG\',newfilename,'.svg'));
+close(h)
 end
-close all
+fprintf('Export abgeschlossen\n');
