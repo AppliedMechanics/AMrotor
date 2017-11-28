@@ -8,7 +8,7 @@ import AMmagneticBearing.2D_Matlab.*
 
 %% Magnetlager erzeugen
 cnfg=Conf_ML_Darmstadt;
-cnfg.material.nonlinMu=false;
+cnfg.material.nonlinMu=true;
 
 ML=MagneticBearing(cnfg); % createpde wird nur einmalig im Konstruktor ausgeführt
 ML.generate_geometry();   % aus der dl-Matrix wird die Geometrie der Simulation erzeugt
@@ -49,7 +49,7 @@ ML.cnfg.mesh.default_Nodes=ML.model.Mesh.Nodes;
 %     [~,Fy_Vector(i)] = ML.calculate_force_Displace([0,0], [2.5,2.5],[0,1], 10^(-i));
 %     end
 %     figure(2),semilogx(10.^(-4:-1:-15),Fy_Vector(4:15)),xlabel('Virtual Displacement'),ylabel('Fy Ergebnis')
-% virtual_displacement=1e-10 %Liegt in der Mitte des Plateaus
+ virtual_displacement=1e-10 %Liegt in der Mitte des Plateaus
 
 %% Kennfeld ermitteln
 posy_array=-0.7e-3:0.1e-3:0.7e-3;
@@ -59,47 +59,72 @@ Iy_nutz_array=-2.5:0.25:2.5;
 x=0;Ix=0;
 Ergebnis_lin=zeros(length(Iy_nutz_array)*length(posy_array),8);
 Ergebnis_nonlin=zeros(length(Iy_nutz_array)*length(posy_array),8);
+Size_1=length(posy_array);
+Size_2=length(Iy_nutz_array);
 
-ML.cnfg.material.nonlinMu=false; % linear 
-% for n1=1:length(Iy_nutz_array)
-%    for n=1:length(posy_array)
+% ML.cnfg.material.nonlinMu=false; % linear 
+% ML.set_material()
+% 
+% Rechnungen=Size_1*Size_2
+% Schritt=0; Zeit=0; n
+% 
+% for n1=1:Size_2
+%    for n=1:Size_1
+%     tic
 %     [Fx,Fy] = ML.calculate_force_Displace([x,posy_array(n)], [I_vormag_x,I_vormag_y],[Ix,Iy_nutz_array(n1)], virtual_displacement);
 %     
-%     Position=(n1-1)*length(posy_array)+n;
+%     Position=(n1-1)*Size_1+n;
 %     
 %     Ergebnis_lin(Position,1)=x;
 %     Ergebnis_lin(Position,2)=posy_array(n);
 %     Ergebnis_lin(Position,3)=I_vormag_x;
 %     Ergebnis_lin(Position,4)=I_vormag_y;
-%     Ergebnis_lin(Position,5)=Ix+I_vormag_x;
-%     Ergebnis_lin(Position,6)=Iy_nutz_array(n1)+I_vormag_y;
+%     Ergebnis_lin(Position,5)=Ix;
+%     Ergebnis_lin(Position,6)=Iy_nutz_array(n1);
 %     Ergebnis_lin(Position,7)=Fx;
 %     Ergebnis_lin(Position,8)=Fy;
+%     
+%     Schritt=Schritt+1;
+%     Zeit=Zeit+toc;
+%     Restzeit=(Zeit/Schritt)*(Rechnungen-Schritt);
+%     fprintf('Fortschritt: %.0f%%  Restzeit:%.1fs\n',Schritt*100/Rechnungen,Restzeit)
+% 
 %     end
 % end
-% 
+
 % ML.cnfg.material.nonlinMu=true; % nichtlinear 
+% ML.set_material();     % Nötig um nonlin anzuwenden
+% 
+% Rechnungen=Size_1*Size_2
+% Schritt=0; Zeit=0;
+% 
 % for n1=1:length(Iy_nutz_array)
 %    for n=1:length(posy_array)
+%     tic
 %     [Fx,Fy] = ML.calculate_force_Displace([x,posy_array(n)], [I_vormag_x,I_vormag_y],[Ix,Iy_nutz_array(n1)], virtual_displacement);
 %     
-%     Position=(n1-1)*length(posy_array)+n
+%     Position=(n1-1)*length(posy_array)+n;
 %     
 %     Ergebnis_nonlin(Position,1)=x;
 %     Ergebnis_nonlin(Position,2)=posy_array(n);
 %     Ergebnis_nonlin(Position,3)=I_vormag_x;
 %     Ergebnis_nonlin(Position,4)=I_vormag_y;
-%     Ergebnis_nonlin(Position,5)=Ix+I_vormag_x;
-%     Ergebnis_nonlin(Position,6)=Iy_nutz_array(n1)+I_vormag_y;
+%     Ergebnis_nonlin(Position,5)=Ix;
+%     Ergebnis_nonlin(Position,6)=Iy_nutz_array(n1);
 %     Ergebnis_nonlin(Position,7)=Fx;
 %     Ergebnis_nonlin(Position,8)=Fy;
+%         Schritt=Schritt+1;
+%     Zeit=Zeit+toc;
+%     Restzeit=(Zeit/Schritt)*(Rechnungen-Schritt);
+%     fprintf('Fortschritt: %.0f%%  Restzeit:%.1fs\n',Schritt*100/Rechnungen,Restzeit)
+% 
 %     end
 % end
-%% Kennfeldplot
-
+%  save Kennfelder_neu.mat Ergebnis_nonlin Ergebnis_lin
+ load('Kennfelder.mat')
 %% Geometrieplot
-figure(3)
-pdegplot(ML.model,'FaceLabels','on')
+% figure(3)
+% pdegplot(ML.model,'FaceLabels','on')
 
 %% Meshplot (magnetisch, unverzerrt)
 % figure(4)
@@ -111,25 +136,25 @@ pdegplot(ML.model,'FaceLabels','on')
 % pdemesh(ML.model)
 
 %% Vektorpotentialplot
-figure(5)
-    I_wire_pre=[2.5 2.5];I_wire_use=[0 1];
-    load.SpuleA_1=(I_wire_pre(2)+I_wire_use(2))*ML.cnfg.coil.n_Windungen/ML.cnfg.coil.area;           %y-oben 
-    load.SpuleB_1=-(I_wire_pre(2)+I_wire_use(2))*ML.cnfg.coil.n_Windungen/ML.cnfg.coil.area;        %y-oben 
-    load.SpuleA_2=(I_wire_pre(1)-I_wire_use(1))*ML.cnfg.coil.n_Windungen/ML.cnfg.coil.area;           %x-links
-    load.SpuleB_2=-(I_wire_pre(1)-I_wire_use(1))*ML.cnfg.coil.n_Windungen/ML.cnfg.coil.area;         %x-links
-    load.SpuleA_3=(I_wire_pre(2)-I_wire_use(2))*ML.cnfg.coil.n_Windungen/ML.cnfg.coil.area;            %y-unten
-    load.SpuleB_3=-(I_wire_pre(2)-I_wire_use(2))*ML.cnfg.coil.n_Windungen/ML.cnfg.coil.area;           %y-unten
-    load.SpuleA_4=(I_wire_pre(1)+I_wire_use(1))*ML.cnfg.coil.n_Windungen/ML.cnfg.coil.area;            %x-rechts
-    load.SpuleB_4=-(I_wire_pre(1)+I_wire_use(1))*ML.cnfg.coil.n_Windungen/ML.cnfg.coil.area;         %x-rechts
-    % Koeffizienten der PDGL festlegen
-    ML.set_load(load);
-    solution=solvepde(ML.model);
-pdegplot(ML.model,'EdgeLabels','off','FaceLabels','off');    % Plotten der Geometrie mit Fasen-Beschriftung
-hold on,axis equal;
-pdeplot(ML.model,'Mesh','off','FaceAlpha',0.1,'Contour','on','ColorMap','parula','XYData',solution.NodalSolution)
-title ('Magnetisches Vektorpotential','Interpreter','latex');
-xlabel('x / m','Interpreter','latex'),ylabel('y / m','Interpreter','latex');
-hold off;
+% figure(5)
+%     I_wire_pre=[2.5 2.5];I_wire_use=[0 1];
+%     load.SpuleA_1=(I_wire_pre(2)+I_wire_use(2))*ML.cnfg.coil.n_Windungen/ML.cnfg.coil.area;           %y-oben 
+%     load.SpuleB_1=-(I_wire_pre(2)+I_wire_use(2))*ML.cnfg.coil.n_Windungen/ML.cnfg.coil.area;        %y-oben 
+%     load.SpuleA_2=(I_wire_pre(1)-I_wire_use(1))*ML.cnfg.coil.n_Windungen/ML.cnfg.coil.area;           %x-links
+%     load.SpuleB_2=-(I_wire_pre(1)-I_wire_use(1))*ML.cnfg.coil.n_Windungen/ML.cnfg.coil.area;         %x-links
+%     load.SpuleA_3=(I_wire_pre(2)-I_wire_use(2))*ML.cnfg.coil.n_Windungen/ML.cnfg.coil.area;            %y-unten
+%     load.SpuleB_3=-(I_wire_pre(2)-I_wire_use(2))*ML.cnfg.coil.n_Windungen/ML.cnfg.coil.area;           %y-unten
+%     load.SpuleA_4=(I_wire_pre(1)+I_wire_use(1))*ML.cnfg.coil.n_Windungen/ML.cnfg.coil.area;            %x-rechts
+%     load.SpuleB_4=-(I_wire_pre(1)+I_wire_use(1))*ML.cnfg.coil.n_Windungen/ML.cnfg.coil.area;         %x-rechts
+%     % Koeffizienten der PDGL festlegen
+%     ML.set_load(load);
+%     solution=solvepde(ML.model);
+% pdegplot(ML.model,'EdgeLabels','off','FaceLabels','off');    % Plotten der Geometrie mit Fasen-Beschriftung
+% hold on,axis equal;
+% pdeplot(ML.model,'Mesh','off','FaceAlpha',0.1,'Contour','on','ColorMap','parula','XYData',solution.NodalSolution)
+% title ('Magnetisches Vektorpotential','Interpreter','latex');
+% xlabel('x / m','Interpreter','latex'),ylabel('y / m','Interpreter','latex');
+% hold off;
 
 %% Meshplot (mechanisch, unverzerrt)
 % figure(6)
@@ -167,3 +192,63 @@ hold off;
 %         mechanicalModel.Mesh.MeshGradation,mechanicalModel.Mesh.GeometricOrder,...
 %         mechanicalModelAssoc);
 % pdemesh(mechanicalModel.Mesh)
+
+%% Kennfeldplots
+figure(8)
+% Rekonstruktion Matrixstruktur
+y_range=sort(unique(Ergebnis_lin(:,2)));
+Iy_range=sort(unique(Ergebnis_lin(:,6)));
+Z=zeros(length(y_range),length(Iy_range));
+
+for i=1:length(y_range)
+    for j=1:length(Iy_range)
+        Z(i,j)=Ergebnis_lin( (Ergebnis_lin(:,2)==y_range(i))&(Ergebnis_lin(:,6)==Iy_range(j))  ,8);
+    end
+end
+surf(y_range,Iy_range,Z')
+title('Kennfeld y-Richtung linear','Interpreter','latex');
+ylabel('Differenzstrom in y-Richtung / A', 'Interpreter', 'latex');
+xlabel('Wellenposition in y-Richtung / m', 'Interpreter', 'latex');
+zlabel('Kraft in y-Richtung / N','Interpreter','latex');
+
+figure(9)
+% Rekonstruktion Matrixstruktur
+y_range2=sort(unique(Ergebnis_nonlin(:,2)));
+Iy_range2=sort(unique(Ergebnis_nonlin(:,6)));
+Z2=zeros(length(y_range),length(Iy_range));
+
+for i=1:length(y_range2)
+    for j=1:length(Iy_range2)
+        Z2(i,j)=Ergebnis_nonlin( (Ergebnis_nonlin(:,2)==y_range2(i))&(Ergebnis_nonlin(:,6)==Iy_range2(j))  ,8);
+    end
+end
+surf(y_range2,Iy_range2,Z2')
+title('Kennfeld y-Richtung nichtlinear','Interpreter','latex');
+ylabel('Differenzstrom in y-Richtung / A', 'Interpreter', 'latex');
+xlabel('Wellenposition in y-Richtung / m', 'Interpreter', 'latex');
+zlabel('Kraft in y-Richtung / N','Interpreter','latex');
+
+figure(10),surf(y_range2,Iy_range2,Z2'-Z')
+
+%% Nichtlinearität Untersuchung
+% figure(11)
+% W1=[];W2=[];
+% ML.cnfg.material.nonlinMu=false; % linear 
+% ML.set_material()
+% for i=1:10
+% W1(end+1) = ML.calculate_energy_Displace([0,0.001],[2.5 2.5],[0,10^i]);
+% end
+% 
+% ML.cnfg.material.nonlinMu=true; % linear
+% ML.set_material()
+% for i=1:10
+% W2(end+1) = ML.calculate_energy_Displace([0,0.001],[2.5 2.5],[0,10^i]);
+% end
+% 
+% loglog(10.^(1:10),W1,10.^(1:10),W2)
+
+
+% figure(2)
+% ML.show_solution(result); % Dazu die Rückgabewerte von
+        % calculate_energy_Displace um result ergänzen. 
+        % (Zweiter Rückgabewert von self.solve)
