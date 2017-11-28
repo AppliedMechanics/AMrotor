@@ -49,7 +49,7 @@ ML.cnfg.mesh.default_Nodes=ML.model.Mesh.Nodes;
 %     [~,Fy_Vector(i)] = ML.calculate_force_Displace([0,0], [2.5,2.5],[0,1], 10^(-i));
 %     end
 %     figure(2),semilogx(10.^(-4:-1:-15),Fy_Vector(4:15)),xlabel('Virtual Displacement'),ylabel('Fy Ergebnis')
- virtual_displacement=1e-10 %Liegt in der Mitte des Plateaus
+%  virtual_displacement=1e-10 %Liegt in der Mitte des Plateaus
 
 %% Kennfeld ermitteln
 posy_array=-0.7e-3:0.1e-3:0.7e-3;
