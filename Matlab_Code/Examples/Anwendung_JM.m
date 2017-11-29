@@ -1,5 +1,5 @@
 %% Tutorialanwendung
-% Zur Demonstration der AMrotorSIM-Toolbox
+% Zur Demonstration der AMrotorSIM-Toolbox%
 
 %% Header
 
