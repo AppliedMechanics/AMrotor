@@ -48,7 +48,7 @@ import AMmagneticBearing.2D_Matlab.*
 % ODER
  cnfg=Conf_ML_Darmstadt;
 
-cnfg.material.nonlinMu=false; % Nichtlinearität       
+cnfg.material.nonlinMu=true; % Nichtlinearität       
 
 geoOrder='linear';  % Bitte wegen Verschiebealgorithmus linear Lassen!
 Hmax=0.0015;         % 0: Automatisch
