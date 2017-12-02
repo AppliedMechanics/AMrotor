@@ -49,7 +49,7 @@ ML.cnfg.mesh.default_Nodes=ML.model.Mesh.Nodes;
 %     [~,Fy_Vector(i)] = ML.calculate_force_Displace([0,0], [2.5,2.5],[0,1], 10^(-i));
 %     end
 %     figure(2),semilogx(10.^(-4:-1:-15),Fy_Vector(4:15)),xlabel('Virtual Displacement'),ylabel('Fy Ergebnis')
-%  virtual_displacement=1e-10 %Liegt in der Mitte des Plateaus
+  virtual_displacement=1e-10 %Liegt in der Mitte des Plateaus
 
 %% Kennfeld ermitteln
 posy_array=-0.7e-3:0.1e-3:0.7e-3;
@@ -61,13 +61,13 @@ Ergebnis_lin=zeros(length(Iy_nutz_array)*length(posy_array),8);
 Ergebnis_nonlin=zeros(length(Iy_nutz_array)*length(posy_array),8);
 Size_1=length(posy_array);
 Size_2=length(Iy_nutz_array);
-
+% 
 % ML.cnfg.material.nonlinMu=false; % linear 
 % ML.set_material()
 % 
 % Rechnungen=Size_1*Size_2
-% Schritt=0; Zeit=0; n
-% 
+% Schritt=0; Zeit=0; 
+
 % for n1=1:Size_2
 %    for n=1:Size_1
 %     tic
@@ -91,37 +91,37 @@ Size_2=length(Iy_nutz_array);
 % 
 %     end
 % end
+% 
+ML.cnfg.material.nonlinMu=true; % nichtlinear 
+ML.set_material();     % Nötig um nonlin anzuwenden
 
-% ML.cnfg.material.nonlinMu=true; % nichtlinear 
-% ML.set_material();     % Nötig um nonlin anzuwenden
-% 
-% Rechnungen=Size_1*Size_2
-% Schritt=0; Zeit=0;
-% 
-% for n1=1:length(Iy_nutz_array)
-%    for n=1:length(posy_array)
-%     tic
-%     [Fx,Fy] = ML.calculate_force_Displace([x,posy_array(n)], [I_vormag_x,I_vormag_y],[Ix,Iy_nutz_array(n1)], virtual_displacement);
-%     
-%     Position=(n1-1)*length(posy_array)+n;
-%     
-%     Ergebnis_nonlin(Position,1)=x;
-%     Ergebnis_nonlin(Position,2)=posy_array(n);
-%     Ergebnis_nonlin(Position,3)=I_vormag_x;
-%     Ergebnis_nonlin(Position,4)=I_vormag_y;
-%     Ergebnis_nonlin(Position,5)=Ix;
-%     Ergebnis_nonlin(Position,6)=Iy_nutz_array(n1);
-%     Ergebnis_nonlin(Position,7)=Fx;
-%     Ergebnis_nonlin(Position,8)=Fy;
-%         Schritt=Schritt+1;
-%     Zeit=Zeit+toc;
-%     Restzeit=(Zeit/Schritt)*(Rechnungen-Schritt);
-%     fprintf('Fortschritt: %.0f%%  Restzeit:%.1fs\n',Schritt*100/Rechnungen,Restzeit)
-% 
-%     end
-% end
-%  save Kennfelder_neu.mat Ergebnis_nonlin Ergebnis_lin
- load('Kennfelder.mat')
+Rechnungen=Size_1*Size_2
+Schritt=0; Zeit=0;
+
+for n1=1:length(Iy_nutz_array)
+   for n=1:length(posy_array)
+    tic
+    [Fx,Fy] = ML.calculate_force_Displace([x,posy_array(n)], [I_vormag_x,I_vormag_y],[Ix,Iy_nutz_array(n1)], virtual_displacement);
+    
+    Position=(n1-1)*length(posy_array)+n;
+    
+    Ergebnis_nonlin(Position,1)=x;
+    Ergebnis_nonlin(Position,2)=posy_array(n);
+    Ergebnis_nonlin(Position,3)=I_vormag_x;
+    Ergebnis_nonlin(Position,4)=I_vormag_y;
+    Ergebnis_nonlin(Position,5)=Ix;
+    Ergebnis_nonlin(Position,6)=Iy_nutz_array(n1);
+    Ergebnis_nonlin(Position,7)=Fx;
+    Ergebnis_nonlin(Position,8)=Fy;
+        Schritt=Schritt+1;
+    Zeit=Zeit+toc;
+    Restzeit=(Zeit/Schritt)*(Rechnungen-Schritt);
+    fprintf('Fortschritt: %.0f%%  Restzeit:%.1fs\n',Schritt*100/Rechnungen,Restzeit)
+
+    end
+end
+% save Kennfelder_neu.mat Ergebnis_nonlin Ergebnis_lin
+% load('Kennfelder.mat')
 %% Geometrieplot
 % figure(3)
 % pdegplot(ML.model,'FaceLabels','on')
@@ -215,7 +215,7 @@ figure(9)
 % Rekonstruktion Matrixstruktur
 y_range2=sort(unique(Ergebnis_nonlin(:,2)));
 Iy_range2=sort(unique(Ergebnis_nonlin(:,6)));
-Z2=zeros(length(y_range),length(Iy_range));
+Z2=zeros(length(y_range2),length(Iy_range2));
 
 for i=1:length(y_range2)
     for j=1:length(Iy_range2)
