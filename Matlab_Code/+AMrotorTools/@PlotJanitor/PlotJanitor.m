@@ -28,6 +28,8 @@ classdef PlotJanitor < handle
         leftLowerCorner;
         rightUpperCorner;
         positions;
+        outputFormat = {'-dpdf'};
+        outputFigureFolder = 'FigureOutput';
     end
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     methods (Access = public)
@@ -47,6 +49,11 @@ classdef PlotJanitor < handle
         function setLayout(obj,rows,cols)
             obj.rows = rows;
             obj.cols = cols;
+        end
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        function setOutputFigureFolder(obj,folderName)
+            obj.outputFigureFolder = folderName;
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -73,13 +80,39 @@ classdef PlotJanitor < handle
                     [fac*obj.offset + obj.positions{pos}(1:2),...
                      0.98*obj.positions{pos}(3:4)]);
             end
-            pause(0.1);
+            pause(0.05);
+        end
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        function addOutputFormat(obj,formats)
+            for f = 1:length(formats)
+                obj.outputFormat{end+1} = char(formats{f});
+            end
+        end
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        function printFigures(obj,prefix,options)
+            figHandles = get(groot, 'Children');
+            for f = 1:length(figHandles)
+                h = figHandles(length(figHandles)-f+1);
+                obj.outputFigures(h,prefix,options);
+            end
+            pause(0.05);
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     end
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     methods (Access = private)
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        outputFigures(obj,figureHandle,prefix,options);
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        function checkAndCreateFolder(obj,folderPath)
+            if exist(folderPath,'dir')
+            else
+                mkdir(folderPath);
+            end
+        end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         function setPositions(obj)
             clear('obj.positions');
