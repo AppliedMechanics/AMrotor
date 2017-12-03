@@ -31,7 +31,9 @@ import AMrotorSIM.*
 close all
 clear all
 clc
-
+Timer = AMrotorTools.Timer();
+Janitor = AMrotorTools.PlotJanitor();
+Janitor.setLayout(2,3);
 %% Compute Rotor
 
 Config_Sim_CG
@@ -43,26 +45,36 @@ r.rotor.mesh();
 
 g=Graphs.Visu_Rotorsystem(r);
 g.show();                       %Hier scheint ein Bug für die Darstellung der Unwucht zu sein!
+Janitor.cleanFigures();
 
 r.compute_matrices();
 r.compute_loads();
 
-r.transform_StateSpace();
+% r.transform_StateSpace();
 
 
 %% Running system analyses
 
-m=Experiments.Modalanalyse(r);
+Mod=Experiments.Modalanalyse(r);
+Mod.calculate_rotorsystem(5);
 
-m.calculate_rotorsystem_ss(10,0:100:200);
-esf2= Graphs.Eigenschwingformen(m); %Hier ist auch irgendetwas durcheinander gekommen.
+esf2= Graphs.Eigenschwingformen(Mod);
 esf2.plot_displacements();
+Janitor.cleanFigures();
 
 % Der Campbell-plot müsste im Prinzip komplett neu aufgebaut werden:
 
-% m.calculate_rotorsystem_ss(3,0:100:3000);
-% cmp = Graphs.Campbell(m);
-% cmp.plot();
+% cmp = Experiments.Campbell(r);
+% cmp.setUp(0:2e2:1e3,8); % input is 1/min, Number of Modes
+% cmp.calculate();
+% 
+% cmpDiagramm = Graphs.Campbell(cmp);
+% % cmpDiagramm.setPlots('all');
+% % cmpDiagramm.setPlots('backward');
+% cmpDiagramm.setPlots('forward');
+Janitor.cleanFigures();
+Janitor.addOutputFormat({'-dsvg'});
+Janitor.printFigures('Test',[2]);
 
 %% Running Time Simulation
 
