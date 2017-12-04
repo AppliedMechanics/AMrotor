@@ -100,6 +100,14 @@ classdef PlotJanitor < handle
             pause(0.05);
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        function exportFigures(obj,prefix)
+            figHandles = get(groot, 'Children');
+            for f = 1:length(figHandles)
+                h = figHandles(length(figHandles)-f+1);
+                obj.tikzFigures(h,prefix);
+            end
+            pause(0.05);
+        end
     end
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
