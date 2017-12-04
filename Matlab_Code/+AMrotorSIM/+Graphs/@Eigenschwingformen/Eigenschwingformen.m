@@ -1,5 +1,5 @@
 classdef Eigenschwingformen < handle
-   properties
+   properties (Access = private)
       name='Rotor Eigenschwingformen'
       modalsystem
    end
@@ -17,57 +17,22 @@ classdef Eigenschwingformen < handle
         disp(obj.name);
       end
       
-      function plot(obj)
-          
-            Aev_x=abs(obj.modalsystem.eigenmatrizen.Aev_x);
-            Aev_y=abs(obj.modalsystem.eigenmatrizen.Aev_y);
-
-           Aev=obj.modalsystem.eigenmatrizen.Aev;
-           Aew=obj.modalsystem.eigenmatrizen.Aew;
-          n_ew=obj.modalsystem.n_ew;
-          
-          nodes=obj.modalsystem.rotorsystem.rotor.nodes;
-%          omega=obj.modalsystem.omega;
-%          EVomega=1;
-          
-          plot_EV_EW(Aev,Aew,nodes,n_ew);
-
-             figure()
-             ax1 = subplot(1,2,1);
-             hold on;
-             title(ax1,'Eigenmoden x-Richtung')
-             ax2 = subplot(1,2,2);
-             hold on;
-             title(ax2,'y-Richtung')
-         for s=1:n_ew
-             plot(ax1,(Aev_x(:,s,1)/norm(Aev_x(:,s,1))))
-             plot(ax2,(Aev_y(:,s,1)/norm(Aev_y(:,s,1))))
-         end
-
-      end
-      
       function plot_displacements(obj)
           
+          ColorHandler = AMrotorTools.PlotColors();
+          
           n_ew=obj.modalsystem.n_ew;
-          nodes=obj.modalsystem.rotorsystem.rotor.nodes;
-          n_nodes=length(nodes);
-          
-          V_x = obj.modalsystem.eigenmatrizen.V(1:2:2*n_nodes,1:2:end,1); %Eigenvektoren
-          D_x = obj.modalsystem.eigenmatrizen.D(1:2:2*n_ew,1:2:2*n_ew,1)  % Eigenwerte in Diagonalmatrix
-          
-          V_y = obj.modalsystem.eigenmatrizen.V(2*n_nodes+1:2:4*n_nodes,1:2:end,1);
-          D_y = obj.modalsystem.eigenmatrizen.D(2*n_ew+1:2:4*n_ew,1:2:2*n_ew,1)
-          
+          ColorHandler.setUp(n_ew);
           %
           disp('Eigenkreisfrequenzen')
-
             for s=1:n_ew
-            disp(['x: ',num2str(imag(D_x(s,s,1))/(2*pi)),' Hz'])
-            disp(['y: ',num2str(imag(D_y(s,s,1))/(2*pi)),' Hz'])
+                disp(' ')
+                disp([num2str(s),'. Eigenfrequenz'])
+                displayFrequencies('x',obj.modalsystem.eigenValues.x,s)
+                displayFrequencies('y',obj.modalsystem.eigenValues.y,s)
             end
-          
-          % 
-          figure()
+          % plotten der Moden
+          figure('Name','Eigenschwingformen','NumberTitle','off');
             ax1 = subplot(1,2,1);
             hold on;
             title(ax1,'Eigenmoden x-Richtung')
@@ -75,13 +40,19 @@ classdef Eigenschwingformen < handle
             hold on;
             title(ax2,'y-Richtung')
 
+            x = obj.modalsystem.rotorsystem.rotor.nodes;
         for s=1:n_ew
-            plot(ax1,(real(V_x(:,s,1))/norm(V_x(:,s,1))),'DisplayName',[num2str(imag(D_x(s,s,1))/(2*pi)),' Hz'])
-            plot(ax2,(real(V_y(:,s,1))/norm(V_y(:,s,1))),'DisplayName',[num2str(imag(D_y(s,s,1))/(2*pi)),' Hz'])
-            
+            plotMode(ax1,x,obj.modalsystem.eigenVectors.x(1:2:end,s),...
+                           obj.modalsystem.eigenValues.x(s),...
+                           ColorHandler.getColor(s))
+            plotMode(ax2,x,obj.modalsystem.eigenVectors.y(1:2:end,s),...
+                           obj.modalsystem.eigenValues.y(s),...
+                           ColorHandler.getColor(s))
         end
             legend(ax1,'show')
             legend(ax2,'show')
+            grid(ax1,'on')
+            grid(ax2,'on')
       end
    end
 end
