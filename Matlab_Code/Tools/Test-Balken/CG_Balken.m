@@ -14,7 +14,7 @@ I = pi/4*(R^4-r^4);
 % mesh
 ele.num = 40;
 ele.n = ele.num+1;
-ele.mo = 5;
+ele.mo = 10;
 ele.l = L/ele.num;
 ele.m = A*ele.l*rho;
 x = linspace(0,L,ele.n);
@@ -34,37 +34,25 @@ for e = 1:ele.num
     K1(indices1,indices1) = K1(indices1,indices1) + ele.Ke1;
 end
 %% create matrix and get right columns and rows
-BCs = 1:length(M);
-% % x richtung
-% K(1,1) = 1e9*K(1,1);
-% K(4,4) = 1e9*K(4,4);
-% K(end-3,end-3) = 1;%e9*K(end-3,end-3);
-% K(end,end) = 1;%e9*K(end,end);
-BCs(1) = NaN; BCs(4) = NaN;
-% BCs(end-3) = NaN; BCs(end) = NaN;
-% % y Richtung
-K(2,2) = 1;%1e-7*K(2,2);
-K(3,3) = 1;%e-7*K(3,3);
-K(end-2,end-2) = 1;%e-7*K(end-2,end-2);
-K(end-1,end-1) = 1;%e-7*K(end-1,end-1);
-% tmp(2) = NaN; tmp(3) = NaN;
-% tmp(end-2) = NaN; tmp(end-1) = NaN;
-% routine um den vektor zu erstellen, der die richtigen Eintraege fuer x
-% und y aus der K und M matrix holt
+% allesFest
+% eineSeiteLose
+% unterschiedlich1
+unterschiedlich2
+%
 ind = getIndices(BCs);
 % Berechnung der EV und EW
 [Vx,Dx] = eigs(K(ind.x,ind.x),M(ind.x,ind.x),ele.mo,'sm');
 [Vy,Dy] = eigs(K(ind.y,ind.y),M(ind.y,ind.y),ele.mo,'sm');
 %% first own frequencies
-omegaSquare(1,:) = [500.55 , 504.67];
-omegaSquare(2,:) = [3803.1 , 3956.9];
-omegaSquare(3,:) = [14620  , 21405];
-omegaSquare(4,:) = [39944  , 84537];
-omegaSquare = omegaSquare*E*I/L^3/(ele.num*ele.m);
-omega = sqrt(omegaSquare)/(2*pi);
-for i = 1:4
-    fprintf('w_%1.0f = %07.3f ---- w_fe,%1.0f = %07.3f\n',i,omega(i,1),i,omega(i,2));
-end
+% omegaSquare(1,:) = [500.55 , 504.67];
+% omegaSquare(2,:) = [3803.1 , 3956.9];
+% omegaSquare(3,:) = [14620  , 21405];
+% omegaSquare(4,:) = [39944  , 84537];
+% omegaSquare = omegaSquare*E*I/L^3/(ele.num*ele.m);
+% omega = sqrt(omegaSquare)/(2*pi);
+% for i = 1:4
+%     fprintf('w_%1.0f = %07.3f ---- w_fe,%1.0f = %07.3f\n',i,omega(i,1),i,omega(i,2));
+% end
 %% plotten
 figure()
     ax1 = subplot(1,2,1);
