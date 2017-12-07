@@ -107,13 +107,6 @@ classdef PlotJanitor < handle
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         outputFigures(obj,figureHandle,prefix,options);
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        function checkAndCreateFolder(obj,folderPath)
-            if exist(folderPath,'dir')
-            else
-                mkdir(folderPath);
-            end
-        end
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         function setPositions(obj)
             clear('obj.positions');
             obj.positions = cell(1,obj.rows*obj.cols);

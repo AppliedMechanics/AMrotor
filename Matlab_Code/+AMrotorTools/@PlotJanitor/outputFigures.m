@@ -103,7 +103,7 @@ set(gcf,'PaperSize',[xSize ySize]);             % Papiergroesse anpassen
 set(gcf,'PaperPosition', [0, 0, xSize, ySize]); % Position der figure auf Papier anpassen
 
 
-obj.checkAndCreateFolder(obj.outputFigureFolder);
+checkAndCreateFolder(obj.outputFigureFolder);
 figureNameWithoutSpaces = strrep(figureHandle.Name,' ','_');
 fileName = strcat('./',obj.outputFigureFolder,'/',...
                         prefix,'_',figureNameWithoutSpaces);
