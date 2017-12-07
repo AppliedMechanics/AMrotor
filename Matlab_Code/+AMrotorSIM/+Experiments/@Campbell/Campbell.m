@@ -32,32 +32,22 @@ classdef Campbell < handle
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         function calculate(obj)
-            count = 1;
-            figure()
-            l = length(obj.omega);
-            row = ceil(l/4);
-            col = 4;
             for w = obj.omega
                 [mat.A,mat.B] = obj.getStateSpaceMatrices(w);
-                [V,D] = obj.performEigenAnalysis(mat);
+                [V,tmp] = obj.performEigenAnalysis(mat);
                 Vpos = obj.getPositionEntries(V);
-                [~,D2] = eig(-full(mat.B),full(mat.A));
-%                 [ ~,EW_for,~,EW_back, ~, ~, ~, ~ ] = ...
-%                     obj.getSeparationEigenVectors(Vpos,D*2*pi);
-%                 obj.EWf(:,count) = EW_for;
-%                 obj.EWb(:,count) = EW_back;
-                subplot(row,col,count)
-                plot(D,'o')
-                hold on
-                plot(D2,'m+')
-                grid on
-                axis([2.1*min(real(D)) -1.1*min(real(D)) ...
-                      1.1*min(imag(D)) 1.1*max(imag(D))])
-                count = count + 1;
-                
+                D = getPositiveEntries(tmp);
+                if w == 0
+                    EW_for = D(1:2:end);
+                    EW_back = D(2:2:end);
+                else
+                    [ ~,EW_for,~,EW_back, ~, ~, ~, ~ ] = ...
+                        obj.getSeparationEigenVectors(Vpos,D);
+                end
+                obj.EWf(:,end+1) = EW_for;
+                obj.EWb(:,end+1) = EW_back;
+
             end
-            
-            error('On purpose!')
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         function [num] = getNumberOfEigenValues(obj)

@@ -12,8 +12,7 @@ function [A,B] = getStateSpaceMatrices(obj,omega)
     A(ind1,ind1) = sparse(obj.rotorSystem.systemmatrizen.M);
     A(ind2,ind2) = sparse(obj.rotorSystem.systemmatrizen.K);
     % set matrix B
-    B(ind1,ind1) = sparse(obj.rotorSystem.systemmatrizen.D +...
-                            omega*obj.rotorSystem.systemmatrizen.G);
+    B(ind1,ind1) = sparse(omega*obj.rotorSystem.systemmatrizen.G);
     B(ind1,ind2) = sparse(obj.rotorSystem.systemmatrizen.K);
     B(ind2,ind1) = sparse(-obj.rotorSystem.systemmatrizen.K);
 end
