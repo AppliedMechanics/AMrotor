@@ -73,6 +73,7 @@ cmpDiagramm.setPlots('all');
 cmpDiagramm.setPlots('backward');
 cmpDiagramm.setPlots('forward');
 Janitor.cleanFigures();
+Janitor.printFigures('Test',1);
 
 %% Running Time Simulation
 
