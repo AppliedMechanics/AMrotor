@@ -21,7 +21,8 @@ classdef TimeSignal < handle
       
           for sensor = sensors
 
-            [x_val,beta_pos,y_val,alpha_pos]=sensor.read_sensor_values(self.rotorsystem);
+            [x_val,~,y_val,~]=...
+                sensor.read_sensor_values(self.experiment);
               
             figure('name',[sensor.name, ' at position ',num2str(sensor.Position), '; Timesignal'], 'NumberTitle', 'off');;
             subplot(2,1,1);
