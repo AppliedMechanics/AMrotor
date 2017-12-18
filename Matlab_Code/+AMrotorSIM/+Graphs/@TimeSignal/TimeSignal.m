@@ -4,11 +4,13 @@ classdef TimeSignal < handle
     rotorsystem
     name=' --- Graphobject Zeitsignale  --- '
     time
+    experiment
    end
   methods
   function self=TimeSignal(r, experiment) 
       self.rotorsystem = r;
       self.time = experiment.time;
+      self.experiment = experiment;
   end
   
   function plot(self,sensors)
