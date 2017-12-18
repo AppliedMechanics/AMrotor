@@ -23,6 +23,9 @@ classdef Stationaere_Lsg < handle
       end
       
      function compute_ode15s_ss(obj)
+        
+        Timer = AMrotorTools.Timer();
+         
         disp('Compute.... ode15s State Space ....')
         obj.rotorsystem.clear_time_result()
         
@@ -53,9 +56,14 @@ classdef Stationaere_Lsg < handle
             end
         end
 
+        Timer.restart();
+        disp('... integration started...')
+        
         sol = ode15s(@integrate_function,obj.time,Z0,...
                      options,ss,ss_h,...
                      n_nodes,omega_rot_const_force,obj.rotorsystem);
+                 
+        disp(['... spent time for integration: ',num2str(Timer.getWallTime()),' s'])
 
         [Z,Zp] = deval(sol,obj.time);
         
