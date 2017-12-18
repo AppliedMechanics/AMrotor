@@ -135,8 +135,8 @@ classdef Rotorsystem < handle
         M_inv = M\eye(size(M));
         obj.systemmatrizen.M_inv=M_inv;
         
-        obj.systemmatrizen.ss = [zeros(length(M)),eye(length(M));-M_inv*K,-M_inv*D];
-        obj.systemmatrizen.ss_G = [zeros(length(M)),zeros(length(M));zeros(length(M)),-M_inv*G];
+        obj.systemmatrizen.ss = sparse([zeros(length(M)),eye(length(M));-M_inv*K,-M_inv*D]);
+        obj.systemmatrizen.ss_G = sparse([zeros(length(M)),zeros(length(M));zeros(length(M)),-M_inv*G]);
         
         %Ergänze StateSpace um Zustand zur Drehzahl integration /
         %Drehmoment
@@ -149,11 +149,11 @@ classdef Rotorsystem < handle
         ss_temp1 = zeros(dim_ss1);
         
         ss_temp1(1:8*n_nodes,1:8*n_nodes)=obj.systemmatrizen.ss_G;
-        obj.systemmatrizen.ss_G=ss_temp1;
+        obj.systemmatrizen.ss_G=sparse(ss_temp1);
         
         ss_temp(1:dim_ss,1:dim_ss)=obj.systemmatrizen.ss;
         ss_temp(dim_ss+1:dim_ss1,dim_ss+1:dim_ss1)=ss_rot;
-        obj.systemmatrizen.ss=ss_temp;
+        obj.systemmatrizen.ss=sparse(ss_temp);
         
         %Ergänze StateSpace um Integrationsglieder aus Regelkreisen
         
