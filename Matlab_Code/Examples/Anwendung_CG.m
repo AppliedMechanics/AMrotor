@@ -91,15 +91,15 @@ dataset_monitoring = d.compose_data();
 
 %------------- Erzeuge Grafiken aus Lösung -------------------
 
-t = Graphs.TimeSignal(r, St_Lsg);
-% o = Graphs.Orbitdarstellung(r, St_Lsg);
+% t = Graphs.TimeSignal(r, St_Lsg);
+o = Graphs.Orbitdarstellung(r, St_Lsg);
 % f = Graphs.Fourierdarstellung(r, St_Lsg);
 % fo = Graphs.Fourierorbitdarstellung(r, St_Lsg);
 % w = Graphs.Waterfalldiagramm(r, St_Lsg);
 
 for sensor = r.sensors
-         t.plot(sensor);
-%          o.plot(sensor);
+%          t.plot(sensor);
+         o.plot(sensor);
 %          f.plot(sensor);
 %          fo.plot(sensor,1);
 %          w.plot(sensor);
