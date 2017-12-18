@@ -237,6 +237,8 @@ classdef Rotorsystem < handle
                   obj.sensors(end+1) = AMrotorSIM.Sensors.Velocitysensor(arg);
               case 4
                   obj.sensors(end+1) = AMrotorSIM.Sensors.Accelerationsensor(arg);
+              otherwise
+                  error('This type of sensor is not implemented yet!')
           end 
       end
       
