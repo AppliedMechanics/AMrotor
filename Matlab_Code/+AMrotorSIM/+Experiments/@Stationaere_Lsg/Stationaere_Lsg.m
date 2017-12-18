@@ -41,6 +41,7 @@ classdef Stationaere_Lsg < handle
         
         %init Vector
         Z0 = zeros(length(ss),1);
+        Z0(4*n_nodes+2:2:8*n_nodes) = omega;
         Z0(8*n_nodes+2)=omega;
         
         % solver parameters
@@ -52,7 +53,9 @@ classdef Stationaere_Lsg < handle
             end
         end
 
-        sol = ode15s(@integrate_function,obj.time,Z0,options,ss,ss_h,n_nodes,omega_rot_const_force,obj.rotorsystem);
+        sol = ode15s(@integrate_function,obj.time,Z0,...
+                     options,ss,ss_h,...
+                     n_nodes,omega_rot_const_force,obj.rotorsystem);
 
         [Z,Zp] = deval(sol,obj.time);
         
