@@ -50,58 +50,59 @@ Janitor.cleanFigures();
 r.compute_matrices();
 r.compute_loads();
 
-% r.transform_StateSpace();
+r.transform_StateSpace();
 
 
 %% Running system analyses
 
-Mod=Experiments.Modalanalyse(r);
-Mod.calculate_rotorsystem(5);
-
-esf2= Graphs.Eigenschwingformen(Mod);
-esf2.plot_displacements();
-Janitor.cleanFigures();
+% Mod=Experiments.Modalanalyse(r);
+% Mod.calculate_rotorsystem(5);
+% 
+% esf2= Graphs.Eigenschwingformen(Mod);
+% esf2.plot_displacements();
+% Janitor.cleanFigures();
 
 % Der Campbell-plot müsste im Prinzip komplett neu aufgebaut werden:
 
-cmp = Experiments.Campbell(r);
-cmp.setUp(0:2e2:1e3,8); % input is 1/min, Number of Modes
-cmp.calculate();
-
-cmpDiagramm = Graphs.Campbell(cmp);
-cmpDiagramm.setPlots('all');
-cmpDiagramm.setPlots('backward');
-cmpDiagramm.setPlots('forward');
-Janitor.cleanFigures();
-Janitor.printFigures('Test',1);
+% cmp = Experiments.Campbell(r);
+% cmp.setUp(0:2e2:1e3,8); % input is 1/min, Number of Modes
+% cmp.calculate();
+% 
+% cmpDiagramm = Graphs.Campbell(cmp);
+% cmpDiagramm.setPlots('all');
+% cmpDiagramm.setPlots('backward');
+% cmpDiagramm.setPlots('forward');
+% Janitor.cleanFigures();
+% Janitor.printFigures('Test',1);
 
 %% Running Time Simulation
 
-% St_Lsg = Experiments.Stationaere_Lsg(r,[500,1000],[0:0.001:0.1]);
-% St_Lsg.show()
+St_Lsg = Experiments.Stationaere_Lsg(r,[500,1000],[0:0.001:0.1]);
+St_Lsg.show()
 % St_Lsg.compute()
 % St_Lsg.compute_newmark()
-% St_Lsg.compute_ode15s_ss
+St_Lsg.compute_ode15s_ss
 
 %------------- Erzeuge Ausgabeformat der Lösung ---------------
 
-% d = Dataoutput.TimeDataOutput(r,St_Lsg);
-% dataset_monitoring = d.aquire_data;
+d = Dataoutput.TimeDataOutput(St_Lsg);
+dataset_monitoring = d.compose_data();
 
 
 %------------- Erzeuge Grafiken aus Lösung -------------------
 
-%t = Graphs.TimeSignal(r, St_Lsg);
-%o= Graphs.Orbitdarstellung(r, St_Lsg);
-%f = Graphs.Fourierdarstellung(r, St_Lsg);
-%fo = Graphs.Fourierorbitdarstellung(r, St_Lsg);
-%w = Graphs.Waterfalldiagramm(r, St_Lsg);
+t = Graphs.TimeSignal(r, St_Lsg);
+% o = Graphs.Orbitdarstellung(r, St_Lsg);
+% f = Graphs.Fourierdarstellung(r, St_Lsg);
+% fo = Graphs.Fourierorbitdarstellung(r, St_Lsg);
+% w = Graphs.Waterfalldiagramm(r, St_Lsg);
 
-% for sensor = r.sensors
-%          t.plot(sensor);
+for sensor = r.sensors
+         t.plot(sensor);
 %          o.plot(sensor);
 %          f.plot(sensor);
 %          fo.plot(sensor,1);
 %          w.plot(sensor);
-% end
+end
+Janitor.cleanFigures();
    
