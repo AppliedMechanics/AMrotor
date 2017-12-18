@@ -31,7 +31,7 @@ classdef Stationaere_Lsg < handle
         disp(['... rotational speed: ',num2str(drehzahl),' U/min'])
         n_nodes = length(obj.rotorsystem.rotor.nodes);
         
-        omega = drehzahl*pi/60;           
+        omega = drehzahl*pi/30;           
         
         ss = obj.rotorsystem.systemmatrizen.ss;
         ss_G = obj.rotorsystem.systemmatrizen.ss_G;
