@@ -3,8 +3,8 @@ function setPlotLabels( ax, Name )
 %   Detailed explanation goes here
 
 title(ax,Name)
-xlabel(ax,'$\Omega$','Interpreter','latex')
-ylabel(ax,'$\omega_{i}$','Interpreter','latex')
+xlabel(ax,'$\Omega$ in $[\frac{1}{min}]$','Interpreter','latex')
+ylabel(ax,'$\omega_{i}$ in $[$Hz$]$','Interpreter','latex')
 
 end
 

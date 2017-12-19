@@ -32,15 +32,21 @@ classdef Campbell < handle
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         function calculate(obj)
-            count = 1;
             for w = obj.omega
                 [mat.A,mat.B] = obj.getStateSpaceMatrices(w);
-                [V,D] = obj.performEigenAnalysis(mat);
+                [V,tmp] = obj.performEigenAnalysis(mat);
                 Vpos = obj.getPositionEntries(V);
-                [~,obj.EWf(:,count),...
-                 ~,obj.EWb(:,count),...
-                 ~,~,~,~] = obj.getSeparationEigenVectors(Vpos,D*2*pi);
-                count = count + 1;
+                D = getPositiveEntries(tmp);
+                if w == 0
+                    EW_for = D(1:2:end);
+                    EW_back = D(2:2:end);
+                else
+                    [ ~,EW_for,~,EW_back, ~, ~, ~, ~ ] = ...
+                        obj.getSeparationEigenVectors(Vpos,D);
+                end
+                obj.EWf(:,end+1) = EW_for;
+                obj.EWb(:,end+1) = EW_back;
+
             end
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

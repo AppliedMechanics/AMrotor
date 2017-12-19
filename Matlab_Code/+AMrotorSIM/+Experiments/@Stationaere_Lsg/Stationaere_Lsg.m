@@ -23,6 +23,9 @@ classdef Stationaere_Lsg < handle
       end
       
      function compute_ode15s_ss(obj)
+        
+        Timer = AMrotorTools.Timer();
+         
         disp('Compute.... ode15s State Space ....')
         obj.rotorsystem.clear_time_result()
         
@@ -31,7 +34,7 @@ classdef Stationaere_Lsg < handle
         disp(['... rotational speed: ',num2str(drehzahl),' U/min'])
         n_nodes = length(obj.rotorsystem.rotor.nodes);
         
-        omega = drehzahl*pi/60;           
+        omega = drehzahl*pi/30;           
         
         ss = obj.rotorsystem.systemmatrizen.ss;
         ss_G = obj.rotorsystem.systemmatrizen.ss_G;
@@ -41,6 +44,7 @@ classdef Stationaere_Lsg < handle
         
         %init Vector
         Z0 = zeros(length(ss),1);
+        Z0(4*n_nodes+2:2:8*n_nodes) = omega;
         Z0(8*n_nodes+2)=omega;
         
         % solver parameters
@@ -52,7 +56,14 @@ classdef Stationaere_Lsg < handle
             end
         end
 
-        sol = ode15s(@integrate_function,obj.time,Z0,options,ss,ss_h,n_nodes,omega_rot_const_force,obj.rotorsystem);
+        Timer.restart();
+        disp('... integration started...')
+        
+        sol = ode15s(@integrate_function,obj.time,Z0,...
+                     options,ss,ss_h,...
+                     n_nodes,omega_rot_const_force,obj.rotorsystem);
+                 
+        disp(['... spent time for integration: ',num2str(Timer.getWallTime()),' s'])
 
         [Z,Zp] = deval(sol,obj.time);
         
