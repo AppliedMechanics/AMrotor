@@ -32,15 +32,12 @@ end
 %==========================================================================
 
 ax = axes('xlim', [-10 10], 'ylim', [-10 10], 'zlim',[-10 10]);
+set(gcf,'Name','Visualisierung Rotorsystem','NumberTitle','off')
 
 view(160,-30);
 grid off;
 axis equal;
 hold on
-xlabel('x')
-ylabel('y')
-zlabel('z')
-title(rotor.name);
 set(gca, 'visible', 'off'); 
 
 dim_r=size(r);
@@ -134,9 +131,13 @@ end
 set(hs(n), 'edgecolor','none')
 set(hs(n), 'facecolor','b')
 
-
 zz=1:50;
 
+% shows axis system for reference
+quiver3(zeros(3,1),zeros(3,1),zeros(3,1),[0.1;0;0],[0;0.1;0],[0;0;0.1],'k')
+text(0.1,0.0,0.0,'z')
+text(0.0,0.1,0.0,'x')
+text(0.0,0.0,0.1,'y')
 end
 
 

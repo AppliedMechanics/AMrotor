@@ -15,10 +15,10 @@ for i=load
     h = surf(ax, z*r+zp, y*r+yp, x*r+xp); %Vertauschung x und z
 
     % Linie;
-    line(ax,[xp,xp], [0,yp], [0,zp]);
+    line(ax,[zp,zp], [0,yp], [0,xp] );
     
     set(h, 'edgecolor','none')
-    set(h, 'facecolor','r')
+    set(h, 'facecolor',i.cnfg.color)
     end
 
     if isa(i,'AMrotorSIM.Loads.Force_constant_fix')

@@ -25,7 +25,7 @@ if (floor(L/2)~=L/2)
     Y = Y(1:end-1);
 end
 
-Y = Y(1:L/2+1);
+Y = Y(1:floor(L/2)+1);
 
 %Berechung des Frequenzvektors 
 f = (fs/L)*(0:(L/2));

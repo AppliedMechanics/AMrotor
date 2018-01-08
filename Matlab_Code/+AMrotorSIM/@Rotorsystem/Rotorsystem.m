@@ -75,9 +75,12 @@ classdef Rotorsystem < handle
             M=M+Ml; G=G+Gl; D=D+Dl; K=K+Kl;
         end
         
-        obj.systemmatrizen.M=M; obj.systemmatrizen.G=G; obj.systemmatrizen.D=D; obj.systemmatrizen.K=K;
+        obj.systemmatrizen.M=sparse(M); 
+        obj.systemmatrizen.G=sparse(G);
+        obj.systemmatrizen.D=sparse(D);
+        obj.systemmatrizen.K=sparse(K);
 
-        obj.reduktionsmatrizen.EVmr = eye(size(M));
+        obj.reduktionsmatrizen.EVmr = sparse(eye(size(M)));
         obj.reduktionsmatrizen.EWmr=0;
       
     end
@@ -132,8 +135,8 @@ classdef Rotorsystem < handle
         M_inv = M\eye(size(M));
         obj.systemmatrizen.M_inv=M_inv;
         
-        obj.systemmatrizen.ss = [zeros(length(M)),eye(length(M));-M_inv*K,-M_inv*D];
-        obj.systemmatrizen.ss_G = [zeros(length(M)),zeros(length(M));zeros(length(M)),-M_inv*G];
+        obj.systemmatrizen.ss = sparse([zeros(length(M)),eye(length(M));-M_inv*K,-M_inv*D]);
+        obj.systemmatrizen.ss_G = sparse([zeros(length(M)),zeros(length(M));zeros(length(M)),-M_inv*G]);
         
         %Ergänze StateSpace um Zustand zur Drehzahl integration /
         %Drehmoment
@@ -146,11 +149,11 @@ classdef Rotorsystem < handle
         ss_temp1 = zeros(dim_ss1);
         
         ss_temp1(1:8*n_nodes,1:8*n_nodes)=obj.systemmatrizen.ss_G;
-        obj.systemmatrizen.ss_G=ss_temp1;
+        obj.systemmatrizen.ss_G=sparse(ss_temp1);
         
         ss_temp(1:dim_ss,1:dim_ss)=obj.systemmatrizen.ss;
         ss_temp(dim_ss+1:dim_ss1,dim_ss+1:dim_ss1)=ss_rot;
-        obj.systemmatrizen.ss=ss_temp;
+        obj.systemmatrizen.ss=sparse(ss_temp);
         
         %Ergänze StateSpace um Integrationsglieder aus Regelkreisen
         
@@ -234,6 +237,8 @@ classdef Rotorsystem < handle
                   obj.sensors(end+1) = AMrotorSIM.Sensors.Velocitysensor(arg);
               case 4
                   obj.sensors(end+1) = AMrotorSIM.Sensors.Accelerationsensor(arg);
+              otherwise
+                  error('This type of sensor is not implemented yet!')
           end 
       end
       
@@ -246,6 +251,16 @@ classdef Rotorsystem < handle
                 obj.lager(end+1) = AMrotorSIM.Bearings.SimpleMagneticBearing(arg);
               case 3
                 obj.lager(end+1) = AMrotorSIM.Bearings.PID_MagneticBearing(arg);
+              case 4
+                obj.lager(end+1) = AMrotorSIM.Bearings.TwoWayLager(arg);
+              otherwise
+                a = dbstack;
+                errorMessage = sprintf(...
+                      "Das ist keine valide Auswahl fuer ein Lager!\n" + ...
+                      "Fehler tritt in der Datei %s in der Zeile %1.0f auf.\n" + ...
+                      "Der fehlerhafter Aufruf kommt aus %s mit Zeile %1.0f",...
+                      a(1).file,a(1).line,a(2).file,a(2).line);
+                error(char(errorMessage))
           end 
       end
       % Loads

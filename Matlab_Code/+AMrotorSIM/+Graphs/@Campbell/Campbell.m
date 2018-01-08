@@ -1,51 +1,54 @@
 classdef Campbell < handle
-   properties
-      name='Campbell Diagramm'
-      modalsystem
-   end
-   methods
-       %Konstruktor
-       function obj = Campbell(a)
-         if nargin == 0
-           disp('Keine Visualierung möglich ohne Modalsystem')
-         else
-           obj.modalsystem = a;
-         end
-       end
-      
-      function show(obj)
-         disp(obj.name);
-      end
-      
-            
-      function plot(obj)
-%           rotorpar=obj.modalsystem.rotorsystem.rotor.cnfg;
-          
-%           Aev=obj.modalsystem.eigenmatrizen.Aev;
-            Aew=obj.modalsystem.eigenmatrizen.Aew;
-          n_ew=obj.modalsystem.n_ew;
-          
-%           nodes=obj.modalsystem.rotorsystem.rotor.nodes;
-          omega=obj.modalsystem.omega;
-%           EVomega=1;
-%           plot_EV_EW(rotorpar,Aev,Aew,nodes,omega,EVomega,n_ew)
-
-%         figure()
-%         hold on;
-%         plot(omega,omega);
-%         for s=1:n_ew
-%             a(:)=abs(Aew(1,s,:));
-%             b(:)=abs(Aew(2,s,:));
-%         plot(omega,a,omega,b)
-%         end
-        
-        plot_campbell(Aew,omega,n_ew)
-        
-      end
- 
- 
-   end
-   methods(Access=private)
-       
-   end
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    properties (Access = private)
+        Name = 'Campbell-Diagramm';
+        experimentCampbell;
+        ColorHandler;
+    end
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    methods (Access = public)
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        % Konstruktor
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        function obj = Campbell(experimentCampbell)
+            if nargin == 0
+                disp(['Without a Campell analaysis a Campbell-Diagram' ...
+                      ' is not possible'])
+            else
+                obj.experimentCampbell = experimentCampbell;
+            end
+        end
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        function setPlots(obj,Selection)
+            obj.setColorNumber();
+            switch Selection
+                case {'Forward','forward','f','F'}
+                    obj.setForwardPlots();
+                case {'Backward','backward','b','B'}
+                    obj.setBackwardPlots();
+                case {'All','all','a','A'}
+                    obj.setAllPlots();
+                otherwise
+                    error(['You try to reach a selection for the Campbell-' ...
+                          'Diagram which is not implemented.']);
+            end
+        end
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    end
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    methods (Access = private)
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        function setColorNumber(obj)
+            obj.ColorHandler = AMrotorTools.PlotColors();
+            num = obj.experimentCampbell.getNumberOfEigenValues();
+            obj.ColorHandler.setUp(num.all);
+        end
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        setForwardPlots(obj);
+        setBackwardPlots(obj);
+        setAllPlots(obj);
+    end
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 end
