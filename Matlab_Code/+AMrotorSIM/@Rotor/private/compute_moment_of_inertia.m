@@ -8,12 +8,8 @@ geometry_par = zeros(Dim(1), 5);
 volume_rotor = 0;
 JzzNorm = 0; % int r^2 dV, entspricht J auf Einheitsdichte normiert 
 
-
-
-
-
-
-for n = 1:Dim(1)-1
+%for n = 1:Dim(1)-1
+for n = 2:Dim(1)
     geometry_par(n,1) = pi*(0.25*rotorpar.rotor_dimensions(n,2)^2-0.25*rotorpar.rotor_dimensions(n,3)^2); % Flaeche
     geometry_par(n,2) = pi*((0.5*rotorpar.rotor_dimensions(n,2))^4/4-(0.5*rotorpar.rotor_dimensions(n,3))^4/4); % I_xi
     geometry_par(n,3) = geometry_par(n,2); % I_eta, bei Kreisquerschnitt gilt I_eta=I_xi
@@ -30,6 +26,9 @@ for n = 1:Dim(1)-1
     
     geometry_par(n,5) = (12*rotorpar.E_module*geometry_par(n,2))/(shear_modulus*geometry_par(n,1)*rotorpar.shear_factor); %muss noch durch Elementlänge^2 geteilt werden
    
-    volume_rotor = volume_rotor + geometry_par(n,1)*(rotorpar.rotor_dimensions(n+1,1)-rotorpar.rotor_dimensions(n,1));
-    JzzNorm = JzzNorm + geometry_par(n,4)*(rotorpar.rotor_dimensions(n+1,1)-rotorpar.rotor_dimensions(n,1));
+    volume_rotor = volume_rotor + geometry_par(n,1)*(rotorpar.rotor_dimensions(n,1)-rotorpar.rotor_dimensions(n-1,1));  %neu
+    JzzNorm = JzzNorm + geometry_par(n,4)*(rotorpar.rotor_dimensions(n,1)-rotorpar.rotor_dimensions(n-1,1));            %neu
+%   volume_rotor = volume_rotor + geometry_par(n,1)*(rotorpar.rotor_dimensions(n+1,1)-rotorpar.rotor_dimensions(n,1));
+%   JzzNorm = JzzNorm + geometry_par(n,4)*(rotorpar.rotor_dimensions(n+1,1)-rotorpar.rotor_dimensions(n,1));
 end
+geometry_par = geometry_par(2:end,:);  % neu
