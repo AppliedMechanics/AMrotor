@@ -21,7 +21,7 @@ r.show;
 
 r.rotor.mesh();
 
-g=Graphs.Visu_Rotorsystem(r);
+%g=Graphs.Visu_Rotorsystem(r);
 %g.show();                       
 %Janitor.cleanFigures();
 

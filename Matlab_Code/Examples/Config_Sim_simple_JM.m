@@ -5,8 +5,7 @@ cnfg.cnfg_rotor.name = 'Testrotor';
 cnfg.cnfg_rotor.shear_def = 1;     % 1 = Timoshenko or 0 = Bernoulli beam theoy
 
 %rotor geometry             [z1,da,di;   z2,da,di]  
-% cnfg.cnfg_rotor.rotor_dimensions = [0,10,0;600,10,0]*1e-3; 
-cnfg.cnfg_rotor.rotor_dimensions = [0,10,0;400,10,0;410,150,0;600,10,0]*1e-3; %[m] %Angefangen bei 0, die Durchmessersprünge am ende des Abschnites eingeben
+cnfg.cnfg_rotor.rotor_dimensions = [0,10,0;400,10,0;410,100,0;600,10,0]*1e-3; %[m] %Angefangen bei 0, die Durchmessersprünge am ende des Abschnites eingeben
 cnfg.cnfg_rotor.shear_factor   = 0.9;  
                                
 
@@ -53,12 +52,16 @@ cnfg.cnfg_lager(2).stiffness=5e7;                     %[N/m]
 %% ========================================================================
 % Kraft in feste Richtung
 cnfg.cnfg_force_const_fix=[];
+cnfg.cnfg_force_const_fix(1).name='Saubere Kraft';
+cnfg.cnfg_force_const_fix(1).position=300e-3;
+cnfg.cnfg_force_const_fix(1).betrag_x= 100;
+cnfg.cnfg_force_const_fix(1).betrag_y= 0;
 
 % Unwuchten
 cnfg.cnfg_unbalance=[];
- cnfg.cnfg_unbalance(1).name = 'Geplante Unwucht';
- cnfg.cnfg_unbalance(1).position = 300e-3;
- cnfg.cnfg_unbalance(1).betrag = 5e-3;
- cnfg.cnfg_unbalance(1).color = 'r';
- cnfg.cnfg_unbalance(1).winkellage = 0;
+%  cnfg.cnfg_unbalance(1).name = 'Geplante Unwucht';
+%  cnfg.cnfg_unbalance(1).position = 300e-3;
+%  cnfg.cnfg_unbalance(1).betrag = 5e-3;
+%  cnfg.cnfg_unbalance(1).color = 'r';
+%  cnfg.cnfg_unbalance(1).winkellage = 0;
 %  
