@@ -18,7 +18,7 @@ for i=load
     line(ax,[zp,zp], [0,yp], [0,xp] );
     
     set(h, 'edgecolor','none')
-    set(h, 'facecolor',i.cnfg.color)
+%    set(h, 'facecolor',i.cnfg.color)
     end
 
     if isa(i,'AMrotorSIM.Loads.Force_constant_fix')

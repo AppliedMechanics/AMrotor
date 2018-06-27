@@ -11,7 +11,7 @@ classdef Rotorsystem < handle
       
       cnfg=struct([])
       
-      rotor = AMrotorSIM.Rotor().empty
+      rotor = AMrotorSIM.Rotor.Rotor().empty
       discs = AMrotorSIM.Disc().empty
       sensors = AMrotorSIM.Sensors.Sensor().empty
       lager = AMrotorSIM.Bearings.Lager().empty
@@ -57,7 +57,7 @@ classdef Rotorsystem < handle
    methods(Access=private)
       % Rotor
       function add_Rotor(obj,arg)
-          obj.rotor = AMrotorSIM.Rotor(arg);
+          obj.rotor = AMrotorSIM.Rotor.Rotor(arg);
       end
       % Disc
       function add_Disc(obj,arg)
