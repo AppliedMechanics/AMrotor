@@ -11,7 +11,7 @@ classdef Rotorsystem < handle
       
       cnfg=struct([])
       
-      rotor = AMrotorSIM.Rotor.Rotor().empty
+      rotor = AMrotorSIM.Rotor.FEMRotor.FeModel().empty
       discs = AMrotorSIM.Disc().empty
       sensors = AMrotorSIM.Sensors.Sensor().empty
       lager = AMrotorSIM.Bearings.Lager().empty
@@ -22,40 +22,24 @@ classdef Rotorsystem < handle
    %%
    methods
        %Konstruktor
-       function obj = Rotorsystem(a,name)
+       function obj = Rotorsystem(c,name)
          if nargin == 0
            obj.name = 'Netter Rotorsystem Name';
          else
-           obj.cnfg = a;
+           obj.cnfg = c;
            obj.name = name;
          end
           %
-         assemble_rotorsystem(obj);
        end
-      
-     
-      
-      function clear_time_result(obj)
-        obj.time_result = [];
-      end
-      
-      function data = generate_sensor_output(obj)
-          n=0;
-          for i=obj.sensors  
-              n=n+1;
-              data(n).name=i.name;
-              data(n).unit=i.unit;
-              [x_pos,beta_pos,y_pos,alpha_pos]=i.read_values(obj);
-              data(n).timedata=[x_pos;beta_pos;y_pos;alpha_pos];
-          end
-      end
-      
-
 
    end
    %%
    methods(Access=private)
       % Rotor
+      function add_FEMRotor(obj,arg)
+         obj.rotor = AMrotorSIM.Rotor.FEMRotor.FeModel(arg); 
+      end
+      
       function add_Rotor(obj,arg)
           obj.rotor = AMrotorSIM.Rotor.Rotor(arg);
       end
@@ -107,38 +91,7 @@ classdef Rotorsystem < handle
       function add_Force(obj,arg)
           obj.loads(end+1) = AMrotorSIM.Loads.Force_constant_fix(arg);
       end
-      
-      % Assemble
-       function assemble_rotorsystem(obj)
-           
-           % Adding rotor
-            for i=obj.cnfg.cnfg_rotor
-            obj.add_Rotor(i);
-            end
-            
-           % Adding discs
-            for i=obj.cnfg.cnfg_disc
-            obj.add_Disc(i);
-            end
-            
-            % Adding Sensors to Rotor
-            for i=obj.cnfg.cnfg_sensor
-            obj.add_Sensor(i);
-            end
-            
-            % Adding Lager to Rotor
-            for i=obj.cnfg.cnfg_lager
-            obj.add_Bearing(i);
-            end
-            
-            % Adding Loads to System
-            for i=obj.cnfg.cnfg_unbalance
-                obj.add_Load(i);
-            end
-            for i=obj.cnfg.cnfg_force_const_fix
-                obj.add_Force(i);
-            end
-       end
+
    end
    
 end

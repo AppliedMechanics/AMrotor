@@ -28,15 +28,16 @@ clc
 doc_Tutorial_Example1_Config_Sim
 
 r=Rotorsystem(cnfg,'System');
+r.assemble;
 r.show;
 
-r.rotor.mesh()
+%r.rotor.mesh()
 
 g=Graphs.Visu_Rotorsystem(r);
 g.show();
 
-r.compute_matrices();
-r.compute_loads();
+%r.compute_matrices();
+%r.compute_loads();
 %r.reduce_modal(10);
 
 %% Running system analyses

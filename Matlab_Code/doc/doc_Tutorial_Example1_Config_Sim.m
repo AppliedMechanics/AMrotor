@@ -1,19 +1,41 @@
 %% ======================================================================
 % Rotor
 
-cnfg.cnfg_rotor.name = "Testrotor";
-cnfg.cnfg_rotor.shear_def = 1;     % 1 = Timoshenko or 0 = Bernoulli beam theoy
+%cnfg.cnfg_rotor.name = "Testrotor";
+%cnfg.cnfg_rotor.shear_def = 1;     % 1 = Timoshenko or 0 = Bernoulli beam theoy
 
 %rotor geometry             [z1,da,di;   z2,da,di]  
-cnfg.cnfg_rotor.rotor_dimensions = [0,15,0;400,15,0;450,150,0;600,15,0]*1e-3; %[m] %Angefangen bei 0, die Durchmessersprünge am ende des Abschnites eingeben
-cnfg.cnfg_rotor.shear_factor   = 0.9;  %!!!!!!!!!wird Automatisch korregiert wenn Kreisring.
+%cnfg.cnfg_rotor.rotor_dimensions = [0,15,0;400,15,0;450,150,0;600,15,0]*1e-3; %[m] %Angefangen bei 0, die Durchmessersprünge am ende des Abschnites eingeben
+%cnfg.cnfg_rotor.shear_factor   = 0.9;  %!!!!!!!!!wird Automatisch korregiert wenn Kreisring.
                                 %!!!!!!!!!Schubkorrekrutfaktor für Kreisquerschnitt 0.9[-], Kreisring 0.5[-]
 
-cnfg.cnfg_rotor.E_module = 211e9;  %[N/m^2]
-cnfg.cnfg_rotor.density  = 7446;   %[kg/m^3]
-cnfg.cnfg_rotor.poisson  = 0.3;    %steel 0.27...0.3 [-]
+%cnfg.cnfg_rotor.E_module = 211e9;  %[N/m^2]
+%cnfg.cnfg_rotor.density  = 7446;   %[kg/m^3]
+%cnfg.cnfg_rotor.poisson  = 0.3;    %steel 0.27...0.3 [-]
 
-cnfg.cnfg_rotor.dz=0.01;           %set elemet length for meshing
+%cnfg.cnfg_rotor.dz=0.01;           %set elemet length for meshing
+
+%-------Config for Geometry and Mesh Creation of a Rotorsystem------
+
+% Material Config
+
+cnfg.cnfg_rotor.material.name = 'steel';
+cnfg.cnfg_rotor.material.e_module = 211e9;  %[N/m^2]
+cnfg.cnfg_rotor.material.density  = 7446;   %[kg/m^3] %%SI EINHEITEN!!
+cnfg.cnfg_rotor.material.poisson  = 0.3;    %steel 0.27...0.3 [-]
+cnfg.cnfg_rotor.material.shear_factor = 0.9;
+
+% Rotor Config
+cnfg.cnfg_rotor.name = 'rotor';
+cnfg.cnfg_rotor.geo_nodes = {[0 0], [0 1], [1 1], [1 2], [2 2], [3 0.5], [4 0.5], [4 0]};
+%cnfg.cnfg_rotor.material = Material(material);
+
+% FEM Config
+cnfg.cnfg_rotor.mesh_opt.name = 'Mesh 1';
+cnfg.cnfg_rotor.mesh_opt.d_min= 0.07;
+cnfg.cnfg_rotor.mesh_opt.d_max = 0.1;
+cnfg.cnfg_rotor.mesh_opt.approx = 'upper sum';   %Approximation for linear functions with gradient 1=0;
+                                % Insert: upper sum, lower sum, mean.
 
     
 %% ========================================================================

@@ -8,12 +8,12 @@ classdef FeModel < handle
     end
     
     methods
-        function self = FeModel(name,mesh_opt)
+        function self = FeModel(a)
             if nargin == 0
                 self.name = 'Non existent FE-Model';
             else
-            self.name = name;
-            self.mesh = mesh_opt;
+            self.mesh = a;
+            self.name = self.mesh.name;
             end
         end
         
