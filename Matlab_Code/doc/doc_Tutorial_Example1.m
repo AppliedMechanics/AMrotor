@@ -4,7 +4,7 @@
 %% Header
 
 % Johannes Maierhofer
-% 28.03.2017,29.03.2017,30.03.2017,31.03.2017,03.04.2017,04.04.2017,05.04.2017,06.04.2017,12.04.2017
+% 29.06.2018
 %
 %         .o.       ooo        ooooo                        .                      
 %        .888.      `88.       .888'                      .o8                      
@@ -30,6 +30,16 @@ doc_Tutorial_Example1_Config_Sim
 r=Rotorsystem(cnfg,'System');
 r.assemble;
 r.show;
+%% Bis hier funktioniert es schon!
+
+
+geo = Geometry(rotor);
+mesh = Mesh(mesh_opt);
+fe_model = FeModel('FE Model',mesh);
+
+fe_model.create_mesh(geo);
+mesh.plot_mesh_2d();
+fe_model.assemble_fem();
 
 %r.rotor.mesh()
 

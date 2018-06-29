@@ -17,6 +17,10 @@ classdef FeModel < handle
             end
         end
         
+      function print(obj)
+         disp(obj.name);
+      end
+        
     end
 end
 
