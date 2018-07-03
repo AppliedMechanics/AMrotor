@@ -1,6 +1,6 @@
 function [ax] = plot_rotor(rotor)
 
-nodes = rotor.nodes;
+nodes = rotor.mesh.nodes;
 rotorpar = rotor.cnfg;
 % das ist eine Funktion die zu jedem Element des Rotors einen zylinder erzeugt 
 

@@ -34,8 +34,8 @@ r.show;
 %r.rotor.geometry.show_2D();
 %r.rotor.geometry.show_3D();
 
-r.rotor.mesh.show_2D(); 
-r.rotor.mesh.show_3D();
+%r.rotor.mesh.show_2D(); 
+%r.rotor.mesh.show_3D();
 
 %% Erstmal bis hierher
 
@@ -48,25 +48,25 @@ g.show();
 
 %% Running system analyses
 
-m=Experiments.Modalanalyse(r);
-
-% m.calculate_rotor_only(4,0:100:1000);
-% esf = Graphs.Eigenschwingformen(m);
-% esf.plot();
-
-m.calculate_rotorsystem(4,0:100:1000);
-esf2= Graphs.Eigenschwingformen(m);
-esf2.plot();
-
-m.calculate_rotorsystem(3,0:100:3000);
-cmp = Graphs.Campbell(m);
-cmp.plot();
+% m=Experiments.Modalanalyse(r);
+% 
+% % m.calculate_rotor_only(4,0:100:1000);
+% % esf = Graphs.Eigenschwingformen(m);
+% % esf.plot();
+% 
+% m.calculate_rotorsystem(4,0:100:1000);
+% esf2= Graphs.Eigenschwingformen(m);
+% esf2.plot();
+% 
+% m.calculate_rotorsystem(3,0:100:3000);
+% cmp = Graphs.Campbell(m);
+% cmp.plot();
 
 %% Running Time Simulation
 
- St_Lsg = Experiments.Stationaere_Lsg(r,1000,[0 2]);
- St_Lsg.show()
- St_Lsg.compute()
-
- w = Graphs.Wegorbit(r);
- w.plot(r.sensors);
+%  St_Lsg = Experiments.Stationaere_Lsg(r,1000,[0 2]);
+%  St_Lsg.show()
+%  St_Lsg.compute()
+% 
+%  w = Graphs.Wegorbit(r);
+%  w.plot(r.sensors);

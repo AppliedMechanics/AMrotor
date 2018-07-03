@@ -313,8 +313,8 @@ classdef Unit < handle
                      self.SIFactor = [1,0];
                      disp(['SIFactor: ', num2str(self.SIFactor)])
                      disp(['dBref: ', num2str(1)])
-                     Offset = 273,5 ;
-                     disp(['Offset: 0 K = 274,5',char(8451)])
+                     Offset = 273.5 ;
+                     disp(['Offset: 0 K = -273,5',char(8451)])
              end       
             
         end    

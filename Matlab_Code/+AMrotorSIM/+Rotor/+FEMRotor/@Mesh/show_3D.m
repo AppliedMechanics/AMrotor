@@ -1,4 +1,4 @@
-function show_3D(self)
+function [ax]=show_3D(self)
    a=1;
    n=1;
    dimR=size(self.nodes);
@@ -32,7 +32,7 @@ function show_3D(self)
    end
 
 %==========================================================================
-   myaxes = axes('xlim', [-10 10], 'ylim', [-10 10], 'zlim',[-10 10]);
+   ax = axes('xlim', [-10 10], 'ylim', [-10 10], 'zlim',[-10 10]);
 
    view(3);
    grid on;
