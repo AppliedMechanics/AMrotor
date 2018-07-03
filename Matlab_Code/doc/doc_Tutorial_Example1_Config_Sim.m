@@ -27,13 +27,13 @@ cnfg.cnfg_rotor.material.shear_factor = 0.9;
 
 % Rotor Config
 cnfg.cnfg_rotor.name = 'rotor';
-cnfg.cnfg_rotor.geo_nodes = {[0 0], [0 1], [1 1], [1 2], [2 2], [3 0.5], [4 0.5], [4 0]};
+cnfg.cnfg_rotor.geo_nodes = {[0 0], [0 0.015], [0.400 0.015], [0.400 0.150], [0.450 0.150], [0.450 0.015], [0.600 0.015]};
 %cnfg.cnfg_rotor.material = Material(material);
 
 % FEM Config
 cnfg.cnfg_rotor.mesh_opt.name = 'Mesh 1';
-cnfg.cnfg_rotor.mesh_opt.d_min= 0.07;
-cnfg.cnfg_rotor.mesh_opt.d_max = 0.1;
+cnfg.cnfg_rotor.mesh_opt.d_min= 0.001;
+cnfg.cnfg_rotor.mesh_opt.d_max = 0.010;
 cnfg.cnfg_rotor.mesh_opt.approx = 'upper sum';   %Approximation for linear functions with gradient 1=0;
                                 % Insert: upper sum, lower sum, mean.
 
