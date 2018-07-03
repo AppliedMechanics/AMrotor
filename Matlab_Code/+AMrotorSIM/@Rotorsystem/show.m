@@ -9,7 +9,7 @@ function show(obj)
             i.print();
         end
 
-        for i=obj.lager
+        for i=obj.bearings
             i.print();
         end
             disp('----------------------------------------------')

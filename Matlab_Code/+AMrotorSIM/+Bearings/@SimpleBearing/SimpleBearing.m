@@ -1,16 +1,16 @@
-classdef SimpleLager < AMrotorSIM.Bearings.Lager
+classdef SimpleBearing < AMrotorSIM.Bearings.Bearing
    properties
        cnfg
    end
    methods
-        function obj=SimpleLager(arg) 
-           obj = obj@AMrotorSIM.Bearings.Lager(arg);
+        function obj=SimpleBearing(arg) 
+           obj = obj@AMrotorSIM.Bearings.Bearing(arg);
            obj.cnfg = arg;
            obj.color = 'green';
         end 
         
         function [M,G,D,K] = compute_matrices(obj)
-         compute_matrices@AMrotorSIM.Bearings.Lager(obj);
+         compute_matrices@AMrotorSIM.Bearings.Bearing(obj);
            
            K(1,1)=obj.cnfg.stiffness;
            K(3,3)=obj.cnfg.stiffness;

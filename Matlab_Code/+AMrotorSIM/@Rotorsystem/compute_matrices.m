@@ -1,9 +1,8 @@
 function compute_matrices(obj)
-        [M,G,D,K]=obj.rotor.compute_matrices(); 
         
-        for lager = obj.lager
-            [matrices.m,matrices.g,matrices.d,matrices.k]=lager.compute_matrices();
-            [Ml,Gl,Dl,Kl]=assembling_matrices(lager.cnfg.position,matrices,obj.rotor);
+        for bearing = obj.bearings
+            [matrices.m,matrices.g,matrices.d,matrices.k]=bearing.compute_matrices();
+            [Ml,Gl,Dl,Kl]=assembling_matrices(bearing.cnfg.position,matrices,obj.rotor);
             M=M+Ml; G=G+Gl; D=D+Dl; K=K+Kl;
         end
         

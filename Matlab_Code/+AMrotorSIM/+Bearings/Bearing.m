@@ -1,4 +1,4 @@
-classdef Lager < matlab.mixin.Heterogeneous & handle
+classdef Bearing < matlab.mixin.Heterogeneous & handle
    properties
       name
       position
@@ -7,7 +7,7 @@ classdef Lager < matlab.mixin.Heterogeneous & handle
    end
    methods
       %Konstruktor
-       function obj = Lager(arg)
+       function obj = Bearing(arg)
          if nargin == 0
            obj.name = 'starkes Lager!';
          else

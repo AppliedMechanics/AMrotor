@@ -14,7 +14,7 @@ classdef Rotorsystem < handle
       rotor@AMrotorSIM.Rotor.FEMRotor.FeModel
       discs = AMrotorSIM.Disc().empty
       sensors = AMrotorSIM.Sensors.Sensor().empty
-      lager = AMrotorSIM.Bearings.Lager().empty
+      bearings = AMrotorSIM.Bearings.Bearing().empty
       loads = AMrotorSIM.Loads.Load().empty
       
       time_result
@@ -67,13 +67,13 @@ classdef Rotorsystem < handle
       function add_Bearing(obj,arg)
           switch arg.type
               case 1
-                obj.lager(end+1) = AMrotorSIM.Bearings.SimpleLager(arg); 
+                obj.bearings(end+1) = AMrotorSIM.Bearings.SimpleBearing(arg); 
               case 2
-                obj.lager(end+1) = AMrotorSIM.Bearings.SimpleMagneticBearing(arg);
+                obj.bearings(end+1) = AMrotorSIM.Bearings.SimpleMagneticBearing(arg);
               case 3
-                obj.lager(end+1) = AMrotorSIM.Bearings.PID_MagneticBearing(arg);
+                obj.bearings(end+1) = AMrotorSIM.Bearings.PID_MagneticBearing(arg);
               case 4
-                obj.lager(end+1) = AMrotorSIM.Bearings.TwoWayLager(arg);
+                obj.bearings(end+1) = AMrotorSIM.Bearings.TwoWayBearing(arg);
               otherwise
                 a = dbstack;
                 errorMessage = sprintf(...
