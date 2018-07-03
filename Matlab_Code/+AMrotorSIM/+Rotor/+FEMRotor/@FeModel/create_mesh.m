@@ -1,6 +1,7 @@
-function create_mesh(self,Geometry)
-    %f = figure;
-    self.geometry = Geometry;
+function mesh = create_mesh(self,mesh_opt,Geometry)
+
+    mesh = AMrotorSIM.Rotor.FEMRotor.Mesh(mesh_opt);
+
     n_nodes = length(Geometry.geometry.nodes);
     geo_node_z=zeros(1,n_nodes);
     geo_node_x=zeros(1,n_nodes);
@@ -21,7 +22,7 @@ function create_mesh(self,Geometry)
         if geo_node_z(k-1) ~= geo_node_z(k)
 
             distance_nodes = geo_node_z(k)-geo_node_z(k-1);
-            for j = self.mesh.d_min:self.mesh.d_min:self.mesh.d_max
+            for j = mesh.d_min:mesh.d_min:mesh.d_max
                 n_mesh_el = distance_nodes/j;
 
                 if round(n_mesh_el) == n_mesh_el
@@ -41,50 +42,21 @@ function create_mesh(self,Geometry)
             for a = 1:length(z)    
                 r(a)=m*z(a)+b;
             end
-            %Hier ein Switch Case rein    
-%                     if m ~= 0
-%                         switch self.approximation
-%                             case 'lower sum'
-%                                 z_new = zeros(1,2*length(z)-2);
-%                                 z_new(1,1:2:length(z_new)) = z(1,1:end-1);
-%                                 z_new(1,2:2:length(z_new)) = z(1,1:length(z)-1);
-%                                                       
-%                                 r_new = zeros(1,2*length(z)-1);
-%                                 r_new(1,2:2:length(r_new)) = r(1,2:end);
-%                                 r_new(1,1:2:length(r_new)) = r(1,1:end);
-%                             
-%                                 z = z_new;
-%                                 r = r_new;
-%                                 
-%                             case 'upper sum'
-%                                 z_new = zeros(1,2*length(z)-1);
-%                                 z_new(1,1:2:length(z_new)) = z(1,1:end);
-%                                 z_new(1,2:2:length(z_new)) = z(1,2:length(z));
-%                                                       
-%                                 r_new = zeros(1,2*length(z)-1);
-%                                 r_new(1,2:2:length(r_new)) = r(1,1:end-1);
-%                                 r_new(1,1:2:length(r_new)) = r(1,1:end);
-%                             
-%                                 z = z_new;
-%                                 r = r_new;
-%                             case 'mean'
-%                         end
-%                     end
 
         %% Create a structure of Node-Objects
             for a = 1:length(z)
               if node_number == 1
-                self.mesh.nodes(node_number) =...
-                MeshNode(node_number, z(a), r(a));
+                mesh.nodes(node_number) =...
+                AMrotorSIM.Rotor.FEMRotor.MeshNode(node_number, z(a), r(a));
                 node_number = node_number + 1;
               else
-                  if z(a) == self.mesh.nodes(node_number-1).z
+                  if z(a) == mesh.nodes(node_number-1).z
                       %Wenn die z Koordinaten vom vorherigem Knoten
                       %mit dem jetzigen möglichen Knoten übereinstimmt, Knoten nicht
                       %doppelt erstellen
                   else
-                    self.mesh.nodes(node_number) =...
-                        MeshNode(node_number, z(a), r(a));
+                    mesh.nodes(node_number) =...
+                        AMrotorSIM.Rotor.FEMRotor.MeshNode(node_number, z(a), r(a));
                     node_number = node_number + 1; 
                   end
                end  
@@ -96,19 +68,20 @@ function create_mesh(self,Geometry)
     elem_nr = 1;
     for k = 1:(node_number-2)
 
-       if self.mesh.nodes(k).z ~= self.mesh.nodes(k+1).z
-        self.mesh.elements(elem_nr) = Element.TimoshenkoLinearElement...
-            (elem_nr,self.mesh.nodes(k),self.mesh.nodes(k+1), Geometry.material);
-        create_ele_loc_matrix(self.mesh.elements(elem_nr),self);
-        calculate_geometry_parameters(self.mesh.elements(elem_nr),self);
+       if mesh.nodes(k).z ~= mesh.nodes(k+1).z
+        mesh.elements(elem_nr) = AMrotorSIM.Rotor.FEMRotor.Element.TimoshenkoLinearElement...
+            (elem_nr,mesh.nodes(k),mesh.nodes(k+1), Geometry.material);
+        create_ele_loc_matrix(mesh.elements(elem_nr),self);
+        calculate_geometry_parameters(mesh.elements(elem_nr),self);
         
         %Assemble elementary matrices
-        assemble_stiffness_matrix(self.mesh.elements(elem_nr));
-        assemble_mass_matrix(self.mesh.elements(elem_nr));
-        assemble_gyroscopic_matrix(self.mesh.elements(elem_nr));
+        assemble_stiffness_matrix(mesh.elements(elem_nr));
+        assemble_mass_matrix(mesh.elements(elem_nr));
+        assemble_gyroscopic_matrix(mesh.elements(elem_nr));
         
         elem_nr = elem_nr +1;
        end
 
     end
+    
 end

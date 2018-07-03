@@ -30,14 +30,12 @@ doc_Tutorial_Example1_Config_Sim
 r=Rotorsystem(cnfg,'System');
 r.assemble;
 r.show;
+
+r.Rotor.FEMRotor.geometry.show_2D();
+
 %% Bis hier funktioniert es schon!
 
 
-geo = Geometry(rotor);
-mesh = Mesh(mesh_opt);
-fe_model = FeModel('FE Model',mesh);
-
-fe_model.create_mesh(geo);
 mesh.plot_mesh_2d();
 fe_model.assemble_fem();
 

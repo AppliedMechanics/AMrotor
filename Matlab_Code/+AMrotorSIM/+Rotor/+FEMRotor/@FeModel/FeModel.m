@@ -1,9 +1,10 @@
 classdef FeModel < handle
     
     properties
-        mesh
         name
+        cnfg
         geometry
+        mesh
         matrices
     end
     
@@ -11,10 +12,15 @@ classdef FeModel < handle
         function self = FeModel(a)
             if nargin == 0
                 self.name = 'Non existent FE-Model';
+                disp('FeModel has no properties');
+                return
             else
-            self.mesh = a;
-            self.name = self.mesh.name;
+            self.cnfg = a;
+            self.name = self.cnfg.name;
             end
+            
+            self.geometry = AMrotorSIM.Rotor.FEMRotor.Geometry(self.cnfg);
+            self.mesh = self.create_mesh(self.cnfg.mesh_opt, self.geometry);
         end
         
       function print(obj)

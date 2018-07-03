@@ -5,15 +5,16 @@ classdef Mesh < handle
         d_min
         d_max
         approximation
-        nodes = MeshNode().empty
-        elements = Element.TimoshenkoLinearElement().empty
+        nodes = AMrotorSIM.Rotor.FEMRotor.MeshNode().empty
+        elements = AMrotorSIM.Rotor.FEMRotor.Element.TimoshenkoLinearElement().empty
     end
     
     methods
         
         function self = Mesh(optn)
             if nargin == 0
-                self.name = 'No Mesh';
+                self.name = 'Empty Mesh';
+                disp('No Options for Meshing...!');
             else
                 self.name = optn.name;
                 self.d_min = optn.d_min;
