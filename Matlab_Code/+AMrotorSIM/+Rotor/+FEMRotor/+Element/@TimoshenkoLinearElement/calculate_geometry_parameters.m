@@ -1,7 +1,6 @@
-function calculate_geometry_parameters(self,fe_model)
-    self.material = fe_model.material;
+function calculate_geometry_parameters(self,mesh)
 
-    switch fe_model.mesh.approximation
+    switch mesh.approximation
         case 'mean'
             self.area = 2*pi*((self.node1.radius+self.node2.radius)/2)^2; % m^2
             self.radius = (self.node1.radius+self.node2.radius)/2;
@@ -24,7 +23,7 @@ function calculate_geometry_parameters(self,fe_model)
     end
     self.length = (self.node2.z-self.node1.z)*10e-3; % m;
     self.volume = self.area*self.length; % m^3
-    self.mass = self.volume * self.material.density; %kg
+   % self.mass = self.volume * self.material.density; %kg
     self.I_p = 0.5*pi*self.node1.radius^4;
     self.I_y = (pi*self.node1.radius^4)/4;
 

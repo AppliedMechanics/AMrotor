@@ -71,17 +71,19 @@ function mesh = create_mesh(self,mesh_opt,Geometry,material)
        if mesh.nodes(k).z ~= mesh.nodes(k+1).z
         mesh.elements(elem_nr) = AMrotorSIM.Rotor.FEMRotor.Element.TimoshenkoLinearElement...
             (elem_nr,mesh.nodes(k),mesh.nodes(k+1), material);
-        create_ele_loc_matrix(mesh.elements(elem_nr),self);
-        calculate_geometry_parameters(mesh.elements(elem_nr),self);
-        
-        %Assemble elementary matrices
-        assemble_stiffness_matrix(mesh.elements(elem_nr));
-        assemble_mass_matrix(mesh.elements(elem_nr));
-        assemble_gyroscopic_matrix(mesh.elements(elem_nr));
-        
         elem_nr = elem_nr +1;
        end
-
+    end
+    
+    for el=mesh.elements
+        
+        el.create_ele_loc_matrix();
+        el.calculate_geometry_parameters(mesh);
+        
+        %Assemble elementary matrices
+        el.assemble_stiffness_matrix();
+        el.assemble_mass_matrix();
+        el.assemble_gyroscopic_matrix(); 
     end
     
 end

@@ -1,4 +1,4 @@
-function create_ele_loc_matrix(self,fe_model)
+function create_ele_loc_matrix(self)
 
         %Vektorversion der Localisierungsmatrix:
         Lv0_ele = [3,9,6,12,1,5,7,11,2,4,8,10];

@@ -31,7 +31,11 @@ r=Rotorsystem(cnfg,'System');
 r.assemble;
 r.show;
 
-r.rotor.FEMRotor.geometry.show_2D();
+r.rotor.geometry.show_2D();
+r.rotor.geometry.show_3D();
+
+r.rotor.mesh.plot_mesh_2d(); %kleines d, show
+r.rotor.mesh.polt_mesh_3d();
 
 %% Erstmal bis hierher
 
