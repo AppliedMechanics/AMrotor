@@ -5,8 +5,8 @@ classdef Mesh < handle
         d_min
         d_max
         approximation
-        nodes = AMrotorSIM.Rotor.FEMRotor.MeshNode().empty
-        elements = AMrotorSIM.Rotor.FEMRotor.Element.TimoshenkoLinearElement().empty
+        nodes@AMrotorSIM.Rotor.FEMRotor.MeshNode vector
+        elements@AMrotorSIM.Rotor.FEMRotor.Element.TimoshenkoLinearElement vector
     end
     
     methods

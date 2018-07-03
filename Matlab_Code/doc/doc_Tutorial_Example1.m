@@ -31,15 +31,9 @@ r=Rotorsystem(cnfg,'System');
 r.assemble;
 r.show;
 
-r.Rotor.FEMRotor.geometry.show_2D();
+r.rotor.FEMRotor.geometry.show_2D();
 
-%% Bis hier funktioniert es schon!
-
-
-mesh.plot_mesh_2d();
-fe_model.assemble_fem();
-
-%r.rotor.mesh()
+%% Erstmal bis hierher
 
 g=Graphs.Visu_Rotorsystem(r);
 g.show();

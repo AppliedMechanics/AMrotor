@@ -11,7 +11,7 @@ classdef Rotorsystem < handle
       
       cnfg=struct([])
       
-      rotor = AMrotorSIM.Rotor.FEMRotor.FeModel().empty
+      rotor@AMrotorSIM.Rotor.FEMRotor.FeModel
       discs = AMrotorSIM.Disc().empty
       sensors = AMrotorSIM.Sensors.Sensor().empty
       lager = AMrotorSIM.Bearings.Lager().empty
