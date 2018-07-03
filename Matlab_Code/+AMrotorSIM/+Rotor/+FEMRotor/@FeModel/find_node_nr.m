@@ -7,7 +7,7 @@ function node_nr = find_node_nr(self,position)
            else
                 node_nr = self.mesh.nodes(1,i).name;
            end
-        elseif position == self.mesh.nodes(1,i-z).z 
+        elseif position == self.mesh.nodes(1,i-1).z 
             node_nr = self.mesh.nodes(1,i-1).name;
         else
             node_nr = self.mesh.nodes(1,i).name;

@@ -6,16 +6,16 @@ classdef Rotorsystem < handle
 
    properties
       name
-      systemmatrizen
+      systemmatrices
       reduktionsmatrizen
       
       cnfg=struct([])
       
       rotor@AMrotorSIM.Rotor.FEMRotor.FeModel
-      discs = AMrotorSIM.Disc().empty
-      sensors = AMrotorSIM.Sensors.Sensor().empty
-      bearings = AMrotorSIM.Bearings.Bearing().empty
-      loads = AMrotorSIM.Loads.Load().empty
+      discs@AMrotorSIM.Disc vector
+      sensors@AMrotorSIM.Sensors.Sensor vector
+      bearings@AMrotorSIM.Bearings.Bearing vector
+      loads@AMrotorSIM.Loads.Load vector
       
       time_result
    end

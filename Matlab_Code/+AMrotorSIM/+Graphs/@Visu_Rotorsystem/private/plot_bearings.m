@@ -3,7 +3,7 @@ function plot_bearings(ax,bearing,obj)
 for i=bearing
     zp=i.cnfg.position;
     
-    bearing_pos = bearing.position; 
+    bearing_pos = i.position; 
     node_at_pos = obj.find_node_nr(bearing_pos);
     diameter = obj.mesh.nodes(node_at_pos).radius*2;
 

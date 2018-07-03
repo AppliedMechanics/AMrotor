@@ -1,8 +1,12 @@
-classdef Bearing < matlab.mixin.Heterogeneous & handle
+classdef (Abstract) Bearing < matlab.mixin.Heterogeneous & handle
    properties
       name
       position
       type
+      localisation_matrix
+      mass_matrix
+      stiffness_matrix
+      damping_matrix
       color='black'
    end
    methods
@@ -15,15 +19,20 @@ classdef Bearing < matlab.mixin.Heterogeneous & handle
            obj.position=arg.position;
            obj.type = arg.type;
          end
-      end
-      
-      function print(obj)
-         disp(obj.name);
-      end
-      
-      function [M,K] = compute_matrices(obj)
-        disp('Compute Matrices Bearings')
-      end
+       end
       
    end
+   
+      methods(Abstract)
+         
+        print(self)
+        
+        create_ele_loc_matrix(self)
+        
+        get_loc_mass_matrix(self)
+        get_loc_stiffness_matrix(self)
+        get_loc_damping_matrix(self)
+        
+      end
+
 end
