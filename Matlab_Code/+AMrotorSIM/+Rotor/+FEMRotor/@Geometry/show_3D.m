@@ -1,8 +1,8 @@
 function show_3D(obj)
     a=1;
     n=1;
-    dimR=size(obj.geometry.nodes);
-    n_nodes = length(obj.geometry.nodes);
+    dimR=size(obj.nodes);
+    n_nodes = length(obj.nodes);
     r=zeros(n_nodes,1);
     geo_node_z=zeros(1,n_nodes);
     geo_node_x=zeros(1,n_nodes);
@@ -14,8 +14,8 @@ function show_3D(obj)
 
 
     for k=1:n_nodes
-        geo_node_z(k) = obj.geometry.nodes(k).z;
-        geo_node_x(k) = obj.geometry.nodes(k).x;
+        geo_node_z(k) = obj.nodes(k).z;
+        geo_node_x(k) = obj.nodes(k).x;
     end
     while n <n_nodes
 

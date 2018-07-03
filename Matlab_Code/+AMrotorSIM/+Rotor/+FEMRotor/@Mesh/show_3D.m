@@ -1,11 +1,11 @@
-function plot_mesh_3d(self)
+function show_3D(self)
    a=1;
    n=1;
    dimR=size(self.nodes);
    n_nodes = length(self.nodes);
    r=zeros(n_nodes,1);
    mesh_node_z=zeros(1,n_nodes);
-   mesh_node_x=zeros(1,n_nodes);
+   mesh_node_radius=zeros(1,n_nodes);
 
    f2=figure;
 % erzeuge Vektor r mit Radien der Abschnitte
@@ -15,11 +15,11 @@ function plot_mesh_3d(self)
 
     for k=1:n_nodes
         mesh_node_z(k) = self.nodes(k).z;
-        mesh_node_x(k) = self.nodes(k).x;
+        mesh_node_radius(k) = self.nodes(k).radius;
     end
     while n <n_nodes
 
-        r(n,1)=mesh_node_x(n);
+        r(n,1)=mesh_node_radius(n);
 
         n=n+1;
 

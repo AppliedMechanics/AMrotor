@@ -1,4 +1,4 @@
-function plot_mesh_2d(self)
+function show_2D(self)
 % Plot the mesh in 2D    
     nodes = self.nodes;
     mesh_node_z = zeros(1, length(nodes));
