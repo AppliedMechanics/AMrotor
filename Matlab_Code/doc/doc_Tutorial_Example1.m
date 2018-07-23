@@ -42,23 +42,25 @@ r.show;
 
 r.assemble_system_matrices();
 
+%% Running system analyses
+
+m=Experiments.Modalanalyse(r);
+m.calculate_rotor_only_without_damping(8);
+
+%m.calculate_rotor_only(5,100);
+
+%m.calculate_rotorsystem_without_damping(5);
+%m.calculate_rotorsystem(4,100);
+%
+esf= Graphs.Eigenschwingformen(m);
+esf.print_frequencies();
+esf.plot_displacements();
+% 
+
 %% Erstmal bis hierher
 %r.compute_loads();
 %r.reduce_modal(10);
 
-%% Running system analyses
-
-m=Experiments.Modalanalyse(r);
-
-% m.calculate_rotor_only(4,0:100:1000);
-% esf = Graphs.Eigenschwingformen(m);
-% esf.plot();
-
-m.calculate_rotor_only(5,100);
-m.calculate_rotorsystem(4);
-esf2= Graphs.Eigenschwingformen(m);
-% esf2.plot_displacements();
-% 
 % m.calculate_rotorsystem(3);
 % cmp = Graphs.Campbell(m);
 % cmp.plot_displacements();
