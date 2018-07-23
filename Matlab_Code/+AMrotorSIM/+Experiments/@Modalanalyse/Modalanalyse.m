@@ -2,7 +2,7 @@ classdef Modalanalyse < handle
    properties
       name='Modalanalyse'
       rotorsystem
-      
+      eigenmatrizen
       n_ew
       eigenVectors
       eigenValues
@@ -26,17 +26,17 @@ classdef Modalanalyse < handle
           disp('Berechne Modalanalyse Rotor')
           
           obj.n_ew = n_modes;
-          obj.omega=drehzahl/60*2*pi;
+          omega=drehzahl/60*2*pi;
           %n_nodes=length(obj.rotorsystem.rotor.nodes);
           
-          K=obj.rotorsystem.rotor.matrizen.K;
-          G=obj.rotorsystem.rotor.matrizen.G;
-          M=obj.rotorsystem.rotor.matrizen.M;
+          K=obj.rotorsystem.rotor.matrices.K;
+          G=obj.rotorsystem.rotor.matrices.G;
+          M=obj.rotorsystem.rotor.matrices.M;
           
           
-         for n1 = 1:length(obj.omega)
+         for n1 = 1:length(omega)
 
-            G_rot = G.*obj.omega(n1);
+            G_rot = G.*omega(n1);
 
             [EV,EW] = polyeig(K,G_rot,M);
 
@@ -45,19 +45,19 @@ classdef Modalanalyse < handle
               EW=EW(I);
               EV=EV(:,I);
              
-             for s = 1:obj.n_ew
-
-                 Aev_x(:,s,n1)=EV(1:2:end/2,s*4-3);
-                 Aev_alpha(:,s,n1)=EV(2:2:end/2,s*4-3);
-                 Aev_y(:,s,n1)=EV(end/2+1:2:end,s*4-3);
-                 Aev_beta(:,s,n1)=EV(end/2+2:2:end,s*4-3);
-
-             end
              
-            Aew(:,n1)=-imag(EW(1:2:s*4));
+            %Aew(:,n1)=-imag(EW(1:2:s*4));
              
+            %obj.eigenmatrizen.Aev_x=Aev_x; %Aussortierung der x werte aus dem EV mithilfe der get_dof implementieren
+            Aev_x = zeros(2*length(obj.rotorsystem.rotor.mesh.nodes),size(EV,2));
+            for node = 1:length(obj.rotorsystem.rotor.mesh.nodes)
+                dof_u_x = obj.rotorsystem.rotor.get_gdof('u_x',node);
+                dof_xi_x = obj.rotorsystem.rotor.get_gdof('xi_x',node);
+                Aev_x(2*node-1,:)=EV(dof_u_x,:);
+                Aev_x(2*node,:)=EV(dof_xi_x,:);
+            end
             obj.eigenmatrizen.Aev_x=Aev_x;
-            obj.eigenmatrizen.Aew=Aew;
+            %obj.eigenmatrizen.Aew=Aew;
          end
           
           %[obj.eigenmatrizen.Aev,obj.eigenmatrizen.Aew] = compute_EW_EV(obj.omega,obj.n_ew,K,G,M,n_nodes);

@@ -32,8 +32,8 @@ cnfg.cnfg_rotor.geo_nodes = {[0 0], [0 0.015], [0.400 0.015], [0.400 0.150], [0.
 
 % FEM Config
 cnfg.cnfg_rotor.mesh_opt.name = 'Mesh 1';
-cnfg.cnfg_rotor.mesh_opt.d_min= 0.001;
-cnfg.cnfg_rotor.mesh_opt.d_max = 0.010;
+cnfg.cnfg_rotor.mesh_opt.d_min= 0.025;
+cnfg.cnfg_rotor.mesh_opt.d_max = 0.050;
 cnfg.cnfg_rotor.mesh_opt.approx = 'upper sum';   %Approximation for linear functions with gradient 1=0;
                                 % Insert: upper sum, lower sum, mean.
 

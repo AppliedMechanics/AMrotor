@@ -48,19 +48,20 @@ r.assemble_system_matrices();
 
 %% Running system analyses
 
-% m=Experiments.Modalanalyse(r);
+m=Experiments.Modalanalyse(r);
+
+% m.calculate_rotor_only(4,0:100:1000);
+% esf = Graphs.Eigenschwingformen(m);
+% esf.plot();
+
+m.calculate_rotor_only(5,100);
+m.calculate_rotorsystem(4);
+esf2= Graphs.Eigenschwingformen(m);
+% esf2.plot_displacements();
 % 
-% % m.calculate_rotor_only(4,0:100:1000);
-% % esf = Graphs.Eigenschwingformen(m);
-% % esf.plot();
-% 
-% m.calculate_rotorsystem(4,0:100:1000);
-% esf2= Graphs.Eigenschwingformen(m);
-% esf2.plot();
-% 
-% m.calculate_rotorsystem(3,0:100:3000);
+% m.calculate_rotorsystem(3);
 % cmp = Graphs.Campbell(m);
-% cmp.plot();
+% cmp.plot_displacements();
 
 %% Running Time Simulation
 

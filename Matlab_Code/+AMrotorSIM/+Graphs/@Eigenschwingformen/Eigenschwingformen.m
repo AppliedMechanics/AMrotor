@@ -40,7 +40,7 @@ classdef Eigenschwingformen < handle
             hold on;
             title(ax2,'y-Richtung')
 
-            x = obj.modalsystem.rotorsystem.rotor.nodes;
+            x = [obj.modalsystem.rotorsystem.rotor.mesh.nodes.z];
         for s=1:n_ew
             plotMode(ax1,x,obj.modalsystem.eigenVectors.x(1:2:end,s),...
                            obj.modalsystem.eigenValues.x(s),...

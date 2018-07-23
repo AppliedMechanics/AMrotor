@@ -3,7 +3,7 @@ function [ V, D ] = getEigenform( obj, nModes, selection )
 %   Berechnet die Eigenformen der ausgewaehlten Koordinatenrichtung. Die
 %   Eigenwerte werden gleich als sqrt(...) und der Groesse
 %   nach aufsteigend zurueck gegeben.
-[row,~] = size(obj.rotorsystem.systemmatrizen.M);
+[row,~] = size(obj.rotorsystem.rotor.matrices.M);
 switch selection
     case 'x'
         start = 1;
@@ -16,8 +16,8 @@ switch selection
 end
     
 indices = start:ende;
-M = obj.rotorsystem.systemmatrizen.M(indices,indices);
-K = obj.rotorsystem.systemmatrizen.K(indices,indices);
+M = obj.rotorsystem.rotor.matrices.M(indices,indices);
+K = obj.rotorsystem.rotor.matrices.K(indices,indices);
 [V,tmp] = eigs(-K,M,nModes,'sm');
 [D,order] = sort(sqrt(diag(tmp)));
 % sorting
