@@ -10,6 +10,8 @@ V = sign(V(index))*V;
 plot(axFigure,x,V/norm(V),...
             'DisplayName',sprintf('%1.2f Hz',imag(D)/(2*pi)),...
             'Color',color)
+xlabel('position')
+ylabel('amplitude')
 
 end
 
