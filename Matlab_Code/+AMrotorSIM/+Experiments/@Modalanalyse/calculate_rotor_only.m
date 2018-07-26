@@ -14,7 +14,7 @@ function calculate_rotor_only(obj,n_modes,drehzahl)
 
     G_rot = G.*omega(n1); %entsprechende Anpassung
 
-    [V,tmp] = eigs(-K,M,nModes,'sm');
+    [V,tmp] = eigs(-K,M,n_modes,'sm');
     [D,order] = sort(sqrt(diag(tmp)));
     % sorting
     for i = 1:length(order)

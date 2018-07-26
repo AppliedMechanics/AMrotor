@@ -30,11 +30,13 @@ function calculate_rotor_only_without_damping(obj,nModes)
         for node = 1:length(nNodes)
             dof_u_x = obj.rotorsystem.rotor.get_gdof('u_x',node);
             dof_u_y = obj.rotorsystem.rotor.get_gdof('u_y',node);
-            if sign(V(dof_u_x,mode)) == -1 || sign(V(dof_u_y,mode)) == -1
-               Ev_lat(node,mode)=-norm(V(dof_u_x,mode)+V(dof_u_y,mode));
-            else
-               Ev_lat(node,mode)=norm(V(dof_u_x,mode)+V(dof_u_y,mode));
-            end
+%             if sign(V(dof_u_x,mode)) == -1 || sign(V(dof_u_y,mode)) == -1
+%                Ev_lat(node,mode)=-norm(V(dof_u_x,mode)+V(dof_u_y,mode));
+%             else
+%                Ev_lat(node,mode)=norm(V(dof_u_x,mode)+V(dof_u_y,mode));
+%             end
+            Ev_lat(node,mode)=sign(min([V(dof_u_x,mode),V(dof_u_y,mode)]))...
+                *norm(V(dof_u_x,mode)+V(dof_u_y,mode));
         end
     end   
     obj.eigenVectors.lateral=Ev_lat;
