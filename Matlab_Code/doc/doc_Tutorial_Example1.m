@@ -37,8 +37,8 @@ r.show;
 %r.rotor.mesh.show_2D(); 
 %r.rotor.mesh.show_3D();
 
-g=Graphs.Visu_Rotorsystem(r);
-g.show();
+% g=Graphs.Visu_Rotorsystem(r);
+% g.show();
 
 r.assemble_system_matrices();
 

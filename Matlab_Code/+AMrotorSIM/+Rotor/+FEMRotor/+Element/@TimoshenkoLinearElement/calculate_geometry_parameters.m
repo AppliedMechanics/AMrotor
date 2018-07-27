@@ -21,7 +21,7 @@ function calculate_geometry_parameters(self,mesh)
                self.radius = self.node2.radius;
             end   
     end
-    self.length = (self.node2.z-self.node1.z)*10e-3; % m;
+    self.length = (self.node2.z-self.node1.z); % m;
     self.volume = self.area*self.length; % m^3
    % self.mass = self.volume * self.material.density; %kg
     self.I_p = 0.5*pi*self.node1.radius^4;

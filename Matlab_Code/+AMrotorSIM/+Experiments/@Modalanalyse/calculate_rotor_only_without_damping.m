@@ -9,7 +9,7 @@ function calculate_rotor_only_without_damping(obj,nModes)
 
 
  [V,D_tmp] = eigs(-K,M,nModes,'sm');
- [D,order] = sort(sqrt(diag(D_tmp)));
+ [D,order] = sort(imag(sqrt(diag(D_tmp))));
     % sorting
     for i = 1:length(order)
         tmp = V(:,i);
@@ -35,8 +35,8 @@ function calculate_rotor_only_without_damping(obj,nModes)
 %             else
 %                Ev_lat(node,mode)=norm(V(dof_u_x,mode)+V(dof_u_y,mode));
 %             end
-            Ev_lat(node,mode)=sign(min([V(dof_u_x,mode),V(dof_u_y,mode)]))...
-                *norm(V(dof_u_x,mode)+V(dof_u_y,mode));
+           Ev_lat(node,mode)=sign(V(dof_u_x,mode))...
+               *norm(V(dof_u_x,mode)+V(dof_u_y,mode));
         end
     end   
     obj.eigenVectors.lateral=Ev_lat;
