@@ -37,15 +37,15 @@ r.show;
 %r.rotor.mesh.show_2D(); 
 %r.rotor.mesh.show_3D();
 
-%g=Graphs.Visu_Rotorsystem(r);
-%g.show();
+g=Graphs.Visu_Rotorsystem(r);
+g.show();
 
 r.assemble_system_matrices();
 
 %% Running system analyses
 
 m=Experiments.Modalanalyse(r);
-m.calculate_rotor_only_without_damping(8);
+m.calculate_rotor_only_without_damping(15);
 
 %m.calculate_rotor_only(5,100);
 
