@@ -8,8 +8,8 @@ function calculate_rotor_only_without_damping(obj,nModes)
   M=obj.rotorsystem.rotor.matrices.M;
 
 
- [V,tmp] = eigs(-K,M,nModes,'sm');
- [D,order] = sort(sqrt(diag(tmp)));
+ [V,D_tmp] = eigs(-K,M,nModes,'sm');
+ [D,order] = sort(sqrt(diag(D_tmp)));
     % sorting
     for i = 1:length(order)
         tmp = V(:,i);
