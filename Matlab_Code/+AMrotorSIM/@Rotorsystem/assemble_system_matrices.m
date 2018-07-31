@@ -10,6 +10,9 @@ function assemble_system_matrices(self)
 %% Lagermatrizen aufaddieren
 
             M_bearing=sparse(6*n_nodes,6*n_nodes);
+            K_bearing=sparse(6*n_nodes,6*n_nodes);
+            G_bearing=sparse(6*n_nodes,6*n_nodes);
+            
             i=0;
             for bearing = self.bearings
                 
@@ -22,11 +25,15 @@ function assemble_system_matrices(self)
                 L_ele = sparse(6,6*n_nodes);
                 L_ele(1:6,(i-1)*6+1:(i-1)*6+6)=bearing.localisation_matrix;
 
-                M_bearing=M_bearing+L_ele'*bearing.mass_matrix*L_ele;
+                M_bearing = M_bearing+L_ele'*bearing.mass_matrix*L_ele;
+                K_bearing = K_bearing+L_ele'*bearing.stiffness_matrix*L_ele;
+                G_bearing = G_bearing+L_ele'*bearing.damping_matrix*L_ele;
             end
         
 %% Gesamtmatrizen addieren
         self.systemmatrices.M = self.rotor.matrices.M + M_bearing;
+        self.systemmatrices.K = self.rotor.matrices.K + K_bearing;
+        self.systemmatrices.G = self.rotor.matrices.G + G_bearing;
         
       
 end
