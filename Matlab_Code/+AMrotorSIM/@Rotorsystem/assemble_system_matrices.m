@@ -22,8 +22,9 @@ function assemble_system_matrices(self)
                 bearing.get_loc_stiffness_matrix
                 
                 i=i+1;
+                bearing_node = self.rotor.find_node_nr(bearing.position);
                 L_ele = sparse(6,6*n_nodes);
-                L_ele(1:6,(i-1)*6+1:(i-1)*6+6)=bearing.localisation_matrix;
+                L_ele(1:6,(bearing_node-1)*6+1:(bearing_node-1)*6+6)=bearing.localisation_matrix;
 
                 M_bearing = M_bearing+L_ele'*bearing.mass_matrix*L_ele;
                 K_bearing = K_bearing+L_ele'*bearing.stiffness_matrix*L_ele;
