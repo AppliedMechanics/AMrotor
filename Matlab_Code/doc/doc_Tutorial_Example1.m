@@ -37,20 +37,21 @@ r.show;
 %r.rotor.mesh.show_2D(); 
 %r.rotor.mesh.show_3D();
 
- g=Graphs.Visu_Rotorsystem(r);
- g.show();
+%g=Graphs.Visu_Rotorsystem(r);
+%g.show();
 
 r.assemble_system_matrices();
-
+r.transform_StateSpace;
 %% Running system analyses
 
 m=Experiments.Modalanalyse(r);
+%m.rotorsystem.transform_StateSpace
 %m.calculate_rotor_only_without_damping(15);
 
 %m.calculate_rotor_only(5,100);
 
-m.calculate_rotorsystem_without_damping(15);
-%m.calculate_rotorsystem(4,100);
+%m.calculate_rotorsystem_without_damping(15);
+m.calculate_rotorsystem(15,0);
 %
 esf= Graphs.Eigenschwingformen(m);
 esf.print_frequencies();

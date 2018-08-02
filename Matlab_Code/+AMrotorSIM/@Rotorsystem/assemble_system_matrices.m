@@ -13,6 +13,7 @@ function assemble_system_matrices(self)
             K_bearing=sparse(6*n_nodes,6*n_nodes);
             G_bearing=sparse(6*n_nodes,6*n_nodes);
             
+            
             i=0;
             for bearing = self.bearings
                 
@@ -35,6 +36,7 @@ function assemble_system_matrices(self)
         self.systemmatrices.M = self.rotor.matrices.M + M_bearing;
         self.systemmatrices.K = self.rotor.matrices.K + K_bearing;
         self.systemmatrices.G = self.rotor.matrices.G + G_bearing;
+        self.systemmatrices.D = self.rotor.matrices.D;
         
       
 end
