@@ -45,17 +45,17 @@ r.transform_StateSpace;
 %% Running system analyses
 
 m=Experiments.Modalanalyse(r);
-%m.rotorsystem.transform_StateSpace
+m.rotorsystem.transform_StateSpace
 %m.calculate_rotor_only_without_damping(15);
 
 %m.calculate_rotor_only(5,100);
 
 %m.calculate_rotorsystem_without_damping(15);
-m.calculate_rotorsystem(15,0);
+%m.calculate_rotorsystem(15,0);
 %
-esf= Graphs.Eigenschwingformen(m);
-esf.print_frequencies();
-esf.plot_displacements();
+%esf= Graphs.Eigenschwingformen(m);
+%esf.print_frequencies();
+%esf.plot_displacements();
 % 
 
 %% Erstmal bis hierher
@@ -68,9 +68,10 @@ esf.plot_displacements();
 
 %% Running Time Simulation
 
-%  St_Lsg = Experiments.Stationaere_Lsg(r,1000,[0 2]);
-%  St_Lsg.show()
-%  St_Lsg.compute()
+St_Lsg = Experiments.Stationaere_Lsg(r,1000,[0 0.1]);
+St_Lsg.compute_ode15s_ss
+St_Lsg.show()
+%St_Lsg.compute()
 % 
-%  w = Graphs.Wegorbit(r);
-%  w.plot(r.sensors);
+%w = Graphs.Wegorbit(r);
+%w.plot(r.sensors);

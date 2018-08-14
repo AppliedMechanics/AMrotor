@@ -12,6 +12,8 @@
     obj.systemmatrices.ss_B =[K,sparse(size(K,1),size(K,2));sparse(size(M,1),size(M,2)),-M];
     obj.systemmatrices.ss_AG =[G,sparse(size(G,1),size(G,2));...
         sparse(size(G,1),size(G,2)),sparse(size(G,1),size(G,2))];
+    obj.systemmatrices.ss_h = sparse(size(obj.systemmatrices.ss_AG,1),1);
+    %obj.systemmatrices.ss_h = sparse(1,size(obj.systemmatrices.ss_AG,1));
 
 %      %Ergänze StateSpace um Integrationsglieder aus Regelkreisen
 % 
