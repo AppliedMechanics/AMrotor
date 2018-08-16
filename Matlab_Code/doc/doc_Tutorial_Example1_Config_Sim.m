@@ -1,8 +1,8 @@
 %% ======================================================================
 % Rotor
 
-%cnfg.cnfg_rotor.name = "Testrotor";
-%cnfg.cnfg_rotor.shear_def = 1;     % 1 = Timoshenko or 0 = Bernoulli beam theoy
+cnfg.cnfg_rotor.name = 'Testrotor';
+cnfg.cnfg_rotor.shear_def = 1;     % 1 = Timoshenko or 0 = Bernoulli beam theoy
 
 %rotor geometry             [z1,da,di;   z2,da,di]  
 %cnfg.cnfg_rotor.rotor_dimensions = [0,15,0;400,15,0;450,150,0;600,15,0]*1e-3; %[m] %Angefangen bei 0, die Durchmessersprünge am ende des Abschnites eingeben

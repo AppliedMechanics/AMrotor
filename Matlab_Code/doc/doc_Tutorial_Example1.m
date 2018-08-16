@@ -70,8 +70,8 @@ m.rotorsystem.transform_StateSpace
 
 St_Lsg = Experiments.Stationaere_Lsg(r,1000,[0 0.1]);
 St_Lsg.compute_ode15s_ss
-St_Lsg.show()
+%St_Lsg.show()
 %St_Lsg.compute()
 % 
-%w = Graphs.Wegorbit(r);
-%w.plot(r.sensors);
+w = Graphs.Wegorbit(r);
+w.plot(r.sensors);
