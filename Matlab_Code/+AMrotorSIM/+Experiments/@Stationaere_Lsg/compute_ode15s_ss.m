@@ -22,8 +22,8 @@
         %init Vector
         Z0 = zeros(length(ss_A),1);
         for node = 1:n_nodes
-            dof_xi_z = obj.rotorsystem.rotor.get_gdof('xi_z',node);
-            Z0(dof_xi_z+size(ss_A,1)/2) = omega; %Alle Positionen der xi_z Koordinaten mit omega auffüllen
+            dof_psi_z = obj.rotorsystem.rotor.get_gdof('psi_z',node);
+            Z0(dof_psi_z+size(ss_A,1)/2) = omega; %Alle Positionen der xi_z Koordinaten mit omega auffüllen
         %Z0(8*n_nodes+2)=omega;
         end
         % solver parameters
