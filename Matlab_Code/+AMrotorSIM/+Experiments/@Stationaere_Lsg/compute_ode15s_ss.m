@@ -3,7 +3,7 @@
         Timer = AMrotorTools.Timer();
          
         disp('Compute.... ode15s State Space ....')
-        obj.rotorsystem.clear_time_result()
+        obj.clear_time_result()
         
         obj.result = containers.Map('KeyType','double','ValueType','any');
         
@@ -49,5 +49,5 @@
         obj.result(drehzahl)=res;
         
        end
-       obj.rotorsystem.time_result=obj.result;
+
      end

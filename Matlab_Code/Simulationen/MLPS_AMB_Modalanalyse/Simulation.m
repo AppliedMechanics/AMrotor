@@ -59,14 +59,11 @@ r.transform_StateSpace;
 
 %% Running Time Simulation
 
-St_Lsg = Experiments.Stationaere_Lsg(r,1000,[0:0.01:0.1]);
+St_Lsg = Experiments.Stationaere_Lsg(r,1000,[0:0.01:0.5]);
 St_Lsg.compute_ode15s_ss
 %St_Lsg.show()
 %St_Lsg.compute()
 % 
-w = Graphs.Wegorbit(r);
-w.plot(r.sensors);
-
 % %------------- Erzeuge Ausgabeformat der Lösung ---------------
 % 
 % d = Dataoutput.TimeDataOutput(St_Lsg);
@@ -75,18 +72,18 @@ w.plot(r.sensors);
 % 
 % %------------- Erzeuge Grafiken aus Lösung -------------------
 % 
-% t = Graphs.TimeSignal(r, St_Lsg);
-% o = Graphs.Orbitdarstellung(r, St_Lsg);
+ t = Graphs.TimeSignal(r, St_Lsg);
+ o = Graphs.Orbitdarstellung(r, St_Lsg);
 % f = Graphs.Fourierdarstellung(r, St_Lsg);
 % fo = Graphs.Fourierorbitdarstellung(r, St_Lsg);
 % w = Graphs.Waterfalldiagramm(r, St_Lsg);
 % 
-% for sensor = r.sensors
-%          t.plot(sensor);
-%          %o.plot(sensor);
+ for sensor = r.sensors
+          t.plot(sensor);
+          o.plot(sensor);
 %          f.plot(sensor);
 %          %fo.plot(sensor,1);
 %          %fo.plot(sensor,2);
 %          %w.plot(sensor);
 %          Janitor.cleanFigures();
-% end
+ end
