@@ -59,7 +59,7 @@ r.transform_StateSpace;
 
 %% Running Time Simulation
 
-St_Lsg = Experiments.Stationaere_Lsg(r,1000,[0 0.1]);
+St_Lsg = Experiments.Stationaere_Lsg(r,1000,[0:0.01:0.1]);
 St_Lsg.compute_ode15s_ss
 %St_Lsg.show()
 %St_Lsg.compute()

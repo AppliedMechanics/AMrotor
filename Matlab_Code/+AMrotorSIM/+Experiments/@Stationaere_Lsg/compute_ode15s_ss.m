@@ -6,6 +6,7 @@
         obj.rotorsystem.clear_time_result()
         
         obj.result = containers.Map('KeyType','double','ValueType','any');
+        
        for drehzahl = obj.drehzahlen 
         disp(['... rotational speed: ',num2str(drehzahl),' U/min'])
         n_nodes = length(obj.rotorsystem.rotor.mesh.nodes);
@@ -23,18 +24,12 @@
         Z0 = zeros(length(ss_A),1);
         for node = 1:n_nodes
             dof_psi_z = obj.rotorsystem.rotor.get_gdof('psi_z',node);
-            Z0(dof_psi_z+size(ss_A,1)/2) = omega; %Alle Positionen der xi_z Koordinaten mit omega auffüllen
-        %Z0(8*n_nodes+2)=omega;
+            Z0(dof_psi_z+size(ss_A,1)/2) = omega; %Alle Positionen der psidot_z Koordinaten mit omega auffüllen
         end
         % solver parameters
         omega_rot_const_force = 0;     %[1/s] angular velocity of constant_rotating_force 
         options = odeset('AbsTol', 1e-6, 'RelTol', 1e-6); %'OutputFcn','odeprint' as option to display steps
-%        if (exist('verbose','var'))
-%            if verbose == 1
-            %options = odeset('OutputFcn','odeprint', 'OutputSel',1);
-            options = odeset('OutputFcn','odeplot','OutputSel',[1:length(Z0)]); 
-%            end
-%        end
+        options = odeset('OutputFcn','odeprint', 'OutputSel',1);
 
         Timer.restart();
         disp('... integration started...')
@@ -47,12 +42,9 @@
 
         [Z,Zp] = deval(sol,obj.time);
         
-        res.X = Z(1:4*n_nodes,:);
-        res.X_d = Z(4*n_nodes+1:2*4*n_nodes,:);
-        res.X_dd= Zp(4*n_nodes+1:2*4*n_nodes,:);
-        
-        res.Phi = Z(8*n_nodes+1,:);
-        res.Phi_d = Z(8*n_nodes+2,:);
+        res.X = Z(1:6*n_nodes,:);
+        res.X_d = Z(6*n_nodes+1:2*6*n_nodes,:);
+        res.X_dd= Zp(6*n_nodes+1:2*6*n_nodes,:);
         
         obj.result(drehzahl)=res;
         
