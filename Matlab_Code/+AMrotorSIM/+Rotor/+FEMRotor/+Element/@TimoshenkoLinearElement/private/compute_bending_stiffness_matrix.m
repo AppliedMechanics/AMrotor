@@ -1,8 +1,7 @@
 function [K_F1, K_F2]=compute_bending_stiffness_matrix(Element)
        E = Element;
-       G = 1/(2*(1+E.material.poisson));
        phi = (12*E.material.e_module * E.I_y*E.material.shear_factor)/...
-                (G*E.area*E.length^2); % ratio between the shear and the flexural flexibility of the beam
+                (E.material.G_module*E.area*E.length^2); % ratio between the shear and the flexural flexibility of the beam
        var = (E.material.e_module * E.I_y)/(E.length^3*(1+phi));     
        
        %x-z plane

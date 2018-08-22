@@ -2,8 +2,6 @@
 % Rotor
 
 cnfg.cnfg_rotor.name = 'MLPS - Rotor';
-cnfg.cnfg_rotor.shear_def = 1;     % 1 = Timoshenko or 0 = Bernoulli beam theoy
-
 
 cnfg.cnfg_rotor.material.name = 'steel';
 cnfg.cnfg_rotor.material.e_module = 211e9;  %[N/m^2]
@@ -12,7 +10,7 @@ cnfg.cnfg_rotor.material.poisson  = 0.3;    %steel 0.27...0.3 [-]
 cnfg.cnfg_rotor.material.shear_factor = 0.9;
 
 % Rotor Config
-cnfg.cnfg_rotor.geo_nodes = {[0 0], [0 0.004], [0.3495 0.004], [0.3495 0.069], [0.3605 0.069], [0.3605 0.004], [0.695 0.004]};
+cnfg.cnfg_rotor.geo_nodes = {[0 0], [0 0.004], [0.3495 0.004], [0.3495 0.069], [0.3605 0.069], [0.3605 0.004], [0.695 0.004], [0.695 0]};
 
 % FEM Config
 cnfg.cnfg_rotor.mesh_opt.name = 'Mesh 1';

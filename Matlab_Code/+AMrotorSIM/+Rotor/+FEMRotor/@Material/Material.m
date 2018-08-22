@@ -1,9 +1,9 @@
 classdef Material < handle
     
-    properties
-        
+    properties 
         name
         e_module
+        G_module
         density
         poisson
         shear_factor
@@ -20,6 +20,7 @@ classdef Material < handle
                 self.density = cnfg.density;
                 self.poisson = cnfg.poisson;
                 self.shear_factor = cnfg.shear_factor;
+                self.G_module = self.e_module/(2*(1+self.poisson));
             end
         end   
     end

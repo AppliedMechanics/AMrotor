@@ -1,14 +1,13 @@
 function [G_ele] = compute_gyroscopic_matrix(Element)
     E = Element;
-    G = 1/(2*(1+E.material.poisson));
     k_sc = (6*(1+E.material.poisson))/(7+6*E.material.poisson);
     phi = (12*E.material.e_module * E.I_y*E.material.shear_factor)/...
-                (k_sc*G*E.area*E.length^2);
+                (k_sc*E.material.G_module*E.area*E.length^2);
             
     a = (E.material.density*E.area*E.radius^2)/(60*(1+phi)^2*E.length);
     
     %G = G0+phi*G1+phi^2*G2
-    G_ele = sparse(8,8);
+
     G0 = sparse(8,8);
     G1 = sparse(8,8);
     G2 = sparse(8,8);
