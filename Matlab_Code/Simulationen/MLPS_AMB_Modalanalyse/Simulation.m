@@ -36,13 +36,22 @@ r.assemble_system_loads();
 r.transform_StateSpace;
 %% Running system analyses
 
-masse = r.rotor.get_mass();
+[masse, Jzz]= r.rotor.get_mass();
 volume = r.rotor.geometry.get_volume();
 
-vol = (4e-3)^2*pi*(695e-3) + (69e-3)^2*pi*(11e-3)
-mass = vol*7446
+r1=(4e-3);
+r2=(69e-3);
+vol1 = r1^2*pi*(695e-3);
+vol2 = r2^2*pi*(11e-3);
+vol = vol1+vol2;
+mass1 = vol1*7446;
+mass2 = vol2*7446;
+mass=mass1+mass2;
+
+I=0.5*mass1*r1^2 + 0.5*mass2*r2^2;
 
 f = r.rotor.check_rigidbody();
+sum(f)
 
 m=Experiments.Modalanalyse(r);
 

@@ -78,7 +78,7 @@ function mesh = create_mesh(self,mesh_opt,Geometry,material)
     for el=mesh.elements
         
         el.create_ele_loc_matrix();
-        el.calculate_geometry_parameters(mesh);
+        el.calculate_geometry_parameters(mesh.approximation);
         
         %Assemble elementary matrices
         el.assemble_stiffness_matrix();

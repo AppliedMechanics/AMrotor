@@ -1,7 +1,7 @@
 function [K] = assemble_stiffness_matrix(self)
             
             K_A = compute_axial_stiffness_matrix(self);
-            K_T = compute_tangent_stiffness_matrix(self);
+            K_T = compute_torsional_stiffness_matrix(self);
             [K_F1, K_F2] = compute_bending_stiffness_matrix(self);
             
             K = zeros(12,12);

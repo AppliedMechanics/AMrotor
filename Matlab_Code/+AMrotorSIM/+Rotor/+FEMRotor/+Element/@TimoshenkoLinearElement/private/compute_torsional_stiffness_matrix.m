@@ -1,4 +1,4 @@
-function [K_T] = compute_tangent_stiffness_matrix(Element)
+function [K_T] = compute_torsional_stiffness_matrix(Element)
     E = Element;
     G = 1/(2*(1+E.material.poisson)); %Schubmodul
     
