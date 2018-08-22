@@ -25,10 +25,6 @@ classdef FeModel < handle
             self.mesh = self.create_mesh(self.cnfg.mesh_opt, self.geometry, self.material);
         end
         
-      function print(obj)
-         disp(obj.name);
-      end
-        
     end
 end
 

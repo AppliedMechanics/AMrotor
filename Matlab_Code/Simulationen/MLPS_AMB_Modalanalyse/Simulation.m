@@ -28,25 +28,33 @@ r.show;
 %r.rotor.mesh.show_2D(); 
 %r.rotor.mesh.show_3D();
 
-g=Graphs.Visu_Rotorsystem(r);
-g.show();
+%g=Graphs.Visu_Rotorsystem(r);
+%g.show();
 
 r.assemble_system_matrices();
 r.assemble_system_loads();
 r.transform_StateSpace;
 %% Running system analyses
 
-%m=Experiments.Modalanalyse(r);
+masse = r.rotor.get_mass();
+volume = r.rotor.geometry.get_volume();
+
+vol = (4e-3)^2*pi*(695e-3) + (69e-3)^2*pi*(11e-3)
+mass = vol*7446
+
+f = r.rotor.check_rigidbody();
+
+m=Experiments.Modalanalyse(r);
 
 %m.calculate_rotor_only_without_damping(15);
 %m.calculate_rotor_only(5,100);
 
-%m.calculate_rotorsystem_without_damping(15);
+m.calculate_rotorsystem_without_damping(15);
 %m.calculate_rotorsystem(15,0);
 %
-%esf= Graphs.Eigenschwingformen(m);
-%esf.print_frequencies();
-%esf.plot_displacements();
+esf= Graphs.Eigenschwingformen(m);
+esf.print_frequencies();
+esf.plot_displacements();
 %Janitor.cleanFigures();
 % 
 
