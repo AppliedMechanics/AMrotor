@@ -51,7 +51,7 @@ mass=mass1+mass2;
 I=0.5*mass1*r1^2 + 0.5*mass2*r2^2;
 
 f = r.rotor.check_rigidbody();
-sf=sum(f)
+sf=sum(f);
 
 m=Experiments.Modalanalyse(r);
 
