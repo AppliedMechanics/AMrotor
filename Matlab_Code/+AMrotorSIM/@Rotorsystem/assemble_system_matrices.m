@@ -16,10 +16,10 @@ function assemble_system_matrices(self)
             
             for bearing = self.bearings
                 
-                bearing.create_ele_loc_matrix
-                bearing.get_loc_damping_matrix
-                bearing.get_loc_mass_matrix
-                bearing.get_loc_stiffness_matrix
+                bearing.create_ele_loc_matrix;
+                bearing.get_loc_damping_matrix;
+                bearing.get_loc_mass_matrix;
+                bearing.get_loc_stiffness_matrix;
                 
                 bearing_node = self.rotor.find_node_nr(bearing.position);
                 L_ele = sparse(6,6*n_nodes);
