@@ -6,10 +6,10 @@ E = 211e9;
 nu = 0.3;
 G = 1/2/(1+nu)*E;
 % geometry
-R = 0.05;
+R = 0.0025;
 r = 0;
 A = pi*(R^2-r^2);
-L = 1;
+L = 0.5;
 I = pi/4*(R^4-r^4);
 % mesh
 ele.num = 40;
