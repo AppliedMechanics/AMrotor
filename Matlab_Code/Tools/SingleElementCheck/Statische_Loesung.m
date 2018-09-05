@@ -5,7 +5,7 @@ close all
 clc
 
 %% Element FEM Lösung
-load Matrizen.mat
+load Matrizen_new.mat
 
 K_fest = K(7:12,7:12); % Linkes Ende einspannen.
 M_fest = M(7:12,7:12);
@@ -73,4 +73,4 @@ Force = 1; %[N]
 u_xab=Force*length^3/(3*e_module*I); %Euler-Bernoulli-Balken
 u_yab=Force*length^3/(3*e_module*I);
 
-u_xat=Force*length^3/(3*e_module*I)+Force*length/(G_module+shear_factor*area); %Timoshenko-Balken
+u_xat=Force*length^3/(3*e_module*I)+Force*length/(G_module*shear_factor*area); %Timoshenko-Balken
