@@ -14,11 +14,6 @@
         omega = drehzahl*pi/30;           
         
         ss_A = obj.rotorsystem.systemmatrices.ss_A;
-        ss_B = obj.rotorsystem.systemmatrices.ss_B;
-        ss_G = obj.rotorsystem.systemmatrices.ss_AG;
-        ss_h = obj.rotorsystem.systemmatrices.ss_h;
-        
-        ss_A=ss_A+ss_G*omega;
         
         %init Vector
         Z0 = zeros(length(ss_A),1);
@@ -27,7 +22,7 @@
             Z0(dof_psi_z+size(ss_A,1)/2) = omega; %Alle Positionen der psidot_z Koordinaten mit omega auffüllen
         end
         % solver parameters
-        omega_rot_const_force = 0;     %[1/s] angular velocity of constant_rotating_force 
+
         options = odeset('AbsTol', 1e-6, 'RelTol', 1e-6); %'OutputFcn','odeprint' as option to display steps
         %options = odeset('OutputFcn','odeprint', 'OutputSel',1);
 
@@ -35,8 +30,7 @@
         disp('... integration started...')
         
         sol = ode15s(@integrate_function,obj.time,Z0,...
-                     options,ss_A,ss_B,ss_h,...
-                     n_nodes,omega_rot_const_force,obj.rotorsystem);
+                     options, omega, obj.rotorsystem);
                  
         disp(['... spent time for integration: ',num2str(Timer.getWallTime()),' s'])
 
