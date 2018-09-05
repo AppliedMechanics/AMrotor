@@ -48,49 +48,16 @@ classdef Rotorsystem < handle
       end
       % Sensor
       function add_Sensor(obj,arg)
-          switch arg.type
-              case 1
-                obj.sensors(end+1) = AMrotorSIM.Sensors.Wegsensor(arg);
-              case 2
-                 obj.sensors(end+1) = AMrotorSIM.Sensors.Kraftsensor(arg);
-              case 3
-                  obj.sensors(end+1) = AMrotorSIM.Sensors.Velocitysensor(arg);
-              case 4
-                  obj.sensors(end+1) = AMrotorSIM.Sensors.Accelerationsensor(arg);
-              otherwise
-                  error('This type of sensor is not implemented yet!')
-          end 
+         obj.sensors(end+1) = AMrotorSIM.Sensors.(arg.type)(arg);
       end
       
       % Lager
       function add_Bearing(obj,arg)
-          switch arg.type
-              case 1
-                obj.bearings(end+1) = AMrotorSIM.Bearings.SimpleBearing(arg); 
-              case 2
-                obj.bearings(end+1) = AMrotorSIM.Bearings.SimpleMagneticBearing(arg);
-              case 3
-                obj.bearings(end+1) = AMrotorSIM.Bearings.PID_MagneticBearing(arg);
-              case 4
-                obj.bearings(end+1) = AMrotorSIM.Bearings.TwoWayBearing(arg);
-              case 5
-                obj.bearings(end+1) = AMrotorSIM.Bearings.SimpleAxialBearing(arg);
-              otherwise
-                a = dbstack;
-                errorMessage = sprintf(...
-                      'Das ist keine valide Auswahl fuer ein Lager!\n' + ...
-                      'Fehler tritt in der Datei %s in der Zeile %1.0f auf.\n' + ...
-                      'Der fehlerhafter Aufruf kommt aus %s mit Zeile %1.0f',...
-                      a(1).file,a(1).line,a(2).file,a(2).line);
-                error(char(errorMessage))
-          end 
+          obj.bearings(end+1) = AMrotorSIM.Bearings.(arg.type)(arg);
       end
       % Loads
       function add_Load(obj,arg)
-          obj.loads(end+1) = AMrotorSIM.Loads.Unbalance_static(arg);
-      end
-      function add_Force(obj,arg)
-          obj.loads(end+1) = AMrotorSIM.Loads.Force_constant_fix(arg);
+          obj.loads(end+1) = AMrotorSIM.Loads.(arg.type)(arg);
       end
 
    end
