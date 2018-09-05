@@ -73,6 +73,8 @@ classdef Rotorsystem < handle
                 obj.bearings(end+1) = AMrotorSIM.Bearings.PID_MagneticBearing(arg);
               case 4
                 obj.bearings(end+1) = AMrotorSIM.Bearings.TwoWayBearing(arg);
+              case 5
+                obj.bearings(end+1) = AMrotorSIM.Bearings.SimpleAxialBearing(arg);
               otherwise
                 a = dbstack;
                 errorMessage = sprintf(...
