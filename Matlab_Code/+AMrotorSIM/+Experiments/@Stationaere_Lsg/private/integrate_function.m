@@ -2,10 +2,9 @@ function dZ = integrate_function(t,Z,omega, rotorsystem)
 
 ss_A = rotorsystem.systemmatrices.ss_A;
 ss_B = rotorsystem.systemmatrices.ss_B;
-ss_G = rotorsystem.systemmatrices.ss_AG;
-ss_h = rotorsystem.systemmatrices.ss_h;
+ss_AG = rotorsystem.systemmatrices.ss_AG;
 
-ss_A=ss_A+ss_G*omega;
+ss_A=ss_A+ss_AG*omega;
 
 n_nodes = length(rotorsystem.rotor.mesh.nodes);
 

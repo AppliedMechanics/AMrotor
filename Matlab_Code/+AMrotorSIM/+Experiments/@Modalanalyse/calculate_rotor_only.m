@@ -1,49 +1,53 @@
-function calculate_rotor_only(obj,n_modes,drehzahl)
+function calculate_rotor_only(obj,nModes,drehzahl)
 
-  disp('Berechne Modalanalyse Rotor')
+    disp('Berechne Modalanalyse Rotor')
 
-  obj.n_ew = n_modes;
-  omega=drehzahl/60*2*pi;
+    obj.n_ew = nModes;
+    omega=drehzahl/60*2*pi;
 
-  K=obj.rotorsystem.rotor.matrices.K;
-  G=obj.rotorsystem.rotor.matrices.G;
-  M=obj.rotorsystem.rotor.matrices.M;
+    K=obj.rotorsystem.rotor.matrices.K;
+    D=obj.rotorsystem.rotor.matrices.D;
+    G=obj.rotorsystem.rotor.matrices.G;
+    M=obj.rotorsystem.rotor.matrices.M;
 
+    ss_A = [D,M;M,sparse(size(M,1),size(M,2))];
+    ss_B =[K,sparse(size(K,1),size(K,2));sparse(size(M,1),size(M,2)),-M];
+    ss_AG =[G,sparse(size(G,1),size(G,2));...
+        sparse(size(G,1),size(G,2)),sparse(size(G,1),size(G,2))];
 
- for n1 = 1:length(omega)   %coolere for-Schleife 
+    ss_A=ss_A+ss_AG*omega;
 
-    G_rot = G.*omega(n1); %entsprechende Anpassung
+    [V,D_tmp] = eigs(ss_B,ss_A,2*nModes,'sm');
 
-    [V,tmp] = eigs(-K,M,n_modes,'sm');
-    [D,order] = sort(sqrt(diag(tmp)));
-    % sorting
-    for i = 1:length(order)
-        tmp = V(:,i);
-        V(:,i) = V(:,order(i));
-        V(:,order(i)) = tmp;
-    end
-    
-    
-    [EV,EW] = polyeig(K,G_rot,M);
+     D = imag(diag(D_tmp));
 
-     [~,I]=sort((abs(EW())));
+    %negative D / V Einträge wegwerfen --> nModes=nModes
 
-      EW=EW(I);
-      EV=EV(:,I);
+     tmp = find(D >=0);
+     tmp2 = sparse(size(V,1),length(tmp));
+     for i = 1:length(tmp)
+         EV_nr = tmp(i,1)
+         tmp2(:,i) = V(:,EV_nr);
+     end
+     V = tmp2;
 
+     V=real(V(1:end/2,:));
 
-    %Aew(:,n1)=-imag(EW(1:2:s*4));
+    %% Aussortierung der x werte aus dem EV mithilfe der get_dof Implementierung
+    nNodes = obj.rotorsystem.rotor.mesh.nodes;
 
-    %obj.eigenmatrizen.Aev_x=Aev_x; %Aussortierung der x werte aus dem EV mithilfe der get_dof implementieren
-    Aev_x = zeros(2*length(obj.rotorsystem.rotor.mesh.nodes),size(EV,2));
-    for node = 1:length(obj.rotorsystem.rotor.mesh.nodes)
-        dof_u_x = obj.rotorsystem.rotor.get_gdof('u_x',node);
-        dof_xi_x = obj.rotorsystem.rotor.get_gdof('xi_x',node);
-        Aev_x(2*node-1,:)=EV(dof_u_x,:);
-        Aev_x(2*node,:)=EV(dof_xi_x,:);
-    end
-    obj.eigenmatrizen.Aev_x=Aev_x;
-    %obj.eigenmatrizen.Aew=Aew;
- end
+    Ev_lat = zeros(length(nNodes),size(V,2));
+
+    for mode = 1:nModes
+        for node = 1:length(nNodes)
+            dof_u_x = obj.rotorsystem.rotor.get_gdof('u_x',node);
+            dof_u_y = obj.rotorsystem.rotor.get_gdof('u_y',node);
+
+                Ev_lat(node,mode)=sign(V(dof_u_x,mode))...
+                *norm(V(dof_u_x,mode)+V(dof_u_y,mode));
+        end
+    end   
+    obj.eigenVectors.lateral=Ev_lat;
+    obj.eigenValues.lateral =D;
 
 end

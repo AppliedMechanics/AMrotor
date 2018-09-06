@@ -8,10 +8,11 @@ cnfg.cnfg_rotor.material.e_module = 211e9;  %[N/m^2]
 cnfg.cnfg_rotor.material.density  = 7446;   %[kg/m^3] %%SI EINHEITEN!!
 cnfg.cnfg_rotor.material.poisson  = 0.3;    %steel 0.27...0.3 [-]
 cnfg.cnfg_rotor.material.shear_factor = 0.9;
+cnfg.cnfg_rotor.material.damping.rayleigh_alpha1= 0.001;    %D=alpha1*K + alpha2*M
+cnfg.cnfg_rotor.material.damping.rayleigh_alpha2= 0.001;
 
 % Rotor Config
 cnfg.cnfg_rotor.geo_nodes = {[0 0], [0 0.004], [0.3495 0.004], [0.3495 0.069], [0.3605 0.069], [0.3605 0.004], [0.695 0.004], [0.695 0]};
-%cnfg.cnfg_rotor.geo_nodes = {[0 0], [0 0.0025], [0.5 0.0025]};
 
 % FEM Config
 cnfg.cnfg_rotor.mesh_opt.name = 'Mesh 1';

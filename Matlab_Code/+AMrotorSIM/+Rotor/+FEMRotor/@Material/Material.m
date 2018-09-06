@@ -7,7 +7,8 @@ classdef Material < handle
         density
         poisson
         shear_factor
-        
+        rayleigh_alpha1
+        rayleigh_alpha2
     end
     
     methods
@@ -21,6 +22,9 @@ classdef Material < handle
                 self.poisson = cnfg.poisson;
                 self.shear_factor = cnfg.shear_factor;
                 self.G_module = self.e_module/(2*(1+self.poisson));
+                
+                self.rayleigh_alpha1=cnfg.damping.rayleigh_alpha1;
+                self.rayleigh_alpha2=cnfg.damping.rayleigh_alpha2;
             end
         end   
     end

@@ -39,9 +39,9 @@ r.transform_StateSpace;
 m=Experiments.Modalanalyse(r);
 
 %m.calculate_rotor_only_without_damping(15);
-%m.calculate_rotor_only(5,100);
+m.calculate_rotor_only(15,100);
 
-m.calculate_rotorsystem_without_damping(15);
+%m.calculate_rotorsystem_without_damping(15);
 %m.calculate_rotorsystem(15,0);
 %
 esf= Graphs.Eigenschwingformen(m);
@@ -58,10 +58,9 @@ esf.plot_displacements();
 
 %% Running Time Simulation
 
-St_Lsg = Experiments.Stationaere_Lsg(r,0,[0:0.01:0.5]);
+St_Lsg = Experiments.Stationaere_Lsg(r,100,[0:0.01:0.5]);
 St_Lsg.compute_ode15s_ss
-%St_Lsg.show()
-%St_Lsg.compute()
+
 % 
 % %------------- Erzeuge Ausgabeformat der Lösung ---------------
 % 

@@ -39,12 +39,12 @@ for ele = self.mesh.elements
 end
 self.matrices.G = G;
 
-D=sparse(6*n_nodes,6*n_nodes);
-self.matrices.D = D;
+%% Rayleigh-Damping
 
-f=sparse(6*n_nodes,1);
-self.matrices.f = f;
+alpha1=self.material.rayleigh_alpha1;
+alpha2=self.material.rayleigh_alpha2;
 
-u = sparse(6*n_nodes,1);
-self.matrices.u = u;
+self.matrices.D = alpha1*K + alpha2*M;
+
+
 end
