@@ -16,31 +16,13 @@ classdef Sensor < matlab.mixin.Heterogeneous & handle
            self.name = self.cnfg.name;
            self.type = self.cnfg.type;
          end
-      end
-      
-      function print(self)
-         disp(self.name);
-      end
-      
-      function [x_val,beta_pos,y_val,alpha_pos] = read_sensor_values( sensor, experiment )
-        switch sensor.type
-            case 1
-                [x_val,beta_pos,y_val,alpha_pos]= sensor.read_values(experiment);
-            case 2
-                [x_val,y_val]= sensor.measure_force(experiment);
-                beta_pos = NaN;
-                alpha_pos = NaN;
-            case 3
-                [x_val,y_val]=sensor.read_velocity_values(experiment);
-                beta_pos = NaN;
-                alpha_pos = NaN;
-            case 4
-                [x_val,y_val]=sensor.read_acceleration_values(experiment);
-                beta_pos = NaN;
-                alpha_pos = NaN;
-        end
-
        end
+   end
+      
+   methods(Abstract)
+       print(self)
+       
+      [x_val,beta_pos,y_val,alpha_pos]=read_values(self, experiment) 
    end
    
 end

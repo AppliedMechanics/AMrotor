@@ -39,27 +39,27 @@ cnfg.cnfg_sensor=[];
 count = 1;
 cnfg.cnfg_sensor(count).name = 'Wirbelstrom Lager1';
 cnfg.cnfg_sensor(count).position=0.110;
-cnfg.cnfg_sensor(count).type='Wegsensor';
+cnfg.cnfg_sensor(count).type='Displacementsensor';
 
 count = count + 1;
 cnfg.cnfg_sensor(count).name='Wirbelstrom Welle 1';
 cnfg.cnfg_sensor(count).position=0.200;
-cnfg.cnfg_sensor(count).type='Wegsensor';
+cnfg.cnfg_sensor(count).type='Displacementsensor';
 
 count = count + 1;
 cnfg.cnfg_sensor(count).name='Wirbelstrom Scheibe';
 cnfg.cnfg_sensor(count).position=0.355;
-cnfg.cnfg_sensor(count).type='Wegsensor';
+cnfg.cnfg_sensor(count).type='Displacementsensor';
 
 count = count + 1;
 cnfg.cnfg_sensor(count).name='Wirbelstrom Welle 2';
 cnfg.cnfg_sensor(count).position=0.500;
-cnfg.cnfg_sensor(count).type='Wegsensor';
+cnfg.cnfg_sensor(count).type='Displacementsensor';
 
 count = count + 1;
 cnfg.cnfg_sensor(count).name='Wirbelstrom Lager2';
 cnfg.cnfg_sensor(count).position=0.630;
-cnfg.cnfg_sensor(count).type='Wegsensor';
+cnfg.cnfg_sensor(count).type='Displacementsensor';
 
 %% ========================================================================
 % Lager
@@ -90,19 +90,20 @@ cnfg.cnfg_bearing(count).damping = 299.275;
 %% ========================================================================
 % Kraft in feste Richtung
 cnfg.cnfg_load=[];
-count = 1;
+count = 0;
 
-cnfg.cnfg_load(count).name='Const. Kraft';
-cnfg.cnfg_load(count).position=350e-3;
-cnfg.cnfg_load(count).betrag_x= 0;
-cnfg.cnfg_load(count).betrag_y= 100;
-cnfg.cnfg_load(count).type='Force_constant_fix';
+% count = count + 1;
+% cnfg.cnfg_load(count).name='Const. Kraft';
+% cnfg.cnfg_load(count).position=350e-3;
+% cnfg.cnfg_load(count).betrag_x= 0;
+% cnfg.cnfg_load(count).betrag_y= 100;
+% cnfg.cnfg_load(count).type='Force_constant_fix';
 
 % Unwuchten
 count = count + 1;
 cnfg.cnfg_load(count).name = 'Kleine Unwucht';
 cnfg.cnfg_load(count).position = 300e-3;
-cnfg.cnfg_load(count).betrag = 5e-1;
+cnfg.cnfg_load(count).betrag = 5e-6;
 cnfg.cnfg_load(count).winkellage = 0;
 cnfg.cnfg_load(count).type='Unbalance_static';
 

@@ -3,7 +3,6 @@ function [x_val,psix_val,y_val,psiy_val] = read_values(self,experiment)
     res = experiment.result;
     rotor = experiment.rotorsystem.rotor;
 
-
         x_val = containers.Map('KeyType','double','ValueType','any');
         y_val = containers.Map('KeyType','double','ValueType','any');
         psix_val = containers.Map('KeyType','double','ValueType','any');
