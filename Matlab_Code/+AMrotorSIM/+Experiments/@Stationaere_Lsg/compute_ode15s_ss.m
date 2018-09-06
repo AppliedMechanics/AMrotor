@@ -16,22 +16,30 @@
         ss_A = obj.rotorsystem.systemmatrices.ss_A;
         
         %init Vector
-        Z0 = zeros(length(ss_A),1);
-        for node = 1:n_nodes
-            dof_psi_z = obj.rotorsystem.rotor.get_gdof('psi_z',node);
-            Z0(dof_psi_z+size(ss_A,1)/2) = omega; %Alle Positionen der psidot_z Koordinaten mit omega auffüllen
-        end
-        % solver parameters
+        
+        %% Statische Lösung vorberechnen:
+%         B = obj.rotorsystem.systemmatrices.ss_B;
+%         h_ges=sparse(2040,1);
+%         h_ges(607)=10;
+% 
+%         Z0=B\h_ges;
 
-        options = odeset('AbsTol', 1e-6, 'RelTol', 1e-6); %'OutputFcn','odeprint' as option to display steps
+        %% Mit null belegen:
+         Z0 = zeros(length(ss_A),1);
+%         for node = 1:n_nodes
+%             dof_psi_z = obj.rotorsystem.rotor.get_gdof('psi_z',node);
+%             Z0(dof_psi_z+size(ss_A,1)/2) = omega; %Alle Positionen der psidot_z Koordinaten mit omega auffüllen
+%         end
+        
+        % solver parameters
+        options = odeset('AbsTol', 1e-5, 'RelTol', 1e-5); %'OutputFcn','odeprint' as option to display steps
         %options = odeset('OutputFcn','odeprint', 'OutputSel',1);
 
         Timer.restart();
         disp('... integration started...')
         
-        sol = ode15s(@integrate_function,obj.time,Z0,...
-                     options, omega, obj.rotorsystem);
-                 
+        sol = ode15s(@integrate_function,obj.time,Z0, options, omega, obj.rotorsystem);
+        
         disp(['... spent time for integration: ',num2str(Timer.getWallTime()),' s'])
 
         [Z,Zp] = deval(sol,obj.time);

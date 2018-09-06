@@ -8,8 +8,8 @@ cnfg.cnfg_rotor.material.e_module = 211e9;  %[N/m^2]
 cnfg.cnfg_rotor.material.density  = 7446;   %[kg/m^3] %%SI EINHEITEN!!
 cnfg.cnfg_rotor.material.poisson  = 0.3;    %steel 0.27...0.3 [-]
 cnfg.cnfg_rotor.material.shear_factor = 0.9;
-cnfg.cnfg_rotor.material.damping.rayleigh_alpha1= 0.001;    %D=alpha1*K + alpha2*M
-cnfg.cnfg_rotor.material.damping.rayleigh_alpha2= 0.001;
+cnfg.cnfg_rotor.material.damping.rayleigh_alpha1= 0.01;    %D=alpha1*K + alpha2*M
+cnfg.cnfg_rotor.material.damping.rayleigh_alpha2= 0.01;
 
 % Rotor Config
 cnfg.cnfg_rotor.geo_nodes = {[0 0], [0 0.004], [0.3495 0.004], [0.3495 0.069], [0.3605 0.069], [0.3605 0.004], [0.695 0.004], [0.695 0]};
@@ -74,6 +74,13 @@ cnfg.cnfg_bearing(count).stiffness=1e10;                     %[N/m]
 cnfg.cnfg_bearing(count).damping = 100;
 
 count = count + 1;
+cnfg.cnfg_bearing(count).name = 'Torque Lager Links';
+cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
+cnfg.cnfg_bearing(count).type='SimpleTorqueBearing';
+cnfg.cnfg_bearing(count).stiffness=1e10;                     %[N/m]
+cnfg.cnfg_bearing(count).damping = 100;
+
+count = count + 1;
 cnfg.cnfg_bearing(count).name = 'Isotropes Lager 1';
 cnfg.cnfg_bearing(count).position=110e-3;                        %[m]
 cnfg.cnfg_bearing(count).type='SimpleBearing';
@@ -93,18 +100,18 @@ cnfg.cnfg_bearing(count).damping = 299.275;
 cnfg.cnfg_load=[];
 count = 0;
 
-% count = count + 1;
-% cnfg.cnfg_load(count).name='Const. Kraft';
-% cnfg.cnfg_load(count).position=350e-3;
-% cnfg.cnfg_load(count).betrag_x= 0;
-% cnfg.cnfg_load(count).betrag_y= 100;
-% cnfg.cnfg_load(count).type='Force_constant_fix';
+count = count + 1;
+cnfg.cnfg_load(count).name='Const. Kraft';
+cnfg.cnfg_load(count).position=350e-3;
+cnfg.cnfg_load(count).betrag_x= 0;
+cnfg.cnfg_load(count).betrag_y= 100;
+cnfg.cnfg_load(count).type='Force_constant_fix';
 
 % Unwuchten
-count = count + 1;
-cnfg.cnfg_load(count).name = 'Kleine Unwucht';
-cnfg.cnfg_load(count).position = 300e-3;
-cnfg.cnfg_load(count).betrag = 5e-6;
-cnfg.cnfg_load(count).winkellage = 0;
-cnfg.cnfg_load(count).type='Unbalance_static';
+% count = count + 1;
+% cnfg.cnfg_load(count).name = 'Kleine Unwucht';
+% cnfg.cnfg_load(count).position = 300e-3;
+% cnfg.cnfg_load(count).betrag = 5e-6;
+% cnfg.cnfg_load(count).winkellage = 0;
+% cnfg.cnfg_load(count).type='Unbalance_static';
 

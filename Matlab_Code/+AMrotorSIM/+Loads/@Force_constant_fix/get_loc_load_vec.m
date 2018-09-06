@@ -26,5 +26,5 @@ function get_loc_load_vec(obj)
     Fy = obj.cnfg.betrag_y;
 
     obj.h.h(1) =  Fx;
-    obj.h.h(3) =  Fy;
+    obj.h.h(2) =  Fy;
 end
