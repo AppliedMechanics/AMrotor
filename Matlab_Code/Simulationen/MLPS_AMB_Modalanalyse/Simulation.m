@@ -34,7 +34,7 @@ r.show;
 r.assemble_system_matrices();
 r.assemble_system_loads();
 r.transform_StateSpace;
-%r.transform_StateSpace_variant;
+r.transform_StateSpace_variant;
 %% Running system analyses
 
 %m=Experiments.Modalanalyse(r);
@@ -89,9 +89,10 @@ r.transform_StateSpace;
 
 %% Running Time Simulation
 
-St_Lsg = Experiments.Stationaere_Lsg(r,0,[0:0.01:0.5]);
+St_Lsg = Experiments.Stationaere_Lsg(r,0,[0:0.001:0.5]);
 %St_Lsg.compute_ode15s_ss
-St_Lsg.compute_euler_ss
+%St_Lsg.compute_euler_ss
+St_Lsg.compute_newmark
 
 % 
 % %------------- Erzeuge Ausgabeformat der Lösung ---------------
