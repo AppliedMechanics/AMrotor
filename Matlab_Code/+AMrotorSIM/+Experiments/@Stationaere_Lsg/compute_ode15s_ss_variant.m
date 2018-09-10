@@ -15,11 +15,12 @@
         
         ss_A = obj.rotorsystem.systemmatrices.ss.A;
         
-        %init Vector
-
-        %% Mit null belegen:
-         Z0 = zeros(length(ss_A),1);
+        %%init Vector
         
+        Z0 = zeros(length(ss_A),1);     % Mit null belegen:
+        Z0(end/2+6:6:end)=omega;        % Drehzahl für psi_z
+         
+         
         % solver parameters
         options = odeset('AbsTol', 1e-5, 'RelTol', 1e-5,'OutputFcn',@odeOutputFcn_plotBeam);
 

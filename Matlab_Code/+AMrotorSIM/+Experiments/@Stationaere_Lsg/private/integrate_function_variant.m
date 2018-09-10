@@ -8,11 +8,7 @@ B = rotorsystem.systemmatrices.ss.B;
 
 %% Lastvektor
 
-phi=0;
-omega=0;
-domega=0;
-
-h_ges = rotorsystem.compute_system_load_variant(t,phi,omega, domega);
+h_ges = rotorsystem.compute_system_load_variant(t,Z);
 
 % h_ges=sparse(2040,1);
 % h_ges(1021)=10;

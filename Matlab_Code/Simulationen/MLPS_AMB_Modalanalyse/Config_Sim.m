@@ -73,12 +73,12 @@ cnfg.cnfg_bearing(count).type='SimpleAxialBearing';
 cnfg.cnfg_bearing(count).stiffness=1e10;                     %[N/m]
 cnfg.cnfg_bearing(count).damping = 100;
 
-count = count + 1;
-cnfg.cnfg_bearing(count).name = 'Torque Lager Links';
-cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
-cnfg.cnfg_bearing(count).type='SimpleTorqueBearing';
-cnfg.cnfg_bearing(count).stiffness=1e10;                     %[N/m]
-cnfg.cnfg_bearing(count).damping = 100;
+% count = count + 1;
+% cnfg.cnfg_bearing(count).name = 'Torque Lager Links';
+% cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
+% cnfg.cnfg_bearing(count).type='SimpleTorqueBearing';
+% cnfg.cnfg_bearing(count).stiffness=1e10;                     %[N/m]
+% cnfg.cnfg_bearing(count).damping = 100;
 
 count = count + 1;
 cnfg.cnfg_bearing(count).name = 'Isotropes Lager 1';
@@ -100,18 +100,18 @@ cnfg.cnfg_bearing(count).damping = 299.275;
 cnfg.cnfg_load=[];
 count = 0;
 
-count = count + 1;
-cnfg.cnfg_load(count).name='Const. Kraft';
-cnfg.cnfg_load(count).position=0e-3;
-cnfg.cnfg_load(count).betrag_x= 10;
-cnfg.cnfg_load(count).betrag_y= 0;
-cnfg.cnfg_load(count).type='Force_constant_fix';
+% count = count + 1;
+% cnfg.cnfg_load(count).name='Const. Kraft';
+% cnfg.cnfg_load(count).position=0e-3;
+% cnfg.cnfg_load(count).betrag_x= 10;
+% cnfg.cnfg_load(count).betrag_y= 0;
+% cnfg.cnfg_load(count).type='Force_constant_fix';
 
 % Unwuchten
-% count = count + 1;
-% cnfg.cnfg_load(count).name = 'Kleine Unwucht';
-% cnfg.cnfg_load(count).position = 300e-3;
-% cnfg.cnfg_load(count).betrag = 5e-6;
-% cnfg.cnfg_load(count).winkellage = 0;
-% cnfg.cnfg_load(count).type='Unbalance_static';
+count = count + 1;
+cnfg.cnfg_load(count).name = 'Kleine Unwucht';
+cnfg.cnfg_load(count).position = 300e-3;
+cnfg.cnfg_load(count).betrag = 5e-6;
+cnfg.cnfg_load(count).winkellage = 0;
+cnfg.cnfg_load(count).type='Unbalance_static';
 
