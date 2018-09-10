@@ -86,13 +86,31 @@ r.transform_StateSpace_variant;
 % figure()
 % plot(psi_ddy)
 
+%% Lösung mit ss-Model von Matlab
+
+% t=[0:0.001:0.5];
+% u=sparse(zeros(length(t),2040));
+% u(10:length(t),1021)=10;
+% sys=ss(r.systemmatrices.ss.A,r.systemmatrices.ss.B,r.systemmatrices.ss.C,r.systemmatrices.ss.D);
+% y = lsim(sys,u,t);
+% 
+% u_x=y(1:length(t),1:6:end/2);
+% % psi_y=u(5:6:end/2);
+% % 
+%  figure()
+%  for i=1:length(t)
+%  plot(u_x(i,:))
+%  drawnow
+% pause(0.1)
+%  end
 
 %% Running Time Simulation
 
 St_Lsg = Experiments.Stationaere_Lsg(r,0,[0:0.001:0.5]);
 %St_Lsg.compute_ode15s_ss
 %St_Lsg.compute_euler_ss
-St_Lsg.compute_newmark
+%St_Lsg.compute_newmark
+St_Lsg.compute_sys_ss_variant
 
 % 
 % %------------- Erzeuge Ausgabeformat der Lösung ---------------
