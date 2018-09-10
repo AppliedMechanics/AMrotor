@@ -1,6 +1,10 @@
 function [ss_h]= compute_system_load_variant(self,t, Z)
 
+self.assemble_invariant_system_loads;
+self.assemble_timevariant_system_loads(t);
 h = self.systemmatrices.h;
+
+%% Put together
 
 n_nodes = length(self.rotor.mesh.nodes);
 

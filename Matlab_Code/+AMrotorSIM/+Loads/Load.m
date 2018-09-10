@@ -17,10 +17,17 @@ classdef Load < matlab.mixin.Heterogeneous & handle
            obj.position=obj.cnfg.position;
          end            
        end
-       
-      function print(obj)
-         disp(obj.name);
-      end
         
    end
+   
+   methods(Abstract)
+
+    print(self)
+
+    create_ele_loc_matrix(self)
+
+    get_loc_load_vec(self)
+    get_loc_timeload_vec(self,time)
+
+  end
 end

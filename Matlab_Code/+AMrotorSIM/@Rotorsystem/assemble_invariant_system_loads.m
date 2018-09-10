@@ -1,4 +1,4 @@
-function assemble_system_loads(self)
+function assemble_invariant_system_loads(self)
     
 %% Lastvektoren einzelner Elemente erstellen
 
@@ -25,7 +25,7 @@ function assemble_system_loads(self)
             h.h_rotsin = h.h;                   
             h.h_rotcos = h.h;
             
-%% Lastvektor aufaddieren            
+%% Lastvektoren für jede Last aufaddieren            
             
             for load = self.loads
                 

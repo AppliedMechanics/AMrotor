@@ -32,7 +32,7 @@ r.show;
 %g.show();
 
 r.assemble_system_matrices();
-r.assemble_system_loads();
+%r.assemble_system_loads();
 r.transform_StateSpace;
 r.transform_StateSpace_variant;
 %% Running system analyses
@@ -61,8 +61,8 @@ r.transform_StateSpace_variant;
 
 St_Lsg = Experiments.Stationaere_Lsg(r,1000,[0:0.001:0.5]);
 %St_Lsg.compute_ode15s_ss           %läuft leider immer noch nicht!
-%St_Lsg.compute_ode15s_ss_variant
-St_Lsg.compute_euler_ss
+St_Lsg.compute_ode15s_ss_variant
+%St_Lsg.compute_euler_ss
 %St_Lsg.compute_newmark
 %St_Lsg.compute_sys_ss_variant
 
