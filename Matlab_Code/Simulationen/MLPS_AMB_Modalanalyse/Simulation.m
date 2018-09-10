@@ -95,8 +95,7 @@ r.transform_StateSpace_variant;
 % y = lsim(sys,u,t);
 % 
 % u_x=y(1:length(t),1:6:end/2);
-% % psi_y=u(5:6:end/2);
-% % 
+%
 %  figure()
 %  for i=1:length(t)
 %  plot(u_x(i,:))
@@ -108,9 +107,10 @@ r.transform_StateSpace_variant;
 
 St_Lsg = Experiments.Stationaere_Lsg(r,0,[0:0.001:0.5]);
 %St_Lsg.compute_ode15s_ss
+St_Lsg.compute_ode15s_ss_variant
 %St_Lsg.compute_euler_ss
 %St_Lsg.compute_newmark
-St_Lsg.compute_sys_ss_variant
+%St_Lsg.compute_sys_ss_variant
 
 % 
 % %------------- Erzeuge Ausgabeformat der Lösung ---------------

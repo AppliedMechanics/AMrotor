@@ -102,9 +102,9 @@ count = 0;
 
 count = count + 1;
 cnfg.cnfg_load(count).name='Const. Kraft';
-cnfg.cnfg_load(count).position=350e-3;
-cnfg.cnfg_load(count).betrag_x= 0;
-cnfg.cnfg_load(count).betrag_y= 100;
+cnfg.cnfg_load(count).position=0e-3;
+cnfg.cnfg_load(count).betrag_x= 10;
+cnfg.cnfg_load(count).betrag_y= 0;
 cnfg.cnfg_load(count).type='Force_constant_fix';
 
 % Unwuchten
