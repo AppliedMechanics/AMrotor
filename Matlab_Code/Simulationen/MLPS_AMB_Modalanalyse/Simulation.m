@@ -57,58 +57,12 @@ r.transform_StateSpace_variant;
 % cmp = Graphs.Campbell(m);
 % cmp.plot_displacements();
 
-%% Statische Durchbiegung des Systems (im StateSpace)
-
-% ss_B = r.systemmatrices.ss_B;
-% h_ges=sparse(2040,1);
-% h_ges(601)=1;
-% 
-% u=ss_B\h_ges;
-% u_x=u(1:6:end/2);
-% psi_y=u(5:6:end/2);
-% 
-% figure()
-% plot(u_x)
-% figure()
-% plot(psi_y)
-
-%% Statische Lösung in dynamisches Problem einsetzen:
-% ss_A = r.systemmatrices.ss_A;
-% Z=u;
-% 
-% dZ = -(ss_A\ss_B)*Z+ss_A\h_ges;
-% 
-% u_ddx=dZ(end/2+1:6:end);
-% psi_ddy=dZ(end/2+5:6:end);
-% 
-% figure()
-% plot(u_ddx)
-% figure()
-% plot(psi_ddy)
-
-%% Lösung mit ss-Model von Matlab
-
-% t=[0:0.001:0.5];
-% u=sparse(zeros(length(t),2040));
-% u(10:length(t),1021)=10;
-% sys=ss(r.systemmatrices.ss.A,r.systemmatrices.ss.B,r.systemmatrices.ss.C,r.systemmatrices.ss.D);
-% y = lsim(sys,u,t);
-% 
-% u_x=y(1:length(t),1:6:end/2);
-%
-%  figure()
-%  for i=1:length(t)
-%  plot(u_x(i,:))
-%  drawnow
-% pause(0.1)
-%  end
-
 %% Running Time Simulation
 
 St_Lsg = Experiments.Stationaere_Lsg(r,1000,[0:0.001:0.5]);
-%St_Lsg.compute_ode15s_ss
-St_Lsg.compute_ode15s_ss_variant
-%St_Lsg.compute_euler_ss
+%St_Lsg.compute_ode15s_ss           %läuft leider immer noch nicht!
+%St_Lsg.compute_ode15s_ss_variant
+St_Lsg.compute_euler_ss
 %St_Lsg.compute_newmark
 %St_Lsg.compute_sys_ss_variant
 

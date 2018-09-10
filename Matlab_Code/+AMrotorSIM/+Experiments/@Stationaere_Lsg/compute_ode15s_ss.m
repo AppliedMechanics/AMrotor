@@ -14,15 +14,6 @@
         omega = drehzahl*pi/30;           
         
         ss_A = obj.rotorsystem.systemmatrices.ss_A;
-        
-        %init Vector
-        
-        %% Statische Lösung vorberechnen:
-%         B = obj.rotorsystem.systemmatrices.ss_B;
-%         h_ges=sparse(2040,1);
-%         h_ges(607)=10;
-% 
-%         Z0=B\h_ges;
 
         %% Mit null belegen:
          Z0 = zeros(length(ss_A),1);
@@ -32,8 +23,7 @@
 %         end
         
         % solver parameters
-        options = odeset('AbsTol', 1e-5, 'RelTol', 1e-5); %'OutputFcn','odeprint' as option to display steps
-        %options = odeset('OutputFcn','odeprint', 'OutputSel',1);
+        options = odeset('AbsTol', 1e-5, 'RelTol', 1e-5,'OutputFcn',@odeOutputFcn_plotBeam);
 
         Timer.restart();
         disp('... integration started...')

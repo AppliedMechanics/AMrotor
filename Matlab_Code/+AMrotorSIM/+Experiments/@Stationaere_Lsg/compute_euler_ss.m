@@ -8,16 +8,17 @@
 %-----EULER ------------------------------------------------------     
 ss_A = obj.rotorsystem.systemmatrices.ss_A;
 ss_B = obj.rotorsystem.systemmatrices.ss_B;
-h_ges=sparse(2040,1);
-h_ges(601)=10;
 
 time=obj.time;
 Z0 = zeros(length(ss_A),1);
+
+h_ges = obj.rotorsystem.compute_system_load(0,Z0);
 
 x=zeros(length(Z0),length(time));
 x(:,1)=0;
 dt=time(2)-time(1);
 for i=2:length(time)
+    h_ges = obj.rotorsystem.compute_system_load(time,x);
     x(:,i)=x(:,i-1)+dt*(-ss_A\ss_B*x(:,i-1)+ss_A\h_ges);
     plot(x(1:6:end/2,i))
     drawnow
