@@ -67,10 +67,10 @@ St_Lsg.compute_ode15s_ss_variant
 %St_Lsg.compute_sys_ss_variant
 
 % 
-% %------------- Erzeuge Ausgabeformat der Lösung ---------------
-% 
-% d = Dataoutput.TimeDataOutput(St_Lsg);
-% dataset_monitoring = d.compose_data();
+%------------- Erzeuge Ausgabeformat der Lösung ---------------
+
+d = Dataoutput.TimeDataOutput(St_Lsg);
+%dataset_modalanalysis = d.compose_data();
 % 
 % 
 % %------------- Erzeuge Grafiken aus Lösung -------------------

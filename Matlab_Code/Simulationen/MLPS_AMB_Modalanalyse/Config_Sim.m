@@ -108,10 +108,21 @@ count = 0;
 % cnfg.cnfg_load(count).type='Force_constant_fix';
 
 % Unwuchten
+% count = count + 1;
+% cnfg.cnfg_load(count).name = 'Kleine Unwucht';
+% cnfg.cnfg_load(count).position = 300e-3;
+% cnfg.cnfg_load(count).betrag = 5e-6;
+% cnfg.cnfg_load(count).winkellage = 0;
+% cnfg.cnfg_load(count).type='Unbalance_static';
+
+% Sinusförmige Anregungskraft
 count = count + 1;
-cnfg.cnfg_load(count).name = 'Kleine Unwucht';
-cnfg.cnfg_load(count).position = 300e-3;
-cnfg.cnfg_load(count).betrag = 5e-6;
-cnfg.cnfg_load(count).winkellage = 0;
-cnfg.cnfg_load(count).type='Unbalance_static';
+cnfg.cnfg_load(count).name='Sinus Kraft';
+cnfg.cnfg_load(count).position=0e-3;
+cnfg.cnfg_load(count).betrag_x= 10;
+cnfg.cnfg_load(count).frequency_x= 50;  %in Hz
+cnfg.cnfg_load(count).betrag_y= 0;
+cnfg.cnfg_load(count).frequency_y= 50;
+cnfg.cnfg_load(count).type='Force_timevariant_fix';
+
 
