@@ -32,7 +32,7 @@ r.show;
 %g.show();
 
 r.assemble_system_matrices();
-r.assemble_system_loads();
+%r.assemble_system_loads();
 r.transform_StateSpace;
 r.transform_StateSpace_variant;
 %% Running system analyses
@@ -57,48 +57,20 @@ r.transform_StateSpace_variant;
 % cmp = Graphs.Campbell(m);
 % cmp.plot_displacements();
 
-%% Statische Durchbiegung des Systems (im StateSpace)
-
-% ss_B = r.systemmatrices.ss_B;
-% h_ges=sparse(2040,1);
-% h_ges(601)=1;
-% 
-% u=ss_B\h_ges;
-% u_x=u(1:6:end/2);
-% psi_y=u(5:6:end/2);
-% 
-% figure()
-% plot(u_x)
-% figure()
-% plot(psi_y)
-
-%% Statische Lösung in dynamisches Problem einsetzen:
-% ss_A = r.systemmatrices.ss_A;
-% Z=u;
-% 
-% dZ = -(ss_A\ss_B)*Z+ss_A\h_ges;
-% 
-% u_ddx=dZ(end/2+1:6:end);
-% psi_ddy=dZ(end/2+5:6:end);
-% 
-% figure()
-% plot(u_ddx)
-% figure()
-% plot(psi_ddy)
-
-
 %% Running Time Simulation
 
-St_Lsg = Experiments.Stationaere_Lsg(r,0,[0:0.001:0.5]);
-St_Lsg.compute_ode15s_ss
+St_Lsg = Experiments.Stationaere_Lsg(r,1000,[0:0.001:0.5]);
+%St_Lsg.compute_ode15s_ss           %läuft leider immer noch nicht!
+St_Lsg.compute_ode15s_ss_variant
 %St_Lsg.compute_euler_ss
 %St_Lsg.compute_newmark
+%St_Lsg.compute_sys_ss_variant
 
 % 
-% %------------- Erzeuge Ausgabeformat der Lösung ---------------
-% 
-% d = Dataoutput.TimeDataOutput(St_Lsg);
-% dataset_monitoring = d.compose_data();
+%------------- Erzeuge Ausgabeformat der Lösung ---------------
+
+d = Dataoutput.TimeDataOutput(St_Lsg);
+%dataset_modalanalysis = d.compose_data();
 % 
 % 
 % %------------- Erzeuge Grafiken aus Lösung -------------------

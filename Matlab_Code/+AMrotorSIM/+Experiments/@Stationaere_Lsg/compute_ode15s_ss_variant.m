@@ -1,4 +1,4 @@
-     function compute_ode15s_ss(obj)
+     function compute_ode15s_ss_variant(obj)
         
         Timer = AMrotorTools.Timer();
          
@@ -13,22 +13,21 @@
         
         omega = drehzahl*pi/30;           
         
-        ss_A = obj.rotorsystem.systemmatrices.ss_A;
-
-        %% Mit null belegen:
-         Z0 = zeros(length(ss_A),1);
-%         for node = 1:n_nodes
-%             dof_psi_z = obj.rotorsystem.rotor.get_gdof('psi_z',node);
-%             Z0(dof_psi_z+size(ss_A,1)/2) = omega; %Alle Positionen der psidot_z Koordinaten mit omega auffüllen
-%         end
+        ss_A = obj.rotorsystem.systemmatrices.ss.A;
         
+        %%init Vector
+        
+        Z0 = zeros(length(ss_A),1);     % Mit null belegen:
+        Z0(end/2+6:6:end)=omega;        % Drehzahl für psi_z
+         
+         
         % solver parameters
         options = odeset('AbsTol', 1e-5, 'RelTol', 1e-5,'OutputFcn',@odeOutputFcn_plotBeam);
 
         Timer.restart();
         disp('... integration started...')
         
-        sol = ode15s(@integrate_function,obj.time,Z0, options, omega, obj.rotorsystem);
+        sol = ode15s(@integrate_function_variant,obj.time,Z0, options, omega, obj.rotorsystem);
         
         disp(['... spent time for integration: ',num2str(Timer.getWallTime()),' s'])
 

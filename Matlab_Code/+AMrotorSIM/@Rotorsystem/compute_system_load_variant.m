@@ -1,6 +1,10 @@
-function [ss_h]= compute_system_load(self,t, Z)
+function [ss_h]= compute_system_load_variant(self,t, Z)
 
+self.assemble_invariant_system_loads;
+self.assemble_timevariant_system_loads(t);
 h = self.systemmatrices.h;
+
+%% Put together
 
 n_nodes = length(self.rotor.mesh.nodes);
 
@@ -21,6 +25,6 @@ h_ges = (h.h +(h.h_ZPsin.*(omega.^2) + h.h_DBsin.*domega +h.h_sin).*(-1).*sin(ph
              +(h.h_ZPcos.*(omega.^2) + h.h_DBcos.*domega +h.h_cos).*(-1).*cos(phi)) ...
              + h.h_rotsin.*sin(phi*omega_rot_const_force) + h.h_rotcos.*cos(phi*omega_rot_const_force); %+Dichtung+Lager
 
-ss_h=[h_ges;zeros(length(h_ges),1)];
+ss_h=[zeros(length(h_ges),1);h_ges];
          
 end
