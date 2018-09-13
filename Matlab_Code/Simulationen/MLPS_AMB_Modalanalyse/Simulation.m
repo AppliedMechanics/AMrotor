@@ -90,9 +90,9 @@ r.transform_StateSpace_variant;
 %% Running Time Simulation
 
 St_Lsg = Experiments.Stationaere_Lsg(r,0,[0:0.001:0.5]);
-%St_Lsg.compute_ode15s_ss
+St_Lsg.compute_ode15s_ss
 %St_Lsg.compute_euler_ss
-St_Lsg.compute_newmark
+%St_Lsg.compute_newmark
 
 % 
 % %------------- Erzeuge Ausgabeformat der Lösung ---------------
