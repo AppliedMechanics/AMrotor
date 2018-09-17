@@ -118,9 +118,9 @@ count = 0;
 % Sinusförmige Anregungskraft
 count = count + 1;
 cnfg.cnfg_load(count).name='Sinus Kraft';
-cnfg.cnfg_load(count).position=0e-3;
+cnfg.cnfg_load(count).position=110e-3;
 cnfg.cnfg_load(count).betrag_x= 10;
-cnfg.cnfg_load(count).frequency_x= 50;  %in Hz
+cnfg.cnfg_load(count).frequency_x= 500;  %in Hz
 cnfg.cnfg_load(count).betrag_y= 0;
 cnfg.cnfg_load(count).frequency_y= 50;
 cnfg.cnfg_load(count).type='Force_timevariant_fix';

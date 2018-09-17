@@ -37,17 +37,17 @@ r.transform_StateSpace;
 r.transform_StateSpace_variant;
 %% Running system analyses
 
-%m=Experiments.Modalanalyse(r);
+% m=Experiments.Modalanalyse(r);
 
 %m.calculate_rotor_only_without_damping(15);
 %m.calculate_rotor_only(15,100);
 
-%m.calculate_rotorsystem_without_damping(15);
+% m.calculate_rotorsystem_without_damping(15);
 %m.calculate_rotorsystem(15,0);
 %
-%esf= Graphs.Eigenschwingformen(m);
-%esf.print_frequencies();
-%esf.plot_displacements();
+% esf= Graphs.Eigenschwingformen(m);
+% esf.print_frequencies();
+% esf.plot_displacements();
 %Janitor.cleanFigures();
 % 
 
@@ -59,7 +59,7 @@ r.transform_StateSpace_variant;
 
 %% Running Time Simulation
 
-St_Lsg = Experiments.Stationaere_Lsg(r,1000,[0:0.001:0.5]);
+St_Lsg = Experiments.Stationaere_Lsg(r,100,[0:0.001:10]);
 %St_Lsg.compute_ode15s_ss           %läuft leider immer noch nicht!
 St_Lsg.compute_ode15s_ss_variant
 %St_Lsg.compute_euler_ss
@@ -70,7 +70,8 @@ St_Lsg.compute_ode15s_ss_variant
 %------------- Erzeuge Ausgabeformat der Lösung ---------------
 
 d = Dataoutput.TimeDataOutput(St_Lsg);
-%dataset_modalanalysis = d.compose_data();
+dataset_modalanalysis = d.compose_data();
+d.save_data(dataset_modalanalysis,'L1-sweep0-500Hz-10s-10kHz');
 % 
 % 
 % %------------- Erzeuge Grafiken aus Lösung -------------------
