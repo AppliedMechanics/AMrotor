@@ -27,6 +27,8 @@ function get_loc_timeload_vec(obj,t)
     fx = obj.cnfg.frequency_x;
     fy = obj.cnfg.frequency_y;
     
-    obj.h.h(1) =  sin(2*pi*fx*t)*Fx;
+    f0=0;
+%     obj.h.h(1) =  sin(2*pi*fx*t)*Fx;
+    obj.h.h(1) =  chirp(t,f0,10,fx)*Fx;
     obj.h.h(2) =  sin(2*pi*fy*t)*Fy;
 end
