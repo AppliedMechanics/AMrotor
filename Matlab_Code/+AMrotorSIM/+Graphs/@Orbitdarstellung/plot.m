@@ -3,7 +3,7 @@ function plot(self,sensors)
 
       for sensor = sensors
 
-        [x_val,~,y_val,~]=sensor.read_sensor_values(self.experiment);
+        [x_val,~,y_val,~]=sensor.read_values(self.experiment);
 
 
         figure('name',[sensor.name, ' at position ',num2str(sensor.Position),'; Orbit'],...

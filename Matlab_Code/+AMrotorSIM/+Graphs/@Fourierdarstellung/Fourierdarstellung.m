@@ -21,7 +21,7 @@ classdef Fourierdarstellung < handle
       
           for sensor = sensors
             
-            [x_val,~,y_val,~]=sensor.read_sensor_values(self.experiment);
+            [x_val,~,y_val,~]=sensor.read_values(self.experiment);
             fs = self.abtastrate;
             
             
