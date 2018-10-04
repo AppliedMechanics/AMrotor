@@ -24,4 +24,8 @@ function assemble(obj)
     for i=obj.cnfg.cnfg_load
         obj.add_Load(i);
     end
+    % Adding Seals to System
+    for i=obj.cnfg.cnfg_seal
+        obj.add_Seal(i);
+    end
 end

@@ -9,6 +9,7 @@ classdef (Abstract) Element < handle
         volume
         length
         radius
+        radius_innen
         mass
         I_p % geometrical moment of inertia (polar)
         I_y

@@ -2,14 +2,16 @@ function status = odeOutputFcn_plotBeam(t,y,flag,varargin)
 
 switch flag 
     case 'init'
-        disp('odeFcn init')
+        disp(' -> odeFcn init ->           ')
         figure()
         status=0;
     case 'done'
-        disp('done')
+        disp(' -> done           ')
         status=0;
+        close
     case ''
-        plot(y(1:6:end/2));
+        plot(y(1:6:end/2,end));
+        ylim([-1 1]*5e-5);
         drawnow
         status=0;
 end

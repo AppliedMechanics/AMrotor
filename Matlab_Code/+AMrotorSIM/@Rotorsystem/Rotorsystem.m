@@ -16,6 +16,7 @@ classdef Rotorsystem < handle
       sensors@AMrotorSIM.Sensors.Sensor vector
       bearings@AMrotorSIM.Bearings.Bearing vector
       loads@AMrotorSIM.Loads.Load vector
+      seals@AMrotorSIM.Seals.Seal vector
 
    end
    %%
@@ -58,6 +59,10 @@ classdef Rotorsystem < handle
       % Loads
       function add_Load(obj,arg)
           obj.loads(end+1) = AMrotorSIM.Loads.(arg.type)(arg);
+      end
+      % Dichtung
+      function add_Seal(obj,arg)
+          obj.seals(end+1) = AMrotorSIM.Seals.(arg.type)(arg);
       end
 
    end

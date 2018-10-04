@@ -24,9 +24,8 @@ function get_loc_timeload_vec(obj,t)
     %%
     Fx = obj.cnfg.betrag_x;
     Fy = obj.cnfg.betrag_y;
-    fx = obj.cnfg.frequency_x;
-    fy = obj.cnfg.frequency_y;
+    f = obj.cnfg.frequency;
     
-    obj.h.h(1) =  sin(2*pi*fx*t)*Fx;
-    obj.h.h(2) =  sin(2*pi*fy*t)*Fy;
+    obj.h.h(1) =  cos(2*pi*f*t)*Fx;
+    obj.h.h(2) =  sin(2*pi*f*t)*Fy;
 end

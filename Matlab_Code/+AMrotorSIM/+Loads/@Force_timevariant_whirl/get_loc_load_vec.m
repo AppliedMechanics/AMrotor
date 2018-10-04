@@ -1,6 +1,5 @@
-function get_loc_timeload_vec(obj,t)
+function get_loc_load_vec(obj)
 
-%Constant fix force 
     obj.h.h = sparse(6,1);
 
     %centripetal-force unbalance, rotating
@@ -20,13 +19,4 @@ function get_loc_timeload_vec(obj,t)
     obj.h.h_rotcos = sparse(6,1);
     
     % dof-order: ux,uy,uz,psix,psiy,psiz
-
-    %%
-    Fx = obj.cnfg.betrag_x;
-    Fy = obj.cnfg.betrag_y;
-    fx = obj.cnfg.frequency_x;
-    fy = obj.cnfg.frequency_y;
-    
-    obj.h.h(1) =  sin(2*pi*fx*t)*Fx;
-    obj.h.h(2) =  sin(2*pi*fy*t)*Fy;
 end

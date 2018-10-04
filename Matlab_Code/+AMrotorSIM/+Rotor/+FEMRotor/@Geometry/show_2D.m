@@ -10,5 +10,5 @@ function show_2D(obj)
         geo_node_x(k) = obj.nodes(k).x;
         plot(geo_node_z, geo_node_x, 'k-o');
     end
-   axis([min(geo_node_z)-1 max(geo_node_z)+1 min(geo_node_x)-1 max(geo_node_x)+1])
+   axis([min(geo_node_z)*0.9 max(geo_node_z)*1.1 min(geo_node_x)*0.9 max(geo_node_x)*1.1])
 end

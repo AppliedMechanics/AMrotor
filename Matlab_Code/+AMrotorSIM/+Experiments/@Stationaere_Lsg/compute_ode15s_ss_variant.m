@@ -9,6 +9,27 @@
         
        for drehzahl = obj.drehzahlen 
         disp(['... rotational speed: ',num2str(drehzahl),' U/min'])
+        
+        %==================================================================
+        % Dichtungskoeffizienten sind abhaengig von der Drehzahl
+        n_nodes=length(obj.rotorsystem.rotor.mesh.nodes);
+        M_seal = sparse(6*n_nodes,6*n_nodes);
+        D_seal = sparse(6*n_nodes,6*n_nodes);
+        K_seal = sparse(6*n_nodes,6*n_nodes);
+           for seal = obj.rotorsystem.seals 
+                seal.create_ele_loc_matrix;
+                seal.get_loc_system_matrices(drehzahl);
+
+                seal_node = obj.rotorsystem.rotor.find_node_nr(seal.position);
+                L_ele = sparse(6,6*n_nodes);
+                L_ele(1:6,(seal_node-1)*6+1:(seal_node-1)*6+6)=seal.localisation_matrix;
+
+                M_seal = M_seal+L_ele'*seal.mass_matrix*L_ele;
+                K_seal = K_seal+L_ele'*seal.stiffness_matrix*L_ele;
+                D_seal = D_seal+L_ele'*seal.damping_matrix*L_ele;
+            end
+        %==================================================================
+
         n_nodes = length(obj.rotorsystem.rotor.mesh.nodes);
         
         omega = drehzahl*pi/30;           
@@ -23,10 +44,12 @@
          
         % solver parameters
         options = odeset('AbsTol', 1e-5, 'RelTol', 1e-5,'OutputFcn',@odeOutputFcn_plotBeam);
+%         options = odeset('AbsTol', 1e-5, 'RelTol', 1e-5); % ohne live-plot
 
         Timer.restart();
         disp('... integration started...')
-        
+        fprintf('           '),pause(0.01), %Initialisierung Anzeige t
+       
         sol = ode15s(@integrate_function_variant,obj.time,Z0, options, omega, obj.rotorsystem);
         
         disp(['... spent time for integration: ',num2str(Timer.getWallTime()),' s'])
