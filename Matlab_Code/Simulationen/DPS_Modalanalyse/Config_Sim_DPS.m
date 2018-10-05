@@ -47,7 +47,12 @@ clear r_Welle r_Laeufer_D r_Laeufer_ML r_Laeufer_D_innen r_Laeufer_ML_innen
 % cnfg.cnfg_rotor.mesh_opt.d_max = 0.005;
 % cnfg.cnfg_rotor.mesh_opt.approx = 'mean';   %Approximation for linear functions with gradient 1=0;
 %                                 % Insert: upper sum, lower sum, mean.
-cnfg.cnfg_rotor.mesh_opt.name = 'Mesh 2';
+% cnfg.cnfg_rotor.mesh_opt.name = 'Mesh 2';
+% cnfg.cnfg_rotor.mesh_opt.d_min= 0.004;
+% cnfg.cnfg_rotor.mesh_opt.d_max = 0.010;
+% cnfg.cnfg_rotor.mesh_opt.approx = 'mean';   %Approximation for linear functions with gradient 1=0;
+%                                 % Insert: upper sum, lower sum, mean.
+cnfg.cnfg_rotor.mesh_opt.name = 'Mesh 3';
 cnfg.cnfg_rotor.mesh_opt.d_min= 0.02;
 cnfg.cnfg_rotor.mesh_opt.d_max = 0.05;
 cnfg.cnfg_rotor.mesh_opt.approx = 'mean';   %Approximation for linear functions with gradient 1=0;
@@ -142,41 +147,52 @@ count = 0;
 count = count + 1;
 cnfg.cnfg_load(count).name = 'Kleine Unwucht';
 cnfg.cnfg_load(count).position = 280e-3;
-cnfg.cnfg_load(count).betrag = 5e-6;
+cnfg.cnfg_load(count).betrag = 1e-6;%5e-6;
 cnfg.cnfg_load(count).winkellage = 0;
 cnfg.cnfg_load(count).type='Unbalance_static';
 
 % Sinusförmige Anregungskraft
-count = count + 1;
-cnfg.cnfg_load(count).name='Sinus Kraft';
-cnfg.cnfg_load(count).position=138e-3; % Position ML 1
-cnfg.cnfg_load(count).betrag_x= 10;
-cnfg.cnfg_load(count).frequency_x= 500;  %in Hz
-cnfg.cnfg_load(count).betrag_y= 0;
-cnfg.cnfg_load(count).frequency_y= 50;
-cnfg.cnfg_load(count).type='Force_timevariant_fix';
+% count = count + 1;
+% cnfg.cnfg_load(count).name='Sinus Kraft';
+% cnfg.cnfg_load(count).position=138e-3; % Position ML 1
+% cnfg.cnfg_load(count).betrag_x= 10;
+% cnfg.cnfg_load(count).frequency_x= 500;  %in Hz
+% cnfg.cnfg_load(count).betrag_y= 0;
+% cnfg.cnfg_load(count).frequency_y= 50;
+% cnfg.cnfg_load(count).type='Force_timevariant_fix';
 
 % Whirl, Anregungskraft beschreibt Ellipse
-count = count + 1;
-cnfg.cnfg_load(count).name='Whirl Kraft';
-cnfg.cnfg_load(count).position=138e-3; % Position ML 1
-cnfg.cnfg_load(count).betrag_x= 10;
-cnfg.cnfg_load(count).betrag_y= 10;
-cnfg.cnfg_load(count).frequency= 500;  %in Hz
-cnfg.cnfg_load(count).type='Force_timevariant_whirl';
+% count = count + 1;
+% cnfg.cnfg_load(count).name='Whirl Kraft';
+% cnfg.cnfg_load(count).position=138e-3; % Position ML 1
+% cnfg.cnfg_load(count).betrag_x= 10;
+% cnfg.cnfg_load(count).betrag_y= 10;
+% cnfg.cnfg_load(count).frequency= 500;  %in Hz
+% cnfg.cnfg_load(count).type='Force_timevariant_whirl';
 
-% Chirp, Sinus-sweep-Kraft
+% % Chirp, Sinus-sweep-Kraft
+% count = count + 1;
+% cnfg.cnfg_load(count).name='Chirp Kraft';
+% cnfg.cnfg_load(count).position=138e-3; % Position ML 1
+% cnfg.cnfg_load(count).betrag_x= 1;
+% cnfg.cnfg_load(count).frequency_x_0 = 0; % Startfrequenz
+% cnfg.cnfg_load(count).frequency_x= 500;  %in Hz, Endfrequenz
+% cnfg.cnfg_load(count).betrag_y= 0;
+% cnfg.cnfg_load(count).frequency_y_0 = 0;
+% cnfg.cnfg_load(count).frequency_y= 0;
+% cnfg.cnfg_load(count).t_end= 2; % Zeitdauer des Chirps, hier wird f erreicht
+% cnfg.cnfg_load(count).type='Force_timevariant_chirp';
+
+% whirl-sweep-Kraft
 count = count + 1;
-cnfg.cnfg_load(count).name='Chirp Kraft';
+cnfg.cnfg_load(count).name='Whirl Sweep Kraft';
 cnfg.cnfg_load(count).position=138e-3; % Position ML 1
-cnfg.cnfg_load(count).betrag_x= 10;
-cnfg.cnfg_load(count).frequency_x_0 = 0; % Startfrequenz
-cnfg.cnfg_load(count).frequency_x= 500;  %in Hz, Endfrequenz
-cnfg.cnfg_load(count).betrag_y= 0;
-cnfg.cnfg_load(count).frequency_y_0 = 0;
-cnfg.cnfg_load(count).frequency_y= 0;
-cnfg.cnfg_load(count).t_end= 1; % Zeitdauer des Chirps, hier wird f erreicht
-cnfg.cnfg_load(count).type='Force_timevariant_chirp';
+cnfg.cnfg_load(count).betrag_x= 1;
+cnfg.cnfg_load(count).betrag_y= cnfg.cnfg_load(count).betrag_x;
+cnfg.cnfg_load(count).frequency_0 = 0; % Startfrequenz
+cnfg.cnfg_load(count).frequency= 1000;  %in Hz, Endfrequenz
+cnfg.cnfg_load(count).t_end= 0.6;%2; % Zeitdauer des Chirps, hier wird f erreicht
+cnfg.cnfg_load(count).type='Force_timevariant_whirl_sweep';
 
 %% ========================================================================
 % Dichtungen
