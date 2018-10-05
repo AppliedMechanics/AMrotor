@@ -1,5 +1,8 @@
 function assemble_system_matrices(self)
     
+% ohne Dichtungsmatrizen, da diese erst vor Zeitintegration mit der
+% entsprechenden Drehzahl erstellt werden koennen
+
 %% Rotormatrizen aus FEM erstellen
             self.rotor.assemble_fem
             n_nodes=length(self.rotor.mesh.nodes);
