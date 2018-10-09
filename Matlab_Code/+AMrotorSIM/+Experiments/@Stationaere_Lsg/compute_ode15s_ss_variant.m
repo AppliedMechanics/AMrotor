@@ -27,7 +27,10 @@
                 M_seal = M_seal+L_ele'*seal.mass_matrix*L_ele;
                 K_seal = K_seal+L_ele'*seal.stiffness_matrix*L_ele;
                 D_seal = D_seal+L_ele'*seal.damping_matrix*L_ele;
-            end
+           end
+        obj.rotorsystem.systemmatrices.M = obj.rotorsystem.systemmatrices.M + M_seal;
+        obj.rotorsystem.systemmatrices.D = obj.rotorsystem.systemmatrices.M + D_seal;
+        obj.rotorsystem.systemmatrices.K = obj.rotorsystem.systemmatrices.M + K_seal;
         %==================================================================
 
         n_nodes = length(obj.rotorsystem.rotor.mesh.nodes);
@@ -50,6 +53,15 @@
         disp('... integration started...')
         fprintf('           '),pause(0.01), %Initialisierung Anzeige t
        
+    %Debugging:
+%     format compact
+%     norm_M = norm(obj.rotorsystem.systemmatrices.M)
+%     norm_D = norm(obj.rotorsystem.systemmatrices.D)
+%     norm_K = norm(obj.rotorsystem.systemmatrices.K)
+%     norm_G = norm(full(obj.rotorsystem.systemmatrices.G))
+%      fprintf('\n          ');
+%     format
+        
         sol = ode15s(@integrate_function_variant,obj.time,Z0, options, omega, obj.rotorsystem);
         
         disp(['... spent time for integration: ',num2str(Timer.getWallTime()),' s'])

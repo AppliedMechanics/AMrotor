@@ -1,4 +1,6 @@
-classdef (Abstract) Seal < matlab.mixin.Heterogeneous & handle
+classdef (Abstract) Seal < matlab.mixin.Heterogeneous & handle % Was heisst Abstract?, Was heisst matlab.mixin.Heterogeneous?
+% classdef Seal < handle
+% classdef (Abstract) Seal < matlab.mixin & handle
    properties
       name
       position
