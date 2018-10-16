@@ -1,7 +1,7 @@
 function [V,D] = performEigenAnalysis(obj,mat)
     opts.tol = 1e-16;
     criteria = true;
-    num.eigenVectors = 4*length(obj.rotorSystem.rotor.nodes);
+    num.eigenVectors = 6*(obj.num.modes);
     while criteria
         [V,tmp.lambda]=eigs(-mat.B,mat.A,num.eigenVectors,'sm',opts);
         % sortiert lambdas aus, deren imaginaerteil kleiner al 1e-2 ist

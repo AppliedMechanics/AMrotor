@@ -31,11 +31,11 @@ EV=EV_raw(:,I_p);
 [Phase_xy_mean, Phase_ab_mean]=deal(NaN(1,n_EW));
 
 % Fill the phases for every EW
-for k=1:n_EW
-    Phase_x(:,k)=angle(EV(1:2:n_DOF/2,k));
-    Phase_y(:,k)=angle(EV(n_DOF/2+1:2:end,k));
-    Phase_b(:,k)=angle(EV(2:2:n_DOF/2,k));
-    Phase_a(:,k)=angle(EV(n_DOF/2+2:2:end,k));
+for k=1:n_EW % order of dof in EV-vector: EV=[x1, y1, phi_x1, phi_y1, ...]'
+    Phase_x(:,k)=angle(EV(1:4:n_DOF,k));
+    Phase_y(:,k)=angle(EV(2:4:n_DOF,k));
+    Phase_a(:,k)=angle(EV(3:4:n_DOF,k));
+    Phase_b(:,k)=angle(EV(4:4:n_DOF,k));
 end
 
 %Calculate the relative phases between the directions

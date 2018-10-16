@@ -90,7 +90,7 @@ classdef Campbell < handle
             end
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        % function deklarations; definitions are in the 'private' folder
+        % function declarations; definitions are in the 'private' folder
         [A,B] = getStateSpaceMatrices(obj,omega)
         [V,D] = performEigenAnalysis(obj,mat)
         Vpos = getPositionEntries(obj,V);

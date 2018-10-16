@@ -7,12 +7,12 @@
 
 import AMrotorSIM.*
 
-Janitor = AMrotorTools.PlotJanitor();
-Janitor.setLayout(2,3);
 %% Clean up
 close all
 clear all
 clc
+Janitor = AMrotorTools.PlotJanitor();
+Janitor.setLayout(2,3);
 
 %% Compute Rotor
 
@@ -28,8 +28,8 @@ r.show;
 %r.rotor.mesh.show_2D(); 
 %r.rotor.mesh.show_3D();
 
-%g=Graphs.Visu_Rotorsystem(r);
-%g.show();
+% g=Graphs.Visu_Rotorsystem(r);
+% g.show();
 
 r.assemble_system_matrices();
 %r.assemble_system_loads();
@@ -53,9 +53,15 @@ r.transform_StateSpace_variant;
 
 %r.reduce_modal(10);
 
-% m.calculate_rotorsystem(3);
-% cmp = Graphs.Campbell(m);
-% cmp.plot_displacements();
+% Der Campbell-plot müsste im Prinzip komplett neu aufgebaut werden:
+cmp = Experiments.Campbell(r);
+cmp.setUp(0:2e2:10e3,8); % input is 1/min, Number of Modes
+cmp.calculate();
+cmpDiagramm = Graphs.Campbell(cmp);
+cmpDiagramm.setPlots('all');
+% cmpDiagramm.setPlots('backward');
+% cmpDiagramm.setPlots('forward');
+Janitor.cleanFigures();
 
 %% Running Time Simulation
 
