@@ -19,7 +19,7 @@ function [A,B] = get_state_space_matrices(obj,omega)
     A(ind1,ind1) = sparse(M);
     A(ind2,ind2) = sparse(K);
     % set matrix B
-    B(ind1,ind1) = sparse(omega*G);
+    B(ind1,ind1) = sparse(omega*G+D);
     B(ind1,ind2) = sparse(K);
     B(ind2,ind1) = sparse(-K);
 end

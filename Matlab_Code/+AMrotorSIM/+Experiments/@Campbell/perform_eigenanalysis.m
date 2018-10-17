@@ -1,7 +1,7 @@
 function [V,D] = perform_eigenanalysis(obj,mat)
     opts.tol = 1e-16;
     criteria = true;
-    num.eigenVectors = 6*(obj.num.modes);
+    num.eigenVectors = 4*(obj.num.modes);
     while criteria
         [V,tmp.lambda]=eigs(-mat.B,mat.A,num.eigenVectors,'sm',opts);
         % sortiert lambdas aus, deren imaginaerteil kleiner al 1e-2 ist
@@ -13,13 +13,17 @@ function [V,D] = perform_eigenanalysis(obj,mat)
         % eigentlich haben will, dann wird die eigenanalyse noch einmal
         % gemacht mit mehr angefragten Werten
         if length(tmp.lambda) < obj.num.modes*2
-            num.eigenVectors = num.eigenVectors + 10;
+            if num.eigenVectors < length(mat.A)-10
+                num.eigenVectors = num.eigenVectors + 10;
+            else
+                num.eigenVectors = length(mat.A);
+            end
         else
             criteria = false;
             V = V(:,indicesLambda);
         end
     end
-    % falls es mehr Werte als angefragte Moden sind, dann wird der groesse
+    % falls es mehr Werte als angefragte Moden sind, dann wird der Groesse
     % nach sortiert und die grosse, die zu viel sind, weggeworfen
     if length(tmp.lambda) > obj.num.modes*2
 %         [~,sortOrder] = sort(abs(imag(tmp.lambda)));

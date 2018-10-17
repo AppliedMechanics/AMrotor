@@ -7,12 +7,12 @@
 
 import AMrotorSIM.*
 
-Janitor = AMrotorTools.PlotJanitor();
-Janitor.setLayout(2,3);
 %% Clean up
 close all
 clear all
 % clc
+Janitor = AMrotorTools.PlotJanitor();
+Janitor.setLayout(2,3);
 
 %% Compute Rotor
 
@@ -32,7 +32,7 @@ r.show; % Funktion AMrotor\Matlab_Code\+AMrotorSIM\+Rotor\+FEMRotor\@FeModel\pri
 % g.show();
 
 
-r.assemble_system_matrices();
+r.assemble_system_matrices(); % rotor + bearings, but without seals
 %r.assemble_system_loads();
 u_trans_rigid_body = r.compute_translational_rigid_body_modes;
 overall_mass = r.check_overall_translational_mass(u_trans_rigid_body)
@@ -56,13 +56,20 @@ r.transform_StateSpace_variant;
 % 
 % r.reduce_modal(10);
 % 
-% m.calculate_rotorsystem(3);
-% cmp = Graphs.Campbell(m);
-% cmp.plot_displacements();
+cmp = Experiments.Campbell(r);
+% cmp.set_up(0:2e2:10e3,4); % input is 1/min, Number of Modes
+% cmp.calculate();
+cmp.set_up(0:2e2:10e3,8); % input is 1/min, Number of Modes
+cmp.calculate_without_damping();
+cmpDiagramm = Graphs.Campbell(cmp);
+cmpDiagramm.set_plots('all');
+% cmpDiagramm.set_plots('backward');
+% cmpDiagramm.set_plots('forward');
+Janitor.cleanFigures();
 
 %% Running Time Simulation
 
-St_Lsg = Experiments.Stationaere_Lsg(r,[0:500:10e3],[0:0.001:1]);%St_Lsg = Experiments.Stationaere_Lsg(r,[0:50:10e3],[0:0.001:2]); %obj = Stationaere_Lsg(a,drehzahlvektor,time)
+St_Lsg = Experiments.Stationaere_Lsg( r , (0:500:10e3) , (0:0.001:1) );%St_Lsg = Experiments.Stationaere_Lsg(r,[0:50:10e3],[0:0.001:2]); %obj = Stationaere_Lsg(a,drehzahlvektor,time)
 %St_Lsg.compute_ode15s_ss           %läuft leider immer noch nicht!
 St_Lsg.compute_ode15s_ss_variant
 %St_Lsg.compute_euler_ss
