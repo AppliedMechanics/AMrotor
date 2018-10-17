@@ -19,15 +19,15 @@ classdef Campbell < handle
             end
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        function setPlots(obj,Selection)
-            obj.setColorNumber();
+        function set_plots(obj,Selection)
+            obj.set_color_number();
             switch Selection
                 case {'Forward','forward','f','F'}
-                    obj.setForwardPlots();
+                    obj.set_forward_plots();
                 case {'Backward','backward','b','B'}
-                    obj.setBackwardPlots();
+                    obj.set_backward_plots();
                 case {'All','all','a','A'}
-                    obj.setAllPlots();
+                    obj.set_all_plots();
                 otherwise
                     error(['You try to reach a selection for the Campbell-' ...
                           'Diagram which is not implemented.']);
@@ -39,15 +39,15 @@ classdef Campbell < handle
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     methods (Access = private)
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        function setColorNumber(obj)
+        function set_color_number(obj)
             obj.ColorHandler = AMrotorTools.PlotColors();
-            num = obj.experimentCampbell.getNumberOfEigenValues();
-            obj.ColorHandler.setUp(num.all);
+            num = obj.experimentCampbell.get_number_of_eigenvalues();
+            obj.ColorHandler.set_up(num.all);
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        setForwardPlots(obj);
-        setBackwardPlots(obj);
-        setAllPlots(obj);
+        set_forward_plots(obj);
+        set_backward_plots(obj);
+        set_all_plots(obj);
     end
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

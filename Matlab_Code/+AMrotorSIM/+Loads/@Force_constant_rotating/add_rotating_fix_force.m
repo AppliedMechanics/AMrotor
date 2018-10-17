@@ -9,7 +9,7 @@ for n = 1:Dim(1)
     if (Parameter(n,1) < 0 || Parameter(n,1) > nodes(end))
         disp('Unwuchtmasse: ')
         disp(n)
-        error('Angriffspunkt außerhalb des Rotors');
+        error('Angriffspunkt ausserhalb des Rotors');
     else
         if Parameter(n,1) == nodes(end)
             % In diesem Fall macht untere Prozedur keinen Sinn, Zuordnung
@@ -25,7 +25,7 @@ for n = 1:Dim(1)
             while nodes(n0+1) <= Parameter(n,1)
                 n0 = n0+1;
             end
-            l_Ele=nodes(n0+1)-nodesn0);
+            l_Ele=nodes(n0+1)-nodes(n0);
             kappa = (Parameter(n,1)-nodes(n0)) / l_Ele;
             
             while rotorpar.rotor_dimensions(b,1) < Parameter(n,1)

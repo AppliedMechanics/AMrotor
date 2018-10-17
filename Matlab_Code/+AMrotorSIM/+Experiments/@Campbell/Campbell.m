@@ -6,7 +6,7 @@ classdef Campbell < handle
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     properties (Access = private)
         name = 'Campell Analysis';
-        rotorSystem;
+        rotorsystem;
         omega;
         num; % struct which will gather all kind of numbers
         EVf; EVb; % eigenvectors forward&backward
@@ -17,32 +17,32 @@ classdef Campbell < handle
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         % Konstruktor
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        function obj = Campbell(rotorSystem)
+        function obj = Campbell(rotorsystem)
             if nargin == 0
                 disp('Without a rotor-system a Campell analaysis is not possible')
             else
-                obj.rotorSystem = rotorSystem;
+                obj.rotorsystem = rotorsystem;
             end
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        function setUp(obj,omega,nModes)
+        function set_up(obj,omega,nModes)
             obj.omega = omega*pi/30;
-            obj.setNumberOfModes(nModes);
-            obj.setNumberOfRevolutions();
+            obj.set_number_of_modes(nModes);
+            obj.set_number_of_revolutions();
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         function calculate(obj)
             for w = obj.omega
-                [mat.A,mat.B] = obj.getStateSpaceMatrices(w);
-                [V,tmp] = obj.performEigenAnalysis(mat);
-                Vpos = obj.getPositionEntries(V);
-                D = getPositiveEntries(tmp);
+                [mat.A,mat.B] = obj.get_state_space_matrices(w);
+                [V,tmp] = obj.perform_eigenanalysis(mat);
+                Vpos = obj.get_position_entries(V);
+                D = get_positive_entries(tmp);
                 if w == 0
                     EW_for = D(1:2:end);
                     EW_back = D(2:2:end);
                 else
                     [ ~,EW_for,~,EW_back, ~, ~, ~, ~ ] = ...
-                        obj.getSeparationEigenVectors(Vpos,D);
+                        obj.get_separation_eigenvectors(Vpos,D);
                 end
                 obj.EWf(:,end+1) = EW_for;
                 obj.EWb(:,end+1) = EW_back;
@@ -50,7 +50,7 @@ classdef Campbell < handle
             end
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        function [num] = getNumberOfEigenValues(obj)
+        function [num] = get_number_of_eigenvalues(obj)
             s = size(obj.EWf);
             num.forward = s(1);
             s = size(obj.EWb);
@@ -58,17 +58,17 @@ classdef Campbell < handle
             num.all = num.forward + num.backward;
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        function nModes = getNumberOfModes(obj)
+        function nModes = get_number_of_modes(obj)
             s = size(obj.EWf);
             nModes = s(2);
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        function EW = getEigenValues(obj)
+        function EW = get_eigenvalues(obj)
             EW.forward = obj.EWf;
             EW.backward = obj.EWb;
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        function omega = getOmega(obj)
+        function omega = get_omega(obj)
             omega = obj.omega;
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -77,11 +77,11 @@ classdef Campbell < handle
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     methods (Access = private)
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        function setNumberOfRevolutions(obj)
+        function set_number_of_revolutions(obj)
             obj.num.omega = length(obj.omega);
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        function setNumberOfModes(obj,nModes)
+        function set_number_of_modes(obj,nModes)
             if mod(nModes,2)
                 obj.num.modes = nModes + 1;
                 disp('The number of modes is increased by one so it is an even number')
@@ -90,14 +90,14 @@ classdef Campbell < handle
             end
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        % function deklarations; definitions are in the 'private' folder
-        [A,B] = getStateSpaceMatrices(obj,omega)
-        [V,D] = performEigenAnalysis(obj,mat)
-        Vpos = getPositionEntries(obj,V);
+        % function declarations; definitions are in the 'private' folder
+        [A,B] = get_state_space_matrices(obj,omega)
+        [V,D] = perform_eigenanalysis(obj,mat)
+        Vpos = get_position_entries(obj,V);
         [ EV_for,EW_for,...
           EV_back,EW_back,...
           EV_0, EW_0,...
-          Phase_xy, Phase_xy_mean ] = getSeparationEigenVectors(obj,EV,EW );
+          Phase_xy, Phase_xy_mean ] = get_separation_eigenvectors(obj,EV,EW );
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     end
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    

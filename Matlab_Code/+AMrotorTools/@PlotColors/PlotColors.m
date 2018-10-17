@@ -12,7 +12,7 @@ classdef PlotColors < handle
     methods (Access = public)
         function obj = PlotColors()
         end
-        function setUp(obj,nColors)
+        function set_up(obj,nColors)
             obj.num.color = nColors;
             obj.colors = distinguishable_colors(obj.num.color);
         end
