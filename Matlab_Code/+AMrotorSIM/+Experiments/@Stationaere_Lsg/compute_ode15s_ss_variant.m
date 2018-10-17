@@ -23,9 +23,11 @@
          
         % solver parameters
         options = odeset('AbsTol', 1e-5, 'RelTol', 1e-5,'OutputFcn',@odeOutputFcn_plotBeam);
+%         options = odeset('AbsTol', 1e-5, 'RelTol', 1e-5); % ohne live-plot
 
         Timer.restart();
         disp('... integration started...')
+        fprintf('           '),pause(0.01), %Initialisierung Anzeige t
         
         sol = ode15s(@integrate_function_variant,obj.time,Z0, options, omega, obj.rotorsystem);
         
