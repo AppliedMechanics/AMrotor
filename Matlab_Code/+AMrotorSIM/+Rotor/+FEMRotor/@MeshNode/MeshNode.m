@@ -2,8 +2,8 @@ classdef MeshNode < handle
    
     properties
         name 
-        radius
-        radius_innen = 0
+        radius_outer
+        radius_inner = 0
         z 
     end
     
@@ -14,8 +14,8 @@ classdef MeshNode < handle
           else  
             self.name = name;
             self.z = z;
-            self.radius = r;
-            self.radius_innen = ri; %Hohlwelle
+            self.radius_outer = r;
+            self.radius_inner = ri; %Hohlwelle
           end
         end
     end
