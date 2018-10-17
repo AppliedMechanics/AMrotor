@@ -7,18 +7,27 @@
         
         obj.result = containers.Map('KeyType','double','ValueType','any');
         
-       for drehzahl = obj.drehzahlen 
-        disp(['... rotational speed: ',num2str(drehzahl),' U/min'])
+        M_without_seal = obj.rotorsystem.systemmatrices.M;
+        D_without_seal = obj.rotorsystem.systemmatrices.D;
+        K_without_seal = obj.rotorsystem.systemmatrices.K;
         
+       for rpm = obj.drehzahlen 
+        disp(['... rotational speed: ',num2str(rpm),' U/min'])
+        
+        % Funktion oder Methode einfuehren, um Systemmatrizen neu zu
+        % berechnen
+        M = M_without_seal;
+        D = D_without_seal;
+        K = K_without_seal;
         %==================================================================
-        % Dichtungskoeffizienten sind abhaengig von der Drehzahl
+        % Seal coefficients dependent on rotational speed
         n_nodes=length(obj.rotorsystem.rotor.mesh.nodes);
         M_seal = sparse(6*n_nodes,6*n_nodes);
         D_seal = sparse(6*n_nodes,6*n_nodes);
         K_seal = sparse(6*n_nodes,6*n_nodes);
            for seal = obj.rotorsystem.seals 
                 seal.create_ele_loc_matrix;
-                seal.get_loc_system_matrices(drehzahl);
+                seal.get_loc_system_matrices(rpm);
 
                 seal_node = obj.rotorsystem.rotor.find_node_nr(seal.position);
                 L_ele = sparse(6,6*n_nodes);
@@ -27,22 +36,30 @@
                 M_seal = M_seal+L_ele'*seal.mass_matrix*L_ele;
                 K_seal = K_seal+L_ele'*seal.stiffness_matrix*L_ele;
                 D_seal = D_seal+L_ele'*seal.damping_matrix*L_ele;
+                
+                M = M + M_seal;
+                D = D + D_seal;
+                K = K + K_seal;
            end
-        obj.rotorsystem.systemmatrices.M = obj.rotorsystem.systemmatrices.M + M_seal;
-        obj.rotorsystem.systemmatrices.D = obj.rotorsystem.systemmatrices.M + D_seal;
-        obj.rotorsystem.systemmatrices.K = obj.rotorsystem.systemmatrices.M + K_seal;
         %==================================================================
-
+        
+        obj.rotorsystem.systemmatrices.M = M; % because transform_StateSpace uses the matrices in the obj-form
+        obj.rotorsystem.systemmatrices.D = D;
+        obj.rotorsystem.systemmatrices.K = K;
+%         obj.rotorsystem.transform_StateSpace; 
+        obj.rotorsystem.transform_StateSpace_variant; % recalculation because of seal
+        obj.rotorsystem.transform_StateSpace_AG_variant(rpm); % recalculation of A_G
+        
         n_nodes = length(obj.rotorsystem.rotor.mesh.nodes);
         
-        omega = drehzahl*pi/30;           
+        Omega = rpm*pi/30;           
         
         ss_A = obj.rotorsystem.systemmatrices.ss.A;
         
         %%init Vector
         
         Z0 = zeros(length(ss_A),1);     % Mit null belegen:
-        Z0(end/2+6:6:end)=omega;        % Drehzahl für psi_z
+        Z0(end/2+6:6:end)=Omega;        % Drehzahl fuer psi_z
          
          
         % solver parameters
@@ -53,16 +70,8 @@
         disp('... integration started...')
         fprintf('           '),pause(0.01), %Initialisierung Anzeige t
        
-    %Debugging:
-%     format compact
-%     norm_M = norm(obj.rotorsystem.systemmatrices.M)
-%     norm_D = norm(obj.rotorsystem.systemmatrices.D)
-%     norm_K = norm(obj.rotorsystem.systemmatrices.K)
-%     norm_G = norm(full(obj.rotorsystem.systemmatrices.G))
-%      fprintf('\n          ');
-%     format
         
-        sol = ode15s(@integrate_function_variant,obj.time,Z0, options, omega, obj.rotorsystem);
+        sol = ode15s(@integrate_function_variant,obj.time,Z0, options, Omega, obj.rotorsystem);
         
         disp(['... spent time for integration: ',num2str(Timer.getWallTime()),' s'])
 
@@ -72,7 +81,7 @@
         res.X_d = Z(6*n_nodes+1:2*6*n_nodes,:);
         res.X_dd= Zp(6*n_nodes+1:2*6*n_nodes,:);
         
-        obj.result(drehzahl)=res;
+        obj.result(rpm)=res;
         
        end
 

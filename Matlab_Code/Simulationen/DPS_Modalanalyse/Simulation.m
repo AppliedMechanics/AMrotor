@@ -1,5 +1,5 @@
 %% DPS
-% Zur Berechnung der Rohdaten für die Modalanalyse
+% Zur Berechnung der Rohdaten fuer die Modalanalyse
 % SIRM2019 Beitrag
 % 20.08.2018
 
@@ -70,14 +70,14 @@ Janitor.cleanFigures();
 %% Running Time Simulation
 
 St_Lsg = Experiments.Stationaere_Lsg( r , (0:500:10e3) , (0:0.001:1) );%St_Lsg = Experiments.Stationaere_Lsg(r,[0:50:10e3],[0:0.001:2]); %obj = Stationaere_Lsg(a,drehzahlvektor,time)
-%St_Lsg.compute_ode15s_ss           %läuft leider immer noch nicht!
+%St_Lsg.compute_ode15s_ss           %laeuft leider immer noch nicht!
 St_Lsg.compute_ode15s_ss_variant
 %St_Lsg.compute_euler_ss
 %St_Lsg.compute_newmark
 %St_Lsg.compute_sys_ss_variant
 
 % 
-%------------- Erzeuge Ausgabeformat der Lösung ---------------
+%------------- Erzeuge Ausgabeformat der Loesung ---------------
 
 d = Dataoutput.TimeDataOutput(St_Lsg);
 dataset_modalanalysis = d.compose_data();
@@ -85,7 +85,7 @@ d.save_data(dataset_modalanalysis,'Hochlauf_0_10krpm');
 % save('workspace_temp.mat');
 % 
 % 
-% %------------- Erzeuge Grafiken aus Lösung -------------------
+% %------------- Erzeuge Grafiken aus Loesung -------------------
 % 
  t = Graphs.TimeSignal(r, St_Lsg);
 o = Graphs.Orbitdarstellung(r, St_Lsg);

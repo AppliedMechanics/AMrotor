@@ -2,7 +2,8 @@ function dZ = integrate_function_variant(t,Z,omega, rotorsystem)
 
 A = rotorsystem.systemmatrices.ss.A;
 B = rotorsystem.systemmatrices.ss.B;
-%ss_AG = rotorsystem.systemmatrices.ss.AG;
+ss_AG = rotorsystem.systemmatrices.ss.AG;
+A = A+ss_AG;
 
 
 %% Loadvector

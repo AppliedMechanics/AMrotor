@@ -60,7 +60,7 @@ classdef Rotorsystem < handle
       function add_Load(obj,arg)
           obj.loads(end+1) = AMrotorSIM.Loads.(arg.type)(arg);
       end
-      % Dichtung
+      % Seals
       function add_Seal(obj,arg)
           obj.seals(end+1) = AMrotorSIM.Seals.(arg.type)(arg);
       end
