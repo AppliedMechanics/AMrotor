@@ -1,4 +1,4 @@
-function [V,D] = performEigenAnalysis(obj,mat)
+function [V,D] = perform_eigenanalysis(obj,mat)
     opts.tol = 1e-16;
     criteria = true;
     num.eigenVectors = 6*(obj.num.modes);
