@@ -2,7 +2,7 @@ function plot_displacements(obj)
 
   n_ew=obj.modalsystem.n_ew;
   ColorHandler = AMrotorTools.PlotColors();
-  ColorHandler.setUp(n_ew);
+  ColorHandler.set_up(n_ew);
 
   % plotten der Moden
   figure('Name','Eigenschwingformen','NumberTitle','off');

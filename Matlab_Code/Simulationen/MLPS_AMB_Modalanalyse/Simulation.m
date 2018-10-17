@@ -53,14 +53,13 @@ r.transform_StateSpace_variant;
 
 %r.reduce_modal(10);
 
-% Der Campbell-plot müsste im Prinzip komplett neu aufgebaut werden:
 cmp = Experiments.Campbell(r);
-cmp.setUp(0:2e2:10e3,8); % input is 1/min, Number of Modes
+cmp.set_up(0:2e2:10e3,8); % input is 1/min, Number of Modes
 cmp.calculate();
 cmpDiagramm = Graphs.Campbell(cmp);
-cmpDiagramm.setPlots('all');
-% cmpDiagramm.setPlots('backward');
-% cmpDiagramm.setPlots('forward');
+cmpDiagramm.set_plots('all');
+% cmpDiagramm.set_plots('backward');
+% cmpDiagramm.set_plots('forward');
 Janitor.cleanFigures();
 
 %% Running Time Simulation

@@ -11,7 +11,7 @@ classdef Orbitdarstellung < handle
       self.rotorsystem = a;
       self.experiment = experiment;
       self.ColorHandler = AMrotorTools.PlotColors();
-      self.ColorHandler.setUp(length(experiment.drehzahlen));
+      self.ColorHandler.set_up(length(experiment.drehzahlen));
   end
       
    end
