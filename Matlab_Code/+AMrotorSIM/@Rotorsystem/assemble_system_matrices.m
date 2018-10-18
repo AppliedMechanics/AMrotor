@@ -10,7 +10,7 @@ function assemble_system_matrices(self)
             %Lokalisierungsmatrix hat 6x6n 0 Einträge
             %Element L wird dann an der Stelle (i-1)*6 drauf addiert.
 
-%% Lagermatrizen aufaddieren
+%% Add bearing matrices
 
             M_bearing=sparse(6*n_nodes,6*n_nodes);
             K_bearing=sparse(6*n_nodes,6*n_nodes);
@@ -20,7 +20,7 @@ function assemble_system_matrices(self)
             for bearing = self.bearings
                 
                 bearing.create_ele_loc_matrix;
-                bearing.get_loc_damping_matrix;
+                bearing.get_loc_gyroscopic_matrix;
                 bearing.get_loc_mass_matrix;
                 bearing.get_loc_stiffness_matrix;
                 

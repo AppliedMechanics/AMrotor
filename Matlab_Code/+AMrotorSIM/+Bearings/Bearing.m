@@ -7,6 +7,7 @@ classdef (Abstract) Bearing < matlab.mixin.Heterogeneous & handle
       mass_matrix
       stiffness_matrix
       damping_matrix
+      gyroscopic_matrix
       color='black'
    end
    methods
@@ -31,7 +32,7 @@ classdef (Abstract) Bearing < matlab.mixin.Heterogeneous & handle
         
         get_loc_mass_matrix(self)
         get_loc_stiffness_matrix(self)
-        get_loc_damping_matrix(self)
+        get_loc_gyroscopic_matrix(self)
         
       end
 
