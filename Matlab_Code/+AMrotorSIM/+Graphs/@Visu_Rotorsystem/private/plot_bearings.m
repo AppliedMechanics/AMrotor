@@ -5,7 +5,7 @@ for i=bearing
     
     bearing_pos = i.position; 
     node_at_pos = obj.find_node_nr(bearing_pos);
-    diameter = obj.mesh.nodes(node_at_pos).radius*2;
+    diameter = obj.mesh.nodes(node_at_pos).radius_outer*2;
 
 
     

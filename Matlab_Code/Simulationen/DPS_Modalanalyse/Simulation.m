@@ -28,8 +28,8 @@ r.show; % Funktion AMrotor\Matlab_Code\+AMrotorSIM\+Rotor\+FEMRotor\@FeModel\pri
 % r.rotor.mesh.show_2D(); 
 %r.rotor.mesh.show_3D();
 
-% g=Graphs.Visu_Rotorsystem(r);
-% g.show();
+g=Graphs.Visu_Rotorsystem(r);
+g.show();
 
 
 r.assemble_system_matrices(); % rotor + bearings, but without seals
