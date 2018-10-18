@@ -15,7 +15,7 @@ function [ax]=show_3D(self)
 
     for k=1:n_nodes
         mesh_node_z(k) = self.nodes(k).z;
-        mesh_node_radius(k) = self.nodes(k).radius;
+        mesh_node_radius(k) = self.nodes(k).radius_outer;
     end
     while n <n_nodes
 
