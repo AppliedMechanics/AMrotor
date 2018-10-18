@@ -97,10 +97,10 @@ cnfg.cnfg_bearing(count).damping = 299.275;
 
 
 %% ========================================================================
-% Kraft in feste Richtung
 cnfg.cnfg_load=[];
 count = 0;
 
+% Kraft in feste Richtung
 % count = count + 1;
 % cnfg.cnfg_load(count).name='Const. Kraft';
 % cnfg.cnfg_load(count).position=0e-3;
@@ -109,21 +109,53 @@ count = 0;
 % cnfg.cnfg_load(count).type='Force_constant_fix';
 
 % Unwuchten
-% count = count + 1;
-% cnfg.cnfg_load(count).name = 'Kleine Unwucht';
-% cnfg.cnfg_load(count).position = 300e-3;
-% cnfg.cnfg_load(count).betrag = 5e-6;
-% cnfg.cnfg_load(count).winkellage = 0;
-% cnfg.cnfg_load(count).type='Unbalance_static';
+count = count + 1;
+cnfg.cnfg_load(count).name = 'Kleine Unwucht';
+cnfg.cnfg_load(count).position = 280e-3;
+cnfg.cnfg_load(count).betrag = 1e-6;%5e-6;
+cnfg.cnfg_load(count).winkellage = 0;
+cnfg.cnfg_load(count).type='Unbalance_static';
 
 % Sinusförmige Anregungskraft
-count = count + 1;
-cnfg.cnfg_load(count).name='Sinus Kraft';
-cnfg.cnfg_load(count).position=110e-3;
-cnfg.cnfg_load(count).betrag_x= 10;
-cnfg.cnfg_load(count).frequency_x= 500;  %in Hz
-cnfg.cnfg_load(count).betrag_y= 0;
-cnfg.cnfg_load(count).frequency_y= 50;
-cnfg.cnfg_load(count).type='Force_timevariant_fix';
+% count = count + 1;
+% cnfg.cnfg_load(count).name='Sinus Kraft';
+% cnfg.cnfg_load(count).position=138e-3; % Position ML 1
+% cnfg.cnfg_load(count).betrag_x= 10;
+% cnfg.cnfg_load(count).frequency_x= 500;  %in Hz
+% cnfg.cnfg_load(count).betrag_y= 0;
+% cnfg.cnfg_load(count).frequency_y= 50;
+% cnfg.cnfg_load(count).type='Force_timevariant_fix';
 
+% Whirl, Anregungskraft beschreibt Ellipse
+% count = count + 1;
+% cnfg.cnfg_load(count).name='Whirl Kraft';
+% cnfg.cnfg_load(count).position=138e-3; % Position ML 1
+% cnfg.cnfg_load(count).betrag_x= 10;
+% cnfg.cnfg_load(count).betrag_y= 10;
+% cnfg.cnfg_load(count).frequency= 500;  %in Hz
+% cnfg.cnfg_load(count).type='Force_timevariant_whirl';
+
+% % Chirp, Sinus-sweep-Kraft
+% count = count + 1;
+% cnfg.cnfg_load(count).name='Chirp Kraft';
+% cnfg.cnfg_load(count).position=138e-3; % Position ML 1
+% cnfg.cnfg_load(count).betrag_x= 1;
+% cnfg.cnfg_load(count).frequency_x_0 = 0; % Startfrequenz
+% cnfg.cnfg_load(count).frequency_x= 500;  %in Hz, Endfrequenz
+% cnfg.cnfg_load(count).betrag_y= 0;
+% cnfg.cnfg_load(count).frequency_y_0 = 0;
+% cnfg.cnfg_load(count).frequency_y= 0;
+% cnfg.cnfg_load(count).t_end= 2; % Zeitdauer des Chirps, hier wird f erreicht
+% cnfg.cnfg_load(count).type='Force_timevariant_chirp';
+
+% whirl-sweep-Kraft
+count = count + 1;
+cnfg.cnfg_load(count).name='Whirl Sweep Kraft';
+cnfg.cnfg_load(count).position=138e-3; % Position ML 1
+cnfg.cnfg_load(count).betrag_x= 1;
+cnfg.cnfg_load(count).betrag_y= cnfg.cnfg_load(count).betrag_x;
+cnfg.cnfg_load(count).frequency_0 = 0; % Startfrequenz
+cnfg.cnfg_load(count).frequency= 1000;  %in Hz, Endfrequenz
+cnfg.cnfg_load(count).t_end= 0.6;%2; % Zeitdauer des Chirps, hier wird f erreicht
+cnfg.cnfg_load(count).type='Force_timevariant_whirl_sweep';
 
