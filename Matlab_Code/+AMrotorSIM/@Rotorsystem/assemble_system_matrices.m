@@ -17,7 +17,7 @@ function assemble_system_matrices(self)
             for bearing = self.bearings
                 
                 bearing.create_ele_loc_matrix;
-                bearing.get_loc_damping_matrix;
+                bearing.get_loc_gyroscopic_matrix;
                 bearing.get_loc_mass_matrix;
                 bearing.get_loc_stiffness_matrix;
                 
@@ -27,7 +27,7 @@ function assemble_system_matrices(self)
 
                 M_bearing = M_bearing+L_ele'*bearing.mass_matrix*L_ele;
                 K_bearing = K_bearing+L_ele'*bearing.stiffness_matrix*L_ele;
-                G_bearing = G_bearing+L_ele'*bearing.damping_matrix*L_ele;
+                G_bearing = G_bearing+L_ele'*bearing.gyroscopic_matrix*L_ele;
             end
 
 %% Add disc matrices
