@@ -32,6 +32,7 @@
                 seal_node = obj.rotorsystem.rotor.find_node_nr(seal.position);
                 L_ele = sparse(6,6*n_nodes);
                 L_ele(1:6,(seal_node-1)*6+1:(seal_node-1)*6+6)=seal.localisation_matrix;
+                %L_ele = sparse(1:6, (seal_node-1)*6+1:(seal_node-1)*6+6, ones(6,1), 6, 6*n_nodes); % added because of warning of Matlab Code Analyzer but not actually faster
 
                 M_seal = M_seal+L_ele'*seal.mass_matrix*L_ele;
                 K_seal = K_seal+L_ele'*seal.stiffness_matrix*L_ele;

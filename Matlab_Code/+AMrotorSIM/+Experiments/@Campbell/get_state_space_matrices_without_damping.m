@@ -4,34 +4,8 @@ function [A,B] = get_state_space_matrices_without_damping(obj,omega)
                              % matrices will be stated as state space
                              % system
     rpm = omega/2/pi*60;
-    M = obj.rotorsystem.systemmatrices.M;
-    K = obj.rotorsystem.systemmatrices.K;
     G = obj.rotorsystem.systemmatrices.G;
-    
-    %==================================================================
-    % Seal-coefficients dependent on rotational speed
-    n_nodes=length(obj.rotorsystem.rotor.mesh.nodes);
-    M_seal = sparse(6*n_nodes,6*n_nodes);
-    D_seal = sparse(6*n_nodes,6*n_nodes);
-    K_seal = sparse(6*n_nodes,6*n_nodes);
-       for seal = obj.rotorsystem.seals 
-            seal.create_ele_loc_matrix;
-            seal.get_loc_system_matrices(rpm);
-
-            seal_node = obj.rotorsystem.rotor.find_node_nr(seal.position);
-            L_ele = sparse(6,6*n_nodes);
-            L_ele(1:6,(seal_node-1)*6+1:(seal_node-1)*6+6)=seal.localisation_matrix;
-
-            M_seal = M_seal+L_ele'*seal.mass_matrix*L_ele;
-            K_seal = K_seal+L_ele'*seal.stiffness_matrix*L_ele;
-            D_seal = D_seal+L_ele'*seal.damping_matrix*L_ele;
-            
-            M = M + M_seal;
-            %D = D + D_seal;
-            K = K + K_seal;
-       end
-    %==================================================================
-        
+    [M,~,K] = obj.add_seal_matrices(rpm);
         
     ind_red = 1:n.nodes*6;
     ind_z = 3:6:n.nodes*6;
