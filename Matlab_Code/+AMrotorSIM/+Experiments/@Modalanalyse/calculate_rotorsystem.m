@@ -4,24 +4,25 @@ function calculate_rotorsystem(obj,nModes,drehzahl)
 
   obj.n_ew = nModes;
 
-  ss_A=obj.rotorsystem.systemmatrices.ss_A;
-  ss_B=obj.rotorsystem.systemmatrices.ss_B;
-
- [V,D_tmp] = eigs(ss_B,ss_A,2*nModes,'sm');
-% [D,order] = sort(imag(diag(D_tmp)));
- D = imag(diag(D_tmp));
+%==========================================================================
+% aus Experiments.Campbell
+[mat.A,mat.B] = obj.get_state_space_matrices(drehzahl/60*2*pi);
+[V,D_tmp] = obj.perform_eigenanalysis(mat);
+D = get_positive_entries(D_tmp);
+%==========================================================================
+D = imag(D);
  
  %negative D / V Einträge wegwerfen --> nModes=nModes
  
  tmp = find(D >=0);
  tmp2 = sparse(size(V,1),length(tmp));
  for i = 1:length(tmp)
-     EV_nr = tmp(i,1)
+     EV_nr = tmp(i,1);
      tmp2(:,i) = V(:,EV_nr);
  end
  V = tmp2;
  
-        V=real(V(1:end/2,:));
+ V=real(V(1:end/2,:));
         
     %% Aussortierung der x werte aus dem EV mithilfe der get_dof Implementierung
     nNodes = obj.rotorsystem.rotor.mesh.nodes;

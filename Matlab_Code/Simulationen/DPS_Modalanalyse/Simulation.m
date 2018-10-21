@@ -29,11 +29,11 @@ r.show; % Funktion AMrotor\Matlab_Code\+AMrotorSIM\+Rotor\+FEMRotor\@FeModel\pri
 % r.rotor.mesh.show_2D(); 
 %r.rotor.mesh.show_3D();
 
-g=Graphs.Visu_Rotorsystem(r);
-g.show();
+% g=Graphs.Visu_Rotorsystem(r);
+% g.show();
 
 
-r.assemble_system_matrices(); % rotor + bearings, but without seals
+r.assemble_system_matrices(); % rotor + bearings + discs, but without seals
 %r.assemble_system_loads();
 u_trans_rigid_body = r.compute_translational_rigid_body_modes;
 overall_mass = r.check_overall_translational_mass(u_trans_rigid_body)
@@ -41,18 +41,18 @@ r.transform_StateSpace;
 r.transform_StateSpace_variant;
 %% Running system analyses
 % 
-% m=Experiments.Modalanalyse(r);
+m=Experiments.Modalanalyse(r);
 % 
 % m.calculate_rotor_only_without_damping(15);
 % m.calculate_rotor_only(15,100);
 % 
 % m.calculate_rotorsystem_without_damping(15);
-% % m.calculate_rotorsystem(15,0);
+m.calculate_rotorsystem(6,1e3);
 % 
-% esf= Graphs.Eigenschwingformen(m);
-% esf.print_frequencies();
-% esf.plot_displacements();
-% Janitor.cleanFigures();
+esf= Graphs.Eigenschwingformen(m);
+esf.print_frequencies();
+esf.plot_displacements();
+Janitor.cleanFigures();
 % 
 % 
 % r.reduce_modal(10);

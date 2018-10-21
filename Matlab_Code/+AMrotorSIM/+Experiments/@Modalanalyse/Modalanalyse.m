@@ -19,6 +19,11 @@ classdef Modalanalyse < handle
        
    end
    methods(Access=private)
-       
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        % function declarations; definitions are in the 'private' folder
+        [A,B] = get_state_space_matrices(obj,omega)
+        [M,D,K] = add_seal_matrices(obj,rpm)
+        [V,D] = perform_eigenanalysis(obj,mat)
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
    end
 end
