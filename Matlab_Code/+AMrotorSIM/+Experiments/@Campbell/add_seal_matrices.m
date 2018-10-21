@@ -7,9 +7,9 @@ function [M,D,K] = add_seal_matrices(obj,rpm)
 %   (in 1/min). 
 
 M = obj.rotorsystem.systemmatrices.M;
-D = obj.rotorsystem.systemmatrices.K;
+D = obj.rotorsystem.systemmatrices.D;
 K = obj.rotorsystem.systemmatrices.K;
-G = obj.rotorsystem.systemmatrices.G;
+% G = obj.rotorsystem.systemmatrices.G;
 
 n_nodes=length(obj.rotorsystem.rotor.mesh.nodes);
 M_seal = sparse(6*n_nodes,6*n_nodes);
@@ -25,12 +25,11 @@ K_seal = sparse(6*n_nodes,6*n_nodes);
 
         M_seal = M_seal+L_ele'*seal.mass_matrix*L_ele;
         K_seal = K_seal+L_ele'*seal.stiffness_matrix*L_ele;
-        D_seal = D_seal+L_ele'*seal.damping_matrix*L_ele;
-
-        M = M + M_seal;
-        D = D + D_seal;
-        K = K + K_seal;
+        D_seal = D_seal+L_ele'*seal.damping_matrix*L_ele;        
    end
-       
+   
+    M = M + M_seal;
+    D = D + D_seal;
+    K = K + K_seal; 
 end
 

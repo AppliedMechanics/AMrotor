@@ -16,7 +16,8 @@ Janitor.setLayout(2,3);
 
 %% Compute Rotor
 
-Config_Sim_DPS
+% Config_Sim_DPS
+Config_Sim_Laval_Dichtung
 
 r=Rotorsystem(cnfg,'DPS-System');
 r.assemble; %fuehrt Funktion assemble.m mit Eingabe Objekt r aus Klasse Rotorsystem aus
@@ -57,8 +58,8 @@ r.transform_StateSpace_variant;
 % r.reduce_modal(10);
 % 
 cmp = Experiments.Campbell(r);
-% cmp.set_up(0:2e2:10e3,4); cmp.calculate();% input of set_up is (1/min, Number of Modes)
-cmp.set_up(0:2e2:10e3,8); cmp.calculate_without_damping();
+cmp.set_up(0:2e2:10e3,6); 
+cmp.calculate();% input of set_up is (1/min, Number of Modes)
 cmpDiagramm = Graphs.Campbell(cmp);
 cmpDiagramm.set_plots('all');
 % cmpDiagramm.set_plots('backward');
