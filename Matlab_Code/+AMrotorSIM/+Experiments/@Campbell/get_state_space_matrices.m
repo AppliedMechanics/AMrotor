@@ -9,6 +9,7 @@ function [A,B] = get_state_space_matrices(obj,omega)
     ind_red = setdiff(ind_red,[ind_z,ind_psi_z]); % remove dof u_z psi_z for compatibility, no information on torsional and axial eigenbehaviour 
     M = obj.rotorsystem.systemmatrices.M(ind_red,ind_red);
     K = obj.rotorsystem.systemmatrices.K(ind_red,ind_red);
+    D = sparse(length(ind_red));%D = obj.rotorsystem.systemmatrices.D(ind_red,ind_red);; %neglect damping for better convergence
     G = obj.rotorsystem.systemmatrices.G(ind_red,ind_red);
     A = sparse(n.entries,n.entries);
     B = sparse(n.entries,n.entries);
@@ -19,7 +20,7 @@ function [A,B] = get_state_space_matrices(obj,omega)
     A(ind1,ind1) = sparse(M);
     A(ind2,ind2) = sparse(K);
     % set matrix B
-    B(ind1,ind1) = sparse(omega*G);
+    B(ind1,ind1) = sparse(omega*G+D);
     B(ind1,ind2) = sparse(K);
     B(ind2,ind1) = sparse(-K);
 end
