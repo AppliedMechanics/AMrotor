@@ -37,19 +37,19 @@ r.transform_StateSpace;
 r.transform_StateSpace_variant;
 %% Running system analyses
 
-% m=Experiments.Modalanalyse(r);
+m=Experiments.Modalanalyse(r);
 
 %m.calculate_rotor_only_without_damping(15);
 %m.calculate_rotor_only(15,100);
 
 % m.calculate_rotorsystem_without_damping(15);
-%m.calculate_rotorsystem(15,0);
+m.calculate_rotorsystem(15,1e3);
 %
-% esf= Graphs.Eigenschwingformen(m);
-% esf.print_frequencies();
-% esf.plot_displacements();
-%Janitor.cleanFigures();
-% 
+esf= Graphs.Eigenschwingformen(m);
+esf.print_frequencies();
+esf.plot_displacements();
+Janitor.cleanFigures();
+
 
 %r.reduce_modal(10);
 
