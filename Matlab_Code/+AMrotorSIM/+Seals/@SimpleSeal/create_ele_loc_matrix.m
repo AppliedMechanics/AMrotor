@@ -1,7 +1,7 @@
 function create_ele_loc_matrix(self)
 
         %Vektorversion der Localisierungsmatrix:
-        Lv0_ele = [1,2,3,4,5,6];
+        Lv0_ele = [2,1,3,4,5,6]; % vertauscht, damit forward und backward whirl stimmen
         
         %Matrixversion:
         L_ele = sparse(6,6); 
