@@ -1,4 +1,4 @@
-function [K] = get_loc_stiffness_matrix(self)
+function [K] = get_loc_stiffness_matrix(self,~)
             
     K=sparse(6,6);
     

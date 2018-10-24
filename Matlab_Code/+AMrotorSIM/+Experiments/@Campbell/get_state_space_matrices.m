@@ -5,7 +5,15 @@ function [A,B] = get_state_space_matrices(obj,omega)
                              % system
     rpm = omega/2/pi*60;
     G = obj.rotorsystem.systemmatrices.G;
-    [M,D,K] = obj.add_seal_matrices(rpm);
+    [M_seal,D_seal,K_seal] = obj.calculate_seal_matrices(rpm);
+    [M_bearing,D_bearing,K_bearing] = obj.calculate_bearing_matrices(rpm); % for bearings with rpm-dependent coefficients
+    
+    M = obj.rotorsystem.systemmatrices.M;
+    D = obj.rotorsystem.systemmatrices.D;
+    K = obj.rotorsystem.systemmatrices.K;
+    M = M + M_seal + M_bearing;
+    D = D + D_seal + D_bearing;
+    K = K + K_seal + K_bearing; 
     
     ind_red = 1:n.nodes*6;
     ind_z = 3:6:n.nodes*6;

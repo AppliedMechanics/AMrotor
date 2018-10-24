@@ -96,19 +96,67 @@ cnfg.cnfg_bearing(count).damping = 100;
 % cnfg.cnfg_bearing(count).stiffness=1e10;                     %[N/m]
 % cnfg.cnfg_bearing(count).damping = 100;
 
-count = count + 1;
-cnfg.cnfg_bearing(count).name = 'Isotropes Lager 1';
-cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
-cnfg.cnfg_bearing(count).type='SimpleBearing';
-cnfg.cnfg_bearing(count).stiffness=1e8;%0.0670680e7; % ???                    %[N/m]
-cnfg.cnfg_bearing(count).damping = 0;%299.275; % ???
+% count = count + 1;
+% cnfg.cnfg_bearing(count).name = 'Isotropes Lager 1';
+% cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
+% cnfg.cnfg_bearing(count).type='SimpleBearing';
+% cnfg.cnfg_bearing(count).stiffness=1e8;%0.0670680e7; % ???                    %[N/m]
+% cnfg.cnfg_bearing(count).damping = 0;%299.275; % ???
+
+% count = count + 1;
+% cnfg.cnfg_bearing(count).name = 'Isotropes Lager 2';
+% cnfg.cnfg_bearing(count).position=600e-3;                        %[m]
+% cnfg.cnfg_bearing(count).type='SimpleBearing';
+% cnfg.cnfg_bearing(count).stiffness=1e8;%0.0670680e7; % ???                    %[N/m]
+% cnfg.cnfg_bearing(count).damping = 0;%299.275; % ???
 
 count = count + 1;
-cnfg.cnfg_bearing(count).name = 'Isotropes Lager 2';
+cnfg.cnfg_bearing(count).name = 'Kennfeld Lager';
+cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
+cnfg.cnfg_bearing(count).type='LookUpTableBearing';
+load('bearing1.mat')
+K_bearing = squeeze(num2cell(K_bearing,3));
+for i = 1:size(K_bearing,1)
+    for j=1:size(K_bearing,2)
+        K_bearing{i,j} = squeeze(K_bearing{i,j});
+    end
+end
+C_bearing = squeeze(num2cell(C_bearing,3));
+for i = 1:size(C_bearing,1)
+    for j=1:size(C_bearing,2)
+        C_bearing{i,j} = squeeze(C_bearing{i,j});
+    end
+end
+cnfg.cnfg_bearing(count).Table.stiffness_matrix = K_bearing; % [N/m]
+%dof: [u_x, u_y, u_z, psi_x, psi_y]',
+cnfg.cnfg_bearing(count).Table.damping_matrix = C_bearing;
+cnfg.cnfg_bearing(count).Table.rpm = rpm;
+
+
+count = count + 1;
+cnfg.cnfg_bearing(count).name = 'Kennfeld Lager';
 cnfg.cnfg_bearing(count).position=600e-3;                        %[m]
-cnfg.cnfg_bearing(count).type='SimpleBearing';
-cnfg.cnfg_bearing(count).stiffness=1e8;%0.0670680e7; % ???                    %[N/m]
-cnfg.cnfg_bearing(count).damping = 0;%299.275; % ???
+cnfg.cnfg_bearing(count).type='LookUpTableBearing';
+load('bearing1.mat')
+K_bearing = squeeze(num2cell(K_bearing,3));
+for i = 1:size(K_bearing,1)
+    for j=1:size(K_bearing,2)
+        K_bearing{i,j} = squeeze(K_bearing{i,j});
+    end
+end
+C_bearing = squeeze(num2cell(C_bearing,3));
+for i = 1:size(C_bearing,1)
+    for j=1:size(C_bearing,2)
+        C_bearing{i,j} = squeeze(C_bearing{i,j});
+    end
+end
+cnfg.cnfg_bearing(count).Table.stiffness_matrix = K_bearing; % [N/m]
+%dof: [u_x, u_y, u_z, psi_x, psi_y]',
+cnfg.cnfg_bearing(count).Table.damping_matrix = C_bearing;
+cnfg.cnfg_bearing(count).Table.rpm = rpm;
+
+    
+clear K_bearing C_bearing rpm
 
 
 %% ========================================================================
@@ -193,22 +241,43 @@ sealModel.sys.Dpw = 0.5*(sealModel.sys.D+sealModel.sys.d);        % Mittlerer Du
 sealModel.sys.S = 0.5*sealModel.sys.D-0.5*sealModel.sys.d;        % Spaltweite
 sealModel.sys.xi_ein = 0.1;                   % Eintrittsverlust im Dichtspalt
 sealModel.sys.xi_aus = 1;                     % Austrittsverlust im Dichtspalt
-sealModel.sys.p = 3e5;                     % Druckdifferenz ueber Dichtung in Pa, N/m^2, 1bar=10^5Pa
+sealModel.sys.p = 20e5;%3e5;                     % Druckdifferenz ueber Dichtung in Pa, N/m^2, 1bar=10^5Pa
 sealModel.sys.rho = 880;                      % Dichte
 sealModel.sys.nu = tempSeal.nut*sealModel.sys.rho*10^(-6);   
+
+% Load Look up table for 'Table'
+load('Koeffizienten_Volumenstrom_2bar.mat')
+sealModel.Table.rpm = wellendrehzahl;
+sealModel.Table.m_xx = masse;
+sealModel.Table.d_xx = hauptdaempfung;
+sealModel.Table.d_xy = nebendaempfung;
+sealModel.Table.k_xx = hauptsteifigkeit;
+sealModel.Table.k_xy = nebensteifigkeit;
+clear wellendrehzahl masse hauptdaempfung nebendaempfung hauptsteifigkeit nebensteifigkeit
  
 % Define Seals
-count = count+1;
-cnfg.cnfg_seal(count).name = 'Dichtung 1';
-cnfg.cnfg_seal(count).position=300e-3;                        %[m]
-cnfg.cnfg_seal(count).type='SimpleSeal';
-cnfg.cnfg_seal(count).sealModel = sealModel;
+% count = count+1;
+% cnfg.cnfg_seal(count).name = 'Dichtung Black';
+% cnfg.cnfg_seal(count).position=300e-3;                        %[m]
+% cnfg.cnfg_seal(count).type='SimpleSeal';
+% cnfg.cnfg_seal(count).sealModel = sealModel;
+% cnfg.cnfg_seal(count).sealModel.type = 'Black';
 
 % Define Seals
 % count = count+1;
-% cnfg.cnfg_seal(count).name = 'Dichtung 2';
-% cnfg.cnfg_seal(count).position=310e-3;                        %[m]
+% cnfg.cnfg_seal(count).name = 'Dichtung Childs';
+% cnfg.cnfg_seal(count).position=300e-3;                        %[m]
 % cnfg.cnfg_seal(count).type='SimpleSeal';
 % cnfg.cnfg_seal(count).sealModel = sealModel;
+% cnfg.cnfg_seal(count).sealModel.type = 'Childs';
+
+% Define Seals
+count = count+1;
+cnfg.cnfg_seal(count).name = 'Dichtung LookUpTable';
+cnfg.cnfg_seal(count).position=300e-3;                        %[m]
+cnfg.cnfg_seal(count).type='SimpleSeal';
+cnfg.cnfg_seal(count).sealModel = sealModel;
+cnfg.cnfg_seal(count).sealModel.type = 'Table';
+
 
 clear sealModel tempSeal

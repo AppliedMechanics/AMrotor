@@ -18,12 +18,13 @@ function assemble_system_matrices(self)
             
             
             for bearing = self.bearings
-                
+                if ~strcmp(bearing.type,'LookUpTableBearing') 
+                    %Do not build systemmatrices if bearing is of type 'LookUpTableBearing', i.e. if systemmatrices are rpm-dependent
                 bearing.create_ele_loc_matrix;
-                bearing.get_loc_gyroscopic_matrix;
-                bearing.get_loc_damping_matrix;
-                bearing.get_loc_mass_matrix;
-                bearing.get_loc_stiffness_matrix;
+                bearing.get_loc_gyroscopic_matrix(0);
+                bearing.get_loc_damping_matrix(0);
+                bearing.get_loc_mass_matrix(0);
+                bearing.get_loc_stiffness_matrix(0);
                 
                 bearing_node = self.rotor.find_node_nr(bearing.position);
                 L_ele = sparse(6,6*n_nodes);
@@ -32,6 +33,7 @@ function assemble_system_matrices(self)
                 M_bearing = M_bearing+L_ele'*bearing.mass_matrix*L_ele;
                 K_bearing = K_bearing+L_ele'*bearing.stiffness_matrix*L_ele;
                 G_bearing = G_bearing+L_ele'*bearing.gyroscopic_matrix*L_ele;
+                end
             end
 
 %% Add disc matrices
