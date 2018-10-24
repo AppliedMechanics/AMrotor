@@ -1,4 +1,4 @@
-function [ M,D,K ] = ChildsModel( self, sys,init )
+function [ M_seal, D_seal ,K_seal ] = ChildsModel( self, init )
 %Massen-, Dämpfungs- und Steifigkeitsmatrizen nach Childs (für EINE Dichtung!!)
 %   für den Prüfstand sind 2 (oder auch 3) Dichtungen zu simulieren
 %   init.omega0IR: 3-Dim-Vektor -> Drehung der Welle erfolgt in x-Richtung
@@ -9,6 +9,8 @@ function [ M,D,K ] = ChildsModel( self, sys,init )
 %   Childs: seal radius =?  -> Wellenradius sys.d/2 
 %       Dann stimmen die Koeffizienten zumindest mit denen von dyrobes.com überein
 %       seal radius = sys.D oder sys.Dpw verschlechtern die Übereinstimmung lediglich (Aufzeichnung 24.01.)
+
+sys = self.cnfg.sealModel.sys;
 
 %% Koeffizienten nach Hirs
 n0= 0.066;      % coefficients for Hirs' turbulence equations
@@ -56,9 +58,9 @@ cc = u0*(2*sigma*init.omega0IR(1)*T^2)/u1 * (u2+sys.v0/a*((1-exp(-a))*(u3+0.5)-(
 md = u0*(sigma*(1/6 + E))/u1 * T^2;
 
 %% Matrizen für output
-M = [md, 0; 0, md];
-D = [Cd, cc; -cc, Cd];
-K = [Kd, kc; -kc, Kd];
+M_seal = [md, 0; 0, md];
+D_seal = [Cd, cc; -cc, Cd];
+K_seal = [Kd, kc; -kc, Kd];
 
 end
 

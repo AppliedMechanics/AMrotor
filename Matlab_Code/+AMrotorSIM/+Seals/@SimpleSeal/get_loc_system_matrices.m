@@ -91,9 +91,12 @@ K = sparse(6,6);
         init.xd0IR = [0;0;0];
         init.omega0IR = [rpm*pi/30;0;0];       % Einheit: rad/s !
         
-        [ M_s,D_s,K_s ] = self.ChildsModel( sys,init );
+        [ M_s,D_s,K_s ] = self.ChildsModel( init );
 
       %  C(k,:)=[rpm, MC(1,1),MC(1,2),DC(1,1),DC(1,2),KC(1,1),KC(1,2)];
+      
+     case 'Table'
+        [ M_s,D_s,K_s ] = self.LookUpTable( rpm );
  end
  
  M(1:2,1:2) = M_s;

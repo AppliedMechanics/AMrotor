@@ -1,4 +1,4 @@
-function [ M,D,K ] = BlackModel( self, init )     % je nachdem, weleche Berechnungsvorschrift von unten verwendet wird, könnte man hier nich ein paar ausgänge entfernen
+function [ M_seal,D_seal ,K_seal ] = BlackModel( self, init )     % je nachdem, weleche Berechnungsvorschrift von unten verwendet wird, könnte man hier nich ein paar ausgänge entfernen
 %BLACKMODEL gibt Koeffizienten nach Black zurück
 %   nach    Black, Jenssen 1969-70 - Dynamic Hybrid Bearing Characteristics
 %   und     Barrett - Turbulent Flow Annular Pump Seals
@@ -120,8 +120,8 @@ Cd = u3 * u1 * T;
 cc = u3 * u2 * init.omega0IR(1) * T^2;
 md = u3 * u2 * T^2;
 
-M = [md, 0; 0, md];
-D = [Cd, cc; -cc, Cd];
-K = [Kd, kc; -kc, Kd];
+M_seal = [md, 0; 0, md];
+D_seal = [Cd, cc; -cc, Cd];
+K_seal = [Kd, kc; -kc, Kd];
 end
 

@@ -21,6 +21,7 @@ function assemble_system_matrices(self)
                 
                 bearing.create_ele_loc_matrix;
                 bearing.get_loc_gyroscopic_matrix;
+                bearing.get_loc_damping_matrix;
                 bearing.get_loc_mass_matrix;
                 bearing.get_loc_stiffness_matrix;
                 
