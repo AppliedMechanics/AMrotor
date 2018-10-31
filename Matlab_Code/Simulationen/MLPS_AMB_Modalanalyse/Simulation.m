@@ -31,6 +31,7 @@ r.show;
 % g=Graphs.Visu_Rotorsystem(r);
 % g.show();
 
+ r.rotor.assemble_fem;
 
 %% Running system analyses
 

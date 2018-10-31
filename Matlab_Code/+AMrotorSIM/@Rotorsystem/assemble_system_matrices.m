@@ -5,7 +5,7 @@ function [M,C,G,K]= assemble_system_matrices(self,rpm)
          end
 
 %% Rotormatrizen aus FEM erstellen
-            self.rotor.assemble_fem
+           
             n_nodes=length(self.rotor.mesh.nodes);
 
             %Lokalisierungsmatrix hat 6x6n 0 Einträge
