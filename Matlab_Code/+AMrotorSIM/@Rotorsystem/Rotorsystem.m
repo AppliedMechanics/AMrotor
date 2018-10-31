@@ -6,8 +6,6 @@ classdef Rotorsystem < handle
 
    properties
       name
-      systemmatrices
-      reduktionsmatrizen
       
       cnfg=struct([])
       

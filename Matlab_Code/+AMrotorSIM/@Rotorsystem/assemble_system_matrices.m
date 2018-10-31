@@ -1,5 +1,9 @@
-function assemble_system_matrices(self)
-    
+function [M,C,G,K]= assemble_system_matrices(self,rpm)
+
+         if nargin == 0
+             rpm=0;
+         end
+
 %% Rotormatrizen aus FEM erstellen
             self.rotor.assemble_fem
             n_nodes=length(self.rotor.mesh.nodes);
@@ -54,10 +58,11 @@ function assemble_system_matrices(self)
             end
         
 %% Add to global matrices
-        self.systemmatrices.M = self.rotor.matrices.M + M_bearing + M_disc;
-        self.systemmatrices.K = self.rotor.matrices.K + K_bearing + K_disc;
-        self.systemmatrices.G = self.rotor.matrices.G + G_bearing + G_disc;
-        self.systemmatrices.D = self.rotor.matrices.D;
+        M = self.rotor.matrices.M + M_bearing + M_disc;
+        C = self.rotor.matrices.D;
+        G = self.rotor.matrices.G + G_bearing + G_disc;
+        K = self.rotor.matrices.K + K_bearing + K_disc;
+
         
       
 end

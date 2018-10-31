@@ -3,14 +3,17 @@ function [A,B] = get_state_space_matrices(obj,omega)
     n.entries = n.nodes*4*2; % 4 because of 4 dof per node and 2 because
                              % matrices will be stated as state space
                              % system
+    
+    [M,C,G,K]= obj.rotorsystem.assemble_system_matrices(omega*60/2/pi);
+                             
     ind_red = 1:n.nodes*6;
     ind_z = 3:6:n.nodes*6;
     ind_psi_z = 6:6:n.nodes*6;
     ind_red = setdiff(ind_red,[ind_z,ind_psi_z]); % remove dof u_z psi_z for compatibility, no information on torsional and axial eigenbehaviour 
-    M = obj.rotorsystem.systemmatrices.M(ind_red,ind_red);
-    K = obj.rotorsystem.systemmatrices.K(ind_red,ind_red);
-    D = sparse(length(ind_red));%D = obj.rotorsystem.systemmatrices.D(ind_red,ind_red);; %neglect damping for better convergence
-    G = obj.rotorsystem.systemmatrices.G(ind_red,ind_red);
+    M = M(ind_red,ind_red);
+    K = K(ind_red,ind_red);
+    C = sparse(length(ind_red)); %neglect damping for better convergence
+    G = G(ind_red,ind_red);
     A = sparse(n.entries,n.entries);
     B = sparse(n.entries,n.entries);
     
@@ -20,7 +23,7 @@ function [A,B] = get_state_space_matrices(obj,omega)
     A(ind1,ind1) = sparse(M);
     A(ind2,ind2) = sparse(K);
     % set matrix B
-    B(ind1,ind1) = sparse(omega*G+D);
+    B(ind1,ind1) = sparse(omega*G+C);
     B(ind1,ind2) = sparse(K);
     B(ind2,ind1) = sparse(-K);
 end

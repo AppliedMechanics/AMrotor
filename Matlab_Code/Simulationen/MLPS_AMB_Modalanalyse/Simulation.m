@@ -31,10 +31,7 @@ r.show;
 % g=Graphs.Visu_Rotorsystem(r);
 % g.show();
 
-r.assemble_system_matrices();
-%r.assemble_system_loads();
-r.transform_StateSpace;
-r.transform_StateSpace_variant;
+
 %% Running system analyses
 
 m=Experiments.Modalanalyse(r);
@@ -42,16 +39,14 @@ m=Experiments.Modalanalyse(r);
 %m.calculate_rotor_only_without_damping(15);
 %m.calculate_rotor_only(15,100);
 
-% m.calculate_rotorsystem_without_damping(15);
-m.calculate_rotorsystem(15,1e3);
+%m.calculate_rotorsystem_without_damping(7);
+m.calculate_rotorsystem(6,1000);
 %
 esf= Graphs.Eigenschwingformen(m);
 esf.print_frequencies();
 esf.plot_displacements();
 Janitor.cleanFigures();
 
-
-%r.reduce_modal(10);
 
 cmp = Experiments.Campbell(r);
 cmp.set_up(0:2e2:10e3,8); % input is 1/min, Number of Modes
