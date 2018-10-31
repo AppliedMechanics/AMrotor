@@ -1,6 +1,6 @@
 function [M,C,G,K]= assemble_system_matrices(self,rpm)
 
-         if nargin == 0
+         if nargin == 1
              rpm=0;
          end
 
@@ -21,9 +21,9 @@ function [M,C,G,K]= assemble_system_matrices(self,rpm)
             for bearing = self.bearings
                 
                 bearing.create_ele_loc_matrix;
-                bearing.get_loc_gyroscopic_matrix;
-                bearing.get_loc_mass_matrix;
-                bearing.get_loc_stiffness_matrix;
+                bearing.get_loc_gyroscopic_matrix(rpm);
+                bearing.get_loc_mass_matrix(rpm);
+                bearing.get_loc_stiffness_matrix(rpm);
                 
                 bearing_node = self.rotor.find_node_nr(bearing.position);
                 L_ele = sparse(6,6*n_nodes);
