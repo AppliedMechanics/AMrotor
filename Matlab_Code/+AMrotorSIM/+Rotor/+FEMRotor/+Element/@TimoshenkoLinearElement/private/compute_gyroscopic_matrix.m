@@ -1,15 +1,13 @@
 function [G_ele] = compute_gyroscopic_matrix(Element)
 % Abhaengigkeit von Drehzahl in transform_StateSpace_variant verwirklicht
     E = Element;
-    radius_outer = E.radius;
-    radius_inner = 0;
-    r_bar = radius_inner/radius_outer;
+    r_bar = E.radius_inner/E.radius_outer;
 %     k_sc = (6*(1+E.material.poisson))/(7+6*E.material.poisson);
     k_sc = (6*(1+E.material.poisson)*(1+r_bar)^2)/((7+6*E.material.poisson)*(1+r_bar)^2+(20+12*E.material.poisson)*r_bar^2); %Tiwari p.608
     phi = (12*E.material.e_module * E.I_y)/... % in rt_chapter10 auf S. 620 steht: Phi = 12*E*I_xx/(k_sc*G*A*l^2), also ohne shear-factor
                 (k_sc*E.material.G_module*E.area*E.length^2);
             
-    a = (E.material.density*E.area*radius_outer^2)/(60*(1+phi)^2*E.length);
+    a = (E.material.density*E.area*E.radius_outer^2)/(60*(1+phi)^2*E.length);
     
     %G = G0+phi*G1+phi^2*G2
 

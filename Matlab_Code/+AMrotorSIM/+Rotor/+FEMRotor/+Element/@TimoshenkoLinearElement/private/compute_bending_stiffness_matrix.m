@@ -1,8 +1,6 @@
 function [K_F1, K_F2]=compute_bending_stiffness_matrix(Element)
        E = Element;
-       radius_outer = E.radius;
-       radius_inner = 0;
-       r_bar = radius_inner/radius_outer;
+       r_bar = E.radius_inner/E.radius_outer;
        k_sc = (6*(1+E.material.poisson)*(1+r_bar)^2)/((7+6*E.material.poisson)*(1+r_bar)^2+(20+12*E.material.poisson)*r_bar^2); %Tiwari p.608
        phi = (12*E.material.e_module * E.I_y)/... % in rt_chapter10 auf S. 620 steht: Phi = 12*E*I_xx/(k_sc*G*A*l^2), also ohne shear-factor; in Genta S. 372 steht 12*E*I_xx*xi/(G*A*l^2), ohne k_sc aber mit xi,welches evtl. shear_factor ist
                     (k_sc*E.material.G_module*E.area*E.length^2); % ratio between the shear and the flexural flexibility of the beam
