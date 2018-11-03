@@ -32,14 +32,13 @@ r.show; % Funktion AMrotor\Matlab_Code\+AMrotorSIM\+Rotor\+FEMRotor\@FeModel\pri
 % g=Graphs.Visu_Rotorsystem(r);
 % g.show();
 
-r.rotor.assemble_fem;
 
-% r.assemble_system_matrices(); % rotor + bearings + discs, but without seals
+r.assemble_system_matrices(); % rotor + bearings + discs, but without seals
 %r.assemble_system_loads();
 u_trans_rigid_body = r.compute_translational_rigid_body_modes;
 overall_mass = r.check_overall_translational_mass(u_trans_rigid_body)
-% r.transform_StateSpace;
-% r.transform_StateSpace_variant;
+r.transform_StateSpace;
+r.transform_StateSpace_variant;
 %% Running system analyses
 % 
 m=Experiments.Modalanalyse(r);

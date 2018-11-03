@@ -30,9 +30,9 @@ classdef (Abstract) Bearing < matlab.mixin.Heterogeneous & handle
         
         create_ele_loc_matrix(self)
         
-        get_loc_mass_matrix(self,varargin)
-        get_loc_stiffness_matrix(self,varargin)
-        get_loc_gyroscopic_matrix(self,varargin)
+        get_loc_mass_matrix(self)
+        get_loc_stiffness_matrix(self)
+        get_loc_gyroscopic_matrix(self)
         
       end
 

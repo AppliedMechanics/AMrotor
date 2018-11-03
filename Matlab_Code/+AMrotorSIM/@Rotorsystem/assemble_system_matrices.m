@@ -1,13 +1,10 @@
-function [M,C,G,K]= assemble_system_matrices(self,rpm)
+function assemble_system_matrices(self)
+    
 % ohne Dichtungsmatrizen, da diese erst vor Zeitintegration mit der
 % entsprechenden Drehzahl erstellt werden koennen
 
-         if nargin == 1
-             rpm=0;
-         end
-
 %% Rotormatrizen aus FEM erstellen
-           
+            self.rotor.assemble_fem
             n_nodes=length(self.rotor.mesh.nodes);
 
             %Lokalisierungsmatrix hat 6x6n 0 Einträge
@@ -21,13 +18,11 @@ function [M,C,G,K]= assemble_system_matrices(self,rpm)
             
             
             for bearing = self.bearings
-                if ~strcmp(bearing.type,'LookUpTableBearing') 
-                    %Do not build systemmatrices if bearing is of type 'LookUpTableBearing', i.e. if systemmatrices are rpm-dependent
+                
                 bearing.create_ele_loc_matrix;
-                bearing.get_loc_gyroscopic_matrix(0);
-                bearing.get_loc_damping_matrix(0);
-                bearing.get_loc_mass_matrix(0);
-                bearing.get_loc_stiffness_matrix(0);
+                bearing.get_loc_gyroscopic_matrix;
+                bearing.get_loc_mass_matrix;
+                bearing.get_loc_stiffness_matrix;
                 
                 bearing_node = self.rotor.find_node_nr(bearing.position);
                 L_ele = sparse(6,6*n_nodes);
@@ -36,7 +31,6 @@ function [M,C,G,K]= assemble_system_matrices(self,rpm)
                 M_bearing = M_bearing+L_ele'*bearing.mass_matrix*L_ele;
                 K_bearing = K_bearing+L_ele'*bearing.stiffness_matrix*L_ele;
                 G_bearing = G_bearing+L_ele'*bearing.gyroscopic_matrix*L_ele;
-                end
             end
 
 %% Add disc matrices
@@ -63,11 +57,10 @@ function [M,C,G,K]= assemble_system_matrices(self,rpm)
             end
         
 %% Add to global matrices
-        M = self.rotor.matrices.M + M_bearing + M_disc;
-        C = self.rotor.matrices.D;
-        G = self.rotor.matrices.G + G_bearing + G_disc;
-        K = self.rotor.matrices.K + K_bearing + K_disc;
-
+        self.systemmatrices.M = self.rotor.matrices.M + M_bearing + M_disc;
+        self.systemmatrices.K = self.rotor.matrices.K + K_bearing + K_disc;
+        self.systemmatrices.G = self.rotor.matrices.G + G_bearing + G_disc;
+        self.systemmatrices.D = self.rotor.matrices.D;
         
       
 end
