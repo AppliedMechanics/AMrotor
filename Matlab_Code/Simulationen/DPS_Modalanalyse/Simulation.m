@@ -16,8 +16,8 @@ Janitor.setLayout(2,3);
 
 %% Compute Rotor
 
-% Config_Sim_DPS
-Config_Sim_Laval_Dichtung
+Config_Sim_DPS
+% Config_Sim_Laval_Dichtung
 
 r=Rotorsystem(cnfg,'DPS-System');
 r.assemble; %fuehrt Funktion assemble.m mit Eingabe Objekt r aus Klasse Rotorsystem aus
@@ -33,12 +33,11 @@ r.show; % Funktion AMrotor\Matlab_Code\+AMrotorSIM\+Rotor\+FEMRotor\@FeModel\pri
 % g.show();
 
 
-r.assemble_system_matrices(); % rotor + bearings + discs, but without seals
-%r.assemble_system_loads();
-u_trans_rigid_body = r.compute_translational_rigid_body_modes;
-overall_mass = r.check_overall_translational_mass(u_trans_rigid_body)
-r.transform_StateSpace;
-r.transform_StateSpace_variant;
+r.rotor.assemble_fem;
+
+% u_trans_rigid_body = r.compute_translational_rigid_body_modes;overall_mass = r.check_overall_translational_mass(u_trans_rigid_body)
+
+
 %% Running system analyses
 % 
 m=Experiments.Modalanalyse(r);

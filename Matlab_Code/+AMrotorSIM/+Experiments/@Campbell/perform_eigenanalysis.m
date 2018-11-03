@@ -13,17 +13,13 @@ function [V,D] = perform_eigenanalysis(obj,mat)
         % eigentlich haben will, dann wird die eigenanalyse noch einmal
         % gemacht mit mehr angefragten Werten
         if length(tmp.lambda) < obj.num.modes*2
-            if num.eigenVectors < length(mat.A)-10
-                num.eigenVectors = num.eigenVectors + 10;
-            else
-                num.eigenVectors = length(mat.A);
-            end
+            num.eigenVectors = num.eigenVectors + 10;
         else
             criteria = false;
             V = V(:,indicesLambda);
         end
     end
-    % falls es mehr Werte als angefragte Moden sind, dann wird der Groesse
+    % falls es mehr Werte als angefragte Moden sind, dann wird der groesse
     % nach sortiert und die grosse, die zu viel sind, weggeworfen
     if length(tmp.lambda) > obj.num.modes*2
 %         [~,sortOrder] = sort(abs(imag(tmp.lambda)));

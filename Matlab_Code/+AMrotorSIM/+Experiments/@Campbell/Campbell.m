@@ -92,7 +92,6 @@ classdef Campbell < handle
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         % function declarations; definitions are in the 'private' folder
         [A,B] = get_state_space_matrices(obj,omega)
-        [M,D,K] = add_seal_matrices(obj,rpm)
         [V,D] = perform_eigenanalysis(obj,mat)
         Vpos = get_position_entries(obj,V);
         [ EV_for,EW_for,...

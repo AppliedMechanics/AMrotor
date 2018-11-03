@@ -1,13 +1,11 @@
  function transform_StateSpace_variant(obj)
 
     M=obj.systemmatrices.M; % Masse
-    D=obj.systemmatrices.D; % Daempfung
+    D=obj.systemmatrices.D; % Dämpfung
     G=obj.systemmatrices.G; % Gyroskopie
     K=obj.systemmatrices.K; % Steifigkeit
     
-%     M_inv = M\eye(size(M));
-    M_inv = inv(M);
-    obj.systemmatrices.M_inv = M_inv;
+    M_inv = M\eye(size(M));
         
     obj.systemmatrices.ss.A = sparse([zeros(length(M)),eye(length(M));-M_inv*K,-M_inv*D]);
     obj.systemmatrices.ss.AG = sparse([zeros(length(M)),zeros(length(M));zeros(length(M)),-M_inv*G]);
