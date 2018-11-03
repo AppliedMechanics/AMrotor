@@ -41,6 +41,7 @@ cnfg.cnfg_rotor.geo_nodes = {[0 r_Welle 0], [0.118 r_Welle 0], ...
     [0.600 r_Welle 0]}; % Format {[z, r_aussen, r_innen], ...} % ohne Anfangs und Endknoten
 clear r_Welle r_Laeufer_D r_Laeufer_ML r_Laeufer_D_innen r_Laeufer_ML_innen
 
+
 % FEM Config
 % cnfg.cnfg_rotor.mesh_opt.name = 'Mesh 1';
 % cnfg.cnfg_rotor.mesh_opt.d_min= 0.002;

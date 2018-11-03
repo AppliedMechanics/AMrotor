@@ -16,8 +16,8 @@ Janitor.setLayout(2,3);
 
 %% Compute Rotor
 
-Config_Sim_DPS
-% Config_Sim_Laval_Dichtung
+% Config_Sim_DPS
+Config_Sim_Laval_Dichtung
 
 r=Rotorsystem(cnfg,'DPS-System');
 r.assemble; %fuehrt Funktion assemble.m mit Eingabe Objekt r aus Klasse Rotorsystem aus
@@ -46,7 +46,7 @@ m=Experiments.Modalanalyse(r);
 % m.calculate_rotor_only(15,100);
 % 
 % m.calculate_rotorsystem_without_damping(15);
-m.calculate_rotorsystem(6,1e3);
+m.calculate_rotorsystem(12,1e3);
 % 
 esf= Graphs.Eigenschwingformen(m);
 esf.print_frequencies();

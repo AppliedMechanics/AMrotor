@@ -13,12 +13,14 @@ cnfg.cnfg_rotor.material.damping.rayleigh_alpha1= 0;%0.001;    %D=alpha1*K + alp
 cnfg.cnfg_rotor.material.damping.rayleigh_alpha2= 0;%0.001;
 
 % Rotor Config
-r_Welle = 10e-3; % Radius der Welle
-r_Laeufer = 80e-3; 
-cnfg.cnfg_rotor.geo_nodes = {[0 r_Welle 0], [0.270 r_Welle 0], ...
-    [0.270 r_Laeufer 0], [0.330 r_Laeufer 0], [0.330 r_Welle 0],...
-    [0.600 r_Welle 0],}; % Format {[z, r_aussen, r_innen], ...} % ohne Anfangs und Endknoten
-clear r_Welle r_Laeufer_D r_Laeufer_ML r_Laeufer_D_innen r_Laeufer_ML_innen
+% r_Welle = 10e-3; % Radius der Welle
+% r_Laeufer = 80e-3; 
+% cnfg.cnfg_rotor.geo_nodes = {[0 r_Welle 0], [0.270 r_Welle 0], ...
+%     [0.270 r_Laeufer 0], [0.330 r_Laeufer 0], [0.330 r_Welle 0],...
+%     [0.600 r_Welle 0],}; % Format {[z, r_aussen, r_innen], ...} % ohne Anfangs und Endknoten
+% clear r_Welle r_Laeufer_D r_Laeufer_ML r_Laeufer_D_innen r_Laeufer_ML_innen
+
+cnfg.cnfg_rotor.geo_nodes = {[0 0 0], [0 0.004 0], [0.250 0.004 0], [0.250 0.069 0], [0.350 0.069 0], [0.350 0.004 0], [0.600 0.004 0], [0.600 0 0]};
 
 % FEM Config
 cnfg.cnfg_rotor.mesh_opt.name = 'Mesh 1';
