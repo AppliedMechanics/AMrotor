@@ -125,19 +125,7 @@ count = count + 1;
 cnfg.cnfg_bearing(count).name = 'Kennfeld Lager';
 cnfg.cnfg_bearing(count).position=600e-3;                        %[m]
 cnfg.cnfg_bearing(count).type='LookUpTableBearing';
-load('bearing1.mat')
-K_bearing = squeeze(num2cell(K_bearing,3));
-for i = 1:size(K_bearing,1)
-    for j=1:size(K_bearing,2)
-        K_bearing{i,j} = squeeze(K_bearing{i,j});
-    end
-end
-C_bearing = squeeze(num2cell(C_bearing,3));
-for i = 1:size(C_bearing,1)
-    for j=1:size(C_bearing,2)
-        C_bearing{i,j} = squeeze(C_bearing{i,j});
-    end
-end
+load_bearing1
 cnfg.cnfg_bearing(count).Table.stiffness_matrix = K_bearing; % [N/m]
 %dof: [u_x, u_y, u_z, psi_x, psi_y]',
 cnfg.cnfg_bearing(count).Table.damping_matrix = C_bearing;

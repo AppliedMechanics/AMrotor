@@ -12,7 +12,7 @@ cnfg.cnfg_rotor.material.damping.rayleigh_alpha1= 0.001;    %D=alpha1*K + alpha2
 cnfg.cnfg_rotor.material.damping.rayleigh_alpha2= 0.001;
 
 % Rotor Config
-cnfg.cnfg_rotor.geo_nodes = {[0 0], [0 0.004], [0.3495 0.004], [0.3495 0.069], [0.3605 0.069], [0.3605 0.004], [0.695 0.004], [0.695 0]};
+cnfg.cnfg_rotor.geo_nodes = {[0 0 0], [0 0.004 0], [0.3495 0.004 0], [0.3495 0.069 0], [0.3605 0.069 0], [0.3605 0.004 0], [0.695 0.004 0], [0.695 0 0]};
 
 % FEM Config
 cnfg.cnfg_rotor.mesh_opt.name = 'Mesh 1';
@@ -126,3 +126,7 @@ cnfg.cnfg_load(count).frequency_y= 50;
 cnfg.cnfg_load(count).type='Force_timevariant_fix';
 
 
+%% ========================================================================
+% Dichtungen
+count = 0;
+cnfg.cnfg_seal = [];
