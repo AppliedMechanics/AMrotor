@@ -69,7 +69,7 @@ function show_3D(obj)
     %Berechnen der Zylinderelemente   
         [xzyl, yzyl, zzyl] = cylinder([r(n) r(n)]);
 
-        [xZ1, yz1, zZ1] = cylinder([r(n) r(n)]);
+        %[xZ1, yz1, zZ1] = cylinder([r(n) r(n)]);
 
         zzyl(1,:)=geo_node_z(n-1);
         zzyl(2,:)=geo_node_z(n);

@@ -17,6 +17,10 @@ classdef Modalanalyse < handle
          end
        end
        
+       function [num] = get_number_of_eigenvalues(obj)
+            num.all = length(obj.eigenValues.lateral);
+        end
+       
    end
    methods(Access=private)
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
