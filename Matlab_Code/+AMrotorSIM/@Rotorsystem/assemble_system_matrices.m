@@ -16,12 +16,14 @@ function [M,C,G,K]= assemble_system_matrices(self,rpm)
             M_bearing=sparse(6*n_nodes,6*n_nodes);
             K_bearing=sparse(6*n_nodes,6*n_nodes);
             G_bearing=sparse(6*n_nodes,6*n_nodes);
+            C_bearing=sparse(6*n_nodes,6*n_nodes);
             
             
             for bearing = self.bearings
                 
                 bearing.create_ele_loc_matrix;
                 bearing.get_loc_gyroscopic_matrix(rpm);
+                bearing.get_loc_damping_matrix(rpm);
                 bearing.get_loc_mass_matrix(rpm);
                 bearing.get_loc_stiffness_matrix(rpm);
                 
@@ -31,6 +33,7 @@ function [M,C,G,K]= assemble_system_matrices(self,rpm)
 
                 M_bearing = M_bearing+L_ele'*bearing.mass_matrix*L_ele;
                 K_bearing = K_bearing+L_ele'*bearing.stiffness_matrix*L_ele;
+                C_bearing = C_bearing+L_ele'*bearing.damping_matrix*L_ele;
                 G_bearing = G_bearing+L_ele'*bearing.gyroscopic_matrix*L_ele;
             end
 
@@ -78,7 +81,7 @@ function [M,C,G,K]= assemble_system_matrices(self,rpm)
         
 %% Add to global matrices
         M = self.rotor.matrices.M + M_bearing + M_disc + M_seal;
-        C = self.rotor.matrices.D + D_seal;
+        C = self.rotor.matrices.D + C_bearing + D_seal;
         G = self.rotor.matrices.G + G_bearing + G_disc;
         K = self.rotor.matrices.K + K_bearing + K_disc + K_seal;
 
