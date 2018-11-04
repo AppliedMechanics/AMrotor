@@ -29,8 +29,8 @@ r.show; % Funktion AMrotor\Matlab_Code\+AMrotorSIM\+Rotor\+FEMRotor\@FeModel\pri
 % r.rotor.mesh.show_2D(); 
 %r.rotor.mesh.show_3D();
 
-% g=Graphs.Visu_Rotorsystem(r);
-% g.show();
+g=Graphs.Visu_Rotorsystem(r);
+g.show();
 
 
 r.rotor.assemble_fem;
@@ -51,6 +51,8 @@ m.calculate_rotorsystem(12,1e3);
 esf= Graphs.Eigenschwingformen(m);
 esf.print_frequencies();
 esf.plot_displacements();
+% esf.set_plots('half') % 'all', 'half' or desired mode number
+esf.set_plots('half','overlay')
 Janitor.cleanFigures();
 % 
 % 

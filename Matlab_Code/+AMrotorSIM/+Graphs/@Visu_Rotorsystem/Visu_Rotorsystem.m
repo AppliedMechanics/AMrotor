@@ -13,7 +13,7 @@ classdef Visu_Rotorsystem < handle
          end
        end
       
-      function show(obj)
+      function [figurehandle] = show(obj)
          disp(obj.name);
          figurehandle=obj.rotorsystem.rotor.mesh.show_3D;
          plot_discs(figurehandle,obj.rotorsystem.discs);
