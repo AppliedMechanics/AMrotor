@@ -11,10 +11,10 @@ for i=load
     yp = R*sin(phi);
     % Kugel;
     [x,y,z] = sphere();
-    h = surf(ax, x*r+xp, y*r+yp, z*r+zp);
+    h = surf(ax, z*r+zp, y*r+yp, x*r+xp);
 
     % Linie;
-    line(ax, [0,xp], [0,yp],[zp,zp]);
+    line(ax, [zp,zp], [0,yp],[0,xp]);
     
     set(h, 'edgecolor','none')
 %    set(h, 'facecolor',i.cnfg.color)
@@ -30,6 +30,6 @@ for i=load
     % Linie;
     
     h.Color='green';
-    h.LineWidth = 2;
+    h.LineWidth = 5;
     end
 end

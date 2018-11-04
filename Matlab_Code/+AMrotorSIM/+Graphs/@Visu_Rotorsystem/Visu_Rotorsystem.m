@@ -22,7 +22,7 @@ classdef Visu_Rotorsystem < handle
          plot_loads(figurehandle,obj.rotorsystem.loads);
          plot_seals(figurehandle,obj.rotorsystem.seals,obj.rotorsystem.rotor);
          
-         view(126,35)
+         view(3)%view(126,35)
          
          
 %          xx = get(figurehandle, 'xData');

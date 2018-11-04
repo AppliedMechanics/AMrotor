@@ -10,7 +10,7 @@ for disc=discs
     [TH,R] = meshgrid(theta,rs);
     [x,y] = pol2cart(TH,R);
     z=((R.*cos(TH)).^2)-((R.*sin(TH)).^2); % z=(x^2)-(y^2)
-    h=surf(ax,x,y,z+zp);
+    h=surf(ax,z+zp,y,x);
     set(h, 'edgecolor','none')
     set(h, 'facecolor',disc.color)
 

@@ -38,9 +38,9 @@ function show_3D(obj)
     grid on;
     axis equal;
     hold on
-    xlabel('x')
+    xlabel('z')
     ylabel('y')
-    zlabel('z')
+    zlabel('x')
 
     dim_r=size(r);
     theta = linspace(0,2*pi,20);
@@ -58,7 +58,7 @@ function show_3D(obj)
 
     z=z*0;
 
-    hs(1)=surf(x,y,z+geo_node_z(1));
+    hs(1)=surf(z+geo_node_z(1),y,x);
     set(hs(1), 'edgecolor','none')
     set(hs(1), 'facecolor','b')
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -88,12 +88,12 @@ function show_3D(obj)
 
         %plote Zylinder
         %hz(n) = surf(zzyl,yzyl, xzyl);
-        hz(n) = surf(xzyl,yzyl, zzyl);
+        hz(n) = surf(zzyl,yzyl, xzyl);
         set(hz(n), 'edgecolor','none')
         set(hz(n), 'facecolor','b')
         %Plote Deckel
         %hs(n)=surf(z+geo_node_x(n),y,x);
-        hs(n)=surf(x,y,z+geo_node_z(n));
+        hs(n)=surf(z+geo_node_z(n),y,x);
         set(hs(n), 'facecolor','b')
 
         if r(n) > r(n-1) 
