@@ -104,28 +104,36 @@ cnfg.cnfg_bearing(count).damping = 100;
 % cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
 % cnfg.cnfg_bearing(count).type='SimpleBearing';
 % cnfg.cnfg_bearing(count).stiffness=1e8;%0.0670680e7; % ???                    %[N/m]
-% cnfg.cnfg_bearing(count).damping = 0;%299.275; % ???
-
+% cnfg.cnfg_bearing(count).damping = 299.275; % ???
+% 
 % count = count + 1;
 % cnfg.cnfg_bearing(count).name = 'Isotropes Lager 2';
 % cnfg.cnfg_bearing(count).position=600e-3;                        %[m]
 % cnfg.cnfg_bearing(count).type='SimpleBearing';
 % cnfg.cnfg_bearing(count).stiffness=1e8;%0.0670680e7; % ???                    %[N/m]
-% cnfg.cnfg_bearing(count).damping = 0;%299.275; % ???
+% cnfg.cnfg_bearing(count).damping = 299.275; % ???
 
 count = count + 1;
-cnfg.cnfg_bearing(count).name = 'Isotropes Lager 1';
+cnfg.cnfg_bearing(count).name = 'Kennfeld Lager';
 cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
-cnfg.cnfg_bearing(count).type='SimpleBearing';
-cnfg.cnfg_bearing(count).stiffness=1e8;%0.0670680e7; % ???                    %[N/m]
-cnfg.cnfg_bearing(count).damping = 0;%299.275; % ???
+cnfg.cnfg_bearing(count).type='LookUpTableBearing';
+load_bearing1
+cnfg.cnfg_bearing(count).Table.stiffness_matrix = K_bearing; % [N/m]
+%dof: [u_x, u_y, u_z, psi_x, psi_y]',
+cnfg.cnfg_bearing(count).Table.damping_matrix = C_bearing;
+cnfg.cnfg_bearing(count).Table.rpm = rpm;
 
 count = count + 1;
-cnfg.cnfg_bearing(count).name = 'Isotropes Lager 2';
+cnfg.cnfg_bearing(count).name = 'Kennfeld Lager';
 cnfg.cnfg_bearing(count).position=600e-3;                        %[m]
-cnfg.cnfg_bearing(count).type='SimpleBearing';
-cnfg.cnfg_bearing(count).stiffness=1e8;%0.0670680e7; % ???                    %[N/m]
-cnfg.cnfg_bearing(count).damping = 0;%299.275; % ???
+cnfg.cnfg_bearing(count).type='LookUpTableBearing';
+load_bearing1
+cnfg.cnfg_bearing(count).Table.stiffness_matrix = K_bearing; % [N/m]
+%dof: [u_x, u_y, u_z, psi_x, psi_y]',
+cnfg.cnfg_bearing(count).Table.damping_matrix = C_bearing;
+cnfg.cnfg_bearing(count).Table.rpm = rpm;
+%    
+% clear K_bearing C_bearing rpm
 
 
 %% ========================================================================
