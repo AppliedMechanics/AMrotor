@@ -17,6 +17,7 @@ Janitor.setLayout(2,3);
 %% Compute Rotor
 
 Config_Sim
+% Config_Sim_Laval
 
 r=Rotorsystem(cnfg,'MLPS-System');
 r.assemble;
@@ -50,7 +51,7 @@ Janitor.cleanFigures();
 
 
 cmp = Experiments.Campbell(r);
-cmp.set_up(0:2e2:10e3,8); % input is 1/min, Number of Modes
+cmp.set_up(0:2e2:10e3,4); % input is 1/min, Number of Modes
 cmp.calculate();
 cmpDiagramm = Graphs.Campbell(cmp);
 cmpDiagramm.set_plots('all');
