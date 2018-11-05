@@ -23,7 +23,7 @@ D = imag(D);
  D = D(tmp);
  V = tmp2;
  
- V = real(get_position_entries(obj,V));
+ V = real(obj.get_position_entries(V));
         
     %% Aussortierung der x werte aus dem EV mithilfe der get_dof Implementierung
     nNodes = obj.rotorsystem.rotor.mesh.nodes;

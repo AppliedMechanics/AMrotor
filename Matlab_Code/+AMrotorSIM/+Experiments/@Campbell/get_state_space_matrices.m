@@ -1,6 +1,6 @@
 function [A,B] = get_state_space_matrices(obj,omega)
     n.nodes = length(obj.rotorsystem.rotor.mesh.nodes);
-    n.entries = n.nodes*6*2; % 4 because of 4 dof per node and 2 because
+    n.entries = n.nodes*6*2; % 6 because of 6 dof per node and 2 because
                              % matrices will be stated as state space
                              % system
     
