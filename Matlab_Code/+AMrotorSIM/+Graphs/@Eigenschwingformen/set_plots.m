@@ -4,6 +4,7 @@ function set_plots(obj,Selection,varargin)
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % overlay
+    if nargin == 3
     if any(strcmp(varargin,{'Overlay','overlay','o','O'}))
         if ischar(Selection)
             switch Selection
@@ -30,6 +31,7 @@ function set_plots(obj,Selection,varargin)
             error(['You try to reach a selection for the Modal-' ...
                       'Diagram which is not implemented.']);
         end
+    end
 
     else
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -38,11 +40,11 @@ function set_plots(obj,Selection,varargin)
         switch Selection
             case {'All','all','a','A'}
                 for i = 1:1:num.all
-                    obj.plot_esf_3D_overlay(i);
+                    obj.plot_esf_3D(i);
                 end
             case {'Half','half','h','H'}
                 for i = 1:2:num.all
-                    obj.plot_esf_3D_overlay(i);
+                    obj.plot_esf_3D(i);
                 end
             otherwise
                 error(['You try to reach a selection for the Modal-' ...
