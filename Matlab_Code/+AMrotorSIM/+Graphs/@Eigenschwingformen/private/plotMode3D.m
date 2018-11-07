@@ -1,5 +1,5 @@
 function plotMode3D( axFigure, x, V, D , color, param)
-%PLOTMODE Summary of this function goes here
+%PLOTMODE3D Summary of this function goes here
 %   Detailed explanation goes here
 
 n_points = param.numberOfTangentialPoints; % number of points in one circle
