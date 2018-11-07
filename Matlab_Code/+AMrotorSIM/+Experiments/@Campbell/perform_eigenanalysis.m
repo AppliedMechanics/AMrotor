@@ -29,5 +29,10 @@ function [V,D] = perform_eigenanalysis(obj,mat)
         V = V(:,1:obj.num.modes*2);
     end
     
+    % sortiere die EW nach Hoehe des Imaginaerteils
+    [~,sortOrder] = sort(abs(imag(tmp.lambda)));
+    tmp.lambda = tmp.lambda(sortOrder(1:obj.num.modes*2));
+    V = V(:,sortOrder(1:obj.num.modes*2));
+    
     D = tmp.lambda;
 end

@@ -62,6 +62,10 @@ Janitor.cleanFigures();
 cmp = Experiments.Campbell(r);
 cmp.set_up(0:2e2:10e3,6); 
 cmp.calculate();% input of set_up is (1/min, Number of Modes)
+% Fehler bei Zuordnung der Ef zu forward oder backward whirl (Wo lag denn
+% der Fehler beim letzten Mal als dies aufgetreten ist?) evtl. versuchen
+% die ESF auszusortieren die zur Torsion gehören, evtl. verursachen diese
+% Probleme
 cmpDiagramm = Graphs.Campbell(cmp);
 cmpDiagramm.set_plots('all');
 % cmpDiagramm.set_plots('backward');

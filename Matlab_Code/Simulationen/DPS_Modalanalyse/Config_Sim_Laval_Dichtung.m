@@ -20,8 +20,8 @@ cnfg.cnfg_rotor.material.damping.rayleigh_alpha2= 0;%0.001;
 %     [0.600 r_Welle 0],}; % Format {[z, r_aussen, r_innen], ...} % ohne Anfangs und Endknoten
 % clear r_Welle r_Laeufer_D r_Laeufer_ML r_Laeufer_D_innen r_Laeufer_ML_innen
 
-cnfg.cnfg_rotor.geo_nodes = {[0 0 0], [0 0.004 0], [0.250 0.004 0], [0.250 0.069 0], [0.350 0.069 0], [0.350 0.004 0], [0.600 0.004 0], [0.600 0 0]};
-% cnfg.cnfg_rotor.geo_nodes = {[0 0 0], [0 0.01 0], [0.290 0.01 0], [0.290 0.069 0], [0.310 0.069 0], [0.310 0.01 0], [0.600 0.01 0], [0.600 0 0]};
+% cnfg.cnfg_rotor.geo_nodes = {[0 0 0], [0 0.004 0], [0.250 0.004 0], [0.250 0.069 0], [0.350 0.069 0], [0.350 0.004 0], [0.600 0.004 0], [0.600 0 0]};
+cnfg.cnfg_rotor.geo_nodes = {[0 0 0], [0 0.01 0], [0.290 0.01 0], [0.290 0.069 0], [0.310 0.069 0], [0.310 0.01 0], [0.600 0.01 0], [0.600 0 0]};
 
 % FEM Config
 cnfg.cnfg_rotor.mesh_opt.name = 'Mesh 1';
@@ -50,7 +50,7 @@ cnfg.cnfg_disc=[];
 % cnfg.cnfg_disc(1).m = 5;                             %disc mass [kg]
 % cnfg.cnfg_disc(1).Jx = 1;                         %disc mom. of inertia [kg*m^2]
 % cnfg.cnfg_disc(1).Jz = 1;                         %disc mom. of inertia [kg*m^2]
-% cnfg.cnfg_disc(1).Jp = 1e-3;                         %disc polar mom. of inertia [kg*m^2] (polar)
+% cnfg.cnfg_disc(1).Jp = 1e-1;                         %disc polar mom. of inertia [kg*m^2] (polar)
 
 %% ========================================================================
 % Sensors
@@ -92,46 +92,46 @@ cnfg.cnfg_bearing(count).type='SimpleAxialBearing';
 cnfg.cnfg_bearing(count).stiffness=1e10;                     %[N/m]
 cnfg.cnfg_bearing(count).damping = 100;
 
-% count = count + 1;
-% cnfg.cnfg_bearing(count).name = 'Torque Lager Links'; % Was macht das Torque Lager?
-% cnfg.cnfg_bearing(count).position=250e-3;                        %[m]
-% cnfg.cnfg_bearing(count).type='SimpleTorqueBearing';
-% cnfg.cnfg_bearing(count).stiffness=1e10;                     %[N/m]
-% cnfg.cnfg_bearing(count).damping = 100;
+count = count + 1;
+cnfg.cnfg_bearing(count).name = 'Torque Lager Links'; % Torque Lager koppelt die Torsion an die Umgebung und verhindert so die Starrkoerpermode fuer den Torsionsfreiheitsgrad psi_z.
+cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
+cnfg.cnfg_bearing(count).type='SimpleTorqueBearing';
+cnfg.cnfg_bearing(count).stiffness=1e10;                     %[N/m]
+cnfg.cnfg_bearing(count).damping = 100;
+
+count = count + 1;
+cnfg.cnfg_bearing(count).name = 'Isotropes Lager 1';
+cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
+cnfg.cnfg_bearing(count).type='SimpleBearing';
+cnfg.cnfg_bearing(count).stiffness=1e8;%0.0670680e7; % ???                    %[N/m]
+cnfg.cnfg_bearing(count).damping = 299.275; % ???
+
+count = count + 1;
+cnfg.cnfg_bearing(count).name = 'Isotropes Lager 2';
+cnfg.cnfg_bearing(count).position=600e-3;                        %[m]
+cnfg.cnfg_bearing(count).type='SimpleBearing';
+cnfg.cnfg_bearing(count).stiffness=1e8;%0.0670680e7; % ???                    %[N/m]
+cnfg.cnfg_bearing(count).damping = 299.275; % ???
 
 % count = count + 1;
-% cnfg.cnfg_bearing(count).name = 'Isotropes Lager 1';
+% cnfg.cnfg_bearing(count).name = 'Kennfeld Lager';
 % cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
-% cnfg.cnfg_bearing(count).type='SimpleBearing';
-% cnfg.cnfg_bearing(count).stiffness=1e8;%0.0670680e7; % ???                    %[N/m]
-% cnfg.cnfg_bearing(count).damping = 299.275; % ???
+% cnfg.cnfg_bearing(count).type='LookUpTableBearing';
+% load_bearing1
+% cnfg.cnfg_bearing(count).Table.stiffness_matrix = K_bearing; % [N/m]
+% %dof: [u_x, u_y, u_z, psi_x, psi_y]',
+% cnfg.cnfg_bearing(count).Table.damping_matrix = C_bearing;
+% cnfg.cnfg_bearing(count).Table.rpm = rpm;
 % 
 % count = count + 1;
-% cnfg.cnfg_bearing(count).name = 'Isotropes Lager 2';
+% cnfg.cnfg_bearing(count).name = 'Kennfeld Lager';
 % cnfg.cnfg_bearing(count).position=600e-3;                        %[m]
-% cnfg.cnfg_bearing(count).type='SimpleBearing';
-% cnfg.cnfg_bearing(count).stiffness=1e8;%0.0670680e7; % ???                    %[N/m]
-% cnfg.cnfg_bearing(count).damping = 299.275; % ???
-
-count = count + 1;
-cnfg.cnfg_bearing(count).name = 'Kennfeld Lager';
-cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
-cnfg.cnfg_bearing(count).type='LookUpTableBearing';
-load_bearing1
-cnfg.cnfg_bearing(count).Table.stiffness_matrix = K_bearing; % [N/m]
-%dof: [u_x, u_y, u_z, psi_x, psi_y]',
-cnfg.cnfg_bearing(count).Table.damping_matrix = C_bearing;
-cnfg.cnfg_bearing(count).Table.rpm = rpm;
-
-count = count + 1;
-cnfg.cnfg_bearing(count).name = 'Kennfeld Lager';
-cnfg.cnfg_bearing(count).position=600e-3;                        %[m]
-cnfg.cnfg_bearing(count).type='LookUpTableBearing';
-load_bearing1
-cnfg.cnfg_bearing(count).Table.stiffness_matrix = K_bearing; % [N/m]
-%dof: [u_x, u_y, u_z, psi_x, psi_y]',
-cnfg.cnfg_bearing(count).Table.damping_matrix = C_bearing;
-cnfg.cnfg_bearing(count).Table.rpm = rpm;
+% cnfg.cnfg_bearing(count).type='LookUpTableBearing';
+% load_bearing1
+% cnfg.cnfg_bearing(count).Table.stiffness_matrix = K_bearing; % [N/m]
+% %dof: [u_x, u_y, u_z, psi_x, psi_y]',
+% cnfg.cnfg_bearing(count).Table.damping_matrix = C_bearing;
+% cnfg.cnfg_bearing(count).Table.rpm = rpm;
 %    
 % clear K_bearing C_bearing rpm
 
@@ -249,12 +249,12 @@ clear wellendrehzahl masse hauptdaempfung nebendaempfung hauptsteifigkeit nebens
 % cnfg.cnfg_seal(count).sealModel.type = 'Childs';
 
 % Define Seals
-count = count+1;
-cnfg.cnfg_seal(count).name = 'Dichtung LookUpTable';
-cnfg.cnfg_seal(count).position=300e-3;                        %[m]
-cnfg.cnfg_seal(count).type='SimpleSeal';
-cnfg.cnfg_seal(count).sealModel = sealModel;
-cnfg.cnfg_seal(count).sealModel.type = 'Table';
+% count = count+1;
+% cnfg.cnfg_seal(count).name = 'Dichtung LookUpTable';
+% cnfg.cnfg_seal(count).position=300e-3;                        %[m]
+% cnfg.cnfg_seal(count).type='SimpleSeal';
+% cnfg.cnfg_seal(count).sealModel = sealModel;
+% cnfg.cnfg_seal(count).sealModel.type = 'Table';
 
 
 clear sealModel tempSeal
