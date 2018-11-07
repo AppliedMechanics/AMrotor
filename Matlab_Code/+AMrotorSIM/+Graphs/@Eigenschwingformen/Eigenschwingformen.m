@@ -2,6 +2,7 @@ classdef Eigenschwingformen < handle
    properties (Access = private)
       name='Rotor Eigenschwingformen'
       modalsystem
+      ColorHandler;
    end
    methods
        %Konstruktor
@@ -13,4 +14,14 @@ classdef Eigenschwingformen < handle
          end
        end
    end
+   
+   methods (Access = private)
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        function set_color_number(obj)
+            obj.ColorHandler = AMrotorTools.PlotColors();
+            num = obj.modalsystem.get_number_of_eigenvalues();
+            obj.ColorHandler.set_up(num.all);
+        end
+   end
+        
 end

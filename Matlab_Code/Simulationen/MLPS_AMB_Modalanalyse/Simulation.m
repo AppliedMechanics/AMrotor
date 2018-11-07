@@ -57,6 +57,8 @@ cmpDiagramm = Graphs.Campbell(cmp);
 cmpDiagramm.set_plots('all');
 % cmpDiagramm.set_plots('backward');
 % cmpDiagramm.set_plots('forward');
+% esf.set_plots('half') % 'all', 'half' or desired mode number
+% esf.set_plots(4,'Overlay','Skip',5,'tangentialPoints',30,'scale',3) %specify additional options, first input is index of mode
 Janitor.cleanFigures();
 
 %% Running Time Simulation
