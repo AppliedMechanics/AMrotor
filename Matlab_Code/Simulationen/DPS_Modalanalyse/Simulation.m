@@ -53,6 +53,7 @@ esf.print_frequencies();
 esf.plot_displacements();
 % esf.set_plots('half') % 'all', 'half' or desired mode number
 %esf.set_plots('half','overlay')
+%esf.set_plots(10,'Overlay','Skip',5,'radialPoints',30) %specify additional options
 Janitor.cleanFigures();
 % 
 % 

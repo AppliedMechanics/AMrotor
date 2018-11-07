@@ -1,4 +1,4 @@
-function plot_esf_3D(obj,number_esf)
+function plot_esf_3D(obj,number_esf,numberOfTangentialPoints,numberOfNodesToPlot) %number_nodes_to_plot used to plot subset of all nodes
 
   n_ew=obj.modalsystem.n_ew;
   ColorHandler = AMrotorTools.PlotColors();
@@ -11,9 +11,12 @@ function plot_esf_3D(obj,number_esf)
   hold on;
 
     x = [obj.modalsystem.rotorsystem.rotor.mesh.nodes.z];
-        plotMode3D(ax,x,obj.modalsystem.eigenVectors.lateral(:,number_esf),...
+    
+    V = obj.modalsystem.eigenVectors.lateral(:,number_esf);
+    
+    plotMode3D(ax,x,V,...
                        obj.modalsystem.eigenValues.lateral(number_esf),...
-                       ColorHandler.getColor(number_esf))
+                       ColorHandler.getColor(number_esf),numberOfTangentialPoints,numberOfNodesToPlot)
 
     %legend('show')
     grid('on')
