@@ -1,4 +1,4 @@
-function moduloOfNodesToPlot = get_modulo_of_nodes_to_plot(obj,userInputCell)
+function scaleEigenvector = get_scale_eigenvector(obj,userInputCell)
 % moduloOfNodesToPlot = determine_modulo_of_nodes_to_plot(obj,userInputCell)
 % for example: 
 %   moduloOfNodesToPlot = 1 -> plot circle at every node
@@ -6,13 +6,12 @@ function moduloOfNodesToPlot = get_modulo_of_nodes_to_plot(obj,userInputCell)
 %   ...
 %   moduloOfNodesToPlot = 10 -> plot circle at every tenth node
 
-str{1} = 'SkipNodes';
-str{2} = 'skip';
-str{3} = 'sk';
+str{1} = 'scale';
+str{2} = 'sc';
 isAll = false;
 
 %pre-allocate so that every node gets plotted 
-moduloOfNodesToPlot = 1;
+scaleEigenvector = 1;
 
 i = 1;
 userInputIndex = 0;
@@ -30,7 +29,7 @@ if any(userInputIndex)
     end
 
     if ~isAll
-        moduloOfNodesToPlot = cell2mat(userInputCell(userInputIndex+1));
+        scaleEigenvector = cell2mat(userInputCell(userInputIndex+1));
     end
 end
 

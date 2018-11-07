@@ -1,9 +1,9 @@
 function numberOfTangentialPoints = get_number_of_tangential_points(obj,userInputCell)
 % numberOfTangentialPoints = get_number_of_tangential_points(obj,userInputCell)
 
-str{1} = 'radialpoints';
-str{2} = 'radial';
-str{3} = 'rad';
+str{1} = 'tangentialpoints';
+str{2} = 'tangential';
+str{3} = 'tang';
 isAll = false;
 
 %pre-allocate

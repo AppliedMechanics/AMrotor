@@ -1,12 +1,11 @@
-function plotMode3D( axFigure, x, V, D , color,numberOfTangentialPoints, numberOfNodesToPlot)
+function plotMode3D( axFigure, x, V, D , color, param)
 %PLOTMODE Summary of this function goes here
 %   Detailed explanation goes here
 
-n_points = numberOfTangentialPoints; % number of points in one circle
+n_points = param.numberOfTangentialPoints; % number of points in one circle
 
 V = V/norm(V);
-
-%reduce the size of V for less circles in the plot -> ToDo (reasonable ?)
+V = V * param.scaleEigenvector;
 
 % create sample points in radial direction
 s = linspace(0,2*pi,n_points);
@@ -21,7 +20,7 @@ for i = 1:length(V)
     ry(i*n_points:(i+1)*n_points-1) = V(i) * ones(1,n_points);
     rz(i*n_points:(i+1)*n_points-1) = V(i) * zeros(1,n_points);
     
-    if any(i == 1:numberOfNodesToPlot:length(V)) % plotte nur jeden n-ten Kreis
+    if any(i == 1:param.moduloOfNodesToPlot:length(V)) % plotte nur jeden n-ten Kreis
         rx(i*n_points:(i+1)*n_points-1) = x(i) * ones(1,n_points);
         ry(i*n_points:(i+1)*n_points-1) = cos(s) * V(i);
         rz(i*n_points:(i+1)*n_points-1) = sin(s) * V(i);
