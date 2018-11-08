@@ -28,18 +28,20 @@ D = imag(D);
     %% Aussortierung der x werte aus dem EV mithilfe der get_dof Implementierung
     nNodes = obj.rotorsystem.rotor.mesh.nodes;
     
-    Ev_lat = zeros(length(nNodes),size(V,2));
+    Ev_lat_x = zeros(length(nNodes),size(V,2));
+    Ev_lat_y = Ev_lat_x;
 
     for mode = 1:nModes
         for node = 1:length(nNodes)
             dof_u_x = obj.rotorsystem.rotor.get_gdof('u_x',node);
             dof_u_y = obj.rotorsystem.rotor.get_gdof('u_y',node);
 
-                Ev_lat(node,mode)=sign(V(dof_u_x,mode))...
-                *norm(V(dof_u_x,mode)+V(dof_u_y,mode));
+            Ev_lat_x(node,mode)=V(dof_u_x,mode);
+            Ev_lat_y(node,mode)=V(dof_u_y,mode);
         end
     end   
-    obj.eigenVectors.lateral=Ev_lat;
+    obj.eigenVectors.lateral_x=Ev_lat_x;
+    obj.eigenVectors.lateral_y=Ev_lat_y;
     obj.eigenValues.lateral =D;
     
     %% Aussortierung der Torsionswerte aus dem EV mithilfe der get_dof Implementierung

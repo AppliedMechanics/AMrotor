@@ -249,12 +249,12 @@ clear wellendrehzahl masse hauptdaempfung nebendaempfung hauptsteifigkeit nebens
 % cnfg.cnfg_seal(count).sealModel.type = 'Childs';
 
 % Define Seals
-% count = count+1;
-% cnfg.cnfg_seal(count).name = 'Dichtung LookUpTable';
-% cnfg.cnfg_seal(count).position=300e-3;                        %[m]
-% cnfg.cnfg_seal(count).type='SimpleSeal';
-% cnfg.cnfg_seal(count).sealModel = sealModel;
-% cnfg.cnfg_seal(count).sealModel.type = 'Table';
+count = count+1;
+cnfg.cnfg_seal(count).name = 'Dichtung LookUpTable';
+cnfg.cnfg_seal(count).position=300e-3;                        %[m]
+cnfg.cnfg_seal(count).type='SimpleSeal';
+cnfg.cnfg_seal(count).sealModel = sealModel;
+cnfg.cnfg_seal(count).sealModel.type = 'Table';
 
 
 clear sealModel tempSeal

@@ -27,11 +27,11 @@ function calculate_rotor_only_without_damping(obj,nModes)
             dof_u_x = obj.rotorsystem.rotor.get_gdof('u_x',node);
             dof_u_y = obj.rotorsystem.rotor.get_gdof('u_y',node);
 
-           Ev_lat(node,mode)=sign(V(dof_u_x,mode))...
-               *norm(V(dof_u_x,mode)+V(dof_u_y,mode));
+           Ev_lat_x(node,mode)=V(dof_u_x,mode);
+           Ev_lat_y(node,mode)=V(dof_u_y,mode);
         end
     end   
-    obj.eigenVectors.lateral=Ev_lat;
+    obj.eigenVectors.lateral_x=Ev_lat_x;
     obj.eigenValues.lateral =D;
     
     %% Aussortierung der Torsionswerte aus dem EV mithilfe der get_dof Implementierung
