@@ -7,7 +7,7 @@ function assemble(obj)
 
    % Adding discs
     for i=obj.cnfg.cnfg_disc
-    obj.discs = AMrotorSIM.Disc(i);
+    obj.discs(end+1) = AMrotorSIM.Disc(i);
     end
 
     % Adding Sensors to Rotor
