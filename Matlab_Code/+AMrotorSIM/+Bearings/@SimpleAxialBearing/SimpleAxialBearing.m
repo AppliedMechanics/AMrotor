@@ -4,7 +4,7 @@ classdef SimpleAxialBearing < AMrotorSIM.Bearings.Bearing
    end
    methods
         function self=SimpleAxialBearing(arg)
-                        self = self@AMrotorSIM.Bearings.Bearing(arg);
+            self = self@AMrotorSIM.Bearings.Bearing(arg);
             if nargin == 0
             self.name = 'Empty Bearing';
             else
