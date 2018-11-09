@@ -32,9 +32,7 @@ classdef (Abstract) Seal < matlab.mixin.Heterogeneous & handle % Was heisst Abst
         
         create_ele_loc_matrix(self)
         
-        get_loc_mass_matrix(self)
-        get_loc_stiffness_matrix(self)
-        get_loc_damping_matrix(self)
+        [M_s,D_s,K_s] = get_loc_system_matrices(self,rpm)
         
       end
 

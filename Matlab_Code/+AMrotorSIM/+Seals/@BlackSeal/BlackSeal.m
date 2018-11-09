@@ -1,9 +1,10 @@
-classdef SimpleSeal < AMrotorSIM.Seals.Seal
+classdef BlackSeal < AMrotorSIM.Seals.Seal
+    % calculation of the seal-coefficients according to Black
    properties
        cnfg
    end
    methods
-        function self=SimpleSeal(arg)
+        function self=BlackSeal(arg)
             self = self@AMrotorSIM.Seals.Seal(arg);
             if nargin == 0
             self.name = 'Empty Seal';

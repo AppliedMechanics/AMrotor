@@ -1,10 +1,8 @@
-function [ M_seal,D_seal ,K_seal ] = BlackModel( self, init )     % je nachdem, weleche Berechnungsvorschrift von unten verwendet wird, könnte man hier nich ein paar ausgänge entfernen
+function [ M_seal,D_seal ,K_seal ] = BlackModel( self, sys, init )     
 %BLACKMODEL gibt Koeffizienten nach Black zurück
 %   nach    Black, Jenssen 1969-70 - Dynamic Hybrid Bearing Characteristics
 %   und     Barrett - Turbulent Flow Annular Pump Seals
 % global verfahrenb
-
-sys = self.cnfg.sealModel.sys;
 
 %% Formeln zur Berechnung von lambda und Auswahl einer geeigneten Rechenvorschrift
 

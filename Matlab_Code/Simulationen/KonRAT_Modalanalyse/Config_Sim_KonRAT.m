@@ -142,7 +142,7 @@ cnfg.cnfg_bearing(count).type='SimpleTorqueBearing';
 cnfg.cnfg_bearing(count).stiffness=1e10;                     %[N/m]
 cnfg.cnfg_bearing(count).damping = 100;
 
-strFileName = 'bearingTP10000.mat' 
+strFileName = '01_bearingTPFax100LS.mat' 
 count = count + 1;
 cnfg.cnfg_bearing(count).name = 'Kennfeld Rillenkugellager 1';
 cnfg.cnfg_bearing(count).position=pos.bearing(1);                        %[m]

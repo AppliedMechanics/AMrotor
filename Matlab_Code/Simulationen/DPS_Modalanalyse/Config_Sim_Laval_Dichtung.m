@@ -194,25 +194,20 @@ cnfg.cnfg_load(count).type='Force_timevariant_whirl_sweep';
 count = 0;
 cnfg.cnfg_seal = [];
 
-% Define Seals
 % count = count+1;
 % cnfg.cnfg_seal(count).name = 'Dichtung Black';
 % cnfg.cnfg_seal(count).position=300e-3;                        %[m]
-% cnfg.cnfg_seal(count).type='SimpleSeal';
+% cnfg.cnfg_seal(count).type='BlackSeal';
 % cnfg.cnfg_seal(count).sealModel = load_seal_model;
-% cnfg.cnfg_seal(count).sealModel.type = 'Black';
 
 % count = count+1;
 % cnfg.cnfg_seal(count).name = 'Dichtung Childs';
 % cnfg.cnfg_seal(count).position=300e-3;                        %[m]
-% cnfg.cnfg_seal(count).type='SimpleSeal';
+% cnfg.cnfg_seal(count).type='ChildsSeal';
 % cnfg.cnfg_seal(count).sealModel = load_seal_model;
-% cnfg.cnfg_seal(count).sealModel.type = 'Childs';
 
-% Define Seals
-% count = count+1;
-% cnfg.cnfg_seal(count).name = 'Dichtung LookUpTable';
-% cnfg.cnfg_seal(count).position=300e-3;                        %[m]
-% cnfg.cnfg_seal(count).type='SimpleSeal';
-% cnfg.cnfg_seal(count).sealModel.type = 'Table';
-% cnfg.cnfg_seal(count).sealModel = load_seal_table('Koeffizienten_Volumenstrom_2bar.mat'); 
+count = count+1;
+cnfg.cnfg_seal(count).name = 'Dichtung LookUpTable';
+cnfg.cnfg_seal(count).position=300e-3;                        %[m]
+cnfg.cnfg_seal(count).type='LookUpTableSeal';
+cnfg.cnfg_seal(count).sealModel = load_seal_table('Koeffizienten_Volumenstrom_2bar.mat'); 
