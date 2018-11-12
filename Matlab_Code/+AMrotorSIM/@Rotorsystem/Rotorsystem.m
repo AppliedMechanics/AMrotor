@@ -7,6 +7,8 @@ classdef Rotorsystem < handle
    properties
       name
       
+      systemmatrices % wieder hinzugefuegt, damit die Zeitintegration erst einmal funktioniert. fuer speichern der systemloads
+      
       cnfg=struct([])
       
       rotor@AMrotorSIM.Rotor.FEMRotor.FeModel

@@ -1,7 +1,8 @@
-function [ss_h]= compute_system_load_variant(self,t, Z)
+function [ss_h]= compute_system_load_variant(self,t, Z, omega)
 
 self.assemble_invariant_system_loads;
 self.assemble_timevariant_system_loads(t);
+self.assemble_bearing_loads(Z,omega);
 h = self.systemmatrices.h;
 
 %% Put together

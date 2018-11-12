@@ -1,14 +1,18 @@
-function dZ = integrate_function_variant(t,Z,omega, rotorsystem)
+function dZ = integrate_function_variant(t,Z,omega, rotorsystem, mat)
 
-A = rotorsystem.systemmatrices.ss.A;
-B = rotorsystem.systemmatrices.ss.B;
-ss_AG = rotorsystem.systemmatrices.ss.AG;
-A = A+ss_AG;
+% A = rotorsystem.systemmatrices.ss.A;
+% B = rotorsystem.systemmatrices.ss.B;
+% ss_AG = rotorsystem.systemmatrices.ss.AG;
+% A = A+ss_AG;
+
+A=mat.A;
+B=mat.B;
 
 
 %% Loadvector
 
-h_ges = rotorsystem.compute_system_load_variant(t,Z);
+h_ges = rotorsystem.compute_system_load_variant(t,Z,omega);
+% h_ges = zeros(length(mat.A),1);
 
 %% DGL
 % t %Zeit ausgeben um Fortschritt zu kontrollieren!
