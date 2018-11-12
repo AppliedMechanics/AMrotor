@@ -2,7 +2,7 @@ function status = odeOutputFcn_plotBeam(t,y,flag,varargin)
 
 switch flag 
     case 'init'
-        disp(' -> odeFcn init ->           ')
+        disp('odeFcn init ->           ')
         figure()
         status=0;
     case 'done'
@@ -12,9 +12,14 @@ switch flag
     case ''
 %         plot(y(1:6:end/2,end)); % plot Auslenkung in x
         plot(sqrt(y(1:6:end/2,end).^2+y(2:6:end/2,end).^2)); %plot den Betrag der Auslenkung
-        ylim([-1 1]*5e-5);
+%         ylim([-1 1]*5e-5);
         drawnow
         status=0;
+        
+        %Zeit ausgeben
+        fprintf(repmat('\b', 1, 11)); % Zeit ausgeben und wieder loeschen, sodass Uebersichtlichkeit erhalten bleibt
+        fprintf('t = %04.0f',t*1000)
+        fprintf(' ms')
 end
 
 end
