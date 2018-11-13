@@ -55,16 +55,22 @@ cnfg.cnfg_disc=[];
 %% ========================================================================
 % Sensors
 cnfg.cnfg_sensor=[];
+count = 0;
 
-count = 1;
-cnfg.cnfg_sensor(count).name = 'Wirbelstrom Lager1';
-cnfg.cnfg_sensor(count).position=0e-3;
-cnfg.cnfg_sensor(count).type='Displacementsensor';
+% count = count+1;
+% cnfg.cnfg_sensor(count).name = 'Wirbelstrom Lager1';
+% cnfg.cnfg_sensor(count).position=0e-3;
+% cnfg.cnfg_sensor(count).type='Displacementsensor';
 
 % count = count + 1;
 % cnfg.cnfg_sensor(count).name='Wirbelstrom Dichtung 1';
 % cnfg.cnfg_sensor(count).position=227.5e-3;
 % cnfg.cnfg_sensor(count).type='Displacementsensor';
+
+count = count + 1;
+cnfg.cnfg_sensor(count).name='Wirbelstrom aussermittig';
+cnfg.cnfg_sensor(count).position=400e-3;
+cnfg.cnfg_sensor(count).type='Displacementsensor';
 
 count = count + 1;
 cnfg.cnfg_sensor(count).name='Wirbelstrom Dichtung Mitte';
@@ -76,10 +82,10 @@ cnfg.cnfg_sensor(count).type='Displacementsensor';
 % cnfg.cnfg_sensor(count).position=332.5e-3;
 % cnfg.cnfg_sensor(count).type='Displacementsensor';
 
-count = count + 1;
-cnfg.cnfg_sensor(count).name='Wirbelstrom Lager2';
-cnfg.cnfg_sensor(count).position=600e-3;
-cnfg.cnfg_sensor(count).type='Displacementsensor';
+% count = count + 1;
+% cnfg.cnfg_sensor(count).name='Wirbelstrom Lager2';
+% cnfg.cnfg_sensor(count).position=600e-3;
+% cnfg.cnfg_sensor(count).type='Displacementsensor';
 
 %% ========================================================================
 % Lager
@@ -137,27 +143,27 @@ cnfg.cnfg_load=[];
 count = 0;
 
 % Kraft in feste Richtung
-count = count + 1;
-cnfg.cnfg_load(count).name='Const. Kraft';
-cnfg.cnfg_load(count).position=0e-3;
-cnfg.cnfg_load(count).betrag_x= 10;
-cnfg.cnfg_load(count).betrag_y= 0;
-cnfg.cnfg_load(count).type='Force_constant_fix';
-% 
+% count = count + 1;
+% cnfg.cnfg_load(count).name='Const. Kraft';
+% cnfg.cnfg_load(count).position=0e-3;
+% cnfg.cnfg_load(count).betrag_x= 10;
+% cnfg.cnfg_load(count).betrag_y= 0;
+% cnfg.cnfg_load(count).type='Force_constant_fix';
+
 % % Unwuchten
 % count = count + 1;
 % cnfg.cnfg_load(count).name = 'Kleine Unwucht';
 % cnfg.cnfg_load(count).position = 300e-3;
-% cnfg.cnfg_load(count).betrag = 1e-6;%5e-6;
+% cnfg.cnfg_load(count).betrag = 1000e-6;%5e-6;
 % cnfg.cnfg_load(count).winkellage = 0;
 % cnfg.cnfg_load(count).type='Unbalance_static';
 % 
-% % Sinusfoermige Anregungskraft
+% Sinusfoermige Anregungskraft
 % count = count + 1;
 % cnfg.cnfg_load(count).name='Sinus Kraft';
 % cnfg.cnfg_load(count).position=138e-3; % Position ML 1
 % cnfg.cnfg_load(count).betrag_x= 10;
-% cnfg.cnfg_load(count).frequency_x= 500;  %in Hz
+% cnfg.cnfg_load(count).frequency_x= 100;  %in Hz
 % cnfg.cnfg_load(count).betrag_y= 0;
 % cnfg.cnfg_load(count).frequency_y= 50;
 % cnfg.cnfg_load(count).type='Force_timevariant_fix';
