@@ -78,5 +78,12 @@ EW_back=EW(I_b);
 EV_0=EV(:,I_0);
 EW_0=EW(I_0);
 
+% gleiche Anzahl forward/backward-modes
+EV_for = EV_for(:,1:obj.num.modes/2);
+EW_for = EW_for(1:obj.num.modes/2);
+
+EV_back = EV_back(:,1:obj.num.modes/2);
+EW_back = EW_back(1:obj.num.modes/2);
+
 end
 

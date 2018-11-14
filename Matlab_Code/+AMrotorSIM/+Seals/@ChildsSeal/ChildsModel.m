@@ -57,8 +57,8 @@ md = u0*(sigma*(1/6 + E))/u1 * T^2;
 
 %% Matrizen für output
 M_seal = [md, 0; 0, md];
-D_seal = [Cd, cc; -cc, Cd];
-K_seal = [Kd, kc; -kc, Kd];
+D_seal = [Cd, -cc; cc, Cd];
+K_seal = [Kd, -kc; kc, Kd];
 
 end
 

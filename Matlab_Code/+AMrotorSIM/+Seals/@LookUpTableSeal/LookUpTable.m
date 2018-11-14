@@ -10,7 +10,7 @@ kc = interp1(Table.rpm, Table.k_xy, rpm_current, 'spline');
 
 
 M_seal = [md, 0; 0, md];
-D_seal = [Cd, cc; -cc, Cd];
-K_seal = [Kd, kc; -kc, Kd];
+D_seal = [Cd, -cc; cc, Cd];
+K_seal = [Kd, -kc; kc, Kd];
 end
 

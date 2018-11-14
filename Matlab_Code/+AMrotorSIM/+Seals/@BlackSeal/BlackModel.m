@@ -119,7 +119,7 @@ cc = u3 * u2 * init.omega0IR(1) * T^2;
 md = u3 * u2 * T^2;
 
 M_seal = [md, 0; 0, md];
-D_seal = [Cd, cc; -cc, Cd];
-K_seal = [Kd, kc; -kc, Kd];
+D_seal = [Cd, -cc; cc, Cd];
+K_seal = [Kd, -kc; kc, Kd];
 end
 

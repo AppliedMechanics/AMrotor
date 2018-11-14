@@ -38,8 +38,11 @@ classdef Campbell < handle
                 Vpos = obj.get_position_entries(V);
                 D=tmp;%
                 if w == 0
+                    D = get_positive_entries(tmp);
                     EW_for = D(1:2:end);
                     EW_back = D(2:2:end);
+                    EW_for = EW_for(1:obj.num.modes/2);
+                    EW_back = EW_back(1:obj.num.modes/2);
                 else
                     [ ~,EW_for,~,EW_back, ~, ~, ~, ~ ] = ...
                         obj.get_separation_eigenvectors(Vpos,D);
