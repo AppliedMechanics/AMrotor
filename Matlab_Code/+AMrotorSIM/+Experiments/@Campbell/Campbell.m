@@ -36,7 +36,7 @@ classdef Campbell < handle
                 [mat.A,mat.B] = obj.get_state_space_matrices(w);
                 [V,tmp] = obj.perform_eigenanalysis(mat);
                 Vpos = obj.get_position_entries(V);
-                D = get_positive_entries(tmp);%D=tmp;%
+                D=tmp;%
                 if w == 0
                     EW_for = D(1:2:end);
                     EW_back = D(2:2:end);
