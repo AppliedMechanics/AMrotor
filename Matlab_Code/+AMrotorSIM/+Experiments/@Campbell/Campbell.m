@@ -32,8 +32,10 @@ classdef Campbell < handle
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         function calculate(obj)
-            %[EV_for_ref, EV_back_ref] = ...
-                get_reference_eigenvectos(obj,500/60*2*pi);
+%             [EV_for_ref, EV_back_ref] = ...
+%                 get_reference_eigenvectos(obj,500/60*2*pi);
+%             EV_for_puffer = repmat(EV_for_ref,1,2);
+%             EV_back_puffer = repmat(EV_back_ref,1,2);
             
             for w = obj.omega
                 [mat.A,mat.B] = obj.get_state_space_matrices(w);
@@ -51,8 +53,10 @@ classdef Campbell < handle
                     [ EV_for, EW_for, EV_back, EW_back, ~, ~, ~, ~ ] = ...
                         obj.get_separation_eigenvectors(Vpos,D);
                 end
-                %[~,EW_for] = obj.get_mode_allocation(EV_for_ref, EV_for, EW_for);
-                %[~,EW_back] = obj.get_mode_allocation(EV_back_ref, EV_back, EW_back);
+%                 [~,EW_for] = obj.get_mode_allocation(EV_for_ref, EV_for, EW_for);
+%                 [~,EW_back] = obj.get_mode_allocation(EV_back_ref, EV_back, EW_back);
+%                 EV_for_puffer = [EV_for_puffer(:,size(EV_for_ref,2)+1:end), EV_for]; EV_back_puffer = [EV_back_puffer(:,size(EV_back_ref,2)+1:end), EV_back];
+%                 EV_for_ref = EV_for_puffer(:,1:size(EV_for_ref,2)); EV_back_ref = EV_back_puffer(:,1:size(EV_back_ref,2)); % use reference EV from the caluculation of the tine step befor
                 obj.EWf(:,end+1) = EW_for;
                 obj.EWb(:,end+1) = EW_back;
 

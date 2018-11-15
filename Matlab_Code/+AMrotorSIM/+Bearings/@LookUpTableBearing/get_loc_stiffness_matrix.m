@@ -15,4 +15,10 @@ function [K] = get_loc_stiffness_matrix(self,varargin)
     
             
     self.stiffness_matrix = K;
+    
+    if rpm_current > max(Table.rpm)
+        warning(['Extrapolation of Bearing-Coefficients from Look-Up-Table ',... 
+            'at rotational speed of more than max(Table.rpm). ',...
+            'Results may be inaccurate!']);
+    end
 end

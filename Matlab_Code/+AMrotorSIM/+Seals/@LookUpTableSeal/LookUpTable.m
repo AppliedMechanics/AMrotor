@@ -12,5 +12,11 @@ kc = interp1(Table.rpm, Table.k_xy, rpm_current, 'spline');
 M_seal = [md, 0; 0, md];
 D_seal = [Cd, -cc; cc, Cd];
 K_seal = [Kd, -kc; kc, Kd];
+
+if rpm_current > 1*max(Table.rpm)
+    warning(['Extrapolation of Seal-Coefficients from Look-Up-Table ',... 
+            'at rotational speed of more than max(Table.rpm). ',...
+            'Results may be inaccurate!']);
+end
 end
 
