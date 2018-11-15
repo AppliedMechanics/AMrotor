@@ -32,21 +32,27 @@ classdef Campbell < handle
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         function calculate(obj)
+            %[EV_for_ref, EV_back_ref] = ...
+                get_reference_eigenvectos(obj,500/60*2*pi);
+            
             for w = obj.omega
                 [mat.A,mat.B] = obj.get_state_space_matrices(w);
-                [V,tmp] = obj.perform_eigenanalysis(mat);
+                [V,D] = obj.perform_eigenanalysis(mat);
                 Vpos = obj.get_position_entries(V);
-                D=tmp;%
                 if w == 0
-                    D = get_positive_entries(tmp);
+                    [Vpos,D]= get_positive_entries(Vpos,D);
                     EW_for = D(1:2:end);
+                    EV_for = Vpos(:,1:2:obj.num.modes);
                     EW_back = D(2:2:end);
+                    EV_back = Vpos(:,2:2:obj.num.modes);
                     EW_for = EW_for(1:obj.num.modes/2);
                     EW_back = EW_back(1:obj.num.modes/2);
                 else
-                    [ ~,EW_for,~,EW_back, ~, ~, ~, ~ ] = ...
+                    [ EV_for, EW_for, EV_back, EW_back, ~, ~, ~, ~ ] = ...
                         obj.get_separation_eigenvectors(Vpos,D);
                 end
+                %[~,EW_for] = obj.get_mode_allocation(EV_for_ref, EV_for, EW_for);
+                %[~,EW_back] = obj.get_mode_allocation(EV_back_ref, EV_back, EW_back);
                 obj.EWf(:,end+1) = EW_for;
                 obj.EWb(:,end+1) = EW_back;
 
@@ -101,6 +107,9 @@ classdef Campbell < handle
           EV_back,EW_back,...
           EV_0, EW_0,...
           Phase_xy, Phase_xy_mean ] = get_separation_eigenvectors(obj,EV,EW );
+        [V,D] = get_mode_allocation(obj, Vref, Vin, D)
+        mac = get_modal_assurance_criterion(obj, v1, v2)
+        [EV_for_ref, EV_back_ref] = get_reference_eigenvectos(obj,w)
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     end
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
