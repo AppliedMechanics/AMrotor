@@ -57,6 +57,21 @@ end
 %     end
 % end
 
+% mac_reduced = mac;
+% for i = 1:size(Vref,2)
+%     iReduced = find(max(mac_reduced(:,1))==mac_reduced(:,1));
+%     sortIndex(i) = iReduced + (i-1);
+%     mac_reduced(iReduced,:) = []; %delete row
+%     mac_reduced(:,iReduced) = []; %delete column, because already used
+% end
+
+
+% [B,I] = maxk(mac(:),size(Vin,2));
+% [I_row, I_col] = ind2sub(size(mac,1),I);
+% sortIndex = I_col;
+
+
+%breakpoint length(unique(sortIndex)) < 4
 D = D(sortIndex);
 V = Vin(:,sortIndex);
 

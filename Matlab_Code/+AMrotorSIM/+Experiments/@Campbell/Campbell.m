@@ -55,8 +55,10 @@ classdef Campbell < handle
                 end
 %                 [~,EW_for] = obj.get_mode_allocation(EV_for_ref, EV_for, EW_for);
 %                 [~,EW_back] = obj.get_mode_allocation(EV_back_ref, EV_back, EW_back);
+                [~,EW_for] = obj.get_mode_allocation_zeros_crossings(EV_for, EW_for);
+                [~,EW_back] = obj.get_mode_allocation_zeros_crossings(EV_back, EW_back);
 %                 EV_for_puffer = [EV_for_puffer(:,size(EV_for_ref,2)+1:end), EV_for]; EV_back_puffer = [EV_back_puffer(:,size(EV_back_ref,2)+1:end), EV_back];
-%                 EV_for_ref = EV_for_puffer(:,1:size(EV_for_ref,2)); EV_back_ref = EV_back_puffer(:,1:size(EV_back_ref,2)); % use reference EV from the caluculation of the tine step befor
+%                 EV_for_ref = EV_for_puffer(:,1:size(EV_for_ref,2)); EV_back_ref = EV_back_puffer(:,1:size(EV_back_ref,2)); % use reference EV from the caluculation of the time step befor
                 obj.EWf(:,end+1) = EW_for;
                 obj.EWb(:,end+1) = EW_back;
 
