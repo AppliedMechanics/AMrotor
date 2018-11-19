@@ -24,13 +24,13 @@ classdef Campbell < handle
             switch Selection
                 case {'Forward','forward','f','F'}
                     obj.set_forward_plots();
-                    obj.set_forward_plots_deltas();
+                    obj.set_forward_plots_damping_ratio();
                 case {'Backward','backward','b','B'}
                     obj.set_backward_plots();
-                    obj.set_backward_plots_deltas();
+                    obj.set_backward_plots_damping_ratio();
                 case {'All','all','a','A'}
                     obj.set_all_plots();
-                    obj.set_all_plots_deltas();
+                    obj.set_all_plots_damping_ratio();
                 otherwise
                     error(['You try to reach a selection for the Campbell-' ...
                           'Diagram which is not implemented.']);

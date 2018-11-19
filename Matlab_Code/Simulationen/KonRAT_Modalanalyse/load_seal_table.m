@@ -1,4 +1,4 @@
-function sealModel = load_seal_table(strFileName)
+function Table = load_seal_table(strFileName)
 % LOAD_SEAL_TABLE:Dichtungsmatrizen ausgeben
 % 
 % sealModel = load_seal_table(strFileName)
@@ -13,14 +13,11 @@ function sealModel = load_seal_table(strFileName)
 
 % Load Look up table for 'Table'
 load(strFileName)
-sealModel.Table.rpm = wellendrehzahl;
-sealModel.Table.m_xx = masse;
-sealModel.Table.d_xx = hauptdaempfung;
-sealModel.Table.d_xy = nebendaempfung;
-sealModel.Table.k_xx = hauptsteifigkeit;
-sealModel.Table.k_xy = nebensteifigkeit;
-
-clear wellendrehzahl masse hauptdaempfung nebendaempfung hauptsteifigkeit nebensteifigkeit
+Table.stiffness_matrix = K_seal; % [N/m]
+%dof: [u_x, u_y, u_z, psi_x, psi_y]',
+Table.damping_matrix = C_seal;
+Table.mass_matrix = M_seal;
+Table.rpm = rpm;
 
 end
 

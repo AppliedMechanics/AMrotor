@@ -39,28 +39,28 @@ r.rotor.assemble_fem;
 
 
 %% Running system analyses
-% 
-m=Experiments.Modalanalyse(r);
-% 
-% m.calculate_rotor_only_without_damping(15);
-% m.calculate_rotor_only(15,100);
-% 
-% m.calculate_rotorsystem_without_damping(15);
-m.calculate_rotorsystem(12,1e3);
-% 
-esf= Graphs.Eigenschwingformen(m);
-esf.print_frequencies();
-esf.plot_displacements();
-% esf.set_plots('half') % 'all', 'half' or desired mode number
-%esf.set_plots('half','overlay')
-% esf.set_plots(10,'Overlay','Skip',5,'tangentialPoints',30,'scale',3) %specify additional options, first input is index of mode
-Janitor.cleanFigures();
+% % 
+% m=Experiments.Modalanalyse(r);
+% % 
+% % m.calculate_rotor_only_without_damping(15);
+% % m.calculate_rotor_only(15,100);
+% % 
+% % m.calculate_rotorsystem_without_damping(15);
+% m.calculate_rotorsystem(12,10e3);
+% % 
+% esf= Graphs.Eigenschwingformen(m);
+% esf.print_frequencies();
+% esf.plot_displacements();
+% % esf.set_plots('half') % 'all', 'half' or desired mode number
+% %esf.set_plots('half','overlay')
+% % esf.set_plots(10,'Overlay','Skip',5,'tangentialPoints',30,'scale',3) %specify additional options, first input is index of mode
+% Janitor.cleanFigures();
 % 
 % 
 % r.reduce_modal(10);
 % 
 cmp = Experiments.Campbell(r);
-cmp.set_up(0:2e2:10e3,6); 
+cmp.set_up(0:2e2:50e3,8); 
 cmp.calculate();% input of set_up is (1/min, Number of Modes)
 cmpDiagramm = Graphs.Campbell(cmp);
 cmpDiagramm.set_plots('all');

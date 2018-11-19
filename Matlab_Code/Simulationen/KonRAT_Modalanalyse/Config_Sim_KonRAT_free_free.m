@@ -132,45 +132,11 @@ cnfg.cnfg_sensor(count).type='Displacementsensor';
 cnfg.cnfg_bearing=[];
 
 count = 1;
-cnfg.cnfg_bearing(count).name = 'Axiales Lager Links';
+cnfg.cnfg_bearing(count).name = 'Feste Einspannung';
 cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
-cnfg.cnfg_bearing(count).type='SimpleAxialBearing';
+cnfg.cnfg_bearing(count).type='RestrictAllDofsBearing';
 cnfg.cnfg_bearing(count).stiffness=1e10;                     %[N/m]
-cnfg.cnfg_bearing(count).damping = 100;
-
-count = count + 1;
-cnfg.cnfg_bearing(count).name = 'Torque Lager Links'; % Torque Lager koppelt die Torsion an die Umgebung und verhindert so die Starrkoerpermode fuer den Torsionsfreiheitsgrad psi_z.
-cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
-cnfg.cnfg_bearing(count).type='SimpleTorqueBearing';
-cnfg.cnfg_bearing(count).stiffness=1e10;                     %[N/m]
-cnfg.cnfg_bearing(count).damping = 100;
-
-strFileName = './Lager_LimSingh/bearingTPFax10000LS.mat' 
-count = count + 1;
-cnfg.cnfg_bearing(count).name = 'Kennfeld Rillenkugellager 1';
-cnfg.cnfg_bearing(count).position=pos.bearing(1);                        %[m]
-cnfg.cnfg_bearing(count).type='LookUpTableBearing';
-cnfg.cnfg_bearing(count).Table = load_bearing(strFileName); 
-
-count = count + 1;
-cnfg.cnfg_bearing(count).name = 'Kennfeld Rillenkugellager 2';
-cnfg.cnfg_bearing(count).position=pos.bearing(2);                        %[m]
-cnfg.cnfg_bearing(count).type='LookUpTableBearing';
-cnfg.cnfg_bearing(count).Table = load_bearing(strFileName); 
-
-% count = count + 1;
-% cnfg.cnfg_bearing(count).name = 'Isotropes Lager 1';
-% cnfg.cnfg_bearing(count).position=pos.bearing(1);                        %[m]
-% cnfg.cnfg_bearing(count).type='SimpleBearing';
-% cnfg.cnfg_bearing(count).stiffness=1e8;%0.0670680e7; % ???                    %[N/m]
-% cnfg.cnfg_bearing(count).damping = 299.275; % ???
-% 
-% count = count + 1;
-% cnfg.cnfg_bearing(count).name = 'Isotropes Lager 2';
-% cnfg.cnfg_bearing(count).position=pos.bearing(2);                        %[m]
-% cnfg.cnfg_bearing(count).type='SimpleBearing';
-% cnfg.cnfg_bearing(count).stiffness=1e8;%0.0670680e7; % ???                    %[N/m]
-% cnfg.cnfg_bearing(count).damping = 299.275; % ???
+cnfg.cnfg_bearing(count).damping = 0;
 
 %% ========================================================================
 cnfg.cnfg_load=[];
@@ -253,30 +219,30 @@ cnfg.cnfg_seal = [];
 % cnfg.cnfg_seal(count).type='ChildsSeal';
 % cnfg.cnfg_seal(count).sealModel = load_seal_model;
 
-count = count+1;
-strSeal1 = './2018-11-19/TPKonRATEcc0Seal1.mat'
-cnfg.cnfg_seal(count).name = 'Inlet Seal';
-cnfg.cnfg_seal(count).position=pos.seal(1);                        %[m]
-cnfg.cnfg_seal(count).type='LookUpTableSeal';
-cnfg.cnfg_seal(count).sealModel.Table = load_seal_table(strSeal1); 
-
-count = count+1;
-strSeal2 = './2018-11-19/TPKonRATEcc0Seal2.mat'
-cnfg.cnfg_seal(count).name = 'Discharge Seal';
-cnfg.cnfg_seal(count).position=pos.seal(2);                        %[m]
-cnfg.cnfg_seal(count).type='LookUpTableSeal';
-cnfg.cnfg_seal(count).sealModel.Table = load_seal_table(strSeal2); 
-
-count = count+1;
-strSeal3 = './2018-11-19/TPKonRATEcc0Seal3.mat'
-cnfg.cnfg_seal(count).name = 'Inter stage seal';
-cnfg.cnfg_seal(count).position=pos.seal(3);                        %[m]
-cnfg.cnfg_seal(count).type='LookUpTableSeal';
-cnfg.cnfg_seal(count).sealModel.Table = load_seal_table(strSeal3); 
-
-count = count+1;
-strSeal4 = './2018-11-19/TPKonRATEcc0Seal4.mat'
-cnfg.cnfg_seal(count).name = 'Turbine Seal';
-cnfg.cnfg_seal(count).position=pos.seal(4);                        %[m]
-cnfg.cnfg_seal(count).type='LookUpTableSeal';
-cnfg.cnfg_seal(count).sealModel.Table = load_seal_table(strSeal4); 
+% count = count+1;
+% strSeal1 = './2018-11-19/TPKonRATEcc0Seal1.mat'
+% cnfg.cnfg_seal(count).name = 'Inlet Seal';
+% cnfg.cnfg_seal(count).position=pos.seal(1);                        %[m]
+% cnfg.cnfg_seal(count).type='LookUpTableSeal';
+% cnfg.cnfg_seal(count).sealModel.Table = load_seal_table(strSeal1); 
+% 
+% count = count+1;
+% strSeal2 = './2018-11-19/TPKonRATEcc0Seal2.mat'
+% cnfg.cnfg_seal(count).name = 'Discharge Seal';
+% cnfg.cnfg_seal(count).position=pos.seal(2);                        %[m]
+% cnfg.cnfg_seal(count).type='LookUpTableSeal';
+% cnfg.cnfg_seal(count).sealModel.Table = load_seal_table(strSeal2); 
+% 
+% count = count+1;
+% strSeal3 = './2018-11-19/TPKonRATEcc0Seal3.mat'
+% cnfg.cnfg_seal(count).name = 'Inter stage seal';
+% cnfg.cnfg_seal(count).position=pos.seal(3);                        %[m]
+% cnfg.cnfg_seal(count).type='LookUpTableSeal';
+% cnfg.cnfg_seal(count).sealModel.Table = load_seal_table(strSeal3); 
+% 
+% count = count+1;
+% strSeal4 = './2018-11-19/TPKonRATEcc0Seal4.mat'
+% cnfg.cnfg_seal(count).name = 'Turbine Seal';
+% cnfg.cnfg_seal(count).position=pos.seal(4);                        %[m]
+% cnfg.cnfg_seal(count).type='LookUpTableSeal';
+% cnfg.cnfg_seal(count).sealModel.Table = load_seal_table(strSeal4); 

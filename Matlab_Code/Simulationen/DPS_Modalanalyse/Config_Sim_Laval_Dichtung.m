@@ -9,8 +9,8 @@ cnfg.cnfg_rotor.material.e_module = 211e9;  %[N/m^2]
 cnfg.cnfg_rotor.material.density  = 7446;   %[kg/m^3] %%SI EINHEITEN!!
 cnfg.cnfg_rotor.material.poisson  = 0.3;    %steel 0.27...0.3 [-]
 cnfg.cnfg_rotor.material.shear_factor = 0.9;
-cnfg.cnfg_rotor.material.damping.rayleigh_alpha1= 0.001;    %D=alpha1*K + alpha2*M
-cnfg.cnfg_rotor.material.damping.rayleigh_alpha2= 0.001;
+cnfg.cnfg_rotor.material.damping.rayleigh_alpha1= 0;%0.001;    %D=alpha1*K + alpha2*M
+cnfg.cnfg_rotor.material.damping.rayleigh_alpha2= 0;%0.001;
 
 % Rotor Config
 % r_Welle = 10e-3; % Radius der Welle
@@ -44,13 +44,13 @@ cnfg.cnfg_rotor.mesh_opt.approx = 'mean';   %Approximation for linear functions 
 % Massescheiben
 cnfg.cnfg_disc=[];
 
-% cnfg.cnfg_disc(1).name = 'Zusatzscheibe';
-% cnfg.cnfg_disc(1).position = 300e-3;                 %disc position [m]
-% cnfg.cnfg_disc(1).radius = 200e-3;                   %only for plot
-% cnfg.cnfg_disc(1).m = 5;                             %disc mass [kg]
-% cnfg.cnfg_disc(1).Jx = 1;                         %disc mom. of inertia [kg*m^2]
-% cnfg.cnfg_disc(1).Jz = 1;                         %disc mom. of inertia [kg*m^2]
-% cnfg.cnfg_disc(1).Jp = 1e-1;                         %disc polar mom. of inertia [kg*m^2] (polar)
+cnfg.cnfg_disc(1).name = 'Zusatzscheibe';
+cnfg.cnfg_disc(1).position = 300e-3;                 %disc position [m]
+cnfg.cnfg_disc(1).radius = 200e-3;                   %only for plot
+cnfg.cnfg_disc(1).m = 5;                             %disc mass [kg]
+cnfg.cnfg_disc(1).Jx = 1;                         %disc mom. of inertia [kg*m^2]
+cnfg.cnfg_disc(1).Jz = 1;                         %disc mom. of inertia [kg*m^2]
+cnfg.cnfg_disc(1).Jp = 1e-1;                         %disc polar mom. of inertia [kg*m^2] (polar)
 
 %% ========================================================================
 % Sensors
@@ -105,31 +105,31 @@ cnfg.cnfg_bearing(count).type='SimpleTorqueBearing';
 cnfg.cnfg_bearing(count).stiffness=1e10;                     %[N/m]
 cnfg.cnfg_bearing(count).damping = 100;
 
-count = count + 1;
-cnfg.cnfg_bearing(count).name = 'Isotropes Lager 1';
-cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
-cnfg.cnfg_bearing(count).type='SimpleBearing';
-cnfg.cnfg_bearing(count).stiffness=1e8;%0.0670680e7; % ???                    %[N/m]
-cnfg.cnfg_bearing(count).damping = 299.275; % ???
-
-count = count + 1;
-cnfg.cnfg_bearing(count).name = 'Isotropes Lager 2';
-cnfg.cnfg_bearing(count).position=600e-3;                        %[m]
-cnfg.cnfg_bearing(count).type='SimpleBearing';
-cnfg.cnfg_bearing(count).stiffness=1e8;%0.0670680e7; % ???                    %[N/m]
-cnfg.cnfg_bearing(count).damping = 299.275; % ???
-
 % count = count + 1;
-% cnfg.cnfg_bearing(count).name = 'Kennfeld Lager';
+% cnfg.cnfg_bearing(count).name = 'Isotropes Lager 1';
 % cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
-% cnfg.cnfg_bearing(count).type='LookUpTableBearing';
-% cnfg.cnfg_bearing(count).Table = load_bearing('bearing1.mat'); 
+% cnfg.cnfg_bearing(count).type='SimpleBearing';
+% cnfg.cnfg_bearing(count).stiffness=1e8;%0.0670680e7; % ???                    %[N/m]
+% cnfg.cnfg_bearing(count).damping = 299.275; % ???
 % 
 % count = count + 1;
-% cnfg.cnfg_bearing(count).name = 'Kennfeld Lager';
+% cnfg.cnfg_bearing(count).name = 'Isotropes Lager 2';
 % cnfg.cnfg_bearing(count).position=600e-3;                        %[m]
-% cnfg.cnfg_bearing(count).type='LookUpTableBearing';
-% cnfg.cnfg_bearing(count).Table = load_bearing('bearing1.mat');   
+% cnfg.cnfg_bearing(count).type='SimpleBearing';
+% cnfg.cnfg_bearing(count).stiffness=1e8;%0.0670680e7; % ???                    %[N/m]
+% cnfg.cnfg_bearing(count).damping = 299.275; % ???
+
+count = count + 1;
+cnfg.cnfg_bearing(count).name = 'Kennfeld Lager';
+cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
+cnfg.cnfg_bearing(count).type='LookUpTableBearing';
+cnfg.cnfg_bearing(count).Table = load_bearing('01_bearingTPFax100LS.mat'); 
+
+count = count + 1;
+cnfg.cnfg_bearing(count).name = 'Kennfeld Lager';
+cnfg.cnfg_bearing(count).position=600e-3;                        %[m]
+cnfg.cnfg_bearing(count).type='LookUpTableBearing';
+cnfg.cnfg_bearing(count).Table = load_bearing('01_bearingTPFax100LS.mat');   
 
 % count = count + 1;
 % cnfg.cnfg_bearing(count).name = 'LimSingh Rillenkugellager 2';
