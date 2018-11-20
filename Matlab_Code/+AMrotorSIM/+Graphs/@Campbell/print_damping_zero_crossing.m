@@ -9,7 +9,7 @@ n_moden=length(zeroCrossings.forward);
 for s=1:n_moden
     disp([num2str(s),'. Mode (forward): bei ', num2str(zeroCrossings.forward(s)*60/2/pi), ' 1/min'])
 end
-disp(' ')
+% disp(' ')
 
 disp('Moden mit backward-whirl')
 n_moden=length(zeroCrossings.backward);
