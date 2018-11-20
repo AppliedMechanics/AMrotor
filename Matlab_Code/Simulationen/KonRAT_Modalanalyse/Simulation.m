@@ -64,6 +64,7 @@ cmp.calculate();
 % cmp.calculate_rotor_only();
 cmpDiagramm = Graphs.Campbell(cmp);
 cmpDiagramm.set_plots('all');
+cmpDiagramm.print_damping_zero_crossing()
 % cmpDiagramm.set_plots('backward');
 % cmpDiagramm.set_plots('forward');
 Janitor.cleanFigures();

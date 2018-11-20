@@ -212,11 +212,11 @@ cnfg.cnfg_seal = [];
 % cnfg.cnfg_seal(count).type='BlackSeal';
 % cnfg.cnfg_seal(count).sealModel = load_seal_model;
 
-% count = count+1;
-% cnfg.cnfg_seal(count).name = 'Dichtung Childs';
-% cnfg.cnfg_seal(count).position=300e-3;                        %[m]
-% cnfg.cnfg_seal(count).type='ChildsSeal';
-% cnfg.cnfg_seal(count).sealModel = load_seal_model;
+count = count+1;
+cnfg.cnfg_seal(count).name = 'Dichtung Childs';
+cnfg.cnfg_seal(count).position=300e-3;                        %[m]
+cnfg.cnfg_seal(count).type='ChildsSeal';
+cnfg.cnfg_seal(count).sealModel = load_seal_model;
 
 % count = count+1;
 % cnfg.cnfg_seal(count).name = 'Dichtung LookUpTable';
