@@ -4,15 +4,15 @@
 
 pos.bearing(1) = 65.182e-3;
 pos.bearing(2) = 212e-3;
-pos.inducer = 4.061e-3;
+pos.inducer = 3.045e-3;
 pos.impeller = 47.541e-3;
 pos.turbine = 250.007e-3;
 pos.seal(1) = 42.3e-3;
 pos.seal(2) = 52.682e-3;
 pos.seal(3) = 138.591e-3;
-pos.seal(4) = 142.25e-3;
+pos.seal(4) = 242.25e-3;
 
-cnfg.cnfg_rotor.name = 'KonRAT Turbopumpe mit 5 aufgesetzten Scheiben und 2 Lagern, noch ohne Dichtungen';
+cnfg.cnfg_rotor.name = 'KonRAT Turbopumpe mit 5 aufgesetzten Scheiben ohne Lagerung';
 
 cnfg.cnfg_rotor.material.name = 'steel';
 cnfg.cnfg_rotor.material.e_module = 211e9;  %[N/m^2]
@@ -45,7 +45,7 @@ cnfg.cnfg_rotor.mesh_opt.approx = 'mean';   %Approximation for linear functions 
     
 %% ========================================================================
 % Massescheiben
-% Jede SCheibe stellt im ersten Schritt ein Bauteil dar, dass auf der Welle
+% Jede Scheibe stellt im ersten Schritt ein Bauteil dar, dass auf der Welle
 % befestigt ist. Die Daten wurden mithilfe von Catia aus dem 3D-Modell
 % ausgelesen.
 cnfg.cnfg_disc=[];
@@ -131,12 +131,12 @@ cnfg.cnfg_sensor(count).type='Displacementsensor';
 % Lager
 cnfg.cnfg_bearing=[];
 
-count = 1;
-cnfg.cnfg_bearing(count).name = 'Feste Einspannung';
-cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
-cnfg.cnfg_bearing(count).type='RestrictAllDofsBearing';
-cnfg.cnfg_bearing(count).stiffness=1e10;                     %[N/m]
-cnfg.cnfg_bearing(count).damping = 0;
+% count = 1;
+% cnfg.cnfg_bearing(count).name = 'Feste Einspannung';
+% cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
+% cnfg.cnfg_bearing(count).type='RestrictAllDofsBearing';
+% cnfg.cnfg_bearing(count).stiffness=1e10;                     %[N/m]
+% cnfg.cnfg_bearing(count).damping = 0;
 
 %% ========================================================================
 cnfg.cnfg_load=[];

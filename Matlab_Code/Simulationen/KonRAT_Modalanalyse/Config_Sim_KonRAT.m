@@ -4,15 +4,15 @@
 
 pos.bearing(1) = 65.182e-3;
 pos.bearing(2) = 212e-3;
-pos.inducer = 4.061e-3;
+pos.inducer = 3.045e-3;
 pos.impeller = 47.541e-3;
 pos.turbine = 250.007e-3;
 pos.seal(1) = 42.3e-3;
 pos.seal(2) = 52.682e-3;
 pos.seal(3) = 138.591e-3;
-pos.seal(4) = 142.25e-3;
+pos.seal(4) = 242.25e-3;
 
-cnfg.cnfg_rotor.name = 'KonRAT Turbopumpe mit 5 aufgesetzten Scheiben und 2 Lagern, noch ohne Dichtungen';
+cnfg.cnfg_rotor.name = 'KonRAT Turbopumpe mit 5 aufgesetzten Scheiben und 2 Lagern und 4 Dichtungen';
 
 cnfg.cnfg_rotor.material.name = 'steel';
 cnfg.cnfg_rotor.material.e_module = 211e9;  %[N/m^2]
