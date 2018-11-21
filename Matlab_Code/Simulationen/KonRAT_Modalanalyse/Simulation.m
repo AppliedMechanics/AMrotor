@@ -14,9 +14,9 @@ Janitor.setLayout(2,3);
 
 %% Compute Rotor
 
-% Config_Sim_KonRAT
+Config_Sim_KonRAT
 % Config_Sim_KonRAT_bearing_only
-Config_Sim_KonRAT_free_free
+% Config_Sim_KonRAT_free_free
 
 r=Rotorsystem(cnfg,'KonRAT');
 r.assemble; %fuehrt Funktion assemble.m mit Eingabe Objekt r aus Klasse Rotorsystem aus
@@ -59,12 +59,13 @@ r.rotor.assemble_fem;
 % r.reduce_modal(10);
 
 cmp = Experiments.Campbell(r);
-cmp.set_up(0:2e2:80e3,20); % input of set_up is (1/min, Number of Modes)
+cmp.set_up(0:2e2:90e3,20); % input of set_up is (1/min, Number of Modes)
 cmp.calculate();
 % cmp.calculate_rotor_only();
 cmpDiagramm = Graphs.Campbell(cmp);
 cmpDiagramm.set_plots('all');
 cmpDiagramm.print_damping_zero_crossing()
+cmpDiagramm.print_critical_speeds()
 % cmpDiagramm.set_plots('backward');
 % cmpDiagramm.set_plots('forward');
 Janitor.cleanFigures();

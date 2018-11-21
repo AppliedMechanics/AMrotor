@@ -11,7 +11,7 @@ classdef Campbell < handle
         num; % struct which will gather all kind of numbers
         EVf; EVb; % eigenvectors forward&backward
         EWf; EWb; % eigenvalues forward&backward
-        zeroCrossingDampingForwardOmega; zeroCrossingDampingBackwardOmega; 
+%         zeroCrossingDampingForwardOmega; zeroCrossingDampingBackwardOmega; 
         % rotational speed at which the instability occurs
     end
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -70,12 +70,6 @@ classdef Campbell < handle
 %                 EV_for_ref = EV_for_puffer(:,1:size(EV_for_ref,2)); EV_back_ref = EV_back_puffer(:,1:size(EV_back_ref,2)); % use reference EV from the caluculation of the time step befor
                 obj.EWf(:,end+1) = EW_for;
                 obj.EWb(:,end+1) = EW_back;
-            end
-            for i = 1:size(obj.EWf,1)
-                obj.zeroCrossingDampingForwardOmega(i) = obj.get_zero_crossing(obj.omega,-real(obj.EWf(i,:)));
-            end
-            for i = 1:size(obj.EWb,1)
-                obj.zeroCrossingDampingBackwardOmega(i) = obj.get_zero_crossing(obj.omega,-real(obj.EWb(i,:)));
             end
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
