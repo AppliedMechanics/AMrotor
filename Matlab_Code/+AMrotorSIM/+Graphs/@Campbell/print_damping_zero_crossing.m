@@ -1,6 +1,6 @@
 function print_damping_zero_crossing(obj)
 
-obj.experimentCampbell.get_omega()
+obj.experimentCampbell.get_omega();
 zeroCrossings = obj.experimentCampbell.read_zero_crossing();
 
 disp('Nulldurchgang der Dämpfung')

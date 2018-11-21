@@ -29,6 +29,10 @@ for b = 1:num.backward
     plot_omegas(axAll,rpm,EW.backward(b,:),...
                obj.ColorHandler.getColor(b+num.forward))
 end
+plot_harmonic( axForward,rpm )
+plot_harmonic( axBackward,rpm )
+plot_harmonic( axAll,rpm )
+
 pause(0.1) % somehow needed for setting limits
 lim.forward = max(max(imag(EW.forward)));
 lim.backward =max(max(imag(EW.backward)));
