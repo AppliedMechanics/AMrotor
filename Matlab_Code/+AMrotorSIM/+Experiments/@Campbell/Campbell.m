@@ -41,9 +41,16 @@ classdef Campbell < handle
             
             for w = obj.omega
                 [mat.A,mat.B] = obj.get_state_space_matrices(w);
-                [V,D] = obj.perform_eigenanalysis(mat);
-                Vpos = obj.get_position_entries(V);
-                if w == 0
+                mat.singular = false;
+                if condest(mat.B) > 1e18
+                    if w == obj.omega(1)
+                        fprintf(repmat(' ', 1, 69)); % for Visualisation of current rpm for singular system
+                    end
+                    mat.singular = true;
+                end
+                [V,D] = obj.perform_eigenanalysis(mat,w);
+                Vpos = obj.get_position_entries(V);  
+                if w == 0 || mat.singular
                     [Vpos,D]= get_positive_entries(Vpos,D);
                     EW_for = D(1:2:end);
                     EV_for = Vpos(:,1:2:obj.num.modes);
@@ -119,7 +126,7 @@ classdef Campbell < handle
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         % function declarations; definitions are in the 'private' folder
         [A,B] = get_state_space_matrices(obj,omega)
-        [V,D] = perform_eigenanalysis(obj,mat)
+        [V,D] = perform_eigenanalysis(obj,mat,omega)
         Vpos = get_position_entries(obj,V);
         [ EV_for,EW_for,...
           EV_back,EW_back,...
