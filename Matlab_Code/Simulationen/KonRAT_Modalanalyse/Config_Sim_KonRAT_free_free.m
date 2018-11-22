@@ -131,12 +131,19 @@ cnfg.cnfg_sensor(count).type='Displacementsensor';
 % Lager
 cnfg.cnfg_bearing=[];
 
-% count = 1;
-% cnfg.cnfg_bearing(count).name = 'Feste Einspannung';
-% cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
-% cnfg.cnfg_bearing(count).type='RestrictAllDofsBearing';
-% cnfg.cnfg_bearing(count).stiffness=1e10;                     %[N/m]
-% cnfg.cnfg_bearing(count).damping = 0;
+count = 1;
+cnfg.cnfg_bearing(count).name = 'Feste Einspannung';
+cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
+cnfg.cnfg_bearing(count).type='RestrictAllDofsBearing';
+cnfg.cnfg_bearing(count).stiffness=100;                     %[N/m]
+cnfg.cnfg_bearing(count).damping = 0;
+
+count = 1;
+cnfg.cnfg_bearing(count).name = 'Feste Einspannung';
+cnfg.cnfg_bearing(count).position=260e-3;                        %[m]
+cnfg.cnfg_bearing(count).type='RestrictAllDofsBearing';
+cnfg.cnfg_bearing(count).stiffness=100;                     %[N/m]
+cnfg.cnfg_bearing(count).damping = 0;
 
 %% ========================================================================
 cnfg.cnfg_load=[];

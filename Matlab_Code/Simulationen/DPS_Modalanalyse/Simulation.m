@@ -17,7 +17,8 @@ Janitor.setLayout(2,3);
 %% Compute Rotor
 
 % Config_Sim_DPS
-Config_Sim_Laval_Dichtung
+% Config_Sim_Laval_Dichtung
+Config_Sim_Laval_free
 
 r=Rotorsystem(cnfg,'DPS-System');
 r.assemble; %fuehrt Funktion assemble.m mit Eingabe Objekt r aus Klasse Rotorsystem aus
@@ -39,22 +40,22 @@ r.rotor.assemble_fem;
 
 
 %% Running system analyses
-% % 
-% m=Experiments.Modalanalyse(r);
-% % 
-% % m.calculate_rotor_only_without_damping(15);
-% % m.calculate_rotor_only(15,100);
-% % 
-% % m.calculate_rotorsystem_without_damping(15);
-% m.calculate_rotorsystem(12,10e3);
-% % 
-% esf= Graphs.Eigenschwingformen(m);
-% esf.print_frequencies();
-% esf.plot_displacements();
-% % esf.set_plots('half') % 'all', 'half' or desired mode number
-% %esf.set_plots('half','overlay')
-% % esf.set_plots(10,'Overlay','Skip',5,'tangentialPoints',30,'scale',3) %specify additional options, first input is index of mode
-% Janitor.cleanFigures();
+% 
+m=Experiments.Modalanalyse(r);
+% 
+% m.calculate_rotor_only_without_damping(15);
+% m.calculate_rotor_only(15,100);
+% 
+% m.calculate_rotorsystem_without_damping(15);
+m.calculate_rotorsystem(10,10e3);
+% 
+esf= Graphs.Eigenschwingformen(m);
+esf.print_frequencies();
+esf.plot_displacements();
+% esf.set_plots('half') % 'all', 'half' or desired mode number
+%esf.set_plots('half','overlay')
+% esf.set_plots(10,'Overlay','Skip',5,'tangentialPoints',30,'scale',3) %specify additional options, first input is index of mode
+Janitor.cleanFigures();
 % 
 % 
 % r.reduce_modal(10);
