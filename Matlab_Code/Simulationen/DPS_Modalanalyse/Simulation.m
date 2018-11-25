@@ -18,7 +18,8 @@ Janitor.setLayout(2,3);
 
 % Config_Sim_DPS
 % Config_Sim_Laval_Dichtung
-Config_Sim_Laval_free
+% Config_Sim_Laval_free
+Config_Sim_Laval_LimSingh
 
 r=Rotorsystem(cnfg,'DPS-System');
 r.assemble; %fuehrt Funktion assemble.m mit Eingabe Objekt r aus Klasse Rotorsystem aus
@@ -41,40 +42,41 @@ r.rotor.assemble_fem;
 
 %% Running system analyses
 % 
-m=Experiments.Modalanalyse(r);
-% 
-% m.calculate_rotor_only_without_damping(15);
-% m.calculate_rotor_only(15,100);
-% 
-% m.calculate_rotorsystem_without_damping(15);
-m.calculate_rotorsystem(10,10e3);
-% 
-esf= Graphs.Eigenschwingformen(m);
-esf.print_frequencies();
-esf.plot_displacements();
-% esf.set_plots('half') % 'all', 'half' or desired mode number
-%esf.set_plots('half','overlay')
-% esf.set_plots(10,'Overlay','Skip',5,'tangentialPoints',30,'scale',3) %specify additional options, first input is index of mode
-Janitor.cleanFigures();
-% 
-% 
-% r.reduce_modal(10);
-% 
-cmp = Experiments.Campbell(r);
-cmp.set_up(0:2e2:50e3,8); 
-cmp.calculate();% input of set_up is (1/min, Number of Modes)
-cmpDiagramm = Graphs.Campbell(cmp);
-cmpDiagramm.print_damping_zero_crossing()
-cmpDiagramm.set_plots('all');
-% cmpDiagramm.set_plots('backward');
-% cmpDiagramm.set_plots('forward');
-Janitor.cleanFigures();
+% m=Experiments.Modalanalyse(r);
+% % 
+% % m.calculate_rotor_only_without_damping(15);
+% % m.calculate_rotor_only(15,100);
+% % 
+% % m.calculate_rotorsystem_without_damping(15);
+% m.calculate_rotorsystem(10,10e3);
+% % 
+% esf= Graphs.Eigenschwingformen(m);
+% esf.print_frequencies();
+% esf.plot_displacements();
+% % esf.set_plots('half') % 'all', 'half' or desired mode number
+% %esf.set_plots('half','overlay')
+% % esf.set_plots(10,'Overlay','Skip',5,'tangentialPoints',30,'scale',3) %specify additional options, first input is index of mode
+% Janitor.cleanFigures();
+% % 
+% % 
+% % r.reduce_modal(10);
+% % 
+% cmp = Experiments.Campbell(r);
+% cmp.set_up(0:2e2:50e3,8); 
+% cmp.calculate();% input of set_up is (1/min, Number of Modes)
+% cmpDiagramm = Graphs.Campbell(cmp);
+% cmpDiagramm.print_damping_zero_crossing()
+% cmpDiagramm.print_critical_speeds()
+% cmpDiagramm.set_plots('all');
+% % cmpDiagramm.set_plots('backward');
+% % cmpDiagramm.set_plots('forward');
+% Janitor.cleanFigures();
 
-return %stop execution -> Time integration is not yet functional
+% return %stop execution -> Time integration is not yet functional
 
 %% Running Time Simulation
 
-St_Lsg = Experiments.Stationaere_Lsg( r , (0:500:10e3) , (0:0.001:1) );%St_Lsg = Experiments.Stationaere_Lsg(r,[0:50:10e3],[0:0.001:2]); %obj = Stationaere_Lsg(a,drehzahlvektor,time)
+St_Lsg = Experiments.Stationaere_Lsg( r , (500:500:500) , (0:0.001:0.1) );%St_Lsg = Experiments.Stationaere_Lsg(r,[0:50:10e3],[0:0.001:2]); %obj = Stationaere_Lsg(a,drehzahlvektor,time)
 %St_Lsg.compute_ode15s_ss           %laeuft leider immer noch nicht!
 St_Lsg.compute_ode15s_ss_variant
 %St_Lsg.compute_euler_ss
@@ -99,12 +101,12 @@ fo = Graphs.Fourierorbitdarstellung(r, St_Lsg);
 w = Graphs.Waterfalldiagramm(r, St_Lsg);
 % 
  for sensor = r.sensors
-%          t.plot(sensor);
-%          t.plot_Orbit(sensor);
-%          o.plot(sensor);
-%          f.plot(sensor);
+         t.plot(sensor);
+         t.plot_Orbit(sensor);
+         o.plot(sensor);
+         f.plot(sensor);
 %          fo.plot(sensor,1); % Error Curve Fitting Toolbox muss installiert sein
 %          fo.plot(sensor,2);
-         w.plot(sensor); % Wasserfall
-%           Janitor.cleanFigures();
+%          w.plot(sensor); % Wasserfall
+          Janitor.cleanFigures();
  end

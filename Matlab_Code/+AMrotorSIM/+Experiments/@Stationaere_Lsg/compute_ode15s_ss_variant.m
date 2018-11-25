@@ -64,12 +64,12 @@
         Omega = rpm*pi/30;           
         
         [mat.A,mat.B] = obj.get_state_space_matrices_variant(Omega);
+%         [mat.M,mat.C,mat.G,mat.K]= obj.rotorsystem.assemble_system_matrices(Omega*60/2/pi);
         
-%         ss_A = obj.rotorsystem.systemmatrices.ss.A;
         
         %%init Vector
         
-        Z0 = zeros(length(mat.A),1);     % Mit null belegen:
+        Z0 = zeros(length(mat.A),1);%Z0 = zeros(2*length(mat.M),1);     % Mit null belegen:
         Z0(end/2+6:6:end)=Omega;        % Drehzahl fuer psi_z
          
          

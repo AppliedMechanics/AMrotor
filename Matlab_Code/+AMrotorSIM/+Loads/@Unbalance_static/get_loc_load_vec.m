@@ -1,4 +1,4 @@
-function get_loc_load_vec(obj,time,omega)
+function get_loc_load_vec(obj,time,omega,varargin)
 
 %Constant fix force 
     obj.h = sparse(6,1);    
