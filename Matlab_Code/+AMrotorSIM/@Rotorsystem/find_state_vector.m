@@ -1,4 +1,4 @@
-function u_node = find_state_vector(self, position, Z)
+function [u, ud] = find_state_vector(self, position, Z)
 % only for state-space in the form u = [x; x_dot]
 
 node = self.rotor.find_node_nr(position);
@@ -9,8 +9,8 @@ dof_psi_z = self.rotor.get_gdof('psi_z',node);
 u = Z(dof_x:dof_psi_z);
 
 % velocity
-u_dot = Z(end/2+(dof_x:dof_psi_z));
+ud = Z(end/2+(dof_x:dof_psi_z));
 
-u_node = [u; u_dot];
+% u_node = [u; u_dot];
 
 end

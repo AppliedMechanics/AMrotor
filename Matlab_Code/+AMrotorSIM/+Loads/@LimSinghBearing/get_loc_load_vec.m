@@ -7,7 +7,7 @@ function get_loc_load_vec(obj,t,omega,U_node)
         
     % dof-order: ux,uy,uz,psix,psiy,psiz
     
-    obj.h = obj.LimSinghForce(par,U_node(1:5));
-
+    obj.h = -obj.LimSinghForce(par,U_node(1:5)); % Mit dem Minus hängt es zumindest nicht, Mit Plus gubt es Probleme
+    obj.h(3) = 0;
     
 end

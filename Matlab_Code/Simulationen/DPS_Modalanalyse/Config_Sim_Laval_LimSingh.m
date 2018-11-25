@@ -9,8 +9,8 @@ cnfg.cnfg_rotor.material.e_module = 211e9;  %[N/m^2]
 cnfg.cnfg_rotor.material.density  = 7446;   %[kg/m^3] %%SI EINHEITEN!!
 cnfg.cnfg_rotor.material.poisson  = 0.3;    %steel 0.27...0.3 [-]
 cnfg.cnfg_rotor.material.shear_factor = 0.9;
-cnfg.cnfg_rotor.material.damping.rayleigh_alpha1= 0;%0.001;    %D=alpha1*K + alpha2*M
-cnfg.cnfg_rotor.material.damping.rayleigh_alpha2= 0;%0.001;
+cnfg.cnfg_rotor.material.damping.rayleigh_alpha1= 0.001;    %D=alpha1*K + alpha2*M
+cnfg.cnfg_rotor.material.damping.rayleigh_alpha2= 0.001;
 
 % Rotor Config
 % r_Welle = 10e-3; % Radius der Welle
@@ -106,20 +106,27 @@ count = 0;
 % cnfg.cnfg_bearing(count).stiffness=1e10;                     %[N/m]
 % cnfg.cnfg_bearing(count).damping = 100;
 
+% count = count + 1;
+% cnfg.cnfg_bearing(count).name = 'Isotropes Lager 1';
+% cnfg.cnfg_bearing(count).position=50e-3;                        %[m]
+% cnfg.cnfg_bearing(count).type='SimpleBearing';
+% cnfg.cnfg_bearing(count).stiffness=1e8;%0.0670680e7; % ???                    %[N/m]
+% cnfg.cnfg_bearing(count).damping = 299.275; % ???
+
 count = count + 1;
-cnfg.cnfg_bearing(count).name = 'Isotropes Lager 1';
-cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
+cnfg.cnfg_bearing(count).name = 'Isotropes Lager 2';
+cnfg.cnfg_bearing(count).position=550e-3;                        %[m]
 cnfg.cnfg_bearing(count).type='SimpleBearing';
 cnfg.cnfg_bearing(count).stiffness=1e8;%0.0670680e7; % ???                    %[N/m]
 cnfg.cnfg_bearing(count).damping = 299.275; % ???
 
-count = count + 1;
-cnfg.cnfg_bearing(count).name = 'Isotropes Lager 2';
-cnfg.cnfg_bearing(count).position=600e-3;                        %[m]
-cnfg.cnfg_bearing(count).type='SimpleBearing';
-cnfg.cnfg_bearing(count).stiffness=1e8;%0.0670680e7; % ???                    %[N/m]
-cnfg.cnfg_bearing(count).damping = 299.275; % ???
-% 
+% count = count + 1;
+% cnfg.cnfg_bearing(count).name = 'Isotropes Lager 3';
+% cnfg.cnfg_bearing(count).position=300e-3;                        %[m]
+% cnfg.cnfg_bearing(count).type='SimpleBearing';
+% cnfg.cnfg_bearing(count).stiffness=1e8;%0.0670680e7; % ???                    %[N/m]
+% cnfg.cnfg_bearing(count).damping = 299.275; % ???
+
 % count = count + 1;
 % cnfg.cnfg_bearing(count).name = 'Kennfeld Lager';
 % cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
@@ -132,14 +139,14 @@ cnfg.cnfg_bearing(count).damping = 299.275; % ???
 % cnfg.cnfg_bearing(count).type='LookUpTableBearing';
 % cnfg.cnfg_bearing(count).Table = load_bearing('01_bearingTPFax100LS.mat');   
 
-% count = 1;
+% count = count+1;
 % cnfg.cnfg_bearing(count).name = 'Feste Einspannung';
 % cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
 % cnfg.cnfg_bearing(count).type='RestrictAllDofsBearing';
 % cnfg.cnfg_bearing(count).stiffness=1;                     %[N/m]
 % cnfg.cnfg_bearing(count).damping = 0;
 % 
-% count = 1;
+% count = count+1;
 % cnfg.cnfg_bearing(count).name = 'Feste Einspannung';
 % cnfg.cnfg_bearing(count).position=600e-3;                        %[m]
 % cnfg.cnfg_bearing(count).type='RestrictAllDofsBearing';
@@ -150,41 +157,41 @@ cnfg.cnfg_bearing(count).damping = 299.275; % ???
 cnfg.cnfg_load=[];
 count = 0;
 
-% Kraft in feste Richtung
-count = count + 1;
-cnfg.cnfg_load(count).name='Const. Kraft';
-cnfg.cnfg_load(count).position=0e-3;
-cnfg.cnfg_load(count).betrag_x= 0;
-cnfg.cnfg_load(count).betrag_y= -100;
-cnfg.cnfg_load(count).type='Force_constant_fix';
-
-% % Unwuchten
+% % Kraft in feste Richtung % macht Berechnung langsam
 % count = count + 1;
-% cnfg.cnfg_load(count).name = 'Kleine Unwucht';
-% cnfg.cnfg_load(count).position = 300e-3;
-% cnfg.cnfg_load(count).betrag = 1000e-6;%5e-6;
-% cnfg.cnfg_load(count).winkellage = 0;
-% cnfg.cnfg_load(count).type='Unbalance_static';
-% 
+% cnfg.cnfg_load(count).name='Const. Kraft';
+% cnfg.cnfg_load(count).position=150e-3;
+% cnfg.cnfg_load(count).betrag_x= 0;
+% cnfg.cnfg_load(count).betrag_y= -100;
+% cnfg.cnfg_load(count).type='Force_constant_fix';
+
+% Unwuchten
+count = count + 1;
+cnfg.cnfg_load(count).name = 'Kleine Unwucht';
+cnfg.cnfg_load(count).position = 150e-3;
+cnfg.cnfg_load(count).betrag = 1e-2;%5e-6;
+cnfg.cnfg_load(count).winkellage = 0;
+cnfg.cnfg_load(count).type='Unbalance_static';
+
 % % Sinusfoermige Anregungskraft
 % count = count + 1;
 % cnfg.cnfg_load(count).name='Sinus Kraft';
 % cnfg.cnfg_load(count).position=138e-3; % Position ML 1
-% cnfg.cnfg_load(count).betrag_x= 10;
-% cnfg.cnfg_load(count).frequency_x= 100;  %in Hz
+% cnfg.cnfg_load(count).betrag_x= 100;
+% cnfg.cnfg_load(count).frequency_x= 40;  %in Hz
 % cnfg.cnfg_load(count).betrag_y= 0;
 % cnfg.cnfg_load(count).frequency_y= 50;
 % cnfg.cnfg_load(count).type='Force_timevariant_fix';
-% 
+
 % % Whirl, Anregungskraft beschreibt Ellipse
 % count = count + 1;
 % cnfg.cnfg_load(count).name='Whirl Kraft';
 % cnfg.cnfg_load(count).position=138e-3; % Position ML 1
 % cnfg.cnfg_load(count).betrag_x= 10;
 % cnfg.cnfg_load(count).betrag_y= 10;
-% cnfg.cnfg_load(count).frequency= 500;  %in Hz
+% cnfg.cnfg_load(count).frequency= 200;  %in Hz
 % cnfg.cnfg_load(count).type='Force_timevariant_whirl';
-% 
+
 % % Chirp, Sinus-sweep-Kraft
 % count = count + 1;
 % cnfg.cnfg_load(count).name='Chirp Kraft';
@@ -195,9 +202,9 @@ cnfg.cnfg_load(count).type='Force_constant_fix';
 % cnfg.cnfg_load(count).betrag_y= 0;
 % cnfg.cnfg_load(count).frequency_y_0 = 0;
 % cnfg.cnfg_load(count).frequency_y= 0;
-% cnfg.cnfg_load(count).t_end= 2; % Zeitdauer des Chirps, hier wird f erreicht
+% cnfg.cnfg_load(count).t_end= 1; % Zeitdauer des Chirps, hier wird f erreicht
 % cnfg.cnfg_load(count).type='Force_timevariant_chirp';
-% 
+
 % % whirl-sweep-Kraft
 % count = count + 1;
 % cnfg.cnfg_load(count).name='Whirl Sweep Kraft';
@@ -205,17 +212,17 @@ cnfg.cnfg_load(count).type='Force_constant_fix';
 % cnfg.cnfg_load(count).betrag_x= 1;
 % cnfg.cnfg_load(count).betrag_y= cnfg.cnfg_load(count).betrag_x;
 % cnfg.cnfg_load(count).frequency_0 = 0; % Startfrequenz
-% cnfg.cnfg_load(count).frequency= 1000;  %in Hz, Endfrequenz
-% cnfg.cnfg_load(count).t_end= 0.6;%2; % Zeitdauer des Chirps, hier wird f erreicht
+% cnfg.cnfg_load(count).frequency= 200;  %in Hz, Endfrequenz
+% cnfg.cnfg_load(count).t_end= 1000;%2; % Zeitdauer des Chirps, hier wird f erreicht
 % cnfg.cnfg_load(count).type='Force_timevariant_whirl_sweep';
 
-% % Lim-Singh-bearing als load fuer Time-Integration
-% count = count + 1;
-% cnfg.cnfg_load(count).name = 'LimSingh Rillenkugellager 1';
-% cnfg.cnfg_load(count).position=0e-3;                        %[m]
-% cnfg.cnfg_load(count).type='LimSinghBearing';
-% cnfg.cnfg_load(count).par = load_bearing_LimSingh('parametersGupta20mm.m'); 
-% 
+% Lim-Singh-bearing als load fuer Time-Integration
+count = count + 1;
+cnfg.cnfg_load(count).name = 'LimSingh Rillenkugellager 1';
+cnfg.cnfg_load(count).position=50e-3;                        %[m]
+cnfg.cnfg_load(count).type='LimSinghBearing';
+cnfg.cnfg_load(count).par = load_bearing_LimSingh('parametersGupta20mm.m'); 
+
 % % Lim-Singh-bearing als load fuer Time-Integration
 % count = count + 1;
 % cnfg.cnfg_load(count).name = 'LimSingh Rillenkugellager 2';
