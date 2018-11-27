@@ -83,6 +83,9 @@ St_Lsg.compute_ode15s_ss_variant
 %St_Lsg.compute_newmark
 %St_Lsg.compute_sys_ss_variant
 
+Hochlauf = Experiments.Hochlaufanalyse( r , [0, 1000] , (0:0.001:10) ); % input: (rotorsystem, [rpm_start, rpm_end], time_vector)
+Hochlauf.compute_ode15s_ss_variant
+
 % 
 %------------- Erzeuge Ausgabeformat der Loesung ---------------
 
