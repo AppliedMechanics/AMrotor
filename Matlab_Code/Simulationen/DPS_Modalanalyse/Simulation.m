@@ -3,14 +3,14 @@
 % SIRM2019 Beitrag
 % 20.08.2018
 
-%% Import
-
-import AMrotorSIM.*
 
 %% Clean up
 close all
 clear all
 % clc
+%% Import
+
+import AMrotorSIM.*
 Janitor = AMrotorTools.PlotJanitor();
 Janitor.setLayout(2,3);
 
@@ -103,7 +103,7 @@ w = Graphs.Waterfalldiagramm(r, St_Lsg);
  for sensor = r.sensors
          t.plot(sensor);
          t.plot_Orbit(sensor);
-         o.plot(sensor);
+%          o.plot(sensor);
          f.plot(sensor);
 %          fo.plot(sensor,1); % Error Curve Fitting Toolbox muss installiert sein
 %          fo.plot(sensor,2);

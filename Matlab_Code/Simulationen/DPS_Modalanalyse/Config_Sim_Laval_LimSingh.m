@@ -2,7 +2,7 @@
 % Rotor
 % Aufbau eines Structs mit den Rotordaten
 
-cnfg.cnfg_rotor.name = 'Symmetrischer Laval-Rotor free free';
+cnfg.cnfg_rotor.name = 'Symmetrischer Laval-Rotor mit dynamischem Lim Singh Lagermodell';
 
 cnfg.cnfg_rotor.material.name = 'steel';
 cnfg.cnfg_rotor.material.e_module = 211e9;  %[N/m^2]

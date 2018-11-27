@@ -7,7 +7,8 @@ function get_loc_load_vec(obj,~,omega,U_node)
         
     % dof-order: ux,uy,uz,psix,psiy,psiz
     
-    obj.h = -obj.LimSinghForce(par,U_node(1:5)); % Mit dem Minus hängt es zumindest nicht, Mit Plus gubt es Probleme
+    U_node(3) = 1.8e-4; % "Lagervorspannung" damit glattes Problem fuer Zeitintegration -> kein Bereich mit F=0 um u_x,u_y=0  herum
+    obj.h = -obj.LimSinghForce(par,U_node);
     obj.h(3) = 0;
     
 end
