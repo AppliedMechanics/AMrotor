@@ -1,4 +1,4 @@
-function get_loc_load_vec(obj,t,omega,U_node)
+function get_loc_load_vec(obj,~,omega,U_node)
 % U_node = [u_x; u_y; u_z; psi_x; psi_y; psi_z; du_x; du_y; du_z; dpsi_x; dpsi_y; dpsi_z] 
     par = obj.cnfg.par;
     par.omega = omega;
