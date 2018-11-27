@@ -2,7 +2,7 @@ function dZ = integrate_function_variant(t,Z,rpm_span,t_span, rotorsystem)
 rpm_curr = rpm_span(1) + (rpm_span(2)-rpm_span(1)) / (t_span(2)-t_span(1)) * t; % aktuelle Drehzahl
 omega_curr = rpm_curr/60*2*pi;
 
-[M,C,G,K] = rotorsystem.assemble_system_matrices(rpm_curr); % Systemmatrizen sind in jedem Zeitschritt anders
+[M,C,G,K] = rotorsystem.assemble_system_matrices(rpm_curr); % Systemmatrizen sind in jedem Zeitschritt anders wegen Seal und Bearing rpm-abhaengig
 D = C + omega_curr*G;
 
 %% Loadvector
