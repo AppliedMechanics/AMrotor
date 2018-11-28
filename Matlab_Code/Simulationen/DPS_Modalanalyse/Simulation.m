@@ -76,32 +76,38 @@ r.rotor.assemble_fem;
 
 %% Running Time Simulation
 
-St_Lsg = Experiments.Stationaere_Lsg( r , 500 , (0:0.001:1) );%St_Lsg = Experiments.Stationaere_Lsg(r,[0:50:10e3],[0:0.001:2]); %obj = Stationaere_Lsg(a,drehzahlvektor,time)
+St_Lsg = Experiments.Stationaere_Lsg( r , 500 , (0:0.001:0.01) );%St_Lsg = Experiments.Stationaere_Lsg(r,[0:50:10e3],[0:0.001:2]); %obj = Stationaere_Lsg(a,drehzahlvektor,time)
 %St_Lsg.compute_ode15s_ss           %laeuft leider immer noch nicht!
-St_Lsg.compute_ode15s_ss_variant
+% St_Lsg.compute_ode15s_ss_variant
 %St_Lsg.compute_euler_ss
-%St_Lsg.compute_newmark
+% St_Lsg.compute_newmark % Instabil, wenn LimSinghBearing als Load eingebunden ist und keine sehr feine Zeitdiskretisierung gewaehlt wurde.
 %St_Lsg.compute_sys_ss_variant
 
-Hochlauf = Experiments.Hochlaufanalyse( r , [0, 1000] , (0:0.001:10) ); % input: (rotorsystem, [rpm_start, rpm_end], time_vector)
+Hochlauf = Experiments.Hochlaufanalyse( r , [0, 200] , (0:0.001:1) ); % input: (rotorsystem, [rpm_start, rpm_end], time_vector)
 Hochlauf.compute_ode15s_ss_variant
 
 % 
 %------------- Erzeuge Ausgabeformat der Loesung ---------------
 
-d = Dataoutput.TimeDataOutput(St_Lsg);
-dataset_modalanalysis = d.compose_data();
-d.save_data(dataset_modalanalysis,'Hochlauf_0_10krpm');
+% d = Dataoutput.TimeDataOutput(St_Lsg);
+% dataset_modalanalysis = d.compose_data();
+% d.save_data(dataset_modalanalysis,'Hochlauf_0_10krpm');
 % save('workspace_temp.mat');
 % 
 % 
 % %------------- Erzeuge Grafiken aus Loesung -------------------
 % 
- t = Graphs.TimeSignal(r, St_Lsg);
-o = Graphs.Orbitdarstellung(r, St_Lsg);
-f = Graphs.Fourierdarstellung(r, St_Lsg);
-fo = Graphs.Fourierorbitdarstellung(r, St_Lsg);
-w = Graphs.Waterfalldiagramm(r, St_Lsg);
+% t = Graphs.TimeSignal(r, St_Lsg);
+% o = Graphs.Orbitdarstellung(r, St_Lsg);
+% f = Graphs.Fourierdarstellung(r, St_Lsg);
+% fo = Graphs.Fourierorbitdarstellung(r, St_Lsg);
+% w = Graphs.Waterfalldiagramm(r, St_Lsg);
+
+t = Graphs.TimeSignal(r, Hochlauf);
+o = Graphs.Orbitdarstellung(r, Hochlauf);
+f = Graphs.Fourierdarstellung(r, Hochlauf);
+fo = Graphs.Fourierorbitdarstellung(r, Hochlauf);
+w = Graphs.Waterfalldiagramm(r, Hochlauf);
 % 
  for sensor = r.sensors
          t.plot(sensor);

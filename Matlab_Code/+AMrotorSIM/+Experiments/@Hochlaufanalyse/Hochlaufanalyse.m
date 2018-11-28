@@ -2,7 +2,7 @@ classdef Hochlaufanalyse < handle
    properties
       name='Hochlaufanalyse'
       rotorsystem
-      rpm_span
+      drehzahlen
       time
       result
    end
@@ -13,7 +13,7 @@ classdef Hochlaufanalyse < handle
            disp('Keine Hoclaufanalyse möglich ohne Rotorsystem')
          else
            obj.rotorsystem = a;
-           obj.rpm_span = rpm_span;
+           obj.drehzahlen = rpm_span;
            obj.time = time;
          end
        end 
