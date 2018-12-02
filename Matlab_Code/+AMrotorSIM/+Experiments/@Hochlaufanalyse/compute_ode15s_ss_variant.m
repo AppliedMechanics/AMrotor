@@ -5,6 +5,7 @@ t_span = [obj.time(1), obj.time(end)];
 Timer = AMrotorTools.Timer();
 
 disp('Compute Hochlauf .... ode15s State Space ....')
+obj.rotorsystem.check_for_non_integrable_components;
 obj.clear_time_result()
 obj.result = containers.Map('KeyType','double','ValueType','any');
 n_nodes = length(obj.rotorsystem.rotor.mesh.nodes);

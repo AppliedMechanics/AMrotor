@@ -1,7 +1,7 @@
 classdef LookUpTableSeal < AMrotorSIM.Seals.Seal
-    % calculation of the seal-coefficients according to Black
    properties
        cnfg
+       integrationProblemFlag = true;
    end
    methods
         function self=LookUpTableSeal(arg)
@@ -12,7 +12,9 @@ classdef LookUpTableSeal < AMrotorSIM.Seals.Seal
             self.cnfg = arg;
             self.color = 'red';
             end
-
+            if isfield(arg,'integrationProblemFlag')
+             self.integrationProblemFlag = arg.integrationProblemFlag;
+            end
         end 
    end
 end

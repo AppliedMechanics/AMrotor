@@ -137,7 +137,8 @@ cnfg.cnfg_bearing(count).damping = 299.275; % ???
 % cnfg.cnfg_bearing(count).name = 'Kennfeld Lager';
 % cnfg.cnfg_bearing(count).position=600e-3;                        %[m]
 % cnfg.cnfg_bearing(count).type='LookUpTableBearing';
-% cnfg.cnfg_bearing(count).Table = load_bearing('01_bearingTPFax100LS.mat');   
+% cnfg.cnfg_bearing(count).Table = load_bearing('01_bearingTPFax100LS.mat');
+% cnfg.cnfg_bearing(count).integrationProblemFlag = false;
 
 % count = count+1;
 % cnfg.cnfg_bearing(count).name = 'Feste Einspannung';
@@ -253,4 +254,5 @@ cnfg.cnfg_seal = [];
 % cnfg.cnfg_seal(count).name = 'Dichtung LookUpTable';
 % cnfg.cnfg_seal(count).position=300e-3;                        %[m]
 % cnfg.cnfg_seal(count).type='LookUpTableSeal';
-% cnfg.cnfg_seal(count).sealModel = load_seal_table('Koeffizienten_Volumenstrom_2bar.mat'); 
+% cnfg.cnfg_seal(count).sealModel.Table = load_seal_table('TPKonRATEcc0Seal1.mat'); 
+% cnfg.cnfg_seal(count).integrationProblemFlag = false;

@@ -3,6 +3,7 @@
         Timer = AMrotorTools.Timer();
          
         disp('Compute.... ode15s State Space ....')
+        obj.rotorsystem.check_for_non_integrable_components;
         obj.clear_time_result()
         
         obj.result = containers.Map('KeyType','double','ValueType','any');

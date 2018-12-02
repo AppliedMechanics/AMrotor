@@ -1,4 +1,5 @@
 function compute_newmark(obj)
+obj.rotorsystem.check_for_non_integrable_components;
 tic
 
         obj.clear_time_result()
