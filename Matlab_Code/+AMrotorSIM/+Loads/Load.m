@@ -26,7 +26,7 @@ classdef Load < matlab.mixin.Heterogeneous & handle
 
     create_ele_loc_matrix(self)
 
-    get_loc_load_vec(self,time,omega)
+    get_loc_load_vec(self,time,node)
 
   end
 end

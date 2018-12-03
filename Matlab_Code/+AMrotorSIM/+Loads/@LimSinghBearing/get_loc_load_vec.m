@@ -1,7 +1,8 @@
-function get_loc_load_vec(obj,~,omega,U_node)
+function get_loc_load_vec(obj,~,node)
 % U_node = [u_x; u_y; u_z; psi_x; psi_y; psi_z; du_x; du_y; du_z; dpsi_x; dpsi_y; dpsi_z] 
+    U_node = node.q;
     par = obj.cnfg.par;
-    par.omega = omega;
+    par.omega = node.omega;
     phi0=U_node(6); 
     par.phi=[0:(2*pi/par.N):(2*pi/par.N)*(par.N-1)]+phi0; %par.N=numberOfBalls
         
