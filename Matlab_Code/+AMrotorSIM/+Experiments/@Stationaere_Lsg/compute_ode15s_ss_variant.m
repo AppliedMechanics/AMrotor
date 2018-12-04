@@ -6,19 +6,21 @@
         obj.clear_time_result()
         
         obj.result = containers.Map('KeyType','double','ValueType','any');
+
+       for rpm = obj.drehzahlen 
+        disp(['... rotational speed: ',num2str(rpm),' U/min'])
         
-       for drehzahl = obj.drehzahlen 
-        disp(['... rotational speed: ',num2str(drehzahl),' U/min'])
         n_nodes = length(obj.rotorsystem.rotor.mesh.nodes);
         
-        omega = drehzahl*pi/30;           
+        Omega = rpm*pi/30;           
         
-        ss_A = obj.rotorsystem.systemmatrices.ss.A;
+        [mat.A,mat.B] = obj.get_state_space_matrices_variant(Omega);
+        
         
         %%init Vector
         
-        Z0 = zeros(length(ss_A),1);     % Mit null belegen:
-        Z0(end/2+6:6:end)=omega;        % Drehzahl für psi_z
+        Z0 = zeros(length(mat.A),1);     % Mit null belegen:
+        Z0(end/2+6:6:end)=Omega;        % Drehzahl fuer psi_z
          
          
         % solver parameters
@@ -26,10 +28,9 @@
 %         options = odeset('AbsTol', 1e-5, 'RelTol', 1e-5); % ohne live-plot
 
         Timer.restart();
-        disp('... integration started...')
-        fprintf('           '),pause(0.01), %Initialisierung Anzeige t
+        disp('... integration started...')       
         
-        sol = ode15s(@integrate_function_variant,obj.time,Z0, options, omega, obj.rotorsystem);
+        sol = ode15s(@integrate_function_variant,obj.time,Z0, options, Omega, obj.rotorsystem, mat);
         
         disp(['... spent time for integration: ',num2str(Timer.getWallTime()),' s'])
 
@@ -39,7 +40,7 @@
         res.X_d = Z(6*n_nodes+1:2*6*n_nodes,:);
         res.X_dd= Zp(6*n_nodes+1:2*6*n_nodes,:);
         
-        obj.result(drehzahl)=res;
+        obj.result(rpm)=res;
         
        end
 
