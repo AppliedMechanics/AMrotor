@@ -19,9 +19,9 @@
         [mat.A,mat.B] = obj.get_state_space_matrices_variant(Omega);        
         
         %%init Vector
-        
-        Z0 = zeros(length(mat.A),1);     % Mit null belegen:
-        Z0(end/2+6:6:end)=Omega;        % Drehzahl fuer psi_z
+        ndof = length(mat.A)/2;
+        Z0 = zeros(3*ndof,1);     % Mit null belegen:
+        Z0(1*ndof+6:6:2*ndof)=Omega;        % Drehzahl fuer psi_z
          
          
         % solver parameters

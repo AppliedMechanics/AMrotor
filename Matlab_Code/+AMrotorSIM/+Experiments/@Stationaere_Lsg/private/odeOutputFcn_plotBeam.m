@@ -10,9 +10,12 @@ switch flag
         status=0;
         close
     case ''
-        plot(y(1:6:end/2,end)); % plot Auslenkung in x+
-        ylim([-1.1 1.1]*max(abs(y(1:6:end/2,end))));
-%         plot(sqrt(y(1:6:end/2,end).^2+y(2:6:end/2,end).^2)); %plot den Betrag der Auslenkung
+        plot(y(1:6:end/3,end)); % plot Auslenkung in x
+        limit = max(abs(y(1:6:end/3,end)));
+        if limit ~=0
+        ylim([-1.1 1.1]*max(abs(y(1:6:end/3,end))));
+        end
+%         plot(sqrt(y(1:6:end/2,end).^2+y(2:6:end/20,end).^2)); %plot den Betrag der Auslenkung
 %         ylim([-1 1]*5e-5);
         drawnow
         status=0;

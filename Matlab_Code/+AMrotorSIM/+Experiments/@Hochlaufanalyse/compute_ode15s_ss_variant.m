@@ -12,8 +12,9 @@ n_nodes = length(obj.rotorsystem.rotor.mesh.nodes);
 
 %%init Vector
 nNodes = length(obj.rotorsystem.rotor.mesh.nodes);
-Z0 = zeros(2*6*nNodes,1);     % Mit null belegen:
-Z0(end/2+6:6:end)=obj.drehzahlen(1);        % Drehzahl fuer psi_z initialisieren
+ndof = 6*nNodes;
+Z0 = zeros(3*ndof,1);     % Mit null belegen:
+Z0(1*ndof+6:6:2*ndof)=rpm_span(1)/60*2*pi;        % Drehzahl fuer psi_z
 
 % solver parameters
 options = odeset('AbsTol', 1e-5, 'RelTol', 1e-5,'OutputFcn',@odeOutputFcn_plotBeam);
