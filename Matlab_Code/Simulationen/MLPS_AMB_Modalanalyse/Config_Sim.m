@@ -133,7 +133,7 @@ cnfg.cnfg_load(count).type='Unbalance_static';
 % cnfg.cnfg_load(count).betrag_x= 10;
 % cnfg.cnfg_load(count).betrag_y= 10;
 % cnfg.cnfg_load(count).frequency= 500;  %in Hz
-% cnfg.cnfg_load(count).type='Force_timevariant_whirl';
+% cnfg.cnfg_load(count).type='Force_timevariant_whirl_fwd';
 
 % % Chirp, Sinus-sweep-Kraft
 % count = count + 1;
@@ -157,5 +157,5 @@ cnfg.cnfg_load(count).betrag_y= cnfg.cnfg_load(count).betrag_x;
 cnfg.cnfg_load(count).frequency_0 = 0; % Startfrequenz
 cnfg.cnfg_load(count).frequency= 1000;  %in Hz, Endfrequenz
 cnfg.cnfg_load(count).t_end= 0.6;%2; % Zeitdauer des Chirps, hier wird f erreicht
-cnfg.cnfg_load(count).type='Force_timevariant_whirl_sweep';
+cnfg.cnfg_load(count).type='Force_timevariant_whirl_fwd_sweep';
 
