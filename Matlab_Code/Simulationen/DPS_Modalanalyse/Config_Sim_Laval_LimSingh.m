@@ -43,13 +43,13 @@ cnfg.cnfg_rotor.mesh_opt.approx = 'mean';   %Approximation for linear functions 
 % Massescheiben
 cnfg.cnfg_disc=[];
 
-% cnfg.cnfg_disc(1).name = 'Zusatzscheibe';
-% cnfg.cnfg_disc(1).position = 300e-3;                 %disc position [m]
-% cnfg.cnfg_disc(1).radius = 200e-3;                   %only for plot
-% cnfg.cnfg_disc(1).m = 5;                             %disc mass [kg]
-% cnfg.cnfg_disc(1).Jx = 1;                         %disc mom. of inertia [kg*m^2]
-% cnfg.cnfg_disc(1).Jz = 1;                         %disc mom. of inertia [kg*m^2]
-% cnfg.cnfg_disc(1).Jp = 1e-1;                         %disc polar mom. of inertia [kg*m^2] (polar)
+cnfg.cnfg_disc(1).name = 'Zusatzscheibe';
+cnfg.cnfg_disc(1).position = 300e-3;                 %disc position [m]
+cnfg.cnfg_disc(1).radius = 200e-3;                   %only for plot
+cnfg.cnfg_disc(1).m = 5;                             %disc mass [kg]
+cnfg.cnfg_disc(1).Jx = 1;                         %disc mom. of inertia [kg*m^2]
+cnfg.cnfg_disc(1).Jz = 1;                         %disc mom. of inertia [kg*m^2]
+cnfg.cnfg_disc(1).Jp = 1e-1;                         %disc polar mom. of inertia [kg*m^2] (polar)
 
 %% ========================================================================
 % Sensors
@@ -91,33 +91,33 @@ cnfg.cnfg_sensor(count).type='Displacementsensor';
 cnfg.cnfg_bearing=[];
 count = 0;
 % 
-% count = count +1 ;
-% cnfg.cnfg_bearing(count).name = 'Axiales Lager Links';
-% cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
-% cnfg.cnfg_bearing(count).type='SimpleAxialBearing';
-% cnfg.cnfg_bearing(count).stiffness=1e10;                     %[N/m]
-% cnfg.cnfg_bearing(count).damping = 100;
+count = count +1 ;
+cnfg.cnfg_bearing(count).name = 'Axiales Lager Links';
+cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
+cnfg.cnfg_bearing(count).type='SimpleAxialBearing';
+cnfg.cnfg_bearing(count).stiffness=1e10;                     %[N/m]
+cnfg.cnfg_bearing(count).damping = 100;
 % 
-% count = count + 1;
-% cnfg.cnfg_bearing(count).name = 'Torque Lager Links'; % Torque Lager koppelt die Torsion an die Umgebung und verhindert so die Starrkoerpermode fuer den Torsionsfreiheitsgrad psi_z.
-% cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
-% cnfg.cnfg_bearing(count).type='SimpleTorqueBearing';
-% cnfg.cnfg_bearing(count).stiffness=1e10;                     %[N/m]
-% cnfg.cnfg_bearing(count).damping = 100;
+count = count + 1;
+cnfg.cnfg_bearing(count).name = 'Torque Lager Links'; % Torque Lager koppelt die Torsion an die Umgebung und verhindert so die Starrkoerpermode fuer den Torsionsfreiheitsgrad psi_z.
+cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
+cnfg.cnfg_bearing(count).type='SimpleTorqueBearing';
+cnfg.cnfg_bearing(count).stiffness=1e10;                     %[N/m]
+cnfg.cnfg_bearing(count).damping = 100;
 % 
-% count = count + 1;
-% cnfg.cnfg_bearing(count).name = 'Isotropes Lager 1';
-% cnfg.cnfg_bearing(count).position=50e-3;                        %[m]
-% cnfg.cnfg_bearing(count).type='SimpleBearing';
-% cnfg.cnfg_bearing(count).stiffness=1e8;%0.0670680e7; % ???                    %[N/m]
-% cnfg.cnfg_bearing(count).damping = 299.275; % ???
-% 
-% count = count + 1;
-% cnfg.cnfg_bearing(count).name = 'Isotropes Lager 2';
-% cnfg.cnfg_bearing(count).position=550e-3;                        %[m]
-% cnfg.cnfg_bearing(count).type='SimpleBearing';
-% cnfg.cnfg_bearing(count).stiffness=1e8;%0.0670680e7; % ???                    %[N/m]
-% cnfg.cnfg_bearing(count).damping = 299.275; % ???
+count = count + 1;
+cnfg.cnfg_bearing(count).name = 'Isotropes Lager 1';
+cnfg.cnfg_bearing(count).position=50e-3;                        %[m]
+cnfg.cnfg_bearing(count).type='SimpleBearing';
+cnfg.cnfg_bearing(count).stiffness=1e8;%0.0670680e7; % ???                    %[N/m]
+cnfg.cnfg_bearing(count).damping = 299.275; % ???
+
+count = count + 1;
+cnfg.cnfg_bearing(count).name = 'Isotropes Lager 2';
+cnfg.cnfg_bearing(count).position=550e-3;                        %[m]
+cnfg.cnfg_bearing(count).type='SimpleBearing';
+cnfg.cnfg_bearing(count).stiffness=1e8;%0.0670680e7; % ???                    %[N/m]
+cnfg.cnfg_bearing(count).damping = 299.275; % ???
 
 % count = count + 1;
 % cnfg.cnfg_bearing(count).name = 'Isotropes Lager 3';
@@ -160,20 +160,20 @@ count = 0;
 % Kraft in feste Richtung % macht Berechnung langsam
 count = count + 1;
 cnfg.cnfg_load(count).name='Const. Kraft';
-cnfg.cnfg_load(count).position=150e-3;
+cnfg.cnfg_load(count).position=300e-3;
 cnfg.cnfg_load(count).betrag_x= 0;
-cnfg.cnfg_load(count).betrag_y= -10;
+cnfg.cnfg_load(count).betrag_y= -1;
 cnfg.cnfg_load(count).type='Force_constant_fix';
 
 % Unwuchten
 count = count + 1;
 cnfg.cnfg_load(count).name = 'Kleine Unwucht';
 cnfg.cnfg_load(count).position = 150e-3;
-cnfg.cnfg_load(count).betrag = 1e-2;%5e-6;
+cnfg.cnfg_load(count).betrag = 5e-6;%1e-2;%5e-6;
 cnfg.cnfg_load(count).winkellage = 0;
 cnfg.cnfg_load(count).type='Unbalance_static';
 
-% % Sinusfoermige Anregungskraft
+% %Sinusfoermige Anregungskraft
 % count = count + 1;
 % cnfg.cnfg_load(count).name='Sinus Kraft';
 % cnfg.cnfg_load(count).position=300e-3; % Position ML 1
@@ -216,33 +216,47 @@ cnfg.cnfg_load(count).type='Unbalance_static';
 % cnfg.cnfg_load(count).t_end= 1000;%2; % Zeitdauer des Chirps, hier wird f erreicht
 % cnfg.cnfg_load(count).type='Force_timevariant_whirl_fwd_sweep';
 
-% Lim-Singh-bearing als load fuer Time-Integration
-count = count + 1;
-cnfg.cnfg_load(count).name = 'LimSingh Rillenkugellager 1';
-cnfg.cnfg_load(count).position=0e-3;                        %[m]
-cnfg.cnfg_load(count).type='LimSinghBearing';
-cnfg.cnfg_load(count).par = load_bearing_LimSingh('parametersGupta20mm.m'); 
-
-% Lim-Singh-bearing als load fuer Time-Integration
-count = count + 1;
-cnfg.cnfg_load(count).name = 'LimSingh Rillenkugellager 2';
-cnfg.cnfg_load(count).position=600e-3;                        %[m]
-cnfg.cnfg_load(count).type='LimSinghBearing';
-cnfg.cnfg_load(count).par = load_bearing_LimSingh('parametersGupta20mm.m'); 
-
-% Childs-Seal als load fuer Time-Integration
-count = count + 1;
-cnfg.cnfg_load(count).name = 'Childs Seal Load 1';
-cnfg.cnfg_load(count).position=300e-3;                        %[m]
-cnfg.cnfg_load(count).type='ChildsSeal';
-cnfg.cnfg_load(count).sealModel = load_seal_model;
+% % Lim-Singh-bearing as load for time-integration
+% count = count + 1;
+% cnfg.cnfg_load(count).name = 'LimSingh Rillenkugellager 1';
+% cnfg.cnfg_load(count).position=0e-3;                        %[m]
+% cnfg.cnfg_load(count).type='LimSinghBearing';
+% cnfg.cnfg_load(count).par = load_bearing_LimSingh('parametersGupta20mm.m'); 
 % 
-% % Childs-Seal als load fuer Time-Integration
+% % Lim-Singh-bearing as load for time-integration
+% count = count + 1;
+% cnfg.cnfg_load(count).name = 'LimSingh Rillenkugellager 2';
+% cnfg.cnfg_load(count).position=600e-3;                        %[m]
+% cnfg.cnfg_load(count).type='LimSinghBearing';
+% cnfg.cnfg_load(count).par = load_bearing_LimSingh('parametersGupta20mm.m'); 
+% 
+% % Childs-Seal as load for time-integration
+% count = count + 1;
+% cnfg.cnfg_load(count).name = 'Childs Seal Load 1';
+% cnfg.cnfg_load(count).position=300e-3;                        %[m]
+% cnfg.cnfg_load(count).type='ChildsSeal';
+% cnfg.cnfg_load(count).sealModel = load_seal_model('ChildsBlackModelParameters.m');
+% 
+% % Childs-Seal as load for time-integration
 % count = count + 1;
 % cnfg.cnfg_load(count).name = 'Childs Seal Load 2';
 % cnfg.cnfg_load(count).position=550e-3;                        %[m]
 % cnfg.cnfg_load(count).type='ChildsSeal';
 % cnfg.cnfg_load(count).sealModel = load_seal_model;
+
+% Muszynska-Seal with eccentricity as load for time-integration
+count = count + 1;
+cnfg.cnfg_load(count).name = 'Muszynska Ecc Seal Mittig';
+cnfg.cnfg_load(count).position=300e-3;                        %[m]
+cnfg.cnfg_load(count).type='MuszynskaEccentricitySeal';
+cnfg.cnfg_load(count).sealModel = load_seal_model('TestRig.m');
+
+% % Muszynska-Seal with eccentricity as load for time-integration
+% count = count + 1;
+% cnfg.cnfg_load(count).name = 'Muszynska Ecc Seal 2';
+% cnfg.cnfg_load(count).position=500e-3;                        %[m]
+% cnfg.cnfg_load(count).type='MuszynskaEccentricitySeal';
+% cnfg.cnfg_load(count).sealModel = load_seal_model('TestRig.m');
 
 
 %% ========================================================================
@@ -254,17 +268,17 @@ cnfg.cnfg_seal = [];
 % cnfg.cnfg_seal(count).name = 'Dichtung Black';
 % cnfg.cnfg_seal(count).position=50e-3;                        %[m]
 % cnfg.cnfg_seal(count).type='BlackSeal';
-% cnfg.cnfg_seal(count).sealModel = load_seal_model;
+% cnfg.cnfg_seal(count).sealModel = load_seal_model('ChildsBlackModelParameters.m');
 % 
 % count = count+1;
 % cnfg.cnfg_seal(count).name = 'Dichtung Childs';
 % cnfg.cnfg_seal(count).position=550e-3;                        %[m]
 % cnfg.cnfg_seal(count).type='ChildsSeal';
-% cnfg.cnfg_seal(count).sealModel = load_seal_model;
+% cnfg.cnfg_seal(count).sealModel = load_seal_model('ChildsBlackModelParameters.m');
 
-% count = count+1;
-% cnfg.cnfg_seal(count).name = 'Dichtung LookUpTable';
-% cnfg.cnfg_seal(count).position=300e-3;                        %[m]
-% cnfg.cnfg_seal(count).type='LookUpTableSeal';
-% cnfg.cnfg_seal(count).sealModel.Table = load_seal_table('TPKonRATEcc0Seal1.mat'); 
-% cnfg.cnfg_seal(count).integrationProblemFlag = false;
+count = count+1;
+cnfg.cnfg_seal(count).name = 'Dichtung LookUpTable';
+cnfg.cnfg_seal(count).position=300e-3;                        %[m]
+cnfg.cnfg_seal(count).type='LookUpTableSeal';
+cnfg.cnfg_seal(count).sealModel.Table = load_seal_table('TPKonRATEcc0Seal1.mat'); 
+cnfg.cnfg_seal(count).integrationProblemFlag = false;

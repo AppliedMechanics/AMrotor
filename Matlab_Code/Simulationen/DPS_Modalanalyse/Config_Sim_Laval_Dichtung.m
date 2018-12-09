@@ -215,7 +215,7 @@ count = count+1;
 cnfg.cnfg_seal(count).name = 'Dichtung Childs';
 cnfg.cnfg_seal(count).position=300e-3;                        %[m]
 cnfg.cnfg_seal(count).type='ChildsSeal';
-cnfg.cnfg_seal(count).sealModel = load_seal_model;
+cnfg.cnfg_seal(count).sealModel = load_seal_model('ChildsBlackModelParameters.m');
 
 % count = count+1;
 % cnfg.cnfg_seal(count).name = 'Dichtung LookUpTable';

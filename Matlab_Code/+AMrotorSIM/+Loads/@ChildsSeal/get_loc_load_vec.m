@@ -26,9 +26,7 @@ init.omega0IR = [omega;0;0];       % Einheit: rad/s !
 
 [ M_s,D_s,K_s ] = self.ChildsModel( sys, init );
 
-F = -(M_s * udd + D_s * ud + K_s * u); % Damit bekomme ich eine unendliche Kraft -> keine Konvergenz
-%F = -(D_s * ud + K_s * u);
-%warning('Ohne Einfluss der Massenmatrix der Dichtung, da sonst keine Konvergenz.')
+F = -(M_s * udd + D_s * ud + K_s * u);
 
 self.h = [F; zeros(4,1)];
 
