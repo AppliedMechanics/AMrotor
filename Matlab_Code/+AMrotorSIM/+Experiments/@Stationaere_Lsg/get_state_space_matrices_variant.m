@@ -5,7 +5,7 @@ M_inv = M\eye(size(M));
 
 
 
-A = sparse([zeros(length(M)), eye(length(M)); -M_inv*K, -M_inv*C-M_inv*G*omega]);
+A = sparse([zeros(length(M)), eye(length(M)); -M_inv*K, -M_inv*(C+G*omega)]);
 B= sparse([zeros(length(M)),zeros(length(M));zeros(length(M)),M_inv]);
 
 end

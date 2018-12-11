@@ -3,10 +3,12 @@
         Timer = AMrotorTools.Timer();
          
         disp('Compute.... ode15s State Space ....')
+        obj.rotorsystem.check_for_non_integrable_components;
         obj.clear_time_result()
         
         obj.result = containers.Map('KeyType','double','ValueType','any');
 
+        
        for rpm = obj.drehzahlen 
         disp(['... rotational speed: ',num2str(rpm),' U/min'])
         
@@ -14,8 +16,7 @@
         
         Omega = rpm*pi/30;           
         
-        [mat.A,mat.B] = obj.get_state_space_matrices_variant(Omega);
-        
+        [mat.A,mat.B] = obj.get_state_space_matrices_variant(Omega);        
         
         %%init Vector
         
@@ -28,7 +29,8 @@
 %         options = odeset('AbsTol', 1e-5, 'RelTol', 1e-5); % ohne live-plot
 
         Timer.restart();
-        disp('... integration started...')       
+        disp('... integration started...')
+       
         
         sol = ode15s(@integrate_function_variant,obj.time,Z0, options, Omega, obj.rotorsystem, mat);
         
