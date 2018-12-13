@@ -136,7 +136,7 @@ cnfg.cnfg_bearing(count).damping = 299.275; % ???
 % cnfg.cnfg_bearing(count).name = 'Kennfeld Lager';
 % cnfg.cnfg_bearing(count).position=600e-3;                        %[m]
 % cnfg.cnfg_bearing(count).type='LookUpTableBearing';
-% cnfg.cnfg_bearing(count).Table = load_bearing('01_bearingTPFax100LS.mat');
+% cnfg.cnfg_bearing(count).Table = load_bearing('Inputfiles/01_bearingTPFax100LS.mat');
 % cnfg.cnfg_bearing(count).integrationProblemFlag = false;
 
 % count = count+1;
@@ -221,21 +221,21 @@ cnfg.cnfg_load(count).type='Unbalance_static';
 % cnfg.cnfg_load(count).name = 'LimSingh Rillenkugellager 1';
 % cnfg.cnfg_load(count).position=0e-3;                        %[m]
 % cnfg.cnfg_load(count).type='LimSinghBearing';
-% cnfg.cnfg_load(count).par = load_bearing_LimSingh('parametersGupta20mm.m'); 
+% cnfg.cnfg_load(count).par = load_bearing_LimSingh('Inputfiles/parametersGupta20mm.m'); 
 % 
 % % Lim-Singh-bearing as load for time-integration
 % count = count + 1;
 % cnfg.cnfg_load(count).name = 'LimSingh Rillenkugellager 2';
 % cnfg.cnfg_load(count).position=600e-3;                        %[m]
 % cnfg.cnfg_load(count).type='LimSinghBearing';
-% cnfg.cnfg_load(count).par = load_bearing_LimSingh('parametersGupta20mm.m'); 
+% cnfg.cnfg_load(count).par = load_bearing_LimSingh('Inputfiles/parametersGupta20mm.m'); 
 % 
 % % Childs-Seal as load for time-integration
 % count = count + 1;
 % cnfg.cnfg_load(count).name = 'Childs Seal Load 1';
 % cnfg.cnfg_load(count).position=300e-3;                        %[m]
 % cnfg.cnfg_load(count).type='ChildsSeal';
-% cnfg.cnfg_load(count).sealModel = load_seal_model('ChildsBlackModelParameters.m');
+% cnfg.cnfg_load(count).sealModel = load_seal_model('Inputfiles/ChildsBlackModelParameters.m');
 % 
 % % Childs-Seal as load for time-integration
 % count = count + 1;
@@ -249,21 +249,21 @@ cnfg.cnfg_load(count).type='Unbalance_static';
 % cnfg.cnfg_load(count).name = 'Muszynska Ecc Seal Mittig';
 % cnfg.cnfg_load(count).position=300e-3;                        %[m]
 % cnfg.cnfg_load(count).type='MuszynskaEccentricitySeal';
-% cnfg.cnfg_load(count).sealModel = load_seal_model('TestRig.m');
+% cnfg.cnfg_load(count).sealModel = load_seal_model('Inputfiles/TestRig.m');
 
 % % Muszynska-Seal turbulent
 % count = count + 1;
 % cnfg.cnfg_load(count).name = 'Muszynska Ecc Seal 2';
 % cnfg.cnfg_load(count).position=500e-3;                        %[m]
 % cnfg.cnfg_load(count).type='MuszynskaEccentricitySeal';
-% cnfg.cnfg_load(count).sealModel = load_seal_model('TestRig.m');
+% cnfg.cnfg_load(count).sealModel = load_seal_model('Inputfiles/TestRig.m');
 
 % Muszynska-Seal laminar
 count = count + 1;
 cnfg.cnfg_load(count).name = 'Muszynska Laminar Seal Mittig';
 cnfg.cnfg_load(count).position=300e-3;                        %[m]
 cnfg.cnfg_load(count).type='MuszynskaLaminarSeal';
-cnfg.cnfg_load(count).sealModel = load_seal_model('TestRigNeu1.m');
+cnfg.cnfg_load(count).sealModel = load_seal_model('Inputfiles/TestRigNeu1.m');
 
 
 %% ========================================================================
@@ -275,17 +275,17 @@ cnfg.cnfg_seal = [];
 % cnfg.cnfg_seal(count).name = 'Dichtung Black';
 % cnfg.cnfg_seal(count).position=50e-3;                        %[m]
 % cnfg.cnfg_seal(count).type='BlackSeal';
-% cnfg.cnfg_seal(count).sealModel = load_seal_model('ChildsBlackModelParameters.m');
+% cnfg.cnfg_seal(count).sealModel = load_seal_model('Inputfiles/ChildsBlackModelParameters.m');
 % 
 % count = count+1;
 % cnfg.cnfg_seal(count).name = 'Dichtung Childs';
 % cnfg.cnfg_seal(count).position=550e-3;                        %[m]
 % cnfg.cnfg_seal(count).type='ChildsSeal';
-% cnfg.cnfg_seal(count).sealModel = load_seal_model('ChildsBlackModelParameters.m');
+% cnfg.cnfg_seal(count).sealModel = load_seal_model('Inputfiles/ChildsBlackModelParameters.m');
 
 % count = count+1;
 % cnfg.cnfg_seal(count).name = 'Dichtung LookUpTable';
 % cnfg.cnfg_seal(count).position=300e-3;                        %[m]
 % cnfg.cnfg_seal(count).type='LookUpTableSeal';
-% cnfg.cnfg_seal(count).sealModel.Table = load_seal_table('TPKonRATEcc0Seal1.mat'); 
+% cnfg.cnfg_seal(count).sealModel.Table = load_seal_table('Inputfiles/TPKonRATEcc0Seal1.mat'); 
 % cnfg.cnfg_seal(count).integrationProblemFlag = false;

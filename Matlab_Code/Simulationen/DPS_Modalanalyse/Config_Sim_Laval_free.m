@@ -222,16 +222,16 @@ cnfg.cnfg_seal = [];
 % cnfg.cnfg_seal(count).name = 'Dichtung Black';
 % cnfg.cnfg_seal(count).position=300e-3;                        %[m]
 % cnfg.cnfg_seal(count).type='BlackSeal';
-% cnfg.cnfg_seal(count).sealModel = load_seal_model;
+% cnfg.cnfg_seal(count).sealModel = load_seal_model('Inputfiles/ChildsBlackModelParameters.m');
 % 
 % count = count+1;
 % cnfg.cnfg_seal(count).name = 'Dichtung Childs';
 % cnfg.cnfg_seal(count).position=300e-3;                        %[m]
 % cnfg.cnfg_seal(count).type='ChildsSeal';
-% cnfg.cnfg_seal(count).sealModel = load_seal_model;
+% cnfg.cnfg_seal(count).sealModel = load_seal_model('Inputfiles/ChildsBlackModelParameters.m');
 
 % count = count+1;
 % cnfg.cnfg_seal(count).name = 'Dichtung LookUpTable';
 % cnfg.cnfg_seal(count).position=300e-3;                        %[m]
 % cnfg.cnfg_seal(count).type='LookUpTableSeal';
-% cnfg.cnfg_seal(count).sealModel = load_seal_table('Koeffizienten_Volumenstrom_2bar.mat'); 
+% cnfg.cnfg_seal(count).sealModel = load_seal_table('Inputfiles/Koeffizienten_Volumenstrom_2bar.mat'); 

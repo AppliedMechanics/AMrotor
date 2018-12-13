@@ -20,7 +20,8 @@ Janitor.setLayout(2,3);
 % Config_Sim_Laval_Dichtung
 % Config_Sim_Laval_free
 % Config_Sim_Laval_LimSingh
-Config_Sim_Laval_Muszynska
+% Config_Sim_Laval_Muszynska
+Config_Sim_DPS_Time
 
 r=Rotorsystem(cnfg,'DPS-System');
 r.assemble; %fuehrt Funktion assemble.m mit Eingabe Objekt r aus Klasse Rotorsystem aus
