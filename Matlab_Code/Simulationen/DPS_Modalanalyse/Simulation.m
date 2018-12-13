@@ -19,7 +19,8 @@ Janitor.setLayout(2,3);
 % Config_Sim_DPS
 % Config_Sim_Laval_Dichtung
 % Config_Sim_Laval_free
-Config_Sim_Laval_LimSingh
+% Config_Sim_Laval_LimSingh
+Config_Sim_Laval_Muszynska
 
 r=Rotorsystem(cnfg,'DPS-System');
 r.assemble; %fuehrt Funktion assemble.m mit Eingabe Objekt r aus Klasse Rotorsystem aus
@@ -76,7 +77,7 @@ r.rotor.assemble_fem;
 
 %% Running Time Simulation
 
-St_Lsg = Experiments.Stationaere_Lsg( r , 0:10e3:100e3 , (0:0.001:1) );%St_Lsg = Experiments.Stationaere_Lsg(r,[0:50:10e3],[0:0.001:2]); %obj = Stationaere_Lsg(a,drehzahlvektor,time)
+St_Lsg = Experiments.Stationaere_Lsg( r , 1e3 , (0:0.001:1) );%St_Lsg = Experiments.Stationaere_Lsg(r,[0:50:10e3],[0:0.001:2]); %obj = Stationaere_Lsg(a,drehzahlvektor,time)
 %St_Lsg.compute_ode15s_ss           %laeuft leider immer noch nicht!
 St_Lsg.compute_ode15s_ss_variant
 %St_Lsg.compute_euler_ss
@@ -116,6 +117,6 @@ w = Graphs.Waterfalldiagramm(r, St_Lsg);
          f.plot(sensor);
 %          fo.plot(sensor,1); % Error Curve Fitting Toolbox muss installiert sein
 %          fo.plot(sensor,2);
-         w.plot(sensor); % Wasserfall
+%          w.plot(sensor); % Wasserfall
           Janitor.cleanFigures();
  end
