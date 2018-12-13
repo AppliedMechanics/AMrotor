@@ -1,4 +1,4 @@
-function [ Koeff ] = MuszynskaModelNew( self, sys,init )
+function [ Koeff ] = MuszynskaModelNew( self, sys, init )
 %MUSZYNSKAMODEL bestimmt die rotordynamischen Koeffizienten einer Dichtung.
 %Alles Überprüft CW1 7.11.2018
 %   Detailed explanation goes here
