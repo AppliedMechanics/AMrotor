@@ -78,7 +78,7 @@ r.rotor.assemble_fem;
 
 %% Running Time Simulation
 
-St_Lsg = Experiments.Stationaere_Lsg( r , 1e3 , (0:0.001:1) );%St_Lsg = Experiments.Stationaere_Lsg(r,[0:50:10e3],[0:0.001:2]); %obj = Stationaere_Lsg(a,drehzahlvektor,time)
+St_Lsg = Experiments.Stationaere_Lsg( r , 0:1e3:4e3 , (0:0.001:0.2) );%St_Lsg = Experiments.Stationaere_Lsg(r,[0:50:10e3],[0:0.001:2]); %obj = Stationaere_Lsg(a,drehzahlvektor,time)
 %St_Lsg.compute_ode15s_ss           %laeuft leider immer noch nicht!
 St_Lsg.compute_ode15s_ss_variant
 %St_Lsg.compute_euler_ss
@@ -104,6 +104,7 @@ o = Graphs.Orbitdarstellung(r, St_Lsg);
 f = Graphs.Fourierdarstellung(r, St_Lsg);
 fo = Graphs.Fourierorbitdarstellung(r, St_Lsg);
 w = Graphs.Waterfalldiagramm(r, St_Lsg);
+w2 = Graphs.WaterfalldiagrammTwoSided(r, St_Lsg);
 
 % t = Graphs.TimeSignal(r, Hochlauf);
 % o = Graphs.Orbitdarstellung(r, Hochlauf);
@@ -119,5 +120,6 @@ w = Graphs.Waterfalldiagramm(r, St_Lsg);
 %          fo.plot(sensor,1); % Error Curve Fitting Toolbox muss installiert sein
 %          fo.plot(sensor,2);
 %          w.plot(sensor); % Wasserfall
+         w2.plot(sensor); % Wasserfall 2 Sided
           Janitor.cleanFigures();
  end
