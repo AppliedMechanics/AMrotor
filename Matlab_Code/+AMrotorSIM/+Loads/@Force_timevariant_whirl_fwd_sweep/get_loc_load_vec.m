@@ -7,9 +7,16 @@ function get_loc_load_vec(obj,time,varargin)
     Fy = obj.cnfg.betrag_y;
     f = obj.cnfg.frequency;
     f0 = obj.cnfg.frequency_0;
-    t_end = obj.cnfg.t_end;
+    tStart = obj.cnfg.t_start;
+    tEnd = obj.cnfg.t_end;
     
-    obj.h(1) =  chirp(time,f0,t_end,f)*Fx;
-    phaseInit = -90;
-    obj.h(2) =  chirp(time,f0,t_end,f,'linear',phaseInit)*Fy;
+    timeDelta = time - tStart;
+    tEndDelta = tEnd - tStart;
+    
+    if (timeDelta > 0 && time<tEnd)
+        obj.h(1) =  chirp(timeDelta,f0,tEndDelta,f)*Fx;
+        phaseInit = -90;
+        obj.h(2) =  chirp(timeDelta,f0,tEndDelta,f,'linear',phaseInit)*Fy;
+    end
+    
 end
