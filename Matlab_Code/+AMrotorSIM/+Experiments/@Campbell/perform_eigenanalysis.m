@@ -24,18 +24,18 @@ function [V,D] = perform_eigenanalysis(obj,mat)
     end
     % falls es mehr Werte als angefragte Moden sind, dann wird der groesse
     % nach sortiert und die grosse, die zu viel sind, weggeworfen
-    if length(tmp.lambda) > num.modes_local*2
+    if length(tmp.lambda) > obj.num.modes*2
         [~,sortOrder] = sort(abs(imag(tmp.lambda)));
-        tmp.lambda = tmp.lambda(sortOrder(1:num.modes_local*2));
-        V = V(:,sortOrder(1:num.modes_local*2));
-        tmp.lambda = tmp.lambda(1:num.modes_local*2);
-        V = V(:,1:num.modes_local*2);
+        tmp.lambda = tmp.lambda(sortOrder(1:obj.num.modes*2));
+        V = V(:,sortOrder(1:obj.num.modes*2));
+        tmp.lambda = tmp.lambda(1:obj.num.modes*2);
+        V = V(:,1:obj.num.modes*2);
     end
     
     % sortiere die EW nach Hoehe des Imaginaerteils
     [~,sortOrder] = sort(abs(imag(tmp.lambda)));
-    tmp.lambda = tmp.lambda(sortOrder);%tmp.lambda = tmp.lambda(sortOrder(1:num.modes_local*2));
-    V = V(:,sortOrder);%V = V(:,sortOrder(1:num.modes_local*2));
+    tmp.lambda = tmp.lambda(sortOrder);
+    V = V(:,sortOrder);
     
     D = tmp.lambda;
 end
