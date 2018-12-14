@@ -132,11 +132,10 @@ count = count+1;
 cnfg.cnfg_seal(count).name = 'Dichtung LookUpTable';
 cnfg.cnfg_seal(count).position=300e-3;                        %[m]
 cnfg.cnfg_seal(count).type='LookUpTableSeal';
-cnfg.cnfg_seal(count).sealModel.Table = load_seal_table('Inpulfiles/TestRig1.mat'); 
+cnfg.cnfg_seal(count).sealModel.Table = load_seal_table('Inputfiles/SealTestRigLaminarEcc0.mat'); 
 
-count = count+1;
-cnfg.cnfg_seal(count).name = 'Dichtung LookUpTable';
-cnfg.cnfg_seal(count).position=300e-3;                        %[m]
-cnfg.cnfg_seal(count).type='LookUpTableSeal';
-cnfg.cnfg_seal(count).sealModel.Table = load_seal_table('Inpulfiles/TestRig2.mat'); 
-cnfg.cnfg_seal(count).integrationProblemFlag = false;
+% count = count+1;
+% cnfg.cnfg_seal(count).name = 'Dichtung LookUpTable';
+% cnfg.cnfg_seal(count).position=300e-3;                        %[m]
+% cnfg.cnfg_seal(count).type='LookUpTableSeal';
+% cnfg.cnfg_seal(count).sealModel.Table = load_seal_table('Inputfiles/SealTestRigNew2.mat'); 

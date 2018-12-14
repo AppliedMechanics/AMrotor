@@ -34,11 +34,11 @@ clear r_Welle r_Laeufer_D r_Laeufer_ML r_Laeufer_D_innen r_Laeufer_ML_innen
 % cnfg.cnfg_rotor.mesh_opt.d_max = 0.005;
 % cnfg.cnfg_rotor.mesh_opt.approx = 'mean';   %Approximation for linear functions with gradient 1=0;
 %                                 % Insert: upper sum, lower sum, mean.
-% cnfg.cnfg_rotor.mesh_opt.name = 'Mesh 2';
-% cnfg.cnfg_rotor.mesh_opt.d_min= 0.004;
-% cnfg.cnfg_rotor.mesh_opt.d_max = 0.010;
-% cnfg.cnfg_rotor.mesh_opt.approx = 'mean';   %Approximation for linear functions with gradient 1=0;
-%                                 % Insert: upper sum, lower sum, mean.
+cnfg.cnfg_rotor.mesh_opt.name = 'Mesh 2';
+cnfg.cnfg_rotor.mesh_opt.d_min= 0.004;
+cnfg.cnfg_rotor.mesh_opt.d_max = 0.010;
+cnfg.cnfg_rotor.mesh_opt.approx = 'mean';   %Approximation for linear functions with gradient 1=0;
+                                % Insert: upper sum, lower sum, mean.
 cnfg.cnfg_rotor.mesh_opt.name = 'Mesh 3';
 cnfg.cnfg_rotor.mesh_opt.d_min= 0.02;
 cnfg.cnfg_rotor.mesh_opt.d_max = 0.05;
@@ -124,10 +124,10 @@ cnfg.cnfg_bearing(count).damping = 299.275; % ???
 cnfg.cnfg_load=[];
 count = 0;
 
-% % Kraft in feste Richtung
+% Kraft in feste Richtung
 % count = count + 1;
 % cnfg.cnfg_load(count).name='Const. Kraft';
-% cnfg.cnfg_load(count).position=0e-3;
+% cnfg.cnfg_load(count).position=300e-3;
 % cnfg.cnfg_load(count).betrag_x= 10;
 % cnfg.cnfg_load(count).betrag_y= 0;
 % cnfg.cnfg_load(count).type='Force_constant_fix';
@@ -135,8 +135,15 @@ count = 0;
 % Unwuchten
 count = count + 1;
 cnfg.cnfg_load(count).name = 'Kleine Unwucht';
-cnfg.cnfg_load(count).position = 300e-3;
-cnfg.cnfg_load(count).betrag = 1e-4;%5e-6;
+cnfg.cnfg_load(count).position = 250e-3;
+cnfg.cnfg_load(count).betrag = 5e-5;%5e-6;
+cnfg.cnfg_load(count).winkellage = 0;
+cnfg.cnfg_load(count).type='Unbalance_static';
+
+count = count + 1;
+cnfg.cnfg_load(count).name = 'Kleine Unwucht';
+cnfg.cnfg_load(count).position = 350e-3;
+cnfg.cnfg_load(count).betrag = 5e-5;%5e-6;
 cnfg.cnfg_load(count).winkellage = 0;
 cnfg.cnfg_load(count).type='Unbalance_static';
 
@@ -196,6 +203,37 @@ cnfg.cnfg_load(count).t_start= 5;
 cnfg.cnfg_load(count).t_end= 10;%2; % Zeitdauer des Chirps, hier wird f erreicht
 cnfg.cnfg_load(count).type='Force_timevariant_whirl_bwd_sweep';
 
+% fwd-whirl-sweep-Kraft
+count = count + 1;
+cnfg.cnfg_load(count).name='Fwd Whirl Sweep Kraft';
+cnfg.cnfg_load(count).position=422e-3; % Position ML 1
+cnfg.cnfg_load(count).betrag_x= 10;
+cnfg.cnfg_load(count).betrag_y= cnfg.cnfg_load(count).betrag_x;
+cnfg.cnfg_load(count).frequency_0 = 0; % Startfrequenz
+cnfg.cnfg_load(count).frequency= 200;  %in Hz, Endfrequenz
+cnfg.cnfg_load(count).t_start= 0; %Zeitpkt an dem Startfrequenz anliegt
+cnfg.cnfg_load(count).t_end= 5; % Zeitpkt des Ende des Chirps, hier wird f erreicht
+cnfg.cnfg_load(count).type='Force_timevariant_whirl_fwd_sweep';
+
+% bwd-whirl-sweep-Kraft
+count = count + 1;
+cnfg.cnfg_load(count).name='Bwd Whirl Sweep Kraft';
+cnfg.cnfg_load(count).position=422e-3; % Position ML 1
+cnfg.cnfg_load(count).betrag_x= 10;
+cnfg.cnfg_load(count).betrag_y= cnfg.cnfg_load(count).betrag_x;
+cnfg.cnfg_load(count).frequency_0 = 0; % Startfrequenz
+cnfg.cnfg_load(count).frequency= 200;  %in Hz, Endfrequenz
+cnfg.cnfg_load(count).t_start= 5;
+cnfg.cnfg_load(count).t_end= 10;%2; % Zeitdauer des Chirps, hier wird f erreicht
+cnfg.cnfg_load(count).type='Force_timevariant_whirl_bwd_sweep';
+
+% Muszynska-Seal laminar
+count = count + 1;
+cnfg.cnfg_load(count).name = 'Muszynska Laminar Seal Mittig';
+cnfg.cnfg_load(count).position=300e-3;                        %[m]
+cnfg.cnfg_load(count).type='MuszynskaLaminarSeal';
+cnfg.cnfg_load(count).sealModel = load_seal_model('Inputfiles/TestRigNeu1.m');
+
 %% ========================================================================
 % Dichtungen
 count = 0;
@@ -205,11 +243,11 @@ cnfg.cnfg_seal = [];
 % cnfg.cnfg_seal(count).name = 'Dichtung LookUpTable';
 % cnfg.cnfg_seal(count).position=300e-3;                        %[m]
 % cnfg.cnfg_seal(count).type='LookUpTableSeal';
-% cnfg.cnfg_seal(count).sealModel.Table = load_seal_table('Inpulfiles/TestRig1.mat'); 
+% cnfg.cnfg_seal(count).sealModel.Table = load_seal_table('Inputfiles/TestRig1.mat'); 
 % 
 % count = count+1;
 % cnfg.cnfg_seal(count).name = 'Dichtung LookUpTable';
 % cnfg.cnfg_seal(count).position=300e-3;                        %[m]
 % cnfg.cnfg_seal(count).type='LookUpTableSeal';
-% cnfg.cnfg_seal(count).sealModel.Table = load_seal_table('Inpulfiles/TestRig2.mat'); 
+% cnfg.cnfg_seal(count).sealModel.Table = load_seal_table('Inputfiles/TestRig2.mat'); 
 % cnfg.cnfg_seal(count).integrationProblemFlag = false;
