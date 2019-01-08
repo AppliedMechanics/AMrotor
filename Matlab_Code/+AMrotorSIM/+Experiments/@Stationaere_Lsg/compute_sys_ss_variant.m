@@ -1,5 +1,5 @@
      function compute_sys_ss_variant(obj)
-        
+        obj.rotorsystem.check_for_non_integrable_components;
         Timer = AMrotorTools.Timer();
          
         disp('Compute.... ode15s State Space ....')

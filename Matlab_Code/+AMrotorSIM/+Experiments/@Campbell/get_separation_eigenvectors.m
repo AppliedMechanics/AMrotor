@@ -16,6 +16,8 @@ function [ EV_for,EW_for,EV_back,EW_back, EV_0, EW_0, Phase_xy, Phase_xy_mean ] 
 % direction with amplitude |x| and |y|
 % -> |phi_y-phi_x|~=pi/2: the main axes is no longer in x and y direction
 
+PhaseAbsMin = 1e-5;
+
 % Determine size of problem
 s=size(EV_raw);
 n_DOF=s(1);
@@ -62,9 +64,9 @@ end
 
 % identify the whirl direction
 % Information of Phase_ab should be redundant to xy and is neglected
-I_f=(Phase_xy_mean>1e-5);
-I_b=(Phase_xy_mean<(-1e-5));
-I_0=(Phase_xy_mean>(-1e-5)&Phase_xy_mean<1e-5);
+I_f=(Phase_xy_mean>PhaseAbsMin);
+I_b=(Phase_xy_mean<(-PhaseAbsMin));
+I_0=(Phase_xy_mean>(-PhaseAbsMin)&Phase_xy_mean<PhaseAbsMin);
 
 % order Phase (necessary if in output)
 

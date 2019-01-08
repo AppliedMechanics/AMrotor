@@ -3,22 +3,25 @@
         Timer = AMrotorTools.Timer();
          
         disp('Compute.... ode15s State Space ....')
+        obj.rotorsystem.check_for_non_integrable_components;
         obj.clear_time_result()
         
         obj.result = containers.Map('KeyType','double','ValueType','any');
+
         
-       for drehzahl = obj.drehzahlen 
-        disp(['... rotational speed: ',num2str(drehzahl),' U/min'])
+       for rpm = obj.drehzahlen 
+        disp(['... rotational speed: ',num2str(rpm),' U/min'])
+        
         n_nodes = length(obj.rotorsystem.rotor.mesh.nodes);
         
-        omega = drehzahl*pi/30;           
+        Omega = rpm*pi/30;           
         
-        ss_A = obj.rotorsystem.systemmatrices.ss.A;
+        [mat.A,mat.B] = obj.get_state_space_matrices_variant(Omega);        
         
         %%init Vector
-        
-        Z0 = zeros(length(ss_A),1);     % Mit null belegen:
-        Z0(end/2+6:6:end)=omega;        % Drehzahl für psi_z
+        ndof = length(mat.A)/2;
+        Z0 = zeros(3*ndof,1);     % Mit null belegen:
+        Z0(1*ndof+6:6:2*ndof)=Omega;        % Drehzahl fuer psi_z
          
          
         % solver parameters
@@ -27,9 +30,9 @@
 
         Timer.restart();
         disp('... integration started...')
-        fprintf('           '),pause(0.01), %Initialisierung Anzeige t
+       
         
-        sol = ode15s(@integrate_function_variant,obj.time,Z0, options, omega, obj.rotorsystem);
+        sol = ode15s(@integrate_function_variant,obj.time,Z0, options, Omega, obj.rotorsystem, mat);
         
         disp(['... spent time for integration: ',num2str(Timer.getWallTime()),' s'])
 
@@ -39,7 +42,7 @@
         res.X_d = Z(6*n_nodes+1:2*6*n_nodes,:);
         res.X_dd= Zp(6*n_nodes+1:2*6*n_nodes,:);
         
-        obj.result(drehzahl)=res;
+        obj.result(rpm)=res;
         
        end
 

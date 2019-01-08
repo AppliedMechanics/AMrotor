@@ -1,4 +1,6 @@
  function compute_euler_ss(obj)
+ 
+    obj.rotorsystem.check_for_non_integrable_components;
 
     Timer = AMrotorTools.Timer();
 

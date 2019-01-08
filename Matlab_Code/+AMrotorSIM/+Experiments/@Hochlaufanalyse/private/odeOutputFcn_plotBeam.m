@@ -12,7 +12,7 @@ switch flag
     case ''
         plot(y(1:6:end/3,end)); % plot Auslenkung in x
         ylim([-1.1 1.1]*(max(abs(y(1:6:end/3,end)))+1e-12));
-%         plot(sqrt(y(1:6:end/2,end).^2+y(2:6:end/20,end).^2)); %plot den Betrag der Auslenkung
+%         plot(sqrt(y(1:6:end/2,end).^2+y(2:6:end/2,end).^2)); %plot den Betrag der Auslenkung
 %         ylim([-1 1]*5e-5);
         drawnow
         status=0;

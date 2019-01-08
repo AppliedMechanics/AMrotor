@@ -1,9 +1,9 @@
-classdef SimpleAxialBearing < AMrotorSIM.Bearings.Bearing
+classdef RestrictAllDofsBearing < AMrotorSIM.Bearings.Bearing
    properties
        cnfg
    end
    methods
-        function self=SimpleAxialBearing(arg)
+        function self=RestrictAllDofsBearing(arg)
             self = self@AMrotorSIM.Bearings.Bearing(arg);
             if nargin == 0
             self.name = 'Empty Bearing';

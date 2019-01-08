@@ -1,8 +1,12 @@
      function compute_ode15s_ss(obj)
+    
         
         Timer = AMrotorTools.Timer();
          
         disp('Compute.... ode15s State Space ....')
+        
+        obj.check_for_non_integrable_components;
+        
         obj.clear_time_result()
         
         obj.result = containers.Map('KeyType','double','ValueType','any');
