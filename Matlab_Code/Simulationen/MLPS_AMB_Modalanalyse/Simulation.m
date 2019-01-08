@@ -1,7 +1,6 @@
 %% MLPS - AMB - Modalanalyse
 % Zur Berechnung der Rohdaten für die Modalanalyse
 % SIRM2019 Beitrag
-% 20.08.2018
 
 %% Import
 
