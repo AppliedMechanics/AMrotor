@@ -16,7 +16,8 @@ title(figurehandle,sprintf('Eigenmode Lateral %1.2f Hz',obj.modalsystem.eigenVal
 hold on;
 
 x = [obj.modalsystem.rotorsystem.rotor.mesh.nodes.z];
-plotMode3D(figurehandle,x,obj.modalsystem.eigenVectors.lateral_x(:,number_esf),...
+r = sqrt(obj.modalsystem.eigenVectors.lateral_x(:,number_esf).^2 + obj.modalsystem.eigenVectors.lateral_y(:,number_esf).^2);
+plotMode3D(figurehandle,x,r,...
     obj.modalsystem.eigenValues.lateral(number_esf),...
     ColorHandler.getColor(number_esf), param)
 

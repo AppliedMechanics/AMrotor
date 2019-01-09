@@ -34,6 +34,21 @@ function plot_displacements(obj)
 
         legend('show')
         grid('on')
+        
+        
+        figure('Name','Eigenschwingformen sqrt(x^2+y^2)','NumberTitle','off');
+        ax = axes;
+        title('Eigenschwingformen r=sqrt(x^2+y^2)')
+        hold on;
+
+        for s=1:n_ew
+            plotMode(ax,x,sqrt(obj.modalsystem.eigenVectors.lateral_y(:,s).^2+obj.modalsystem.eigenVectors.lateral_y(:,s).^2),...
+                obj.modalsystem.eigenValues.lateral(s),...
+                ColorHandler.getColor(s))
+        end
+
+        legend('show')
+        grid('on')
     end
     
 end
