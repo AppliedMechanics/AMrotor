@@ -52,7 +52,7 @@ r.rotor.assemble_fem;
 
 % Campbell-Diagramm
 cmp = Experiments.Campbell(r);
-cmp.set_up(0:2e2:20e3,8); 
+cmp.set_up(1e2:1e2:6e3,8); 
 cmp.calculate();% input of set_up is (1/min, Number of Modes)
 cmpDiagramm = Graphs.Campbell(cmp);
 cmpDiagramm.print_damping_zero_crossing()
@@ -61,3 +61,7 @@ cmpDiagramm.set_plots('all');
 % cmpDiagramm.set_plots('backward');
 % cmpDiagramm.set_plots('forward');
 Janitor.cleanFigures();
+
+% % to plot the Campbell-Diagram from the simulation into the waterfalldiagram from the experiment
+% plot_Campbell_stem3(cmpDiagramm,1e-3)
+% plot_Campbell_plot(cmpDiagramm)
