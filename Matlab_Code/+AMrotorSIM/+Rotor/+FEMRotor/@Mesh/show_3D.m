@@ -10,14 +10,14 @@ function [ax]=show_3D(self)
    f2=figure;
 % erzeuge Vektor r mit Radien der Abschnitte
 %==========================================================================
-   for k=1:n_nodes
+%    for k=1:n_nodes
 
 
     for k=1:n_nodes
         mesh_node_z(k) = self.nodes(k).z;
         mesh_node_radius(k) = self.nodes(k).radius_outer;
     end
-    while n <n_nodes
+    while n <=n_nodes
 
         r(n,1)=mesh_node_radius(n);
 
@@ -29,7 +29,7 @@ function [ax]=show_3D(self)
         a=a+1;
     end
 
-   end
+%    end
 
 %==========================================================================
    ax = axes('xlim', [-10 10], 'ylim', [-10 10], 'zlim',[-10 10]);

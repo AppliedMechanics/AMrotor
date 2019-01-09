@@ -27,7 +27,7 @@ for sensor = sensors
     ampfull=[flip(amp_Rminus(:,1:1:end/4),2) amp_Rplus(:,1:1:end/4)];
     waterfall(ffull,rpm_vec./60,ampfull)
     xlabel('Frequenz [Hz]')
-    ylabel('Drehzahl [U/min]')
+    ylabel('Drehzahl [U/s]')
     zlabel(['Amplitude [', sensor.unit,']'])
     title ('Two Sided Waterfalldiagram')
     colormap( [ 0 0 0 ] )
