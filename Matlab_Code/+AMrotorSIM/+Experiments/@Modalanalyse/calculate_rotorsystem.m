@@ -8,6 +8,7 @@ function calculate_rotorsystem(obj,nModes,drehzahl)
 %==========================================================================
 % aus Experiments.Campbell
 [mat.A,mat.B] = obj.get_state_space_matrices(omega);
+% [mat.A,mat.B] = obj.get_state_space_matrices_reduced(omega);
 [V,D_tmp] = obj.perform_eigenanalysis(mat);
 D = D_tmp;% D = get_positive_entries(D_tmp);
 %==========================================================================
@@ -24,7 +25,7 @@ D = imag(D);
  D = D(tmp);
  V = tmp2;
  
- V = real(obj.get_position_entries(V));
+ V = real(obj.get_position_entries(V,mat));
         
     %% Aussortierung der x werte aus dem EV mithilfe der get_dof Implementierung
     nNodes = obj.rotorsystem.rotor.mesh.nodes;
@@ -34,8 +35,8 @@ D = imag(D);
 
     for mode = 1:nModes
         for node = 1:length(nNodes)
-            dof_u_x = obj.rotorsystem.rotor.get_gdof('u_x',node);%1+4*(node-1)
-            dof_u_y = obj.rotorsystem.rotor.get_gdof('u_y',node);%2+4*(node-1)
+            dof_u_x = obj.rotorsystem.rotor.get_gdof('u_x',node,mat);%1+4*(node-1)
+            dof_u_y = obj.rotorsystem.rotor.get_gdof('u_y',node,mat);%2+4*(node-1)
 
             Ev_lat_x(node,mode)=V(dof_u_x,mode);
             Ev_lat_y(node,mode)=V(dof_u_y,mode);
@@ -45,12 +46,12 @@ D = imag(D);
     obj.eigenVectors.lateral_y=Ev_lat_y;
     obj.eigenValues.lateral =D;
     
-    %% Aussortierung der Torsionswerte aus dem EV mithilfe der get_dof Implementierung
-    Ev_tor = zeros(length(nNodes),size(V,2));
-    for node = 1:length(nNodes)
-        dof_xi_z = obj.rotorsystem.rotor.get_gdof('psi_z',node);
-        Ev_tor(node,:)= V(dof_xi_z,:);
-    end
-    obj.eigenVectors.torsional=Ev_tor;
+%     %% Aussortierung der Torsionswerte aus dem EV mithilfe der get_dof Implementierung
+%     Ev_tor = zeros(length(nNodes),size(V,2));
+%     for node = 1:length(nNodes)
+%         dof_xi_z = obj.rotorsystem.rotor.get_gdof('psi_z',node);
+%         Ev_tor(node,:)= V(dof_xi_z,:);
+%     end
+%     obj.eigenVectors.torsional=Ev_tor;
 
 end 

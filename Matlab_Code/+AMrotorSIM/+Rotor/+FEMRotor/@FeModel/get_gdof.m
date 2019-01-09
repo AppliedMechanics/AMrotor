@@ -1,4 +1,4 @@
-function glob_dof = get_gdof(self,direction,Node)
+function glob_dof = get_gdof(self,direction,Node,mat)
     dof_name = {'u_x','u_y','u_z','psi_x','psi_y','psi_z'};
     dof_loc = [1,2,3,4,5,6];
     
@@ -15,6 +15,10 @@ function glob_dof = get_gdof(self,direction,Node)
         error ('Error: Input not existent as a degree of freedom')
     end
     
-    glob_dof = (Node-1)*6+entry_nr;
+    % falls weniger als 6 dof benutzt werden
+    n.nodes = length(self.mesh.nodes);
+    n.dofPerNode = length(mat.A)/n.nodes/2;
+    
+    glob_dof = (Node-1)*n.dofPerNode+entry_nr;
    
 end
