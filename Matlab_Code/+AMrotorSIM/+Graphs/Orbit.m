@@ -1,17 +1,20 @@
 classdef Orbit < handle
    properties
-      name
-      rotorsystem
+    unit
+    rotorsystem
+    name=' --- Graphobject Orbits  --- '
+    time
+    experiment
+    ColorHandler
    end
    methods
        %Konstruktor
-       function obj = Orbit(a)
-         if nargin == 0
-           disp('Keine Orbitdarstellung möglich ohne Rotorsystem')
-         else
-           obj.rotorsystem = a;
-           obj.name = strcat(obj.rotorsystem.name,'- Wegorbits');
-         end
+       function obj = Orbit(r, experiment)
+          self.rotorsystem = r;
+          self.time = experiment.time;
+          self.experiment = experiment;
+          self.ColorHandler = AMrotorTools.PlotColors();
+          self.ColorHandler.set_up(length(experiment.drehzahlen));
        end
       
       function show(obj)

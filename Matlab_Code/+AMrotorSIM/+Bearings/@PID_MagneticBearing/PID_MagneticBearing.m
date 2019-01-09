@@ -1,11 +1,11 @@
-classdef PID_MagneticBearing < AMrotorSIM.Bearings.Lager
+classdef PID_MagneticBearing < AMrotorSIM.Bearings.Bearing
    properties
         cnfg
         ss_position
    end
    methods
         function obj=PID_MagneticBearing(arg) 
-           obj = obj@AMrotorSIM.Bearings.Lager(arg);
+           obj = obj@AMrotorSIM.Bearings.Bearing(arg);
            obj.cnfg = arg; 
            
            obj.color = 'yellow';
@@ -17,7 +17,7 @@ classdef PID_MagneticBearing < AMrotorSIM.Bearings.Lager
         end 
         
         function [M,G,D,K] = compute_matrices(obj)
-         compute_matrices@AMrotorSIM.Bearings.Lager(obj);
+         compute_matrices@AMrotorSIM.Bearings.Bearing(obj);
            
            K = zeros(4,4);
            D = zeros(4,4);

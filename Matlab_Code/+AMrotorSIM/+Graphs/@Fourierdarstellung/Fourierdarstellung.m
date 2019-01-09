@@ -13,7 +13,7 @@ classdef Fourierdarstellung < handle
       self.abtastrate = 1/(experiment.time(2)-experiment.time(1));
       self.experiment = experiment;
       self.ColorHandler = AMrotorTools.PlotColors();
-      self.ColorHandler.setUp(length(experiment.drehzahlen));
+      self.ColorHandler.set_up(length(experiment.drehzahlen));
   end
   
   function plot(self,sensors)
@@ -21,7 +21,7 @@ classdef Fourierdarstellung < handle
       
           for sensor = sensors
             
-            [x_val,~,y_val,~]=sensor.read_sensor_values(self.experiment);
+            [x_val,~,y_val,~]=sensor.read_values(self.experiment);
             fs = self.abtastrate;
             
             

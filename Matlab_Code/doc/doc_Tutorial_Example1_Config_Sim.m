@@ -1,19 +1,42 @@
 %% ======================================================================
 % Rotor
 
-cnfg.cnfg_rotor.name = "Testrotor";
+cnfg.cnfg_rotor.name = 'Testrotor';
 cnfg.cnfg_rotor.shear_def = 1;     % 1 = Timoshenko or 0 = Bernoulli beam theoy
 
 %rotor geometry             [z1,da,di;   z2,da,di]  
-cnfg.cnfg_rotor.rotor_dimensions = [0,15,0;400,15,0;450,150,0;600,15,0]*1e-3; %[m] %Angefangen bei 0, die Durchmessersprünge am ende des Abschnites eingeben
-cnfg.cnfg_rotor.shear_factor   = 0.9;  %!!!!!!!!!wird Automatisch korregiert wenn Kreisring.
+%cnfg.cnfg_rotor.rotor_dimensions = [0,15,0;400,15,0;450,150,0;600,15,0]*1e-3; %[m] %Angefangen bei 0, die Durchmessersprünge am ende des Abschnites eingeben
+%cnfg.cnfg_rotor.shear_factor   = 0.9;  %!!!!!!!!!wird Automatisch korregiert wenn Kreisring.
                                 %!!!!!!!!!Schubkorrekrutfaktor für Kreisquerschnitt 0.9[-], Kreisring 0.5[-]
 
-cnfg.cnfg_rotor.E_module = 211e9;  %[N/m^2]
-cnfg.cnfg_rotor.density  = 7446;   %[kg/m^3]
-cnfg.cnfg_rotor.poisson  = 0.3;    %steel 0.27...0.3 [-]
+%cnfg.cnfg_rotor.E_module = 211e9;  %[N/m^2]
+%cnfg.cnfg_rotor.density  = 7446;   %[kg/m^3]
+%cnfg.cnfg_rotor.poisson  = 0.3;    %steel 0.27...0.3 [-]
 
-cnfg.cnfg_rotor.dz=0.01;           %set elemet length for meshing
+%cnfg.cnfg_rotor.dz=0.01;           %set elemet length for meshing
+
+%-------Config for Geometry and Mesh Creation of a Rotorsystem------
+
+% Material Config
+
+cnfg.cnfg_rotor.material.name = 'steel';
+cnfg.cnfg_rotor.material.e_module = 211e9;  %[N/m^2]
+cnfg.cnfg_rotor.material.density  = 7446;   %[kg/m^3] %%SI EINHEITEN!!
+cnfg.cnfg_rotor.material.poisson  = 0.3;    %steel 0.27...0.3 [-]
+cnfg.cnfg_rotor.material.shear_factor = 0.9;
+
+% Rotor Config
+cnfg.cnfg_rotor.name = 'rotor';
+%cnfg.cnfg_rotor.geo_nodes = {[0 0], [0 0.015], [0.400 0.015], [0.400 0.150], [0.450 0.150], [0.450 0.015], [0.600 0.015]};
+cnfg.cnfg_rotor.geo_nodes = {[0 0], [0 0.0025], [0.5 0.0025]}% [0.2575 0.0075], [0.2575 0.050], [0.3425 0.050], [0.3425 0.0075], [0.600 0.0075]};
+%cnfg.cnfg_rotor.material = Material(material);
+
+% FEM Config
+cnfg.cnfg_rotor.mesh_opt.name = 'Mesh 1';
+cnfg.cnfg_rotor.mesh_opt.d_min= 0.25;
+cnfg.cnfg_rotor.mesh_opt.d_max = 0.5;
+cnfg.cnfg_rotor.mesh_opt.approx = 'upper sum';   %Approximation for linear functions with gradient 1=0;
+                                % Insert: upper sum, lower sum, mean.
 
     
 %% ========================================================================
@@ -35,9 +58,9 @@ cnfg.cnfg_sensor(1).name = 'Sepp';
 cnfg.cnfg_sensor(1).position=0.050;
 cnfg.cnfg_sensor(1).type=1;
 
-cnfg.cnfg_sensor(2).name='Hans';
-cnfg.cnfg_sensor(2).position=0.550;
-cnfg.cnfg_sensor(2).type=1;
+%cnfg.cnfg_sensor(2).name='Hans';
+%cnfg.cnfg_sensor(2).position=0.550;
+%cnfg.cnfg_sensor(2).type=1;
 
 % cnfg.cnfg_sensor(3).name='Maeir';
 % cnfg.cnfg_sensor(3).position=0.325;
@@ -58,7 +81,7 @@ cnfg.cnfg_lager(1).stiffness=5e6;%7.0e5;              %[N/m]
 
 % Lager
 cnfg.cnfg_lager(2).name = 'Ein zweites Lager';
-cnfg.cnfg_lager(2).position=600e-3;                        %[m]
+cnfg.cnfg_lager(2).position=0.5;                        %[m]
 cnfg.cnfg_lager(2).type=1;
 %Config_Sim_Mag1
 %cnfg.cnfg_lager(2).mag=mag;

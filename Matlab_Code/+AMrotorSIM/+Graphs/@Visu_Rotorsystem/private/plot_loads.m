@@ -11,14 +11,13 @@ for i=load
     yp = R*sin(phi);
     % Kugel;
     [x,y,z] = sphere();
-    %h = surf(ax, x*r+xp, y*r+yp, z*r+zp);
-    h = surf(ax, z*r+zp, y*r+yp, x*r+xp); %Vertauschung x und z
+    h = surf(ax, z*r+zp, y*r+yp, x*r+xp);
 
     % Linie;
-    line(ax,[zp,zp], [0,yp], [0,xp] );
+    line(ax, [zp,zp], [0,yp],[0,xp]);
     
     set(h, 'edgecolor','none')
-    set(h, 'facecolor',i.cnfg.color)
+%    set(h, 'facecolor',i.cnfg.color)
     end
 
     if isa(i,'AMrotorSIM.Loads.Force_constant_fix')
@@ -27,11 +26,10 @@ for i=load
     ly = i.cnfg.betrag_y;
     
     %Vektoren;
-    %h=quiver3(ax,0,0,zp,lx*0.003,ly*0.003,0);
-    h=quiver3(ax,zp,0,0,lx*0.003,ly*0.003,0);
+    h=quiver3(ax,zp,0,0,0,-ly*0.003,-lx*0.003);
     % Linie;
     
     h.Color='green';
-    h.LineWidth = 2;
+    h.LineWidth = 5;
     end
 end

@@ -4,7 +4,7 @@
 %% Header
 
 % Johannes Maierhofer
-% 28.03.2017,29.03.2017,30.03.2017,31.03.2017,03.04.2017,04.04.2017,05.04.2017,06.04.2017,12.04.2017
+% 29.06.2018
 %
 %         .o.       ooo        ooooo                        .                      
 %        .888.      `88.       .888'                      .o8                      
@@ -28,38 +28,50 @@ clc
 doc_Tutorial_Example1_Config_Sim
 
 r=Rotorsystem(cnfg,'System');
+r.assemble;
 r.show;
 
-r.rotor.mesh()
+%r.rotor.geometry.show_2D();
+%r.rotor.geometry.show_3D();
 
-g=Graphs.Visu_Rotorsystem(r);
-g.show();
+%r.rotor.mesh.show_2D(); 
+%r.rotor.mesh.show_3D();
 
-r.compute_matrices();
-r.compute_loads();
-%r.reduce_modal(10);
+%g=Graphs.Visu_Rotorsystem(r);
+%g.show();
 
+r.assemble_system_matrices();
+r.transform_StateSpace;
 %% Running system analyses
 
 m=Experiments.Modalanalyse(r);
+m.rotorsystem.transform_StateSpace
+%m.calculate_rotor_only_without_damping(15);
 
-% m.calculate_rotor_only(4,0:100:1000);
-% esf = Graphs.Eigenschwingformen(m);
-% esf.plot();
+%m.calculate_rotor_only(5,100);
 
-m.calculate_rotorsystem(4,0:100:1000);
-esf2= Graphs.Eigenschwingformen(m);
-esf2.plot();
+%m.calculate_rotorsystem_without_damping(15);
+%m.calculate_rotorsystem(15,0);
+%
+%esf= Graphs.Eigenschwingformen(m);
+%esf.print_frequencies();
+%esf.plot_displacements();
+% 
 
-m.calculate_rotorsystem(3,0:100:3000);
-cmp = Graphs.Campbell(m);
-cmp.plot();
+%% Erstmal bis hierher
+%r.compute_loads();
+%r.reduce_modal(10);
+
+% m.calculate_rotorsystem(3);
+% cmp = Graphs.Campbell(m);
+% cmp.plot_displacements();
 
 %% Running Time Simulation
 
- St_Lsg = Experiments.Stationaere_Lsg(r,1000,[0 2]);
- St_Lsg.show()
- St_Lsg.compute()
-
- w = Graphs.Wegorbit(r);
- w.plot(r.sensors);
+St_Lsg = Experiments.Stationaere_Lsg(r,1000,[0 0.1]);
+St_Lsg.compute_ode15s_ss
+%St_Lsg.show()
+%St_Lsg.compute()
+% 
+w = Graphs.Wegorbit(r);
+w.plot(r.sensors);
