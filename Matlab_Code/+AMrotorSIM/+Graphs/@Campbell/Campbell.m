@@ -1,6 +1,6 @@
 classdef Campbell < handle
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    properties (Access = private)
+    properties %(Access = private)
         Name = 'Campbell-Diagramm';
         experimentCampbell;
         ColorHandler;

@@ -25,12 +25,13 @@ D = imag(D);
  D = D(tmp);
  V = tmp2;
  
- V = real(obj.get_position_entries(V,mat));
+ V = obj.get_position_entries(V,mat);
+ V_real = real(V);
         
     %% Aussortierung der x werte aus dem EV mithilfe der get_dof Implementierung
     nNodes = obj.rotorsystem.rotor.mesh.nodes;
     
-    Ev_lat_x = zeros(length(nNodes),size(V,2));
+    Ev_lat_x = zeros(length(nNodes),size(V_real,2));
     Ev_lat_y = Ev_lat_x;
 
     for mode = 1:nModes
@@ -38,8 +39,8 @@ D = imag(D);
             dof_u_x = obj.rotorsystem.rotor.get_gdof('u_x',node,mat);%1+4*(node-1)
             dof_u_y = obj.rotorsystem.rotor.get_gdof('u_y',node,mat);%2+4*(node-1)
 
-            Ev_lat_x(node,mode)=V(dof_u_x,mode);
-            Ev_lat_y(node,mode)=V(dof_u_y,mode);
+            Ev_lat_x(node,mode)=V_real(dof_u_x,mode);
+            Ev_lat_y(node,mode)=V_real(dof_u_y,mode);
         end
     end   
     obj.eigenVectors.lateral_x=Ev_lat_x;
@@ -47,11 +48,13 @@ D = imag(D);
     obj.eigenValues.lateral =D;
     
 %     %% Aussortierung der Torsionswerte aus dem EV mithilfe der get_dof Implementierung
-%     Ev_tor = zeros(length(nNodes),size(V,2));
+%     Ev_tor = zeros(length(nNodes),size(V_real,2));
 %     for node = 1:length(nNodes)
 %         dof_xi_z = obj.rotorsystem.rotor.get_gdof('psi_z',node);
-%         Ev_tor(node,:)= V(dof_xi_z,:);
+%         Ev_tor(node,:)= V_real(dof_xi_z,:);
 %     end
 %     obj.eigenVectors.torsional=Ev_tor;
+
+obj.eigenVectors.complex = V;
 
 end 
