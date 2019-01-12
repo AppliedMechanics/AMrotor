@@ -33,12 +33,13 @@ r.rotor.assemble_fem;
 
 %% Running Time Simulation
 
-St_Lsg = Experiments.Stationaere_Lsg( r , 10e3 , (0:0.001:10) );%St_Lsg = Experiments.Stationaere_Lsg(r,[0:50:10e3],[0:0.001:2]); %obj = Stationaere_Lsg(a,drehzahlvektor,time)
+St_Lsg = Experiments.Stationaere_Lsg( r , 0e3:5e2:1e3 , (0:0.001:0.01) );%St_Lsg = Experiments.Stationaere_Lsg(r,[0:50:10e3],[0:0.001:2]); %obj = Stationaere_Lsg(a,drehzahlvektor,time)
 %St_Lsg.compute_ode15s_ss           %laeuft leider immer noch nicht!
 St_Lsg.compute_ode15s_ss_variant
 %St_Lsg.compute_euler_ss
 % St_Lsg.compute_newmark % Instabil, wenn LimSinghBearing als Load eingebunden ist und keine sehr feine Zeitdiskretisierung gewaehlt wurde.
 %St_Lsg.compute_sys_ss_variant
+St_Lsg.save_data('St_Lsg_DPS_U_fwd_bwd_sweep_0_12krpm');
 
 % Hochlauf = Experiments.Hochlaufanalyse( r , [0, 80e3] , (0:0.01:10) ); % input: (rotorsystem, [rpm_start, rpm_end], time_vector)
 % Hochlauf.compute_ode15s_ss_variant
@@ -46,9 +47,10 @@ St_Lsg.compute_ode15s_ss_variant
 %% Plot results 
 %------------- Erzeuge Ausgabeformat der Loesung ---------------
 
-d = Dataoutput.TimeDataOutput(St_Lsg);
-dataset_modalanalysis = d.compose_data();
-d.save_data(dataset_modalanalysis,'Hochlauf_DPS_U_fwd_bwd_sweep_0_6krpm');
+% d = Dataoutput.TimeDataOutput(St_Lsg);
+% dataset_modalanalysis = d.compose_data();
+% d.save_data(dataset_modalanalysis,'Hochlauf_DPS_U_fwd_bwd_sweep_0_12krpm');
+%Methode um die Daten einfach laden zu koennen?
 % save('workspace_temp.mat');
 % 
 % 
@@ -68,7 +70,7 @@ w2 = Graphs.WaterfalldiagrammTwoSided(r, St_Lsg);
 % w = Graphs.Waterfalldiagramm(r, Hochlauf);
 % 
  for sensor = r.sensors
-%          t.plot(sensor);
+          t.plot(sensor);
 %          t.plot_Orbit(sensor);
 %          o.plot(sensor);
 %          f.plot(sensor);

@@ -23,33 +23,37 @@ cnfg.cnfg_rotor.material.damping.rayleigh_alpha2= 0;%0.001;
 cnfg.cnfg_rotor.geo_nodes = {[0 0 0], [0 0.01 0], [0.290 0.01 0], [0.290 0.069 0], [0.310 0.069 0], [0.310 0.01 0], [0.600 0.01 0], [0.600 0 0]};
 
 % FEM Config
-% cnfg.cnfg_rotor.mesh_opt.name = 'Mesh 1';
-% cnfg.cnfg_rotor.mesh_opt.d_min= 0.002;
-% cnfg.cnfg_rotor.mesh_opt.d_max = 0.005;
-% cnfg.cnfg_rotor.mesh_opt.approx = 'mean';   %Approximation for linear functions with gradient 1=0;
-%                                 % Insert: upper sum, lower sum, mean.
-cnfg.cnfg_rotor.mesh_opt.name = 'Mesh 2';
-cnfg.cnfg_rotor.mesh_opt.d_min= 0.004;
-cnfg.cnfg_rotor.mesh_opt.d_max = 0.010;
+cnfg.cnfg_rotor.mesh_opt.name = 'Mesh 1';
+cnfg.cnfg_rotor.mesh_opt.d_min= 0.002;
+cnfg.cnfg_rotor.mesh_opt.d_max = 0.004;
 cnfg.cnfg_rotor.mesh_opt.approx = 'mean';   %Approximation for linear functions with gradient 1=0;
                                 % Insert: upper sum, lower sum, mean.
+% cnfg.cnfg_rotor.mesh_opt.name = 'Mesh 2';
+% cnfg.cnfg_rotor.mesh_opt.d_min= 0.004;
+% cnfg.cnfg_rotor.mesh_opt.d_max = 0.010;
+% cnfg.cnfg_rotor.mesh_opt.approx = 'mean';   %Approximation for linear functions with gradient 1=0;
+%                                 % Insert: upper sum, lower sum, mean.
 % cnfg.cnfg_rotor.mesh_opt.name = 'Mesh 3';
 % cnfg.cnfg_rotor.mesh_opt.d_min= 0.02;
 % cnfg.cnfg_rotor.mesh_opt.d_max = 0.05;
 % cnfg.cnfg_rotor.mesh_opt.approx = 'mean';   %Approximation for linear functions with gradient 1=0;
 %                                 % Insert: upper sum, lower sum, mean.
+% cnfg.cnfg_rotor.mesh_opt.name = 'Mesh aequidistant';
+% cnfg.cnfg_rotor.mesh_opt.d_min= 0.005;
+% cnfg.cnfg_rotor.mesh_opt.d_max = 0.005;
+% cnfg.cnfg_rotor.mesh_opt.approx = 'mean';
     
 %% ========================================================================
 % Massescheiben
 cnfg.cnfg_disc=[];
 
-cnfg.cnfg_disc(1).name = 'Zusatzscheibe';
-cnfg.cnfg_disc(1).position = 300e-3;                 %disc position [m]
-cnfg.cnfg_disc(1).radius = 200e-3;                   %only for plot
-cnfg.cnfg_disc(1).m = 5;                             %disc mass [kg]
-cnfg.cnfg_disc(1).Jx = 1;                         %disc mom. of inertia [kg*m^2]
-cnfg.cnfg_disc(1).Jz = 1;                         %disc mom. of inertia [kg*m^2]
-cnfg.cnfg_disc(1).Jp = 1e-1;                         %disc polar mom. of inertia [kg*m^2] (polar)
+% cnfg.cnfg_disc(1).name = 'Zusatzscheibe';
+% cnfg.cnfg_disc(1).position = 300e-3;                 %disc position [m]
+% cnfg.cnfg_disc(1).radius = 200e-3;                   %only for plot
+% cnfg.cnfg_disc(1).m = 5;                             %disc mass [kg]
+% cnfg.cnfg_disc(1).Jx = 1;                         %disc mom. of inertia [kg*m^2]
+% cnfg.cnfg_disc(1).Jz = 1;                         %disc mom. of inertia [kg*m^2]
+% cnfg.cnfg_disc(1).Jp = 1e-1;                         %disc polar mom. of inertia [kg*m^2] (polar)
 
 %% ========================================================================
 % Sensors
@@ -92,43 +96,43 @@ cnfg.cnfg_bearing=[];
 
 count = 1;
 cnfg.cnfg_bearing(count).name = 'Axiales Lager Links';
-cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
+cnfg.cnfg_bearing(count).position=000e-3;                        %[m]
 cnfg.cnfg_bearing(count).type='SimpleAxialBearing';
-cnfg.cnfg_bearing(count).stiffness=1e10;                     %[N/m]
-cnfg.cnfg_bearing(count).damping = 100;
+cnfg.cnfg_bearing(count).stiffness=1;                     %[N/m]
+cnfg.cnfg_bearing(count).damping = 0;
 
 count = count + 1;
 cnfg.cnfg_bearing(count).name = 'Torque Lager Links'; % Torque Lager koppelt die Torsion an die Umgebung und verhindert so die Starrkoerpermode fuer den Torsionsfreiheitsgrad psi_z.
-cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
+cnfg.cnfg_bearing(count).position=000e-3;                        %[m]
 cnfg.cnfg_bearing(count).type='SimpleTorqueBearing';
-cnfg.cnfg_bearing(count).stiffness=1e10;                     %[N/m]
-cnfg.cnfg_bearing(count).damping = 100;
+cnfg.cnfg_bearing(count).stiffness=1;                     %[N/m]
+cnfg.cnfg_bearing(count).damping = 0;
 
 % count = count + 1;
 % cnfg.cnfg_bearing(count).name = 'Isotropes Lager 1';
-% cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
+% cnfg.cnfg_bearing(count).position=000e-3;                        %[m]
 % cnfg.cnfg_bearing(count).type='SimpleBearing';
-% cnfg.cnfg_bearing(count).stiffness=1e8;%0.0670680e7; % ???                    %[N/m]
+% cnfg.cnfg_bearing(count).stiffness=1e7;%1e8;%0.0670680e7; % ???                    %[N/m]
 % cnfg.cnfg_bearing(count).damping = 299.275; % ???
 % 
 % count = count + 1;
 % cnfg.cnfg_bearing(count).name = 'Isotropes Lager 2';
 % cnfg.cnfg_bearing(count).position=600e-3;                        %[m]
 % cnfg.cnfg_bearing(count).type='SimpleBearing';
-% cnfg.cnfg_bearing(count).stiffness=1e8;%0.0670680e7; % ???                    %[N/m]
+% cnfg.cnfg_bearing(count).stiffness=1e7;%1e8;%0.0670680e7; % ???                    %[N/m]
 % cnfg.cnfg_bearing(count).damping = 299.275; % ???
 
 count = count + 1;
 cnfg.cnfg_bearing(count).name = 'Kennfeld Lager';
-cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
+cnfg.cnfg_bearing(count).position=000e-3;                        %[m]
 cnfg.cnfg_bearing(count).type='LookUpTableBearing';
-cnfg.cnfg_bearing(count).Table = load_bearing('01_bearingTPFax100LS.mat'); 
+cnfg.cnfg_bearing(count).Table = load_bearing('Inputfiles/bearingTPFax1000LS.mat'); 
 
 count = count + 1;
 cnfg.cnfg_bearing(count).name = 'Kennfeld Lager';
 cnfg.cnfg_bearing(count).position=600e-3;                        %[m]
 cnfg.cnfg_bearing(count).type='LookUpTableBearing';
-cnfg.cnfg_bearing(count).Table = load_bearing('01_bearingTPFax100LS.mat');   
+cnfg.cnfg_bearing(count).Table = load_bearing('Inputfiles/bearingTPFax1000LS.mat');   
 
 % count = count + 1;
 % cnfg.cnfg_bearing(count).name = 'LimSingh Rillenkugellager 2';
@@ -211,14 +215,20 @@ cnfg.cnfg_seal = [];
 % cnfg.cnfg_seal(count).type='BlackSeal';
 % cnfg.cnfg_seal(count).sealModel = load_seal_model('Inputfiles/ChildsBlackModelParameters.m');
 
-count = count+1;
-cnfg.cnfg_seal(count).name = 'Dichtung Childs';
-cnfg.cnfg_seal(count).position=300e-3;                        %[m]
-cnfg.cnfg_seal(count).type='ChildsSeal';
-cnfg.cnfg_seal(count).sealModel = load_seal_model('Inputfiles/ChildsBlackModelParameters.m');
+% count = count+1;
+% cnfg.cnfg_seal(count).name = 'Dichtung Childs';
+% cnfg.cnfg_seal(count).position=300e-3;                        %[m]
+% cnfg.cnfg_seal(count).type='ChildsSeal';
+% cnfg.cnfg_seal(count).sealModel = load_seal_model('Inputfiles/ChildsBlackModelParameters.m');
 
 % count = count+1;
 % cnfg.cnfg_seal(count).name = 'Dichtung LookUpTable';
 % cnfg.cnfg_seal(count).position=300e-3;                        %[m]
 % cnfg.cnfg_seal(count).type='LookUpTableSeal';
 % cnfg.cnfg_seal(count).sealModel = load_seal_table('Inputfiles/Koeffizienten_Volumenstrom_2bar.mat'); 
+
+count = count+1;
+cnfg.cnfg_seal(count).name = 'Dichtung LookUpTable TestRigLam1';
+cnfg.cnfg_seal(count).position=300e-3;                        %[m]
+cnfg.cnfg_seal(count).type='LookUpTableSeal';
+cnfg.cnfg_seal(count).sealModel.Table = load_seal_table('Inputfiles/SealTestRigLam1.mat'); 

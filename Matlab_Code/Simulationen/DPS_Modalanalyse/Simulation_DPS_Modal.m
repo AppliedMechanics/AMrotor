@@ -36,18 +36,18 @@ r.rotor.assemble_fem;
 
 %% Running system analyses
 
-% % Modalanalyse
-% m=Experiments.Modalanalyse(r);
-% 
-% m.calculate_rotorsystem(20,10e3);
-% 
-% esf= Graphs.Eigenschwingformen(m);
-% esf.print_frequencies();
-% esf.plot_displacements();
-% % esf.set_plots('half') % 'all', 'half' or desired mode number
-% %esf.set_plots('half','overlay')
-% % esf.set_plots(10,'Overlay','Skip',5,'tangentialPoints',30,'scale',3) %specify additional options, first input is index of mode
-% Janitor.cleanFigures();
+% Modalanalyse
+m=Experiments.Modalanalyse(r);
+
+m.calculate_rotorsystem(20,10e3);
+
+esf= Graphs.Eigenschwingformen(m);
+esf.print_frequencies();
+esf.plot_displacements();
+% esf.set_plots('half') % 'all', 'half' or desired mode number
+%esf.set_plots('half','overlay')
+% esf.set_plots(10,'Overlay','Skip',5,'tangentialPoints',30,'scale',3) %specify additional options, first input is index of mode
+Janitor.cleanFigures();
 
 
 % Campbell-Diagramm
