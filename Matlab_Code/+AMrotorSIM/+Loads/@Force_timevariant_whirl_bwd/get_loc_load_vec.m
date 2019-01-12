@@ -1,4 +1,4 @@
-function get_loc_load_vec(obj,time,varargin)
+function h = get_loc_load_vec(obj,time,varargin)
 
     obj.h = sparse(6,1);
     
@@ -16,5 +16,5 @@ function get_loc_load_vec(obj,time,varargin)
     obj.h(1) =  cos(2*pi*f*timeDelta)*Fx;
     obj.h(2) =  -sin(2*pi*f*timeDelta)*Fy;
     end
-    
+    h = obj.h;
 end

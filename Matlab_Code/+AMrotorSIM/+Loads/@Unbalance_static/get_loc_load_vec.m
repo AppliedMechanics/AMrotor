@@ -1,4 +1,4 @@
-function get_loc_load_vec(obj,time,node,varargin)
+function h = get_loc_load_vec(obj,time,node,varargin)
 
     %Constant fix force 
     obj.h = sparse(6,1);    
@@ -21,6 +21,8 @@ function get_loc_load_vec(obj,time,node,varargin)
     % Superposition
     obj.h(1) = FCentripetalForce(1) + FAngularAcceleration(1);
     obj.h(2) = FCentripetalForce(2) + FAngularAcceleration(2);
+    
+    h = obj.h;
     
     % possible next steps: moment because of FAngularAcceleration
     

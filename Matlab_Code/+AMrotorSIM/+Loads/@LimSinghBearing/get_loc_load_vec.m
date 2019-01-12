@@ -1,4 +1,4 @@
-function get_loc_load_vec(obj,~,node)
+function h = get_loc_load_vec(obj,~,node)
 % U_node = [u_x; u_y; u_z; psi_x; psi_y; psi_z; du_x; du_y; du_z; dpsi_x; dpsi_y; dpsi_z] 
     U_node = node.q;
     par = obj.cnfg.par;
@@ -12,4 +12,5 @@ function get_loc_load_vec(obj,~,node)
     obj.h = -obj.LimSinghForce(par,U_node);
     obj.h(3) = 0;
     
+    h = obj.h;
 end

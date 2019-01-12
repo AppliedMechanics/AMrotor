@@ -1,4 +1,4 @@
-function get_loc_load_vec(self,~,node)
+function h = get_loc_load_vec(self,~,node)
 
 u = node.q(1:2);
 ud = node.qd(1:2);
@@ -29,5 +29,7 @@ init.omega0IR = [omega;0;0];       % Einheit: rad/s !
 F = -(M_s * udd + D_s * ud + K_s * u);
 
 self.h = [F; zeros(4,1)];
+
+h = self.h;
 
 end

@@ -1,4 +1,4 @@
-function get_loc_load_vec(obj,time,varargin)
+function h = get_loc_load_vec(obj,time,varargin)
 
     obj.h = sparse(6,1);
     
@@ -18,5 +18,5 @@ function get_loc_load_vec(obj,time,varargin)
         phaseInit = -90;
         obj.h(2) =  -chirp(timeDelta,f0,tEndDelta,f,'linear',phaseInit)*Fy;
     end
-    
+    h = obj.h;
 end

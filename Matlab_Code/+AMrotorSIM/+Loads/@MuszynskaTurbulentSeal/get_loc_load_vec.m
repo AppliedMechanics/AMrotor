@@ -1,4 +1,4 @@
-function get_loc_load_vec(self,~,node)
+function h = get_loc_load_vec(self,~,node)
 
 u = node.q(1:2);
 ud = node.qd(1:2);
@@ -32,5 +32,7 @@ M_s = [Koeff.M_xx, 0; 0, Koeff.M_xx];
 F = -(M_s * udd + D_s * ud + K_s * u); 
 
 self.h = [F; zeros(4,1)];
+
+h = self.h;
 
 end
