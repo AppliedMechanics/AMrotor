@@ -17,13 +17,13 @@ Janitor.setLayout(2,3);
 %% Compute Rotor
 
 % Config_Sim_DPS
-% Config_Sim_Laval_Dichtung
+Config_Sim_Laval_Dichtung
 % Config_Sim_Laval_free
 % Config_Sim_Laval_LimSingh
 % Config_Sim_Laval_Muszynska
-Config_Sim_DPS_Time
+% Config_Sim_DPS_Time
 
-r=Rotorsystem(cnfg,'DPS-System');
+r=Rotorsystem(cnfg,'Laval-Rotor');
 r.assemble; %fuehrt Funktion assemble.m mit Eingabe Objekt r aus Klasse Rotorsystem aus
 r.show; % Funktion AMrotor\Matlab_Code\+AMrotorSIM\+Rotor\+FEMRotor\@FeModel\print.m
 
@@ -44,21 +44,22 @@ r.rotor.assemble_fem;
 
 %% Running system analyses
 
-% m=Experiments.Modalanalyse(r);
-% % 
-% % m.calculate_rotor_only_without_damping(15);
-% % m.calculate_rotor_only(15,100);
-% % 
-% % m.calculate_rotorsystem_without_damping(15);
-% m.calculate_rotorsystem(20,10e3);
-% % 
-% esf= Graphs.Eigenschwingformen(m);
-% esf.print_frequencies();
-% esf.plot_displacements();
-% % esf.set_plots('half') % 'all', 'half' or desired mode number
-% %esf.set_plots('half','overlay')
-% % esf.set_plots(10,'Overlay','Skip',5,'tangentialPoints',30,'scale',3) %specify additional options, first input is index of mode
-% Janitor.cleanFigures();
+m=Experiments.Modalanalyse(r);
+% 
+% m.calculate_rotor_only_without_damping(15);
+% m.calculate_rotor_only(15,100);
+% 
+% m.calculate_rotorsystem_without_damping(15);
+m.calculate_rotorsystem(8,0.1e3);
+% 
+esf= Graphs.Eigenschwingformen(m);
+esf.print_frequencies();
+esf.plot_displacements();
+% esf.set_plots('half') % 'all', 'half' or desired mode number
+% esf.set_plots(10,'overlay')
+esf.set_plots('a','Overlay','Skip',5,'tangentialPoints',30,'scale',20) %specify additional options, first input is index of mode
+% esf.set_plots('a','Skip',5,'tangentialPoints',30)
+Janitor.cleanFigures();
 % 
 % 
 % r.reduce_modal(10);
@@ -73,8 +74,8 @@ r.rotor.assemble_fem;
 % % cmpDiagramm.set_plots('backward');
 % % cmpDiagramm.set_plots('forward');
 % Janitor.cleanFigures();
-% 
-% return %stop execution -> Time integration is not yet functional
+
+return %stop execution -> Time integration is not yet functional
 
 %% Running Time Simulation
 
