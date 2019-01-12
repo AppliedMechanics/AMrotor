@@ -87,9 +87,19 @@ cnfg.cnfg_sensor(count).position=551e-3;
 cnfg.cnfg_sensor(count).type='Displacementsensor';
 
 count = count + 1;
-cnfg.cnfg_sensor(count).name='Kraftsensor Lager2';
-cnfg.cnfg_sensor(count).position=551e-3;
+cnfg.cnfg_sensor(count).name='Kraftsensor Dichtung 2';
+cnfg.cnfg_sensor(count).position=280e-3;
 cnfg.cnfg_sensor(count).type='ForceLoadPostSensor';
+
+count = count + 1;
+cnfg.cnfg_sensor(count).name='Geschwindigkeitssensor Dichtung 2';
+cnfg.cnfg_sensor(count).position=280e-3;
+cnfg.cnfg_sensor(count).type='Velocitysensor';
+
+count = count + 1;
+cnfg.cnfg_sensor(count).name='Beschleunigungssensor Dichtung 2';
+cnfg.cnfg_sensor(count).position=280e-3;
+cnfg.cnfg_sensor(count).type='Accelerationsensor';
 
 %% ========================================================================
 % Lager
