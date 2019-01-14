@@ -89,7 +89,7 @@ function [ax]=show_3D(self)
         %plote Zylinder
         %hz(n) = surf(zzyl,yzyl, xzyl);
         hz(n) = surf(zzyl,yzyl, xzyl);
-        set(hz(n), 'edgecolor','none')
+        set(hz(n), 'edgecolor','k')%set(hz(n), 'edgecolor','none')
         set(hz(n), 'facecolor','b')
         %Plote Deckel
         %hs(n)=surf(z+geo_node_x(n),y,x);

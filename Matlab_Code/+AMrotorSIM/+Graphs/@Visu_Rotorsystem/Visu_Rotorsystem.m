@@ -19,7 +19,7 @@ classdef Visu_Rotorsystem < handle
          plot_discs(figurehandle,obj.rotorsystem.discs);
          plot_bearings(figurehandle,obj.rotorsystem.bearings,obj.rotorsystem.rotor);
          plot_sensors(figurehandle,obj.rotorsystem.sensors);
-         plot_loads(figurehandle,obj.rotorsystem.loads);
+         plot_loads(figurehandle,obj.rotorsystem.loads,obj.rotorsystem.rotor);
          plot_seals(figurehandle,obj.rotorsystem.seals,obj.rotorsystem.rotor);
          
          view(3)%view(126,35)
