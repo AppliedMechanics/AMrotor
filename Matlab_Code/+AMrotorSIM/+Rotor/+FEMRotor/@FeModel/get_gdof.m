@@ -5,8 +5,8 @@ function glob_dof = get_gdof(self,direction,Node,varargin)
     if nargin == 3
         n.dof = 6*n.nodes;
     else
-        mat.A = varargin;
-        n.dof = length(mat.A)/2;
+        A = varargin{1};
+        n.dof = length(A)/2;
     end
     n.dofPerNode = n.dof/n.nodes;
     

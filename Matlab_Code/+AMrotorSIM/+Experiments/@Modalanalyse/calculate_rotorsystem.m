@@ -36,8 +36,8 @@ D = imag(D);
 
     for mode = 1:nModes
         for node = 1:length(nNodes)
-            dof_u_x = obj.rotorsystem.rotor.get_gdof('u_x',node,mat);%1+4*(node-1)
-            dof_u_y = obj.rotorsystem.rotor.get_gdof('u_y',node,mat);%2+4*(node-1)
+            dof_u_x = obj.rotorsystem.rotor.get_gdof('u_x',node,mat.A);%1+4*(node-1)
+            dof_u_y = obj.rotorsystem.rotor.get_gdof('u_y',node,mat.A);%2+4*(node-1)
 
             Ev_lat_x(node,mode)=V_real(dof_u_x,mode);
             Ev_lat_y(node,mode)=V_real(dof_u_y,mode);
