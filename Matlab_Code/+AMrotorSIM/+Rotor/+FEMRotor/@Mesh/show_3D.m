@@ -85,33 +85,38 @@ function [ax]=show_3D(self)
         [x,y,z] = pol2cart(TH,R,Z);
 
         z=z*0;
+        
+        %Plote Deckel
+        hs_left(n)=surf(z+mesh_node_z(n-1),y,x);
+        hs_right(n)=surf(z+mesh_node_z(n),y,x);
+        set(hs_left(n), 'facecolor','b')
+        set(hs_right(n), 'facecolor','b')
 
         %plote Zylinder
         %hz(n) = surf(zzyl,yzyl, xzyl);
         hz(n) = surf(zzyl,yzyl, xzyl);
-        set(hz(n), 'edgecolor','k')%set(hz(n), 'edgecolor','none')
+%         set(hz(n), 'edgecolor','k')%
+        set(hz(n), 'edgecolor','none')
         set(hz(n), 'facecolor','b')
-        %Plote Deckel
-        %hs(n)=surf(z+geo_node_x(n),y,x);
-        hs(n)=surf(z+mesh_node_z(n),y,x);
-        set(hs(n), 'facecolor','b')
 
-        if r(n) > r(n-1) 
+        if r(n) > r(n-1) || n == 2
 
-            set(hs(n), 'edgecolor','none') %sichtbare deckel ohne edges
+            set(hs_left(n), 'edgecolor','none') %sichtbare deckel ohne edges
 
         end
 
         if r(n) < r(n-1)
-            set(hs(n-1), 'edgecolor','none')   %sichtbare deckel ohne edges
+            set(hs_right(n-1), 'edgecolor','none')   %sichtbare deckel ohne edges
         end
 
         k=k+2;
 
    end
 
-   set(hs(n), 'edgecolor','none')
-   set(hs(n), 'facecolor','b')
+   set(hs_left(n), 'edgecolor','none')
+   set(hs_left(n), 'facecolor','b')
+   set(hs_right(n), 'edgecolor','none')
+   set(hs_right(n), 'facecolor','b')
 
 
    zz=1:50;
