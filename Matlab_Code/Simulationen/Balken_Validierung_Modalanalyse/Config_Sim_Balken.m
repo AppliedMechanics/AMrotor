@@ -18,11 +18,13 @@ cnfg.cnfg_rotor.geo_nodes = {[0 0 0], [0 radius 0], [beamLength radius 0]};
 
 % FEM Config
 % cnfg.cnfg_rotor.mesh_opt.name = 'Mesh 1';
-% cnfg.cnfg_rotor.mesh_opt.d_min= 0.002;
+% cnfg.cnfg_rotor.mesh_opt.n_refinement = 10; %number of refinement steps between d_min and d_max 
+% cnfg.cnfg_rotor.mesh_opt.d_min = 0.002;
 % cnfg.cnfg_rotor.mesh_opt.d_max = 0.005;
 % cnfg.cnfg_rotor.mesh_opt.approx = 'mean';   %Approximation for linear functions with gradient 1=0;
 %                                 % Insert: upper sum, lower sum, mean.
 cnfg.cnfg_rotor.mesh_opt.name = 'grobes Netz';
+cnfg.cnfg_rotor.mesh_opt.n_refinement = 10; %number of refinement steps between d_min and d_max 
 cnfg.cnfg_rotor.mesh_opt.d_min= 0.02;
 cnfg.cnfg_rotor.mesh_opt.d_max = 0.05;
 cnfg.cnfg_rotor.mesh_opt.approx = 'mean';
