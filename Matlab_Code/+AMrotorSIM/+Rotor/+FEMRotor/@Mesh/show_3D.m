@@ -1,37 +1,9 @@
 function [ax]=show_3D(self)
-   a=1;
-   n=1;
-   dimR=size(self.nodes);
-   n_nodes = length(self.nodes);
-   r=zeros(n_nodes,1);
-   mesh_node_z=zeros(1,n_nodes);
-   mesh_node_radius=zeros(1,n_nodes);
+    ele = self.elements;
+   nEle = length(self.elements);
 
    f2=figure;
-% erzeuge Vektor r mit Radien der Abschnitte
-%==========================================================================
-%    for k=1:n_nodes
 
-
-    for k=1:n_nodes
-        mesh_node_z(k) = self.nodes(k).z;
-        mesh_node_radius(k) = self.nodes(k).radius_outer;
-    end
-    while n <=n_nodes
-
-        r(n,1)=mesh_node_radius(n);
-
-        n=n+1;
-
-    end
-
-    if a < dimR(1)
-        a=a+1;
-    end
-
-%    end
-
-%==========================================================================
    ax = axes('xlim', [-10 10], 'ylim', [-10 10], 'zlim',[-10 10]);
 
    view(3);
@@ -41,84 +13,55 @@ function [ax]=show_3D(self)
    xlabel('z')
    ylabel('y')
    zlabel('x')
-
-   dim_r=size(r);
+   
    theta = linspace(0,2*pi,20);
 
-   k=1;
-   %%%%%%%%%%%%%%%%%%%%%%%
-   %erstes el
-   rs = linspace(0,r(1),2);
-   % 
-   [TH,R] = meshgrid(theta,rs);
-   % 
-   Z=((R.*cos(TH)).^2)-((R.*sin(TH)).^2); % z=(x^2)-(y^2)
-   % 
-   [x,y,z] = pol2cart(TH,R,Z);
 
-   z=z*0;
+   for n=1:nEle
 
-   hs(1)=surf(z+mesh_node_z(1),y,x);
-   set(hs(1), 'edgecolor','none')
-   set(hs(1), 'facecolor','b')
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-   for n=2:dim_r(1)
-
-   %Berechnen der Zylinderelemente   
-        [xzyl, yzyl, zzyl] = cylinder([r(n) r(n)]);
-
-        %[xZ1, yz1, zZ1] = cylinder([r(n) r(n)]);
-
-        zzyl(1,:)=mesh_node_z(n-1);
-        zzyl(2,:)=mesh_node_z(n);
+       rEle = ele(n).radius_outer;
+       
+   %% Berechnen der Zylinderelemente   
+        [xzyl, yzyl, zzyl] = cylinder([rEle, rEle]);
+        
+        zLeft = ele(n).node1.z;
+        zRight = ele(n).node2.z;
+        zzyl(1,:)=zLeft;
+        zzyl(2,:)=zRight;
 
    %% berechenen der Scheiben bzw Zyl. Deckel :-))
 
-        rs = linspace(0,r(n),2);
-% 
+        rs = linspace(0,rEle,2);
         [TH,R] = meshgrid(theta,rs);
-% 
         Z=((R.*cos(TH)).^2)-((R.*sin(TH)).^2); % z=(x^2)-(y^2)
-% 
         [x,y,z] = pol2cart(TH,R,Z);
-
-        z=z*0;
         
-        %Plote Deckel
-        hs_left(n)=surf(z+mesh_node_z(n-1),y,x);
-        hs_right(n)=surf(z+mesh_node_z(n),y,x);
+        %% Plote Deckel
+        hs_left(n)=surf(z+zLeft,y,x);
+        hs_right(n)=surf(z+zRight,y,x);
         set(hs_left(n), 'facecolor','b')
         set(hs_right(n), 'facecolor','b')
 
-        %plote Zylinder
-        %hz(n) = surf(zzyl,yzyl, xzyl);
+        %% plote Zylinder
         hz(n) = surf(zzyl,yzyl, xzyl);
-%         set(hz(n), 'edgecolor','k')%
         set(hz(n), 'edgecolor','none')
         set(hz(n), 'facecolor','b')
 
-        if r(n) > r(n-1) || n == 2
+%% Ausblenden der Kanten der sichtbaren Deckel
+%         if r(n) > r(n-1) || n == 2
+%             set(hs_left(n), 'edgecolor','none')
+%         end
+%         if r(n) < r(n-1)
+%             set(hs_right(n-1), 'edgecolor','none')
+%         end
 
-            set(hs_left(n), 'edgecolor','none') %sichtbare deckel ohne edges
-
-        end
-
-        if r(n) < r(n-1)
-            set(hs_right(n-1), 'edgecolor','none')   %sichtbare deckel ohne edges
-        end
-
-        k=k+2;
 
    end
 
-   set(hs_left(n), 'edgecolor','none')
-   set(hs_left(n), 'facecolor','b')
-   set(hs_right(n), 'edgecolor','none')
-   set(hs_right(n), 'facecolor','b')
-
-
-   zz=1:50;
+%% Ausblenden der linken und rechten Deckel
+%    set(hs_left(1), 'edgecolor','none')
+%    set(hs_left(1), 'facecolor','b')
+%    set(hs_right(n), 'edgecolor','none')
+%    set(hs_right(n), 'facecolor','b')
 
    end
