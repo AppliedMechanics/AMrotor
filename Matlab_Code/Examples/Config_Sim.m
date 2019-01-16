@@ -49,26 +49,26 @@ cnfg.cnfg_sensor(2).type=1;
 
 %% ========================================================================
 % Lager
-cnfg.cnfg_lager=[];
+cnfg.cnfg_bearing=[];
 
-cnfg.cnfg_lager(1).name = 'Locker lässiges Lager';
-cnfg.cnfg_lager(1).position=0e-3;                        %[m]
-cnfg.cnfg_lager(1).type=1;
-cnfg.cnfg_lager(1).stiffness=5e7;                     %[N/m]
+cnfg.cnfg_bearing(1).name = 'Locker lässiges Lager';
+cnfg.cnfg_bearing(1).position=0e-3;                        %[m]
+cnfg.cnfg_bearing(1).type=1;
+cnfg.cnfg_bearing(1).stiffness=5e7;                     %[N/m]
 
 % Magnet-Lager links
-% cnfg.cnfg_lager(1).name = 'Magnetlager links';
-% cnfg.cnfg_lager(1).position=0e-3;                        %[m]
-% cnfg.cnfg_lager(1).type=3;
+% cnfg.cnfg_bearing(1).name = 'Magnetlager links';
+% cnfg.cnfg_bearing(1).position=0e-3;                        %[m]
+% cnfg.cnfg_bearing(1).type=3;
 % Config_Sim_Mag1
-% cnfg.cnfg_lager(1).mag=mag;
+% cnfg.cnfg_bearing(1).mag=mag;
 
 % Magnet-Lager rechts
-cnfg.cnfg_lager(2).name = 'Magnetlager rechts';
-cnfg.cnfg_lager(2).position=600e-3;                        %[m]
-cnfg.cnfg_lager(2).type=3;
+cnfg.cnfg_bearing(2).name = 'Magnetlager rechts';
+cnfg.cnfg_bearing(2).position=600e-3;                        %[m]
+cnfg.cnfg_bearing(2).type=3;
 Config_Sim_Mag1
-cnfg.cnfg_lager(2).mag=mag;
+cnfg.cnfg_bearing(2).mag=mag;
 
 %% ========================================================================
 % Kraft in feste Richtung

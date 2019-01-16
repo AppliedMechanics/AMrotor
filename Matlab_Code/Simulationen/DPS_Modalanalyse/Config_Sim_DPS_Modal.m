@@ -91,7 +91,7 @@ cnfg.cnfg_sensor(count).type='Displacementsensor';
 
 %% ========================================================================
 % Lager
-cnfg.cnfg_lager=[];
+cnfg.cnfg_bearing=[];
 
 count = 1;
 cnfg.cnfg_bearing(count).name = 'Axiales Lager Links';
