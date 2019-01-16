@@ -14,8 +14,8 @@ cnfg.cnfg_rotor.material.damping.rayleigh_alpha2= 0;%0.001;
 % Rotor Config
 beamLength = 0.5; %0.5 Meter
 radius = 10e-3; % 20 Millimeter
-% cnfg.cnfg_rotor.geo_nodes = {[0 0 0], [0 radius 0], [beamLength radius 0]};
-cnfg.cnfg_rotor.geo_nodes = {[0 0 0], [0 radius 0], [0.15 radius 0], [0.15 30e-3 0], [0.35 30e-3 0], [0.40 radius 0] [beamLength radius 0]};
+cnfg.cnfg_rotor.geo_nodes = {[0 0 0], [0 radius 0], [beamLength radius 0]};
+% cnfg.cnfg_rotor.geo_nodes = {[0 0 0], [0 radius 0], [0.15 radius 0], [0.15 30e-3 radius/2], [0.35 30e-3 0], [0.40 radius 0], [0.42 radius 0], [0.42 radius/2 0],  [beamLength radius/2 0]};
 
 % FEM Config
 % cnfg.cnfg_rotor.mesh_opt.name = 'Mesh 1';
