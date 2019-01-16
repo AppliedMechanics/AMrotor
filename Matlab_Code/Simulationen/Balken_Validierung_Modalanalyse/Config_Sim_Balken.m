@@ -34,6 +34,14 @@ cnfg.cnfg_rotor.mesh_opt.approx = 'mean';
 cnfg.cnfg_disc=[];
 count = 0;
 
+% cnfg.cnfg_disc(1).name = 'Zusatzscheibe';
+% cnfg.cnfg_disc(1).position = 250e-3;                 %disc position [m]
+% cnfg.cnfg_disc(1).radius = 60e-3;  
+% cnfg.cnfg_disc(1).m = 5;                             %disc mass [kg]
+% cnfg.cnfg_disc(1).Jx = 1;                         %disc mom. of inertia [kg*m^4]
+% cnfg.cnfg_disc(1).Jz = 1;                         %disc mom. of inertia [kg*m^4]
+% cnfg.cnfg_disc(1).Jp = 1;                         %disc polar mom. of inertia [kg*m^4]
+
 %% ========================================================================
 % Sensors
 cnfg.cnfg_sensor=[];
@@ -47,9 +55,15 @@ count = 1;
 cnfg.cnfg_bearing(count).name = 'Feste Einspannung';
 cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
 cnfg.cnfg_bearing(count).type='RestrictAllDofsBearing';
-cnfg.cnfg_bearing(count).stiffness=0;                     %[N/m]
+cnfg.cnfg_bearing(count).stiffness=1e10;                     %[N/m]
 cnfg.cnfg_bearing(count).damping = 0;
 
+count = 2;
+cnfg.cnfg_bearing(count).name = 'Feste Einspannung';
+cnfg.cnfg_bearing(count).position=beamLength;                        %[m]
+cnfg.cnfg_bearing(count).type='RestrictAllDofsBearing';
+cnfg.cnfg_bearing(count).stiffness=1e10;                     %[N/m]
+cnfg.cnfg_bearing(count).damping = 0;
 
 
 %% ========================================================================

@@ -7,10 +7,10 @@ Config_Sim_Balken
 
 % boundaryCondition = 'free-free';
 % boundaryCondition = 'supported-free';
-boundaryCondition = 'clamped-free';
+% boundaryCondition = 'clamped-free';
 % boundaryCondition = 'supported-supported';
 % boundaryCondition = 'supported-clamped';
-% boundaryCondition = 'clamped-clamped';
+boundaryCondition = 'clamped-clamped';
 numberEigenfrequencies = 6;
 beamLength = beamLength; % aus Config
 area = pi*radius^2; % aus Config
