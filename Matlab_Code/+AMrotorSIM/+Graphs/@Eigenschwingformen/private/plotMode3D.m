@@ -4,9 +4,6 @@ function plotMode3D( axFigure, x, V_x, V_y, D , color, param)
 
 n_points = param.numberOfTangentialPoints; % number of points in one circle
 
-V_norm = sum(sqrt(V_x.^2+V_y.^2));
-V_x = V_x/V_norm;
-V_y = V_y/V_norm;
 V_x = V_x * param.scaleEigenvector;
 V_y = V_y * param.scaleEigenvector;
 
