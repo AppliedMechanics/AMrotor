@@ -23,11 +23,13 @@ r=Rotorsystem(cnfg,'MLPS-System');
 r.assemble;
 r.show;
 
-%r.rotor.geometry.show_2D();
-%r.rotor.geometry.show_3D();
+% r.rotor.show_2D(); % compare discretisation and user input
+% r.rotor.geometry.show_2D(); 
+% r.rotor.geometry.show_3D(); % funktioniert nicht richtig
 
-%r.rotor.mesh.show_2D(); 
-%r.rotor.mesh.show_3D();
+% r.rotor.mesh.show_2D(); % show elements
+% r.rotor.mesh.show_2D_nodes(); % show geo_nodes
+% r.rotor.mesh.show_3D();
 
 % g=Graphs.Visu_Rotorsystem(r);
 % g.show();
@@ -42,7 +44,7 @@ m=Experiments.Modalanalyse(r);
 %m.calculate_rotor_only(15,100);
 
 %m.calculate_rotorsystem_without_damping(7);
-m.calculate_rotorsystem(6,1000);
+m.calculate_rotorsystem(9,5000);
 %
 esf= Graphs.Eigenschwingformen(m);
 esf.print_frequencies();
@@ -51,9 +53,10 @@ Janitor.cleanFigures();
 
 
 cmp = Experiments.Campbell(r);
-cmp.set_up(0:2e2:10e3,4); % input is 1/min, Number of Modes
+cmp.set_up(0:2e2:10e3,6); % input is 1/min, Number of Modes
 cmp.calculate();
 cmpDiagramm = Graphs.Campbell(cmp);
+cmpDiagramm.print_critical_speeds()
 cmpDiagramm.set_plots('all');
 % cmpDiagramm.set_plots('backward');
 % cmpDiagramm.set_plots('forward');

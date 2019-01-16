@@ -28,19 +28,19 @@ cnfg.cnfg_rotor.geo_nodes = {[0 0 0], [0 0.01 0], [0.290 0.01 0], [0.290 0.069 0
 % cnfg.cnfg_rotor.mesh_opt.d_min = 0.002;
 % cnfg.cnfg_rotor.mesh_opt.d_max = 0.005;
 % cnfg.cnfg_rotor.mesh_opt.approx = 'mean';   %Approximation for linear functions with gradient 1=0;
-%                                 % Insert: upper sum, lower sum, mean.
+%                                 % Insert: upper sum, lower sum, mean, symmetric.
 % cnfg.cnfg_rotor.mesh_opt.name = 'Mesh 2';
 % cnfg.cnfg_rotor.mesh_opt.n_refinement = 10; %number of refinement steps between d_min and d_max 
 % cnfg.cnfg_rotor.mesh_opt.d_min = 0.004;
 % cnfg.cnfg_rotor.mesh_opt.d_max = 0.010;
 % cnfg.cnfg_rotor.mesh_opt.approx = 'mean';   %Approximation for linear functions with gradient 1=0;
-%                                 % Insert: upper sum, lower sum, mean.
+%                                 % Insert: upper sum, lower sum, mean, symmetric.
 cnfg.cnfg_rotor.mesh_opt.name = 'Mesh 3';
 cnfg.cnfg_rotor.mesh_opt.n_refinement = 10; %number of refinement steps between d_min and d_max 
 cnfg.cnfg_rotor.mesh_opt.d_min= 0.02;
 cnfg.cnfg_rotor.mesh_opt.d_max = 0.05;
 cnfg.cnfg_rotor.mesh_opt.approx = 'mean';   %Approximation for linear functions with gradient 1=0;
-                                % Insert: upper sum, lower sum, mean.
+                                % Insert: upper sum, lower sum, mean, symmetric.
     
 %% ========================================================================
 % Massescheiben
