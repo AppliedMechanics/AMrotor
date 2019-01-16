@@ -45,5 +45,5 @@ for i=load
     h = surf(ax,z*0.01+zp-0.005, y, x);
 
     set(h, 'edgecolor','none')
-    set(h, 'facecolor','blue')
+    set(h, 'facecolor','cyan')
 end

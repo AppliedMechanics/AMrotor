@@ -35,6 +35,7 @@ function [ax]=show_3D(self)
         [TH,R] = meshgrid(theta,rs);
         Z=((R.*cos(TH)).^2)-((R.*sin(TH)).^2); % z=(x^2)-(y^2)
         [x,y,z] = pol2cart(TH,R,Z);
+        z = z*0;
         
         %% Plote Deckel
         hs_left(n)=surf(z+zLeft,y,x);
