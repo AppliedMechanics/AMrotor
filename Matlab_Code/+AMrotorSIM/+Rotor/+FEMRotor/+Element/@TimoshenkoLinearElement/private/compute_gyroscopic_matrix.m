@@ -14,6 +14,10 @@ function [G_ele] = compute_gyroscopic_matrix(Element)
     G0 = sparse(8,8);
     G1 = sparse(8,8);
     G2 = sparse(8,8);
+
+    % Fehler in der Implementierung: G_ele ist mit der vorherigen
+    % Implementierung nicht skew-symmetric, obwohl das gefordert ist. spy(G)
+    % Meiner Meinung (MK) nach stimmt auch die dof-Reihenfolge nicht.
     
     % Eintraege G0 
     G0(5,1)= 36;
