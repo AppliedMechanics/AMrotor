@@ -11,9 +11,12 @@ function plot_displacements(obj)
     hold on;
 
     x = [obj.modalsystem.rotorsystem.rotor.mesh.nodes.z];
+    EVx = obj.modalsystem.eigenVectors.lateral_x;
+    EVy = obj.modalsystem.eigenVectors.lateral_y;
+    EW = obj.modalsystem.eigenValues.lateral;
     for s=1:n_ew
-        plotMode(ax,x,obj.modalsystem.eigenVectors.lateral_x(:,s),...
-                       obj.modalsystem.eigenValues.lateral(s),...
+        plotMode(ax,x,EVx(:,s),...
+                       EW(s),...
                        ColorHandler.getColor(s))
     end
 
@@ -27,9 +30,7 @@ function plot_displacements(obj)
         hold on;
 
         for s=1:n_ew
-            plotMode(ax,x,obj.modalsystem.eigenVectors.lateral_y(:,s),...
-                obj.modalsystem.eigenValues.lateral(s),...
-                ColorHandler.getColor(s))
+            plotMode(ax,x,EVy(:,s),EW(s),ColorHandler.getColor(s))
         end
 
         legend('show')
@@ -42,8 +43,31 @@ function plot_displacements(obj)
         hold on;
 
         for s=1:n_ew
-            plotMode(ax,x,sqrt(obj.modalsystem.eigenVectors.lateral_y(:,s).^2+obj.modalsystem.eigenVectors.lateral_y(:,s).^2),...
-                obj.modalsystem.eigenValues.lateral(s),...
+            plotMode(ax,x,sqrt(EVx(:,s).^2+EVy(:,s).^2),EW(s),...
+                ColorHandler.getColor(s))
+        end
+
+        legend('show')
+        grid('on')
+        
+        figure('Name','Eigenschwingformen in Hauptachsen','NumberTitle','off');
+        ax = axes;
+        title('Eigenschwingformen in Hauptachsen')
+        hold on;
+
+        for s=1:n_ew
+            angle = atan2(EVy(:,s),EVx(:,s));
+            angle = wrapTo2Pi(angle);
+            % wrap angle to [0 pi]
+            for i = 1:length(angle)
+                if angle(i) > pi
+                    angle(i) = angle(i)-pi;
+                end
+            end
+            angle = mean(angle);
+            
+            EVmain = EVx(:,s)*cos(angle) + EVy(:,s)*sin(angle);
+            plotMode(ax,x,EVmain,EW(s),...
                 ColorHandler.getColor(s))
         end
 

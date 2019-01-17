@@ -18,8 +18,8 @@ for sensor = sensors
         j=j+1;
     end
     % Umformatierung
-    amp_Rplus=abs(Rplus(:,2:end))*1000;
-    amp_Rminus=abs(Rminus(:,2:end))*1000;
+    amp_Rplus=abs(Rplus(:,2:end));%*1000;
+    amp_Rminus=abs(Rminus(:,2:end));%*1000;
     f=f(2:end);
     % Plot
     figure('name',[sensor.name, ' at position ',num2str(sensor.Position), '; Waterfall'], 'NumberTitle', 'off');
