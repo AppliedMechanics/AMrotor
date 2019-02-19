@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of plotmac</title>
+  <meta name="keywords" content="plotmac">
+  <meta name="description" content="PLOTMAC   Plot Manhattan type MAC matrix plot">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; plotmac.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>plotmac
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>PLOTMAC   Plot Manhattan type MAC matrix plot</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function h = plotmac(MAC,p1,p2,str1,str2) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> PLOTMAC   Plot Manhattan type MAC matrix plot
+
+       h = plotmac(MAC,p1,p2)
+
+       h       Handle to figure (vector)
+
+       MAC     Mac matrix from amac
+       p1      Poles for first mode shape matrix
+       p2      Poles for second mode shape matrix (if several)
+       str1    String with label for axis of p1
+       str2    String with label for axis of p2
+
+ plotmac(MAC)        generates a plot with modes numbered by 1, 2, 3,...
+ plotmac(MAC,p)      generates a plot of an Auto-MAC with frequencies as tick marks
+ plotmac(MAC,p1,p2)  generates a plot of a Cross-MAC with different frequencies on the x- and y-axes
+ plotmac(MAC,p1,p2,str1,str2) as plotmac(MAC,p1,p2) with labels for p1 and p2 
+
+ See also <a href="amac.html" class="code" title="function M = amac(V1,V2)">AMAC</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="poles2fz.html" class="code" title="function [fr,zr] = poles2fz(poles)">poles2fz</a>	POLES2FZ Convert poles to frequencies and relative damping</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function h = plotmac(MAC,p1,p2,str1,str2)</a>
+0002 <span class="comment">% PLOTMAC   Plot Manhattan type MAC matrix plot</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%       h = plotmac(MAC,p1,p2)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%       h       Handle to figure (vector)</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%       MAC     Mac matrix from amac</span>
+0009 <span class="comment">%       p1      Poles for first mode shape matrix</span>
+0010 <span class="comment">%       p2      Poles for second mode shape matrix (if several)</span>
+0011 <span class="comment">%       str1    String with label for axis of p1</span>
+0012 <span class="comment">%       str2    String with label for axis of p2</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">% plotmac(MAC)        generates a plot with modes numbered by 1, 2, 3,...</span>
+0015 <span class="comment">% plotmac(MAC,p)      generates a plot of an Auto-MAC with frequencies as tick marks</span>
+0016 <span class="comment">% plotmac(MAC,p1,p2)  generates a plot of a Cross-MAC with different frequencies on the x- and y-axes</span>
+0017 <span class="comment">% plotmac(MAC,p1,p2,str1,str2) as plotmac(MAC,p1,p2) with labels for p1 and p2</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">% See also AMAC</span>
+0020 
+0021 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0022 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0023 <span class="comment">% Version: 1.0 2011-06-23</span>
+0024 <span class="comment">%          1.1 2013-03-13 Added support for axis labels</span>
+0025 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0026 
+0027 h=bar3(MAC);
+0028 [N,M]=size(MAC);
+0029 <span class="comment">% Color bars after height</span>
+0030 <span class="keyword">for</span> m = 1:M
+0031     zdata = ones(6*N,4);
+0032     k = 1;
+0033     <span class="keyword">for</span> n = 0:6:(6*N-6)
+0034         zdata(n+1:n+6,:) = MAC(k,m);
+0035         k = k+1;
+0036     <span class="keyword">end</span>
+0037     set(h(m),<span class="string">'Cdata'</span>,zdata);
+0038 <span class="keyword">end</span>
+0039 <span class="comment">% colormap('default')</span>
+0040 colormap(<span class="string">'jet'</span>);        <span class="comment">% Changed 2015-05-19 for MATLAB 2015a compatibility</span>
+0041 colorbar
+0042 
+0043 <span class="keyword">if</span> nargin ==1
+0044     title(<span class="string">'Auto MAC matrix'</span>)
+0045 <span class="keyword">elseif</span> nargin == 2
+0046     fr1=<a href="poles2fz.html" class="code" title="function [fr,zr] = poles2fz(poles)">poles2fz</a>(p1);
+0047     <span class="keyword">for</span> n=1:length(fr1)
+0048         T{n}=sprintf(<span class="string">'%4.1f'</span>,fr1(n));
+0049     <span class="keyword">end</span>
+0050     set(gca,<span class="string">'XTickLabel'</span>,T);
+0051     set(gca,<span class="string">'YTickLabel'</span>,T);
+0052     title(<span class="string">'Cross MAC matrix'</span>);
+0053 <span class="keyword">elseif</span> nargin == 3
+0054     fr1=<a href="poles2fz.html" class="code" title="function [fr,zr] = poles2fz(poles)">poles2fz</a>(p1);
+0055     fr2=<a href="poles2fz.html" class="code" title="function [fr,zr] = poles2fz(poles)">poles2fz</a>(p2);
+0056     <span class="keyword">for</span> n=1:length(fr1)
+0057         Tx{n}=sprintf(<span class="string">'%4.1f'</span>,fr1(n));
+0058     <span class="keyword">end</span>
+0059     <span class="keyword">for</span> n=1:length(fr2)
+0060         Ty{n}=sprintf(<span class="string">'%4.1f'</span>,fr2(n));
+0061     <span class="keyword">end</span>
+0062     set(gca,<span class="string">'XTickLabel'</span>,Ty)
+0063     set(gca,<span class="string">'YTickLabel'</span>,Tx)
+0064     title(<span class="string">'Cross MAC matrix'</span>)
+0065 <span class="keyword">elseif</span> nargin == 5  <span class="comment">% Added 2013-03-13</span>
+0066     fr1=<a href="poles2fz.html" class="code" title="function [fr,zr] = poles2fz(poles)">poles2fz</a>(p1);
+0067     fr2=<a href="poles2fz.html" class="code" title="function [fr,zr] = poles2fz(poles)">poles2fz</a>(p2);
+0068     <span class="keyword">for</span> n=1:length(fr1)
+0069         Tx{n}=sprintf(<span class="string">'%4.1f'</span>,fr1(n));
+0070     <span class="keyword">end</span>
+0071     <span class="keyword">for</span> n=1:length(fr2)
+0072         Ty{n}=sprintf(<span class="string">'%4.1f'</span>,fr2(n));
+0073     <span class="keyword">end</span>
+0074     set(gca,<span class="string">'XTickLabel'</span>,Ty)
+0075     set(gca,<span class="string">'YTickLabel'</span>,Tx)
+0076     title(<span class="string">'Cross MAC matrix'</span>)
+0077     xlabel(str1)
+0078     ylabel(str2)
+0079 <span class="keyword">end</span>
+0080 axis(<span class="string">'tight'</span>)</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

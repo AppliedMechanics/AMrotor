@@ -1,0 +1,7 @@
+Animator Release History
+
+1.02beta 13-Aug-05
+- Fixed limits : "Values must be increasing and non-NaN."
+
+1.01beta 25-July-2005
+- Initial release

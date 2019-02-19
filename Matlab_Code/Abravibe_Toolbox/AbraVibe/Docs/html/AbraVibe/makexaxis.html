@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of makexaxis</title>
+  <meta name="keywords" content="makexaxis">
+  <meta name="description" content="MAKEXAXIS Create a time or frequency x axis">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; makexaxis.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>makexaxis
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>MAKEXAXIS Create a time or frequency x axis</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function x = makexaxis(y,dx,x0); </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment">MAKEXAXIS Create a time or frequency x axis
+
+           x = makexaxis(y,dx,x0);
+
+           y       Y axis
+           dx      x increment
+           x0      Start x value (default = 0)
+
+ This command can be used to create an x axis for time data as for example
+ t=makexaxis(y,1/fs) if fs is the sampling frequency, and start is 0 sec.
+ or for a spectrum by using
+ f=makexaxis(Y,fs/N)
+ if Y is a spectrum using blocksize N, starting at 0 Hz.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="abrabrowse.html" class="code" title="function varargout = abrabrowse(varargin)">abrabrowse</a>	ABRABROWSE GUI-based data browser for ABRAVIBE toolbox data files</li><li><a href="apceps.html" class="code" title="function [cp, tau] = apceps(Gxx,f)">apceps</a>	APCEPS    Calculate power cepstrum of single-sided autospectrum</li><li><a href="axcorrp.html" class="code" title="function [Ryx,t,Gyx,f] = axcorrp(x,y,fs,N)">axcorrp</a>	AXCORRP      Scaled cross-correlation between x (input) and y (output)</li><li><a href="data2hmtrx.html" class="code" title="function [H,f,RespDof,RespDir,RefDof,RefDir,FillMtrx] = data2hmtrx(Prefix,StartNo,StopNo,FuncType)">data2hmtrx</a>	DATA2HMTRX      Import Abravibe FRF data into H matrix</li><li><a href="frf2ir.html" class="code" title="function [h,t,fs] = frf2ir(H,f);">frf2ir</a>	FRF2IR    Convert freqency response(s) to impulse response(s)</li><li><a href="impplot1.html" class="code" title="function h = impplot1(x,y,fs,N,TrigIdx,DIdx,TrigLevel)">impplot1</a>	IMPPLOT1  Plot impact analysis plot with force/response. Internal</li><li><a href="impsetup.html" class="code" title="function impsetup(DataFile,ChanNo,SetupFile)">impsetup</a>	IMPSETUP Setup utility for IMPPROC</li><li><a href="imptrig2.html" class="code" title="function [TrigIdx, DIdx] = imptrig2(x,y,fs,N,TrigPerc,PreTrigger)">imptrig2</a>	IMPTRIG2       Impact testing triggering and double impact detection</li><li><a href="ir2ptime.html" class="code" title="function [p,L,H,f] = ir2ptime(h,fs,NLines,MaxModes,EstType,MIF,f,fOffset);">ir2ptime</a>	IR2PTIME   Time domain MDOF methods for parameter extraction from free</li><li><a href="plotfile.html" class="code" title="function plotfile(FileList,Overlay,col);">plotfile</a>	PLOTFILE  Plot data in ABRABIVE file(s) with default format</li><li><a href="psd2time.html" class="code" title="function [y,t] = psd2time(P,f,N);">psd2time</a>	PSD2TIME  Generate Gaussian random signal from PSD</li><li><a href="synchsampr.html" class="code" title="function  [xs,rpm,tc,tt] = synchsampr(x,fs,rpm,MaxOrd)">synchsampr</a>	SYNCHSAMPR   Resample data synchronously with RPM, using rpm-time profile</li><li><a href="synchsampt.html" class="code" title="function  [xs,rpm,tc] = synchsampt(x,fs,tacho,TLevel,Slope,PPR,MaxOrd)">synchsampt</a>	SYNCHSAMPT   Resample data synchronously with RPM, based on tacho signal</li><li><a href="tacho2rpm.html" class="code" title="function [rpm,t] = tacho2rpm(x,fs,TLevel,Slope,PPR,NewFs,FilterL)">tacho2rpm</a>	TACHO2RPM     Extract rpm/time profile from tacho time signal</li><li><a href="timeint.html" class="code" title="function y = timeint(x,fs,Type,Par);">timeint</a>	TIMEINT Integrate time signal</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function x = makexaxis(y,dx,x0);</a>
+0002 <span class="comment">%MAKEXAXIS Create a time or frequency x axis</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%           x = makexaxis(y,dx,x0);</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%           y       Y axis</span>
+0007 <span class="comment">%           dx      x increment</span>
+0008 <span class="comment">%           x0      Start x value (default = 0)</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">% This command can be used to create an x axis for time data as for example</span>
+0011 <span class="comment">% t=makexaxis(y,1/fs) if fs is the sampling frequency, and start is 0 sec.</span>
+0012 <span class="comment">% or for a spectrum by using</span>
+0013 <span class="comment">% f=makexaxis(Y,fs/N)</span>
+0014 <span class="comment">% if Y is a spectrum using blocksize N, starting at 0 Hz.</span>
+0015 
+0016 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0017 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0018 <span class="comment">% Version: 1.0 2011-06-23</span>
+0019 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0020 <span class="comment">%</span>
+0021 
+0022 <span class="keyword">if</span> nargin == 2
+0023     x0=0;
+0024 <span class="keyword">end</span>
+0025 
+0026 N=length(y);
+0027 x=(x0:dx:x0+(N-1)*dx)';</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

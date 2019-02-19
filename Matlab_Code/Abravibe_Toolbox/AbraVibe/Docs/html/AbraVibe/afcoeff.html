@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of afcoeff</title>
+  <meta name="keywords" content="afcoeff">
+  <meta name="description" content="AFCOEFF  Compute filter coefficients for time domain filters">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; afcoeff.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>afcoeff
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>AFCOEFF  Compute filter coefficients for time domain filters</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [B,A] = afcoeff(fs,Type) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> AFCOEFF  Compute filter coefficients for time domain filters
+
+       [B,A] = afcoeff(fs,Type)
+
+       B       Digital filter B coefficients, see FILTER
+       A       Ditto A coefficients
+ 
+       fs      Sampling frequency for data
+       Type    'A' for acoustic A-weighting filter
+               'C' for acoustic C-weighting filter</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="afcoeff.html" class="code" title="function [B,A] = afcoeff(fs,Type)">afcoeff</a>	AFCOEFF  Compute filter coefficients for time domain filters</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="afcoeff.html" class="code" title="function [B,A] = afcoeff(fs,Type)">afcoeff</a>	AFCOEFF  Compute filter coefficients for time domain filters</li><li><a href="timeweight.html" class="code" title="function y = timeweight(x,fs,Type)">timeweight</a>	TIMEWEIGHT   Filter data with time weighting filter in time domain</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [B,A] = afcoeff(fs,Type)</a>
+0002 <span class="comment">% AFCOEFF  Compute filter coefficients for time domain filters</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%       [B,A] = afcoeff(fs,Type)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%       B       Digital filter B coefficients, see FILTER</span>
+0007 <span class="comment">%       A       Ditto A coefficients</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%       fs      Sampling frequency for data</span>
+0010 <span class="comment">%       Type    'A' for acoustic A-weighting filter</span>
+0011 <span class="comment">%               'C' for acoustic C-weighting filter</span>
+0012 
+0013 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0014 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0015 <span class="comment">% Version: 1.0 2011-06-23</span>
+0016 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0017 
+0018 Type=upper(Type);
+0019 
+0020 <span class="keyword">if</span> strcmp(Type,<span class="string">'C'</span>)
+0021     w1=2*pi*20.6;
+0022     D1=conv([1 w1],[1 w1]);
+0023     jw1k=j*2*pi*1000;
+0024     C1=abs(jw1k+w1)^2/abs(jw1k)^2;
+0025     w2=2*pi*12200;
+0026     D2=conv([1 w2],[1 w2]);
+0027     C2=abs(jw1k+w2)^2;
+0028     [B1,A1]=bilinear([C1 0 0],D1,fs);
+0029     [B2,A2]=bilinear(C2,D2,fs);
+0030     B=conv(B1,B2);
+0031     A=conv(A1,A2);
+0032 <span class="keyword">elseif</span> strcmp(Type,<span class="string">'A'</span>)
+0033     [B,A]=<a href="afcoeff.html" class="code" title="function [B,A] = afcoeff(fs,Type)">afcoeff</a>(fs,<span class="string">'C'</span>);
+0034     w3=2*pi*107.7;
+0035     w4=2*pi*737.9;
+0036     D3=conv([1 w3],[1 w4]);
+0037     jw1k=j*2*pi*1000;
+0038     C3=abs(jw1k+w3)*abs(jw1k+w4)/abs(jw1k)^2;
+0039     [B1,A1]=bilinear([C3 0 0],D3,fs);
+0040     B=conv(B,B1);
+0041     A=conv(A,A1);
+0042 <span class="keyword">end</span>
+0043 
+0044 <span class="comment">% For later: D-weighting poles and zeros are</span>
+0045 <span class="comment">%         Poles             Zeroes</span>
+0046 <span class="comment">%     -282.7 + j0       -519.8 + j876.2</span>
+0047 <span class="comment">%      -1160 + j0       -519.8 - j876.2</span>
+0048 <span class="comment">%      -1712 + j2628         0 + j0</span>
+0049 <span class="comment">%      -1712 - j2628</span></pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of frf2msdof</title>
+  <meta name="keywords" content="frf2msdof">
+  <meta name="description" content="FRF2MSDOF Curve fit FRFs into poles and mode shapes, SDOF techniques">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; frf2msdof.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>frf2msdof
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>FRF2MSDOF Curve fit FRFs into poles and mode shapes, SDOF techniques</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [p,V] = frf2msdof(H,f,fstart,NoLines,Type,ScaleDof) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment">FRF2MSDOF Curve fit FRFs into poles and mode shapes, SDOF techniques
+
+       [p,V] = frf2msdof(H,F,fstart,NoLines,Type,ScaleDof)
+
+       p           Complex poles in column vector
+       V           Mode shape matrix, each mode in a column, D-by-Nmodes
+
+       H           Matrix with accelerance FRF(s), N-by-D (single reference!)
+       f           Frequency axis for H
+       fstart      Vector with start frequencies (one for each mode)
+       NoLines     Number of frequency lines to use at each mode (ODD
+                   number!), default is 7
+       Type        String: (Default is 'poly')
+                   'lsqrl' uses an SDOF local least squares method
+                           (using only positive pole pair)
+                   'poly' uses an SDOF polynomial least squares method
+                          (using complex conjugate pair).
+       ScaleDof    Dof (column in H) to scale for (driving point) if D &gt; 1
+
+ Mode shapes are scaled to unity modal A (see, e.g. modal2frf)
+
+ Note: It is recommended only to use this function for pole estimation, as
+ mode shapes are normally better estimated by an MDOF method. If there are
+ frequency shifts between the FRFs, this function can be used for mode
+ shape estimation, and then 'poly' or 'lsqrl' should be used.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="fint.html" class="code" title="function Y = fint(X,f,Type,NumberInt)">fint</a>	FINT Frequency integration by jw division</li><li><a href="poles2fz.html" class="code" title="function [fr,zr] = poles2fz(poles)">poles2fz</a>	POLES2FZ Convert poles to frequencies and relative damping</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [p,V] = frf2msdof(H,f,fstart,NoLines,Type,ScaleDof)</a>
+0002 <span class="comment">%FRF2MSDOF Curve fit FRFs into poles and mode shapes, SDOF techniques</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%       [p,V] = frf2msdof(H,F,fstart,NoLines,Type,ScaleDof)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%       p           Complex poles in column vector</span>
+0007 <span class="comment">%       V           Mode shape matrix, each mode in a column, D-by-Nmodes</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%       H           Matrix with accelerance FRF(s), N-by-D (single reference!)</span>
+0010 <span class="comment">%       f           Frequency axis for H</span>
+0011 <span class="comment">%       fstart      Vector with start frequencies (one for each mode)</span>
+0012 <span class="comment">%       NoLines     Number of frequency lines to use at each mode (ODD</span>
+0013 <span class="comment">%                   number!), default is 7</span>
+0014 <span class="comment">%       Type        String: (Default is 'poly')</span>
+0015 <span class="comment">%                   'lsqrl' uses an SDOF local least squares method</span>
+0016 <span class="comment">%                           (using only positive pole pair)</span>
+0017 <span class="comment">%                   'poly' uses an SDOF polynomial least squares method</span>
+0018 <span class="comment">%                          (using complex conjugate pair).</span>
+0019 <span class="comment">%       ScaleDof    Dof (column in H) to scale for (driving point) if D &gt; 1</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">% Mode shapes are scaled to unity modal A (see, e.g. modal2frf)</span>
+0022 <span class="comment">%</span>
+0023 <span class="comment">% Note: It is recommended only to use this function for pole estimation, as</span>
+0024 <span class="comment">% mode shapes are normally better estimated by an MDOF method. If there are</span>
+0025 <span class="comment">% frequency shifts between the FRFs, this function can be used for mode</span>
+0026 <span class="comment">% shape estimation, and then 'poly' or 'lsqrl' should be used.</span>
+0027 <span class="comment">%</span>
+0028 
+0029 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0030 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0031 <span class="comment">% Version: 1.0 2011-06-23</span>
+0032 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0033 
+0034 <span class="comment">%*************************************************************************</span>
+0035 <span class="comment">% This file is still in development!</span>
+0036 <span class="comment">%*************************************************************************</span>
+0037 
+0038 <span class="keyword">if</span> nargin == 3
+0039     Type = <span class="string">'LSQRL'</span>;
+0040     NoLines=7;
+0041 <span class="keyword">else</span>
+0042     Type = upper(Type);
+0043 <span class="keyword">end</span>
+0044 
+0045 <span class="keyword">if</span> mod(NoLines,2) == 0
+0046     NoLines=NoLines+1;
+0047 <span class="keyword">end</span>
+0048 idxs=(NoLines-1)/2;             <span class="comment">% Index shift</span>
+0049 
+0050 [N,D]=size(H);
+0051 
+0052 <span class="comment">% Convert from assumed accelerance to receptance</span>
+0053 H=<a href="fint.html" class="code" title="function Y = fint(X,f,Type,NumberInt)">fint</a>(H,f,<span class="string">'lin'</span>,2);
+0054 
+0055 
+0056 <span class="keyword">if</span> strcmp(Type,<span class="string">'LSQRL'</span>)
+0057     jw=j*2*pi*f;
+0058     p=zeros(D,length(fstart));
+0059     V=zeros(D,length(fstart));
+0060     <span class="keyword">for</span> hn = 1:D
+0061         Hin=H(:,hn);
+0062         <span class="keyword">for</span> n = 1:length(fstart)
+0063             idx=min(find(f &gt;= fstart(n)));
+0064             idx=idx-idxs:idx+idxs;
+0065             jwt=jw(idx);
+0066             Hvect=Hin(idx);
+0067             <span class="comment">% Build matrices</span>
+0068             A=[Hvect ones(size(Hvect))];
+0069             B=jwt.*Hvect;
+0070             <span class="comment">% Solve for poles and mode shapes</span>
+0071             S=pinv(A)*B;
+0072             p(hn,n)=S(1);
+0073             V(hn,n)=S(2);
+0074         <span class="keyword">end</span>
+0075     <span class="keyword">end</span>
+0076     <span class="comment">% Check results for 'outliers' in frequency</span>
+0077     fr=<a href="poles2fz.html" class="code" title="function [fr,zr] = poles2fz(poles)">poles2fz</a>(p);
+0078     <span class="comment">% Check for freqs that differ &gt; 10% from fstart(n)</span>
+0079     <span class="keyword">for</span> mode = 1:length(fstart)
+0080         idx=find(abs((fr(:,mode)-fstart(mode))/fstart(mode)) &lt; 0.1);
+0081         idx2=find(abs((fr(:,mode)-fstart(mode))/fstart(mode)) &gt; 0.1);
+0082         <span class="keyword">if</span> ~isempty(idx)                <span class="comment">% There was one or more badly fitted mode</span>
+0083             p=p(idx,:);
+0084             V(idx2,mode)=0;              <span class="comment">% Assume method diverges because close to node line</span>
+0085         <span class="keyword">end</span>
+0086     <span class="keyword">end</span>
+0087     <span class="comment">% Average remaining poles and force to column</span>
+0088     p=mean(p);
+0089     p=p(:);
+0090 <span class="keyword">elseif</span> strcmp(Type,<span class="string">'POLY'</span>)
+0091     jw=j*2*pi*f;
+0092     w2=abs(jw.^2);
+0093     p=zeros(D,length(fstart));
+0094     V=zeros(D,length(fstart));
+0095     <span class="keyword">for</span> hn = 1:D
+0096         Hin=H(:,hn);
+0097         <span class="keyword">for</span> n = 1:length(fstart)
+0098             idx=min(find(f &gt;= fstart(n)));
+0099             idx=idx-idxs:idx+idxs;
+0100             jwt=jw(idx);
+0101             w2t=w2(idx);
+0102             Hvect=Hin(idx)
+0103             <span class="comment">% Build matrices</span>
+0104             A=[Hvect 2*jwt.*Hvect -ones(size(Hvect))]
+0105             B=w2t.*Hvect
+0106             <span class="comment">% Solve for poles and mode shapes</span>
+0107             S=pinv(A)*B
+0108             ar=sqrt(S(1));
+0109             br=S(2)./ar;
+0110             p(hn,n)=-br.*ar+j*ar.*sqrt(1-br.^2);
+0111             <span class="comment">%idx=min(find(w2t&gt;=ar^2));</span>
+0112         <span class="keyword">end</span>
+0113     <span class="keyword">end</span>
+0114     <span class="comment">% Check results for 'outliers' in frequency</span>
+0115     fr=<a href="poles2fz.html" class="code" title="function [fr,zr] = poles2fz(poles)">poles2fz</a>(p);
+0116     <span class="comment">% Check for freqs that differ &gt; 10% from fstart(n)</span>
+0117     <span class="keyword">for</span> mode = 1:length(fstart)
+0118         idx=find(abs((fr(:,mode)-fstart(mode))/fstart(mode)) &lt; 0.1)
+0119 <span class="comment">%         idx2=find(abs((fr(:,mode)-fstart(mode))/fstart(mode)) &gt; 0.1);</span>
+0120         <span class="keyword">if</span> ~isempty(idx)                <span class="comment">% There was one or more badly fitted mode</span>
+0121             pnew(mode)=mean(p(idx,mode));
+0122 <span class="comment">%             V(idx2,mode)=0;              % Assume method diverges because close to node line</span>
+0123         <span class="keyword">end</span>
+0124     <span class="keyword">end</span>
+0125     p=pnew(:);
+0126     <span class="comment">% Estimate mode shapes using estimated poles</span>
+0127     <span class="keyword">for</span> hn = 1:D
+0128         <span class="keyword">for</span> n = 1:length(p)
+0129             idx=min(find(f &gt;= abs(p(n))/2/pi));
+0130             idx=idx-idxs:idx+idxs;
+0131             Hin=H(idx,hn);
+0132             jwt=jw(idx);  
+0133             <span class="keyword">for</span> fl=1:length(idx)
+0134                 Rr(fl)=Hin(fl)*(jwt(fl)-p(n))*(jwt(fl)-conj(p(n)));
+0135             <span class="keyword">end</span>
+0136             V(hn,n)=mean((Rr))/(j*2*imag(p(n)));
+0137             clear Rr
+0138         <span class="keyword">end</span>
+0139     <span class="keyword">end</span>
+0140 <span class="keyword">end</span>
+0141 
+0142 <span class="comment">% Scale modes</span>
+0143 <span class="keyword">if</span> D == 1
+0144         V=sqrt(V);
+0145 <span class="keyword">else</span>
+0146     <span class="keyword">if</span> ~isempty(V)
+0147         <span class="keyword">for</span> mode=1:length(V(1,:))
+0148             V(:,mode)=V(:,mode)/sqrt(V(ScaleDof,mode));
+0149         <span class="keyword">end</span>
+0150     <span class="keyword">end</span>
+0151 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

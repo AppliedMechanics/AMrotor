@@ -1,0 +1,210 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of unvr55</title>
+  <meta name="keywords" content="unvr55">
+  <meta name="description" content="UNVR55    Read SDRC universal file mode shape record">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; unvr55.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>unvr55
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>UNVR55    Read SDRC universal file mode shape record</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [Nodes,Shape,Header] = unvr55(fid); </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> UNVR55    Read SDRC universal file mode shape record
+
+       [Nodes,Shape,Header] = unvr55(fid); 
+
+ This function reads one dataset, type 55 (Mode shape data).
+ 
+ Output:    
+        Nodes contains a list of the node numbers of the shape
+        Shape contains shape data in column
+        Header is a struct containing all header information</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="unvread.html" class="code" title="function LastNo = unvread(FileName,Prefix,FirstNo,Type)">unvread</a>	UNVREAD Read a standard UNV file</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [Nodes,Shape,Header] = unvr55(fid); </a>
+0002 <span class="comment">% UNVR55    Read SDRC universal file mode shape record</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%       [Nodes,Shape,Header] = unvr55(fid);</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">% This function reads one dataset, type 55 (Mode shape data).</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">% Output:</span>
+0009 <span class="comment">%        Nodes contains a list of the node numbers of the shape</span>
+0010 <span class="comment">%        Shape contains shape data in column</span>
+0011 <span class="comment">%        Header is a struct containing all header information</span>
+0012 
+0013 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0014 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0015 <span class="comment">% Version: 1.0 2011-06-23</span>
+0016 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0017 
+0018 <span class="comment">%---------------------------------------------------------------------------------</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">% Record 1 - 5, ID lines</span>
+0021 <span class="comment">%-----------------------------------------------------------------------------------------------</span>
+0022 Header.Title=fgetl(fid);            <span class="comment">% ID line 1</span>
+0023 <span class="keyword">if</span> length(Header.Title) == 0
+0024    Header.title=fgetl(fid);         <span class="comment">% Sometimes fscanf() in unvread leaves a &lt;CR&gt;</span>
+0025 <span class="keyword">elseif</span> (isspace(Header.Title))
+0026    Header.Title=fgetl(fid);         <span class="comment">% If 55 in Function ID was followed by blanks</span>
+0027 <span class="keyword">end</span>
+0028 Header.Title2=fgetl(fid);              <span class="comment">% Ditto 2</span>
+0029 Header.Date=fgetl(fid);             <span class="comment">% ID line 3, normally date and time</span>
+0030 Header.Title3=fgetl(fid);            <span class="comment">% ...</span>
+0031 Header.Title4=fgetl(fid);
+0032     
+0033 <span class="comment">% Record 6 - Data definition parameters</span>
+0034 <span class="comment">%-----------------------------------------------------------------------------------------------</span>
+0035 L=fgetl(fid);
+0036 Header.ModelType=sscanf(L(1:10),<span class="string">'%i'</span>);          <span class="comment">% Model Type</span>
+0037 Header.AnalysisType=sscanf(L(11:20),<span class="string">'%i'</span>);      <span class="comment">% Analysis Type</span>
+0038 Header.DataChar=sscanf(L(21:30),<span class="string">'%i'</span>);          <span class="comment">% Data Characteristic</span>
+0039 Header.SpecDataType=sscanf(L(31:40),<span class="string">'%i'</span>);      <span class="comment">% Specific Data Type</span>
+0040 Header.DataType=sscanf(L(41:50),<span class="string">'%i'</span>);          <span class="comment">% Data Type (2=real, 5=complex)</span>
+0041 Header.NumValuesPerNode=sscanf(L(51:60),<span class="string">'%i'</span>);    <span class="comment">% Number of Data Values Per Node</span>
+0042 
+0043 <span class="comment">% Record 7 and 8 are data specific, hence has to be tested here</span>
+0044 <span class="comment">%-----------------------------------------------------------------------------------------------</span>
+0045 L=fgetl(fid);
+0046 <span class="keyword">if</span> Header.AnalysisType == 0                         <span class="comment">% Unknown</span>
+0047     Header.NumIntDataValues=sscanf(L(1:10),<span class="string">'%i'</span>);    <span class="comment">% Number of Integer Data Values</span>
+0048     Header.NumRealDataValues=sscanf(L(11:20),<span class="string">'%i'</span>);    <span class="comment">% Number of Real Data Values</span>
+0049     Header.IDNumber=sscanf(L(21:30),<span class="string">'%i'</span>);          <span class="comment">% ID Number</span>
+0050 <span class="comment">%    Record 8</span>
+0051     L=fgetl(fid);
+0052 <span class="keyword">elseif</span> Header.AnalysisType == 1                     <span class="comment">% Static</span>
+0053     Header.NumIntDataValues=sscanf(L(1:10),<span class="string">'%i'</span>);    <span class="comment">% Number of Integer Data Values</span>
+0054     Header.NumRealDataValues=sscanf(L(11:20),<span class="string">'%i'</span>);    <span class="comment">% Number of Real Data Values</span>
+0055     Header.LoadCase=sscanf(L(21:30),<span class="string">'%i'</span>);          <span class="comment">% Load case</span>
+0056 <span class="comment">%    Record 8</span>
+0057     L=fgetl(fid);
+0058 <span class="keyword">elseif</span> Header.AnalysisType == 2                     <span class="comment">% Normal Mode</span>
+0059     Header.NumIntDataValues=sscanf(L(1:10),<span class="string">'%i'</span>);    <span class="comment">% Number of Integer Data Values</span>
+0060     Header.NumRealDataValues=sscanf(L(11:20),<span class="string">'%i'</span>);    <span class="comment">% Number of Real Data Values</span>
+0061     Header.LoadCase=sscanf(L(21:30),<span class="string">'%i'</span>);          <span class="comment">% Load Case</span>
+0062     Header.ModeNumber=sscanf(L(31:40),<span class="string">'%i'</span>);        <span class="comment">% Mode number</span>
+0063 <span class="comment">%    Record 8</span>
+0064     L=fgetl(fid);
+0065     Header.Frequency=sscanf(L(1:13),<span class="string">'%g'</span>);          <span class="comment">% Frequency</span>
+0066     Header.ModalMass=sscanf(L(14:26),<span class="string">'%g'</span>);         <span class="comment">% Modal Mass</span>
+0067     Header.ViscousDampingRatio=sscanf(L(27:39),<span class="string">'%g'</span>);    <span class="comment">% Modal Viscous Damping Ratio</span>
+0068     Header.HystereticDampingRatio=sscanf(L(40:52),<span class="string">'%g'</span>);    <span class="comment">% Modal Hysteretic Damping Ratio</span>
+0069 <span class="keyword">elseif</span> Header.AnalysisType == 3                     <span class="comment">% Complex Eigenvalue</span>
+0070     Header.NumIntDataValues=sscanf(L(1:10),<span class="string">'%i'</span>);    <span class="comment">% =2</span>
+0071     Header.NumRealDataValues=sscanf(L(11:20),<span class="string">'%i'</span>);    <span class="comment">% =6</span>
+0072     Header.LoadCase=sscanf(L(21:30),<span class="string">'%i'</span>);          <span class="comment">% Load Case</span>
+0073     Header.ModeNumber=sscanf(L(31:40),<span class="string">'%i'</span>);        <span class="comment">% Mode number</span>
+0074 <span class="comment">%    Record 8</span>
+0075     L=fgetl(fid);
+0076     R=sscanf(L(1:13),<span class="string">'%g'</span>);                         <span class="comment">% Real Part Eigenvalue</span>
+0077     I=sscanf(L(14:26),<span class="string">'%g'</span>);                        <span class="comment">% Imaginary Part Eigenvalue</span>
+0078     Header.Eigenvalue=R+j*I;
+0079     R=sscanf(L(27:39),<span class="string">'%g'</span>);                        <span class="comment">% Real Part of Modal A</span>
+0080     I=sscanf(L(40:52),<span class="string">'%g'</span>);                        <span class="comment">% Imaginary Part of Modal A</span>
+0081     Header.ModalA=R+j*I;
+0082     R=sscanf(L(53:65),<span class="string">'%g'</span>);                        <span class="comment">% Real Part of Modal B</span>
+0083     I=sscanf(L(66:78),<span class="string">'%g'</span>);                        <span class="comment">% Imaginary Part of Modal B</span>
+0084     Header.ModalB=R+j*I;
+0085 <span class="keyword">elseif</span> Header.AnalysisType == 4                     <span class="comment">% Transient</span>
+0086     Header.NumIntDataValues=sscanf(L(1:10),<span class="string">'%i'</span>);    <span class="comment">% =2</span>
+0087     Header.NumRealDataValues=sscanf(L(11:20),<span class="string">'%i'</span>);    <span class="comment">% =1</span>
+0088     Header.LoadCase=sscanf(L(21:30),<span class="string">'%i'</span>);          <span class="comment">% Load Case</span>
+0089     Header.TimeStepNumber=sscanf(L(31:40),<span class="string">'%i'</span>);    <span class="comment">% Time Step number</span>
+0090 <span class="comment">%    Record 8</span>
+0091     L=fgetl(fid);
+0092     Header.Time=sscanf(L(1:13),<span class="string">'%g'</span>);               <span class="comment">% Time (Seconds)</span>
+0093 <span class="keyword">elseif</span> Header.AnalysisType == 5                     <span class="comment">% Frequency Response</span>
+0094     Header.NumIntDataValues=sscanf(L(1:10),<span class="string">'%i'</span>);    <span class="comment">% =2</span>
+0095     Header.NumRealDataValues=sscanf(L(11:20),<span class="string">'%i'</span>);    <span class="comment">% =1</span>
+0096     Header.LoadCase=sscanf(L(21:30),<span class="string">'%i'</span>);          <span class="comment">% Load Case</span>
+0097     Header.TimeStepNumber=sscanf(L(31:40),<span class="string">'%i'</span>);    <span class="comment">% Frequency Step number</span>
+0098 <span class="comment">%    Record 8</span>
+0099     L=fgetl(fid);
+0100     Header.Frequency=sscanf(L(1:13),<span class="string">'%g'</span>);          <span class="comment">% Frequency (Hz)</span>
+0101 <span class="keyword">elseif</span> Header.AnalysisType == 6                     <span class="comment">% Buckling</span>
+0102     Header.NumIntDataValues=sscanf(L(1:10),<span class="string">'%i'</span>);    <span class="comment">% =1</span>
+0103     Header.NumRealDataValues=sscanf(L(11:20),<span class="string">'%i'</span>);    <span class="comment">% =1</span>
+0104     Header.LoadCase=sscanf(L(21:30),<span class="string">'%i'</span>);          <span class="comment">% Load Case</span>
+0105 <span class="comment">%    Record 8</span>
+0106     L=fgetl(fid);
+0107     Header.Eigenvalue=sscanf(L(1:13),<span class="string">'%g'</span>);         <span class="comment">% Eigenvalue</span>
+0108 <span class="keyword">else</span>
+0109    error(<span class="string">'Wrong Analysis Type in mode shape record!'</span>)
+0110 <span class="keyword">end</span>
+0111 
+0112 <span class="comment">%-----------------------------------------------------------------------------------------------</span>
+0113 <span class="comment">% Records 9 and 10 are now repeated until data are over</span>
+0114 <span class="comment">% Data values - check for real or complex data</span>
+0115 ShapeRow=1;
+0116 NodesRow=1;
+0117 NDV=Header.NumValuesPerNode;                <span class="comment">% Number of values</span>
+0118 Shape=[];
+0119 Nodes=[];
+0120 L=fgetl(fid);                       <span class="comment">% Until last -1 of dataset is read</span>
+0121 <span class="keyword">while</span> isempty(findstr(L,<span class="string">'-1'</span>))
+0122     Nodes(NodesRow)=sscanf(L(1:10),<span class="string">'%i'</span>);
+0123     NodesRow=NodesRow+1;
+0124     L=fgetl(fid);
+0125     <span class="keyword">for</span> n = 1:NDV
+0126         <span class="keyword">if</span> Header.DataType == 2                <span class="comment">% Real Modes</span>
+0127             nstart=(n-1)*13+1;
+0128             nstop=n*13;
+0129             Shape(ShapeRow)=sscanf(L(nstart:nstop),<span class="string">'%g'</span>)';        <span class="comment">% Data in one row</span>
+0130             ShapeRow=ShapeRow+1;
+0131         <span class="keyword">elseif</span> Header.DataType == 5                                    <span class="comment">% For complex data - handle this</span>
+0132             nstart=(n-1)*26+1;
+0133             nstop=nstart+12;
+0134             R=sscanf(L(nstart:nstop),<span class="string">'%g'</span>);
+0135             nstart=(n-1)*26+14;
+0136             nstop=nstart+12;
+0137             I=sscanf(L(nstart:nstop),<span class="string">'%g'</span>);
+0138             Shape(ShapeRow)=R+j*I;
+0139             ShapeRow=ShapeRow+1;
+0140         <span class="keyword">end</span>
+0141     <span class="keyword">end</span>
+0142     L=fgetl(fid);                           <span class="comment">% Until -1 of dataset is read</span>
+0143 <span class="keyword">end</span>
+0144 Nodes=Nodes(:);
+0145 Shape=Shape(:);                                <span class="comment">% Convert to column in Shape</span>
+0146 <span class="comment">% Convert Shape into structure with x, y, and z information separately</span>
+0147 tShape=Shape;
+0148 clear Shape
+0149 Shape.X=tShape(1:3:end);
+0150 Shape.Y=tShape(2:3:end);
+0151 Shape.Z=tShape(3:3:end);
+0152 
+0153 <span class="comment">%-----------------------------------------------------------------------------------------------</span>
+0154</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

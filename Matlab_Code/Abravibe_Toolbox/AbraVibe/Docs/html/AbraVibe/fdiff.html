@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of fdiff</title>
+  <meta name="keywords" content="fdiff">
+  <meta name="description" content="FDIFF Frequency differentiation by jw multiplication">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; fdiff.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>fdiff
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>FDIFF Frequency differentiation by jw multiplication</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function Y = fdiff(X,f,Type,NumberDiff) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment">FDIFF Frequency differentiation by jw multiplication
+
+       Y = fdiff(X,f,Type,NumberInt)
+
+       Y           Differentiated spectrum (multiplied once or twice by jw)
+                   Y can be up to 3 dimensions (for example for FRF
+                   matrices)
+
+       X           Input spectrum (linear or power spectrum)
+       f           Frequency axis for G
+       Type        'lin' for linear spectrum/FRF, or 'power' for PSD, or
+                   other power spectrum. Default = 'lin'
+       NumberDiff  Number of differentiations, 1 (default) or 2
+
+ See also <a href="fint.html" class="code" title="function Y = fint(X,f,Type,NumberInt)">fint</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="modal2frf.html" class="code" title="function H = modal2frf(f,p,V,indof,outdof,Type)">modal2frf</a>	MODAL2FRF  Synthesize FRF(s) from modal parameters</li><li><a href="modal2frfh.html" class="code" title="function H = modal2frfh(f,fr,etar,V,indof,outdof,Type)">modal2frfh</a>	MODAL2FRFH  Synthesize FRF(s) from modal parameters with hysteretic damping</li><li><a href="timefresp.html" class="code" title="function  [y,H,f] = timefresp(varargin);">timefresp</a>	TIMEFRESP     Time domain forced response</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function Y = fdiff(X,f,Type,NumberDiff)</a>
+0002 <span class="comment">%FDIFF Frequency differentiation by jw multiplication</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%       Y = fdiff(X,f,Type,NumberInt)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%       Y           Differentiated spectrum (multiplied once or twice by jw)</span>
+0007 <span class="comment">%                   Y can be up to 3 dimensions (for example for FRF</span>
+0008 <span class="comment">%                   matrices)</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%       X           Input spectrum (linear or power spectrum)</span>
+0011 <span class="comment">%       f           Frequency axis for G</span>
+0012 <span class="comment">%       Type        'lin' for linear spectrum/FRF, or 'power' for PSD, or</span>
+0013 <span class="comment">%                   other power spectrum. Default = 'lin'</span>
+0014 <span class="comment">%       NumberDiff  Number of differentiations, 1 (default) or 2</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">% See also fint</span>
+0017 
+0018 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0019 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0020 <span class="comment">% Version: 1.0 2011-06-23</span>
+0021 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0022 
+0023 <span class="keyword">if</span> nargin == 2
+0024     Type=<span class="string">'LIN'</span>;
+0025     NumberDiff=1;
+0026 <span class="keyword">elseif</span> nargin == 3
+0027     Type=upper(Type);
+0028     NumberDiff=1;
+0029 <span class="keyword">elseif</span> nargin == 4
+0030     Type=upper(Type);
+0031 <span class="keyword">end</span>
+0032 
+0033 <span class="keyword">if</span> strcmp(Type,<span class="string">'LIN'</span>)
+0034     <span class="keyword">if</span> NumberDiff == 1
+0035         op=j*2*pi*f;                <span class="comment">% Operator is jw</span>
+0036     <span class="keyword">elseif</span> NumberDiff == 2
+0037         op=-(2*pi*f).^2;            <span class="comment">% Operator is (jw)^2</span>
+0038     <span class="keyword">else</span>
+0039         error(<span class="string">'Wrong parameter NumberDiff! Only 1 or 2 allowed'</span>)
+0040     <span class="keyword">end</span>
+0041 <span class="keyword">elseif</span> strcmp(Type,<span class="string">'POWER'</span>)
+0042     <span class="keyword">if</span> NumberDiff == 1
+0043         op=(4*pi*f).^2;             <span class="comment">% Operator is w^2</span>
+0044     <span class="keyword">elseif</span> NumberDiff == 2
+0045         op=-(4*pi*f).^4;            <span class="comment">% Operator is w^4</span>
+0046     <span class="keyword">else</span>
+0047         error(<span class="string">'Wrong parameter NumberDiff! Only 1 or 2 allowed'</span>)
+0048     <span class="keyword">end</span>
+0049 <span class="keyword">else</span>
+0050     error(<span class="string">'Wrong Type parameter! Only ''lin'' or ''power'' allowed.'</span>)
+0051 <span class="keyword">end</span>
+0052 
+0053 [N,D,R]=size(X);
+0054 Y=zeros(size(X));
+0055 
+0056 <span class="keyword">for</span> n = 1:D
+0057     <span class="keyword">if</span> R == 1
+0058         Y(:,n)=X(:,n).*op;
+0059     <span class="keyword">else</span>
+0060         <span class="keyword">for</span> m=1:R
+0061             Y(:,n,m)=X(:,n,m).*op;
+0062         <span class="keyword">end</span>
+0063     <span class="keyword">end</span>
+0064 <span class="keyword">end</span>
+0065 
+0066     
+0067 
+0068</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of animate</title>
+  <meta name="keywords" content="animate">
+  <meta name="description" content="ANIMATE  Animates wireframe models from universal files or MATLAB structure">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">animate</a> &gt; animate.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for animate&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>animate
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>ANIMATE  Animates wireframe models from universal files or MATLAB structure</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function animate; </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> ANIMATE  Animates wireframe models from universal files or MATLAB structure
+
+ Usage: Store geometry and mode shape information either in a universal file, 
+ or in a MATLAB file with the following two structures:
+ GEOMETRY.node    =&gt; Column vector with node labels (double)
+ GEOMETRY.x          =&gt; Column vector with node X-axis data (double)
+ GEOMETRY.y          =&gt; Column vector with node Y-axis data (double)
+ GEOMETRY.z          =&gt; Column vector with node Z-axis data (double)
+ GEOMETRY.conn    =&gt; Row vector with node labels describing the wireframe.  A line-break (pen-up) can use a NaN, 0, or -1 (double)
+  
+ MODAL is a structured array, MODAL(#).xxx with each position defining a single modes data.
+ MODAL.Freq          =&gt; Complex value for modal frequency in Hz.
+ MODAL.Node        =&gt; Column vector with node labels (double)
+ MODAL.X              =&gt; Column vector with node X-axis maximum deflection (double)
+ MODAL.Y              =&gt; Column vector with node Y-axis maximum deflection (double)
+ MODAL.Z              =&gt; Column vector with node Z-axis maximum deflection (double)</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>	</li><li><a href="defaults.html" class="code" title="function varargout = defaults(action,DATA);">defaults</a>	</li><li><a href="guiAnimate.html" class="code" title="function h0=guiAnimate(SETUP);">guiAnimate</a>	</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+<h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="#_sub1" class="code">function SETUP = updateRecentFiles(SETUP,flag)</a></li></ul>
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function animate;</a>
+0002 <span class="comment">% ANIMATE  Animates wireframe models from universal files or MATLAB structure</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">% Usage: Store geometry and mode shape information either in a universal file,</span>
+0005 <span class="comment">% or in a MATLAB file with the following two structures:</span>
+0006 <span class="comment">% GEOMETRY.node    =&gt; Column vector with node labels (double)</span>
+0007 <span class="comment">% GEOMETRY.x          =&gt; Column vector with node X-axis data (double)</span>
+0008 <span class="comment">% GEOMETRY.y          =&gt; Column vector with node Y-axis data (double)</span>
+0009 <span class="comment">% GEOMETRY.z          =&gt; Column vector with node Z-axis data (double)</span>
+0010 <span class="comment">% GEOMETRY.conn    =&gt; Row vector with node labels describing the wireframe.  A line-break (pen-up) can use a NaN, 0, or -1 (double)</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">% MODAL is a structured array, MODAL(#).xxx with each position defining a single modes data.</span>
+0013 <span class="comment">% MODAL.Freq          =&gt; Complex value for modal frequency in Hz.</span>
+0014 <span class="comment">% MODAL.Node        =&gt; Column vector with node labels (double)</span>
+0015 <span class="comment">% MODAL.X              =&gt; Column vector with node X-axis maximum deflection (double)</span>
+0016 <span class="comment">% MODAL.Y              =&gt; Column vector with node Y-axis maximum deflection (double)</span>
+0017 <span class="comment">% MODAL.Z              =&gt; Column vector with node Z-axis maximum deflection (double)</span>
+0018 
+0019 
+0020 
+0021 <span class="keyword">global</span> SETUP RESIZE UFF UDATA GEOMETRY
+0022 SETUP           = [];
+0023 GEOMETRY        = [];
+0024 MODAL           = [];
+0025 UDATA           = [];
+0026 UDATA.Handles   = [];
+0027 <span class="keyword">if</span> ishandle(findobj(0,<span class="string">'Tag'</span>,<span class="string">'ANIMATE'</span>))
+0028     figure(findobj(0,<span class="string">'Tag'</span>,<span class="string">'ANIMATE'</span>));
+0029     <span class="keyword">return</span>;
+0030 <span class="keyword">end</span>
+0031 <span class="comment">% Init Variables</span>
+0032 [PATH,FILE,EXT]         = fileparts(which(<span class="string">'animate.m'</span>));
+0033 SETUP                   = <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'initDefaults'</span>);
+0034 SETUP.RecentFiles.File1 = <span class="string">''</span>;
+0035 SETUP.RecentFiles.Type1 = [];
+0036 SETUP.RecentFiles.File2 = <span class="string">''</span>;
+0037 SETUP.RecentFiles.Type2 = [];
+0038 SETUP.RecentFiles.File3 = <span class="string">''</span>;
+0039 SETUP.RecentFiles.Type3 = [];
+0040 SETUP.RecentFiles.File4 = <span class="string">''</span>;
+0041 SETUP.RecentFiles.Type4 = [];
+0042 
+0043 SETUP.Path.Data     = PATH;
+0044 SETUP.Path.Root     = PATH;
+0045 SETUP.Path.Export   = PATH;
+0046 SETUP.Path.Help     = fullfile(PATH,<span class="string">'Help'</span>);
+0047 
+0048 <span class="keyword">if</span> exist(fullfile(PATH,<span class="string">'animate.ini'</span>),<span class="string">'file'</span>);
+0049     SETUP   = <a href="defaults.html" class="code" title="function varargout = defaults(action,DATA);">defaults</a>(<span class="string">'readINI'</span>,SETUP');
+0050     <span class="keyword">if</span> ~isempty(SETUP.RecentFiles.File1)
+0051         [p,f,e] = fileparts(SETUP.RecentFiles.File1);
+0052         SETUP.Path.Data = p;
+0053     <span class="keyword">end</span>
+0054 <span class="keyword">else</span>
+0055     <a href="defaults.html" class="code" title="function varargout = defaults(action,DATA);">defaults</a>(<span class="string">'writeINI'</span>,SETUP');
+0056 <span class="keyword">end</span>
+0057 flag    = 0;
+0058 <span class="keyword">if</span> ~isdir(SETUP.Path.Root)
+0059     SETUP.Path.Root     = PATH;
+0060     flag    = 1;
+0061 <span class="keyword">end</span>
+0062 <span class="keyword">if</span> ~isdir(SETUP.Path.Data)
+0063     SETUP.Path.Data     = PATH;
+0064     flag    = 1;
+0065 <span class="keyword">end</span>
+0066 <span class="keyword">if</span> ~isdir(SETUP.Path.Export)
+0067     SETUP.Path.Export   = PATH;
+0068     flag    = 1;
+0069 <span class="keyword">end</span>
+0070 <span class="keyword">if</span> ~isdir(SETUP.Path.Help)
+0071     SETUP.Path.Help     = PATH;
+0072     flag    = 1;
+0073 <span class="keyword">end</span>
+0074 <span class="keyword">if</span> max(flag)
+0075     <a href="defaults.html" class="code" title="function varargout = defaults(action,DATA);">defaults</a>(<span class="string">'addPaths'</span>,SETUP);
+0076 <span class="keyword">end</span>
+0077 
+0078 flag    = zeros(1,4);
+0079 <span class="keyword">if</span> ~exist(SETUP.RecentFiles.File1,<span class="string">'file'</span>)
+0080     flag(1) = 1;
+0081 <span class="keyword">end</span>
+0082 <span class="keyword">if</span> ~exist(SETUP.RecentFiles.File2,<span class="string">'file'</span>)
+0083     flag(2) = 1;
+0084 <span class="keyword">end</span>
+0085 <span class="keyword">if</span> ~exist(SETUP.RecentFiles.File3,<span class="string">'file'</span>)
+0086     flag(3) = 1;
+0087 <span class="keyword">end</span>
+0088 <span class="keyword">if</span> ~exist(SETUP.RecentFiles.File4,<span class="string">'file'</span>)
+0089     flag(4) = 1;
+0090 <span class="keyword">end</span>
+0091 SETUP   = <a href="#_sub1" class="code" title="subfunction SETUP = updateRecentFiles(SETUP,flag)">updateRecentFiles</a>(SETUP,flag);
+0092 <span class="keyword">if</span> max(flag)
+0093     <a href="defaults.html" class="code" title="function varargout = defaults(action,DATA);">defaults</a>(<span class="string">'addRecentFiles'</span>,SETUP);
+0094 <span class="keyword">end</span>
+0095 UFF.DATA    = [];
+0096 UFF.dsn15   = [];
+0097 UFF.dsn18   = [];
+0098 UFF.dsn55   = [];
+0099 UFF.dsn82   = [];
+0100 
+0101 VER             = version;
+0102 ind             = findstr(VER,<span class="string">'R'</span>);
+0103 SETUP.Release   = str2num(VER(ind+1:ind+2));
+0104 
+0105 
+0106 <span class="comment">% Init GUI</span>
+0107 FIG             = <a href="guiAnimate.html" class="code" title="function h0=guiAnimate(SETUP);">guiAnimate</a>(SETUP);
+0108 RESIZE.FigPos   = get(FIG,<span class="string">'Position'</span>);
+0109 
+0110 <a name="_sub1" href="#_subfunctions" class="code">function SETUP = updateRecentFiles(SETUP,flag)</a>
+0111 ind = find(flag);
+0112 
+0113 <span class="keyword">if</span> flag(4)
+0114     SETUP.RecentFiles.File4 = <span class="string">''</span>;
+0115     SETUP.RecentFiles.Type4 = [];
+0116 <span class="keyword">end</span>
+0117 <span class="keyword">if</span> flag(3)
+0118     SETUP.RecentFiles.File3 = SETUP.RecentFiles.File4;
+0119     SETUP.RecentFiles.Type3 = SETUP.RecentFiles.Type4;
+0120     SETUP.RecentFiles.File4 = <span class="string">''</span>;
+0121     SETUP.RecentFiles.Type4 = [];
+0122 <span class="keyword">end</span>
+0123 <span class="keyword">if</span> flag(2)
+0124     SETUP.RecentFiles.File2 = SETUP.RecentFiles.File3;
+0125     SETUP.RecentFiles.Type2 = SETUP.RecentFiles.Type3;
+0126     SETUP.RecentFiles.File3 = SETUP.RecentFiles.File4;
+0127     SETUP.RecentFiles.Type3 = SETUP.RecentFiles.Type4;
+0128     SETUP.RecentFiles.File4 = <span class="string">''</span>;
+0129     SETUP.RecentFiles.Type4 = [];
+0130 <span class="keyword">end</span>
+0131 <span class="keyword">if</span> flag(1)
+0132     SETUP.RecentFiles.File1 = SETUP.RecentFiles.File2;
+0133     SETUP.RecentFiles.Type1 = SETUP.RecentFiles.Type2;
+0134     SETUP.RecentFiles.File2 = SETUP.RecentFiles.File3;
+0135     SETUP.RecentFiles.Type2 = SETUP.RecentFiles.Type3;
+0136     SETUP.RecentFiles.File3 = SETUP.RecentFiles.File4;
+0137     SETUP.RecentFiles.Type3 = SETUP.RecentFiles.Type4;
+0138     SETUP.RecentFiles.File4 = <span class="string">''</span>;
+0139     SETUP.RecentFiles.Type4 = [];
+0140 <span class="keyword">end</span>
+0141</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

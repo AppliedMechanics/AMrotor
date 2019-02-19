@@ -1,0 +1,225 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of timefresp</title>
+  <meta name="keywords" content="timefresp">
+  <meta name="description" content="TIMEFRESP     Time domain forced response">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; timefresp.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>timefresp
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>TIMEFRESP     Time domain forced response</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function  [y,H,f] = timefresp(varargin); </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> TIMEFRESP     Time domain forced response
+
+ This function can be called several different ways:
+
+ y = timefresp(x,fs,p,V,indof,outdof,OutType) calculates the output
+ based on known poles and mode shapes.
+
+ y = timefresp(x,fs,M,C,K,indof,outdof,OutType) calculates the output
+ based on known mass, damping, and stiffness matrices, if C is a matrix.
+
+ y = timefresp(x,fs,M,z,K,indof,outdof,OutType) calculates the output
+ based on known mass, and stiffness matrices, and modal (viscous) damping
+ if z is a vector. (ONLY works for more than one DOF, see below).
+
+       y           Output(s) in columns, N-by-D (a little shorter than 
+                   N if OutType is 'v' or 'a', see text below)
+
+       x           Input force(s) in columns [Newton], length(x) = N
+       fs          Sampling frequency for x (no oversampling required!)
+       p           Vector with poles
+       V           Mode shape matrix with mode shapes in columns
+       indof       Vector with dofs for the columns in x
+       outdof      Vector with dofs for the columns in y, length(outdof)=D
+       OutType     'd', 'v', 'a' for displacement, velocity, acceleration
+       M           Mass matrix
+       C, z        Damping matrix, or relative damping coefficients. Note
+                   that z is only valid when the number of DOFs is &gt; 1
+                   For SDOF systems, you MUST use m, c, k
+       K           Stiffness matrix
+
+ Note! All input parameters MUST be given to this function.
+
+ This function upsamples data by a factor 5, and downsamples again after
+ the simulation is finished, so no extra oversampling, in addition to the
+ 'normal' factors 2 to 2.5, is needed for the input data x.
+ See inside file for reference.
+ If output type is 'v' or 'a', one or two differentiating filters is/are
+ applied. This will reduce the length by 20, or 40 samples, respectively,
+ see TIMEDIFF with option 'remez'.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="fdiff.html" class="code" title="function Y = fdiff(X,f,Type,NumberDiff)">fdiff</a>	FDIFF Frequency differentiation by jw multiplication</li><li><a href="fresppv.html" class="code" title="function [y,H,f] = fresppv(x,fs,p,V,indof,outdof)">fresppv</a>	FRESPPV   Time domain filter forced response. Internal function.</li><li><a href="mck2modal.html" class="code" title="function [p,V,Prop] = mck2modal(varargin)">mck2modal</a>	MCK2MODAL     Compute modal model (poles and mode shapes) from M,(C),K</li><li><a href="mkz2modal.html" class="code" title="function [p,V] = mkz2modal(M,K,z)">mkz2modal</a>	MKZ2MODAL     Compute modal model (poles and mode shapes) from M,K, and z</li><li><a href="timediff.html" class="code" title="function y = timediff(x,fs,Type);">timediff</a>	TIMEDIFF Differentiate time signal</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function  [y,H,f] = timefresp(varargin);</a>
+0002 <span class="comment">% TIMEFRESP     Time domain forced response</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">% This function can be called several different ways:</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">% y = timefresp(x,fs,p,V,indof,outdof,OutType) calculates the output</span>
+0007 <span class="comment">% based on known poles and mode shapes.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">% y = timefresp(x,fs,M,C,K,indof,outdof,OutType) calculates the output</span>
+0010 <span class="comment">% based on known mass, damping, and stiffness matrices, if C is a matrix.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">% y = timefresp(x,fs,M,z,K,indof,outdof,OutType) calculates the output</span>
+0013 <span class="comment">% based on known mass, and stiffness matrices, and modal (viscous) damping</span>
+0014 <span class="comment">% if z is a vector. (ONLY works for more than one DOF, see below).</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%       y           Output(s) in columns, N-by-D (a little shorter than</span>
+0017 <span class="comment">%                   N if OutType is 'v' or 'a', see text below)</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%       x           Input force(s) in columns [Newton], length(x) = N</span>
+0020 <span class="comment">%       fs          Sampling frequency for x (no oversampling required!)</span>
+0021 <span class="comment">%       p           Vector with poles</span>
+0022 <span class="comment">%       V           Mode shape matrix with mode shapes in columns</span>
+0023 <span class="comment">%       indof       Vector with dofs for the columns in x</span>
+0024 <span class="comment">%       outdof      Vector with dofs for the columns in y, length(outdof)=D</span>
+0025 <span class="comment">%       OutType     'd', 'v', 'a' for displacement, velocity, acceleration</span>
+0026 <span class="comment">%       M           Mass matrix</span>
+0027 <span class="comment">%       C, z        Damping matrix, or relative damping coefficients. Note</span>
+0028 <span class="comment">%                   that z is only valid when the number of DOFs is &gt; 1</span>
+0029 <span class="comment">%                   For SDOF systems, you MUST use m, c, k</span>
+0030 <span class="comment">%       K           Stiffness matrix</span>
+0031 <span class="comment">%</span>
+0032 <span class="comment">% Note! All input parameters MUST be given to this function.</span>
+0033 <span class="comment">%</span>
+0034 <span class="comment">% This function upsamples data by a factor 5, and downsamples again after</span>
+0035 <span class="comment">% the simulation is finished, so no extra oversampling, in addition to the</span>
+0036 <span class="comment">% 'normal' factors 2 to 2.5, is needed for the input data x.</span>
+0037 <span class="comment">% See inside file for reference.</span>
+0038 <span class="comment">% If output type is 'v' or 'a', one or two differentiating filters is/are</span>
+0039 <span class="comment">% applied. This will reduce the length by 20, or 40 samples, respectively,</span>
+0040 <span class="comment">% see TIMEDIFF with option 'remez'.</span>
+0041 
+0042 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0043 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0044 <span class="comment">% Version: 1.0 2011-06-23</span>
+0045 <span class="comment">%          1.1 2011-08-11  Simplified oversampling expressions</span>
+0046 <span class="comment">%          1.2 2012-01-15  Modified to work for 'v' and 'a' in Octave</span>
+0047 <span class="comment">%          1.3 2018-03-09  Modified so H, f only computed if asked for</span>
+0048 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0049 
+0050 <span class="comment">% References:</span>
+0051 <span class="comment">% Ahlin, K., Magnevall, M. &amp; Josefsson, A., &quot;Simulation of forced response</span>
+0052 <span class="comment">% in linear and nonlinear mechanical systems using digital filters,&quot;, ISMA,</span>
+0053 <span class="comment">% International Conference on Noise and Vibration Engineering, Catholic</span>
+0054 <span class="comment">% University, Leuven, 2006. Ramp invariant transform is used here.</span>
+0055 <span class="comment">%</span>
+0056 <span class="comment">% Brandt, A., &quot;Noise and Vibration Analysis: Signal Analysis and</span>
+0057 <span class="comment">% Experimental Procedures,&quot; John Wiley and Sons., 2011, Section 6.5.</span>
+0058 
+0059 <span class="comment">% Set simulation parameter for oversampling</span>
+0060 OS=5;              <span class="comment">% Data are resampled to newfs=OS*fs</span>
+0061 
+0062 <span class="comment">% Parse inputs</span>
+0063 <span class="keyword">if</span> nargin == 7      <span class="comment">% based on modal model</span>
+0064     x=varargin{1};
+0065     fs=varargin{2};
+0066     p=varargin{3};
+0067     V=varargin{4};
+0068     indof=varargin{5};
+0069     outdof=varargin{6};
+0070     OutType=varargin{7};
+0071 <span class="keyword">elseif</span> nargin == 8  <span class="comment">% Based on M, C, K or M, z, K</span>
+0072     x=varargin{1};
+0073     fs=varargin{2};
+0074     M=varargin{3};
+0075     C=varargin{4};
+0076     [m,n]=size(C);
+0077     <span class="keyword">if</span> m ~= n
+0078         z=C;
+0079         clear C
+0080     <span class="keyword">end</span>
+0081     K=varargin{5};
+0082     indof=varargin{6};
+0083     outdof=varargin{7};
+0084     OutType=varargin{8};
+0085 <span class="keyword">end</span>
+0086 OutType=upper(OutType);
+0087 
+0088 <span class="comment">%=======================================================================</span>
+0089 <span class="comment">% Upsample input data OS times</span>
+0090 [N,R]=size(x);
+0091 D=length(outdof);
+0092 xn=zeros(OS*N,R);
+0093 <span class="keyword">for</span> r = 1:R
+0094     xn(:,r)=resample(x(:,r),OS,1);
+0095 <span class="keyword">end</span>
+0096 x=xn;
+0097 clear xn
+0098 fs=OS*fs;
+0099     
+0100 <span class="comment">%=======================================================================</span>
+0101 <span class="comment">% Calculate output(s) depending on damping type</span>
+0102 <span class="keyword">if</span> exist(<span class="string">'C'</span>,<span class="string">'var'</span>)
+0103     [p,V]=<a href="mck2modal.html" class="code" title="function [p,V,Prop] = mck2modal(varargin)">mck2modal</a>(M,C,K);
+0104 <span class="keyword">elseif</span> exist(<span class="string">'z'</span>,<span class="string">'var'</span>)
+0105     [p,V]=<a href="mkz2modal.html" class="code" title="function [p,V] = mkz2modal(M,K,z)">mkz2modal</a>(M,K,z);
+0106 <span class="keyword">end</span>
+0107 
+0108 <span class="comment">% Compute outputs depending on call</span>
+0109 <span class="keyword">if</span> nargout &gt; 1
+0110     [y,H,f] = <a href="fresppv.html" class="code" title="function [y,H,f] = fresppv(x,fs,p,V,indof,outdof)">fresppv</a>(x,fs,p,V,indof,outdof);
+0111 <span class="keyword">else</span>
+0112     [y] = <a href="fresppv.html" class="code" title="function [y,H,f] = fresppv(x,fs,p,V,indof,outdof)">fresppv</a>(x,fs,p,V,indof,outdof);
+0113 <span class="keyword">end</span>
+0114 
+0115 <span class="comment">% Downsample output data</span>
+0116 yold=y;
+0117 y=zeros(N,D);
+0118 <span class="keyword">for</span> d = 1:D
+0119     y=resample(yold,fs/(OS),fs);
+0120 <span class="keyword">end</span>
+0121 fs=fs/(OS);
+0122 
+0123 <span class="comment">% Check if differentiation is necessary and apply</span>
+0124 <span class="comment">% Bug fix: 2012-01-15 changed 'remez' to 'maxflat' differentiation if run</span>
+0125 <span class="comment">% from Octave, since it seems there is a problem with remez in Octave.</span>
+0126 <span class="comment">% Fix 2012-11-06: Changed to maxflat for both platforms, as there were</span>
+0127 <span class="comment">% problems with remez in MATLAB.</span>
+0128 difftype=<span class="string">'maxflat'</span>;
+0129 <span class="keyword">if</span> strcmp(OutType,<span class="string">'V'</span>)
+0130     y=<a href="timediff.html" class="code" title="function y = timediff(x,fs,Type);">timediff</a>(y,fs,difftype);
+0131     <span class="keyword">if</span> nargout &gt; 1
+0132         H=<a href="fdiff.html" class="code" title="function Y = fdiff(X,f,Type,NumberDiff)">fdiff</a>(H,f,<span class="string">'lin'</span>,1);
+0133     <span class="keyword">end</span>
+0134 <span class="keyword">elseif</span> strcmp(OutType,<span class="string">'A'</span>)
+0135     yt=<a href="timediff.html" class="code" title="function y = timediff(x,fs,Type);">timediff</a>(y,fs,difftype);
+0136     y=<a href="timediff.html" class="code" title="function y = timediff(x,fs,Type);">timediff</a>(yt,fs,difftype);
+0137     <span class="keyword">if</span> nargout &gt; 1
+0138         H=<a href="fdiff.html" class="code" title="function Y = fdiff(X,f,Type,NumberDiff)">fdiff</a>(H,f,<span class="string">'lin'</span>,2);
+0139     <span class="keyword">end</span>
+0140 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

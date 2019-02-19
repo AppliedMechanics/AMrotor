@@ -1,0 +1,200 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of mck2modal</title>
+  <meta name="keywords" content="mck2modal">
+  <meta name="description" content="MCK2MODAL     Compute modal model (poles and mode shapes) from M,(C),K">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; mck2modal.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>mck2modal
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>MCK2MODAL     Compute modal model (poles and mode shapes) from M,(C),K</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [p,V,Prop] = mck2modal(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> MCK2MODAL     Compute modal model (poles and mode shapes) from M,(C),K
+
+       p       Column vector with poles, (or eigenfrequencies if undamped) in rad/s
+       V       Matrix with mode shapes in columns
+       Prop    Logical, 1 if C is proportional damping, otherwise 0
+       
+       M       Mass matrix
+       C       (Optional) viscous damping matrix
+       K       Stiffness matrix
+
+ [p,V] = mck2modal(M,K) solves for the undamped system and returns
+ eigenfrequencies as purely imaginary poles (in rad/s), and mode shapes (normal modes).
+
+ [p,V] = mck2modal(M,C,K) solves for the poles and mode shapes. If the
+ damping matrix C=aM+bK for konstants a and b, i.e. the system exhibits
+ proportional damping, then the undamped system is solved for mode shapes,
+ and the poles are calculated from the uncoupled equations in modal
+ coordinates. If the damping is not proportional, a general state space
+ formulation is used to find the (complex) mode shapes and poles.
+
+ NOTE: The list of poles is limited to the poles with positive imaginary
+ part, as the other half of the poles can easily be calculated as the
+ complex conjugates of the first ones.
+
+ Mode shape scaling:
+ Undamped mode shapes (normal modes) are scaled to unity modal mass
+ Mode shapes calculated with damping are scaled to unity modal A. 
+ This means that the modal scaling constant, Qr = 1, that is, that all 
+ residues are Apqr=psi_p*psi_q
+ This also means that the mode shapes are complex even for 
+ proportionally damped case, but it is the most convenient scaling.
+
+ See also <a href="uma2umm.html" class="code" title="function V = uma2umm(Vold,p)">UMA2UMM</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="mkz2frf.html" class="code" title="function H = mkz2frf(f,M,K,z,indof,outdof,type)">mkz2frf</a>	MKZ2FRF Calculate FRF(s) from M, K and modal damping, z</li><li><a href="mkz2modal.html" class="code" title="function [p,V] = mkz2modal(M,K,z)">mkz2modal</a>	MKZ2MODAL     Compute modal model (poles and mode shapes) from M,K, and z</li><li><a href="timefresp.html" class="code" title="function  [y,H,f] = timefresp(varargin);">timefresp</a>	TIMEFRESP     Time domain forced response</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [p,V,Prop] = mck2modal(varargin)</a>
+0002 <span class="comment">% MCK2MODAL     Compute modal model (poles and mode shapes) from M,(C),K</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%       p       Column vector with poles, (or eigenfrequencies if undamped) in rad/s</span>
+0005 <span class="comment">%       V       Matrix with mode shapes in columns</span>
+0006 <span class="comment">%       Prop    Logical, 1 if C is proportional damping, otherwise 0</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%       M       Mass matrix</span>
+0009 <span class="comment">%       C       (Optional) viscous damping matrix</span>
+0010 <span class="comment">%       K       Stiffness matrix</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">% [p,V] = mck2modal(M,K) solves for the undamped system and returns</span>
+0013 <span class="comment">% eigenfrequencies as purely imaginary poles (in rad/s), and mode shapes (normal modes).</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">% [p,V] = mck2modal(M,C,K) solves for the poles and mode shapes. If the</span>
+0016 <span class="comment">% damping matrix C=aM+bK for konstants a and b, i.e. the system exhibits</span>
+0017 <span class="comment">% proportional damping, then the undamped system is solved for mode shapes,</span>
+0018 <span class="comment">% and the poles are calculated from the uncoupled equations in modal</span>
+0019 <span class="comment">% coordinates. If the damping is not proportional, a general state space</span>
+0020 <span class="comment">% formulation is used to find the (complex) mode shapes and poles.</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">% NOTE: The list of poles is limited to the poles with positive imaginary</span>
+0023 <span class="comment">% part, as the other half of the poles can easily be calculated as the</span>
+0024 <span class="comment">% complex conjugates of the first ones.</span>
+0025 <span class="comment">%</span>
+0026 <span class="comment">% Mode shape scaling:</span>
+0027 <span class="comment">% Undamped mode shapes (normal modes) are scaled to unity modal mass</span>
+0028 <span class="comment">% Mode shapes calculated with damping are scaled to unity modal A.</span>
+0029 <span class="comment">% This means that the modal scaling constant, Qr = 1, that is, that all</span>
+0030 <span class="comment">% residues are Apqr=psi_p*psi_q</span>
+0031 <span class="comment">% This also means that the mode shapes are complex even for</span>
+0032 <span class="comment">% proportionally damped case, but it is the most convenient scaling.</span>
+0033 <span class="comment">%</span>
+0034 <span class="comment">% See also UMA2UMM</span>
+0035 
+0036 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0037 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0038 <span class="comment">% Version: 1.0 2011-06-23</span>
+0039 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0040 
+0041 <span class="comment">% Note: The way we solve the various systems in this file are not</span>
+0042 <span class="comment">% at all necessary, but is done for pedagogical reasons.</span>
+0043 <span class="comment">% In principal the state space formulation could be used in all cases,</span>
+0044 <span class="comment">% and would yield correct results.</span>
+0045 
+0046 <span class="keyword">if</span> nargin == 2      <span class="comment">% Undamped case</span>
+0047     <span class="comment">% Solve the undamped case for eigenfrequencies and mode shapes</span>
+0048     M=varargin{1};
+0049     K=varargin{2};
+0050     [V,D]=eig(M\K);
+0051     [D,I]=sort(diag(D));    <span class="comment">% Sort eigenvalues/frequencies, lowest first</span>
+0052     V=V(:,I);
+0053     p=sqrt(-D);             <span class="comment">% Poles (with positive imaginary part)</span>
+0054     Prop=[];                <span class="comment">% Undefined for undamped case!</span>
+0055     Mn=diag(V'*M*V);        <span class="comment">% Modal Mass</span>
+0056     wd=imag(p);
+0057     <span class="keyword">for</span> n = 1:length(Mn)
+0058 <span class="comment">%        V(:,n)=V(:,n)/sqrt((j*2*wd(n))*Mn(n));    % Which is equivalent to Mr=1/(j2wd)</span>
+0059         V(:,n)=V(:,n)/sqrt((Mn(n)));    <span class="comment">% Which is equivalent to Mr=1/(j2wd)</span>
+0060     <span class="keyword">end</span>
+0061 <span class="keyword">elseif</span> nargin == 3
+0062     M=varargin{1};
+0063     C=varargin{2};
+0064     K=varargin{3};
+0065     <span class="comment">% Find if damping is proportional. See for example</span>
+0066     <span class="comment">% Ewins, D. J., Modal Testing: Theory, Practice and Application,</span>
+0067     <span class="comment">% Research Studies Press, 2000.</span>
+0068     M1=(M\K)*(M\C);
+0069     M2=(M\C)*(M\K);
+0070     <span class="keyword">if</span> norm(M1-M2)&lt;1e-6           <span class="comment">% If proportional damping</span>
+0071         <span class="comment">% Solve the undamped case for mode shapes</span>
+0072         [V,D]=eig(M\K);
+0073         [D,I]=sort(diag(D));    <span class="comment">% Sort eigenvalues/frequencies, descending</span>
+0074         V=V(:,I);
+0075         wn=sqrt(D);             <span class="comment">% Undamped natural frequencies</span>
+0076         <span class="comment">% Now diagonalize M, C, K into modal coordinates</span>
+0077         Mn=diag(V'*M*V);       <span class="comment">% Modal Mass</span>
+0078         <span class="keyword">for</span> n = 1:length(Mn)
+0079             V(:,n)=V(:,n)/sqrt(Mn(n));    <span class="comment">% Unity modal mass</span>
+0080         <span class="keyword">end</span>
+0081         Mn=diag(eye(size(M)));
+0082         Kn=diag(V'*K*V);       <span class="comment">% Modal Stiffness</span>
+0083         Cn=diag(V'*C*V);       <span class="comment">% Modal Damping</span>
+0084         z=(Cn/2)./sqrt(Kn.*Mn); <span class="comment">% relative damping from uncoupled equations</span>
+0085         p=-z.*wn+j*wn.*sqrt(1-z.^2);    <span class="comment">% Poles (with positive imaginary part)</span>
+0086         Prop=1;
+0087         wd=imag(p);
+0088         <span class="keyword">for</span> n=1:length(Mn)                  <span class="comment">% Rescale mode shapes to unity modal A</span>
+0089             V(:,n)=V(:,n)/sqrt((j*2*wd(n)));    <span class="comment">% Which is equivalent to Mr=1/(j2wd)</span>
+0090         <span class="keyword">end</span>
+0091     <span class="keyword">else</span>
+0092         <span class="comment">% Non-proportional damping, solve state-space formulation</span>
+0093         <span class="comment">% See for example:</span>
+0094         <span class="comment">% Craig, R.R., Kurdila, A.J., Fundamentals of Structural Dynamics, Wiley 2006</span>
+0095         <span class="comment">% With this formulation, coordinates are z={x ; x_dot}</span>
+0096         A=[C    M;   M    0*M];
+0097         B=[K  0*M; 0*M     -M];
+0098         [V,D]=eig(B,-A);
+0099         <span class="comment">% Sort in descending order</span>
+0100         [Dum,I]=sort(diag(abs(imag(D))));
+0101         p=diag(D);
+0102         p=p(I);
+0103         V=V(:,I);
+0104         <span class="comment">% Rotate vectors to real first element (row 1)</span>
+0105         phi=angle(V(1,:));
+0106         phi=diag(exp(-j*phi));
+0107         V=V*phi;
+0108         <span class="comment">% Scale to unity Modal A</span>
+0109         Ma=V.'*A*V;
+0110         <span class="keyword">for</span> col = 1:length(V(1,:))
+0111             V(:,col)=V(:,col)/sqrt(Ma(col,col));
+0112         <span class="keyword">end</span>
+0113         <span class="comment">% Shorten to size N-by-N. NOTE! This means that in order to use the</span>
+0114         <span class="comment">% modal model, you need to recreate the complex conjugate pairs!</span>
+0115         <span class="comment">% See, e.g., MODAL2FRF</span>
+0116         [m,n]=size(V);
+0117         p=p(1:2:m);
+0118         V=V(1:m/2,1:2:n);
+0119         Prop=0;
+0120     <span class="keyword">end</span>
+0121 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

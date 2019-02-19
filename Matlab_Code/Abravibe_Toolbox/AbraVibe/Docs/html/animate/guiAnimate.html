@@ -1,0 +1,602 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of guiAnimate</title>
+  <meta name="keywords" content="guiAnimate">
+  <meta name="description" content="">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">animate</a> &gt; guiAnimate.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for animate&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>guiAnimate
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong></strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function h0=guiAnimate(SETUP); </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="animate.html" class="code" title="function animate;">animate</a>	ANIMATE  Animates wireframe models from universal files or MATLAB structure</li></ul>
+<!-- crossreference -->
+
+<h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="#_sub1" class="code">function addMenus(uiFig,SETUP,viewVal)</a></li><li><a href="#_sub2" class="code">function [iconZoom,iconAnimate,iconRotate]=loadIcons(SETUP);</a></li></ul>
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function h0=guiAnimate(SETUP);</a>
+0002 
+0003 bcolor = SETUP.Colors.Background;
+0004 
+0005 h0=figure(<span class="string">'Color'</span>           , bcolor, <span class="keyword">...</span>
+0006    <span class="string">'MenuBar'</span>                , <span class="string">'none'</span>, <span class="keyword">...</span>
+0007    <span class="string">'NumberTitle'</span>            , <span class="string">'off'</span>, <span class="keyword">...</span>
+0008    <span class="string">'Name'</span>                   , <span class="string">'Modal Vector Animation'</span>, <span class="keyword">...</span>
+0009    <span class="string">'Position'</span>               , [4,32,800,600], <span class="keyword">...</span>
+0010    <span class="string">'Resize'</span>                 , <span class="string">'on'</span>,<span class="keyword">...</span>
+0011    <span class="string">'ResizeFcn'</span>              , <span class="string">'command(''resize'');'</span>,<span class="keyword">...</span>
+0012    <span class="string">'Visible'</span>                , <span class="string">'on'</span>,<span class="keyword">...</span>
+0013    <span class="string">'Tag'</span>                    , <span class="string">'ANIMATE'</span>,<span class="keyword">...</span>
+0014    <span class="string">'Renderer'</span>               , SETUP.Display.Renderer,<span class="keyword">...</span>
+0015    <span class="string">'DoubleBuffer'</span>           , <span class="string">'on'</span>,<span class="keyword">...</span>
+0016    <span class="string">'CloseRequestFcn'</span>        , [<span class="string">'command(''close'',''main'');'</span>]);
+0017 <span class="comment">% set(h0,'Visible','on');</span>
+0018 
+0019 viewStr = {<span class="string">'X'</span>,<span class="string">'Y'</span>,<span class="string">'Z'</span>,<span class="string">'Ortho'</span>};
+0020 viewVal = ismember(viewStr,SETUP.View.Axis);
+0021 <a href="#_sub1" class="code" title="subfunction addMenus(uiFig,SETUP,viewVal)">addMenus</a>(h0,SETUP,viewVal);
+0022 [iconZoom,iconAnimate,iconRotate]=<a href="#_sub2" class="code" title="subfunction [iconZoom,iconAnimate,iconRotate]=loadIcons(SETUP);">loadIcons</a>(SETUP);
+0023 
+0024 <span class="comment">% Contextmenu</span>
+0025 cm=uicontextmenu(<span class="string">'Parent'</span>,h0    ,<span class="string">'Tag'</span>,<span class="string">'ContextMenu\Axes'</span>);
+0026 h(1)=uimenu(cm,<span class="string">'Label'</span>,<span class="string">'&amp;X'</span>     ,<span class="string">'Tag'</span>,<span class="string">'ContextMenu\Axes\X'</span>);
+0027 h(2)=uimenu(cm,<span class="string">'Label'</span>,<span class="string">'&amp;Y'</span>     ,<span class="string">'Tag'</span>,<span class="string">'ContextMenu\Axes\Y'</span>);
+0028 h(3)=uimenu(cm,<span class="string">'Label'</span>,<span class="string">'&amp;Z'</span>     ,<span class="string">'Tag'</span>,<span class="string">'ContextMenu\Axes\Z'</span>);
+0029 h(4)=uimenu(cm,<span class="string">'Label'</span>,<span class="string">'&amp;Ortho'</span> ,<span class="string">'Tag'</span>,<span class="string">'ContextMenu\Axes\Ortho'</span>,<span class="string">'Separator'</span>,<span class="string">'off'</span>);
+0030 str ={<span class="string">'off'</span>,<span class="string">'on'</span>};
+0031 set(h(1),<span class="string">'Callback'</span>,<span class="string">'command(''changeView'',''X'');'</span>,<span class="string">'Checked'</span>,str{viewVal(1)+1});
+0032 set(h(2),<span class="string">'Callback'</span>,<span class="string">'command(''changeView'',''Y'');'</span>,<span class="string">'Checked'</span>,str{viewVal(2)+1});
+0033 set(h(3),<span class="string">'Callback'</span>,<span class="string">'command(''changeView'',''Z'');'</span>,<span class="string">'Checked'</span>,str{viewVal(3)+1});
+0034 set(h(4),<span class="string">'Callback'</span>,<span class="string">'command(''changeView'',''Ortho'');'</span>,<span class="string">'Checked'</span>,str{viewVal(4)+1});
+0035 set(h0,    <span class="string">'UIcontextmenu'</span>         ,cm)
+0036 <span class="comment">% Controls Frame</span>
+0037 framePos    = [0 560 642 62];
+0038 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0039    <span class="string">'Style'</span>                  , <span class="string">'Frame'</span>,<span class="keyword">...</span>
+0040    <span class="string">'Tag'</span>                    , <span class="string">'Frame:Controls'</span>,<span class="keyword">...</span>
+0041    <span class="string">'BackgroundColor'</span>        , [1 1 1]*.8,<span class="keyword">...</span>
+0042    <span class="string">'Position'</span>               , framePos);
+0043 
+0044 <span class="comment">% ANIMATE Toggle</span>
+0045 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0046    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0047    <span class="string">'Style'</span>                  , <span class="string">'Toggle'</span>,<span class="keyword">...</span>
+0048    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*.8,<span class="keyword">...</span>
+0049    <span class="string">'Foregroundcolor'</span>        , [1 1 1]*0,<span class="keyword">...</span>
+0050    <span class="string">'Value'</span>                  , 0,<span class="keyword">...</span>
+0051    <span class="string">'CData'</span>                  , iconAnimate,<span class="keyword">...</span>
+0052    <span class="string">'Position'</span>               , [5 framePos(2)+5,25 25],<span class="keyword">...</span>
+0053    <span class="string">'Callback'</span>               , <span class="string">'command(''run_animate'')'</span>,<span class="keyword">...</span>
+0054    <span class="string">'Tag'</span>                    , <span class="string">'Toggle:Animate'</span>,<span class="keyword">...</span>
+0055    <span class="string">'ToolTipString'</span>          , <span class="string">'Animation'</span>,<span class="keyword">...</span>
+0056    <span class="string">'Enable'</span>                 , <span class="string">'off'</span>);
+0057 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0058    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0059    <span class="string">'Style'</span>                  , <span class="string">'Toggle'</span>,<span class="keyword">...</span>
+0060    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*.8,<span class="keyword">...</span>
+0061    <span class="string">'Foregroundcolor'</span>        , [1 1 1]*0,<span class="keyword">...</span>
+0062    <span class="string">'Value'</span>                  , 0,<span class="keyword">...</span>
+0063    <span class="string">'CData'</span>                  , iconZoom,<span class="keyword">...</span>
+0064    <span class="string">'Position'</span>               , [35 framePos(2)+5 25 25],<span class="keyword">...</span>
+0065    <span class="string">'Callback'</span>               , <span class="string">'command(''zoom'',gcbo);'</span>,<span class="keyword">...</span>
+0066    <span class="string">'Tag'</span>                    , <span class="string">'Toggle:Zoom'</span>,<span class="keyword">...</span>
+0067    <span class="string">'ToolTipString'</span>          , <span class="string">'Pan &amp; Zoom'</span>,<span class="keyword">...</span>
+0068    <span class="string">'Enable'</span>                 , <span class="string">'off'</span>);
+0069 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0070    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0071    <span class="string">'Style'</span>                  , <span class="string">'Toggle'</span>,<span class="keyword">...</span>
+0072    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*.8,<span class="keyword">...</span>
+0073    <span class="string">'Foregroundcolor'</span>        , [1 1 1]*0,<span class="keyword">...</span>
+0074    <span class="string">'Value'</span>                  , 0,<span class="keyword">...</span>
+0075    <span class="string">'CData'</span>                  , iconRotate,<span class="keyword">...</span>
+0076    <span class="string">'Position'</span>               , [65 framePos(2)+5 25 25],<span class="keyword">...</span>
+0077    <span class="string">'Callback'</span>               , <span class="string">'command(''rotate'',gcbo);'</span>,<span class="keyword">...</span>
+0078    <span class="string">'Tag'</span>                    , <span class="string">'Toggle:Rotate'</span>,<span class="keyword">...</span>
+0079    <span class="string">'ToolTipString'</span>          , <span class="string">'Rotate'</span>,<span class="keyword">...</span>
+0080    <span class="string">'Enable'</span>                 , <span class="string">'off'</span>);
+0081 
+0082 <span class="comment">% Mode Text/Popup</span>
+0083 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0084    <span class="string">'Units'</span>                  ,<span class="string">'pixels'</span>,<span class="keyword">...</span>
+0085    <span class="string">'Style'</span>                  ,<span class="string">'Text'</span>,<span class="keyword">...</span>
+0086    <span class="string">'Position'</span>               ,[105 framePos(2)+20 115 20],<span class="keyword">...</span>
+0087    <span class="string">'HorizontalAlignment'</span>    ,<span class="string">'center'</span>,<span class="keyword">...</span>
+0088    <span class="string">'Backgroundcolor'</span>        ,[1 1 1]*0.8,<span class="keyword">...</span>
+0089    <span class="string">'String'</span>                 ,<span class="string">'Mode List'</span>);
+0090 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0091    <span class="string">'Units'</span>                  ,<span class="string">'pixels'</span>,<span class="keyword">...</span>
+0092    <span class="string">'Style'</span>                  ,<span class="string">'Popup'</span>,<span class="keyword">...</span>
+0093    <span class="string">'Backgroundcolor'</span>        ,[1 1 1]*1,<span class="keyword">...</span>
+0094    <span class="string">'Foregroundcolor'</span>        ,[1 1 1]*0,<span class="keyword">...</span>
+0095    <span class="string">'Value'</span>                  ,1,<span class="keyword">...</span>
+0096    <span class="string">'Position'</span>               ,[105 framePos(2)+5 115 20],<span class="keyword">...</span>
+0097    <span class="string">'String'</span>                 ,<span class="string">' '</span>,<span class="keyword">...</span>
+0098    <span class="string">'Callback'</span>               ,<span class="string">'command(''update_mode'');'</span>,<span class="keyword">...</span>
+0099    <span class="string">'Tag'</span>                    ,<span class="string">'popup_modeList'</span>);
+0100 
+0101 <span class="comment">% Frames Text/Edit/Slider</span>
+0102 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0103    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0104    <span class="string">'Style'</span>                  , <span class="string">'Text'</span>,<span class="keyword">...</span>
+0105    <span class="string">'Position'</span>               , [230 framePos(2)+25 40 15],<span class="keyword">...</span>
+0106    <span class="string">'HorizontalAlignment'</span>    , <span class="string">'center'</span>,<span class="keyword">...</span>
+0107    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*0.8,<span class="keyword">...</span>
+0108    <span class="string">'String'</span>                 , <span class="string">'FPC'</span>);
+0109 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0110    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0111    <span class="string">'Style'</span>                  , <span class="string">'Edit'</span>,<span class="keyword">...</span>
+0112    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*1,<span class="keyword">...</span>
+0113    <span class="string">'Foregroundcolor'</span>        , [1 1 1]*0,<span class="keyword">...</span>
+0114    <span class="string">'Value'</span>                  , 1,<span class="keyword">...</span>
+0115    <span class="string">'Position'</span>               , [230 framePos(2)+8 40 20],<span class="keyword">...</span>
+0116    <span class="string">'String'</span>                 , num2str(SETUP.Animation.Frames),<span class="keyword">...</span>
+0117    <span class="string">'Callback'</span>               , <span class="string">'command(''set'',''FPC'',''edit'');'</span>,<span class="keyword">...</span>
+0118    <span class="string">'Tag'</span>                    , <span class="string">'Edit:FPC'</span>);
+0119 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0120    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0121    <span class="string">'Style'</span>                  , <span class="string">'Slider'</span>,<span class="keyword">...</span>
+0122    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*1,<span class="keyword">...</span>
+0123    <span class="string">'Foregroundcolor'</span>        , [1 1 1]*0,<span class="keyword">...</span>
+0124    <span class="string">'Value'</span>                  , SETUP.Animation.Frames,<span class="keyword">...</span>
+0125    <span class="string">'Min'</span>                    , 3,<span class="keyword">...</span>
+0126    <span class="string">'Max'</span>                    , 503,<span class="keyword">...</span>
+0127    <span class="string">'SliderStep'</span>             , [.01 .1],<span class="keyword">...</span>
+0128    <span class="string">'Position'</span>               , [270 framePos(2)+3 18 30],<span class="keyword">...</span>
+0129    <span class="string">'Callback'</span>               , <span class="string">'command(''set'',''FPC'',''slider'');'</span>,<span class="keyword">...</span>
+0130    <span class="string">'Tag'</span>                    , <span class="string">'Slider:FPC'</span>);
+0131 
+0132 <span class="comment">% Amplitude Text/Edit/Slider</span>
+0133 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0134    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0135    <span class="string">'Style'</span>                  , <span class="string">'Text'</span>,<span class="keyword">...</span>
+0136    <span class="string">'Position'</span>               , [290 framePos(2)+25 40 15],<span class="keyword">...</span>
+0137    <span class="string">'HorizontalAlignment'</span>    , <span class="string">'center'</span>,<span class="keyword">...</span>
+0138    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*0.8,<span class="keyword">...</span>
+0139    <span class="string">'String'</span>                 , <span class="string">'Amp'</span>);
+0140 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0141    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0142    <span class="string">'Style'</span>                  , <span class="string">'Edit'</span>,<span class="keyword">...</span>
+0143    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*1,<span class="keyword">...</span>
+0144    <span class="string">'Foregroundcolor'</span>        , [1 1 1]*0,<span class="keyword">...</span>
+0145    <span class="string">'Value'</span>                  , 1,<span class="keyword">...</span>
+0146    <span class="string">'Position'</span>               , [290 framePos(2)+8 40 20],<span class="keyword">...</span>
+0147    <span class="string">'String'</span>                 , num2str(SETUP.Animation.Amplitude),<span class="keyword">...</span>
+0148    <span class="string">'Callback'</span>               , <span class="string">'command(''set'',''amp'',''edit'');'</span>,<span class="keyword">...</span>
+0149    <span class="string">'Tag'</span>                    , <span class="string">'Edit:Amp'</span>);
+0150 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0151    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0152    <span class="string">'Style'</span>                  , <span class="string">'Slider'</span>,<span class="keyword">...</span>
+0153    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*1,<span class="keyword">...</span>
+0154    <span class="string">'Foregroundcolor'</span>        , [1 1 1]*0,<span class="keyword">...</span>
+0155    <span class="string">'Value'</span>                  , SETUP.Animation.Amplitude,<span class="keyword">...</span>
+0156    <span class="string">'Min'</span>                    , .01,<span class="keyword">...</span>
+0157    <span class="string">'Max'</span>                    , 100.01,<span class="keyword">...</span>
+0158    <span class="string">'SliderStep'</span>             , [.01 .1],<span class="keyword">...</span>
+0159    <span class="string">'Position'</span>               , [330 framePos(2)+3 18 30],<span class="keyword">...</span>
+0160    <span class="string">'Callback'</span>               , <span class="string">'command(''set'',''amp'',''slider'');'</span>,<span class="keyword">...</span>
+0161    <span class="string">'Tag'</span>                    , <span class="string">'Slider:Amp'</span>);
+0162 
+0163 <span class="comment">% Amplitude Text/Edit/Slider</span>
+0164 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0165    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0166    <span class="string">'Style'</span>                  , <span class="string">'Text'</span>,<span class="keyword">...</span>
+0167    <span class="string">'Position'</span>               , [350 framePos(2)+25 40 15],<span class="keyword">...</span>
+0168    <span class="string">'HorizontalAlignment'</span>    , <span class="string">'center'</span>,<span class="keyword">...</span>
+0169    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*0.8,<span class="keyword">...</span>
+0170    <span class="string">'String'</span>                 , <span class="string">'Deg.'</span>);
+0171 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0172    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0173    <span class="string">'Style'</span>                  , <span class="string">'Edit'</span>,<span class="keyword">...</span>
+0174    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*1,<span class="keyword">...</span>
+0175    <span class="string">'Foregroundcolor'</span>        , [1 1 1]*0,<span class="keyword">...</span>
+0176    <span class="string">'Value'</span>                  , 1,<span class="keyword">...</span>
+0177    <span class="string">'Position'</span>               , [350 framePos(2)+8 40 20],<span class="keyword">...</span>
+0178    <span class="string">'String'</span>                 , num2str(round(SETUP.Animation.Theta)),<span class="keyword">...</span>
+0179    <span class="string">'Callback'</span>               , <span class="string">'command(''set'',''deg'',''edit'');'</span>,<span class="keyword">...</span>
+0180    <span class="string">'Tag'</span>                    , <span class="string">'Edit:Deg'</span>);
+0181 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0182    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0183    <span class="string">'Style'</span>                  , <span class="string">'Slider'</span>,<span class="keyword">...</span>
+0184    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*1,<span class="keyword">...</span>
+0185    <span class="string">'Foregroundcolor'</span>        , [1 1 1]*0,<span class="keyword">...</span>
+0186    <span class="string">'Value'</span>                  , round(SETUP.Animation.Theta),<span class="keyword">...</span>
+0187    <span class="string">'Min'</span>                    ,-360,<span class="keyword">...</span>
+0188    <span class="string">'Max'</span>                    , 360,<span class="keyword">...</span>
+0189    <span class="string">'SliderStep'</span>             , [0.00694444444444444 0.00694444444444444*2],<span class="keyword">...</span>
+0190    <span class="string">'Position'</span>               , [390 framePos(2)+3 18 30],<span class="keyword">...</span>
+0191    <span class="string">'Callback'</span>               , <span class="string">'command(''set'',''deg'',''slider'');'</span>,<span class="keyword">...</span>
+0192    <span class="string">'Tag'</span>                    , <span class="string">'Slider:Deg'</span>);
+0193 
+0194 <span class="comment">% Annotate Text box</span>
+0195 str={<span class="string">'off'</span>,<span class="string">'on'</span>};
+0196 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0197    <span class="string">'Units'</span>                  ,<span class="string">'pixels'</span>,<span class="keyword">...</span>
+0198    <span class="string">'Style'</span>                  ,<span class="string">'Text'</span>,<span class="keyword">...</span>
+0199    <span class="string">'Backgroundcolor'</span>        ,bcolor,<span class="keyword">...</span>
+0200    <span class="string">'Foregroundcolor'</span>        ,[1 1 1]*0,<span class="keyword">...</span>
+0201    <span class="string">'HorizontalAlignment'</span>    ,<span class="string">'left'</span>,<span class="keyword">...</span>
+0202    <span class="string">'Max'</span>                    ,2,<span class="keyword">...</span>
+0203    <span class="string">'Visible'</span>                ,str{SETUP.Display.Annotate+1},<span class="keyword">...</span>
+0204    <span class="string">'Position'</span>               ,[10 520 250 40],<span class="keyword">...</span>
+0205    <span class="string">'Fontsize'</span>               ,7,<span class="keyword">...</span>
+0206    <span class="string">'Fontname'</span>               ,<span class="string">'Arial'</span>,<span class="keyword">...</span>
+0207    <span class="string">'String'</span>                 ,<span class="string">' '</span>,<span class="keyword">...</span>
+0208    <span class="string">'Tag'</span>                    ,<span class="string">'Text:Annotate'</span>);
+0209 
+0210 
+0211 
+0212 <span class="comment">% Axes</span>
+0213 str     = {<span class="string">'+X'</span>,<span class="string">'+Y'</span>,<span class="string">'+Z'</span>};
+0214 vector  = eye(3);
+0215 val     = find(ismember(str,SETUP.View.UpVector));
+0216 <span class="comment">% MATLAB evolution: 2017-04-04</span>
+0217 <span class="comment">% 'DrawMode'              , 'fast',...</span>
+0218 <span class="comment">% was replaced by</span>
+0219 <span class="comment">%     'SortMethod'            , 'depth',...</span>
+0220 
+0221 h1=axes(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0222     <span class="string">'Units'</span>                 , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0223     <span class="string">'CameraUpVector'</span>        , [0 1 0], <span class="keyword">...</span>
+0224     <span class="string">'Position'</span>              , [20 20 760 465],<span class="keyword">...</span>
+0225     <span class="string">'Color'</span>                 , bcolor,<span class="keyword">...</span>
+0226     <span class="string">'Clipping'</span>              , <span class="string">'On'</span>,<span class="keyword">...</span>
+0227     <span class="string">'SortMethod'</span>            , <span class="string">'depth'</span>,<span class="keyword">...</span>
+0228     <span class="string">'XTickLabelMode'</span>        , <span class="string">'manual'</span>,<span class="keyword">...</span>
+0229     <span class="string">'XTickMode'</span>             , <span class="string">'manual'</span>,<span class="keyword">...</span>
+0230     <span class="string">'XTickLabel'</span>            , <span class="string">''</span>,<span class="keyword">...</span>
+0231     <span class="string">'YTickLabelMode'</span>        , <span class="string">'manual'</span>,<span class="keyword">...</span>
+0232     <span class="string">'YTickMode'</span>             , <span class="string">'manual'</span>,<span class="keyword">...</span>
+0233     <span class="string">'YTickLabel'</span>            , <span class="string">''</span>,<span class="keyword">...</span>
+0234     <span class="string">'ZTickLabelMode'</span>        , <span class="string">'manual'</span>,<span class="keyword">...</span>
+0235     <span class="string">'ZTickMode'</span>             , <span class="string">'manual'</span>,<span class="keyword">...</span>
+0236     <span class="string">'ZTickLabel'</span>            , <span class="string">''</span>,<span class="keyword">...</span>
+0237     <span class="string">'Tag'</span>                   , <span class="string">'Axes:Single'</span>,<span class="keyword">...</span>
+0238     <span class="string">'Xcolor'</span>                , bcolor,<span class="keyword">...</span>
+0239     <span class="string">'Ycolor'</span>                , bcolor,<span class="keyword">...</span>
+0240     <span class="string">'Zcolor'</span>                , bcolor,<span class="keyword">...</span>
+0241     <span class="string">'UIcontextmenu'</span>         , cm,<span class="keyword">...</span>
+0242     <span class="string">'Visible'</span>               , <span class="string">'off'</span>);
+0243 view([135 35]);
+0244 set(h1,<span class="string">'CameraUpVector'</span>,vector(val,:));
+0245 
+0246 <a name="_sub1" href="#_subfunctions" class="code">function addMenus(uiFig,SETUP,viewVal)</a>
+0247 h1 = uimenu(<span class="string">'Parent'</span>,uiFig, <span class="keyword">...</span>
+0248     <span class="string">'Label'</span>,<span class="string">'&amp;File'</span>, <span class="keyword">...</span>
+0249     <span class="string">'Tag'</span>,<span class="string">'file'</span>);
+0250 
+0251 <span class="comment">%Load sublist</span>
+0252 h2 = uimenu(<span class="string">'Parent'</span>, h1, <span class="keyword">...</span>
+0253     <span class="string">'Label'</span>         , <span class="string">'Load'</span>, <span class="keyword">...</span>
+0254     <span class="string">'Separator'</span>     , <span class="string">'on'</span>);
+0255 h3 = uimenu(<span class="string">'Parent'</span>, h2, <span class="keyword">...</span>
+0256     <span class="string">'Callback'</span>      , <span class="string">'command(''Load'',''Matlab'');'</span>, <span class="keyword">...</span>
+0257     <span class="string">'Label'</span>         , <span class="string">'&amp;Matlab'</span>);
+0258 h3 = uimenu(<span class="string">'Parent'</span>, h2, <span class="keyword">...</span>
+0259     <span class="string">'Callback'</span>      , <span class="string">'command(''Load'',''UFF'');'</span>, <span class="keyword">...</span>
+0260     <span class="string">'Label'</span>         , <span class="string">'&amp;Universal File'</span>);
+0261 
+0262 <span class="comment">%Save sublist</span>
+0263 h2 = uimenu(<span class="string">'Parent'</span>, h1, <span class="keyword">...</span>
+0264     <span class="string">'Label'</span>         , <span class="string">'Save'</span>, <span class="keyword">...</span>
+0265     <span class="string">'Separator'</span>     , <span class="string">'off'</span>, <span class="keyword">...</span>
+0266     <span class="string">'Tag'</span>           , <span class="string">'Menu:File:Save'</span>,<span class="keyword">...</span>
+0267     <span class="string">'Enable'</span>        , <span class="string">'off'</span>);
+0268 h3 = uimenu(<span class="string">'Parent'</span>, h2, <span class="keyword">...</span>
+0269     <span class="string">'Callback'</span>      , <span class="string">'command(''Save'',''Matlab'');'</span>, <span class="keyword">...</span>
+0270     <span class="string">'Label'</span>         , <span class="string">'&amp;Matlab'</span>);
+0271 h3 = uimenu(<span class="string">'Parent'</span>, h2, <span class="keyword">...</span>
+0272     <span class="string">'Callback'</span>      , <span class="string">'command(''Save'',''UFF'');'</span>, <span class="keyword">...</span>
+0273     <span class="string">'Label'</span>         , <span class="string">'&amp;Universal File'</span>);
+0274 h3 = uimenu(<span class="string">'Parent'</span>, h2, <span class="keyword">...</span>
+0275     <span class="string">'Callback'</span>      , <span class="string">'command(''Save'',''Snapshot'');'</span>, <span class="keyword">...</span>
+0276     <span class="string">'Label'</span>         , <span class="string">'&amp;Snapshot'</span>,<span class="keyword">...</span>
+0277     <span class="string">'Tag'</span>           , <span class="string">'Menu:File:Snapshot'</span>);
+0278 h3 = uimenu(<span class="string">'Parent'</span>, h2, <span class="keyword">...</span>
+0279     <span class="string">'Callback'</span>      , <span class="string">'command(''Save'',''AVI'');'</span>, <span class="keyword">...</span>
+0280     <span class="string">'Label'</span>         , <span class="string">'&amp;AVI Movie'</span>,<span class="keyword">...</span>
+0281     <span class="string">'Tag'</span>           , <span class="string">'Menu:File:Avi'</span>);
+0282 
+0283 h2 = uimenu(<span class="string">'Parent'</span>    , h1, <span class="keyword">...</span>
+0284     <span class="string">'Separator'</span>         , <span class="string">'on'</span>,<span class="keyword">...</span>
+0285     <span class="string">'Label'</span>             , <span class="string">'Preferences'</span>, <span class="keyword">...</span>
+0286     <span class="string">'Callback'</span>          , <span class="string">'command(''preferences'',''init'');'</span>);
+0287 
+0288 str ={<span class="string">'on'</span>,<span class="string">'off'</span>};
+0289 [p,f,e] = fileparts(SETUP.RecentFiles.File1);
+0290 h2 = uimenu(<span class="string">'Parent'</span>    , h1, <span class="keyword">...</span>
+0291     <span class="string">'Separator'</span>         , <span class="string">'on'</span>,<span class="keyword">...</span>
+0292     <span class="string">'Label'</span>             , [f,e], <span class="keyword">...</span>
+0293     <span class="string">'Visible'</span>           , str{isempty(SETUP.RecentFiles.File1)+1},<span class="keyword">...</span>
+0294     <span class="string">'Callback'</span>          , <span class="string">'command(''recentFile'',''1'');'</span>,<span class="keyword">...</span>
+0295     <span class="string">'Tag'</span>               , <span class="string">'Menu:File:File1'</span>);
+0296 [p,f,e] = fileparts(SETUP.RecentFiles.File2);
+0297 h2 = uimenu(<span class="string">'Parent'</span>    , h1, <span class="keyword">...</span>
+0298     <span class="string">'Label'</span>             , [f,e], <span class="keyword">...</span>
+0299     <span class="string">'Visible'</span>           , str{isempty(SETUP.RecentFiles.File2)+1},<span class="keyword">...</span>
+0300     <span class="string">'Callback'</span>          , <span class="string">'command(''recentFile'',''2'');'</span>,<span class="keyword">...</span>
+0301     <span class="string">'Tag'</span>               , <span class="string">'Menu:File:File2'</span>);
+0302 [p,f,e] = fileparts(SETUP.RecentFiles.File3);
+0303 h2 = uimenu(<span class="string">'Parent'</span>    , h1, <span class="keyword">...</span>
+0304     <span class="string">'Label'</span>             , [f,e], <span class="keyword">...</span>
+0305     <span class="string">'Visible'</span>           , str{isempty(SETUP.RecentFiles.File3)+1},<span class="keyword">...</span>
+0306     <span class="string">'Callback'</span>          , <span class="string">'command(''recentFile'',''3'');'</span>,<span class="keyword">...</span>
+0307     <span class="string">'Tag'</span>               , <span class="string">'Menu:File:File3'</span>);
+0308 [p,f,e] = fileparts(SETUP.RecentFiles.File4);
+0309 h2 = uimenu(<span class="string">'Parent'</span>    , h1, <span class="keyword">...</span>
+0310     <span class="string">'Label'</span>             , [f,e], <span class="keyword">...</span>
+0311     <span class="string">'Visible'</span>           , str{isempty(SETUP.RecentFiles.File4)+1},<span class="keyword">...</span>
+0312     <span class="string">'Callback'</span>          , <span class="string">'command(''recentFile'',''4'');'</span>,<span class="keyword">...</span>
+0313     <span class="string">'Tag'</span>               , <span class="string">'Menu:File:File4'</span>);
+0314 
+0315 
+0316 <span class="comment">% =================================================================</span>
+0317 <span class="comment">% ----------   Display   ------------------------------------------</span>
+0318 h1 = uimenu(<span class="string">'Parent'</span>    , uiFig, <span class="keyword">...</span>
+0319     <span class="string">'Label'</span>             , <span class="string">'&amp;Display'</span>, <span class="keyword">...</span>
+0320     <span class="string">'Tag'</span>               , <span class="string">'Menu:Display'</span>,<span class="keyword">...</span>
+0321     <span class="string">'Enable'</span>            , <span class="string">'off'</span>);
+0322 str={<span class="string">'off'</span> ,<span class="string">'on'</span>};
+0323 h2 = uimenu(<span class="string">'Parent'</span>    , h1, <span class="keyword">...</span>
+0324     <span class="string">'Label'</span>             , <span class="string">'Annotate'</span>, <span class="keyword">...</span>
+0325     <span class="string">'Tag'</span>               , <span class="string">'Menu:Display:Annotate'</span>,<span class="keyword">...</span>
+0326     <span class="string">'Callback'</span>          , <span class="string">'command(''Change'',''Annotate'');'</span>,<span class="keyword">...</span>
+0327     <span class="string">'checked'</span>           , str{SETUP.Display.Annotate+1});
+0328 h2 = uimenu(<span class="string">'Parent'</span>    , h1, <span class="keyword">...</span>
+0329     <span class="string">'Label'</span>             , <span class="string">'Static'</span>, <span class="keyword">...</span>
+0330     <span class="string">'Tag'</span>               , <span class="string">'Menu:Display:Static'</span>,<span class="keyword">...</span>
+0331     <span class="string">'Callback'</span>          , <span class="string">'command(''Change'',''Static'');'</span>,<span class="keyword">...</span>
+0332     <span class="string">'checked'</span>           , str{SETUP.Display.Static+1});
+0333 h2 = uimenu(<span class="string">'Parent'</span>    , h1, <span class="keyword">...</span>
+0334     <span class="string">'Label'</span>             , <span class="string">'Markers'</span>, <span class="keyword">...</span>
+0335     <span class="string">'Tag'</span>               , <span class="string">'Menu:Display:Markers'</span>,<span class="keyword">...</span>
+0336     <span class="string">'Callback'</span>          , <span class="string">'command(''Change'',''Markers'');'</span>,<span class="keyword">...</span>
+0337     <span class="string">'checked'</span>           , str{SETUP.Display.Markers+1});
+0338 h2 = uimenu(<span class="string">'Parent'</span>    , h1, <span class="keyword">...</span>
+0339     <span class="string">'Label'</span>             , <span class="string">'Labels'</span>, <span class="keyword">...</span>
+0340     <span class="string">'Tag'</span>               , <span class="string">'Menu:Display:Labels'</span>,<span class="keyword">...</span>
+0341     <span class="string">'Callback'</span>          , <span class="string">'command(''Change'',''Labels'');'</span>,<span class="keyword">...</span>
+0342     <span class="string">'checked'</span>           , str{SETUP.Display.Labels+1});
+0343 h2 = uimenu(<span class="string">'Parent'</span>    , h1, <span class="keyword">...</span>
+0344     <span class="string">'Label'</span>             , <span class="string">'UCS'</span>, <span class="keyword">...</span>
+0345     <span class="string">'Tag'</span>               , <span class="string">'Menu:Display:UCS'</span>,<span class="keyword">...</span>
+0346     <span class="string">'Callback'</span>          , <span class="string">'command(''Change'',''UCS'');'</span>,<span class="keyword">...</span>
+0347     <span class="string">'checked'</span>           , str{SETUP.Display.UCS+1});
+0348 h2 = uimenu(<span class="string">'Parent'</span>    , h1, <span class="keyword">...</span>
+0349     <span class="string">'Label'</span>             , <span class="string">'Spin'</span>, <span class="keyword">...</span>
+0350     <span class="string">'Tag'</span>               , <span class="string">'Menu:Display:Spin'</span>,<span class="keyword">...</span>
+0351     <span class="string">'Callback'</span>          , <span class="string">'command(''Change'',''Spin'');'</span>,<span class="keyword">...</span>
+0352     <span class="string">'checked'</span>           , str{SETUP.Display.Spin+1});
+0353 h2 = uimenu(<span class="string">'Parent'</span>    , h1, <span class="keyword">...</span>
+0354     <span class="string">'Separator'</span>         , <span class="string">'on'</span>,<span class="keyword">...</span>
+0355     <span class="string">'Label'</span>             , <span class="string">'Max Deflection'</span>, <span class="keyword">...</span>
+0356     <span class="string">'Tag'</span>               , <span class="string">'Menu:Display:MaxDeflection'</span>,<span class="keyword">...</span>
+0357     <span class="string">'Callback'</span>          , <span class="string">'command(''MaxDeflection'');'</span>,<span class="keyword">...</span>
+0358     <span class="string">'checked'</span>           , <span class="string">'off'</span>);
+0359 <span class="comment">% Component List</span>
+0360 h2 = uimenu(<span class="string">'Parent'</span>    , h1, <span class="keyword">...</span>
+0361     <span class="string">'Label'</span>             , <span class="string">'Components'</span>, <span class="keyword">...</span>
+0362     <span class="string">'Tag'</span>               , <span class="string">'Menu:Display:Components'</span>,<span class="keyword">...</span>
+0363     <span class="string">'checked'</span>           , str{SETUP.Component.Open+1},<span class="keyword">...</span>
+0364     <span class="string">'Callback'</span>          , <span class="string">'command(''components'',''init'');'</span>,<span class="keyword">...</span>
+0365     <span class="string">'Separator'</span>         , <span class="string">'on'</span>);
+0366 
+0367 <span class="comment">% View Menu</span>
+0368 h1 = uimenu(<span class="string">'Parent'</span>    , uiFig, <span class="keyword">...</span>
+0369     <span class="string">'Label'</span>             , <span class="string">'&amp;View'</span>, <span class="keyword">...</span>
+0370     <span class="string">'Tag'</span>               , <span class="string">'Menu:View'</span>,<span class="keyword">...</span>
+0371     <span class="string">'Enable'</span>            , <span class="string">'off'</span>);
+0372 onOff   = strcmp({<span class="string">'+X'</span>,<span class="string">'+Y'</span>,<span class="string">'+Z'</span>},SETUP.View.UpVector);
+0373 <span class="comment">% Display Type</span>
+0374 h2 = uimenu(<span class="string">'Parent'</span>    , h1, <span class="keyword">...</span>
+0375     <span class="string">'Separator'</span>         , <span class="string">'off'</span>, <span class="keyword">...</span>
+0376     <span class="string">'Label'</span>             , <span class="string">'Display Type'</span>);
+0377 h3 = uimenu(<span class="string">'Parent'</span>    , h2, <span class="keyword">...</span>
+0378     <span class="string">'Label'</span>             , <span class="string">'Single'</span>, <span class="keyword">...</span>
+0379     <span class="string">'Tag'</span>               , <span class="string">'Menu:View:Single'</span>,<span class="keyword">...</span>
+0380     <span class="string">'Callback'</span>          , <span class="string">'command(''viewType'',''Single'');'</span>,<span class="keyword">...</span>
+0381     <span class="string">'checked'</span>           , <span class="string">'on'</span>);
+0382 h3 = uimenu(<span class="string">'Parent'</span>    , h2, <span class="keyword">...</span>
+0383     <span class="string">'Label'</span>             , <span class="string">'Quad'</span>, <span class="keyword">...</span>
+0384     <span class="string">'Tag'</span>               , <span class="string">'Menu:View:Quad'</span>,<span class="keyword">...</span>
+0385     <span class="string">'Callback'</span>          , <span class="string">'command(''viewType'',''Quad'');'</span>,<span class="keyword">...</span>
+0386     <span class="string">'checked'</span>           , <span class="string">'off'</span>);
+0387 h3 = uimenu(<span class="string">'Parent'</span>    , h2, <span class="keyword">...</span>
+0388     <span class="string">'Label'</span>             , <span class="string">'Cross-eyed'</span>, <span class="keyword">...</span>
+0389     <span class="string">'Tag'</span>               , <span class="string">'Menu:View:Crosseyed'</span>,<span class="keyword">...</span>
+0390     <span class="string">'Callback'</span>          , <span class="string">'command(''viewType'',''Cross-eyed'');'</span>,<span class="keyword">...</span>
+0391     <span class="string">'checked'</span>           , <span class="string">'off'</span>);
+0392 h3 = uimenu(<span class="string">'Parent'</span>    , h2, <span class="keyword">...</span>
+0393     <span class="string">'Label'</span>             , <span class="string">'Red/Blue Glasses'</span>, <span class="keyword">...</span>
+0394     <span class="string">'Tag'</span>               , <span class="string">'Menu:View:RedBlue'</span>,<span class="keyword">...</span>
+0395     <span class="string">'Callback'</span>          , <span class="string">'command(''viewType'',''Red/Blue Glasses'');'</span>,<span class="keyword">...</span>
+0396     <span class="string">'checked'</span>           , <span class="string">'off'</span>);
+0397 <span class="comment">% View</span>
+0398 h2 = uimenu(<span class="string">'Parent'</span>    , h1, <span class="keyword">...</span>
+0399     <span class="string">'Separator'</span>         , <span class="string">'off'</span>, <span class="keyword">...</span>
+0400     <span class="string">'Label'</span>             , <span class="string">'View'</span>);
+0401 h3 = uimenu(<span class="string">'Parent'</span>    , h2, <span class="keyword">...</span>
+0402     <span class="string">'Label'</span>             , <span class="string">'X'</span>, <span class="keyword">...</span>
+0403     <span class="string">'Tag'</span>               , <span class="string">'Menu:View:X'</span>,<span class="keyword">...</span>
+0404     <span class="string">'Callback'</span>          , <span class="string">'command(''changeView'',''X'');'</span>,<span class="keyword">...</span>
+0405     <span class="string">'checked'</span>           , str{viewVal(1)+1});
+0406 h3 = uimenu(<span class="string">'Parent'</span>    , h2, <span class="keyword">...</span>
+0407     <span class="string">'Label'</span>             , <span class="string">'Y'</span>, <span class="keyword">...</span>
+0408     <span class="string">'Tag'</span>               , <span class="string">'Menu:View:Y'</span>,<span class="keyword">...</span>
+0409     <span class="string">'Callback'</span>          , <span class="string">'command(''changeView'',''Y'');'</span>,<span class="keyword">...</span>
+0410     <span class="string">'checked'</span>           , str{viewVal(2)+1});
+0411 h3 = uimenu(<span class="string">'Parent'</span>    , h2, <span class="keyword">...</span>
+0412     <span class="string">'Label'</span>             , <span class="string">'Z'</span>, <span class="keyword">...</span>
+0413     <span class="string">'Tag'</span>               , <span class="string">'Menu:View:Z'</span>,<span class="keyword">...</span>
+0414     <span class="string">'Callback'</span>          , <span class="string">'command(''changeView'',''Z'');'</span>,<span class="keyword">...</span>
+0415     <span class="string">'checked'</span>           , str{viewVal(3)+1});
+0416 h3 = uimenu(<span class="string">'Parent'</span>    , h2, <span class="keyword">...</span>
+0417     <span class="string">'Label'</span>             , <span class="string">'Ortho'</span>, <span class="keyword">...</span>
+0418     <span class="string">'Tag'</span>               , <span class="string">'Menu:View:Ortho'</span>,<span class="keyword">...</span>
+0419     <span class="string">'Callback'</span>          , <span class="string">'command(''changeView'',''Ortho'');'</span>,<span class="keyword">...</span>
+0420     <span class="string">'checked'</span>           , str{viewVal(4)+1});
+0421 <span class="comment">% Up Vector</span>
+0422 h2 = uimenu(<span class="string">'Parent'</span>    , h1, <span class="keyword">...</span>
+0423     <span class="string">'Separator'</span>         , <span class="string">'off'</span>, <span class="keyword">...</span>
+0424     <span class="string">'Label'</span>             , <span class="string">'Up Vector'</span>);
+0425 h3 = uimenu(<span class="string">'Parent'</span>    , h2, <span class="keyword">...</span>
+0426     <span class="string">'Label'</span>             , <span class="string">'+X'</span>, <span class="keyword">...</span>
+0427     <span class="string">'Tag'</span>               , <span class="string">'Menu:View:+X'</span>,<span class="keyword">...</span>
+0428     <span class="string">'Callback'</span>          , <span class="string">'command(''MultipleChange'',''+X'');'</span>,<span class="keyword">...</span>
+0429     <span class="string">'checked'</span>           , str{onOff(1)+1});
+0430 h3 = uimenu(<span class="string">'Parent'</span>    , h2, <span class="keyword">...</span>
+0431     <span class="string">'Label'</span>             , <span class="string">'+Y'</span>, <span class="keyword">...</span>
+0432     <span class="string">'Tag'</span>               , <span class="string">'Menu:View:+Y'</span>,<span class="keyword">...</span>
+0433     <span class="string">'Callback'</span>          , <span class="string">'command(''MultipleChange'',''+Y'');'</span>,<span class="keyword">...</span>
+0434     <span class="string">'checked'</span>           , str{onOff(2)+1});
+0435 h3 = uimenu(<span class="string">'Parent'</span>    , h2, <span class="keyword">...</span>
+0436     <span class="string">'Label'</span>             , <span class="string">'+Z'</span>, <span class="keyword">...</span>
+0437     <span class="string">'Tag'</span>               , <span class="string">'Menu:View:+Z'</span>,<span class="keyword">...</span>
+0438     <span class="string">'Callback'</span>          , <span class="string">'command(''MultipleChange'',''+Z'');'</span>,<span class="keyword">...</span>
+0439     <span class="string">'checked'</span>           , str{onOff(3)+1});
+0440 <span class="comment">% Vector Type</span>
+0441 onOff   = strcmp({<span class="string">'Real'</span>, <span class="string">'Imaginary'</span>,<span class="string">'Complex'</span>},SETUP.View.VectorType);
+0442 h2 = uimenu(<span class="string">'Parent'</span>    , h1, <span class="keyword">...</span>
+0443     <span class="string">'Label'</span>             , <span class="string">'Vector Type'</span>, <span class="keyword">...</span>
+0444     <span class="string">'Separator'</span>         , <span class="string">'off'</span>);
+0445 h3 = uimenu(<span class="string">'Parent'</span>    , h2, <span class="keyword">...</span>
+0446     <span class="string">'Label'</span>             , <span class="string">'Real'</span>, <span class="keyword">...</span>
+0447     <span class="string">'Tag'</span>               , <span class="string">'Menu:Display:Real'</span>,<span class="keyword">...</span>
+0448     <span class="string">'Callback'</span>          , <span class="string">'command(''MultipleChange'',''Real'');'</span>,<span class="keyword">...</span>
+0449     <span class="string">'checked'</span>           , str{onOff(1)+1});
+0450 h3 = uimenu(<span class="string">'Parent'</span>    , h2, <span class="keyword">...</span>
+0451     <span class="string">'Label'</span>             , <span class="string">'Imaginary'</span>, <span class="keyword">...</span>
+0452     <span class="string">'Tag'</span>               , <span class="string">'Menu:Display:Imaginary'</span>,<span class="keyword">...</span>
+0453     <span class="string">'Callback'</span>          , <span class="string">'command(''MultipleChange'',''Imaginary'');'</span>,<span class="keyword">...</span>
+0454     <span class="string">'checked'</span>           , str{onOff(2)+1});
+0455 h3 = uimenu(<span class="string">'Parent'</span>    , h2, <span class="keyword">...</span>
+0456     <span class="string">'Label'</span>             , <span class="string">'Complex'</span>, <span class="keyword">...</span>
+0457     <span class="string">'Tag'</span>               , <span class="string">'Menu:Display:Complex'</span>,<span class="keyword">...</span>
+0458     <span class="string">'Callback'</span>          , <span class="string">'command(''MultipleChange'',''Complex'');'</span>,<span class="keyword">...</span>
+0459     <span class="string">'checked'</span>           , str{onOff(3)+1});
+0460 
+0461 <span class="comment">% Help Type</span>
+0462 h1 = uimenu(<span class="string">'Parent'</span>    , uiFig, <span class="keyword">...</span>
+0463     <span class="string">'Label'</span>             , <span class="string">'&amp;Help'</span>);
+0464 h2 = uimenu(<span class="string">'Parent'</span>    , h1, <span class="keyword">...</span>
+0465     <span class="string">'Label'</span>             , <span class="string">'&amp;Animation Help'</span>,<span class="keyword">...</span>
+0466     <span class="string">'Callback'</span>          , <span class="string">'command(''help'',''help'');'</span>);
+0467 h2 = uimenu(<span class="string">'Parent'</span>    , h1, <span class="keyword">...</span>
+0468     <span class="string">'Label'</span>             , <span class="string">'&amp;About'</span>,<span class="keyword">...</span>
+0469     <span class="string">'Callback'</span>          , <span class="string">'command(''help'',''about'');'</span>);
+0470 
+0471 <a name="_sub2" href="#_subfunctions" class="code">function [iconZoom,iconAnimate,iconRotate]=loadIcons(SETUP);</a>
+0472 iconZoom =uint8([    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0;<span class="keyword">...</span>
+0473     0  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204    0;<span class="keyword">...</span>
+0474     0  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204    0;<span class="keyword">...</span>
+0475     0  204  204    0    0    0    0    0    0    0    0    0    0    0    0  204  204  204  204  204  204  204  204  204    0;<span class="keyword">...</span>
+0476     0  204  204    0  255  255  255  255  255  255  255  255  255  255    0    0  204  204  204  204  204  204  204  204    0;<span class="keyword">...</span>
+0477     0  204  204    0  255  255  255  255  255  255  255  255  255  255    0  229    0  204  204  204  204  204  204  204    0;<span class="keyword">...</span>
+0478     0  204  204    0  255  255  255  255  255  255  255  255  255  255    0  153  229    0  204  204  204  204  204  204    0;<span class="keyword">...</span>
+0479     0  204  204    0  255  255  255  255  255  255  255  255  255  255    0    0    0    0    0  204  204  204  204  204    0;<span class="keyword">...</span>
+0480     0  204  204    0  255  255  255  255  255  255  255  255  255  255  255  255  255  255    0  204  204  204  204  204    0;<span class="keyword">...</span>
+0481     0  204  204    0  255  255  255  255  255  255  255  255  255  255    0    0    0  255    0  204  204  204  204  204    0;<span class="keyword">...</span>
+0482     0  204  204    0  255  255  255  255  255  255  255  255    0    0  229  229  229    0    0  204  204  204  204  204    0;<span class="keyword">...</span>
+0483     0  204  204    0  255  255  255  255  255  255  255    0  162  162  229  229  229  229   76    0  204  204  204  204    0;<span class="keyword">...</span>
+0484     0  204  204    0  255  255  255  255  255  255    0  162  162  229  229  229  229  229   76  229    0  204  204  204    0;<span class="keyword">...</span>
+0485     0  204  204    0  255  255  255  255  255  255    0  229  229  229  229  229  229  229   76  229    0  204  204  204    0;<span class="keyword">...</span>
+0486     0  204  204    0  255  255  255  255  255  255    0  229  229  229  229  229  229  229   76  229    0  204  204  204    0;<span class="keyword">...</span>
+0487     0  204  204    0  255  255  255  255  255  255    0  229  229  229  229  229  229  162   51  153    0  204  204  204    0;<span class="keyword">...</span>
+0488     0  204  204    0  255  255  255  255  255  255  255    0  229  229  229  229  229  162   76    0  204  204  204  204    0;<span class="keyword">...</span>
+0489     0  204  204    0  255  255  255  255  255  255  255  255    0    0  229  229  229    0    0    0  204  204  204  204    0;<span class="keyword">...</span>
+0490     0  204  204    0  255  255  255  255  255  255  255  255  255  255    0    0    0  255    0    0    0  204  204  204    0;<span class="keyword">...</span>
+0491     0  204  204    0  255  255  255  255  255  255  255  255  255  255  255  255  255  255    0    0    0  204  204  204    0;<span class="keyword">...</span>
+0492     0  204  204    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0  204    0    0    0  204    0;<span class="keyword">...</span>
+0493     0  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204    0    0  204    0;<span class="keyword">...</span>
+0494     0  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204    0;<span class="keyword">...</span>
+0495     0  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204    0;<span class="keyword">...</span>
+0496     0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0]);
+0497 iconZoom(:,:,2)    = iconZoom;
+0498 iconZoom(:,:,3)    = iconZoom(:,:,1);
+0499 iconRotate=uint8([0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0;<span class="keyword">...</span>
+0500     0  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204    0;<span class="keyword">...</span>
+0501     0  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204    0;<span class="keyword">...</span>
+0502     0  204  204  204  204  204  204  204  204    0    0    0    0    0  204  204  204  204  204  204  204  204  204  204    0;<span class="keyword">...</span>
+0503     0  204  204  204  204  204  204    0    0  187  187  187  187  187    0    0  204  204  204  204  204  204  204  204    0;<span class="keyword">...</span>
+0504     0  204  204  204  204    0    0  187  187  187  204  204  204  204  187  187  187  204  204  204  204  204  204  204    0;<span class="keyword">...</span>
+0505     0  204  204  204    0    0  187  187  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204    0;<span class="keyword">...</span>
+0506     0  204  204  204    0  187  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204    0;<span class="keyword">...</span>
+0507     0  204  204    0  187  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204    0;<span class="keyword">...</span>
+0508     0  204  204    0  187  204  204  204  204  204  204  204  204  204  204  204  204  204  204    0  204  204  204  204    0;<span class="keyword">...</span>
+0509     0  204    0  187  204  204  204  204  204  204  204  204  204  204  204  204  204  204    0    0    0  204  204  204    0;<span class="keyword">...</span>
+0510     0  204    0  187  204  204  204  204  204  204  204  204  204  204  204  204  204    0    0    0    0    0  204  204    0;<span class="keyword">...</span>
+0511     0  204    0  187  204  204  204  204  204  204  204  204  204  204  204  204    0    0    0    0    0    0    0  204    0;<span class="keyword">...</span>
+0512     0  204    0  187  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204    0    0  187  187  204    0;<span class="keyword">...</span>
+0513     0  204    0  187  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204    0    0  187  204  204    0;<span class="keyword">...</span>
+0514     0  204  204    0  187  204  204  204  204  204  204  204  204  204  204  204  204  204  204    0  187  204  204  204    0;<span class="keyword">...</span>
+0515     0  204  204    0  187  204  204  204  204  204  204  204  204  204  204  204  204  204  204    0  187  204  204  204    0;<span class="keyword">...</span>
+0516     0  204  204  204    0  204  204  204  204  204  204  204  204  204  204  204  204  204    0  187  204  204  204  204    0;<span class="keyword">...</span>
+0517     0  204  204  204    0    0  204  204  204  204  204  204  204  204  204  204  204    0    0  187  204  204  204  204    0;<span class="keyword">...</span>
+0518     0  204  204  204  204    0    0  204  204  204  204  204  204  204  204  204    0    0  187  204  204  204  204  204    0;<span class="keyword">...</span>
+0519     0  204  204  204  204  204  187    0    0  204  204  204  204  204    0    0  187  187  204  204  204  204  204  204    0;<span class="keyword">...</span>
+0520     0  204  204  204  204  204  204  187  187    0    0    0    0    0  187  187  204  204  204  204  204  204  204  204    0;<span class="keyword">...</span>
+0521     0  204  204  204  204  204  204  204  204  187  187  187  187  187  204  204  204  204  204  204  204  204  204  204    0;<span class="keyword">...</span>
+0522     0  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204    0;<span class="keyword">...</span>
+0523     0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0]);
+0524 iconRotate(:,:,2)   = iconRotate;
+0525 iconRotate(:,:,3)   = iconRotate(:,:,1);
+0526 
+0527 iconAnimate=uint8([0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0;<span class="keyword">...</span>
+0528     0  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204    0;<span class="keyword">...</span>
+0529     0  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204    0;<span class="keyword">...</span>
+0530     0  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204    0;<span class="keyword">...</span>
+0531     0  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204    0;<span class="keyword">...</span>
+0532     0  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204    0;<span class="keyword">...</span>
+0533     0  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204    0;<span class="keyword">...</span>
+0534     0  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204   16  204  204    0;<span class="keyword">...</span>
+0535     0  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204   16  205   16  204    0;<span class="keyword">...</span>
+0536     0  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204   16   16  204  204    0;<span class="keyword">...</span>
+0537     0  204  204  204  204  204  204  204   16   16   16   16  204  204  204  204  204  204  204   16  205   16  204  204    0;<span class="keyword">...</span>
+0538     0  204  204  204  204  204   16   16  205   16   16   16   16   16  204  204  204   16   16  205   16  204  204  204    0;<span class="keyword">...</span>
+0539     0  204  204  204  204   16  205   16   16  204  204  204  204   16   16   16   16  205   16   16  204  204  204  204    0;<span class="keyword">...</span>
+0540     0  204  204  204  204   16   16  204  204  204  204  204  204  204  204   16   16   16  204  204  204  204  204  204    0;<span class="keyword">...</span>
+0541     0  204  204  204   16  205   16  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204    0;<span class="keyword">...</span>
+0542     0  204  204   16  205   16  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204    0;<span class="keyword">...</span>
+0543     0  204   16  205   16  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204    0;<span class="keyword">...</span>
+0544     0  204  204   16  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204    0;<span class="keyword">...</span>
+0545     0  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204    0;<span class="keyword">...</span>
+0546     0  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204    0;<span class="keyword">...</span>
+0547     0  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204    0;<span class="keyword">...</span>
+0548     0  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204    0;<span class="keyword">...</span>
+0549     0  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204    0;<span class="keyword">...</span>
+0550     0  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204  204    0;<span class="keyword">...</span>
+0551     0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0]);
+0552 iconAnimate(:,:,2)  = iconAnimate;
+0553 iconAnimate(:,:,3)  = iconAnimate(:,:,1);</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

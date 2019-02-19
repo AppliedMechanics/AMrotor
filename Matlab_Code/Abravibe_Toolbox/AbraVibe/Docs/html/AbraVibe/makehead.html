@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of makehead</title>
+  <meta name="keywords" content="makehead">
+  <meta name="description" content="MAKEHEAD   Make an empty ABRAVIBE header structure">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; makehead.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>makehead
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>MAKEHEAD   Make an empty ABRAVIBE header structure</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function Header = makehead(FuncType,Data,dx) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> MAKEHEAD   Make an empty ABRAVIBE header structure
+
+       Header = makehead(FuncType,Data,dx)
+
+       Header      ABRAVIBE header structure, see DATAHELP
+
+       FuncType    Numerical function type, see FUNCTYPE
+       Data        Data vector to take number of data values from
+       dx          x axis increment (1/fs for time data)</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function Header = makehead(FuncType,Data,dx)</a>
+0002 <span class="comment">% MAKEHEAD   Make an empty ABRAVIBE header structure</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%       Header = makehead(FuncType,Data,dx)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%       Header      ABRAVIBE header structure, see DATAHELP</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%       FuncType    Numerical function type, see FUNCTYPE</span>
+0009 <span class="comment">%       Data        Data vector to take number of data values from</span>
+0010 <span class="comment">%       dx          x axis increment (1/fs for time data)</span>
+0011 
+0012 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0013 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0014 <span class="comment">% Version: 1.0 2011-06-23</span>
+0015 <span class="comment">%          1.1 2014-03-02 Fixed bugs for compatibility with abrahead</span>
+0016 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0017 
+0018 <span class="comment">% Parse inputs</span>
+0019 <span class="keyword">if</span> nargin == 1
+0020     Data=0;
+0021     dx=1;
+0022 <span class="keyword">elseif</span> nargin == 2
+0023     dx=1;
+0024 <span class="keyword">end</span>
+0025 
+0026 <span class="comment">% General fields</span>
+0027 Header.FunctionType = FuncType;     <span class="comment">% Numeric field! see FUNCTYPE</span>
+0028 Header.Date=datestr(now);
+0029 Header.Title=<span class="string">'Empty ABRAVIBE header'</span>;
+0030 
+0031 <span class="comment">% Data dependent fields</span>
+0032 Header.NoValues=length(Data);
+0033 Header.xStart=0;
+0034 Header.xIncrement=dx;
+0035 
+0036 <span class="comment">% Information fields</span>
+0037 Header.Unit=<span class="string">'EU'</span>;
+0038 Header.Dof=1;
+0039 Header.Dir=<span class="string">'X+'</span>;
+0040 Header.Label=<span class="string">'Label'</span>;
+0041 
+0042 <span class="comment">% Fields dependent on Function type</span>
+0043 SpecTypes1=[2:3];        <span class="comment">% Auto/Cross spectrum</span>
+0044 <span class="keyword">if</span> ~isempty(find(SpecTypes1 == Header.FunctionType))
+0045     Header.NumberAverages=1;
+0046     Header.OverlapPerc=0;
+0047     ENBW=0;
+0048 <span class="keyword">elseif</span> Header.FunctionType == 9     <span class="comment">% PSD</span>
+0049     Header.NumberAverages=1;
+0050     Header.OverlapPerc=0;
+0051     ENBW=0;
+0052     Header.Method=<span class="string">'Welch'</span>;
+0053     Header.SmoothLength=0;
+0054     Header.SmoothWin=<span class="string">''</span>;
+0055 <span class="keyword">end</span>
+0056 
+0057 SpecTypes2=[3:6 8];      <span class="comment">% 2-channel function</span>
+0058 <span class="keyword">if</span> ~isempty(find(SpecTypes2 == Header.FunctionType))
+0059     Header.RefDof=1;
+0060     Header.RefDir=<span class="string">'X+'</span>;
+0061 <span class="keyword">end</span>
+0062 
+0063 <span class="keyword">end</span>
+0064</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

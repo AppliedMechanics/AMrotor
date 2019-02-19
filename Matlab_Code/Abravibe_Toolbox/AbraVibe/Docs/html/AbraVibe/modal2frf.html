@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of modal2frf</title>
+  <meta name="keywords" content="modal2frf">
+  <meta name="description" content="MODAL2FRF  Synthesize FRF(s) from modal parameters">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; modal2frf.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>modal2frf
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>MODAL2FRF  Synthesize FRF(s) from modal parameters</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function H = modal2frf(f,p,V,indof,outdof,Type) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> MODAL2FRF  Synthesize FRF(s) from modal parameters
+
+       H = modal2frf(f,p,V,indof,outdof,Type)
+
+       H           FRF matrix, N-by-D-by-R
+
+       f           Frequency axis (column) vector
+       p           Column vector with poles, one for each column in V
+       V           Mode shape matrix with modes in columns (unity modal A)
+       indof       Vector with dofs for references (inputs), length=R
+       outdof      Vector with dofs for responses (outputs), length=D,
+                   Default is 1:length(V(:,1))
+       Type        String with 'd' for dynamic flexibility (displacement/force)
+                   String with 'v' for mobility (velocity/force) (Default)
+                   String with 'a' for accelerance (acceleration/force)
+       N           length(f), number of frequency values to compute H on
+
+ Note: For all modes, only one mode shape and pole out of every
+ complex conjugate pair should be included in p and V. The complex
+ conjugate is produced by this function. p and V must correspond, that is,
+ the number of columns in V must be = length(p).
+
+ Note2: The mode shapes are assumed to be scaled to unity modal A.
+
+ Example:
+ H = modal2frf(f,p,V,[1 3],[1:12],'v') produces a 3D matrix H (mobilities)
+ (N-by-12-by-2), provided length(V(:,1)) is &gt;= 12. p and V do not need to
+ include all modes of the system (but of course, then the FRFs are not
+ complete).
+
+ See also <a href="umm2uma.html" class="code" title="function V = umm2uma(Vold,p)">UMM2UMA</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="fdiff.html" class="code" title="function Y = fdiff(X,f,Type,NumberDiff)">fdiff</a>	FDIFF Frequency differentiation by jw multiplication</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="frfsynt.html" class="code" title="function Hs = frfsynt(H,f,p,V,Res,indof,outdof,Type,DispTime,Fdof)">frfsynt</a>	FRFSYNT  Synthesize FRF(s) after modal parameter extraction</li><li><a href="mkz2frf.html" class="code" title="function H = mkz2frf(f,M,K,z,indof,outdof,type)">mkz2frf</a>	MKZ2FRF Calculate FRF(s) from M, K and modal damping, z</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function H = modal2frf(f,p,V,indof,outdof,Type)</a>
+0002 <span class="comment">% MODAL2FRF  Synthesize FRF(s) from modal parameters</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%       H = modal2frf(f,p,V,indof,outdof,Type)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%       H           FRF matrix, N-by-D-by-R</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%       f           Frequency axis (column) vector</span>
+0009 <span class="comment">%       p           Column vector with poles, one for each column in V</span>
+0010 <span class="comment">%       V           Mode shape matrix with modes in columns (unity modal A)</span>
+0011 <span class="comment">%       indof       Vector with dofs for references (inputs), length=R</span>
+0012 <span class="comment">%       outdof      Vector with dofs for responses (outputs), length=D,</span>
+0013 <span class="comment">%                   Default is 1:length(V(:,1))</span>
+0014 <span class="comment">%       Type        String with 'd' for dynamic flexibility (displacement/force)</span>
+0015 <span class="comment">%                   String with 'v' for mobility (velocity/force) (Default)</span>
+0016 <span class="comment">%                   String with 'a' for accelerance (acceleration/force)</span>
+0017 <span class="comment">%       N           length(f), number of frequency values to compute H on</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">% Note: For all modes, only one mode shape and pole out of every</span>
+0020 <span class="comment">% complex conjugate pair should be included in p and V. The complex</span>
+0021 <span class="comment">% conjugate is produced by this function. p and V must correspond, that is,</span>
+0022 <span class="comment">% the number of columns in V must be = length(p).</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">% Note2: The mode shapes are assumed to be scaled to unity modal A.</span>
+0025 <span class="comment">%</span>
+0026 <span class="comment">% Example:</span>
+0027 <span class="comment">% H = modal2frf(f,p,V,[1 3],[1:12],'v') produces a 3D matrix H (mobilities)</span>
+0028 <span class="comment">% (N-by-12-by-2), provided length(V(:,1)) is &gt;= 12. p and V do not need to</span>
+0029 <span class="comment">% include all modes of the system (but of course, then the FRFs are not</span>
+0030 <span class="comment">% complete).</span>
+0031 <span class="comment">%</span>
+0032 <span class="comment">% See also UMM2UMA</span>
+0033 
+0034 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0035 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0036 <span class="comment">% Version: 1.0 2011-06-23</span>
+0037 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0038 
+0039 <span class="keyword">if</span> p(1) == 0
+0040     error(<span class="string">'Rigid body modes are not allowed!'</span>)
+0041 <span class="keyword">end</span>
+0042 
+0043 <span class="keyword">if</span> nargin &lt;= 3
+0044     error(<span class="string">'indof needs to be specified!'</span>)
+0045 <span class="keyword">elseif</span> nargin == 4
+0046     outdof = 1:length(V(:,1));
+0047     Type=<span class="string">'V'</span>;
+0048 <span class="keyword">elseif</span> nargin == 5
+0049     Type=<span class="string">'V'</span>;
+0050 <span class="keyword">else</span>
+0051     Type=upper(Type);
+0052 <span class="keyword">end</span>
+0053 
+0054 <span class="comment">% Calculate wd for mode scaling</span>
+0055 wd=imag(p);
+0056 <span class="comment">% calculate j*omega</span>
+0057 jw=j*2*pi*f;
+0058 
+0059 <span class="comment">% Allocate H</span>
+0060 N=length(f);
+0061 D=length(outdof);
+0062 R=length(indof);
+0063 Nm=length(p);
+0064 H=zeros(N,D,R);
+0065 <span class="comment">% Loop through all inputs</span>
+0066 <span class="keyword">for</span> inno = 1:R
+0067     <span class="comment">% Loop through response dofs</span>
+0068     <span class="keyword">for</span> outno = 1:D
+0069         <span class="comment">% Loop through modes</span>
+0070         <span class="keyword">for</span> mode = 1:Nm
+0071             <span class="comment">% Calculate residue. NOTE!  Modes scaled to unity modal A</span>
+0072             A=V(indof(inno),mode)*V(outdof(outno),mode);
+0073             <span class="comment">% Compute dynamic flexibility</span>
+0074             H(:,outno,inno)=H(:,outno,inno)+A./(jw-p(mode))+conj(A)./(jw-conj(p(mode)));
+0075         <span class="keyword">end</span>
+0076         <span class="keyword">if</span> strcmp(Type,<span class="string">'V'</span>)
+0077             H(:,outno,inno)=<a href="fdiff.html" class="code" title="function Y = fdiff(X,f,Type,NumberDiff)">fdiff</a>(H(:,outno,inno),f,<span class="string">'lin'</span>,1);
+0078         <span class="keyword">elseif</span> strcmp(Type,<span class="string">'A'</span>)
+0079             H(:,outno,inno)=<a href="fdiff.html" class="code" title="function Y = fdiff(X,f,Type,NumberDiff)">fdiff</a>(H(:,outno,inno),f,<span class="string">'lin'</span>,2);
+0080         <span class="keyword">end</span>
+0081     <span class="keyword">end</span>
+0082 <span class="keyword">end</span>
+0083</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of pv2modal</title>
+  <meta name="keywords" content="pv2modal">
+  <meta name="description" content="PV2MODAL   Convert separate variables to animate MODAL struct">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; pv2modal.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>pv2modal
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>PV2MODAL   Convert separate variables to animate MODAL struct</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function MODAL = pv2modal(p,V,dofs,dirs) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> PV2MODAL   Convert separate variables to animate MODAL struct
+
+       MODAL = pv2modal(p,V,dofs,dirs)
+
+       MODAL   Structure with all modal information, see ANIMATE
+
+       p       Vector with complex poles with positive imaginary part
+       V       Mode shape matrix Ndofs-by-Nmodes
+       dofs    Vector with each dof in the mode shape rows
+       dirs    Vector with each direction in the mode shape rows (1,2,3
+               for x,y,z)
+
+ NOTE! This function only works for dofs=[1:NumberDofs]!
+
+ See also ANIMATE <a href="modal2pv.html" class="code" title="function [p,V,dofs,dirs] = modal2pv(MODAL)">modal2pv</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function MODAL = pv2modal(p,V,dofs,dirs)</a>
+0002 <span class="comment">% PV2MODAL   Convert separate variables to animate MODAL struct</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%       MODAL = pv2modal(p,V,dofs,dirs)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%       MODAL   Structure with all modal information, see ANIMATE</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%       p       Vector with complex poles with positive imaginary part</span>
+0009 <span class="comment">%       V       Mode shape matrix Ndofs-by-Nmodes</span>
+0010 <span class="comment">%       dofs    Vector with each dof in the mode shape rows</span>
+0011 <span class="comment">%       dirs    Vector with each direction in the mode shape rows (1,2,3</span>
+0012 <span class="comment">%               for x,y,z)</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">% NOTE! This function only works for dofs=[1:NumberDofs]!</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">% See also ANIMATE modal2pv</span>
+0017 
+0018 <span class="comment">% Copyright (c) 2018 by Anders Brandt</span>
+0019 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0020 <span class="comment">% Version: 1.0 2018-05-10</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0023 
+0024 [NumberPoints,NumberModes]=size(V);
+0025 
+0026 <span class="comment">% Create empty MODAL struct, with correct size</span>
+0027 dofs=dofs(:);
+0028 <span class="keyword">for</span> n=1:NumberModes
+0029     MODAL(n).Freq=0;
+0030     MODAL(n).Node=dofs;
+0031     MODAL(n).X=zeros(length(dofs),1);
+0032     MODAL(n).Y=zeros(length(dofs),1);
+0033     MODAL(n).Z=zeros(length(dofs),1);
+0034 <span class="keyword">end</span>
+0035 
+0036 <span class="comment">% Fill in proper places in MODAL</span>
+0037 <span class="keyword">for</span> n = 1:NumberModes
+0038     MODAL(n).Freq=p(n)/2/pi;
+0039     MODAL(n).Node=dofs;
+0040     <span class="keyword">for</span> row=1:NumberPoints
+0041         <span class="keyword">if</span> abs(dirs(row)) == 1
+0042             MODAL(n).X(dofs(row))=sign(dirs(row))*V(row,n);
+0043         <span class="keyword">elseif</span> abs(dirs(row)) == 2
+0044              MODAL(n).Y(dofs(row))=sign(dirs(row))*V(row,n);
+0045         <span class="keyword">elseif</span> abs(dirs(row)) == 3
+0046              MODAL(n).Z(dofs(row))=sign(dirs(row))*V(row,n);
+0047         <span class="keyword">end</span>
+0048     <span class="keyword">end</span>
+0049 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

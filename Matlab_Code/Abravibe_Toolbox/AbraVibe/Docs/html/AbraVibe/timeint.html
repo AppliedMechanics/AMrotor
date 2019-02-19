@@ -1,0 +1,240 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of timeint</title>
+  <meta name="keywords" content="timeint">
+  <meta name="description" content="TIMEINT Integrate time signal">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; timeint.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>timeint
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>TIMEINT Integrate time signal</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function y = timeint(x,fs,Type,Par); </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> TIMEINT Integrate time signal 
+
+       y = timeint(x,fs,Type,Par)
+
+       y       Time integration of x
+
+       x       Input time signal
+       fs      Sampling frequency
+       Type    'simple', 'HPFilter','IIR', 'FFT', Default='iir'
+       Par     Extra parameter for HP, and IIR
+               For HPFilter:  Cutoff frequency for HP filter in Hz, 5 Hz default
+               For IIR: Cutoff frequency for HP filter in Hz, 5 Hz default
+               For FFT: Number of low frequency frequency lines set to zero
+
+ For good performance, x should be oversampled by a factor of &gt;=10, except
+ for IIR, where a factor 4 is sufficient, or for FFT where it is not necessary.
+ Note that the IIR type introduces a delay by (exactly) 23 samples, and that
+ those first samples in the output sequency are thrown away by TIMEINT! Thus
+ length(y)=length(x)-23 for IIR type filter, so that the first sample in y is
+ synchronous with the first sample in x.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="fnegfreq.html" class="code" title="function [Yn,fn] = fnegfreq(Y,Type,f);">fnegfreq</a>	FNEGFREQ  Create negative frequencies by mirroring positive</li><li><a href="makexaxis.html" class="code" title="function x = makexaxis(y,dx,x0);">makexaxis</a>	MAKEXAXIS Create a time or frequency x axis</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function y = timeint(x,fs,Type,Par);</a>
+0002 <span class="comment">% TIMEINT Integrate time signal</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%       y = timeint(x,fs,Type,Par)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%       y       Time integration of x</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%       x       Input time signal</span>
+0009 <span class="comment">%       fs      Sampling frequency</span>
+0010 <span class="comment">%       Type    'simple', 'HPFilter','IIR', 'FFT', Default='iir'</span>
+0011 <span class="comment">%       Par     Extra parameter for HP, and IIR</span>
+0012 <span class="comment">%               For HPFilter:  Cutoff frequency for HP filter in Hz, 5 Hz default</span>
+0013 <span class="comment">%               For IIR: Cutoff frequency for HP filter in Hz, 5 Hz default</span>
+0014 <span class="comment">%               For FFT: Number of low frequency frequency lines set to zero</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">% For good performance, x should be oversampled by a factor of &gt;=10, except</span>
+0017 <span class="comment">% for IIR, where a factor 4 is sufficient, or for FFT where it is not necessary.</span>
+0018 <span class="comment">% Note that the IIR type introduces a delay by (exactly) 23 samples, and that</span>
+0019 <span class="comment">% those first samples in the output sequency are thrown away by TIMEINT! Thus</span>
+0020 <span class="comment">% length(y)=length(x)-23 for IIR type filter, so that the first sample in y is</span>
+0021 <span class="comment">% synchronous with the first sample in x.</span>
+0022 <span class="comment">%</span>
+0023 
+0024 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0025 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0026 <span class="comment">% Version: 1.0 2011-06-23</span>
+0027 <span class="comment">%          1.1 2012-06-07   Added functionality to work for more than one</span>
+0028 <span class="comment">%                           signal, and check that data are in columns.</span>
+0029 <span class="comment">%          1.2 2017-11-11   Added 'FFT' method, performing one long FFT per</span>
+0030 <span class="comment">%                           channel.</span>
+0031 <span class="comment">%          1.3 2018-03-09   Correct option 'HPFILTER' to work on columns in x</span>
+0032 <span class="comment">%</span>
+0033 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0034 <span class="comment">%</span>
+0035 
+0036 <span class="comment">% The IIR filter is taken from</span>
+0037 <span class="comment">% Pintelon and Schoukens, &quot;Real-Time Integration and Differentiation</span>
+0038 <span class="comment">% of Analog Signals by Means of Digital Filtering,&quot; IEEE Trans. on Instr.</span>
+0039 <span class="comment">% and Meas., Vol 39, No 6, pp. 923–927, December 1990.</span>
+0040 <span class="comment">%</span>
+0041 <span class="comment">% For FFT integration, see</span>
+0042 <span class="comment">% Brandt, A. &amp; Brincker, R. &quot;“Integrating time signals in frequency domain</span>
+0043 <span class="comment">% – Comparison with time domain integration,” Measurement, vol. 58, pp. 511–519, 2014.</span>
+0044 
+0045 
+0046 <span class="comment">% Check parameters</span>
+0047 <span class="keyword">if</span> nargin == 2
+0048     Type=<span class="string">'IIR'</span>;
+0049     Par=5;
+0050 <span class="keyword">elseif</span> nargin == 3
+0051     <span class="keyword">if</span> strcmp(upper(Type),<span class="string">'SIMPLE'</span>)
+0052         Par=[];
+0053     <span class="keyword">elseif</span> strcmp(upper(Type),<span class="string">'HPFILTER'</span>)
+0054         Par=5;                          <span class="comment">% Cutoff frequency of butterworth filter</span>
+0055     <span class="keyword">elseif</span> strcmp(upper(Type),<span class="string">'IIR'</span>)
+0056         Par=5;                          <span class="comment">% Cutoff frequency of FIR filter, see below</span>
+0057     <span class="keyword">elseif</span> strcmp(upper(Type),<span class="string">'FFT'</span>)
+0058         Par=1;                          <span class="comment">% Cutoff frequency of FIR filter, see below</span>
+0059     <span class="keyword">else</span>
+0060         fprintf(<span class="string">'Wrong parameter ''Type'', se help'</span>)
+0061         <span class="keyword">return</span>;
+0062     <span class="keyword">end</span>
+0063 <span class="keyword">elseif</span> nargin == 4
+0064     <span class="keyword">if</span> strcmp(upper(Type),<span class="string">'SIMPLE'</span>)
+0065         fprintf(<span class="string">'Wrong number of parameters for Type ''SIMPLE'''</span>)
+0066         <span class="keyword">return</span>;
+0067     <span class="keyword">end</span>
+0068 <span class="keyword">end</span>
+0069 
+0070 <span class="comment">% Added 7.6-2012: Make work for more than one signal</span>
+0071 [n,m]=size(x);
+0072 <span class="keyword">if</span> n == 1
+0073     error(<span class="string">'Data must be in columns!'</span>)
+0074 <span class="keyword">elseif</span> m == 1
+0075     x=x-mean(x);
+0076 <span class="keyword">else</span>
+0077      x=x-ones(n,1)*mean(x);
+0078 <span class="keyword">end</span>
+0079     
+0080     
+0081 <span class="comment">% Process each case separately</span>
+0082 <span class="keyword">if</span> strcmp(upper(Type),<span class="string">'SIMPLE'</span>)
+0083     <span class="comment">% Create 'trapezoidal rule' filter</span>
+0084     B=1/2/fs*[1 1];
+0085     A=[1 -1];
+0086     y=zeros(n,m);
+0087     <span class="keyword">for</span> c = 1:m
+0088         y(:,c)=filter(B,A,x(:,c));
+0089     <span class="keyword">end</span>
+0090 <span class="keyword">elseif</span> strcmp(upper(Type),<span class="string">'HPFILTER'</span>)
+0091     <span class="comment">% Create a 1. order HP filter with cutoff frequency Par</span>
+0092     <span class="comment">% This is equivalent to the &quot;old&quot;, analog integrator found in for</span>
+0093     <span class="comment">% example charge amplifiers</span>
+0094     fnyq=fs/2;                  <span class="comment">% Nyquist frequency</span>
+0095     frel=Par/fnyq;              <span class="comment">% Relative cutoff frequency as wanted by butter</span>
+0096     Amp=1/(2*pi*Par);           <span class="comment">% Butterworth has a unity numerator, HP filter does not</span>
+0097     [B,A]=butter(1,frel)       <span class="comment">% 1. order HP filter coefficients</span>
+0098     y=zeros(n,m);
+0099     <span class="keyword">for</span> c=1:m
+0100         y(:,c)=Amp*filter(B,A,x(:,c));        <span class="comment">% Integrate time signal</span>
+0101     <span class="keyword">end</span>
+0102 <span class="keyword">elseif</span> strcmp(upper(Type),<span class="string">'IIR'</span>)
+0103     <span class="comment">% Calculate a 32-pin, linear-phase FIR HP filter by a constrained least</span>
+0104     <span class="comment">% squares solution, ir Par is not = 0</span>
+0105     <span class="keyword">if</span> Par ~= 0
+0106         fnyq=fs/2;                  <span class="comment">% Nyquist frequency</span>
+0107         Nfir=32;                    <span class="comment">% FIR filter length</span>
+0108         fcn=Par/fnyq;               <span class="comment">% Normalized cutoff frequency</span>
+0109         dp=1e-6;                    <span class="comment">% Passband deviation, to achieve 120 dB total dynamic range</span>
+0110         ds=1e-6;                    <span class="comment">% stopband attenuation</span>
+0111         ft=2*fcn;                   <span class="comment">% Frequency above which dp is achieved</span>
+0112         <span class="comment">%     if strcmp(checksw,'MATLAB')</span>
+0113         <span class="comment">%         Bf=fircls1(Nfir,fcn,dp,ds,ft,'high')   % Compute FIR filter</span>
+0114         <span class="comment">%     elseif strcmp(checksw,'OCTAVE')</span>
+0115         Bf=firls(Nfir,[0 fcn 1.1*fcn 1],[0 0.9 1 1]);
+0116         <span class="comment">%     end</span>
+0117         <span class="comment">% Use 8th order IIR filter by Pintelon and Schoukens, se ref above</span>
+0118     <span class="keyword">else</span>
+0119         Nfir=0;
+0120     <span class="keyword">end</span>
+0121     p=zeros(8,1);
+0122     p(1)=-0.5805235;
+0123     p(2)=0.2332021*exp(j*114.0968*pi/180);
+0124     p(3)=conj(p(2));
+0125     p(4)=0.1814755*exp(j*66.33969*pi/180);
+0126     p(5)=conj(p(4));
+0127     p(6)=0.1641457*exp(j*21.89539*pi/180);
+0128     p(7)=conj(p(6));
+0129     p(8)=0.9999999999;
+0130     z=zeros(8,1);
+0131     z(1)=-1.175839;
+0132     z(2)=3.37102*exp(j*125.1125*pi/180);
+0133     z(3)=conj(z(2));
+0134     z(4)=4.54971*exp(j*80.96404*pi/180);
+0135     z(5)=conj(z(4));
+0136     z(6)=5.223966*exp(j*40.09347*pi/180);
+0137     z(7)=conj(z(6));
+0138     z(8)=5.443743;
+0139     A=poly(p);
+0140     Const=1.951579134931078e-005;
+0141     B=-Const*poly(z);           <span class="comment">% Some sign and scale factor not in P&amp;S paper</span>
+0142     Amp=1/fs;   
+0143     D=8+Nfir/2;                           <span class="comment">% First sample after delay caused by both filters</span>
+0144     y=zeros(n-D+1,m);                       
+0145     <span class="keyword">for</span> c=1:m                                 <span class="comment">% Loop added 2012-06-07</span>
+0146         <span class="keyword">if</span> Par ~= 0
+0147             x(:,c)=filter(Bf,1,x(:,c));       <span class="comment">% Highpass filter x</span>
+0148         <span class="keyword">end</span>
+0149         yt=filter(B,A,x(:,c));                <span class="comment">% Integrate time signal</span>
+0150         yt=Amp*yt;
+0151         yt=yt(D:end);                         <span class="comment">% Throw away initial samples during delay period</span>
+0152         y(:,c)=yt; <span class="comment">%-mean(yt);                % We assume dynamic signal without static part!</span>
+0153     <span class="keyword">end</span>
+0154 <span class="keyword">elseif</span> strcmp(upper(Type),<span class="string">'FFT'</span>)
+0155     <span class="keyword">if</span> mod(n,2) ~= 0                          <span class="comment">% Ensure even length data</span>
+0156         x=x(1:end-1,:);
+0157     <span class="keyword">end</span>
+0158     N=2*length(x(:,1));                       <span class="comment">% FFT size</span>
+0159     df=fs/(N);
+0160     y=zeros(N/2,length(x(1,:)));
+0161     <span class="keyword">for</span> c=1:m
+0162         X=fft(x(:,c),N);
+0163         X=X(1:N/2+1);
+0164         f=<a href="makexaxis.html" class="code" title="function x = makexaxis(y,dx,x0);">makexaxis</a>(X,df);
+0165         jw=j*2*pi*f;
+0166         Y=X./jw;
+0167         Y(1:Par)=0;
+0168         Yn=<a href="fnegfreq.html" class="code" title="function [Yn,fn] = fnegfreq(Y,Type,f);">fnegfreq</a>(Y,<span class="string">'fft'</span>);
+0169         yn=real(ifft(Yn));
+0170         yn=yn(1:length(yn)/2);
+0171         yt=detrend(yn);
+0172         y(:,c)=yt;
+0173     <span class="keyword">end</span>
+0174 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

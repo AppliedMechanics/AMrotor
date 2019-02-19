@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of unvwrite</title>
+  <meta name="keywords" content="unvwrite">
+  <meta name="description" content="UNVWRITE Write a universal file">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; unvwrite.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>unvwrite
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>UNVWRITE Write a universal file</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function unvwrite(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment">UNVWRITE Write a universal file
+
+ To write test data (measurement functions), the data must first
+ be stored in standard ABRAVIBE files named with a prefix and a number. 
+ Then use the syntax unvwrite(Prefix,FirstNo,LastNo,OutFileName), to 
+ write the functions to a common universal file. All files in the 
+ sequence do not have to exist.
+
+ To export modal data, the variables GEOMETRY, MODAL, and (optionally)
+ MHEADER, must be in the current workspace. Then export the data to a
+ universal file by the syntax unvwrite(GEOMETRY,MODAL,OutFileName), or
+ unvwrite(GEOMETRY,MODAL,MHEADER,OutFileName). To create a modal header,
+ the command makemhead can be used.
+
+ See also <a href="makemhead.html" class="code" title="function MHEADER = makemhead(Title,MODAL,ModeNumber)">MAKEMHEAD</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="makemhead.html" class="code" title="function MHEADER = makemhead(Title,MODAL,ModeNumber)">makemhead</a>	MAKEMHEAD     Make a default MODAL header</li><li><a href="unvw15.html" class="code" title="function Status = unvw15(fid,GEOMETRY);">unvw15</a>	UNVR55    Write SDRC universal file nodes record</li><li><a href="unvw55.html" class="code" title="function Status = unvw55(fid,MODAL,MHEADER);">unvw55</a>	UNVR55    Write SDRC universal file nodes record</li><li><a href="unvw58.html" class="code" title="function unvw58(fid,XData,Data,UnvHead);">unvw58</a>	function [XData,Data,UnvHead] = unvw58(fid);</li><li><a href="unvw82.html" class="code" title="function Status = unvw55(fid,GEOMETRY);">unvw82</a>	UNVR55    Write SDRC universal file trace line record</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function unvwrite(varargin)</a>
+0002 <span class="comment">%UNVWRITE Write a universal file</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">% To write test data (measurement functions), the data must first</span>
+0005 <span class="comment">% be stored in standard ABRAVIBE files named with a prefix and a number.</span>
+0006 <span class="comment">% Then use the syntax unvwrite(Prefix,FirstNo,LastNo,OutFileName), to</span>
+0007 <span class="comment">% write the functions to a common universal file. All files in the</span>
+0008 <span class="comment">% sequence do not have to exist.</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">% To export modal data, the variables GEOMETRY, MODAL, and (optionally)</span>
+0011 <span class="comment">% MHEADER, must be in the current workspace. Then export the data to a</span>
+0012 <span class="comment">% universal file by the syntax unvwrite(GEOMETRY,MODAL,OutFileName), or</span>
+0013 <span class="comment">% unvwrite(GEOMETRY,MODAL,MHEADER,OutFileName). To create a modal header,</span>
+0014 <span class="comment">% the command makemhead can be used.</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">% See also MAKEMHEAD</span>
+0017 
+0018 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0019 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0020 <span class="comment">% Version: 1.0 2011-06-23</span>
+0021 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0022 
+0023 <span class="comment">% Check type of data, TEST or MODAL</span>
+0024 <span class="keyword">if</span> isstr(varargin{1})   <span class="comment">% First syntax</span>
+0025     Prefix=varargin{1};
+0026     FirstNo=varargin{2};
+0027     LastNo=varargin{3};
+0028     OutFileName=varargin{4};
+0029     Type=<span class="string">'TestData'</span>;
+0030 <span class="keyword">else</span> 
+0031     GEOMETRY=varargin{1};
+0032     MODAL=varargin{2};
+0033     <span class="keyword">if</span> nargin == 3      <span class="comment">% Second syntax: make a default header</span>
+0034         <span class="keyword">for</span> n = 1:length(MODAL)
+0035             MHEADER(n)=<a href="makemhead.html" class="code" title="function MHEADER = makemhead(Title,MODAL,ModeNumber)">makemhead</a>(<span class="string">'Default modal header'</span>,MODAL(n));
+0036         <span class="keyword">end</span>
+0037         OutFileName=varargin{3};
+0038     <span class="keyword">else</span>
+0039         MHEADER=varargin{3};
+0040         OutFileName=varargin{4};
+0041     <span class="keyword">end</span>
+0042 <span class="comment">%    OutFileName=varargin{4};</span>
+0043     Type=<span class="string">'ModalData'</span>;
+0044 <span class="keyword">end</span>
+0045 
+0046 <span class="keyword">if</span> strcmp(Type,<span class="string">'TestData'</span>)  <span class="comment">% Save as dataset 58</span>
+0047     fid=fopen(OutFileName,<span class="string">'w'</span>);
+0048     <span class="keyword">for</span> n = FirstNo:LastNo
+0049         InFileName=strcat(Prefix,int2str(n));
+0050         <span class="keyword">if</span> exist(strcat(InFileName,<span class="string">'.mat'</span>),<span class="string">'file'</span>) == 2
+0051             load(InFileName);
+0052             <span class="keyword">if</span> exist(<span class="string">'Data'</span>,<span class="string">'var'</span>) &amp; exist(<span class="string">'Header'</span>,<span class="string">'var'</span>)
+0053                 <span class="keyword">if</span> exist(<span class="string">'xAxis'</span>,<span class="string">'var'</span>)
+0054                     <a href="unvw58.html" class="code" title="function unvw58(fid,XData,Data,UnvHead);">unvw58</a>(fid,xAxis,Data,Header);
+0055                 <span class="keyword">else</span>
+0056                     <a href="unvw58.html" class="code" title="function unvw58(fid,XData,Data,UnvHead);">unvw58</a>(fid,0,Data,Header);
+0057                 <span class="keyword">end</span>
+0058             <span class="keyword">end</span>
+0059         <span class="keyword">end</span>
+0060     <span class="keyword">end</span>
+0061 <span class="keyword">else</span>
+0062     fid=fopen(OutFileName,<span class="string">'w'</span>);
+0063     <span class="keyword">if</span> fid &gt; 0
+0064         Status=<a href="unvw15.html" class="code" title="function Status = unvw15(fid,GEOMETRY);">unvw15</a>(fid,GEOMETRY);
+0065         Status=<a href="unvw82.html" class="code" title="function Status = unvw55(fid,GEOMETRY);">unvw82</a>(fid,GEOMETRY);
+0066         <span class="keyword">for</span> n = 1:length(MODAL)
+0067             Status=<a href="unvw55.html" class="code" title="function Status = unvw55(fid,MODAL,MHEADER);">unvw55</a>(fid,MODAL(n),MHEADER(n));
+0068         <span class="keyword">end</span>
+0069     <span class="keyword">end</span>
+0070 <span class="keyword">end</span>
+0071 fclose(fid);</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

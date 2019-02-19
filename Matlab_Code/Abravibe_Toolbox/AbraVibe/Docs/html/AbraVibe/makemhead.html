@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of makemhead</title>
+  <meta name="keywords" content="makemhead">
+  <meta name="description" content="MAKEMHEAD     Make a default MODAL header">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; makemhead.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>makemhead
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>MAKEMHEAD     Make a default MODAL header</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function MHEADER = makemhead(Title,MODAL,ModeNumber) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> MAKEMHEAD     Make a default MODAL header
+
+       MHEADER = makemhead(Title,MODAL,ModeNumber)
+
+       MHEADER         Output header record
+
+       Title           Up to 80 character string
+       MODAL           Modal structure, see animate
+       ModeNumber      Integer number
+
+ Note! MODAL should contain only ONE record</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="unvwrite.html" class="code" title="function unvwrite(varargin)">unvwrite</a>	UNVWRITE Write a universal file</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function MHEADER = makemhead(Title,MODAL,ModeNumber)</a>
+0002 <span class="comment">% MAKEMHEAD     Make a default MODAL header</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%       MHEADER = makemhead(Title,MODAL,ModeNumber)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%       MHEADER         Output header record</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%       Title           Up to 80 character string</span>
+0009 <span class="comment">%       MODAL           Modal structure, see animate</span>
+0010 <span class="comment">%       ModeNumber      Integer number</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">% Note! MODAL should contain only ONE record</span>
+0013 
+0014 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0015 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0016 <span class="comment">% Version: 1.0 2011-06-23</span>
+0017 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0018 
+0019 N=length(MODAL);
+0020 
+0021 <span class="keyword">for</span> n=1:N
+0022     MHEADER(n).Title=sprintf(<span class="string">'%-80s'</span>,Title);
+0023     MHEADER(n).Title2=sprintf(<span class="string">'%-80s'</span>,<span class="string">'None'</span>);
+0024     MHEADER(n).Date=sprintf(<span class="string">'%-80s'</span>,datestr(now));
+0025     MHEADER(n).Title3=sprintf(<span class="string">'%-80s'</span>,<span class="string">'None'</span>);
+0026     MHEADER(n).Title4=sprintf(<span class="string">'%-80s'</span>,<span class="string">'None'</span>);
+0027     
+0028     MHEADER(n).ModelType=1;
+0029     <span class="keyword">if</span> isreal(MODAL(n).X) &amp; isreal(MODAL(n).Y) &amp; isreal(MODAL(n).Z)
+0030         MHEADER(n).AnalysisType=2;     <span class="comment">% Normal Mode</span>
+0031         MHEADER(n).DataType=2;         <span class="comment">% Real data type</span>
+0032     <span class="keyword">else</span>
+0033         MHEADER(n).AnalysisType=3;     <span class="comment">% Complex Mode</span>
+0034         MHEADER(n).DataType=5;         <span class="comment">% Real data type</span>
+0035     <span class="keyword">end</span>
+0036     MHEADER(n).DataChar=2;             <span class="comment">% 3DOF global translation</span>
+0037     MHEADER(n).SpecDataType=8;           <span class="comment">% Displacement</span>
+0038     MHEADER(n).NumValuesPerNode=3;
+0039     MHEADER(n).NumIntDataValues=2;
+0040     MHEADER(n).NumRealDataValues=6;
+0041     MHEADER(n).LoadCase=1;
+0042     MHEADER(n).ModeNumber=n;
+0043     MHEADER(n).Eigenvalue=2*pi*MODAL(n).Freq;
+0044     MHEADER(n).ModalA=1;
+0045     MHEADER(n).ModalB=-MHEADER(n).Eigenvalue;
+0046 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

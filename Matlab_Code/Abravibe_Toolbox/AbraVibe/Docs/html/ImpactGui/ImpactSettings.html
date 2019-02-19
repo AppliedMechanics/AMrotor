@@ -1,0 +1,611 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of ImpactSettings</title>
+  <meta name="keywords" content="ImpactSettings">
+  <meta name="description" content="IMPACTSETTINGS MATLAB code for ImpactSettings.fig">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">ImpactGui</a> &gt; ImpactSettings.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for ImpactGui&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>ImpactSettings
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>IMPACTSETTINGS MATLAB code for ImpactSettings.fig</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function varargout = ImpactSettings(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> IMPACTSETTINGS MATLAB code for ImpactSettings.fig
+      IMPACTSETTINGS, by itself, creates a new IMPACTSETTINGS or raises the existing
+      singleton*.
+
+      H = IMPACTSETTINGS returns the handle to a new IMPACTSETTINGS or the handle to
+      the existing singleton*.
+
+      IMPACTSETTINGS('CALLBACK',hObject,eventData,handles,...) calls the local
+      function named CALLBACK in IMPACTSETTINGS.M with the given input arguments.
+
+      IMPACTSETTINGS('Property','Value',...) creates a new IMPACTSETTINGS or raises the
+      existing singleton*.  Starting from the left, property value pairs are
+      applied to the GUI before ImpactSettings_OpeningFcn gets called.  An
+      unrecognized property name or invalid value makes property application
+      stop.  All inputs are passed to ImpactSettings_OpeningFcn via varargin.
+
+      *See GUI Options on GUIDE's Tools menu.  Choose &quot;GUI allows only one
+      instance to run (singleton)&quot;.
+
+ See also: GUIDE, GUIDATA, GUIHANDLES</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="GuiImptrig.html" class="code" title="function [TrigIdx, DIdx, AIdx] = GuiImpTrig(x,N,TrigPerc,PreTrigger)">GuiImptrig</a>	GUIIMPTRIG    Impact testing triggering and double impact detection for</li><li><a href="GuiImptrig2.html" class="code" title="function [TrigIdx, DIdx, AIdx] = GuiImptrig2(x,y,fs,N,TrigPerc,PreTrigger)">GuiImptrig2</a>	GUIIMPTRIG2   Impact testing triggering and double impact detection for</li><li><a href="ImpactChecks.html" class="code" title="function [status,OutTrigIdx,idx] = ImpactChecks(x,TrigIdx,N)">ImpactChecks</a>	IMPACTCHECKS  Checks that combination of triggers and blocksize do not</li><li><a href="ImpactContDlg.html" class="code" title="function varargout = ImpactContDlg(varargin)">ImpactContDlg</a>	IMPACTCONTDLG MATLAB code for ImpactContDlg.fig</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="ImpactGui.html" class="code" title="function varargout = ImpactGui(varargin)">ImpactGui</a>	IMPACTGUI ABRAVIBE impact testing GUI</li></ul>
+<!-- crossreference -->
+
+<h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="#_sub1" class="code">function ImpactSettings_OpeningFcn(hObject, eventdata, handles, varargin)</a></li><li><a href="#_sub2" class="code">function varargout = ImpactSettings_OutputFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub3" class="code">function Export_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub4" class="code">function CancelButton_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub5" class="code">function ForceWindowEdit_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub6" class="code">function ForceWindowEdit_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub7" class="code">function ExpWindowEdit_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub8" class="code">function ExpWindowEdit_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub9" class="code">function WindowsPlotFRFButton_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub10" class="code">function BlocksizePopup_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub11" class="code">function BlocksizePopup_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub12" class="code">function BlocksizeButton_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub13" class="code">function TrigLevelEdit_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub14" class="code">function TrigLevelEdit_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub15" class="code">function PretriggerEdit_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub16" class="code">function PretriggerEdit_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub17" class="code">function TriggeringButton_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub18" class="code">function SelectImpactsButton_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub19" class="code">function WindowsPlotTimeButton_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub20" class="code">function NumberImpactsText_CreateFcn(hObject, eventdata, handles)</a></li></ul>
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = ImpactSettings(varargin)</a>
+0002 <span class="comment">% IMPACTSETTINGS MATLAB code for ImpactSettings.fig</span>
+0003 <span class="comment">%      IMPACTSETTINGS, by itself, creates a new IMPACTSETTINGS or raises the existing</span>
+0004 <span class="comment">%      singleton*.</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%      H = IMPACTSETTINGS returns the handle to a new IMPACTSETTINGS or the handle to</span>
+0007 <span class="comment">%      the existing singleton*.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%      IMPACTSETTINGS('CALLBACK',hObject,eventData,handles,...) calls the local</span>
+0010 <span class="comment">%      function named CALLBACK in IMPACTSETTINGS.M with the given input arguments.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%      IMPACTSETTINGS('Property','Value',...) creates a new IMPACTSETTINGS or raises the</span>
+0013 <span class="comment">%      existing singleton*.  Starting from the left, property value pairs are</span>
+0014 <span class="comment">%      applied to the GUI before ImpactSettings_OpeningFcn gets called.  An</span>
+0015 <span class="comment">%      unrecognized property name or invalid value makes property application</span>
+0016 <span class="comment">%      stop.  All inputs are passed to ImpactSettings_OpeningFcn via varargin.</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%      *See GUI Options on GUIDE's Tools menu.  Choose &quot;GUI allows only one</span>
+0019 <span class="comment">%      instance to run (singleton)&quot;.</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">% See also: GUIDE, GUIDATA, GUIHANDLES</span>
+0022 
+0023 <span class="comment">% Copyright (c) 2009-2014 by Anders Brandt</span>
+0024 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0025 <span class="comment">% Version: 1.0 2014-07-15</span>
+0026 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0027 
+0028 
+0029 <span class="comment">% Last Modified by GUIDE v2.5 26-Nov-2015 17:57:21</span>
+0030 
+0031 <span class="comment">% Begin initialization code - DO NOT EDIT</span>
+0032 gui_Singleton = 1;
+0033 gui_State = struct(<span class="string">'gui_Name'</span>,       mfilename, <span class="keyword">...</span>
+0034     <span class="string">'gui_Singleton'</span>,  gui_Singleton, <span class="keyword">...</span>
+0035     <span class="string">'gui_OpeningFcn'</span>, @<a href="#_sub1" class="code" title="subfunction ImpactSettings_OpeningFcn(hObject, eventdata, handles, varargin)">ImpactSettings_OpeningFcn</a>, <span class="keyword">...</span>
+0036     <span class="string">'gui_OutputFcn'</span>,  @<a href="#_sub2" class="code" title="subfunction varargout = ImpactSettings_OutputFcn(hObject, eventdata, handles)">ImpactSettings_OutputFcn</a>, <span class="keyword">...</span>
+0037     <span class="string">'gui_LayoutFcn'</span>,  [] , <span class="keyword">...</span>
+0038     <span class="string">'gui_Callback'</span>,   []);
+0039 <span class="keyword">if</span> nargin &amp;&amp; ischar(varargin{1})
+0040     gui_State.gui_Callback = str2func(varargin{1});
+0041 <span class="keyword">end</span>
+0042 
+0043 <span class="keyword">if</span> nargout
+0044     [varargout{1:nargout}] = gui_mainfcn(gui_State, varargin{:});
+0045 <span class="keyword">else</span>
+0046     gui_mainfcn(gui_State, varargin{:});
+0047 <span class="keyword">end</span>
+0048 <span class="comment">% End initialization code - DO NOT EDIT</span>
+0049 
+0050 
+0051 <span class="comment">% --- Executes just before ImpactSettings is made visible.</span>
+0052 <a name="_sub1" href="#_subfunctions" class="code">function ImpactSettings_OpeningFcn(hObject, eventdata, handles, varargin)</a>
+0053 <span class="comment">% This function has no output args, see OutputFcn.</span>
+0054 <span class="comment">% hObject    handle to figure</span>
+0055 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0056 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0057 <span class="comment">% varargin   command line arguments to ImpactSettings (see VARARGIN)</span>
+0058 
+0059 <span class="comment">% Define help menu and items</span>
+0060 h1 = uimenu(<span class="string">'Label'</span>, <span class="string">'Help'</span>,<span class="string">'Callback'</span>,<span class="string">'ImpSettingsHelp'</span>);
+0061 <span class="comment">%      uimenu(h1,'Label','Help','Callback','ImpSettingsHelp');</span>
+0062 
+0063 <span class="comment">% Load input variables from file ImpactSettings</span>
+0064 handles.ImpactGui=varargin{1};
+0065 
+0066 <span class="comment">% Set GUI fields by input values from the ImpactGui struct</span>
+0067 set(handles.TrigLevelEdit,<span class="string">'String'</span>,handles.ImpactGui.TrigLevel);
+0068 set(handles.PretriggerEdit,<span class="string">'String'</span>,handles.ImpactGui.Pretrigger);
+0069 set(handles.BlocksizePopup,<span class="string">'Value'</span>,handles.ImpactGui.BlocksizeNumber);
+0070 set(handles.ForceWindowEdit,<span class="string">'String'</span>,handles.ImpactGui.ForceWindowLength);
+0071 set(handles.ExpWindowEdit,<span class="string">'String'</span>,handles.ImpactGui.ExpWindowPercent);
+0072 
+0073 <span class="comment">% Choose default command line output for ImpactSettings</span>
+0074 handles.output = hObject;
+0075 
+0076 <span class="comment">% Update handles structure</span>
+0077 guidata(hObject, handles);
+0078 
+0079 <span class="comment">% UIWAIT makes ImpactSettings wait for user response (see UIRESUME)</span>
+0080 uiwait(handles.figure1);
+0081 
+0082 
+0083 <span class="comment">% --- Outputs from this function are returned to the command line.</span>
+0084 <a name="_sub2" href="#_subfunctions" class="code">function varargout = ImpactSettings_OutputFcn(hObject, eventdata, handles)</a>
+0085 <span class="comment">% varargout  cell array for returning output args (see VARARGOUT);</span>
+0086 <span class="comment">% hObject    handle to figure</span>
+0087 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0088 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0089 
+0090 <span class="comment">% Get default command line output from handles structure</span>
+0091 <span class="comment">% Start by closing down all plot windows that are open</span>
+0092 <span class="keyword">if</span> isfield(handles,<span class="string">'h1'</span>) &amp; ishghandle(handles.h1)
+0093     delete(handles.h1)
+0094     rmfield(handles,<span class="string">'h1'</span>)
+0095 <span class="keyword">end</span>
+0096 <span class="keyword">if</span> isfield(handles,<span class="string">'h2'</span>) &amp; ishghandle(handles.h2)
+0097     delete(handles.h2)
+0098     rmfield(handles,<span class="string">'h2'</span>)
+0099 <span class="keyword">end</span>
+0100 <span class="keyword">if</span> isfield(handles,<span class="string">'h3'</span>) &amp; ishghandle(handles.h3)
+0101     delete(handles.h3)
+0102     rmfield(handles,<span class="string">'h3'</span>)
+0103 <span class="keyword">end</span>
+0104 <span class="keyword">if</span> isfield(handles,<span class="string">'h4'</span>) &amp; ishghandle(handles.h4)
+0105     delete(handles.h4)
+0106     rmfield(handles,<span class="string">'h4'</span>)
+0107 <span class="keyword">end</span>
+0108 <span class="keyword">if</span> isfield(handles,<span class="string">'ImpactGui'</span>)
+0109     handles.output=handles.ImpactGui;
+0110     varargout{1} = handles.output;
+0111     delete(handles.figure1);
+0112 <span class="keyword">else</span>
+0113     varargout{1} =<span class="string">''</span>;
+0114 <span class="keyword">end</span>
+0115 
+0116 <span class="comment">% --- Executes on button press in Export.</span>
+0117 <a name="_sub3" href="#_subfunctions" class="code">function Export_Callback(hObject, eventdata, handles)</a>
+0118 <span class="comment">% hObject    handle to Export (see GCBO)</span>
+0119 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0120 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0121 uiresume;
+0122 
+0123 
+0124 <span class="comment">% --- Executes on button press in CancelButton.</span>
+0125 <a name="_sub4" href="#_subfunctions" class="code">function CancelButton_Callback(hObject, eventdata, handles)</a>
+0126 <span class="comment">% hObject    handle to CancelButton (see GCBO)</span>
+0127 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0128 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0129 handles.ImpactGui=<span class="string">''</span>;
+0130 guidata(hObject,handles)
+0131 uiresume;
+0132 
+0133 
+0134 <a name="_sub5" href="#_subfunctions" class="code">function ForceWindowEdit_Callback(hObject, eventdata, handles)</a>
+0135 <span class="comment">% hObject    handle to ForceWindowEdit (see GCBO)</span>
+0136 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0137 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0138 
+0139 <span class="comment">% Hints: get(hObject,'String') returns contents of ForceWindowEdit as text</span>
+0140 <span class="comment">%        str2double(get(hObject,'String')) returns contents of ForceWindowEdit as a double</span>
+0141 n = str2double(get(hObject,<span class="string">'String'</span>));
+0142 <span class="keyword">if</span> isnumeric(n)
+0143     <span class="keyword">if</span> n &gt; 0 &amp; n &lt;= 100
+0144         handles.ImpactGui.ForceWindowLength=n;
+0145         guidata(hObject,handles)
+0146     <span class="keyword">else</span>
+0147         <a href="ImpactContDlg.html" class="code" title="function varargout = ImpactContDlg(varargin)">ImpactContDlg</a>(<span class="string">'Title'</span>,<span class="string">'Force window length must be between 0 and 100%!'</span>)
+0148         set(hObject,<span class="string">'String'</span>,num2str(handles.ImpactGui.ForceWindowLength));
+0149     <span class="keyword">end</span>
+0150 <span class="keyword">else</span>
+0151     <a href="ImpactContDlg.html" class="code" title="function varargout = ImpactContDlg(varargin)">ImpactContDlg</a>(<span class="string">'Title'</span>,<span class="string">'Force window length must be numeric! Not changing...'</span>)
+0152     set(hObject,<span class="string">'String'</span>,num2str(handles.ImpactGui.ForceWindowLength));
+0153 <span class="keyword">end</span>
+0154 
+0155 
+0156 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0157 <a name="_sub6" href="#_subfunctions" class="code">function ForceWindowEdit_CreateFcn(hObject, eventdata, handles)</a>
+0158 <span class="comment">% hObject    handle to ForceWindowEdit (see GCBO)</span>
+0159 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0160 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0161 
+0162 <span class="comment">% Hint: edit controls usually have a white background on Windows.</span>
+0163 <span class="comment">%       See ISPC and COMPUTER.</span>
+0164 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0165     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0166 <span class="keyword">end</span>
+0167 
+0168 <a name="_sub7" href="#_subfunctions" class="code">function ExpWindowEdit_Callback(hObject, eventdata, handles)</a>
+0169 <span class="comment">% hObject    handle to ExpWindowEdit (see GCBO)</span>
+0170 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0171 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0172 
+0173 <span class="comment">% Hints: get(hObject,'String') returns contents of ExpWindowEdit as text</span>
+0174 <span class="comment">%        str2double(get(hObject,'String')) returns contents of ExpWindowEdit as a double</span>
+0175 n = str2double(get(hObject,<span class="string">'String'</span>));
+0176 <span class="keyword">if</span> isnumeric(n)
+0177     <span class="keyword">if</span> n &gt; 0 &amp; n &lt;= 100
+0178         handles.ImpactGui.ExpWindowPercent=n;
+0179         guidata(hObject,handles)
+0180     <span class="keyword">else</span>
+0181         <a href="ImpactContDlg.html" class="code" title="function varargout = ImpactContDlg(varargin)">ImpactContDlg</a>(<span class="string">'Title'</span>,<span class="string">'Exponential window End must be between 0 and 100%!'</span>)
+0182         set(hObject,<span class="string">'String'</span>,num2str(handles.ImpactGui.ExpWindowEndPercent));
+0183     <span class="keyword">end</span>
+0184 <span class="keyword">else</span>
+0185     <a href="ImpactContDlg.html" class="code" title="function varargout = ImpactContDlg(varargin)">ImpactContDlg</a>(<span class="string">'Title'</span>,<span class="string">'Exponential window end must be numeric! Not changing...'</span>)
+0186     set(hObject,<span class="string">'String'</span>,num2str(handles.ImpactGui.ExpWindowEndPercent));
+0187 <span class="keyword">end</span>
+0188 
+0189 
+0190 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0191 <a name="_sub8" href="#_subfunctions" class="code">function ExpWindowEdit_CreateFcn(hObject, eventdata, handles)</a>
+0192 <span class="comment">% hObject    handle to ExpWindowEdit (see GCBO)</span>
+0193 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0194 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0195 
+0196 <span class="comment">% Hint: edit controls usually have a white background on Windows.</span>
+0197 <span class="comment">%       See ISPC and COMPUTER.</span>
+0198 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0199     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0200 <span class="keyword">end</span>
+0201 
+0202 
+0203 <span class="comment">% --- Executes on button press in WindowsPlotFRFButton.</span>
+0204 <a name="_sub9" href="#_subfunctions" class="code">function WindowsPlotFRFButton_Callback(hObject, eventdata, handles)</a>
+0205 <span class="comment">% hObject    handle to WindowsPlotFRFButton (see GCBO)</span>
+0206 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0207 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0208 <span class="keyword">if</span> isfield(handles,<span class="string">'TrigIdx'</span>)
+0209     N=handles.ImpactGui.BlocksizeNumbers(handles.ImpactGui.BlocksizeNumber);
+0210     [H,f, C, Tff] = imp2frf2(handles.x,handles.y,handles.fs,N,handles.TrigIdx,<span class="keyword">...</span>
+0211         handles.DIdx,handles.ImpactGui.ForceWindowLength,<span class="keyword">...</span>
+0212         handles.ImpactGui.ExpWindowPercent,0);
+0213     <span class="keyword">if</span> ~isfield(handles,<span class="string">'h3'</span>)
+0214         handles.h3=figure;
+0215     <span class="keyword">elseif</span> ishghandle(handles.h3)
+0216         figure(handles.h3);
+0217     <span class="keyword">else</span>
+0218         handles.h3=figure;
+0219     <span class="keyword">end</span>
+0220     subplot(3,1,1)
+0221     semilogy(f,abs(H))
+0222     ylabel(<span class="string">'Mag. FRF'</span>)
+0223     title(<span class="string">'Zoom in and investigate the lowest resonance peak(s)'</span>)
+0224     axis tight
+0225     A=axis;
+0226     subplot(3,1,2)
+0227     plot(f,C)
+0228     ylabel(<span class="string">'Coherence'</span>)
+0229     xlim(A(1:2))
+0230     ylim([0 1.02])
+0231     subplot(3,1,3)
+0232     semilogy(f,Tff)
+0233     xlim(A(1:2))
+0234     ylabel(<span class="string">'Force Spectrum'</span>)
+0235     xlabel(<span class="string">'Frequency [Hz]'</span>)
+0236     guidata(hObject,handles)
+0237 <span class="keyword">else</span>
+0238     <a href="ImpactContDlg.html" class="code" title="function varargout = ImpactContDlg(varargin)">ImpactContDlg</a>(<span class="string">'Title'</span>,<span class="string">'You have to select impacts first!'</span>)
+0239 <span class="keyword">end</span>
+0240 
+0241 
+0242 <span class="comment">% --- Executes on selection change in BlocksizePopup.</span>
+0243 <a name="_sub10" href="#_subfunctions" class="code">function BlocksizePopup_Callback(hObject, eventdata, handles)</a>
+0244 <span class="comment">% hObject    handle to BlocksizePopup (see GCBO)</span>
+0245 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0246 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0247 
+0248 <span class="comment">% Hints: contents = cellstr(get(hObject,'String')) returns BlocksizePopup contents as cell array</span>
+0249 <span class="comment">%        contents{get(hObject,'Value')} returns selected item from BlocksizePopup</span>
+0250 contents=cellstr(get(hObject,<span class="string">'String'</span>));
+0251 OldBlocksizeNumber=handles.ImpactGui.BlocksizeNumber;
+0252 handles.ImpactGui.BlocksizeNumber=get(hObject,<span class="string">'Value'</span>);
+0253 <span class="comment">% If selected immediately upon opening GUI, there are no triggers, so only</span>
+0254 <span class="comment">% update the blocksize. Otherwise select new triggers, and compare with</span>
+0255 <span class="comment">% previous triggers</span>
+0256 <span class="keyword">if</span> isfield(handles,<span class="string">'x'</span>)     <span class="comment">% Indicates triggers are already selected</span>
+0257     <span class="comment">% Check if new blocksize affects the triggers or double impact detection</span>
+0258     <span class="comment">% First get new triggers</span>
+0259     TrigLevel=handles.ImpactGui.TrigLevel;
+0260     Pretrigger=handles.ImpactGui.Pretrigger;
+0261     N=handles.ImpactGui.BlocksizeNumbers(handles.ImpactGui.BlocksizeNumber);
+0262     [TrigIdx,DIdx,AIdx]=<a href="GuiImptrig.html" class="code" title="function [TrigIdx, DIdx, AIdx] = GuiImpTrig(x,N,TrigPerc,PreTrigger)">GuiImptrig</a>(handles.x,N,TrigLevel,Pretrigger);
+0263     <span class="comment">% Check if new trigger occations are different from before</span>
+0264     Idx=ismember(handles.TrigIdx,TrigIdx);
+0265     <span class="keyword">if</span> ~isempty(find(Idx == 0))   <span class="comment">% if trigger occasions have changed</span>
+0266         <span class="keyword">if</span> isfield(handles,<span class="string">'TrigIdx'</span>)
+0267             handles=rmfield(handles,<span class="string">'TrigIdx'</span>);
+0268             set(handles.NumberImpactsText,<span class="string">'String'</span>,<span class="string">'Triggering affected! Select new impacts!'</span>)
+0269         <span class="keyword">end</span>
+0270     <span class="keyword">end</span>
+0271     <span class="comment">% Check that no blocks are overlapping with the new blocksize, unless</span>
+0272     <span class="comment">% trigger index already deleted</span>
+0273     <span class="keyword">if</span> isfield(handles,<span class="string">'TrigIdx'</span>)
+0274         [status,TrigIdx]=<a href="ImpactChecks.html" class="code" title="function [status,OutTrigIdx,idx] = ImpactChecks(x,TrigIdx,N)">ImpactChecks</a>(handles.x,handles.TrigIdx,N);
+0275         <span class="keyword">if</span> ~isempty(TrigIdx)
+0276             handles.TrigIdx = TrigIdx;
+0277             set(handles.NumberImpactsText,<span class="string">'String'</span>,[int2str(length(TrigIdx)) <span class="string">' impacts selected'</span>])
+0278         <span class="keyword">else</span>
+0279             set(handles.NumberImpactsText,<span class="string">'String'</span>,<span class="string">'Select New Impacts!'</span>)
+0280             <span class="comment">%         handles.ImpactGui.BlocksizeNumber=OldBlocksizeNumber;</span>
+0281         <span class="keyword">end</span>
+0282     <span class="keyword">end</span>
+0283 <span class="keyword">end</span>    
+0284 guidata(hObject,handles);
+0285 
+0286 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0287 <a name="_sub11" href="#_subfunctions" class="code">function BlocksizePopup_CreateFcn(hObject, eventdata, handles)</a>
+0288 <span class="comment">% hObject    handle to BlocksizePopup (see GCBO)</span>
+0289 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0290 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0291 
+0292 <span class="comment">% Hint: popupmenu controls usually have a white background on Windows.</span>
+0293 <span class="comment">%       See ISPC and COMPUTER.</span>
+0294 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0295     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0296 <span class="keyword">end</span>
+0297 
+0298 
+0299 <span class="comment">% --- Executes on button press in BlocksizeButton.</span>
+0300 <a name="_sub12" href="#_subfunctions" class="code">function BlocksizeButton_Callback(hObject, eventdata, handles)</a>
+0301 <span class="comment">% hObject    handle to BlocksizeButton (see GCBO)</span>
+0302 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0303 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0304 <span class="comment">% Plot FRFs with three blocksizes</span>
+0305 <span class="keyword">if</span> isfield(handles,<span class="string">'TrigIdx'</span>)
+0306     N=handles.ImpactGui.BlocksizeNumbers(handles.ImpactGui.BlocksizeNumber);
+0307     N=N*[0.5 1 2];
+0308     <span class="comment">% Make sure the larger blocksize does not exhaust data</span>
+0309     [status,TrigIdx]=<a href="ImpactChecks.html" class="code" title="function [status,OutTrigIdx,idx] = ImpactChecks(x,TrigIdx,N)">ImpactChecks</a>(handles.x,handles.TrigIdx,N(3));
+0310     <span class="keyword">if</span> isempty(TrigIdx)
+0311         NumberBlocksizes=2;
+0312     <span class="keyword">else</span>
+0313         NumberBlocksizes=3;
+0314     <span class="keyword">end</span>
+0315     <span class="keyword">for</span> n = 1:NumberBlocksizes
+0316         <span class="comment">% Compute FRFs. NOTE! This only works if you use no windows...</span>
+0317         [H{n},f{n}] = imp2frf2(handles.x,handles.y,handles.fs,N(n),handles.TrigIdx,<span class="keyword">...</span>
+0318             handles.DIdx,100,100,0);
+0319         <span class="keyword">if</span> n==1
+0320             L={int2str(N(n))};
+0321         <span class="keyword">else</span>
+0322             L=[L; int2str(N(n))];
+0323         <span class="keyword">end</span>
+0324     <span class="keyword">end</span>
+0325     <span class="keyword">if</span> ~isfield(handles,<span class="string">'h2'</span>)
+0326         handles.h2=figure;
+0327     <span class="keyword">elseif</span> ishghandle(handles.h2)
+0328         figure(handles.h2);
+0329     <span class="keyword">else</span>
+0330         handles.h2=figure;
+0331     <span class="keyword">end</span>
+0332     semilogy(f{1},abs(H{1}),f{2},abs(H{2}),f{3},abs(H{3}))
+0333     legend(L)
+0334     xlabel(<span class="string">'Frequency [Hz]'</span>)
+0335     ylabel(<span class="string">'Mag. FRF'</span>)
+0336     title(<span class="string">'Zoom in and investigate the lowest resonance peak(s)'</span>)
+0337     guidata(hObject,handles)
+0338 <span class="keyword">else</span>
+0339     <a href="ImpactContDlg.html" class="code" title="function varargout = ImpactContDlg(varargin)">ImpactContDlg</a>(<span class="string">'Title'</span>,<span class="string">'You have to select impacts first!'</span>)
+0340 <span class="keyword">end</span>
+0341 
+0342 
+0343 
+0344 <a name="_sub13" href="#_subfunctions" class="code">function TrigLevelEdit_Callback(hObject, eventdata, handles)</a>
+0345 <span class="comment">% hObject    handle to TrigLevelEdit (see GCBO)</span>
+0346 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0347 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0348 
+0349 <span class="comment">% Hints: get(hObject,'String') returns contents of TrigLevelEdit as text</span>
+0350 <span class="comment">%        str2double(get(hObject,'String')) returns contents of TrigLevelEdit as a double</span>
+0351 n = str2double(get(hObject,<span class="string">'String'</span>));
+0352 <span class="keyword">if</span> isnumeric(n)
+0353     handles.ImpactGui.TrigLevel=n;
+0354     <span class="comment">% Reset trigger index if it exists (i.e. if impacts have been selected)</span>
+0355     <span class="keyword">if</span> isfield(handles,<span class="string">'TrigIdx'</span>)
+0356         handles=rmfield(handles,<span class="string">'TrigIdx'</span>);
+0357         set(handles.NumberImpactsText,<span class="string">'String'</span>,<span class="string">'No Impacts Selected!'</span>)
+0358     <span class="keyword">end</span>
+0359     guidata(hObject,handles)
+0360 <span class="keyword">else</span>
+0361     <a href="ImpactContDlg.html" class="code" title="function varargout = ImpactContDlg(varargin)">ImpactContDlg</a>(<span class="string">'Title'</span>,<span class="string">'Trig Level must be numeric! Not changing...'</span>)
+0362     set(hObject,<span class="string">'String'</span>,num2str(handles.ImpactGui.TrigLevel));
+0363 <span class="keyword">end</span>
+0364 
+0365 
+0366 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0367 <a name="_sub14" href="#_subfunctions" class="code">function TrigLevelEdit_CreateFcn(hObject, eventdata, handles)</a>
+0368 <span class="comment">% hObject    handle to TrigLevelEdit (see GCBO)</span>
+0369 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0370 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0371 
+0372 <span class="comment">% Hint: edit controls usually have a white background on Windows.</span>
+0373 <span class="comment">%       See ISPC and COMPUTER.</span>
+0374 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0375     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0376 <span class="keyword">end</span>
+0377 
+0378 
+0379 
+0380 <a name="_sub15" href="#_subfunctions" class="code">function PretriggerEdit_Callback(hObject, eventdata, handles)</a>
+0381 <span class="comment">% hObject    handle to PretriggerEdit (see GCBO)</span>
+0382 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0383 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0384 
+0385 <span class="comment">% Hints: get(hObject,'String') returns contents of PretriggerEdit as text</span>
+0386 <span class="comment">%        str2double(get(hObject,'String')) returns contents of PretriggerEdit as a double</span>
+0387 n = str2double(get(hObject,<span class="string">'String'</span>));
+0388 <span class="keyword">if</span> isnumeric(n)
+0389     handles.ImpactGui.Pretrigger=n;
+0390     <span class="comment">% Reset trigger index if it exists (i.e. if impacts have been selected)</span>
+0391     <span class="keyword">if</span> isfield(handles,<span class="string">'TrigIdx'</span>)
+0392         handles=rmfield(handles,<span class="string">'TrigIdx'</span>);
+0393         set(handles.NumberImpactsText,<span class="string">'String'</span>,<span class="string">'No Impacts Selected!'</span>)
+0394     <span class="keyword">end</span>
+0395     guidata(hObject,handles)
+0396 <span class="keyword">else</span>
+0397     <a href="ImpactContDlg.html" class="code" title="function varargout = ImpactContDlg(varargin)">ImpactContDlg</a>(<span class="string">'Title'</span>,<span class="string">'Trig Level must be numeric! Not changing...'</span>)
+0398     set(hObject,<span class="string">'String'</span>,num2str(handles.ImpactGui.Pretrigger));
+0399 <span class="keyword">end</span>
+0400 
+0401 
+0402 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0403 <a name="_sub16" href="#_subfunctions" class="code">function PretriggerEdit_CreateFcn(hObject, eventdata, handles)</a>
+0404 <span class="comment">% hObject    handle to PretriggerEdit (see GCBO)</span>
+0405 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0406 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0407 
+0408 <span class="comment">% Hint: edit controls usually have a white background on Windows.</span>
+0409 <span class="comment">%       See ISPC and COMPUTER.</span>
+0410 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0411     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0412 <span class="keyword">end</span>
+0413 
+0414 
+0415 <span class="comment">% --- Executes on button press in TriggeringButton.</span>
+0416 <a name="_sub17" href="#_subfunctions" class="code">function TriggeringButton_Callback(hObject, eventdata, handles)</a>
+0417 <span class="comment">% hObject    handle to TriggeringButton (see GCBO)</span>
+0418 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0419 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0420 <span class="keyword">if</span> isfield(handles,<span class="string">'TrigIdx'</span>)
+0421     <span class="comment">% Plot force and response signals in blue. Mark the &quot;good&quot; length N blocks</span>
+0422     <span class="comment">% with no double impacts in green, and double impact blocks in red</span>
+0423     N=handles.ImpactGui.BlocksizeNumbers(handles.ImpactGui.BlocksizeNumber);
+0424     t=makexaxis(handles.x,1/handles.fs);
+0425     <span class="keyword">if</span> ~isfield(handles,<span class="string">'h1'</span>) 
+0426         handles.h1=figure;
+0427     <span class="keyword">elseif</span> ishghandle(handles.h1) 
+0428         figure(handles.h1);
+0429     <span class="keyword">else</span>
+0430         handles.h1=figure;
+0431     <span class="keyword">end</span>
+0432     subplot(2,1,1)
+0433     TrigLevelScaled=max(handles.x)*handles.ImpactGui.TrigLevel/100;
+0434     plot(t,handles.x,[t(1) t(end)],[TrigLevelScaled TrigLevelScaled])
+0435     title(<span class="string">'Zoom in and investigate impacts and response! Then close window.'</span>)
+0436     hold on
+0437     <span class="keyword">for</span> n=1:length(handles.TrigIdx)
+0438         idx=handles.TrigIdx(n):handles.TrigIdx(n)+N-1;
+0439         plot(t(idx),handles.x(idx),<span class="string">'g'</span>)
+0440     <span class="keyword">end</span>
+0441     <span class="keyword">if</span> handles.DIdx ~= 0
+0442         <span class="keyword">for</span> n = 1:length(handles.DIdx)
+0443             idx=handles.AIdx(handles.DIdx(n)):handles.AIdx(handles.DIdx(n))+N-1;
+0444             plot(t(idx),handles.x(idx),<span class="string">'r'</span>)
+0445         <span class="keyword">end</span>
+0446     <span class="keyword">end</span>
+0447     hold off
+0448     subplot(2,1,2)
+0449     plot(t,handles.y)
+0450     hold on
+0451     <span class="keyword">for</span> n=1:length(handles.TrigIdx)
+0452         idx=handles.TrigIdx(n):handles.TrigIdx(n)+N-1;
+0453         plot(t(idx),handles.y(idx),<span class="string">'g'</span>)
+0454     <span class="keyword">end</span>
+0455     <span class="keyword">if</span> handles.DIdx ~= 0
+0456         <span class="keyword">for</span> n = 1:length(handles.DIdx)
+0457             idx=handles.AIdx(handles.DIdx(n)):handles.AIdx(handles.DIdx(n))+N-1;
+0458             plot(t(idx),handles.y(idx),<span class="string">'r'</span>)
+0459         <span class="keyword">end</span>
+0460     <span class="keyword">end</span>
+0461     guidata(hObject,handles)
+0462 <span class="keyword">else</span>
+0463     <a href="ImpactContDlg.html" class="code" title="function varargout = ImpactContDlg(varargin)">ImpactContDlg</a>(<span class="string">'Title'</span>,<span class="string">'You have to select impacts first!'</span>)
+0464 <span class="keyword">end</span>
+0465 
+0466 <span class="comment">% --- Executes on button press in SelectImpactsButton.</span>
+0467 <a name="_sub18" href="#_subfunctions" class="code">function SelectImpactsButton_Callback(hObject, eventdata, handles)</a>
+0468 <span class="comment">% hObject    handle to SelectImpactsButton (see GCBO)</span>
+0469 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0470 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0471 load(handles.ImpactGui.PretestFileName,<span class="string">'-mat'</span>)
+0472 handles.x=Data{1};
+0473 <span class="comment">% Check if impacts are negative, then &quot;flip&quot; positive, and update Dir field</span>
+0474 handles.x=cell2mat(Data(1));
+0475 [M,I]=max(abs(handles.x));
+0476 <span class="keyword">if</span> handles.x(I) &lt; 0
+0477     handles.x=-handles.x;
+0478     Dir=dir2nbr(Header(1).Dir);
+0479     Header.Dir=nbr2dir(-Dir);
+0480 <span class="keyword">end</span>
+0481 handles.y=Data{handles.ImpactGui.UseChannelNo};
+0482 handles.fs=1/Header(1).xIncrement;
+0483 N=handles.ImpactGui.BlocksizeNumbers(handles.ImpactGui.BlocksizeNumber);
+0484 TrigLevel=handles.ImpactGui.TrigLevel;
+0485 Pretrigger=handles.ImpactGui.Pretrigger;
+0486 [TrigIdx,DIdx,AIdx]=<a href="GuiImptrig2.html" class="code" title="function [TrigIdx, DIdx, AIdx] = GuiImptrig2(x,y,fs,N,TrigPerc,PreTrigger)">GuiImptrig2</a>(handles.x,handles.y,handles.fs,N,TrigLevel,Pretrigger);
+0487 handles.TrigIdx=TrigIdx;
+0488 handles.DIdx=DIdx;
+0489 handles.AIdx=AIdx;
+0490 set(handles.NumberImpactsText,<span class="string">'String'</span>,[int2str(length(TrigIdx)) <span class="string">' impacts selected'</span>])
+0491 <span class="comment">% Check if there are double impacts among the selected impacts. In that</span>
+0492 <span class="comment">% case issue a warning. Thus, this is 'allowed', because you may want to see</span>
+0493 <span class="comment">% what the result is.</span>
+0494 <span class="keyword">if</span> DIdx ~= 0
+0495     <span class="keyword">if</span> ~isempty(intersect(TrigIdx,AIdx(DIdx)))
+0496         <a href="ImpactContDlg.html" class="code" title="function varargout = ImpactContDlg(varargin)">ImpactContDlg</a>(<span class="string">'Title'</span>,<span class="string">'WARNING! You have selected blocks with double impacts!'</span>)
+0497     <span class="keyword">end</span>
+0498 <span class="keyword">end</span>
+0499 guidata(hObject,handles);
+0500 
+0501 
+0502 <span class="comment">% --- Executes on button press in WindowsPlotTimeButton.</span>
+0503 <a name="_sub19" href="#_subfunctions" class="code">function WindowsPlotTimeButton_Callback(hObject, eventdata, handles)</a>
+0504 <span class="comment">% hObject    handle to WindowsPlotTimeButton (see GCBO)</span>
+0505 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0506 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0507 <span class="keyword">if</span> isfield(handles,<span class="string">'TrigIdx'</span>)
+0508     <span class="keyword">if</span> ~isfield(handles,<span class="string">'h4'</span>)
+0509         handles.h4=figure;
+0510     <span class="keyword">elseif</span> ishghandle(handles.h4)
+0511         figure(handles.h4);
+0512     <span class="keyword">else</span>
+0513         handles.h4=figure;
+0514     <span class="keyword">end</span>
+0515     N=handles.ImpactGui.BlocksizeNumbers(handles.ImpactGui.BlocksizeNumber);
+0516     idx=handles.TrigIdx(1):handles.TrigIdx(1)+N-1;
+0517     t=makexaxis(handles.x(idx),1/handles.fs);
+0518     wf=aforcew(N,handles.ImpactGui.ForceWindowLength);
+0519     we=aexpw(N,handles.ImpactGui.ExpWindowPercent);
+0520     subplot(3,1,1)
+0521     plot(t,handles.x(idx),t,wf*max(handles.x(idx))*1.02);
+0522     ylabel(<span class="string">'Force, First Impact'</span>)
+0523     subplot(3,1,2)
+0524     plot(t,handles.y(idx))
+0525     ylabel(<span class="string">'Response Signal'</span>)
+0526     Ma=max(abs(handles.y(idx)));
+0527     ylim([-Ma Ma])
+0528     subplot(3,1,3)
+0529     plot(t,handles.y(idx).*we)
+0530     ylabel(<span class="string">'Windowed Response'</span>)
+0531     xlabel(<span class="string">'Time [s]'</span>)
+0532     ylim([-Ma Ma])
+0533     guidata(hObject,handles)
+0534 <span class="keyword">else</span>
+0535     <a href="ImpactContDlg.html" class="code" title="function varargout = ImpactContDlg(varargin)">ImpactContDlg</a>(<span class="string">'Title'</span>,<span class="string">'You have to select impacts first!'</span>)
+0536 <span class="keyword">end</span>
+0537 
+0538 
+0539 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0540 <a name="_sub20" href="#_subfunctions" class="code">function NumberImpactsText_CreateFcn(hObject, eventdata, handles)</a>
+0541 <span class="comment">% hObject    handle to NumberImpactsText (see GCBO)</span>
+0542 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0543 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span></pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

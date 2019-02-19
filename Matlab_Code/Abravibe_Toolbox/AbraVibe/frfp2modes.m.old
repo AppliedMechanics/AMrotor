@@ -1,0 +1,145 @@
+function [V,Res] = frfp2modes(varargin)
+% FRFP2MODES     Estimate mode shapes from FRFs and poles in frequency domain
+%
+% V = frfp2modes(H,f,p,Plot) for an N-by-1 vector H, estimates mode
+% shape coefficients for one FRF, without residual terms. If Plot=1 an
+% overlay plot is generated showing the result.
+% [V,Res] = frfp2modes(H,f,p,Plot) for an N-by-1 vector H, estimates mode
+% shape coefficients for one FRF, including residual terms. If Plot=1 an
+% overlay plot is generated showing the result.
+% V = frfp2modes(H,f,p,ScaleDof,DispTime) for an N-by-D matrix H estimates a 
+% D-by-Nm matrix with mode shapes scaled to the driving point in ScaleDof. 
+%  If DispTime~=0 or empty, an overlay plot is generated showing the result
+% during DispTime seconds.
+% [V,Res] = frfp2modes(H,f,p,ScaleDof,DispTime) for an N-by-D matrix H generates a 
+% D-by-Nm matrix with mode shapes scaled to the driving point in ScaleDof.
+%
+%       V           Mode shape matrix with modes in columns D-by-Nm
+%       Res         Residual terms (Optional) [1/w^2 const], D-by-2
+%
+%       H           Accelerance FRF matrix, up to N-by-D-by-R (see text)
+%       f           Frequency axis for H, containin (as H) the frequenies
+%                   that should be used for the curve fitting
+%       p           Vector with poles for those modes that should be fitted
+%       L           Modal participation matrix, 1 if single reference,
+%                   otherwise output from multiref. curve fitting for poles
+%       ScaleDof    Dof for scaling of FRFs (driving point)
+%       Type        String with specification of method:
+%                   'lsfreq' for least squares frequency domain (Default)
+%       DispTime    If ~= 0 (or not given), then each FRF is plotted in overlay 
+%                   with the estimated model FRF during DispTime seconds
+%
+%
+% Mode shapes are scaled to unity modal A, see modal2frf
+%
+% See also FRF2MSDOF MODAL2FRF FRFSYNT
+
+% Copyright (c) 2009-2011 by Anders Brandt
+% Email: abra@iti.sdu.dk
+% Version: 1.0 2011-06-23   
+% This file is part of ABRAVIBE Toolbox for NVA
+
+%**********************************************************
+% This function is still in development!
+%**********************************************************
+nargin
+% Parse inputs
+if nargin == 3 | nargin == 4
+    H=varargin{1};
+    [N,D,R]=size(H)
+    if D ==1
+        f=varargin{2};
+        p=varargin{3};
+        if nargin > 3
+            Plot=varargin{4};
+        end
+    else
+        f=varargin{2};
+        p=varargin{3};
+        ScaleDof=varargin{4};
+    end
+    if R > 1
+        error('Only single reference allowed as of yet!')
+    end
+    DispTime=0;
+elseif nargin == 5
+    H=varargin{1};
+    [N,D,R]=size(H);
+    if D ==1
+        error('Too many input parameters for single-dimension H!')
+    else
+        f=varargin{2};
+        p=varargin{3};
+        ScaleDof=varargin{4};
+        DispTime=varargin{5};
+    end
+end
+whos
+Nm=length(p);
+
+%============================================================
+% Convert FRFs to receptance
+H=fint(H,f,'lin',2);
+
+% Expand size of p to 2N by including complex conjugate poles
+p=p(:);                 % Force to column
+p=[p ; conj(p)];
+
+% if nargin == 3 | nargin == 4
+    % Set up matrices
+    jw=j*2*pi*f;
+    Lambda=zeros(N,2*Nm);
+    for mode = 1:2*Nm
+        Lambda(:,mode)=1./(jw-p(mode));
+    end
+    if nargout == 2
+        Lambda(:,2*Nm+1)=1./(jw.^2);
+        Lambda(:,2*Nm+2)=ones(N,1);
+    end
+    % Compute modes and residuals
+    if nargout == 1
+        A=zeros(D,2*Nm);                    % Residues, scaling to modes later
+    else
+        A=zeros(D,2*Nm+2);                  % Residues, scaling to modes later
+    end
+    Res=zeros(D,2);
+    for d = 1:D
+        Vt=pinv(Lambda)*H(:,d);
+%         Vt=Lambda\H(:,d);         % Alternative solution
+        A(d,:)=Vt.';
+        if ~exist('h','var')
+            h=figure;
+        end
+        if DispTime > 0
+            Hsynt=Lambda*A(d,:).';
+            semilogy(f,abs(H(:,d)),f,abs(Hsynt),'k--')
+            title(['Curve fit result, DOF=' int2str(d)])
+            xlabel('Frequency [Hz]')
+            ylabel('Accelerance')
+            legend('Measured','Synthesized')
+            pause(DispTime)
+        end
+    end
+
+% Split A into modes and residuals, and shrink down to D-by-Nm
+if nargout == 2
+    Res=A(:,2*Nm+1:2*Nm+2);
+end
+if D == 1
+    V=sqrt(A(1:Nm));
+    if exist('Plot','var') 
+        if Plot == 1
+            Hsynt=modal2frf(f,p,V,1,1,'a');
+            figure
+            semilogy(f,abs(H),f,Hsynt)
+            legend('Measured','Synthesized')
+            xlabel('Frequency [Hz]')
+            ylabel('Accelerance')
+        end
+    end
+else
+    for mode = 1:Nm
+        V(:,mode)=A(:,mode)/sqrt(A(ScaleDof,mode));
+    end
+end
+

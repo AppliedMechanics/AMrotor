@@ -1,0 +1,472 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of abravibezzz</title>
+  <meta name="keywords" content="abravibezzz">
+  <meta name="description" content="ABRAVIBE MATLAB/Octave Toolbox for Noise &amp; Vibration Analysis">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; abravibezzz.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>abravibezzz
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>ABRAVIBE MATLAB/Octave Toolbox for Noise &amp; Vibration Analysis</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>This is a script file. </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> ABRAVIBE MATLAB/Octave Toolbox for Noise &amp; Vibration Analysis
+ Version 2.0    2018-05-12 
+ Tested under MATLAB rel. 2018a, Octave 3.2.4 (both Windows)
+ Copyright (c) 2009-2018 by Anders Brandt, University of Southern Denmark
+ Email: abra@iti.sdu.dk
+ ----------------------------------------------------------------------
+ ABRAVIBE is an accompanying toolbox intended for use with the book:
+ Brandt, A. (2011): Noise and Vibration Analysis: Signal Analysis and
+ Experimental Procedures, John Wiley and Sons, ISBN 978-0470746448.
+ ----------------------------------------------------------------------
+ This toolbox is FREE SOFTWARE published under the GNU General Public
+ License. See the license file in the software directory for details.
+ ----------------------------------------------------------------------
+
+ A word on command names:
+ To avoid confusion with many rather common functions, many of the
+ commands in this toolbox start with an 'a' for 'abravibe'. I hope this
+ helps. :-)
+
+ Help: type for example:
+ &gt;&gt; help abravibe
+ to get help for a specific command in the list below (replace abravibe).
+ ----------------------------------------------------------------------
+ About
+ -------------------
+   abrabout      - Type abrabout to print some information on screen
+
+ Helpful functions
+ -------------------
+   checksw       - Check if running MATLAB or GNU/Octave
+   makexaxis     - Create a time or frequency x axis
+   makepulse     - Calculate a Gaussian or halfsine pulse
+
+ Data storage info
+ -------------------
+   abra2imp      - Convert general ABRAVIBE time data files to .imptime format
+   abrahead      - Check if header structure is a valid ABRAVIBE header
+   datahelp      - Prints documentation for Abravibe data storage (Data and Header variables)
+   dir2nbr       - Convert Header direction string to number
+   dofdir2n      - Convert dof number and dir string to numeric format
+   functype      - Convert between numeric and string function type
+   headpstr      - Create string out of Abravibe header Dof and Dir info
+   makehead      - Make an empty ABRAVIBE header structure
+   nbr2dir       - Convert numeric direction to string
+   n2dofdir      - Convert dof numeric format to dof number and numeric dir  
+
+ Universal file import/export
+ -------------------
+   abra2modstr   - Convert ABRAVIBE modal information files into structure
+   makemhead     - Make a default MODAL header
+   unvread       - Read a standard UNV file
+   unvwrite      - Write a universal file
+
+ Statistics analysis
+ -------------------
+   apdf          - Calculate and plot probability density function, PDF
+   acrest        - Calculate crest factor
+   akurtosis     - Calculate kurtosis
+   amoment       - Calculate statistical moment
+   arms          - RMS calculation by 'analog' or linear integration 
+   askewness     - Calculate skewness
+   framestat     - Calculate frame statistics of signal
+   statchk       - Create standard statistics for time signal(s) in matrix
+   statchkf      - STATCHK Create standard statistics for time signal(s) in ABRAVIBE files
+   teststat      - Hypothesis test for stationarity
+
+ Time data processing
+ -------------------
+   afcoeff       - Compute filter coefficients for time domain filters
+   apceps        - Calculate power cepstrum of single-sided autospectrum
+   axcorr        - Scaled cross-correlation between x (input) and y (output)
+   axcorrp       - Scaled cross-correlation between x (input) and y (output)
+   smoothfilt    - Simple smoothing filter for time domain data
+   timeavg       - Create synchronuous time average using blocksize N
+   timediff      - Differentiate time signal 
+   timeint       - Integrate time signal 
+   timeweight    - Filter data with time weighting filter in time domain
+   time2corr     - Process ABRAVIBE time data files into correlation function files
+   time2spec     - TIME2CORR    Process ABRAVIBE time data files into spectral density function files
+   winsmooth     - SMOOTHFILT Smooth data with any smoothing window
+
+ Acoustics and octave bands
+ -------------------
+   aweighf       - Calculate A-weighting curve for A-weighting a spectrum
+   cweighf       - Calculate C-weighting curve for C-weighting a spectrum
+   noctfilt      - Calculate filter coefficients for fractional octave band filter
+   noctfreqs     - Compute the exact midband frequencies for a 1/n octave analysis
+   noctlimits    - Calculate IEC/ANSI limits for fractional octave filter
+   spec2noct     - Calculate 1/n octave spectrum from an FFT spectrum
+
+ Frequency Analysis
+ -------------------
+   acsdsp        - Cross-Spectral Density, CSD, by smoothed periodogram method
+   acsdw         - Calculate cross PSD from time data, Welch's method (standard)
+   aenvspec      - Calculate envelope spectrum
+   alinspec      - Calculate linear (rms) spectrum from time data
+   alinspecp     - Calculate linear (rms) spectrum of time data, with phase
+   apsdsp        - Power Spectral Density, PSD, by smoothed periodogram
+   apsdw         - Calculate auto PSD from time data, Welch's method (standard)
+   atranspec     - Calculate (linear) transient spectrum
+   chkbsize      - Compare up to three blocksizes for PSD calculation (Welch's method)
+   fdiff         - Frequency differentiation by jw multiplication
+   fint          - Frequency integration by jw division
+   fnegfreq      - Create negative frequencies by mirroring positive
+   nskipblocks   - Extract every NoSkip+1 blocks with size N from x
+   time2xmtrx    - Calculate In-/Out cross spectral matrices for MIMO analysis
+   time2xmtrxc   - Computes In-/Out cross spectral matrices from time data by cyclic averaging
+   welcherr      - Random error in PSD estimate with Welch's method 
+
+ Time windows etc. (Also see impact testing post processing)
+ -------------------
+   aflattop      - Calculate flattop window
+   ahann         - Calculate a Hanning window
+   hsinew        - Calculate half sine time window
+   winacf        - Calculate amplitude correction factor of time window
+   winenbw       - Calculate equivalent noise bandwidth of time window
+
+ Linear Systems Analysis
+ -------------------
+   frf2ir        - Convert freqency response(s) to impulse response(s)
+   frfim2re      - FRFRE2IM  Create FRF with Real part from Hilbert transform of imaginary part
+   frfre2im      - Create FRF with imaginary part from Hilbert transform of real part
+   mcoh          - Calculate multiple coherence
+   xmtrx2frf     - FRF estimation (SISO, SIMO, MISO, or MIMO)
+
+ Principal components and virtual coherence
+ -------------------
+   apcax         - Compute principal components and cumulated virtual coherences 
+   apcaxy        - Compute cumulated virtual coherences etc. based on two sets of signals, x and y
+
+ System simulation and response analysis
+ -------------------
+   asrs          - Acceleration shock response spectrum, SRS
+   fz2poles      - Convert frequencies and damping to poles
+   mck2frf       - Calculate FRF(s) from M, C, K matrices
+   mck2modal     - Compute modal model (poles and mode shapes) from M,(C),K
+   mkz2frf       - Calculate FRF(s) from M, K and modal damping, z
+   mkz2modal     - Compute modal model (poles and mode shapes) from M,K, and z
+   modal2frf     - Synthesize FRF(s) from modal parameters
+   modal2frfh    - Synthesize FRF(s) from modal parameters with hysteretic damping
+   poles2fz      - Convert poles to frequencies and relative damping
+   timefresp     - Time domain forced response
+   tunedamp      - Compute FRF of tuned damper with SDOF system
+   uma2umm       - Rescale mode shapes from unity modal A to unity modal mass
+   umm2uma       - Rescale mode shapes from unity modal mass to unity modal A
+ 
+ Create time data for simulation
+ -------------------
+   abrand        - Create burst random time data blocks in column vector
+   aprand        - Create pseudo random time data block in column vector
+   psd2time      - Generate Gaussian random signal from PSD
+
+ Experimental modal analysis and operating deflection shape analysis
+ -------------------
+   acomac        - AMAC  Calculate Coordinate Modal Assurance Critera matrix C from two mode sets
+   amac          - Calculate Modal Assurance Critera matrix M from two mode sets
+   amif          - Calculate mode indicator function of (accelerance) FRFs
+   data2hmtrx    - Import Abravibe FRF data into H matrix
+   enhancefrf    - Enhance FRF matrix by Singular Value Decomposition
+   frf2msdof     - Curve fit FRFs into poles and mode shapes, SDOF techniques
+   frfp2modes    - Estimate mode shapes from FRFs and poles in frequency domain
+   frf2ptime     - Time domain MDOF methods for parameter extraction
+   frfsynt       - Synthesize FRF(s) after modal parameter extraction
+   ir2ptime      - Time domain MDOF methods for parameter extraction
+   listpoles     - List undamped natural frequencies and damping factors
+   modal2pv      - Convert animate MODAL struct to separate variables
+   modalchk      - Standard checks on FRF matrix for exp. modal analysis
+   odspick       - Extract ODS shapes from phase spectrum
+   plateanim     - Animate mode shapes on plate structures (1D mode shapes)
+   plotmac       - Plot Manhattan type MAC matrix plot
+   pv2modal      - Convert separate variables to animate MODAL struct
+   sdiagramGUI   - MATLAB code for sdiagramGUI.fig. This is an internal function
+   wincomp       - Compensate poles due to exponential window from Impact testing
+
+ Operational modal analysis
+ -------------------
+   ir2pmitd      - ir2MITD Multi-reference Ibrahim Time domain MDOF method for OMA parameter extraction
+
+ Order tracking (Rotating machinery analysis)
+ -------------------
+ Fix sampling frequency commands:
+   map2order     - Extract orders from RPM map, fix fs or synchronuous sampling
+   plotrpmmapc   - Plot a color map of RPM map data with fixed fs
+   plotrpmmapwf  - Plot RPM map from fix fs in waterfall format
+   rpmmap        - Compute rpm/frequency spectral map for order tracking, fixed fs
+   tacho2rpm     - Extract rpm/time profile from tacho time signal
+ Synchronous sampling commands: (also use tacho2rpm and map2order above) 
+   plotrpmmapsc  - Plot a color map of RPM map data from synchronuous sampling
+   plotrpmmapswf - Plot RPM map from synchronuous sampling in waterfall format
+   rpmmaps       - Compute rpm/order spectral map for order tracking, synchronuous sampling
+   synchsampr    - Resample data synchronously with RPM, using rpm-time profile
+   synchsampt    - Resample data synchronously with RPM, based on tacho signal
+
+ Impact testing post processing 
+ -------------------
+   ImpactGui     - Impact testing GUI
+   aexpw         - Exponential window for impact testing
+   aforcew       - Force window for impact testing
+
+ Plotting and animation
+ -------------------
+   abrabrowse    - GUI-based data browser for ABRAVIBE toolbox data files
+   angledeg      - Calculate angle in degrees for complex vector(s)
+   animate       - GUI-based animation software
+   anomograph    - Plot a displacement, velocity, acceleration nomograph
+   db10          - Calculate dB for power data (units squared)
+   db20          - Calculate dB for linear data (linear units)
+   plotfile      - Plot data in ABRABIVE file(s) with default format
+   plotmagph     - Plot complex data in magnitude/phase format
+   plotreim      - Plot real and imaginary part of complex function
+   plotscan      - Scan a vector with time data and plot blockwise
+ 
+ Copyright 2009-2018, Anders Brandt. See license file for details.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <span class="comment">% ABRAVIBE MATLAB/Octave Toolbox for Noise &amp; Vibration Analysis</span>
+0002 <span class="comment">% Version 2.0    2018-05-12</span>
+0003 <span class="comment">% Tested under MATLAB rel. 2018a, Octave 3.2.4 (both Windows)</span>
+0004 <span class="comment">% Copyright (c) 2009-2018 by Anders Brandt, University of Southern Denmark</span>
+0005 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0006 <span class="comment">% ----------------------------------------------------------------------</span>
+0007 <span class="comment">% ABRAVIBE is an accompanying toolbox intended for use with the book:</span>
+0008 <span class="comment">% Brandt, A. (2011): Noise and Vibration Analysis: Signal Analysis and</span>
+0009 <span class="comment">% Experimental Procedures, John Wiley and Sons, ISBN 978-0470746448.</span>
+0010 <span class="comment">% ----------------------------------------------------------------------</span>
+0011 <span class="comment">% This toolbox is FREE SOFTWARE published under the GNU General Public</span>
+0012 <span class="comment">% License. See the license file in the software directory for details.</span>
+0013 <span class="comment">% ----------------------------------------------------------------------</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">% A word on command names:</span>
+0016 <span class="comment">% To avoid confusion with many rather common functions, many of the</span>
+0017 <span class="comment">% commands in this toolbox start with an 'a' for 'abravibe'. I hope this</span>
+0018 <span class="comment">% helps. :-)</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">% Help: type for example:</span>
+0021 <span class="comment">% &gt;&gt; help abravibe</span>
+0022 <span class="comment">% to get help for a specific command in the list below (replace abravibe).</span>
+0023 <span class="comment">% ----------------------------------------------------------------------</span>
+0024 <span class="comment">% About</span>
+0025 <span class="comment">% -------------------</span>
+0026 <span class="comment">%   abrabout      - Type abrabout to print some information on screen</span>
+0027 <span class="comment">%</span>
+0028 <span class="comment">% Helpful functions</span>
+0029 <span class="comment">% -------------------</span>
+0030 <span class="comment">%   checksw       - Check if running MATLAB or GNU/Octave</span>
+0031 <span class="comment">%   makexaxis     - Create a time or frequency x axis</span>
+0032 <span class="comment">%   makepulse     - Calculate a Gaussian or halfsine pulse</span>
+0033 <span class="comment">%</span>
+0034 <span class="comment">% Data storage info</span>
+0035 <span class="comment">% -------------------</span>
+0036 <span class="comment">%   abra2imp      - Convert general ABRAVIBE time data files to .imptime format</span>
+0037 <span class="comment">%   abrahead      - Check if header structure is a valid ABRAVIBE header</span>
+0038 <span class="comment">%   datahelp      - Prints documentation for Abravibe data storage (Data and Header variables)</span>
+0039 <span class="comment">%   dir2nbr       - Convert Header direction string to number</span>
+0040 <span class="comment">%   dofdir2n      - Convert dof number and dir string to numeric format</span>
+0041 <span class="comment">%   functype      - Convert between numeric and string function type</span>
+0042 <span class="comment">%   headpstr      - Create string out of Abravibe header Dof and Dir info</span>
+0043 <span class="comment">%   makehead      - Make an empty ABRAVIBE header structure</span>
+0044 <span class="comment">%   nbr2dir       - Convert numeric direction to string</span>
+0045 <span class="comment">%   n2dofdir      - Convert dof numeric format to dof number and numeric dir</span>
+0046 <span class="comment">%</span>
+0047 <span class="comment">% Universal file import/export</span>
+0048 <span class="comment">% -------------------</span>
+0049 <span class="comment">%   abra2modstr   - Convert ABRAVIBE modal information files into structure</span>
+0050 <span class="comment">%   makemhead     - Make a default MODAL header</span>
+0051 <span class="comment">%   unvread       - Read a standard UNV file</span>
+0052 <span class="comment">%   unvwrite      - Write a universal file</span>
+0053 <span class="comment">%</span>
+0054 <span class="comment">% Statistics analysis</span>
+0055 <span class="comment">% -------------------</span>
+0056 <span class="comment">%   apdf          - Calculate and plot probability density function, PDF</span>
+0057 <span class="comment">%   acrest        - Calculate crest factor</span>
+0058 <span class="comment">%   akurtosis     - Calculate kurtosis</span>
+0059 <span class="comment">%   amoment       - Calculate statistical moment</span>
+0060 <span class="comment">%   arms          - RMS calculation by 'analog' or linear integration</span>
+0061 <span class="comment">%   askewness     - Calculate skewness</span>
+0062 <span class="comment">%   framestat     - Calculate frame statistics of signal</span>
+0063 <span class="comment">%   statchk       - Create standard statistics for time signal(s) in matrix</span>
+0064 <span class="comment">%   statchkf      - STATCHK Create standard statistics for time signal(s) in ABRAVIBE files</span>
+0065 <span class="comment">%   teststat      - Hypothesis test for stationarity</span>
+0066 <span class="comment">%</span>
+0067 <span class="comment">% Time data processing</span>
+0068 <span class="comment">% -------------------</span>
+0069 <span class="comment">%   afcoeff       - Compute filter coefficients for time domain filters</span>
+0070 <span class="comment">%   apceps        - Calculate power cepstrum of single-sided autospectrum</span>
+0071 <span class="comment">%   axcorr        - Scaled cross-correlation between x (input) and y (output)</span>
+0072 <span class="comment">%   axcorrp       - Scaled cross-correlation between x (input) and y (output)</span>
+0073 <span class="comment">%   smoothfilt    - Simple smoothing filter for time domain data</span>
+0074 <span class="comment">%   timeavg       - Create synchronuous time average using blocksize N</span>
+0075 <span class="comment">%   timediff      - Differentiate time signal</span>
+0076 <span class="comment">%   timeint       - Integrate time signal</span>
+0077 <span class="comment">%   timeweight    - Filter data with time weighting filter in time domain</span>
+0078 <span class="comment">%   time2corr     - Process ABRAVIBE time data files into correlation function files</span>
+0079 <span class="comment">%   time2spec     - TIME2CORR    Process ABRAVIBE time data files into spectral density function files</span>
+0080 <span class="comment">%   winsmooth     - SMOOTHFILT Smooth data with any smoothing window</span>
+0081 <span class="comment">%</span>
+0082 <span class="comment">% Acoustics and octave bands</span>
+0083 <span class="comment">% -------------------</span>
+0084 <span class="comment">%   aweighf       - Calculate A-weighting curve for A-weighting a spectrum</span>
+0085 <span class="comment">%   cweighf       - Calculate C-weighting curve for C-weighting a spectrum</span>
+0086 <span class="comment">%   noctfilt      - Calculate filter coefficients for fractional octave band filter</span>
+0087 <span class="comment">%   noctfreqs     - Compute the exact midband frequencies for a 1/n octave analysis</span>
+0088 <span class="comment">%   noctlimits    - Calculate IEC/ANSI limits for fractional octave filter</span>
+0089 <span class="comment">%   spec2noct     - Calculate 1/n octave spectrum from an FFT spectrum</span>
+0090 <span class="comment">%</span>
+0091 <span class="comment">% Frequency Analysis</span>
+0092 <span class="comment">% -------------------</span>
+0093 <span class="comment">%   acsdsp        - Cross-Spectral Density, CSD, by smoothed periodogram method</span>
+0094 <span class="comment">%   acsdw         - Calculate cross PSD from time data, Welch's method (standard)</span>
+0095 <span class="comment">%   aenvspec      - Calculate envelope spectrum</span>
+0096 <span class="comment">%   alinspec      - Calculate linear (rms) spectrum from time data</span>
+0097 <span class="comment">%   alinspecp     - Calculate linear (rms) spectrum of time data, with phase</span>
+0098 <span class="comment">%   apsdsp        - Power Spectral Density, PSD, by smoothed periodogram</span>
+0099 <span class="comment">%   apsdw         - Calculate auto PSD from time data, Welch's method (standard)</span>
+0100 <span class="comment">%   atranspec     - Calculate (linear) transient spectrum</span>
+0101 <span class="comment">%   chkbsize      - Compare up to three blocksizes for PSD calculation (Welch's method)</span>
+0102 <span class="comment">%   fdiff         - Frequency differentiation by jw multiplication</span>
+0103 <span class="comment">%   fint          - Frequency integration by jw division</span>
+0104 <span class="comment">%   fnegfreq      - Create negative frequencies by mirroring positive</span>
+0105 <span class="comment">%   nskipblocks   - Extract every NoSkip+1 blocks with size N from x</span>
+0106 <span class="comment">%   time2xmtrx    - Calculate In-/Out cross spectral matrices for MIMO analysis</span>
+0107 <span class="comment">%   time2xmtrxc   - Computes In-/Out cross spectral matrices from time data by cyclic averaging</span>
+0108 <span class="comment">%   welcherr      - Random error in PSD estimate with Welch's method</span>
+0109 <span class="comment">%</span>
+0110 <span class="comment">% Time windows etc. (Also see impact testing post processing)</span>
+0111 <span class="comment">% -------------------</span>
+0112 <span class="comment">%   aflattop      - Calculate flattop window</span>
+0113 <span class="comment">%   ahann         - Calculate a Hanning window</span>
+0114 <span class="comment">%   hsinew        - Calculate half sine time window</span>
+0115 <span class="comment">%   winacf        - Calculate amplitude correction factor of time window</span>
+0116 <span class="comment">%   winenbw       - Calculate equivalent noise bandwidth of time window</span>
+0117 <span class="comment">%</span>
+0118 <span class="comment">% Linear Systems Analysis</span>
+0119 <span class="comment">% -------------------</span>
+0120 <span class="comment">%   frf2ir        - Convert freqency response(s) to impulse response(s)</span>
+0121 <span class="comment">%   frfim2re      - FRFRE2IM  Create FRF with Real part from Hilbert transform of imaginary part</span>
+0122 <span class="comment">%   frfre2im      - Create FRF with imaginary part from Hilbert transform of real part</span>
+0123 <span class="comment">%   mcoh          - Calculate multiple coherence</span>
+0124 <span class="comment">%   xmtrx2frf     - FRF estimation (SISO, SIMO, MISO, or MIMO)</span>
+0125 <span class="comment">%</span>
+0126 <span class="comment">% Principal components and virtual coherence</span>
+0127 <span class="comment">% -------------------</span>
+0128 <span class="comment">%   apcax         - Compute principal components and cumulated virtual coherences</span>
+0129 <span class="comment">%   apcaxy        - Compute cumulated virtual coherences etc. based on two sets of signals, x and y</span>
+0130 <span class="comment">%</span>
+0131 <span class="comment">% System simulation and response analysis</span>
+0132 <span class="comment">% -------------------</span>
+0133 <span class="comment">%   asrs          - Acceleration shock response spectrum, SRS</span>
+0134 <span class="comment">%   fz2poles      - Convert frequencies and damping to poles</span>
+0135 <span class="comment">%   mck2frf       - Calculate FRF(s) from M, C, K matrices</span>
+0136 <span class="comment">%   mck2modal     - Compute modal model (poles and mode shapes) from M,(C),K</span>
+0137 <span class="comment">%   mkz2frf       - Calculate FRF(s) from M, K and modal damping, z</span>
+0138 <span class="comment">%   mkz2modal     - Compute modal model (poles and mode shapes) from M,K, and z</span>
+0139 <span class="comment">%   modal2frf     - Synthesize FRF(s) from modal parameters</span>
+0140 <span class="comment">%   modal2frfh    - Synthesize FRF(s) from modal parameters with hysteretic damping</span>
+0141 <span class="comment">%   poles2fz      - Convert poles to frequencies and relative damping</span>
+0142 <span class="comment">%   timefresp     - Time domain forced response</span>
+0143 <span class="comment">%   tunedamp      - Compute FRF of tuned damper with SDOF system</span>
+0144 <span class="comment">%   uma2umm       - Rescale mode shapes from unity modal A to unity modal mass</span>
+0145 <span class="comment">%   umm2uma       - Rescale mode shapes from unity modal mass to unity modal A</span>
+0146 <span class="comment">%</span>
+0147 <span class="comment">% Create time data for simulation</span>
+0148 <span class="comment">% -------------------</span>
+0149 <span class="comment">%   abrand        - Create burst random time data blocks in column vector</span>
+0150 <span class="comment">%   aprand        - Create pseudo random time data block in column vector</span>
+0151 <span class="comment">%   psd2time      - Generate Gaussian random signal from PSD</span>
+0152 <span class="comment">%</span>
+0153 <span class="comment">% Experimental modal analysis and operating deflection shape analysis</span>
+0154 <span class="comment">% -------------------</span>
+0155 <span class="comment">%   acomac        - AMAC  Calculate Coordinate Modal Assurance Critera matrix C from two mode sets</span>
+0156 <span class="comment">%   amac          - Calculate Modal Assurance Critera matrix M from two mode sets</span>
+0157 <span class="comment">%   amif          - Calculate mode indicator function of (accelerance) FRFs</span>
+0158 <span class="comment">%   data2hmtrx    - Import Abravibe FRF data into H matrix</span>
+0159 <span class="comment">%   enhancefrf    - Enhance FRF matrix by Singular Value Decomposition</span>
+0160 <span class="comment">%   frf2msdof     - Curve fit FRFs into poles and mode shapes, SDOF techniques</span>
+0161 <span class="comment">%   frfp2modes    - Estimate mode shapes from FRFs and poles in frequency domain</span>
+0162 <span class="comment">%   frf2ptime     - Time domain MDOF methods for parameter extraction</span>
+0163 <span class="comment">%   frfsynt       - Synthesize FRF(s) after modal parameter extraction</span>
+0164 <span class="comment">%   ir2ptime      - Time domain MDOF methods for parameter extraction</span>
+0165 <span class="comment">%   listpoles     - List undamped natural frequencies and damping factors</span>
+0166 <span class="comment">%   modal2pv      - Convert animate MODAL struct to separate variables</span>
+0167 <span class="comment">%   modalchk      - Standard checks on FRF matrix for exp. modal analysis</span>
+0168 <span class="comment">%   odspick       - Extract ODS shapes from phase spectrum</span>
+0169 <span class="comment">%   plateanim     - Animate mode shapes on plate structures (1D mode shapes)</span>
+0170 <span class="comment">%   plotmac       - Plot Manhattan type MAC matrix plot</span>
+0171 <span class="comment">%   pv2modal      - Convert separate variables to animate MODAL struct</span>
+0172 <span class="comment">%   sdiagramGUI   - MATLAB code for sdiagramGUI.fig. This is an internal function</span>
+0173 <span class="comment">%   wincomp       - Compensate poles due to exponential window from Impact testing</span>
+0174 <span class="comment">%</span>
+0175 <span class="comment">% Operational modal analysis</span>
+0176 <span class="comment">% -------------------</span>
+0177 <span class="comment">%   ir2pmitd      - ir2MITD Multi-reference Ibrahim Time domain MDOF method for OMA parameter extraction</span>
+0178 <span class="comment">%</span>
+0179 <span class="comment">% Order tracking (Rotating machinery analysis)</span>
+0180 <span class="comment">% -------------------</span>
+0181 <span class="comment">% Fix sampling frequency commands:</span>
+0182 <span class="comment">%   map2order     - Extract orders from RPM map, fix fs or synchronuous sampling</span>
+0183 <span class="comment">%   plotrpmmapc   - Plot a color map of RPM map data with fixed fs</span>
+0184 <span class="comment">%   plotrpmmapwf  - Plot RPM map from fix fs in waterfall format</span>
+0185 <span class="comment">%   rpmmap        - Compute rpm/frequency spectral map for order tracking, fixed fs</span>
+0186 <span class="comment">%   tacho2rpm     - Extract rpm/time profile from tacho time signal</span>
+0187 <span class="comment">% Synchronous sampling commands: (also use tacho2rpm and map2order above)</span>
+0188 <span class="comment">%   plotrpmmapsc  - Plot a color map of RPM map data from synchronuous sampling</span>
+0189 <span class="comment">%   plotrpmmapswf - Plot RPM map from synchronuous sampling in waterfall format</span>
+0190 <span class="comment">%   rpmmaps       - Compute rpm/order spectral map for order tracking, synchronuous sampling</span>
+0191 <span class="comment">%   synchsampr    - Resample data synchronously with RPM, using rpm-time profile</span>
+0192 <span class="comment">%   synchsampt    - Resample data synchronously with RPM, based on tacho signal</span>
+0193 <span class="comment">%</span>
+0194 <span class="comment">% Impact testing post processing</span>
+0195 <span class="comment">% -------------------</span>
+0196 <span class="comment">%   ImpactGui     - Impact testing GUI</span>
+0197 <span class="comment">%   aexpw         - Exponential window for impact testing</span>
+0198 <span class="comment">%   aforcew       - Force window for impact testing</span>
+0199 <span class="comment">%</span>
+0200 <span class="comment">% Plotting and animation</span>
+0201 <span class="comment">% -------------------</span>
+0202 <span class="comment">%   abrabrowse    - GUI-based data browser for ABRAVIBE toolbox data files</span>
+0203 <span class="comment">%   angledeg      - Calculate angle in degrees for complex vector(s)</span>
+0204 <span class="comment">%   animate       - GUI-based animation software</span>
+0205 <span class="comment">%   anomograph    - Plot a displacement, velocity, acceleration nomograph</span>
+0206 <span class="comment">%   db10          - Calculate dB for power data (units squared)</span>
+0207 <span class="comment">%   db20          - Calculate dB for linear data (linear units)</span>
+0208 <span class="comment">%   plotfile      - Plot data in ABRABIVE file(s) with default format</span>
+0209 <span class="comment">%   plotmagph     - Plot complex data in magnitude/phase format</span>
+0210 <span class="comment">%   plotreim      - Plot real and imaginary part of complex function</span>
+0211 <span class="comment">%   plotscan      - Scan a vector with time data and plot blockwise</span>
+0212 <span class="comment">%</span>
+0213 <span class="comment">% Copyright 2009-2018, Anders Brandt. See license file for details.</span></pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>
