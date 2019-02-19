@@ -19,11 +19,11 @@ V_y = V_y*scaleFactor;
 % plotten der Moden
 % set(figurehandle,'Name',sprintf('Eigenschwingform %i',number_esf),'NumberTitle','off');
 % ax = axes;
-title(figurehandle,sprintf('Eigenmode Lateral %1.2f Hz, scaleFactor %.2d',obj.modalsystem.eigenValues.lateral(number_esf)/(2*pi),scaleFactor))
+title(figurehandle,sprintf('Eigenmode Lateral %1.2f Hz, scaleFactor %.2d',imag(obj.modalsystem.eigenValues.lateral(number_esf))/(2*pi),scaleFactor))
 hold on;
 
 plotMode3D(figurehandle,x,V_x, V_y,...
-    obj.modalsystem.eigenValues.lateral(number_esf),...
+    imag(obj.modalsystem.eigenValues.lateral(number_esf)),...
     ColorHandler.getColor(number_esf), param)
 
 %legend('show')

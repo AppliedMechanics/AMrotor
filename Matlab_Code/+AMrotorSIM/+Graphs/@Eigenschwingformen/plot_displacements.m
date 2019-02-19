@@ -13,7 +13,7 @@ function plot_displacements(obj)
     x = [obj.modalsystem.rotorsystem.rotor.mesh.nodes.z];
     EVx = obj.modalsystem.eigenVectors.lateral_x;
     EVy = obj.modalsystem.eigenVectors.lateral_y;
-    EW = obj.modalsystem.eigenValues.lateral;
+    EW = imag(obj.modalsystem.eigenValues.lateral);
     for s=1:n_ew
         plotMode(ax,x,EVx(:,s),...
                        EW(s),...
