@@ -61,8 +61,8 @@ function mesh = create_mesh(self,mesh_opt,Geometry,material)
                       %mit dem jetzigen möglichen Knoten übereinstimmt, Knoten nicht
                       %doppelt erstellen
                       % immer den kleinsten Wert abspeichern
-                      mesh.nodes(node_number-1).radius_outer = min(mesh.nodes(node_number-1).radius_outer, r(a));
-                      mesh.nodes(node_number-1).radius_inner = min(mesh.nodes(node_number-1).radius_inner, ri(a));
+                      mesh.nodes(node_number-1).radius_outer = max(mesh.nodes(node_number-1).radius_outer, r(a));
+                      mesh.nodes(node_number-1).radius_inner = max(mesh.nodes(node_number-1).radius_inner, ri(a));
                   else
                     mesh.nodes(node_number) =...
                         AMrotorSIM.Rotor.FEMRotor.MeshNode(node_number, z(a), r(a), ri(a));

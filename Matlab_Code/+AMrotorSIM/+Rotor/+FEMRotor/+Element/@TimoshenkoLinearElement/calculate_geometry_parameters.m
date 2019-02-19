@@ -4,18 +4,18 @@ function calculate_geometry_parameters(self,method)
             %detect jump for outer radius
             if self.node2.radius_outer > self.node1.radius_outer
                 % ascending jump
-                self.radius_outer = self.node2.radius_outer;
+                self.radius_outer = self.node1.radius_outer;
             else
                 %descending jump or no jump
-                self.radius_outer = self.node1.radius_outer;
+                self.radius_outer = self.node2.radius_outer;
             end
             %detect jump for inner radius
             if self.node2.radius_inner > self.node1.radius_inner
                 % ascending jump
-                self.radius_inner = self.node2.radius_inner;
+                self.radius_inner = self.node1.radius_inner;
             else
                 %descending jump or no jump
-                self.radius_inner = self.node1.radius_inner;
+                self.radius_inner = self.node2.radius_inner;
             end
         case 'mean'
             self.radius_outer = (self.node1.radius_outer+self.node2.radius_outer)/2;
