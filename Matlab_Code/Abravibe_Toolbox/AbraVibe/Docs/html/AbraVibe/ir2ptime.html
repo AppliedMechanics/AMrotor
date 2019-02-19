@@ -1,0 +1,414 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of ir2ptime</title>
+  <meta name="keywords" content="ir2ptime">
+  <meta name="description" content="IR2PTIME   Time domain MDOF methods for parameter extraction from free">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; ir2ptime.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>ir2ptime
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>IR2PTIME   Time domain MDOF methods for parameter extraction from free</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [p,L,H,f] = ir2ptime(h,fs,NLines,MaxModes,EstType,MIF,f,fOffset); </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> IR2PTIME   Time domain MDOF methods for parameter extraction from free
+ decay functions (impulse response or cross-correlation functions)
+
+         [p,L] = ir2ptime(h,fs,Nlines,MaxModes,EstType,MIF,f,fOffset);
+
+       p           Vector with complex poles with positive imaginary part
+       L           This is a variable which varies with the EstType
+                   for EstType='prony' or 'lsce', L = 1.
+                   for EstType='ptd' and 'mmitd', L contains the modal participation
+                   factors
+
+       h           Matrix with free-decay functions (impulse responsee,
+                   correlations, random decrements)
+       fs          Sampling frequency
+       Nlines      Number of time values to use
+       MaxModes    Maximum order number
+       EstType     'Prony', 'LSCE', 'PTD', or MMITD
+       MIF         Overlay function for stabilization diagram (Optional) 
+       f           Frequency axis for MIF. Mandatory if MIF given
+       fOffset     Frequency offset if h computed from zoomed freq. range
+                   Mandatory if MIF and f given
+
+ See also <a href="frf2ptime.html" class="code" title="function [p,L,fLimits] = frf2ptime(H,f,Nlines,MaxModes,MifType,EstType)">FRF2PTIME</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="amif.html" class="code" title="function Mif = amif(H,Type)">amif</a>	AMIF   Calculate mode indicator function of (accelerance) FRFs</li><li><a href="h2hankel.html" class="code" title="function Hank = h2hankel(h,nr,nc,nstart)">h2hankel</a>	H2HANKEL   Build Hankel matrix of time functions</li><li><a href="h2ptdhankel.html" class="code" title="function Hank = h2ptdhankel(h,nr,nc,nstart)">h2ptdhankel</a>	H2PTDHANKEL   Build Hankel matrix of time functions for PTD method</li><li><a href="makexaxis.html" class="code" title="function x = makexaxis(y,dx,x0);">makexaxis</a>	MAKEXAXIS Create a time or frequency x axis</li><li><a href="sdiagramnew.html" class="code" title="function [p,N] = sdiagram(varargin);">sdiagramnew</a>	SDIAGRAM Stability diagram, used for all methods (internal function)</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="frf2ptime.html" class="code" title="function [p,L,fLimits] = frf2ptime(H,f,Nlines,MaxModes,MifType,EstType)">frf2ptime</a>	FRF2PTIME Time domain MDOF methods for parameter extraction</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [p,L,H,f] = ir2ptime(h,fs,NLines,MaxModes,EstType,MIF,f,fOffset);</a>
+0002 <span class="comment">% IR2PTIME   Time domain MDOF methods for parameter extraction from free</span>
+0003 <span class="comment">% decay functions (impulse response or cross-correlation functions)</span>
+0004 <span class="comment">%</span>
+0005 <span class="comment">%         [p,L] = ir2ptime(h,fs,Nlines,MaxModes,EstType,MIF,f,fOffset);</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%       p           Vector with complex poles with positive imaginary part</span>
+0008 <span class="comment">%       L           This is a variable which varies with the EstType</span>
+0009 <span class="comment">%                   for EstType='prony' or 'lsce', L = 1.</span>
+0010 <span class="comment">%                   for EstType='ptd' and 'mmitd', L contains the modal participation</span>
+0011 <span class="comment">%                   factors</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%       h           Matrix with free-decay functions (impulse responsee,</span>
+0014 <span class="comment">%                   correlations, random decrements)</span>
+0015 <span class="comment">%       fs          Sampling frequency</span>
+0016 <span class="comment">%       Nlines      Number of time values to use</span>
+0017 <span class="comment">%       MaxModes    Maximum order number</span>
+0018 <span class="comment">%       EstType     'Prony', 'LSCE', 'PTD', or MMITD</span>
+0019 <span class="comment">%       MIF         Overlay function for stabilization diagram (Optional)</span>
+0020 <span class="comment">%       f           Frequency axis for MIF. Mandatory if MIF given</span>
+0021 <span class="comment">%       fOffset     Frequency offset if h computed from zoomed freq. range</span>
+0022 <span class="comment">%                   Mandatory if MIF and f given</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">% See also FRF2PTIME</span>
+0025 
+0026 <span class="comment">% Note!             MIF, f, and fOffset are internal variables, used only</span>
+0027 <span class="comment">%                   if this function is called from FRF2PTIME.</span>
+0028 
+0029 <span class="comment">% Copyright (c) 2014 by Anders Brandt</span>
+0030 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0031 <span class="comment">% Version: 1.4 2014-01-27 Created from frf2ptime.</span>
+0032 <span class="comment">%          1.5 2018-01-05 Bug fixed to always use NLines</span>
+0033 <span class="comment">%          1.6 2018-03-09 Changed to use \ instead of pinv() for options</span>
+0034 <span class="comment">%                         'LSCE', 'PTD'</span>
+0035 <span class="comment">%          1.7 2018-05-10 Added MMITD method</span>
+0036 <span class="comment">%</span>
+0037 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0038 
+0039 <span class="comment">%=========================================================================</span>
+0040 <span class="comment">% Initialize hardcode parameters</span>
+0041 <span class="comment">%=========================================================================</span>
+0042 SelStartTime=0;             <span class="comment">% Set to 1 to get a plot where start of impulse</span>
+0043 <span class="comment">%                             response is selected interactively (using</span>
+0044 <span class="comment">%                             first impulse response</span>
+0045 SelEndTime=0;               <span class="comment">% Set to 1 to also include selection of last</span>
+0046 <span class="comment">%                             impulse response value to use (thus overrides</span>
+0047 <span class="comment">%                             NLines input parameter</span>
+0048 <span class="comment">%</span>
+0049 
+0050 <span class="comment">%=========================================================================</span>
+0051 <span class="comment">% Check input parameters</span>
+0052 <span class="comment">%=========================================================================</span>
+0053 <span class="comment">% If MIF is not given, ir2ptime is called directly, and not from frf2ptime.</span>
+0054 <span class="comment">% Then, use alternative MIF function based on the sum of the FFTs of h</span>
+0055 <span class="keyword">if</span> nargin == 5
+0056     H=fft(h);
+0057     [N,D,R]=size(H);
+0058     H=H(1:N/2+1,:,:);
+0059     f=<a href="makexaxis.html" class="code" title="function x = makexaxis(y,dx,x0);">makexaxis</a>(H(:,1,1),fs/N);
+0060     fOffset=0;
+0061     MIF=<a href="amif.html" class="code" title="function Mif = amif(H,Type)">amif</a>(j*H,<span class="string">'mvmif'</span>);
+0062     MIF=MIF(:,1);
+0063     plot(MIF);
+0064 <span class="keyword">else</span>
+0065     MIF=MIF/max(MIF(1:end));
+0066 <span class="keyword">end</span>
+0067 EstType=upper(EstType);
+0068 <span class="comment">%=========================================================================</span>
+0069 <span class="comment">% If a selection of start and perhaps end point in the first h(t) is</span>
+0070 <span class="comment">% requested, produce a plot and have user select points to use</span>
+0071 <span class="keyword">if</span> SelStartTime == 1
+0072     hfig=figure;
+0073     plot(h(:,1,1))
+0074     xlabel(<span class="string">'Sample Number'</span>)
+0075     <span class="keyword">if</span> SelEndTime == 0
+0076         title(<span class="string">'Select start time in impulse response'</span>)
+0077         [xx,dum]=ginput(1);
+0078         <span class="keyword">while</span> length(h(:,1,1)) - xx &lt; NLines
+0079             title(<span class="string">'Too high start point to allow Nlines=%i. Select lower start point!\n'</span>,NLines);
+0080         <span class="keyword">end</span>
+0081         tlo=max(1,round(xx));
+0082         thi=xx+NLines-1;
+0083     <span class="keyword">else</span>
+0084         title(<span class="string">'Select start and end time in impulse response'</span>)
+0085         [xx,dum]=ginput(2);
+0086         <span class="keyword">if</span> strcmp(EstType,<span class="string">'LSCE'</span>) | strcmp(EstType,<span class="string">'PRONY'</span>)     <span class="comment">% Single reference methods!</span>
+0087             <span class="keyword">while</span> (max(xx)-min(xx)) &lt; MaxModes+1
+0088                 title(<span class="string">'Too narrow range, select a higher time for end point!\n'</span>);
+0089                 xx=ginput(2);
+0090             <span class="keyword">end</span>
+0091         <span class="keyword">else</span>
+0092             <span class="keyword">while</span> (max(xx)-min(xx)) &lt; R*MaxModes+1
+0093                 title(<span class="string">'Too narrow range, select a higher time for end point!\n'</span>);
+0094                 xx=ginput(2);
+0095             <span class="keyword">end</span>
+0096         <span class="keyword">end</span>
+0097         tlo=min(round(xx));
+0098         tlo=max(1,tlo);
+0099         thi=max(round(xx));
+0100     <span class="keyword">end</span>
+0101 <span class="keyword">else</span>
+0102     tlo=10;
+0103 <span class="comment">%     thi=floor(length(h(:,1,1))/2);   % Bug fixed 2018-01-05</span>
+0104     thi=tlo+NLines-1;
+0105 <span class="keyword">end</span>
+0106 
+0107 <span class="comment">% Truncate h matrix to thi-tlo+1 time samples</span>
+0108 <span class="keyword">if</span> mod(thi-tlo+1,2) ~= 0
+0109     thi=thi+1;
+0110 <span class="keyword">end</span>
+0111 h=h(tlo:thi,:,:);
+0112 [N,D,R]=size(h);
+0113 
+0114 <span class="comment">%=========================================================================</span>
+0115 <span class="comment">% Estimate depending on EstType</span>
+0116 <span class="comment">%=========================================================================</span>
+0117 <span class="keyword">if</span> strcmp(EstType,<span class="string">'PRONY'</span>)
+0118     <span class="comment">% The prony method is a local method, i.e. it uses only one FRF at the</span>
+0119     <span class="comment">% time. It should be used preferably when only a single FRF is to be</span>
+0120     <span class="comment">% fitted. The implementation here uses a stabilization diagram on every</span>
+0121     <span class="comment">% impulse response, and then averages all poles, assuming the same number</span>
+0122     <span class="comment">% of modes have been selected from each impulse response.</span>
+0123     <span class="comment">% This is not an ideal solution, as in the case of several responses,</span>
+0124     <span class="comment">% the ideal model order could vary. Use 'lsce' for larger data sets.</span>
+0125     <span class="comment">%</span>
+0126     <span class="comment">% Use first h to find model order</span>
+0127     Col=1;                          <span class="comment">% Index into pole matrix</span>
+0128     <span class="keyword">for</span> d=1:D
+0129         <span class="keyword">for</span> r=1:R
+0130 <span class="comment">%             ht=h(tlo:thi,d,r);           % Use first h to find order of system</span>
+0131 <span class="comment">%           Next line: bug fix 2013-06-09: removed tlo:thi to work with new layout</span>
+0132             ht=h(:,d,r);                   <span class="comment">% Use first h to find order of system</span>
+0133             <span class="keyword">for</span> Order = 1:MaxModes     <span class="comment">% Number of modes</span>
+0134                 [B,A]=prony(ht,2*Order-2,2*Order);
+0135                 Roots=roots(A);
+0136                 Poles{Order}=fs*log(Roots);
+0137                 NumberModes(Order)=Order;
+0138             <span class="keyword">end</span>
+0139             <span class="comment">% Adjust poles for the limited frequency range</span>
+0140             <span class="keyword">for</span> Order=1:MaxModes
+0141                 <span class="keyword">for</span> n=1:length(Poles{Order})
+0142                     Sign=sign(imag(Poles{Order}(n)));
+0143                     wr=abs(Poles{Order}(n))+2*pi*fOffset;
+0144                     zr=-real(Poles{Order}(n))/wr;
+0145                     Poles{Order}(n)=-zr*wr+j*Sign*wr*sqrt(1-zr^2);
+0146                 <span class="keyword">end</span>
+0147             <span class="keyword">end</span>
+0148             p(:,Col)=<a href="sdiagramnew.html" class="code" title="function [p,N] = sdiagram(varargin);">sdiagramnew</a>(f,Poles,2*NumberModes,MIF);
+0149             Col=Col+1;
+0150         <span class="keyword">end</span>             <span class="comment">% Reference</span>
+0151     <span class="keyword">end</span>                 <span class="comment">% Response</span>
+0152     <span class="comment">% Now transpose pole matrix and average, if more than one FRF was</span>
+0153     <span class="comment">% fitted</span>
+0154     p=p.';
+0155     [n,m]=size(p);
+0156     <span class="keyword">if</span> m &gt; 1 &amp;&amp; n &gt; 1
+0157         p=mean(p);
+0158     <span class="keyword">end</span>
+0159     p=p(:);
+0160     L=1;
+0161 <span class="keyword">elseif</span> strcmp(EstType,<span class="string">'LSCE'</span>)
+0162     <span class="comment">%=========================================================================</span>
+0163     <span class="comment">% Least Squares Complex Exponential</span>
+0164     <span class="comment">%=========================================================================</span>
+0165     <span class="comment">% Least squares complex exponential is a global method, taking all FRFs</span>
+0166     <span class="comment">% into account, but with no modal participation matrix (MPF) (i.e., it</span>
+0167     <span class="comment">% is a scalar that we set to 1 here and thus ignore). The implementation</span>
+0168     <span class="comment">% here uses all FRFs in the H matrix, even for several references, but</span>
+0169     <span class="comment">% all FRFs are put together without respect to reference location.</span>
+0170     <span class="comment">% This means that repeated poles will be estimated, but the mode shapes</span>
+0171     <span class="comment">% will perhaps not be correctly estimated by frf2modes, because the lack</span>
+0172     <span class="comment">% of MPF.</span>
+0173     <span class="comment">% The least squares solution is produced by pinv() or \, see code around</span>
+0174     <span class="comment">% line 238.</span>
+0175     <span class="comment">%</span>
+0176     <span class="comment">% Build the Toeplitz matrix</span>
+0177     T=toeplitz(flipud(h(:,1,1)));
+0178     T=fliplr(T);
+0179     T=T(1:end/2,1:end/2);
+0180     <span class="keyword">for</span> d=2:D
+0181         <span class="keyword">for</span> r=1:R
+0182             Tt=toeplitz(flipud(h(:,d,r)));
+0183             Tt=fliplr(Tt);
+0184             T=[T; Tt(1:end/2,1:end/2)];
+0185         <span class="keyword">end</span>
+0186     <span class="keyword">end</span>
+0187     <span class="comment">% Go through all requested orders</span>
+0188     NoModes=[];
+0189     <span class="keyword">for</span> Order=1:MaxModes
+0190         NoModes=[NoModes Order];
+0191         N=2*Order;
+0192         A=T(:,1:N);
+0193         B=-T(:,N+1);
+0194 <span class="comment">%         disp(['Size A: ' num2str(size(A))])</span>
+0195 <span class="comment">%        alfa=pinv(A)*B;</span>
+0196         alfa=A\B;
+0197         alfa=[alfa;1];
+0198         Roots=roots((alfa));
+0199         p=fs*log(Roots);
+0200         Poles{Order}=p;
+0201     <span class="keyword">end</span>
+0202     <span class="comment">% Adjust frequencies for offset due to limited frequency range</span>
+0203     <span class="keyword">for</span> Order=1:MaxModes
+0204         <span class="keyword">for</span> n=1:length(Poles{Order})
+0205             Sign=sign(imag(Poles{Order}(n)));
+0206             wr=abs(Poles{Order}(n))+2*pi*fOffset;
+0207             zr=real(Poles{Order}(n))/wr;
+0208             Poles{Order}(n)=-zr*wr+j*Sign*wr*sqrt(1-zr^2);
+0209         <span class="keyword">end</span>
+0210     <span class="keyword">end</span>
+0211     p=<a href="sdiagramnew.html" class="code" title="function [p,N] = sdiagram(varargin);">sdiagramnew</a>(f,Poles,2*NoModes,MIF);        <span class="comment">% Select poles in stability diagram</span>
+0212     L=1;
+0213 <span class="keyword">elseif</span> strcmp(EstType,<span class="string">'PTD'</span>)
+0214     <span class="comment">%=========================================================================</span>
+0215     <span class="comment">% Polyreference Time Domain</span>
+0216     <span class="comment">%=========================================================================</span>
+0217     <span class="comment">% The polyreference time domain method is a global MIMO method.</span>
+0218     <span class="comment">% It computes both poles and modal participation factors</span>
+0219     <span class="comment">% with a stabilization diagram in which poles can be chosen.</span>
+0220     <span class="comment">% Closely spaced or repeated modes can be computed with this technique.</span>
+0221 
+0222     <span class="comment">% Build block Hankel matrix of order MaxModes+1 by 5 times more columns</span>
+0223     nr=2*MaxModes;
+0224     nc=round(5*nr/D);
+0225     <span class="comment">% Build the block Hankel matrices</span>
+0226     <span class="comment">% Build H1 with R extra rows at the bottom, which will be used for H2</span>
+0227     H1=<a href="h2ptdhankel.html" class="code" title="function Hank = h2ptdhankel(h,nr,nc,nstart)">h2ptdhankel</a>(h,nr+1,nc);
+0228     <span class="comment">% Loop through model orders</span>
+0229     <span class="keyword">for</span> Np = R:R:2*MaxModes      <span class="comment">% Np is number of poles (2 per mode)</span>
+0230         <span class="comment">% Reduce matrices to size Np</span>
+0231         H1p=H1(1:Np,:);
+0232         H2p=H1(Np+1:Np+R,:);
+0233         <span class="comment">% Solve the matrix coefficients in LS sense</span>
+0234 <span class="comment">%         A=H2p*pinv(H1p);</span>
+0235         A=H2p/H1p;
+0236         <span class="comment">% Build the companion matrix, C</span>
+0237         <span class="comment">% Start with first row which goes &quot;backwards&quot; compared to A</span>
+0238         L=length(A(1,:));
+0239         <span class="keyword">for</span> n = 1:Np/R
+0240             C(1:R,(n-1)*R+1:n*R)=A(:,L-n*R+1:L-(n-1)*R);
+0241         <span class="keyword">end</span>
+0242         <span class="comment">% Then fill rest of C with diagonal with identity matrices</span>
+0243         <span class="keyword">for</span> n = 1:Np/R-1
+0244             Z=zeros(R,Np);
+0245             Z(1:R,(n-1)*R+1:n*R)=eye(R);
+0246             C=[C;Z];
+0247         <span class="keyword">end</span>
+0248         <span class="comment">% Solve eigenvalues and conv to poles</span>
+0249         [Vp,Dp]=eig(C);
+0250         Dp=diag(Dp);
+0251         poles=fs*log(Dp);
+0252         <span class="comment">%     [fr,zr]=poles2fz(poles)</span>
+0253         <span class="comment">% Extract MPFs</span>
+0254         MPFt=Vp(1:R,:);
+0255         <span class="comment">% Save to arrays</span>
+0256         NoPoles(Np/R)=length(poles);
+0257         Poles{Np/R}=poles;
+0258         MPF{Np/R}=MPFt;
+0259         clear C
+0260     <span class="keyword">end</span>
+0261     <span class="comment">% Adjust frequencies for offset due to limited frequency range</span>
+0262     <span class="keyword">for</span> Order=1:length(Poles)
+0263         <span class="keyword">for</span> n=1:length(Poles{Order})
+0264             Sign=sign(imag(Poles{Order}(n)));
+0265             wr=abs(Poles{Order}(n))+2*pi*fOffset;
+0266             zr=abs(real(Poles{Order}(n)))/wr;
+0267             Poles{Order}(n)=-zr*wr+j*Sign*wr*sqrt(1-zr^2);
+0268         <span class="keyword">end</span>
+0269     <span class="keyword">end</span>
+0270     [p,SelOrder]=<a href="sdiagramnew.html" class="code" title="function [p,N] = sdiagram(varargin);">sdiagramnew</a>(f,Poles,NoPoles,MIF);        <span class="comment">% Select poles in stability diagram</span>
+0271     <span class="comment">% % Find modal participation factors corresponding to the selected poles</span>
+0272     clear V L
+0273     <span class="keyword">for</span> n = 1:length(p)
+0274         o_idx = find(NoPoles == SelOrder{n});           <span class="comment">% which order was clicked?</span>
+0275         [m,p_idx]=min(Poles{o_idx} - p(n));             <span class="comment">% Closest pole</span>
+0276         L(n,:)=MPF{o_idx}(:,p_idx).';                   <span class="comment">% Corresponding participation factors</span>
+0277     <span class="keyword">end</span>
+0278     <span class="keyword">if</span> exist(<span class="string">'L'</span>) == 0
+0279         L=1;
+0280     <span class="keyword">end</span>
+0281 <span class="keyword">elseif</span> strcmp(EstType,<span class="string">'MMITD'</span>)
+0282     <span class="comment">%=========================================================================</span>
+0283     <span class="comment">% Modified multiple-reference Ibrahim time</span>
+0284     <span class="comment">%=========================================================================</span>
+0285     <span class="comment">% The modified multiple-reference Ibrahim time domain method is a</span>
+0286     <span class="comment">% global MIMO method. It computes both poles and modal participation</span>
+0287     <span class="comment">% factors with a stabilization diagram in which poles can be chosen.</span>
+0288     <span class="comment">% Closely spaced or repeated modes can be computed with this technique.</span>
+0289     
+0290     dt=1/fs;
+0291     <span class="comment">%</span>
+0292     <span class="comment">% Build block Hankel matrix of order 2*MaxModes</span>
+0293     nr=2*MaxModes;
+0294     nc=nr;
+0295     H1=<a href="h2hankel.html" class="code" title="function Hank = h2hankel(h,nr,nc,nstart)">h2hankel</a>(h,nc,nr,1);     <span class="comment">% Hankel at t</span>
+0296     H2=<a href="h2hankel.html" class="code" title="function Hank = h2hankel(h,nr,nc,nstart)">h2hankel</a>(h,nc,nr,2);     <span class="comment">% Hankel at t+dt</span>
+0297     <span class="comment">% Compute transfer matrix</span>
+0298     [U,S,V]=svd(H1);
+0299     <span class="comment">% Loop through model orders. Start with first even number &gt;= R</span>
+0300     <span class="keyword">if</span> mod(R,2) == 0
+0301         FirstOrder=R;
+0302     <span class="keyword">else</span>
+0303         FirstOrder=R+1;
+0304     <span class="keyword">end</span>
+0305     <span class="keyword">for</span> Np = FirstOrder:2:2*MaxModes      <span class="comment">% Np is number of poles (2 per mode)</span>
+0306         <span class="comment">% Reduce matrices to size Np</span>
+0307         Vp=V(:,1:Np);       <span class="comment">% V prime</span>
+0308         H1p=Vp.'*H1';       <span class="comment">% Hankel(t) prime</span>
+0309         H2p=Vp.'*H2';       <span class="comment">% ditto at t+dt</span>
+0310         <span class="comment">% Build compressed system matrix</span>
+0311         Ap=(H2p*H1p.')*pinv(H1p*H1p.');
+0312         <span class="comment">% Solve eigenvalues and conv to poles</span>
+0313         [Lpt,Dp]=eig(Ap);
+0314         Lp=Lpt.';
+0315         Dp=diag(Dp);
+0316         poles=log(Dp)/dt;
+0317         <span class="comment">% Expand (transposed) modal participation factors</span>
+0318         Lptemp=(pinv(Vp.')*Lp.').';
+0319         <span class="comment">% Save to arrays</span>
+0320         NoPoles(Np/2)=Np;
+0321         Poles{Np/2}=poles;
+0322         MPF{Np/2}=Lptemp(1:Np,1:R);
+0323     <span class="keyword">end</span>
+0324     <span class="comment">% Adjust frequencies for offset due to limited frequency range</span>
+0325     <span class="keyword">for</span> Order=1:MaxModes
+0326         <span class="keyword">for</span> n=1:length(Poles{Order})
+0327             Sign=sign(imag(Poles{Order}(n)));
+0328             wr=abs(Poles{Order}(n))+2*pi*fOffset;
+0329             zr=abs(real(Poles{Order}(n)))/wr;
+0330             Poles{Order}(n)=-zr*wr+j*Sign*wr*sqrt(1-zr^2);
+0331         <span class="keyword">end</span>
+0332     <span class="keyword">end</span>
+0333     [p,SelOrder]=<a href="sdiagramnew.html" class="code" title="function [p,N] = sdiagram(varargin);">sdiagramnew</a>(f,Poles,NoPoles,MIF);        <span class="comment">% Select poles in stability diagram</span>
+0334     <span class="comment">% % Find modal participation factors corresponding to the selected poles</span>
+0335     clear V L
+0336     <span class="keyword">for</span> n = 1:length(p)
+0337         o_idx = find(NoPoles == SelOrder{n});           <span class="comment">% which order was clicked?</span>
+0338         [m,p_idx]=min(Poles{o_idx} - p(n));             <span class="comment">% Closest pole</span>
+0339         L(n,:)=MPF{o_idx}(p_idx,:);                     <span class="comment">% Corresponding participation factors</span>
+0340     <span class="keyword">end</span>
+0341     <span class="keyword">if</span> exist(<span class="string">'L'</span>) == 0
+0342         L=1;
+0343     <span class="keyword">end</span>
+0344 <span class="keyword">end</span>
+0345</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

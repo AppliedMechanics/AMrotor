@@ -1,0 +1,217 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of imp2frf</title>
+  <meta name="keywords" content="imp2frf">
+  <meta name="description" content="IMP2FRF  Calculate FRF(s) from impact time data recording (internal function)">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; imp2frf.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>imp2frf
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>IMP2FRF  Calculate FRF(s) from impact time data recording (internal function)</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [H,f,C,Tff] = imp2frf(x,y,fs,N,TrigPerc,PreTrigger,FWinLength,ExpWinPar,Plot) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> IMP2FRF  Calculate FRF(s) from impact time data recording (internal function)
+
+        [H,f,C,Tff] = imp2frf(x,y,fs,N,TrigPerc,PreTrigger,FWinLength,ExpWinPar,Plot)
+
+           H           Frequency response(s), N/2+1-by-D
+           f           Frequency axis, N/2+1-by-1
+           C           Coherence function(s), N/2+1-by-D
+           Tff         Transient spectrum of force signal
+
+           x           Force vector
+           y           Response signal(s) in D column(s)
+           fs          Sampling frequency
+           N           Block size for FFT
+           TrigPerc    Trigger level in percent of max(abs(x))
+           PreTrigger  Pretrigger in samples (integer &gt; 0)
+           FWinLength  Force window in percent of N
+           ExpWinPar   End value of exponential window in percent
+           Plot        Logical variable, if Plot=1, 
+
+ See also <a href="impsetup.html" class="code" title="function impsetup(DataFile,ChanNo,SetupFile)">IMPSETUP</a> IMPMASSCAL <a href="impproc.html" class="code" title="function LastNumber = impproc(FreqLo,FreqHi,InPrefix,StartNo,StopNo,OutPrefix,OutStartNo,SetupFile,Proc,fid)">IMPPROC</a> <a href="imptrig.html" class="code" title="function [TrigIdx, DIdx] = imptrig(x,N,TrigPerc,PreTrigger)">IMPTRIG</a> <a href="aforcew.html" class="code" title="function w = aforcew(N,widthp,Type)">AFORCEW</a> <a href="aexpw.html" class="code" title="function w=aexpw(N, EndFactor);">AEXPW</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="aexpw.html" class="code" title="function w=aexpw(N, EndFactor);">aexpw</a>	AEXPW Exponential window for impact testing</li><li><a href="aforcew.html" class="code" title="function w = aforcew(N,widthp,Type)">aforcew</a>	AFORCEW Force window for impact testing</li><li><a href="impplot1.html" class="code" title="function h = impplot1(x,y,fs,N,TrigIdx,DIdx,TrigLevel)">impplot1</a>	IMPPLOT1  Plot impact analysis plot with force/response. Internal</li><li><a href="imptrig.html" class="code" title="function [TrigIdx, DIdx] = imptrig(x,N,TrigPerc,PreTrigger)">imptrig</a>	IMPTRIG       Impact testing triggering and double impact detection</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="impproc.html" class="code" title="function LastNumber = impproc(FreqLo,FreqHi,InPrefix,StartNo,StopNo,OutPrefix,OutStartNo,SetupFile,Proc,fid)">impproc</a>	IMPPROC Impact time data processing</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [H,f,C,Tff] = imp2frf(x,y,fs,N,TrigPerc,PreTrigger,FWinLength,ExpWinPar,Plot)</a>
+0002 <span class="comment">% IMP2FRF  Calculate FRF(s) from impact time data recording (internal function)</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%        [H,f,C,Tff] = imp2frf(x,y,fs,N,TrigPerc,PreTrigger,FWinLength,ExpWinPar,Plot)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%           H           Frequency response(s), N/2+1-by-D</span>
+0007 <span class="comment">%           f           Frequency axis, N/2+1-by-1</span>
+0008 <span class="comment">%           C           Coherence function(s), N/2+1-by-D</span>
+0009 <span class="comment">%           Tff         Transient spectrum of force signal</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%           x           Force vector</span>
+0012 <span class="comment">%           y           Response signal(s) in D column(s)</span>
+0013 <span class="comment">%           fs          Sampling frequency</span>
+0014 <span class="comment">%           N           Block size for FFT</span>
+0015 <span class="comment">%           TrigPerc    Trigger level in percent of max(abs(x))</span>
+0016 <span class="comment">%           PreTrigger  Pretrigger in samples (integer &gt; 0)</span>
+0017 <span class="comment">%           FWinLength  Force window in percent of N</span>
+0018 <span class="comment">%           ExpWinPar   End value of exponential window in percent</span>
+0019 <span class="comment">%           Plot        Logical variable, if Plot=1,</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">% See also IMPSETUP IMPMASSCAL IMPPROC IMPTRIG AFORCEW AEXPW</span>
+0022 <span class="comment">%</span>
+0023 
+0024 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0025 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0026 <span class="comment">% Version: 1.0 2011-06-23</span>
+0027 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0028 
+0029 <span class="comment">% Find lengths and dimensions</span>
+0030 D=length(y(1,:));
+0031 <span class="keyword">if</span> length(x(1,:)) &gt; 1
+0032     x=x(:,1);
+0033 <span class="keyword">end</span>
+0034 <span class="keyword">if</span> length(y(1,:)) &gt; 1
+0035     D=length(y(1,:));       <span class="comment">% Number of responses</span>
+0036 <span class="keyword">end</span>
+0037 
+0038 <span class="comment">% Find triggers in x, if too few triggers found, reduce trigger level</span>
+0039 [TrigIdx,DIdx]=<a href="imptrig.html" class="code" title="function [TrigIdx, DIdx] = imptrig(x,N,TrigPerc,PreTrigger)">imptrig</a>(x,N,TrigPerc,PreTrigger);
+0040 <span class="comment">% if length(TrigIdx) &lt; 2</span>
+0041 <span class="comment">%     while length(TrigIdx) &lt; 2</span>
+0042 <span class="comment">%         fprintf('No triggers found. Changing trigger level to %f\n',TrigPerc/2);</span>
+0043 <span class="comment">%         TrigPerc=TrigPerc/2;</span>
+0044 <span class="comment">%         [TrigIdx,DIdx]=imptrig(x,N,TrigPerc,PreTrigger);</span>
+0045 <span class="comment">%     end</span>
+0046 <span class="comment">% end</span>
+0047 
+0048 <span class="keyword">if</span> TrigIdx == 0
+0049     H=[];
+0050     f=[];
+0051     C=[];
+0052     Tff=[];
+0053 <span class="keyword">else</span>
+0054     h=<a href="impplot1.html" class="code" title="function h = impplot1(x,y,fs,N,TrigIdx,DIdx,TrigLevel)">impplot1</a>(x,y(:,1),fs,N,TrigIdx,DIdx);
+0055 <span class="comment">%     % Plot force and response signals in blue. Mark the &quot;good&quot; length N blocks</span>
+0056 <span class="comment">%     % with no double impacts in green, and double impact blocks in red</span>
+0057 <span class="comment">%     t=makexaxis(x,1/fs);</span>
+0058 <span class="comment">%     hTime=figure;</span>
+0059 <span class="comment">%     subplot(2,1,1)</span>
+0060 <span class="comment">%     plot(t,x)</span>
+0061 <span class="comment">%     title('Force signal (blue) and triggered blocks (green); double impact (red)')</span>
+0062 <span class="comment">%     hold on</span>
+0063 <span class="comment">%     for n=1:length(TrigIdx)</span>
+0064 <span class="comment">%         idx=TrigIdx(n):TrigIdx(n)+N-1;</span>
+0065 <span class="comment">%         plot(t(idx),x(idx),'g')</span>
+0066 <span class="comment">%     end</span>
+0067 <span class="comment">%     if DIdx ~= 0</span>
+0068 <span class="comment">%         for n = 1:length(DIdx)</span>
+0069 <span class="comment">%             idx=DIdx(n):DIdx(n)+N-1;</span>
+0070 <span class="comment">%             plot(t(idx),x(idx),'r')</span>
+0071 <span class="comment">%         end</span>
+0072 <span class="comment">%     end</span>
+0073 <span class="comment">%     grid</span>
+0074 <span class="comment">%     hold off</span>
+0075 <span class="comment">%     subplot(2,1,2)</span>
+0076 <span class="comment">%     plot(t,y)</span>
+0077 <span class="comment">%     hold on</span>
+0078 <span class="comment">%     for n=1:length(TrigIdx)</span>
+0079 <span class="comment">%         idx=TrigIdx(n):TrigIdx(n)+N-1;</span>
+0080 <span class="comment">%         plot(t(idx),y(idx),'g')</span>
+0081 <span class="comment">%     end</span>
+0082 <span class="comment">%     if DIdx ~= 0</span>
+0083 <span class="comment">%         for n = 1:length(DIdx)</span>
+0084 <span class="comment">%             idx=DIdx(n):DIdx(n)+N-1;</span>
+0085 <span class="comment">%             plot(t(idx),y(idx),'r')</span>
+0086 <span class="comment">%         end</span>
+0087 <span class="comment">%     end</span>
+0088 <span class="comment">%     grid</span>
+0089     
+0090     <span class="comment">% Ask user to select impacts to use</span>
+0091     fprintf(<span class="string">'Select impacts by clicking on each (green) impact you want to include\n'</span>)
+0092     fprintf(<span class="string">'Click return when done.\n'</span>)
+0093     [xx,d]=ginput;
+0094     <span class="comment">% Find closest trigger events, if no events were selected, use them all!</span>
+0095     <span class="keyword">if</span> ~isempty(xx)
+0096         xx=round(xx*fs);        <span class="comment">% Scale in idx number</span>
+0097         <span class="keyword">for</span> n=1:length(xx)
+0098             [m,I]=min(abs(TrigIdx-xx(n)));
+0099             T(n)=TrigIdx(I);    <span class="comment">% Selected trigger index(es)</span>
+0100         <span class="keyword">end</span>
+0101     <span class="keyword">else</span>
+0102         T=TrigIdx;
+0103     <span class="keyword">end</span>
+0104     close(h)
+0105     
+0106     <span class="comment">% Use the selected impacts to calculate FRF etc for each response (column)</span>
+0107     <span class="comment">% in y</span>
+0108     yin=y; clear y
+0109     <span class="keyword">for</span> k = 1:D
+0110         y=yin(:,k);
+0111         L=N/2+1;
+0112         Tyf=zeros(L,1);
+0113         Tyy=zeros(L,1);
+0114         Tff=zeros(L,1);
+0115         fw=<a href="aforcew.html" class="code" title="function w = aforcew(N,widthp,Type)">aforcew</a>(N,FWinLength);
+0116         ew=<a href="aexpw.html" class="code" title="function w=aexpw(N, EndFactor);">aexpw</a>(N,ExpWinPar);
+0117         <span class="keyword">for</span> n=1:length(T)
+0118             F=x(T(n):T(n)+N-1);
+0119             F=F-F(1);
+0120             F=F.*fw.*ew;
+0121             Ff=fft(F);
+0122             Ff=Ff(1:L);
+0123             Y=y(T(n):T(n)+N-1);
+0124             Y=Y.*ew;
+0125             Yf=fft(Y);
+0126             Yf=Yf(1:L);
+0127             Tyf=Tyf+(Yf.*conj(Ff));
+0128             Tyy=Tyy+abs(Yf).^2;
+0129             Tff=Tff+abs(Ff).^2;
+0130         <span class="keyword">end</span>
+0131         H(:,k)=Tyf./Tff;
+0132         f=(0:fs/N:fs/2);
+0133         C(:,k)=abs(Tyf).^2./Tff./Tyy;
+0134         Tff(:,k)=Tff/n/fs;               <span class="comment">% Transient average spectrum</span>
+0135         <span class="keyword">if</span> exist(<span class="string">'Plot'</span>,<span class="string">'var'</span>)
+0136             <span class="keyword">if</span> Plot
+0137                 figure
+0138                 subplot(3,1,1)
+0139                 semilogy(f,abs(H))
+0140                 ylabel(<span class="string">'FRF'</span>)
+0141                 subplot(3,1,2)
+0142                 plot(f,C)
+0143                 ylabel(<span class="string">'Coherence'</span>)
+0144                 subplot(3,1,3)
+0145                 semilogy(f,Tff)
+0146                 ylabel(<span class="string">'Force Spec.'</span>)
+0147                 xlabel(<span class="string">'Frequency [Hz]'</span>)
+0148             <span class="keyword">end</span>
+0149         <span class="keyword">end</span>
+0150     <span class="keyword">end</span>
+0151 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

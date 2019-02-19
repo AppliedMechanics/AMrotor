@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of odspick</title>
+  <meta name="keywords" content="odspick">
+  <meta name="description" content="ODSPICK   Extract ODS shapes from phase spectrum">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; odspick.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>odspick
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>ODSPICK   Extract ODS shapes from phase spectrum</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [O,freqs] = osdpick(PSpec,f,NoLines,DispFunc) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> ODSPICK   Extract ODS shapes from phase spectrum
+
+       [O,freqs] = osdpick(PSpec,f,NoLines,DispFunc)
+       or
+       [O,freqs] = osdpick(PSpec,f,NoLines,infreqs)
+
+        O          ODS shape(s) in column(s)
+        freqs      Frequency in Hz for corresponding column in O
+   
+        PSpec      Spectrum with amplitude and phase for each dof, for
+                   example from PSPEC or ACSDW
+        f          Frequency axis for PSpec (and DispFunc if used)
+        NoLines    A peak search is done on each function PSpec
+                   using NoLines (odd number) around each peak
+                   if NoLines=0 the frequencies are picked without a peak
+                   search
+        DispFunc   If used, this function (or matrix) will be plotted 
+                   instead of PSpec in the interactive peak pick display
+        infreqs    Vector with frequencies to pick for 'automatic' pick.
+                   must be shorter than f
+
+ With the first syntax, this function displays a spectrum and allows for
+ the user to pick the frequencies for which ODS shapes are to be
+ estimated.
+ With the second syntax, the ODS shapes are picked using the frequencies 
+ in the vector infreqs, without interaction.
+
+ See also  <a href="alinspecp.html" class="code" title="function [Lyx,f] = alinspecp(y,x,fs,w,M,ovlp);">alinspecp</a> <a href="acsdw.html" class="code" title="function [Pyx,f,Nblocks] = acsdw(x,y,fs,N,POverlap);">acsdw</a> pcaxy</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [O,freqs] = osdpick(PSpec,f,NoLines,DispFunc)</a>
+0002 <span class="comment">% ODSPICK   Extract ODS shapes from phase spectrum</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%       [O,freqs] = osdpick(PSpec,f,NoLines,DispFunc)</span>
+0005 <span class="comment">%       or</span>
+0006 <span class="comment">%       [O,freqs] = osdpick(PSpec,f,NoLines,infreqs)</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%        O          ODS shape(s) in column(s)</span>
+0009 <span class="comment">%        freqs      Frequency in Hz for corresponding column in O</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%        PSpec      Spectrum with amplitude and phase for each dof, for</span>
+0012 <span class="comment">%                   example from PSPEC or ACSDW</span>
+0013 <span class="comment">%        f          Frequency axis for PSpec (and DispFunc if used)</span>
+0014 <span class="comment">%        NoLines    A peak search is done on each function PSpec</span>
+0015 <span class="comment">%                   using NoLines (odd number) around each peak</span>
+0016 <span class="comment">%                   if NoLines=0 the frequencies are picked without a peak</span>
+0017 <span class="comment">%                   search</span>
+0018 <span class="comment">%        DispFunc   If used, this function (or matrix) will be plotted</span>
+0019 <span class="comment">%                   instead of PSpec in the interactive peak pick display</span>
+0020 <span class="comment">%        infreqs    Vector with frequencies to pick for 'automatic' pick.</span>
+0021 <span class="comment">%                   must be shorter than f</span>
+0022 <span class="comment">%</span>
+0023 <span class="comment">% With the first syntax, this function displays a spectrum and allows for</span>
+0024 <span class="comment">% the user to pick the frequencies for which ODS shapes are to be</span>
+0025 <span class="comment">% estimated.</span>
+0026 <span class="comment">% With the second syntax, the ODS shapes are picked using the frequencies</span>
+0027 <span class="comment">% in the vector infreqs, without interaction.</span>
+0028 <span class="comment">%</span>
+0029 <span class="comment">% See also  alinspecp acsdw pcaxy</span>
+0030 
+0031 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0032 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0033 <span class="comment">% Version: 1.0 2011-06-23</span>
+0034 <span class="comment">%          1.1 2014-03-17 Implemented second syntax with infreqs</span>
+0035 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0036 
+0037 <span class="keyword">if</span> nargin == 3
+0038     figure
+0039     semilogy(f,abs(PSpec));
+0040     DispFunc=abs(PSpec);
+0041 <span class="keyword">elseif</span> nargin == 4
+0042     <span class="keyword">if</span> length(DispFunc) == length(f)
+0043         figure
+0044         semilogy(f,abs(DispFunc))
+0045         DispFunc=abs(DispFunc);
+0046     <span class="keyword">else</span>
+0047         infreqs=DispFunc;
+0048     <span class="keyword">end</span>
+0049 <span class="keyword">end</span>
+0050 
+0051 <span class="keyword">if</span> ~exist(<span class="string">'infreqs'</span>,<span class="string">'var'</span>)
+0052     title(<span class="string">'Pick frequencies, then &lt;RETURN&gt;'</span>)
+0053     [xx,yy]=ginput;
+0054     idxs=round(xx/(f(2)-f(1)));
+0055     freqs=f(idxs);
+0056 <span class="keyword">else</span>
+0057     freqs=infreqs;
+0058     idxs=round(infreqs/(f(2)-f(1)));
+0059 <span class="keyword">end</span>
+0060 
+0061 <span class="comment">% Pick shapes</span>
+0062 [N,D]=size(PSpec);
+0063 <span class="keyword">for</span> freq = 1:length(freqs)
+0064     <span class="keyword">for</span> d = 1:D
+0065         idx=idxs(freq);
+0066         <span class="keyword">if</span> NoLines == 0
+0067             O(d,freq)=PSpec(idx,d);
+0068         <span class="keyword">else</span>
+0069             [dum,midx]=max(PSpec(idx-(NoLines-1)/2:idx+(NoLines-1)/2,d));
+0070             O(d,freq)=PSpec(midx+idx-(NoLines-1)/2-1,d);
+0071         <span class="keyword">end</span>
+0072     <span class="keyword">end</span>
+0073 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

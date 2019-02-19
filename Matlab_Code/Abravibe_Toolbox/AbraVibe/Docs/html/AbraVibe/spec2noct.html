@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of spec2noct</title>
+  <meta name="keywords" content="spec2noct">
+  <meta name="description" content="SPEC2NOCT   Calculate 1/n octave spectrum from an FFT spectrum">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; spec2noct.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>spec2noct
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>SPEC2NOCT   Calculate 1/n octave spectrum from an FFT spectrum</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [L,f] = spec2noct(Gxx,f,n,Type,win) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment">SPEC2NOCT   Calculate 1/n octave spectrum from an FFT spectrum
+
+           [L,f] = spec2noct(Gxx,f,n,type)
+
+           Gxx     Spectrum based on FFT (linear spectrum or PSD)
+           f       Frequency axis for Gxx. MUST BE [0:df:fs/2]
+
+           n       Fractional octave number (for 1/n octave filter)
+           type    'lin' or 'psd'
+           win     Vector with time window used for spectrum, only for Type='lin'
+                   Note: Does not need to be same length as Gxx and f
+
+ NOTE n must be 1, 2, 3, 6, 12, or 24
+ 
+ This command uses coefficients for filters according to IEC 61260:1995, 
+ and ANSI S1.11-2004. HOWEVER, DUE TO LACKING FREQUENCY RESOLUTION, THE
+ FILTERS MAY NOT CONFORM TO THE STANDARDS! If you wish to know, edit the
+ file, and remove the 'warning off&quot; at the beginning of the code.
+
+ The lowest 1/n octave included in L is the one where there are 3 
+ frequency bins inside the 1/n octave width.
+
+ SEE ALSO    <a href="noctfilt.html" class="code" title="function [b,a] = noctfilt(n,fc,fs)">NOCTFILT</a>, <a href="noctfreqs.html" class="code" title="function fcs = noctfreqs(n, fmin, fmax)">NOCTFREQS</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="db20.html" class="code" title="function db20 = db20(y,ref);">db20</a>	DB20      Calculate dB for linear data (linear units)</li><li><a href="noctfreqs.html" class="code" title="function fcs = noctfreqs(n, fmin, fmax)">noctfreqs</a>	NOCTFREQS     Compute the exact midband frequencies for a 1/n octave analysis</li><li><a href="noctlimits.html" class="code" title="function [Lu,Ll,f] = noctlimits(n,fc);">noctlimits</a>	NOCTLIMITS Calculate IEC/ANSI limits for fractional octave filter</li><li><a href="winenbw.html" class="code" title="function Be = winenbw(w);">winenbw</a>	WINENBW Calculate equivalent noise bandwidth of time window</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [L,f] = spec2noct(Gxx,f,n,Type,win)</a>
+0002 <span class="comment">%SPEC2NOCT   Calculate 1/n octave spectrum from an FFT spectrum</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%           [L,f] = spec2noct(Gxx,f,n,type)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%           Gxx     Spectrum based on FFT (linear spectrum or PSD)</span>
+0007 <span class="comment">%           f       Frequency axis for Gxx. MUST BE [0:df:fs/2]</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%           n       Fractional octave number (for 1/n octave filter)</span>
+0010 <span class="comment">%           type    'lin' or 'psd'</span>
+0011 <span class="comment">%           win     Vector with time window used for spectrum, only for Type='lin'</span>
+0012 <span class="comment">%                   Note: Does not need to be same length as Gxx and f</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">% NOTE n must be 1, 2, 3, 6, 12, or 24</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">% This command uses coefficients for filters according to IEC 61260:1995,</span>
+0017 <span class="comment">% and ANSI S1.11-2004. HOWEVER, DUE TO LACKING FREQUENCY RESOLUTION, THE</span>
+0018 <span class="comment">% FILTERS MAY NOT CONFORM TO THE STANDARDS! If you wish to know, edit the</span>
+0019 <span class="comment">% file, and remove the 'warning off&quot; at the beginning of the code.</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">% The lowest 1/n octave included in L is the one where there are 3</span>
+0022 <span class="comment">% frequency bins inside the 1/n octave width.</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">% SEE ALSO    NOCTFILT, NOCTFREQS</span>
+0025 
+0026 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0027 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0028 <span class="comment">% Version: 1.0 2011-06-23</span>
+0029 <span class="comment">%          1.1 2017-10-07 First official release.</span>
+0030 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0031 
+0032 warning off
+0033 
+0034 <span class="keyword">if</span> nargin == 4 &amp; strcmp(upper(Type),<span class="string">'LIN'</span>)
+0035     error(<span class="string">'You must specify window for Type=''lin''!'</span>)
+0036 <span class="keyword">end</span>
+0037 <span class="comment">% Check that lowest frequency in f is zero</span>
+0038 <span class="keyword">if</span> f(1) ~= 0
+0039     error(<span class="string">'First frequency in f must be zero!'</span>)
+0040 <span class="keyword">end</span>
+0041 
+0042 <span class="comment">% Check that the requested n is supported. You can add more possibilities</span>
+0043 <span class="comment">% here, like 6, 12, 24</span>
+0044 N=[1 3];
+0045 <span class="keyword">if</span> ~ismember(n,N)
+0046     error(<span class="string">'Unsupported fractional octave number'</span>);
+0047 <span class="keyword">end</span>
+0048  
+0049 
+0050 <span class="comment">% G=2;                    % Base two definition</span>
+0051 G=10^.3;                <span class="comment">% Base ten definition</span>
+0052 OctRatio=G^(0.5/n);
+0053 fs=2*f(end);            <span class="comment">% ONLY works for spectra with f=[0,fs/2]</span>
+0054 df=f(2)-f(1);
+0055 Bratio=G^(1/2/n)-G^(-1/2/n);  <span class="comment">% bandwidth ratio, i.e. B=fc*Bratio for each octave band</span>
+0056 <span class="comment">% Compute the lowest 1/n octave band, as the band with 3 frequency bins</span>
+0057 <span class="comment">% within the octave band. Then compute the lower cutoff freq. of this band</span>
+0058 fcmin=3*df/Bratio;
+0059 fmin=fcmin*G^(-1/2/n);
+0060 
+0061 <span class="comment">% Now compute all exact center frequencies for the octave bands</span>
+0062 fcs=<a href="noctfreqs.html" class="code" title="function fcs = noctfreqs(n, fmin, fmax)">noctfreqs</a>(n,fmin,fs/2/1.15);
+0063 <span class="keyword">for</span> k=1:length(fcs);
+0064     fc=fcs(k);
+0065     fl = fc/OctRatio;
+0066     fh = fc*OctRatio;
+0067     fnyq = fs/2;                <span class="comment">% Nyquist frequency for BUTTER command</span>
+0068     <span class="comment">% Fourth (since rev 1.1) order butterworth bandpass filter coefficients</span>
+0069     [b,a] = butter(3,[fl/fnyq fh/fnyq]);  
+0070     <span class="comment">% Check that filter corresponds to IEC/ANSI standard, or issue warning</span>
+0071     <span class="comment">% The filter shape is checked in freq. range fc/5 &lt; f &lt; 5*fc</span>
+0072     [Lu,Ll,ff]=<a href="noctlimits.html" class="code" title="function [Lu,Ll,f] = noctlimits(n,fc);">noctlimits</a>(n,fc);         <span class="comment">% Calculate limits</span>
+0073     Hf=freqz(b,a,f,fs);
+0074     Lu=interp1(ff,Lu,f,<span class="string">'linear'</span>,<span class="string">'extrap'</span>);                <span class="comment">% Interpolate fu onto ff axis</span>
+0075     Ll=interp1(ff,Ll,f,<span class="string">'linear'</span>,<span class="string">'extrap'</span>);
+0076     idx=find(f &gt; fc/5  &amp; f &lt; 5*fc &amp; Lu &gt; -75);          <span class="comment">% Added Lu boundary 2013-03-18</span>
+0077     <span class="keyword">if</span> ~isempty(find(<a href="db20.html" class="code" title="function db20 = db20(y,ref);">db20</a>(Hf(idx))&gt;Lu(idx))) | ~isempty(find(<a href="db20.html" class="code" title="function db20 = db20(y,ref);">db20</a>(Hf(idx))&lt;Ll(idx)))
+0078         warning([<span class="string">'nonconfirming octave: '</span> num2str(fc) <span class="string">' Hz'</span>])
+0079     <span class="keyword">end</span>
+0080 <span class="comment">%     semilogx(f,db20(Hf),f,Ll,f,Lu)</span>
+0081 <span class="comment">%     title(['fc = ' num2str(fc)])</span>
+0082 <span class="comment">%     pause</span>
+0083     <span class="keyword">if</span> strcmp(upper(Type),<span class="string">'LIN'</span>)
+0084         ENBW=<a href="winenbw.html" class="code" title="function Be = winenbw(w);">winenbw</a>(win);
+0085         St=(abs(Hf).*Gxx).^2;
+0086         L(k)=sqrt(sum(St)/ENBW);
+0087     <span class="keyword">else</span>
+0088         St=(abs(Hf).^2).*Gxx;
+0089         L(k)=sqrt(df*sum(St));
+0090     <span class="keyword">end</span>
+0091 <span class="keyword">end</span>
+0092 f=fcs;
+0093 
+0094 warning on</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

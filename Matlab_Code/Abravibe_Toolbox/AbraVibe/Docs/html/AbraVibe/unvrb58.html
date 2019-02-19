@@ -1,0 +1,198 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of unvrb58</title>
+  <meta name="keywords" content="unvrb58">
+  <meta name="description" content="UNV_RB58    Read a binary universal file record 58b">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; unvrb58.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>unvrb58
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>UNV_RB58    Read a binary universal file record 58b</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [XData,Data,UnvHead] = unv_rb58(fid,FuncIdLine); </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> UNV_RB58    Read a binary universal file record 58b
+
+ function [XData,Data,UnvHead] = unv_rb58(fid,FuncIdLine); 
+
+ This function reads one BINARY dataset, type 58b (Test Data).
+ 
+ Output:    
+       XData contains x-axis for unevenly spaced data, or 0 if evenly spaced
+        Data    contains data in a column vector
+        UnvHead contains a struct with all header values</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="nbr2dir.html" class="code" title="function DirString = nbr2dir(DirNumber)">nbr2dir</a>	NBR2DIR   Convert numeric direction to string</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="unvread.html" class="code" title="function LastNo = unvread(FileName,Prefix,FirstNo,Type)">unvread</a>	UNVREAD Read a standard UNV file</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [XData,Data,UnvHead] = unv_rb58(fid,FuncIdLine); </a>
+0002 <span class="comment">% UNV_RB58    Read a binary universal file record 58b</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">% function [XData,Data,UnvHead] = unv_rb58(fid,FuncIdLine);</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">% This function reads one BINARY dataset, type 58b (Test Data).</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">% Output:</span>
+0009 <span class="comment">%       XData contains x-axis for unevenly spaced data, or 0 if evenly spaced</span>
+0010 <span class="comment">%        Data    contains data in a column vector</span>
+0011 <span class="comment">%        UnvHead contains a struct with all header values</span>
+0012 <span class="comment">%</span>
+0013 
+0014 <span class="comment">% Copyright (c) 2016 by Anders Brandt</span>
+0015 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0016 <span class="comment">% Version: 1.0 2016-02-06</span>
+0017 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0018 
+0019 XData=0;                    <span class="comment">% In case not used later</span>
+0020 <span class="comment">%---------------------------------------------------------------------------------</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">% Special Binary format 58 header, first row</span>
+0023 <span class="comment">%-----------------------------------------------------------------------------------------------</span>
+0024 ByteOrderMethod=str2num(FuncIdLine(8:13));    <span class="comment">% 1=little 2=big endian</span>
+0025 FloatMethod=str2num(FuncIdLine(14:19));        <span class="comment">% 1=DEC VMS, 2=IEEE 754 (Unix), 3=IBM 5/370</span>
+0026 NoALines=str2num(FuncIdLine(20:31));        <span class="comment">% Number of ASCII Lines below</span>
+0027 NoBytes=str2num(FuncIdLine(32:43));            <span class="comment">% Number of bytes after the ASCII lines</span>
+0028 <span class="comment">%---------------------------------------------------------------------------------</span>
+0029 <span class="comment">%</span>
+0030 <span class="comment">% Check that data is for Windows NT - this interface only supports ByteOrder=1 FloatMethod=2</span>
+0031 <span class="comment">%-----------------------------------------------------------------------------------------------</span>
+0032 <span class="keyword">if</span> FloatMethod ~= 2
+0033    error(<span class="string">'This Binary UNV file has a format not supported by this interface'</span>);
+0034 <span class="keyword">end</span>
+0035 <span class="comment">%</span>
+0036 <span class="comment">% Record 1 - 5, ID lines</span>
+0037 <span class="comment">%-----------------------------------------------------------------------------------------------</span>
+0038 UnvHead.Title=fgetl(fid);            <span class="comment">% ID line 1</span>
+0039 UnvHead.Title2=fgetl(fid);          <span class="comment">% Ditto 2</span>
+0040 UnvHead.Date=fgetl(fid);            <span class="comment">% ID line 3, normally date and time</span>
+0041 UnvHead.Title3=fgetl(fid);            <span class="comment">% ...</span>
+0042 UnvHead.Title4=fgetl(fid);
+0043     
+0044 <span class="comment">% Record 6 - DOF Identification</span>
+0045 <span class="comment">%-----------------------------------------------------------------------------------------------</span>
+0046 L=fgetl(fid);
+0047 UnvHead.FunctionType=sscanf(L(1:5),<span class="string">'%i'</span>);    <span class="comment">% Function Type</span>
+0048 UnvHead.FuncId=sscanf(L(6:15),<span class="string">'%i'</span>);         <span class="comment">% Function ID Number</span>
+0049 UnvHead.SeqNo=sscanf(L(16:20),<span class="string">'%i'</span>);         <span class="comment">% Version or Sequence Number</span>
+0050 UnvHead.LoadCase=sscanf(L(21:30),<span class="string">'%i'</span>);      <span class="comment">% Load Case ID Number</span>
+0051 Dummy=sscanf(L(31),<span class="string">'%s'</span>);                    <span class="comment">% Blank</span>
+0052 UnvHead.RespId=sscanf(L(32:41),<span class="string">'%s'</span>);         <span class="comment">% Response Entity Name</span>
+0053 UnvHead.Dof=sscanf(L(42:51),<span class="string">'%i'</span>);           <span class="comment">% Response No</span>
+0054 TmpDir=sscanf(L(52:55),<span class="string">'%i'</span>);                <span class="comment">% Response Direction</span>
+0055 UnvHead.Dir=<a href="nbr2dir.html" class="code" title="function DirString = nbr2dir(DirNumber)">nbr2dir</a>(TmpDir);                 <span class="comment">% Response Direction</span>
+0056 Dummy=sscanf(L(56),<span class="string">'%s'</span>);                    <span class="comment">% Blank</span>
+0057 UnvHead.RefId=sscanf(L(57:66),<span class="string">'%s'</span>);         <span class="comment">% Reference Entity Name</span>
+0058 UnvHead.RefDof=sscanf(L(67:76),<span class="string">'%i'</span>);        <span class="comment">% Reference Node Number</span>
+0059 TmpDir=sscanf(L(77:80),<span class="string">'%i'</span>);                <span class="comment">% Reference Direction</span>
+0060 UnvHead.RefDir=<a href="nbr2dir.html" class="code" title="function DirString = nbr2dir(DirNumber)">nbr2dir</a>(TmpDir);              <span class="comment">% Reference Direction</span>
+0061 
+0062 <span class="comment">% Record 7 - Data Form</span>
+0063 <span class="comment">%-----------------------------------------------------------------------------------------------</span>
+0064 L=fgetl(fid);
+0065 UnvHead.OrdDataType=sscanf(L(1:10),<span class="string">'%i'</span>);        <span class="comment">% Ordinate Data Type (real or imaginary)</span>
+0066 UnvHead.NoValues=sscanf(L(11:20),<span class="string">'%i'</span>);         <span class="comment">% No Data Pairs (uneven), or Values (even)</span>
+0067 UnvHead.xSpacing=sscanf(L(21:30),<span class="string">'%i'</span>);         <span class="comment">% Abscissa Spacing (even or uneven)</span>
+0068 UnvHead.xStart=sscanf(L(31:43),<span class="string">'%g'</span>);           <span class="comment">% Abscissa minimum</span>
+0069 UnvHead.xIncrement=sscanf(L(44:56),<span class="string">'%g'</span>);       <span class="comment">% Abscissa increment</span>
+0070 UnvHead.ZValue=sscanf(L(57:69),<span class="string">'%g'</span>);           <span class="comment">% Z-axis value</span>
+0071 
+0072 <span class="comment">% Record 8 - Abscissa Data Characteristics</span>
+0073 <span class="comment">%-----------------------------------------------------------------------------------------------</span>
+0074 L=fgetl(fid);
+0075 UnvHead.xSpecDataType=sscanf(L(1:10),<span class="string">'%i'</span>);     <span class="comment">% Specific Data Type</span>
+0076 UnvHead.xLUnitsExp=sscanf(L(11:15),<span class="string">'%i'</span>);        <span class="comment">% Length Units Exponent</span>
+0077 UnvHead.xFUnitsExp=sscanf(L(16:20),<span class="string">'%i'</span>);        <span class="comment">% Force Units Exp.</span>
+0078 UnvHead.xTUnitsExp=sscanf(L(21:25),<span class="string">'%i'</span>);        <span class="comment">% Temp. Units Exp.</span>
+0079 Dummy=sscanf(L(26),<span class="string">'%s'</span>);
+0080 UnvHead.xLabel=sscanf(L(27:46),<span class="string">'%s'</span>);           <span class="comment">% Axis Label</span>
+0081 Dummy=sscanf(L(47),<span class="string">'%s'</span>);
+0082 UnvHead.xUnit=sscanf(L(48:end),<span class="string">'%s'</span>);           <span class="comment">% Axis Units Label</span>
+0083 
+0084 <span class="comment">% Record 9 - Ordinate Data Characteristics</span>
+0085 <span class="comment">%-----------------------------------------------------------------------------------------------</span>
+0086 L=fgetl(fid);
+0087 UnvHead.OrdSpecDataType=sscanf(L(1:10),<span class="string">'%i'</span>);   <span class="comment">% Specific Data Type</span>
+0088 UnvHead.OrdLUnitsExp=sscanf(L(11:15),<span class="string">'%i'</span>);        <span class="comment">% Length Units Exponent</span>
+0089 UnvHead.OrdFUnitsExp=sscanf(L(16:20),<span class="string">'%i'</span>);        <span class="comment">% Force Units Exp.</span>
+0090 UnvHead.OrdTUnitsExp=sscanf(L(21:25),<span class="string">'%i'</span>);        <span class="comment">% Temp. Units Exp.</span>
+0091 Dummy=sscanf(L(26),<span class="string">'%s'</span>);
+0092 UnvHead.Label=sscanf(L(27:46),<span class="string">'%s'</span>);            <span class="comment">% Axis Label</span>
+0093 Dummy=sscanf(L(47),<span class="string">'%s'</span>);
+0094 UnvHead.Unit=sscanf(L(48:end),<span class="string">'%s'</span>);            <span class="comment">% Axis Units Label</span>
+0095 
+0096 <span class="comment">% Record 10 - Denominator Data Characteristics</span>
+0097 <span class="comment">%-----------------------------------------------------------------------------------------------</span>
+0098 L=fgetl(fid);
+0099 UnvHead.DenSpecDataType=sscanf(L(1:10),<span class="string">'%i'</span>);   <span class="comment">% Specific Data Type</span>
+0100 UnvHead.DenLUnitsExp=sscanf(L(11:15),<span class="string">'%i'</span>);        <span class="comment">% Length Units Exponent</span>
+0101 UnvHead.DenFUnitsExp=sscanf(L(16:20),<span class="string">'%i'</span>);        <span class="comment">% Force Units Exp.</span>
+0102 UnvHead.DenTUnitsExp=sscanf(L(21:25),<span class="string">'%i'</span>);        <span class="comment">% Temp. Units Exp.</span>
+0103 Dummy=sscanf(L(26),<span class="string">'%s'</span>);
+0104 UnvHead.RefLabel=sscanf(L(27:46),<span class="string">'%s'</span>);         <span class="comment">% Axis Label</span>
+0105 Dummy=sscanf(L(47),<span class="string">'%s'</span>);
+0106 UnvHead.RefUnit=sscanf(L(48:end),<span class="string">'%s'</span>);         <span class="comment">% Axis Units Label</span>
+0107 
+0108 <span class="comment">% Record 11 - Z-axis Data Characteristics</span>
+0109 <span class="comment">%-----------------------------------------------------------------------------------------------</span>
+0110 L=fgetl(fid);
+0111 UnvHead.ZSpecDataType=sscanf(L(1:10),<span class="string">'%i'</span>);     <span class="comment">% Specific Data Type</span>
+0112 UnvHead.ZLUnitsExp=sscanf(L(11:15),<span class="string">'%i'</span>);        <span class="comment">% Length Units Exponent</span>
+0113 UnvHead.ZFUnitsExp=sscanf(L(16:20),<span class="string">'%i'</span>);        <span class="comment">% Force Units Exp.</span>
+0114 UnvHead.ZTUnitsExp=sscanf(L(21:25),<span class="string">'%i'</span>);        <span class="comment">% Temp. Units Exp.</span>
+0115 Dummy=sscanf(L(26),<span class="string">'%s'</span>);
+0116 UnvHead.ZLabel=sscanf(L(27:46),<span class="string">'%s'</span>);           <span class="comment">% Axis Label</span>
+0117 Dummy=sscanf(L(47),<span class="string">'%s'</span>);
+0118 UnvHead.ZUnit=sscanf(L(48:end),<span class="string">'%s'</span>);           <span class="comment">% Axis Units Label</span>
+0119 
+0120 <span class="comment">%-----------------------------------------------------------------------------------------------</span>
+0121 <span class="comment">% Read binary data and decode it</span>
+0122 <span class="keyword">if</span> ByteOrderMethod == 1
+0123     MachineFormat=<span class="string">'l'</span>;  <span class="comment">% Little endian</span>
+0124 <span class="keyword">else</span>
+0125     MachineFormat=<span class="string">'b'</span>;  <span class="comment">% Big endian</span>
+0126 <span class="keyword">end</span>
+0127 <span class="keyword">if</span> UnvHead.OrdDataType == 2 | UnvHead.OrdDataType == 5
+0128     Precision=<span class="string">'single'</span>;
+0129     bpn=4;                  <span class="comment">% Bytes per number</span>
+0130 <span class="keyword">else</span>
+0131     Precision=<span class="string">'double'</span>;
+0132     bpn=8;
+0133 <span class="keyword">end</span>
+0134 A=fread(fid,NoBytes/bpn,Precision,MachineFormat);
+0135 <span class="keyword">if</span> UnvHead.OrdDataType == 2 | UnvHead.OrdDataType == 4  <span class="comment">% Real Data</span>
+0136     Data=A;
+0137 <span class="keyword">else</span>
+0138     Data=A(1:2:end)+j*A(2:2:end);
+0139 <span class="keyword">end</span>
+0140 <span class="comment">%-----------------------------------------------------------------------------------------------</span>
+0141 F_id=fscanf(fid,<span class="string">'%i'</span>,1);            <span class="comment">% Last -1 of dataset 58</span>
+0142</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

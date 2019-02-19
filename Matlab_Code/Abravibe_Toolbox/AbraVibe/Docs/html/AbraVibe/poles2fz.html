@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of poles2fz</title>
+  <meta name="keywords" content="poles2fz">
+  <meta name="description" content="POLES2FZ Convert poles to frequencies and relative damping">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; poles2fz.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>poles2fz
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>POLES2FZ Convert poles to frequencies and relative damping</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [fr,zr] = poles2fz(poles) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment">POLES2FZ Convert poles to frequencies and relative damping
+
+       [fr,zr] = poles2fz(poles)
+
+       fr          Undamped natural (eigen-) frequencies, in vector
+       zr          Relative damping ratios, in vector same length as fr
+
+       poles       Complex poles in column vector</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="frf2msdof.html" class="code" title="function [p,V] = frf2msdof(H,f,fstart,NoLines,Type,ScaleDof)">frf2msdof</a>	FRF2MSDOF Curve fit FRFs into poles and mode shapes, SDOF techniques</li><li><a href="listpoles.html" class="code" title="function listpoles(p1,p2,str1,str2)">listpoles</a>	LISTPOLES     List undamped natural frequencies and damping factors</li><li><a href="plotmac.html" class="code" title="function h = plotmac(MAC,p1,p2,str1,str2)">plotmac</a>	PLOTMAC   Plot Manhattan type MAC matrix plot</li><li><a href="sdiagramGUI.html" class="code" title="function varargout = sdiagramGUI(varargin)">sdiagramGUI</a>	SDIAGRAMGUI MATLAB code for sdiagramGUI.fig. This is an internal function</li><li><a href="wincomp.html" class="code" title="function [NewPoles,a_factor] = wincomp(OldPoles,N,fs,EndPercent)">wincomp</a>	WINCOMP       Compensate poles due to exponential window from Impact testing</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [fr,zr] = poles2fz(poles)</a>
+0002 <span class="comment">%POLES2FZ Convert poles to frequencies and relative damping</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%       [fr,zr] = poles2fz(poles)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%       fr          Undamped natural (eigen-) frequencies, in vector</span>
+0007 <span class="comment">%       zr          Relative damping ratios, in vector same length as fr</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%       poles       Complex poles in column vector</span>
+0010 <span class="comment">%</span>
+0011 
+0012 
+0013 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0014 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0015 <span class="comment">% Version: 1.0 2011-06-23</span>
+0016 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0017 
+0018 a=real(poles);
+0019 b=imag(poles);
+0020 wr=sqrt(a.^2+b.^2);     <span class="comment">% This is more transparent than the equivalent wr=abs(poles).^2</span>
+0021 fr=1/2/pi*wr;
+0022 zr=-a./wr;</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

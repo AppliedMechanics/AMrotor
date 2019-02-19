@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of h2ptdhankel</title>
+  <meta name="keywords" content="h2ptdhankel">
+  <meta name="description" content="H2PTDHANKEL   Build Hankel matrix of time functions for PTD method">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; h2ptdhankel.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>h2ptdhankel
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>H2PTDHANKEL   Build Hankel matrix of time functions for PTD method</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function Hank = h2ptdhankel(h,nr,nc,nstart) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> H2PTDHANKEL   Build Hankel matrix of time functions for PTD method
+
+       Hank = h2hankel(h,nc,nstart)
+
+       Hank        The system Hankel matrix, R*nr-by-D*nc
+
+       h           Matrix of impulse responses, N/2+1-by-D-by-R
+       nr          Number of row time repetitions
+       nc          Number of column repetitions for each response
+       nstart      time sample to start at (default = 1)
+
+ This is an internal function.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="ir2ptime.html" class="code" title="function [p,L,H,f] = ir2ptime(h,fs,NLines,MaxModes,EstType,MIF,f,fOffset);">ir2ptime</a>	IR2PTIME   Time domain MDOF methods for parameter extraction from free</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function Hank = h2ptdhankel(h,nr,nc,nstart)</a>
+0002 <span class="comment">% H2PTDHANKEL   Build Hankel matrix of time functions for PTD method</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%       Hank = h2hankel(h,nc,nstart)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%       Hank        The system Hankel matrix, R*nr-by-D*nc</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%       h           Matrix of impulse responses, N/2+1-by-D-by-R</span>
+0009 <span class="comment">%       nr          Number of row time repetitions</span>
+0010 <span class="comment">%       nc          Number of column repetitions for each response</span>
+0011 <span class="comment">%       nstart      time sample to start at (default = 1)</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">% This is an internal function.</span>
+0014 
+0015 <span class="comment">% Copyright (c) 2009-2012 by Anders Brandt</span>
+0016 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0017 <span class="comment">% Version: 1.0 2012-04-15</span>
+0018 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0019 
+0020 <span class="keyword">if</span> nargin == 3
+0021     nstart=1;
+0022 <span class="keyword">end</span>
+0023 
+0024 <span class="comment">% Skip first nstart-1 samples in h</span>
+0025 h=h(nstart:<span class="keyword">end</span>,:,:);
+0026 
+0027 <span class="comment">% Check size of h</span>
+0028 [hLength,D,R]=size(h);
+0029 
+0030 <span class="comment">% Check that nc and nr does not exhaust h</span>
+0031 <span class="keyword">if</span> (nc+nr) &gt; hLength
+0032     error(<span class="string">'nr+nc must be &lt;= number of time samples in h'</span>)
+0033 <span class="keyword">end</span>
+0034     
+0035 <span class="comment">% Build Hankel matrix with column vectors of all references</span>
+0036 Hank=zeros(R*nr,D*nc);
+0037 h=permute(h,[3 1 2]);       <span class="comment">% Now comes in order of ref, time, resp</span>
+0038 <span class="keyword">for</span> d = 1:D
+0039     <span class="comment">% Pick out the impulse response to repeat</span>
+0040     ht=h(:,:,d);
+0041     <span class="comment">% Make it a column vector</span>
+0042     ht=ht(:);
+0043     <span class="comment">% Repeat it shifted in nc columns</span>
+0044     <span class="keyword">for</span> c = 1:nc
+0045       Hankt(:,c)=ht((c-1)*R+1:(c-1+nr)*R);
+0046     <span class="keyword">end</span>
+0047     <span class="comment">% Move all vectors for this response into final Hankel matrix</span>
+0048     Hank(:,(d-1)*nc+1:d*nc)=Hankt;
+0049 <span class="keyword">end</span>
+0050</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

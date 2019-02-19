@@ -1,0 +1,244 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of acsdsp</title>
+  <meta name="keywords" content="acsdsp">
+  <meta name="description" content="ACSDSP  Cross-Spectral Density, CSD, by smoothed periodogram method">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; acsdsp.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>acsdsp
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>ACSDSP  Cross-Spectral Density, CSD, by smoothed periodogram method</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [Pyx, f, Nw] = acsdsp(varargin); </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> ACSDSP  Cross-Spectral Density, CSD, by smoothed periodogram method
+
+           [Pyx,f,Nw] = acsdsp(x,y,fs,N,winstr)
+                        produces a linear resolution CSD, similar to ACSDW
+           [Pyx,f,Nw] = acsdsp(x,y,fs,fmin,fmax,Nfreqs,Lsmin,winstr)
+                        produces a logartihmic frequency resolution CSD
+
+            Pyx        CSD in units of x squared per Hz (EU^2/Hz)
+            f          Frequency axis in Hz
+            Nw         Length of smoothing window. Determines random
+                       error; eps_r=1/sqrt(Nw). For logarithmic frequency
+                       resolution, Nw is a vector with length(f).
+
+            x          Input time data in column(s)
+            y          Output time data in column(s)
+            fs         Sampling frequency in Hz
+            N          'Blocksize', as for Welch (see apsdw)
+            winstr     String with window function, e.g. 'boxcar' (default)
+            fmin       First frequency value
+            fmax       Last frequency value
+            Nfreqs     Number of spectrum values to calculate between fmin and fmax
+            Lsmin      Minimum smoothing window length (for first freq.)
+
+ The CSD is computed by the smoothed periodogram method.
+ Note that the window used by this method is quite different from the time
+ window (e.g. Hanning window) used by Welch's method for CSD computation.
+ The window should normally be 'boxcar', which means it does not need to
+ be specified.
+ A logarithmic frequency axis uses frequency resolution with constant
+ relative bandwidth. The first frequency value will be given by
+ fs/length(win), and higher frequencies will have a resolution in a
+ logarithmic fashion.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [Pyx, f, Nw] = acsdsp(varargin);</a>
+0002 <span class="comment">% ACSDSP  Cross-Spectral Density, CSD, by smoothed periodogram method</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%           [Pyx,f,Nw] = acsdsp(x,y,fs,N,winstr)</span>
+0005 <span class="comment">%                        produces a linear resolution CSD, similar to ACSDW</span>
+0006 <span class="comment">%           [Pyx,f,Nw] = acsdsp(x,y,fs,fmin,fmax,Nfreqs,Lsmin,winstr)</span>
+0007 <span class="comment">%                        produces a logartihmic frequency resolution CSD</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%            Pyx        CSD in units of x squared per Hz (EU^2/Hz)</span>
+0010 <span class="comment">%            f          Frequency axis in Hz</span>
+0011 <span class="comment">%            Nw         Length of smoothing window. Determines random</span>
+0012 <span class="comment">%                       error; eps_r=1/sqrt(Nw). For logarithmic frequency</span>
+0013 <span class="comment">%                       resolution, Nw is a vector with length(f).</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%            x          Input time data in column(s)</span>
+0016 <span class="comment">%            y          Output time data in column(s)</span>
+0017 <span class="comment">%            fs         Sampling frequency in Hz</span>
+0018 <span class="comment">%            N          'Blocksize', as for Welch (see apsdw)</span>
+0019 <span class="comment">%            winstr     String with window function, e.g. 'boxcar' (default)</span>
+0020 <span class="comment">%            fmin       First frequency value</span>
+0021 <span class="comment">%            fmax       Last frequency value</span>
+0022 <span class="comment">%            Nfreqs     Number of spectrum values to calculate between fmin and fmax</span>
+0023 <span class="comment">%            Lsmin      Minimum smoothing window length (for first freq.)</span>
+0024 <span class="comment">%</span>
+0025 <span class="comment">% The CSD is computed by the smoothed periodogram method.</span>
+0026 <span class="comment">% Note that the window used by this method is quite different from the time</span>
+0027 <span class="comment">% window (e.g. Hanning window) used by Welch's method for CSD computation.</span>
+0028 <span class="comment">% The window should normally be 'boxcar', which means it does not need to</span>
+0029 <span class="comment">% be specified.</span>
+0030 <span class="comment">% A logarithmic frequency axis uses frequency resolution with constant</span>
+0031 <span class="comment">% relative bandwidth. The first frequency value will be given by</span>
+0032 <span class="comment">% fs/length(win), and higher frequencies will have a resolution in a</span>
+0033 <span class="comment">% logarithmic fashion.</span>
+0034 <span class="comment">%</span>
+0035 
+0036 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0037 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0038 <span class="comment">% Version: 1.0 2011-06-23</span>
+0039 <span class="comment">%          1.1 2012-07-08 Fixed bugs for multichannel data</span>
+0040 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0041 
+0042 <span class="comment">% Parse input parameters and find out which call is made</span>
+0043 x=varargin{1};
+0044 y=varargin{2};
+0045 fs=varargin{3};
+0046 <span class="keyword">if</span> nargin &lt;= 5
+0047     N=varargin{4};
+0048     <span class="keyword">if</span> nargin == 5
+0049         winstr=varargin{5};
+0050     <span class="keyword">end</span>
+0051 <span class="keyword">else</span>
+0052     fmin=varargin{4};
+0053     fmax=varargin{5};
+0054     Nfreqs=varargin{6};
+0055     Lsmin=varargin{7};
+0056     <span class="keyword">if</span> nargin == 8
+0057         winstr=varargin{8};
+0058     <span class="keyword">end</span>
+0059 <span class="keyword">end</span>
+0060 
+0061 <span class="comment">% Input checks</span>
+0062 <span class="keyword">if</span> nargin == 4          <span class="comment">% Call is for linear resolution</span>
+0063     winstr=<span class="string">'boxcar'</span>;
+0064     res=<span class="string">'LIN'</span>;
+0065 <span class="keyword">elseif</span> nargin == 5
+0066     res=<span class="string">'LIN'</span>;          <span class="comment">% Call is for linear resolution</span>
+0067 <span class="keyword">elseif</span> nargin == 7
+0068     winstr=<span class="string">'boxcar'</span>;    <span class="comment">% Call is for logarithmic resolution</span>
+0069     res=<span class="string">'LOG'</span>;
+0070 <span class="keyword">elseif</span> nargin == 8
+0071     res=<span class="string">'LOG'</span>;
+0072 <span class="keyword">end</span>
+0073 
+0074 <span class="comment">% First remove mean</span>
+0075 [nx,mx]=size(x);
+0076 [ny,my]=size(y);
+0077 <span class="keyword">if</span> nx ~= ny
+0078     minL=min(nx,ny);
+0079     x=x(1:minL,:);
+0080     y=y(1:minL,:);
+0081     nx=minL;
+0082     ny=minL;
+0083 <span class="keyword">end</span>
+0084 L=length(x(:,1));                   
+0085 <span class="comment">% Remove mean from all columns</span>
+0086 x=x-ones(nx,1)*mean(x);             
+0087 y=y-ones(ny,1)*mean(y);          
+0088 
+0089 <span class="comment">% Change blocksize to actual number of freq. lines (only used for linear</span>
+0090 <span class="comment">% resolution)</span>
+0091 N=N/2+1;
+0092 
+0093 
+0094 <span class="comment">% Loop through all combinations of input and output</span>
+0095 xin=x;
+0096 yin=y;
+0097 <span class="keyword">for</span> r = 1:mx
+0098     x=xin(:,r);
+0099     <span class="keyword">for</span> d = 1:my
+0100         y=yin(:,d);
+0101         <span class="comment">% Compute 'periodogram'</span>
+0102         p=1/L^2*conj(fft(x)).*fft(y);
+0103         p=2*p(1:L/2+1);               <span class="comment">% Single-sided</span>
+0104         df=fs/L;
+0105         p=p/df;
+0106         p(1)=0;
+0107         Lp=length(p);
+0108         fp=(0:df:(Lp-1)*df)';
+0109         
+0110         <span class="keyword">if</span> strcmp(res,<span class="string">'LIN'</span>)
+0111             <span class="comment">% Determine smoothing window</span>
+0112             Nw=floor(2*(Lp-2)/(N+1)+1);
+0113             <span class="keyword">if</span> mod(Nw,2) == 0
+0114                 Nw=Nw-1;                <span class="comment">% Ensure odd length</span>
+0115             <span class="keyword">end</span>
+0116             win=feval(winstr,Nw);
+0117             <span class="comment">% Ensure that the sum of the window is unity</span>
+0118             win = win/sum(win);
+0119             P=zeros(N,1);
+0120             <span class="comment">% Smooth estimate by window</span>
+0121             Nstep=(Nw-1)/2;          <span class="comment">% 50 % overlap</span>
+0122             P=zeros(N,1);
+0123             f=zeros(N,1);
+0124             <span class="keyword">for</span> n =1:N
+0125                 P(n)=sum(p((n-1)*Nstep+2:(n+1)*Nstep+2).*win);
+0126                 f(n)=(n*(Nw-1)/2+2)*df;
+0127             <span class="keyword">end</span>
+0128         <span class="keyword">elseif</span> strcmp(res,<span class="string">'LOG'</span>)
+0129             <span class="comment">% Calculate step parameter s</span>
+0130             s=log(fmax/fmin)/(Nfreqs-1);
+0131             <span class="comment">%     Lsmin=floor(2*fmin/df);</span>
+0132             P=zeros(Nfreqs,1);
+0133             f=zeros(Nfreqs,1);
+0134             Nw=zeros(Nfreqs,1);
+0135             <span class="comment">% Loop through frequencies</span>
+0136             <span class="keyword">for</span> n = 1:Nfreqs
+0137                 <span class="comment">% Determine frequency to calculate</span>
+0138                 ft=fmin*exp(s*(n-1));
+0139                 <span class="comment">% find closest actual frequency</span>
+0140                 [dum,k]=min(abs(fp-ft));
+0141                 f(n)=fp(k);
+0142                 <span class="comment">% Determine nominal smoothing window length</span>
+0143                 Nwt=round(min(Lsmin*exp(s*(n-1)),2*(fs/2-f(n))/df));
+0144                 <span class="keyword">if</span> mod(Nwt,2) == 0
+0145                     Nwt=Nwt+1;
+0146                 <span class="keyword">end</span>
+0147                 Nw(n)=Nwt;
+0148                 win=feval(winstr,Nw(n));
+0149                 win = win/sum(win);
+0150                 <span class="keyword">if</span> k+(Nw(n)-1)/2 &lt; Lp
+0151                     pt=p(k-(Nw(n)-1)/2:k+(Nw(n)-1)/2);
+0152                     P(n)=sum(pt.*win);
+0153                 <span class="keyword">end</span>
+0154             <span class="keyword">end</span>
+0155             <span class="comment">% Check if there are values at higher freqs that did not get filled in</span>
+0156             <span class="comment">% due to the width of the smoothing window being too high</span>
+0157             idx=min(find(f(2:end) == 0));
+0158             <span class="keyword">if</span> ~isempty(idx)
+0159                 f=f(1:idx-1);
+0160                 P=P(1:idx-1);
+0161                 Nw=Nw(1:idx-1);
+0162             <span class="keyword">end</span>
+0163         <span class="keyword">end</span>
+0164         Pyx(:,d,r)=P;
+0165     <span class="keyword">end</span>
+0166 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

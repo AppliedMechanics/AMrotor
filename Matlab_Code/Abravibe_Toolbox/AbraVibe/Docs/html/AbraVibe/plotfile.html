@@ -1,0 +1,406 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of plotfile</title>
+  <meta name="keywords" content="plotfile">
+  <meta name="description" content="PLOTFILE  Plot data in ABRABIVE file(s) with default format">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; plotfile.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>plotfile
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>PLOTFILE  Plot data in ABRABIVE file(s) with default format</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function plotfile(FileList,Overlay,col); </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> PLOTFILE  Plot data in ABRABIVE file(s) with default format
+
+           plotfile(FileList,Overlay,col);
+
+           FileList    String or, if more than one file, cell array with
+                       file name(s). All files must exist. The list can
+                       contain EITHER regular ABRAVIBE files (with
+                       extension .mat), OR .imptime files
+           Overlay     Logical, if = 1, all files containing the same
+                       measurement function will be plotted in the same window
+           col         Color string, or cell array of strings, see PLOT
+                       Must be same length as FileList</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="angledeg.html" class="code" title="function phase = angledeg(H);">angledeg</a>	ANGLEDEG Calculate angle in degrees for complex vector(s)</li><li><a href="headpstr.html" class="code" title="function DofString = headpstr(Header)">headpstr</a>	HEADPSTR     Create string out of Abravibe header Dof and Dir info</li><li><a href="makexaxis.html" class="code" title="function x = makexaxis(y,dx,x0);">makexaxis</a>	MAKEXAXIS Create a time or frequency x axis</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="abrabrowse.html" class="code" title="function varargout = abrabrowse(varargin)">abrabrowse</a>	ABRABROWSE GUI-based data browser for ABRAVIBE toolbox data files</li></ul>
+<!-- crossreference -->
+
+<h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="#_sub1" class="code">function PlotFunction(x,y,Header,c)</a></li><li><a href="#_sub2" class="code">function PlotImptime(Data,Header,Overlay)</a></li></ul>
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function plotfile(FileList,Overlay,col);</a>
+0002 <span class="comment">% PLOTFILE  Plot data in ABRABIVE file(s) with default format</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%           plotfile(FileList,Overlay,col);</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%           FileList    String or, if more than one file, cell array with</span>
+0007 <span class="comment">%                       file name(s). All files must exist. The list can</span>
+0008 <span class="comment">%                       contain EITHER regular ABRAVIBE files (with</span>
+0009 <span class="comment">%                       extension .mat), OR .imptime files</span>
+0010 <span class="comment">%           Overlay     Logical, if = 1, all files containing the same</span>
+0011 <span class="comment">%                       measurement function will be plotted in the same window</span>
+0012 <span class="comment">%           col         Color string, or cell array of strings, see PLOT</span>
+0013 <span class="comment">%                       Must be same length as FileList</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">%</span>
+0016 
+0017 
+0018 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0019 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0020 <span class="comment">% Version: 1.0 2011-06-23</span>
+0021 <span class="comment">%          1.1 2011-10-14 Added support for type 12, and for x axes not</span>
+0022 <span class="comment">%                         starting at 0</span>
+0023 <span class="comment">%          1.2 2013-11-16 Added support for type 30, transient spectrum</span>
+0024 <span class="comment">%          1.3 2014-07-10 Added support for .imptime files. Limitation is</span>
+0025 <span class="comment">%                         that entire FileList must contain *either* .imptime</span>
+0026 <span class="comment">%                         *or* regular ABRAVIBE files</span>
+0027 <span class="comment">%          1.4 2014-11-05 Added fixed ylim [0 1] for coherence</span>
+0028 <span class="comment">%          1.5 2018-05-10 Added support for type 26, multiple coherence and</span>
+0029 <span class="comment">%                         fixed bug for overlay plot of imptime files</span>
+0030 <span class="comment">%</span>
+0031 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0032 
+0033 <span class="comment">% Parse inputs</span>
+0034 <span class="keyword">if</span> nargin == 1
+0035     Overlay = 0;
+0036     col=<span class="string">'DEF'</span>;
+0037 <span class="keyword">elseif</span> nargin == 2
+0038     col=<span class="string">'DEF'</span>;
+0039 <span class="keyword">else</span>
+0040     col=upper(col);
+0041 <span class="keyword">end</span>
+0042 
+0043 <span class="comment">% Defaults are also defined in subfunction PlotFunction at the end of this</span>
+0044 <span class="comment">% file!</span>
+0045 DefCol=[ 0         0    1.0000
+0046          0    0.5000         0
+0047     1.0000         0         0
+0048          0    0.7500    0.7500
+0049     0.7500         0    0.7500
+0050     0.7500    0.7500         0
+0051     0.2500    0.2500    0.2500];
+0052 
+0053 <span class="comment">% Detect which sort of file extension are in the list</span>
+0054 Idx=findstr(cell2mat(FileList),<span class="string">'.imptime'</span>);
+0055 <span class="keyword">if</span> ~isempty(Idx)
+0056     FileTypes = <span class="string">'IMPTIME'</span>;
+0057 <span class="keyword">else</span>
+0058     FileTypes = <span class="string">'MAT'</span>;
+0059 <span class="keyword">end</span>    
+0060 
+0061 <span class="comment">% Process, depending of file types</span>
+0062 <span class="keyword">if</span> strcmp(FileTypes,<span class="string">'MAT'</span>)
+0063     <span class="keyword">if</span> Overlay &amp; iscell(FileList) &amp; length(FileList) &gt; 1
+0064         <span class="comment">% Go through all files and find function type</span>
+0065         FunctionType=zeros(1,length(FileList));
+0066         <span class="keyword">for</span> fileno = 1:length(FileList)
+0067             <span class="keyword">if</span> iscell(FileList) &amp; length(FileList) &gt; 1
+0068                 FileName=FileList{fileno};
+0069             <span class="keyword">else</span>
+0070                 FileName=FileList;
+0071             <span class="keyword">end</span>
+0072             load(FileName,<span class="string">'Header'</span>);
+0073             FunctionType(fileno)=Header.FunctionType;
+0074         <span class="keyword">end</span>
+0075         <span class="comment">% Sort function type and rearrange FileList accordingly</span>
+0076         [FunctionType,idx]=sort(FunctionType);
+0077         <span class="keyword">for</span> n=1:length(idx)
+0078             NewFileList{n}=FileList{idx(n)};
+0079         <span class="keyword">end</span>
+0080         FileList=NewFileList;
+0081         <span class="comment">% Find out where the function type changes</span>
+0082         NoFunctionTypes=length(unique(FunctionType));
+0083         StartFunctionIdx(1)=1;
+0084         idx=1;
+0085         <span class="keyword">for</span> n = 2:length(FunctionType)
+0086             <span class="keyword">if</span> FunctionType(n) ~= FunctionType(n-1)
+0087                 idx=idx+1;
+0088                 StartFunctionIdx(idx)=n;
+0089             <span class="keyword">end</span>
+0090         <span class="keyword">end</span>
+0091         StartFunctionIdx(idx+1)=length(FileList)+1; <span class="comment">% To stop loop later</span>
+0092     <span class="keyword">elseif</span> Overlay &amp; iscell(FileList)     <span class="comment">% Overlay is selected but only one file selected</span>
+0093         Overlay = false;
+0094     <span class="keyword">end</span>
+0095     
+0096     <span class="comment">% Loop through all files</span>
+0097     <span class="keyword">if</span> ~Overlay
+0098         <span class="keyword">if</span> iscell(FileList)
+0099             <span class="keyword">for</span> fileno = 1:length(FileList)
+0100                 FileName=FileList{fileno};
+0101                 load(FileName);
+0102                 x=<a href="makexaxis.html" class="code" title="function x = makexaxis(y,dx,x0);">makexaxis</a>(Data,Header.xIncrement,Header.xStart);
+0103                 <a href="#_sub1" class="code" title="subfunction PlotFunction(x,y,Header,c)">PlotFunction</a>(x,Data,Header);
+0104             <span class="keyword">end</span>
+0105         <span class="keyword">else</span>
+0106             load(FileList)
+0107             x=<a href="makexaxis.html" class="code" title="function x = makexaxis(y,dx,x0);">makexaxis</a>(Data,Header.xIncrement,Header.xStart);
+0108             <a href="#_sub1" class="code" title="subfunction PlotFunction(x,y,Header,c)">PlotFunction</a>(x,Data,Header);
+0109         <span class="keyword">end</span>
+0110     <span class="keyword">else</span>
+0111         <span class="comment">% Loop through each function type and plot</span>
+0112         <span class="keyword">for</span> FuncTypeNumber = 1:length(StartFunctionIdx)-1
+0113             col=1; clear y
+0114             <span class="keyword">for</span> fileno = StartFunctionIdx(FuncTypeNumber):StartFunctionIdx(FuncTypeNumber+1)-1
+0115                 FileName=FileList{fileno};
+0116                 load(FileName)
+0117                 y(:,col)=Data;
+0118                 col=col+1;
+0119             <span class="keyword">end</span>
+0120             x=<a href="makexaxis.html" class="code" title="function x = makexaxis(y,dx,x0);">makexaxis</a>(Data,Header.xIncrement,Header.xStart);
+0121             <a href="#_sub1" class="code" title="subfunction PlotFunction(x,y,Header,c)">PlotFunction</a>(x,y,Header);
+0122         <span class="keyword">end</span>
+0123     <span class="keyword">end</span>
+0124 <span class="keyword">else</span> <span class="comment">% IMPTIME files</span>
+0125     <span class="keyword">for</span> n = 1:length(FileList)
+0126         FileName=FileList{n};
+0127         load(FileName,<span class="string">'-mat'</span>)
+0128         <a href="#_sub2" class="code" title="subfunction PlotImptime(Data,Header,Overlay)">PlotImptime</a>(Data,Header,Overlay)
+0129     <span class="keyword">end</span>
+0130 <span class="keyword">end</span>
+0131         
+0132 
+0133 
+0134 <a name="_sub1" href="#_subfunctions" class="code">function PlotFunction(x,y,Header,c)</a>
+0135 
+0136 <span class="comment">% Default plot parameters</span>
+0137 LineWidth=1;
+0138 FontSize=9;
+0139 FontName=<span class="string">'Times New Roman'</span>;
+0140 GridString=<span class="string">'grid on'</span>;
+0141 
+0142 type=Header.FunctionType;
+0143 <span class="keyword">if</span> type == 0
+0144     figure
+0145     plot(x,y,<span class="string">'LineWidth'</span>,LineWidth)
+0146     xlabel(<span class="string">'Unknown'</span>,<span class="string">'FontName'</span>,FontName,<span class="string">'FontSize'</span>,FontSize);
+0147     ylabel(<span class="string">'Unknown'</span>,<span class="string">'FontName'</span>,FontName,<span class="string">'FontSize'</span>,FontSize);
+0148     eval(GridString);
+0149 <span class="keyword">elseif</span> type == 1        <span class="comment">% Time</span>
+0150     figure
+0151     plot(x,y,<span class="string">'LineWidth'</span>,LineWidth);
+0152     xlabel(<span class="string">'Time [s]'</span>,<span class="string">'FontName'</span>,FontName,<span class="string">'FontSize'</span>,FontSize);
+0153     <span class="keyword">if</span> isfield(Header,<span class="string">'Unit'</span>)
+0154         UnitString=Header.Unit;
+0155     <span class="keyword">else</span>
+0156         UnitString=<span class="string">''</span>;
+0157     <span class="keyword">end</span>
+0158     <span class="keyword">if</span> isfield(Header,<span class="string">'Label'</span>)
+0159         Label=Header.Label;
+0160     <span class="keyword">else</span>
+0161         Label=<span class="string">''</span>;
+0162     <span class="keyword">end</span>
+0163     YString=strcat(Label,<span class="string">'{ [}'</span>,UnitString,<span class="string">']'</span>);
+0164     ylabel(YString,<span class="string">'FontName'</span>,FontName,<span class="string">'FontSize'</span>,FontSize);
+0165     eval(GridString);
+0166 <span class="keyword">elseif</span> type == 4        <span class="comment">% FRF</span>
+0167     figure
+0168     subplot(2,1,1)
+0169     semilogy(x,abs(y),<span class="string">'LineWidth'</span>,LineWidth);
+0170     xlabel(<span class="string">'Frequency [Hz]'</span>,<span class="string">'FontName'</span>,FontName,<span class="string">'FontSize'</span>,FontSize);
+0171     <span class="keyword">if</span> isfield(Header,<span class="string">'Unit'</span>)
+0172         UnitString=Header.Unit;
+0173     <span class="keyword">else</span>
+0174         UnitString=<span class="string">''</span>;
+0175     <span class="keyword">end</span>
+0176     <span class="keyword">if</span> isfield(Header,<span class="string">'RefUnit'</span>)
+0177         RefUnit=Header.RefUnit;
+0178     <span class="keyword">else</span>
+0179         RefUnit=<span class="string">''</span>;
+0180     <span class="keyword">end</span>
+0181     <span class="keyword">if</span> isfield(Header,<span class="string">'Label'</span>)
+0182         Label=Header.Label;
+0183     <span class="keyword">else</span>
+0184         Label=<span class="string">''</span>;
+0185     <span class="keyword">end</span>
+0186     YString=strcat(<span class="string">'{FRF }'</span>,Label,<span class="string">'{ [(}'</span>,UnitString,<span class="string">')/'</span>,RefUnit,<span class="string">']'</span>);
+0187     ylabel(YString,<span class="string">'FontName'</span>,FontName,<span class="string">'FontSize'</span>,FontSize);
+0188     TString=<a href="headpstr.html" class="code" title="function DofString = headpstr(Header)">headpstr</a>(Header);
+0189     title(TString);
+0190     eval(GridString);
+0191     subplot(2,1,2)
+0192     plot(x,<a href="angledeg.html" class="code" title="function phase = angledeg(H);">angledeg</a>(y));
+0193     ylabel(<span class="string">'Phase [Deg.]'</span>,<span class="string">'FontName'</span>,FontName,<span class="string">'FontSize'</span>,FontSize);
+0194     eval(GridString);
+0195 <span class="keyword">elseif</span> type == 6        <span class="comment">% Coherence</span>
+0196     figure
+0197     plot(x,y,<span class="string">'LineWidth'</span>,LineWidth);
+0198     xlabel(<span class="string">'Frequency [Hz]'</span>,<span class="string">'FontName'</span>,FontName,<span class="string">'FontSize'</span>,FontSize);
+0199     ylabel(<span class="string">'Coherence'</span>,<span class="string">'FontName'</span>,FontName,<span class="string">'FontSize'</span>,FontSize);
+0200     ylim([0 1])
+0201     TString=<a href="headpstr.html" class="code" title="function DofString = headpstr(Header)">headpstr</a>(Header);
+0202     title(TString);
+0203     eval(GridString);
+0204 <span class="keyword">elseif</span> type == 7        <span class="comment">% Autocorrelation</span>
+0205     figure
+0206     plot(x,y,<span class="string">'LineWidth'</span>,LineWidth);
+0207     xlabel(<span class="string">'Time Lag [s]'</span>,<span class="string">'FontName'</span>,FontName,<span class="string">'FontSize'</span>,FontSize);
+0208     ylabel(<span class="string">'Autocorrelation'</span>,<span class="string">'FontName'</span>,FontName,<span class="string">'FontSize'</span>,FontSize);
+0209     TString=<a href="headpstr.html" class="code" title="function DofString = headpstr(Header)">headpstr</a>(Header);
+0210     title(TString);
+0211     eval(GridString);
+0212 <span class="keyword">elseif</span> type == 8        <span class="comment">% Cross-correlation</span>
+0213     figure
+0214     plot(x,y,<span class="string">'LineWidth'</span>,LineWidth);
+0215     xlabel(<span class="string">'Time Lag [s]'</span>,<span class="string">'FontName'</span>,FontName,<span class="string">'FontSize'</span>,FontSize);
+0216     ylabel(<span class="string">'Cross-correlation'</span>,<span class="string">'FontName'</span>,FontName,<span class="string">'FontSize'</span>,FontSize);
+0217     TString=<a href="headpstr.html" class="code" title="function DofString = headpstr(Header)">headpstr</a>(Header);
+0218     title(TString);
+0219     eval(GridString);
+0220 <span class="keyword">elseif</span> type == 9        <span class="comment">% PSD or CSD</span>
+0221     figure
+0222     semilogy(x,abs(y),<span class="string">'LineWidth'</span>,LineWidth); <span class="comment">% 2014-03-03: Fixed with abs(y) to work for CSD</span>
+0223     xlabel(<span class="string">'Frequency [Hz]'</span>,<span class="string">'FontName'</span>,FontName,<span class="string">'FontSize'</span>,FontSize);
+0224     <span class="keyword">if</span> isfield(Header,<span class="string">'Unit'</span>)
+0225         UnitString=Header.Unit;
+0226     <span class="keyword">else</span>
+0227         UnitString=<span class="string">''</span>;
+0228     <span class="keyword">end</span>
+0229     <span class="keyword">if</span> isfield(Header,<span class="string">'Label'</span>)
+0230         Label=Header.Label;
+0231     <span class="keyword">else</span>
+0232         Label=<span class="string">''</span>;
+0233     <span class="keyword">end</span>
+0234     YString=strcat(<span class="string">'{PSD }'</span>,Label,<span class="string">'{ [}'</span>,UnitString,<span class="string">']'</span>);
+0235     ylabel(YString,<span class="string">'FontName'</span>,FontName,<span class="string">'FontSize'</span>,FontSize);
+0236     eval(GridString);
+0237 <span class="keyword">elseif</span> type == 12        <span class="comment">% Spectrum. This type can be either linear (RMS)</span>
+0238                          <span class="comment">% spectrum or phase spectrum, so abs(Data) is plotted</span>
+0239     figure
+0240     plot(x,abs(y),<span class="string">'LineWidth'</span>,LineWidth);
+0241     xlabel(<span class="string">'Frequency [Hz]'</span>,<span class="string">'FontName'</span>,FontName,<span class="string">'FontSize'</span>,FontSize);
+0242     <span class="keyword">if</span> isfield(Header,<span class="string">'Unit'</span>)
+0243         UnitString=Header.Unit;
+0244     <span class="keyword">else</span>
+0245         UnitString=<span class="string">''</span>;
+0246     <span class="keyword">end</span>
+0247     <span class="keyword">if</span> isfield(Header,<span class="string">'Label'</span>)
+0248         Label=Header.Label;
+0249     <span class="keyword">else</span>
+0250         Label=<span class="string">''</span>;
+0251     <span class="keyword">end</span>
+0252     YString=strcat(<span class="string">'Spectrum '</span>,Label,<span class="string">'{ [}'</span>,UnitString,<span class="string">']'</span>);
+0253     ylabel(YString,<span class="string">'FontName'</span>,FontName,<span class="string">'FontSize'</span>,FontSize);
+0254     eval(GridString);
+0255 <span class="keyword">elseif</span> type == 26        <span class="comment">% Multiple Coherence</span>
+0256     figure
+0257     plot(x,y,<span class="string">'LineWidth'</span>,LineWidth);
+0258     xlabel(<span class="string">'Frequency [Hz]'</span>,<span class="string">'FontName'</span>,FontName,<span class="string">'FontSize'</span>,FontSize);
+0259     ylabel(<span class="string">'Mult. Coherence'</span>,<span class="string">'FontName'</span>,FontName,<span class="string">'FontSize'</span>,FontSize);
+0260     ylim([0 1])
+0261     TString=<a href="headpstr.html" class="code" title="function DofString = headpstr(Header)">headpstr</a>(Header);
+0262     title(TString);
+0263     eval(GridString);
+0264 <span class="keyword">elseif</span> type == 30        <span class="comment">% Transient Spectrum.</span>
+0265     figure
+0266     semilogy(x,(y),<span class="string">'LineWidth'</span>,LineWidth);
+0267     xlabel(<span class="string">'Frequency [Hz]'</span>,<span class="string">'FontName'</span>,FontName,<span class="string">'FontSize'</span>,FontSize);
+0268     <span class="keyword">if</span> isfield(Header,<span class="string">'Unit'</span>)
+0269         UnitString=Header.Unit;
+0270     <span class="keyword">else</span>
+0271         UnitString=<span class="string">''</span>;
+0272     <span class="keyword">end</span>
+0273     <span class="keyword">if</span> isfield(Header,<span class="string">'Label'</span>)
+0274         Label=Header.Label;
+0275     <span class="keyword">else</span>
+0276         Label=<span class="string">''</span>;
+0277     <span class="keyword">end</span>
+0278     YString=strcat(<span class="string">'{Trans. Spec. }'</span>,Label,<span class="string">'{ [}'</span>,UnitString,<span class="string">']'</span>);
+0279     ylabel(YString,<span class="string">'FontName'</span>,FontName,<span class="string">'FontSize'</span>,FontSize);
+0280     eval(GridString);
+0281 <span class="keyword">end</span>
+0282 
+0283 
+0284 <a name="_sub2" href="#_subfunctions" class="code">function PlotImptime(Data,Header,Overlay)</a>
+0285 <span class="comment">% Default plot parameters</span>
+0286 LineWidth=1;
+0287 FontSize=9;
+0288 FontName=<span class="string">'Times New Roman'</span>;
+0289 GridString=<span class="string">'grid on'</span>;
+0290 
+0291 <span class="keyword">if</span> Overlay
+0292     t=<a href="makexaxis.html" class="code" title="function x = makexaxis(y,dx,x0);">makexaxis</a>(Data{1},Header(1).xIncrement);
+0293     figure
+0294     subplot(2,1,1)
+0295     plot(t,Data{1},<span class="string">'LineWidth'</span>,LineWidth)
+0296     xlabel(<span class="string">'Time [s]'</span>,<span class="string">'FontName'</span>,FontName,<span class="string">'FontSize'</span>,FontSize);
+0297     <span class="keyword">if</span> isfield(Header(1),<span class="string">'Unit'</span>)
+0298         UnitString=Header(1).Unit;
+0299     <span class="keyword">else</span>
+0300         UnitString=<span class="string">''</span>;
+0301     <span class="keyword">end</span>
+0302     <span class="keyword">if</span> isfield(Header(1),<span class="string">'Label'</span>)
+0303         Label=Header.Label;
+0304     <span class="keyword">else</span>
+0305         Label=<span class="string">''</span>;
+0306     <span class="keyword">end</span>
+0307     YString=strcat(Label,<span class="string">' ['</span>,UnitString,<span class="string">']'</span>);
+0308     ylabel(YString,<span class="string">'FontName'</span>,FontName,<span class="string">'FontSize'</span>,FontSize);
+0309     eval(GridString);
+0310     subplot(2,1,2)
+0311     plot(t,cell2mat(Data(2:end)),<span class="string">'LineWidth'</span>,LineWidth)
+0312     xlabel(<span class="string">'Time [s]'</span>,<span class="string">'FontName'</span>,FontName,<span class="string">'FontSize'</span>,FontSize);
+0313     <span class="keyword">if</span> isfield(Header(2),<span class="string">'Unit'</span>)
+0314         UnitString=Header(2).Unit;
+0315     <span class="keyword">else</span>
+0316         UnitString=<span class="string">''</span>;
+0317     <span class="keyword">end</span>
+0318     <span class="keyword">if</span> isfield(Header(2),<span class="string">'Label'</span>)
+0319         Label=Header(2).Label;
+0320     <span class="keyword">else</span>
+0321         Label=<span class="string">''</span>;
+0322     <span class="keyword">end</span>
+0323     YString=strcat(Label,<span class="string">' ['</span>,UnitString,<span class="string">']'</span>);
+0324     ylabel(YString,<span class="string">'FontName'</span>,FontName,<span class="string">'FontSize'</span>,FontSize);
+0325     eval(GridString);
+0326 <span class="keyword">else</span>
+0327     t=<a href="makexaxis.html" class="code" title="function x = makexaxis(y,dx,x0);">makexaxis</a>(Data{1},Header(1).xIncrement);
+0328     <span class="keyword">for</span> n=1:length(Data)
+0329         figure
+0330         plot(t,Data{n},<span class="string">'LineWidth'</span>,LineWidth)
+0331         xlabel(<span class="string">'Time [s]'</span>,<span class="string">'FontName'</span>,FontName,<span class="string">'FontSize'</span>,FontSize);
+0332         <span class="keyword">if</span> isfield(Header(n),<span class="string">'Unit'</span>)
+0333             UnitString=Header(n).Unit;
+0334         <span class="keyword">else</span>
+0335             UnitString=<span class="string">''</span>;
+0336         <span class="keyword">end</span>
+0337         <span class="keyword">if</span> isfield(Header(n),<span class="string">'Label'</span>)
+0338             Label=Header(n).Label;
+0339         <span class="keyword">else</span>
+0340             Label=<span class="string">''</span>;
+0341         <span class="keyword">end</span>
+0342         YString=strcat(Label,<span class="string">' ['</span>,UnitString,<span class="string">']'</span>);
+0343         ylabel(YString,<span class="string">'FontName'</span>,FontName,<span class="string">'FontSize'</span>,FontSize);
+0344         eval(GridString);
+0345     <span class="keyword">end</span>
+0346 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of frfsynt</title>
+  <meta name="keywords" content="frfsynt">
+  <meta name="description" content="FRFSYNT  Synthesize FRF(s) after modal parameter extraction">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; frfsynt.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>frfsynt
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>FRFSYNT  Synthesize FRF(s) after modal parameter extraction</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function Hs = frfsynt(H,f,p,V,Res,indof,outdof,Type,DispTime,Fdof) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> FRFSYNT  Synthesize FRF(s) after modal parameter extraction
+
+       Hs = modal2frf(H,f,p,V,indof,outdof,Type,DispTime,Fdof)
+
+       Hs          FRF matrix, N-by-D-by-R
+
+       H           Measured accelerance FRFs for overlay plot(s)
+       f           Frequency axis (column) vector
+       p           Column vector with poles, one for each column in V
+       V           Mode shape matrix with modes in columns (unity modal mass)
+       Res         Residual vector from parameter estimation. Empty if no
+                   residuals were used
+       indof       Vector with dofs for references (inputs), length=R
+       outdof      Vector with dofs for responses (outputs), length=D,
+                   Default is 1:length(V(:,1))
+       Type        String with 'd' for dynamic flexibility (displacement/force)
+                               'v' for mobility (velocity/force) (Default)
+                               'a' for accelerance (acceleration/force)
+       DispTime    Time in seconds for display of each overlay plot. 
+                   If = 0, no plots are produced
+       Fdof        Vector with pointer to corresponding coefficient in the
+                   response dimension
+       N           length(f), number of frequency values to compute H on
+
+ If R &gt; 1, synthesized FRFs for each response are plotted simultaneously
+ for all references in indof.
+
+ Note2: The mode shapes are assumed to be scaled to unity modal A.
+
+ Example:
+ Assume a test was made with three shakers in positions 1, 29, and 35 on a
+ structure with 35 dofs, numbered 1 to 35. The three driving point FRFs
+ will then be synthesized and overlaid with the corresponding measured 
+ functions, by
+ H11=frfsynt(H,f,p,V,Res,1,1,'a',DispTime,[1 29 35])
+ H2929=frfsynt(H,f,p,V,Res,29,29,'a',DispTime,[1 29 35])
+ H3535=frfsynt(H,f,p,V,Res,35,35,'a',DispTime,[1 29 35])
+ ...if we assume all variables H,f... are properly defined.
+ Example 2:
+ If all measurements are to be synthesized and plotted during DispTime
+ seconds each (for each output and all inputs simultaneously), then call:
+ Hs=frfsynt(H,f,p,V,Res,[1 29 35],[1:35],'a',DispTime,[1 29 35])</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="modal2frf.html" class="code" title="function H = modal2frf(f,p,V,indof,outdof,Type)">modal2frf</a>	MODAL2FRF  Synthesize FRF(s) from modal parameters</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="frfp2modes.html" class="code" title="function [V,L,Res] = frfp2modes(varargin)">frfp2modes</a>	FRFP2MODES     Estimate mode shapes from FRFs and poles in frequency domain</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function Hs = frfsynt(H,f,p,V,Res,indof,outdof,Type,DispTime,Fdof)</a>
+0002 <span class="comment">% FRFSYNT  Synthesize FRF(s) after modal parameter extraction</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%       Hs = modal2frf(H,f,p,V,indof,outdof,Type,DispTime,Fdof)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%       Hs          FRF matrix, N-by-D-by-R</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%       H           Measured accelerance FRFs for overlay plot(s)</span>
+0009 <span class="comment">%       f           Frequency axis (column) vector</span>
+0010 <span class="comment">%       p           Column vector with poles, one for each column in V</span>
+0011 <span class="comment">%       V           Mode shape matrix with modes in columns (unity modal mass)</span>
+0012 <span class="comment">%       Res         Residual vector from parameter estimation. Empty if no</span>
+0013 <span class="comment">%                   residuals were used</span>
+0014 <span class="comment">%       indof       Vector with dofs for references (inputs), length=R</span>
+0015 <span class="comment">%       outdof      Vector with dofs for responses (outputs), length=D,</span>
+0016 <span class="comment">%                   Default is 1:length(V(:,1))</span>
+0017 <span class="comment">%       Type        String with 'd' for dynamic flexibility (displacement/force)</span>
+0018 <span class="comment">%                               'v' for mobility (velocity/force) (Default)</span>
+0019 <span class="comment">%                               'a' for accelerance (acceleration/force)</span>
+0020 <span class="comment">%       DispTime    Time in seconds for display of each overlay plot.</span>
+0021 <span class="comment">%                   If = 0, no plots are produced</span>
+0022 <span class="comment">%       Fdof        Vector with pointer to corresponding coefficient in the</span>
+0023 <span class="comment">%                   response dimension</span>
+0024 <span class="comment">%       N           length(f), number of frequency values to compute H on</span>
+0025 <span class="comment">%</span>
+0026 <span class="comment">% If R &gt; 1, synthesized FRFs for each response are plotted simultaneously</span>
+0027 <span class="comment">% for all references in indof.</span>
+0028 <span class="comment">%</span>
+0029 <span class="comment">% Note2: The mode shapes are assumed to be scaled to unity modal A.</span>
+0030 <span class="comment">%</span>
+0031 <span class="comment">% Example:</span>
+0032 <span class="comment">% Assume a test was made with three shakers in positions 1, 29, and 35 on a</span>
+0033 <span class="comment">% structure with 35 dofs, numbered 1 to 35. The three driving point FRFs</span>
+0034 <span class="comment">% will then be synthesized and overlaid with the corresponding measured</span>
+0035 <span class="comment">% functions, by</span>
+0036 <span class="comment">% H11=frfsynt(H,f,p,V,Res,1,1,'a',DispTime,[1 29 35])</span>
+0037 <span class="comment">% H2929=frfsynt(H,f,p,V,Res,29,29,'a',DispTime,[1 29 35])</span>
+0038 <span class="comment">% H3535=frfsynt(H,f,p,V,Res,35,35,'a',DispTime,[1 29 35])</span>
+0039 <span class="comment">% ...if we assume all variables H,f... are properly defined.</span>
+0040 <span class="comment">% Example 2:</span>
+0041 <span class="comment">% If all measurements are to be synthesized and plotted during DispTime</span>
+0042 <span class="comment">% seconds each (for each output and all inputs simultaneously), then call:</span>
+0043 <span class="comment">% Hs=frfsynt(H,f,p,V,Res,[1 29 35],[1:35],'a',DispTime,[1 29 35])</span>
+0044 
+0045 <span class="comment">% Copyright (c) 2012 by Anders Brandt</span>
+0046 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0047 <span class="comment">% Version: 1.0 2012-03-27</span>
+0048 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0049 
+0050 [N,D,R]=size(H);
+0051 Nm=length(p);
+0052 [n,m]=size(V);
+0053 <span class="keyword">if</span> n ~= D
+0054     error(<span class="string">'Mode shape matrix is not consistent with H matrix, wrong number of responses!'</span>)
+0055 <span class="keyword">end</span>
+0056 <span class="keyword">if</span> m ~= Nm
+0057     error(<span class="string">'Mode shape matrix is not consistent with the pole vector!'</span>)
+0058 <span class="keyword">end</span>
+0059 <span class="keyword">if</span> max(outdof) &gt; D
+0060     error(<span class="string">'Requested output dof(s) outside size of H!'</span>)
+0061 <span class="keyword">end</span>
+0062 
+0063 <span class="comment">% Define which force indeces in H that will be synthesized</span>
+0064 fidx=[];
+0065 <span class="keyword">for</span> r=1:length(indof)
+0066     fidx=[fidx find(Fdof == indof(r))];
+0067 <span class="keyword">end</span>
+0068 <span class="keyword">if</span> isempty(fidx)
+0069     error(<span class="string">'No force positions found! Check syntax'</span>)
+0070 <span class="keyword">elseif</span> length(fidx) &gt; R
+0071     error(<span class="string">'Too many forces in indof!'</span>)
+0072 <span class="keyword">end</span>
+0073 
+0074 <span class="comment">% calculate omega^2 for use with residuals</span>
+0075 w2=(2*pi*f).^2;        
+0076 
+0077 <span class="comment">% Allocate Hs</span>
+0078 Hs=zeros(N,length(outdof),length(fidx));
+0079 
+0080 <span class="keyword">for</span> d=1:length(outdof)
+0081     <span class="keyword">if</span>  ~exist(<span class="string">'h'</span>,<span class="string">'var'</span>)
+0082         h=figure;
+0083     <span class="keyword">else</span>
+0084         figure(h);
+0085     <span class="keyword">end</span>
+0086     <span class="keyword">if</span> length(fidx) == 1
+0087         Hs(:,d)=<a href="modal2frf.html" class="code" title="function H = modal2frf(f,p,V,indof,outdof,Type)">modal2frf</a>(f,p,V,indof,outdof(d),Type);
+0088         semilogy(f,abs(H(:,outdof(d),fidx)),f,abs(Hs(:,d)),<span class="string">'--'</span>)
+0089         xlabel(<span class="string">'Frequency, [Hz]'</span>)
+0090         <span class="keyword">if</span> strcmp(upper(Type),<span class="string">'D'</span>)
+0091             ylabel(<span class="string">'Receptance, [m/N]'</span>)
+0092         <span class="keyword">elseif</span> strcmp(upper(Type),<span class="string">'V'</span>)
+0093             ylabel(<span class="string">'Mobility, [(m/s)/N]'</span>)
+0094         <span class="keyword">elseif</span> strcmp(upper(Type),<span class="string">'A'</span>)
+0095             ylabel(<span class="string">'Accelerance, [(m/s)^2/N]'</span>)
+0096         <span class="keyword">end</span>
+0097         legend(<span class="string">'Measured'</span>,<span class="string">'Synthesized'</span>)
+0098         title([<span class="string">'Response dof '</span> num2str(outdof(d))])
+0099     <span class="keyword">else</span>
+0100         <span class="keyword">for</span> r=1:length(fidx)
+0101             Ht=<a href="modal2frf.html" class="code" title="function H = modal2frf(f,p,V,indof,outdof,Type)">modal2frf</a>(f,p,V,indof(r),outdof(d),Type);
+0102             <span class="keyword">if</span> isempty(Res)
+0103             <span class="keyword">else</span>
+0104                 Ht=Ht+Res(fidx(r),outdof(d));
+0105                 Ht=Ht+Res(R+fidx(r))./w2;outdof(d);
+0106             <span class="keyword">end</span>
+0107             Hs(:,d,r)=Ht;
+0108             subplot(length(fidx),1,r)
+0109             semilogy(f,abs(H(:,outdof(d),fidx(r))),f,abs(Hs(:,d,r)),<span class="string">'--'</span>)
+0110             xlabel(<span class="string">'Frequency, [Hz]'</span>)
+0111             <span class="keyword">if</span> strcmp(upper(Type),<span class="string">'D'</span>)
+0112                 ylabel(<span class="string">'Receptance, [m/N]'</span>)
+0113             <span class="keyword">elseif</span> strcmp(upper(Type),<span class="string">'V'</span>)
+0114                 ylabel(<span class="string">'Mobility, [(m/s)/N]'</span>)
+0115             <span class="keyword">elseif</span> strcmp(upper(Type),<span class="string">'A'</span>)
+0116                 ylabel(<span class="string">'Accelerance, [(m/s)^2/N]'</span>)
+0117             <span class="keyword">end</span>
+0118             <span class="keyword">if</span> r == 1
+0119                 legend(<span class="string">'Measured'</span>,<span class="string">'Synthesized'</span>)
+0120                 title([<span class="string">'Response dof '</span> num2str(outdof(d))])
+0121             <span class="keyword">end</span>
+0122         <span class="keyword">end</span>
+0123     <span class="keyword">end</span>
+0124     pause(DispTime)
+0125 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

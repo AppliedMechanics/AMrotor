@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of unvw55</title>
+  <meta name="keywords" content="unvw55">
+  <meta name="description" content="UNVR55    Write SDRC universal file nodes record">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; unvw55.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>unvw55
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>UNVR55    Write SDRC universal file nodes record</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function Status = unvw55(fid,MODAL,MHEADER); </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> UNVR55    Write SDRC universal file nodes record
+
+       Nodes = unvw55(fid,MODAL,MHEADER);
+
+ This function writes one dataset, type 55 (Mode shapes) to an opened
+ universal file.
+
+ Currently no header info is written out (to simplify export).</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="unvwrite.html" class="code" title="function unvwrite(varargin)">unvwrite</a>	UNVWRITE Write a universal file</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function Status = unvw55(fid,MODAL,MHEADER);</a>
+0002 <span class="comment">% UNVR55    Write SDRC universal file nodes record</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%       Nodes = unvw55(fid,MODAL,MHEADER);</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">% This function writes one dataset, type 55 (Mode shapes) to an opened</span>
+0007 <span class="comment">% universal file.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">% Currently no header info is written out (to simplify export).</span>
+0010 
+0011 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0012 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0013 <span class="comment">% Version: 1.0 2011-06-23</span>
+0014 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0015 
+0016 
+0017 SetStartStr=<span class="string">'    -1'</span>;
+0018 fprintf(fid,<span class="string">'%-80s\n'</span>,SetStartStr);
+0019 fprintf(fid,<span class="string">'%6i\n'</span>,55);
+0020 C=8;        <span class="comment">% Color</span>
+0021 I=<span class="string">'%10i'</span>;
+0022 E=<span class="string">'%13.5E'</span>;
+0023 
+0024 <span class="comment">%-----------------------------------------------------------------------------------------------</span>
+0025 <span class="comment">% Records 1 - 5: ID lines (third is date and time)</span>
+0026 fprintf(fid,<span class="string">'%-80s\n'</span>,MHEADER.Title);
+0027 fprintf(fid,<span class="string">'%-80s\n'</span>,MHEADER.Title2);
+0028 fprintf(fid,<span class="string">'%-80s\n'</span>,MHEADER.Date);
+0029 fprintf(fid,<span class="string">'%-80s\n'</span>,MHEADER.Title3);
+0030 fprintf(fid,<span class="string">'%-80s\n'</span>,MHEADER.Title4);
+0031 
+0032 
+0033 <span class="comment">%-----------------------------------------------------------------------------------------------</span>
+0034 <span class="comment">% Record 6</span>
+0035 Rec6.Field1=1;      <span class="comment">% Always structural!</span>
+0036 Rec6.Field2=MHEADER.AnalysisType;
+0037 Rec6.Field3=MHEADER.DataChar;      
+0038 Rec6.Field4=MHEADER.SpecDataType;  
+0039 Rec6.Field5=MHEADER.DataType;  <span class="comment">% Real data type</span>
+0040 Rec6.Field6=MHEADER.NumValuesPerNode;      <span class="comment">% NDV, Number of data values per node</span>
+0041 fprintf(fid,[I I I I I I <span class="string">'\n'</span>],Rec6.Field1,Rec6.Field2,Rec6.Field3,Rec6.Field4,Rec6.Field5,Rec6.Field6);
+0042 
+0043 <span class="comment">%-----------------------------------------------------------------------------------------------</span>
+0044 <span class="comment">% Records 7 and 8 are analysis type dependant</span>
+0045 <span class="keyword">if</span> Rec6.Field2 == 2     <span class="comment">% Normal mode (real mode shapes)</span>
+0046     Rec7.Field1=2;
+0047     Rec7.Field2=4;
+0048     Rec7.Field3=MHEADER.LoadCase;      <span class="comment">% Load case number</span>
+0049     Rec7.Field4=MHEADER.ModeNumber;
+0050     fprintf(fid,[I I I I <span class="string">'\n'</span>],Rec7.Field1,Rec7.Field2,Rec7.Field3,Rec7.Field4);
+0051     Rec8.Field1=2*pi*real(MODAL.Freq);
+0052     Rec8.Field2=1;      <span class="comment">% Unity Modal mass!</span>
+0053     Rec8.Field3=-real(MODAL.Freq)/(abs(MODAL.Freq));
+0054     Rec8.Field4=0;
+0055     fprintf(fid,[E E E E E E <span class="string">'\n'</span>],Rec8.Field1,Rec8.Field2,Rec8.Field3,Rec8.Field4,0,0);
+0056     <span class="keyword">for</span> m = 1:length(MODAL.Node)
+0057         fprintf(fid,[I <span class="string">'\n'</span>],MODAL.Node(m));
+0058         fprintf(fid,[E E E <span class="string">'\n'</span>],MODAL.X(m),MODAL.Y(m),MODAL.Z(m));
+0059     <span class="keyword">end</span>
+0060 <span class="keyword">elseif</span> Rec6.Field2 == 3 <span class="comment">% Complex mode</span>
+0061     Rec7.Field1=2;
+0062     Rec7.Field2=6;
+0063     Rec7.Field3=MHEADER.LoadCase;      <span class="comment">% Load case number</span>
+0064     Rec7.Field4=MHEADER.ModeNumber;
+0065     fprintf(fid,[I I I I <span class="string">'\n'</span>],Rec7.Field1,Rec7.Field2,Rec7.Field3,Rec7.Field4);
+0066     Rec8.Field1=2*pi*real(MODAL.Freq);
+0067     Rec8.Field2=2*pi*imag(MODAL.Freq);
+0068     Rec8.Field3=real(MHEADER.ModalA);          <span class="comment">% Unity modal A!</span>
+0069     Rec8.Field4=imag(MHEADER.ModalA);
+0070     Rec8.Field5=real(MHEADER.ModalB);
+0071     Rec8.Field6=imag(MHEADER.ModalB);
+0072     fprintf(fid,[E E E E E E <span class="string">'\n'</span>],Rec8.Field1,Rec8.Field2,Rec8.Field3,Rec8.Field4,Rec8.Field5,Rec8.Field6);
+0073     <span class="keyword">for</span> m = 1:length(MODAL.Node)
+0074         fprintf(fid,[I <span class="string">'\n'</span>],MODAL.Node(m));
+0075         fprintf(fid,[E E E E E E <span class="string">'\n'</span>],real(MODAL.X(m)),imag(MODAL.X(m)),real(MODAL.Y(m)),imag(MODAL.Y(m)),real(MODAL.Z(m)),imag(MODAL.Z(m)));
+0076     <span class="keyword">end</span>
+0077 <span class="keyword">end</span>
+0078 <span class="comment">%-----------------------------------------------------------------------------------------------</span>
+0079 fprintf(fid,<span class="string">'%-80s\n'</span>,SetStartStr);
+0080 Status=1;</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

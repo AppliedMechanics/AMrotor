@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of statchk</title>
+  <meta name="keywords" content="statchk">
+  <meta name="description" content="STATCHK Create standard statistics for time signal(s) in matrix">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; statchk.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>statchk
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>STATCHK Create standard statistics for time signal(s) in matrix</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function statchk(x, N, NPlot, FileName); </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment">STATCHK Create standard statistics for time signal(s) in matrix
+
+           statchk(x, N, NPlot, FileName);
+
+           x           Time data in column(s)
+           N           Number of bins for PDF computation
+           NPlot       If NPlot=1 a plot with the PDF of x is plotted with
+                       the equivalent Gaussian distribution overlaid
+                       If NPlot=2, the same is plotted with logy scale
+                       If NPlot=0 no plot is produced.
+           FileName    If this string is given, the output of statchk is
+                       redirected to a log file FileName.log in the 
+                       current directory (or in the directory indicated in 
+                       the string FileName if a full path is given). 
+                       Also, the actual statistical vectors are stored in 
+                       mat file FileName.mat.
+
+ This function performs some standard statistical analysis of time data in 
+ the columns of x.
+ Also, a histogram is plotted with N bins centered around 0. If Nplot=1 a plot of
+ the Gaussian distribution using mean and std of x is overlayed on the histogram.
+ If N is not given a default of 30 bins are used for the histogram. After calling
+ this function, a number of variables with generic names are logged in text file FileName.
+ If no FileName is given the values are listed on the screen.
+ 
+ WARNING! This command will overwrite an existing log file with the name
+ in FileName!
+
+ See also <a href="statchkf.html" class="code" title="function statchkf(Prefix,StartNo,StopNo,FileName)">STATCHKF</a> <a href="framestat.html" class="code" title="function F = framestat(y,N,func,NPlot)">FRAMESTAT</a> <a href="teststat.html" class="code" title="function status = teststat(y,alfa,Type)">TESTSTAT</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="akurtosis.html" class="code" title="function K = akurtosis(x);">akurtosis</a>	AKURTOSIS Calculate kurtosis</li><li><a href="apdf.html" class="code" title="function [Pdf, XAx, G, mu, sigma] = apdf(x, N, NPlot);">apdf</a>	APDF      Calculate and plot probability density function, PDF</li><li><a href="askewness.html" class="code" title="function S = askewness(x);">askewness</a>	ASKEWNESS Calculate skewness</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function statchk(x, N, NPlot, FileName);</a>
+0002 <span class="comment">%STATCHK Create standard statistics for time signal(s) in matrix</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%           statchk(x, N, NPlot, FileName);</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%           x           Time data in column(s)</span>
+0007 <span class="comment">%           N           Number of bins for PDF computation</span>
+0008 <span class="comment">%           NPlot       If NPlot=1 a plot with the PDF of x is plotted with</span>
+0009 <span class="comment">%                       the equivalent Gaussian distribution overlaid</span>
+0010 <span class="comment">%                       If NPlot=2, the same is plotted with logy scale</span>
+0011 <span class="comment">%                       If NPlot=0 no plot is produced.</span>
+0012 <span class="comment">%           FileName    If this string is given, the output of statchk is</span>
+0013 <span class="comment">%                       redirected to a log file FileName.log in the</span>
+0014 <span class="comment">%                       current directory (or in the directory indicated in</span>
+0015 <span class="comment">%                       the string FileName if a full path is given).</span>
+0016 <span class="comment">%                       Also, the actual statistical vectors are stored in</span>
+0017 <span class="comment">%                       mat file FileName.mat.</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">% This function performs some standard statistical analysis of time data in</span>
+0020 <span class="comment">% the columns of x.</span>
+0021 <span class="comment">% Also, a histogram is plotted with N bins centered around 0. If Nplot=1 a plot of</span>
+0022 <span class="comment">% the Gaussian distribution using mean and std of x is overlayed on the histogram.</span>
+0023 <span class="comment">% If N is not given a default of 30 bins are used for the histogram. After calling</span>
+0024 <span class="comment">% this function, a number of variables with generic names are logged in text file FileName.</span>
+0025 <span class="comment">% If no FileName is given the values are listed on the screen.</span>
+0026 <span class="comment">%</span>
+0027 <span class="comment">% WARNING! This command will overwrite an existing log file with the name</span>
+0028 <span class="comment">% in FileName!</span>
+0029 <span class="comment">%</span>
+0030 <span class="comment">% See also STATCHKF FRAMESTAT TESTSTAT</span>
+0031 
+0032 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0033 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0034 <span class="comment">% Version: 1.0 2011-06-23</span>
+0035 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0036 
+0037 
+0038 <span class="keyword">if</span> nargin == 2
+0039    NPlot=0;
+0040    fid=1;
+0041 <span class="keyword">elseif</span> nargin == 1
+0042    NPlot=0;
+0043    N=30;
+0044    fid=1;
+0045 <span class="keyword">elseif</span> nargin == 3
+0046        fid=1;
+0047 <span class="keyword">elseif</span> nargin == 4
+0048     fid=fopen(strcat(FileName,<span class="string">'.log'</span>),<span class="string">'w'</span>);
+0049 <span class="keyword">elseif</span> nargin &gt; 4
+0050    error(<span class="string">'Wrong number of parameters!'</span>)
+0051 <span class="keyword">end</span>
+0052 
+0053 [mx,nx]=size(x);
+0054 
+0055 m=mean(x);
+0056 Sigma2=diag(cov(x))';
+0057 Sigma=sqrt(Sigma2);
+0058 Skewness=<a href="askewness.html" class="code" title="function S = askewness(x);">askewness</a>(x);
+0059 Kurtosis=<a href="akurtosis.html" class="code" title="function K = akurtosis(x);">akurtosis</a>(x);
+0060 RMS=sqrt(1/mx*sum(x.^2));
+0061 Crest=max(abs(x))./RMS;
+0062 XMax=max(x);
+0063 XMin=min(x);
+0064 kol=[1:nx];
+0065 
+0066 
+0067 <span class="keyword">if</span> fid ~= 1
+0068     fprintf(fid,<span class="string">'Output of command STATCHK\n'</span>);
+0069     fprintf(fid,<span class="string">'Date: %s\n'</span>,datestr(now));
+0070 <span class="keyword">end</span>
+0071 fprintf(fid,<span class="string">'Statistical parameters:\n'</span>);
+0072 fprintf(fid,<span class="string">'============================\n'</span>);
+0073 [S,E]=sprintf(<span class="string">'%5s%12s%12s%12s%12s%12s%12s%12s%12s%12s\n'</span>,<span class="string">'Col.'</span>,<span class="string">'Max'</span>,<span class="string">'Min'</span>,<span class="string">'Mean'</span>,<span class="string">'Crest'</span>,<span class="string">'RMS'</span>,<span class="string">'Std dev'</span>,<span class="keyword">...</span>
+0074 <span class="string">'Variance'</span>,<span class="string">'Skewness'</span>,<span class="string">'Kurtosis'</span>);
+0075 fprintf(fid,<span class="string">'%s'</span>,S);
+0076 <span class="keyword">for</span> col=1:nx,
+0077    S2=sprintf(<span class="string">'%5d%12.2g%12.2g%12.2g%12.2g%12.2g%12.2g%12.2g%12.2g%12.2g'</span>,kol(col),XMax(col),XMin(col),<span class="keyword">...</span>
+0078    m(col),Crest(col),RMS(col),Sigma(col),Sigma2(col),Skewness(col),Kurtosis(col));  
+0079    fprintf(fid,<span class="string">'%s\n'</span>,S2);
+0080 <span class="keyword">end</span>
+0081 
+0082 [row,col]=size(x);
+0083 <span class="keyword">if</span> (col &gt; 1) &amp; NPlot
+0084    fprintf(fid,<span class="string">' Stat: more than one column in vector, graphing only first column!\n\n'</span>);
+0085 <span class="keyword">end</span>
+0086 [H, XAx, G]=<a href="apdf.html" class="code" title="function [Pdf, XAx, G, mu, sigma] = apdf(x, N, NPlot);">apdf</a>(x(:,1),N,NPlot);
+0087 <span class="comment">%</span>
+0088 <span class="keyword">if</span> nargin == 4
+0089    S=[<span class="string">'save '</span> FileName <span class="string">' XMax XMin m Crest RMS Sigma Sigma2 Skewness Kurtosis'</span>];
+0090    eval(S)
+0091    fclose(fid);
+0092 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

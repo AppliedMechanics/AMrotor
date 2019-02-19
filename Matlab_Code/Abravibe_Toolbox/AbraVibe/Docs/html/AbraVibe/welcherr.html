@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of welcherr</title>
+  <meta name="keywords" content="welcherr">
+  <meta name="description" content="WELCHERR   Random error in PSD estimate with Welch's method">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; welcherr.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>welcherr
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>WELCHERR   Random error in PSD estimate with Welch's method</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function Eps_r = welcherr(win,O,K) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment">WELCHERR   Random error in PSD estimate with Welch's method 
+
+           Eps_r = welcherr(win,O,K)
+
+           Eps_r    Normalized random error of PSD estimate
+
+           win      Window vector, for example hann(512) 
+           O        Overlap between blocks in percent
+           K        number of averages in PSD calculation
+
+ This function computes the random error in PSDs estimated with overlap
+ according to Welch 1967, see inside file for reference.
+
+ Example: Eps_r = welcherr(hann(512),50,199)
+    Gives the random error Eps_r = 0.0728, which means that 199 averages with
+    50% overlap and Hanning window correponds to 1/0.0728^2 = 189
+    independent (nonoverlapping) averages. Note that this corresponds to
+    100 independent segments of data, plus 99 overlapping segments
+    (because the 100th block will be half way outside the data).</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function Eps_r = welcherr(win,O,K)</a>
+0002 <span class="comment">%WELCHERR   Random error in PSD estimate with Welch's method</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%           Eps_r = welcherr(win,O,K)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%           Eps_r    Normalized random error of PSD estimate</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%           win      Window vector, for example hann(512)</span>
+0009 <span class="comment">%           O        Overlap between blocks in percent</span>
+0010 <span class="comment">%           K        number of averages in PSD calculation</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">% This function computes the random error in PSDs estimated with overlap</span>
+0013 <span class="comment">% according to Welch 1967, see inside file for reference.</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">% Example: Eps_r = welcherr(hann(512),50,199)</span>
+0016 <span class="comment">%    Gives the random error Eps_r = 0.0728, which means that 199 averages with</span>
+0017 <span class="comment">%    50% overlap and Hanning window correponds to 1/0.0728^2 = 189</span>
+0018 <span class="comment">%    independent (nonoverlapping) averages. Note that this corresponds to</span>
+0019 <span class="comment">%    100 independent segments of data, plus 99 overlapping segments</span>
+0020 <span class="comment">%    (because the 100th block will be half way outside the data).</span>
+0021 
+0022 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0023 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0024 <span class="comment">% Version: 1.0 2011-06-23</span>
+0025 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0026 
+0027 
+0028 <span class="comment">% References</span>
+0029 <span class="comment">% Welch, Peter (1967), The Use of Fast Fourier Transform for the Estimation of</span>
+0030 <span class="comment">% Power Spectra: A Method Based on Time Averaging Over Short, Modified</span>
+0031 <span class="comment">% Periodograms, IEEE Trans. On Audio and Electroacoustics, AU-15(2), pp</span>
+0032 <span class="comment">% 70-73</span>
+0033 <span class="comment">% where the formula for the random error (or variance, its square) is given</span>
+0034 <span class="comment">%</span>
+0035 <span class="comment">% Brandt, Anders: &quot;Noise and Vibration Analysis: Signal Analysis and</span>
+0036 <span class="comment">% Experimental Procedures,&quot; Wiley 2011. ISBN: 13-978-0-470-74644-8,</span>
+0037 <span class="comment">% where normalized random error is defined</span>
+0038 
+0039 <span class="comment">% Copyright 2011, Anders Brandt</span>
+0040 
+0041 N=length(win);                     <span class="comment">% Blocksize for calculation</span>
+0042 D=round(N*(1-O/100));              <span class="comment">% Welch used the DELAY in samples</span>
+0043 
+0044 w = zeros(3*N,1);
+0045 w(1:N) = win;
+0046 rho = zeros(K,1);
+0047 
+0048 <span class="comment">% Calculate rho(q)</span>
+0049 q = 1;
+0050 <span class="keyword">while</span> q*D &lt; N
+0051     wn = zeros(3*N,1);
+0052     wn(q*D+1:q*D+N) = win;
+0053     rho(q) = sum(w.*wn)/sum(w.*w);
+0054     rho(q) = rho(q)^2;
+0055     q = q+1;
+0056 <span class="keyword">end</span>
+0057 
+0058 <span class="comment">% Sum up (1 + 2*sum(rho(q)))</span>
+0059 V = 1;
+0060 <span class="keyword">for</span> q = 1:K-1
+0061     V = V + 2*(K-q)/K*rho(q);
+0062 <span class="keyword">end</span>
+0063 
+0064 <span class="comment">% Normalized random error is square root of variance</span>
+0065 Eps_r = sqrt(V/K);
+0066</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

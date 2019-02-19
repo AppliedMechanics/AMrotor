@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of functype</title>
+  <meta name="keywords" content="functype">
+  <meta name="description" content="FUNCTYPE  Convert between numeric and string function type">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; functype.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>functype
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>FUNCTYPE  Convert between numeric and string function type</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function FuncType = functype(FuncType) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> FUNCTYPE  Convert between numeric and string function type
+
+       FuncType = functype(FuncType)
+
+       FuncType    Function type as specified by universal file 58 format
+
+ This function converts a numeric function type to a short string
+ abbreviation, and vice versa if input FuncType is a string.
+ Uppercase/lowercase is not checked when matching string format.
+ See inside file for documentation</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="abrabrowse.html" class="code" title="function varargout = abrabrowse(varargin)">abrabrowse</a>	ABRABROWSE GUI-based data browser for ABRAVIBE toolbox data files</li><li><a href="time2spec.html" class="code" title="function LastNumber = time2spec(InPrefix,StartNo,StopNo,OutPrefix,OutStartNo,Blocksize,RefChannel,DownSample,Type,start,stop)">time2spec</a>	TIME2CORR    Process ABRAVIBE time data files into spectral density function files</li><li><a href="timeproc.html" class="code" title="function LastNumber = timeproc(InPrefix,StartNo,StopNo,OutPrefix,OutStartNo,FunctionType,Settings)">timeproc</a>	TIME2PROC    Process time data files into ABRAVIBE function files</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function FuncType = functype(FuncType)</a>
+0002 <span class="comment">% FUNCTYPE  Convert between numeric and string function type</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%       FuncType = functype(FuncType)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%       FuncType    Function type as specified by universal file 58 format</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">% This function converts a numeric function type to a short string</span>
+0009 <span class="comment">% abbreviation, and vice versa if input FuncType is a string.</span>
+0010 <span class="comment">% Uppercase/lowercase is not checked when matching string format.</span>
+0011 <span class="comment">% See inside file for documentation</span>
+0012 <span class="comment">%</span>
+0013 
+0014 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0015 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0016 <span class="comment">% Version: 1.0 2011-06-23</span>
+0017 <span class="comment">%          1.1 2012-01-10  Added flexibility if FuncType input is not</span>
+0018 <span class="comment">%                          defined</span>
+0019 <span class="comment">%          1.2 2013-11-16  Added type 30 for Transient spectrum</span>
+0020 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0021 
+0022 <span class="comment">%------------------------------------------------------------------------</span>
+0023 <span class="comment">% Universal file format 58 definitions:</span>
+0024 <span class="comment">%         0 - General or Unknown</span>
+0025 <span class="comment">%         1 - Time Response</span>
+0026 <span class="comment">%         2 - Auto Spectrum</span>
+0027 <span class="comment">%         3 - Cross Spectrum</span>
+0028 <span class="comment">%         4 - Frequency Response Function</span>
+0029 <span class="comment">%         5 - Transmissibility</span>
+0030 <span class="comment">%         6 - Coherence</span>
+0031 <span class="comment">%         7 - Auto Correlation</span>
+0032 <span class="comment">%         8 - Cross Correlation</span>
+0033 <span class="comment">%         9 - Power Spectral Density (PSD)</span>
+0034 <span class="comment">%         10 - Energy Spectral Density (ESD)</span>
+0035 <span class="comment">%         11 - Probability Density Function</span>
+0036 <span class="comment">%         12 - Spectrum</span>
+0037 <span class="comment">%         13 - Cumulative Frequency Distribution</span>
+0038 <span class="comment">%         14 - Peaks Valley</span>
+0039 <span class="comment">%         15 - Stress/Cycles</span>
+0040 <span class="comment">%         16 - Strain/Cycles</span>
+0041 <span class="comment">%         17 - Orbit</span>
+0042 <span class="comment">%         18 - Mode Indicator Function</span>
+0043 <span class="comment">%         19 - Force Pattern</span>
+0044 <span class="comment">%         20 - Partial Power</span>
+0045 <span class="comment">%         21 - Partial Coherence</span>
+0046 <span class="comment">%         22 - Eigenvalue</span>
+0047 <span class="comment">%         23 - Eigenvector</span>
+0048 <span class="comment">%         24 - Shock Response Spectrum</span>
+0049 <span class="comment">%         25 - Finite Impulse Response Filter</span>
+0050 <span class="comment">%         26 - Multiple Coherence</span>
+0051 <span class="comment">%         27 - Order Function</span>
+0052 <span class="comment">%         28 - Phase Compensation</span>
+0053 <span class="comment">%         29 - Undefined</span>
+0054 <span class="comment">%         30 - Transient Spectrum</span>
+0055 
+0056 <span class="comment">%------------------------------------------------------------------------</span>
+0057 <span class="comment">% Define short strings</span>
+0058 ShortStrings={<span class="string">'Unknown'</span>,<span class="string">'Time'</span>,<span class="string">'AutoSpec'</span>,<span class="string">'CrossSpec'</span>,<span class="string">'FRF'</span>,<span class="keyword">...</span>
+0059     <span class="string">'Transmissibility'</span>,<span class="string">'Coherence'</span>,<span class="string">'AutoCorr'</span>,<span class="string">'CrossCorr'</span>,<span class="string">'PSD'</span>,<span class="keyword">...</span>
+0060     <span class="string">'ESD'</span>,<span class="string">'PDF'</span>,<span class="string">'Spectrum'</span>,<span class="string">'CumFreqDistr'</span>,<span class="string">'PeaksValley'</span>,<span class="keyword">...</span>
+0061     <span class="string">'Stress/Cycles'</span>,<span class="string">'Strain/Cycles'</span>,<span class="string">'Orbit'</span>,<span class="string">'MIF'</span>,<span class="string">'ForcePattern'</span>,<span class="keyword">...</span>
+0062     <span class="string">'PartPower'</span>,<span class="string">'PartCoh'</span>,<span class="string">'Eigenvalue'</span>,<span class="string">'Eigenvector'</span>,<span class="string">'SRS'</span>,<span class="keyword">...</span>
+0063     <span class="string">'FIRFilter'</span>,<span class="string">'MultCoh'</span>,<span class="string">'Order'</span>,<span class="string">'PhaseComp'</span>,<span class="string">'Undefined'</span>,<span class="string">'TranSpec'</span>};
+0064 
+0065 <span class="comment">%------------------------------------------------------------------------</span>
+0066 <span class="comment">% Start conversion</span>
+0067 <span class="keyword">if</span> isnumeric(FuncType)
+0068     <span class="keyword">if</span> FuncType &lt;= length(ShortStrings)     <span class="comment">% Added 2012-01-10</span>
+0069         FuncType = ShortStrings{1+FuncType};
+0070     <span class="keyword">else</span>
+0071         FuncType=<span class="string">'Unknown'</span>;
+0072     <span class="keyword">end</span>
+0073 <span class="keyword">else</span>
+0074     idx=0;
+0075     <span class="keyword">for</span> n=1:31      <span class="comment">% Changed to 31 in rev 1.2</span>
+0076         <span class="keyword">if</span> strcmp(upper(FuncType),upper(ShortStrings{n}))
+0077             idx=n;
+0078         <span class="keyword">end</span>
+0079     <span class="keyword">end</span>
+0080     <span class="keyword">if</span> idx &gt; 0
+0081         FuncType=idx-1;
+0082     <span class="keyword">else</span>
+0083         FuncType=-1;                    <span class="comment">% Added 2012-01-10</span>
+0084     <span class="keyword">end</span>
+0085 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

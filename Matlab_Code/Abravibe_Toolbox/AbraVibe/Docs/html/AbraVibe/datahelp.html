@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of datahelp</title>
+  <meta name="keywords" content="datahelp">
+  <meta name="description" content="DATAHELP Prints documentation for Abravibe data storage (Data and Header variables)">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; datahelp.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>datahelp
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>DATAHELP Prints documentation for Abravibe data storage (Data and Header variables)</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function datahelp </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment">DATAHELP Prints documentation for Abravibe data storage (Data and Header variables)
+
+ In ABRAVIBE toolbox, data are (normally) stored in mat files or mat+wav 
+ files with two variables: 'Header', and 'Data'. The variable 'Data' is
+ either a column vector with data (time data, spectrum, FRF) from ONE
+ channel, or a string with a pointer to a wav file, with extension. 
+ (Wav files are not supported yet.)
+
+ Time data from Impact testing are stored in a special format, to keep
+ information from one impact position and several accelerometers in one
+ file for easy processing. This file includes a similar format as for
+ single measurements, but the Data variables is a cell array, and the
+ header struct includes several records, one for each cell array in Data.
+
+==========================================================================
+ Header
+---------------
+ The abravibe Header struct is documenting measurement data with the
+ following (mostly self explanatory) fields:
+
+ Data from single measurement (time data, spectrum etc.)
+ Header.
+           FunctionType    Number indication measurement function, see
+                           help for FUNCTYPE for more information
+           DateStr         String with date and time information
+           Title           String with title
+           Title2,...      Additional (optional) title lines can be
+                           included as Title2, Title3, etc.
+           NumberSamples   Length of Data
+           xStart          First x value for x axis (see MAKEXAXIS)
+           xIncrement      Increment for x axis (dt or df, typically)
+           Unit            String with units of Data
+           Dof             Measurement point number
+           Dir             Direction string, e.g. 'X+', see dir2nbr
+           Label           String with label info
+
+ PSDs can (should) have additional fields:
+           Method          'Welch', 'SmoothedPer'
+           NumberAverages  Number averages for spectrum
+           OverlapPerc     Overlap Percentage (if Method is 'Welch')
+           SmoothLength    Smoothing window length (if Method is 'SmoothedPer')
+           SmoothWin       String with smoothing window ('boxcar','ahann'...)
+           ENBW            Equivalent  noise bandwidth of window used (see enwb command)
+
+ Other frequency domain functions should have
+           NumberAverages  Number averages for spectrum
+           OverlapPerc     Overlap Percentage (if Method is 'Welch')
+           ENBW            Equivalent  noise bandwidth of window used (see enwb command)
+
+ Multipoint data as e.g. FRFs, cross spectra etc. have additional fields
+           RefDof          Dof number of (usually) force location (denominator dof)
+           RefDir          Direction string for force (denominator)</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="datahelp.html" class="code" title="function datahelp">datahelp</a>	DATAHELP Prints documentation for Abravibe data storage (Data and Header variables)</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="datahelp.html" class="code" title="function datahelp">datahelp</a>	DATAHELP Prints documentation for Abravibe data storage (Data and Header variables)</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function datahelp</a>
+0002 <span class="comment">%DATAHELP Prints documentation for Abravibe data storage (Data and Header variables)</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">% In ABRAVIBE toolbox, data are (normally) stored in mat files or mat+wav</span>
+0005 <span class="comment">% files with two variables: 'Header', and 'Data'. The variable 'Data' is</span>
+0006 <span class="comment">% either a column vector with data (time data, spectrum, FRF) from ONE</span>
+0007 <span class="comment">% channel, or a string with a pointer to a wav file, with extension.</span>
+0008 <span class="comment">% (Wav files are not supported yet.)</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">% Time data from Impact testing are stored in a special format, to keep</span>
+0011 <span class="comment">% information from one impact position and several accelerometers in one</span>
+0012 <span class="comment">% file for easy processing. This file includes a similar format as for</span>
+0013 <span class="comment">% single measurements, but the Data variables is a cell array, and the</span>
+0014 <span class="comment">% header struct includes several records, one for each cell array in Data.</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%==========================================================================</span>
+0017 <span class="comment">% Header</span>
+0018 <span class="comment">%---------------</span>
+0019 <span class="comment">% The abravibe Header struct is documenting measurement data with the</span>
+0020 <span class="comment">% following (mostly self explanatory) fields:</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">% Data from single measurement (time data, spectrum etc.)</span>
+0023 <span class="comment">% Header.</span>
+0024 <span class="comment">%           FunctionType    Number indication measurement function, see</span>
+0025 <span class="comment">%                           help for FUNCTYPE for more information</span>
+0026 <span class="comment">%           DateStr         String with date and time information</span>
+0027 <span class="comment">%           Title           String with title</span>
+0028 <span class="comment">%           Title2,...      Additional (optional) title lines can be</span>
+0029 <span class="comment">%                           included as Title2, Title3, etc.</span>
+0030 <span class="comment">%           NumberSamples   Length of Data</span>
+0031 <span class="comment">%           xStart          First x value for x axis (see MAKEXAXIS)</span>
+0032 <span class="comment">%           xIncrement      Increment for x axis (dt or df, typically)</span>
+0033 <span class="comment">%           Unit            String with units of Data</span>
+0034 <span class="comment">%           Dof             Measurement point number</span>
+0035 <span class="comment">%           Dir             Direction string, e.g. 'X+', see dir2nbr</span>
+0036 <span class="comment">%           Label           String with label info</span>
+0037 <span class="comment">%</span>
+0038 <span class="comment">% PSDs can (should) have additional fields:</span>
+0039 <span class="comment">%           Method          'Welch', 'SmoothedPer'</span>
+0040 <span class="comment">%           NumberAverages  Number averages for spectrum</span>
+0041 <span class="comment">%           OverlapPerc     Overlap Percentage (if Method is 'Welch')</span>
+0042 <span class="comment">%           SmoothLength    Smoothing window length (if Method is 'SmoothedPer')</span>
+0043 <span class="comment">%           SmoothWin       String with smoothing window ('boxcar','ahann'...)</span>
+0044 <span class="comment">%           ENBW            Equivalent  noise bandwidth of window used (see enwb command)</span>
+0045 <span class="comment">%</span>
+0046 <span class="comment">% Other frequency domain functions should have</span>
+0047 <span class="comment">%           NumberAverages  Number averages for spectrum</span>
+0048 <span class="comment">%           OverlapPerc     Overlap Percentage (if Method is 'Welch')</span>
+0049 <span class="comment">%           ENBW            Equivalent  noise bandwidth of window used (see enwb command)</span>
+0050 <span class="comment">%</span>
+0051 <span class="comment">% Multipoint data as e.g. FRFs, cross spectra etc. have additional fields</span>
+0052 <span class="comment">%           RefDof          Dof number of (usually) force location (denominator dof)</span>
+0053 <span class="comment">%           RefDir          Direction string for force (denominator)</span>
+0054 
+0055 help <a href="datahelp.html" class="code" title="function datahelp">datahelp</a>       
+0056 
+0057 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0058 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0059 <span class="comment">% Version: 1.0 2011-06-23</span>
+0060 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span></pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

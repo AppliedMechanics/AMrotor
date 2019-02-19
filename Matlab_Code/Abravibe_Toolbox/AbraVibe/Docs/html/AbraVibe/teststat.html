@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of teststat</title>
+  <meta name="keywords" content="teststat">
+  <meta name="description" content="TESTSTAT Hypothesis test for stationarity">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; teststat.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>teststat
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>TESTSTAT Hypothesis test for stationarity</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function status = teststat(y,alfa,Type) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment">TESTSTAT Hypothesis test for stationarity
+
+       status = teststat(F,alfa,Type);
+
+       status      Logical variable(s) = 1 (true) if signal in x is
+                   stationary with significance level alfa
+
+       F           Frames from FRAMESTAT
+       alfa        Significance level
+       Type        'reverse' performs a reverse arrangements test,
+                   sensitive to trends in (columns of) x
+                   'runs' performs a run test, sensitive to periodicity
+                   in (columns of) x
+
+
+   See also <a href="statchk.html" class="code" title="function statchk(x, N, NPlot, FileName);">STATCHK</a> <a href="framestat.html" class="code" title="function F = framestat(y,N,func,NPlot)">FRAMESTAT</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function status = teststat(y,alfa,Type)</a>
+0002 <span class="comment">%TESTSTAT Hypothesis test for stationarity</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%       status = teststat(F,alfa,Type);</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%       status      Logical variable(s) = 1 (true) if signal in x is</span>
+0007 <span class="comment">%                   stationary with significance level alfa</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%       F           Frames from FRAMESTAT</span>
+0010 <span class="comment">%       alfa        Significance level</span>
+0011 <span class="comment">%       Type        'reverse' performs a reverse arrangements test,</span>
+0012 <span class="comment">%                   sensitive to trends in (columns of) x</span>
+0013 <span class="comment">%                   'runs' performs a run test, sensitive to periodicity</span>
+0014 <span class="comment">%                   in (columns of) x</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   See also STATCHK FRAMESTAT</span>
+0018 
+0019 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0020 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0021 <span class="comment">% Version: 1.0 2011-06-23</span>
+0022 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0023 
+0024 Type=upper(Type);
+0025 N=length(y);
+0026 
+0027 <span class="comment">% If more than one channel (column) in x, loop trough each channel</span>
+0028 <span class="comment">%</span>
+0029 <span class="comment">%     % First, calculate the parameters yi for either test type</span>
+0030 <span class="comment">%     L=floor(length(x(:,ch))/N);</span>
+0031 <span class="comment">%     for n=0:N-1,</span>
+0032 <span class="comment">%         y(n+1)=feval(func,x(n*L+1:(n+1)*L,ch));</span>
+0033 <span class="comment">%     end</span>
+0034 <span class="comment">% Analysis dependent on test type</span>
+0035 <span class="keyword">if</span> strcmp(Type,<span class="string">'REVERSE'</span>)
+0036     
+0037     <span class="comment">% Next calculate the A number by summing up Ai</span>
+0038     A=0;
+0039     <span class="keyword">for</span> n=2:length(y)
+0040         A=A+sum(y(n-1) &gt; y(n:end));
+0041     <span class="keyword">end</span>
+0042     
+0043     <span class="comment">% Calculate the upper and lower limits for the hypothesis to hold</span>
+0044     mu=N*(N-1)/4;
+0045     s=sqrt(N*(2*N+5)*(N-1)/72);
+0046     
+0047 <span class="keyword">elseif</span> strcmp(Type,<span class="string">'RUNS'</span>)
+0048     
+0049     <span class="comment">% Produce the run variable r as 1 and 0 instead of + and -</span>
+0050     r=(y &gt;= mean(y));
+0051     <span class="comment">% Count number of runs</span>
+0052     d=diff(r);
+0053     A=1+sum(abs(d));
+0054     
+0055     N1=sum(r);
+0056     N2=N-N1;
+0057     
+0058     <span class="comment">%    N=N/2;      % Only half degrees of freedom</span>
+0059     mu=2*N1*N2/(N)+1;
+0060     s=sqrt((mu-1)*(mu-2)/(N-1));
+0061     <span class="comment">%    s=sqrt(2*N1*N2/N^2*(2*N1*N2-N)/(N-1))</span>
+0062 <span class="keyword">end</span>
+0063 
+0064 <span class="comment">% Null hypothesis decision is independent of test type</span>
+0065 delta=sqrt(2)*erfinv(1-alfa);
+0066 lo_lim=fix(mu-delta*s);
+0067 hi_lim=fix(mu+delta*s);
+0068 status = (lo_lim&lt;A) &amp;&amp; (hi_lim&gt;A);
+0069</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

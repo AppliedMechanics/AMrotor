@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of mck2frf</title>
+  <meta name="keywords" content="mck2frf">
+  <meta name="description" content="MCK2FRF Calculate FRF(s) from M, C, K matrices">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; mck2frf.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>mck2frf
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>MCK2FRF Calculate FRF(s) from M, C, K matrices</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function H = mck2frf(f,M,C,K,indof,outdof,type) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment">MCK2FRF Calculate FRF(s) from M, C, K matrices
+
+       H = mck2frf(f,M,C,K,indof,outdof,type)
+
+               H       Frequency response matrix in [(m/s)/N] (matrix) N-by-D-by-R
+               N       length(f), number of frequency values
+               D       length(outdof), number of responses
+               R       length(indof), number of references (inputs)
+  
+               f       Frequency vector in [Hz]
+               M       Mass matrix in [kg]
+               C       Damping matrix in [Ns/m]
+               K       Stiffness matrix in m/N
+               indof   Input DOF(s), may be a vector for many reference
+                       DOFs, (default = 1)
+               outdof  Output DOF(2) may be a vector for many responses
+                       (default = 1)
+               type    Type of output FRF as string: 
+                       'Flexibility' or 'd' generates displacement/force 
+                       'Mobility' or 'v'    generates velocity/force (Default)
+                       'Accelerance' or 'a' generates acceleration/force
+ Example:
+               H = mck2frf(f,M,C,K,[1 2 4],[5:12],'v');
+
+ Calculates mobilities with columns corresponding to force in
+ DOFs 1, 2, and 4, and responses in DOFs 5 to 12. H will in this case be
+ of dimension (N, 8, 3) where N is the number of frequency values.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="tunedamp.html" class="code" title="function [H,f] = tunedamp(fr,zr,m_ratio,z_ratio)">tunedamp</a>	TUNEDAMP  Compute FRF of tuned damper with SDOF system</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function H = mck2frf(f,M,C,K,indof,outdof,type)</a>
+0002 <span class="comment">%MCK2FRF Calculate FRF(s) from M, C, K matrices</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%       H = mck2frf(f,M,C,K,indof,outdof,type)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%               H       Frequency response matrix in [(m/s)/N] (matrix) N-by-D-by-R</span>
+0007 <span class="comment">%               N       length(f), number of frequency values</span>
+0008 <span class="comment">%               D       length(outdof), number of responses</span>
+0009 <span class="comment">%               R       length(indof), number of references (inputs)</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%               f       Frequency vector in [Hz]</span>
+0012 <span class="comment">%               M       Mass matrix in [kg]</span>
+0013 <span class="comment">%               C       Damping matrix in [Ns/m]</span>
+0014 <span class="comment">%               K       Stiffness matrix in m/N</span>
+0015 <span class="comment">%               indof   Input DOF(s), may be a vector for many reference</span>
+0016 <span class="comment">%                       DOFs, (default = 1)</span>
+0017 <span class="comment">%               outdof  Output DOF(2) may be a vector for many responses</span>
+0018 <span class="comment">%                       (default = 1)</span>
+0019 <span class="comment">%               type    Type of output FRF as string:</span>
+0020 <span class="comment">%                       'Flexibility' or 'd' generates displacement/force</span>
+0021 <span class="comment">%                       'Mobility' or 'v'    generates velocity/force (Default)</span>
+0022 <span class="comment">%                       'Accelerance' or 'a' generates acceleration/force</span>
+0023 <span class="comment">% Example:</span>
+0024 <span class="comment">%               H = mck2frf(f,M,C,K,[1 2 4],[5:12],'v');</span>
+0025 <span class="comment">%</span>
+0026 <span class="comment">% Calculates mobilities with columns corresponding to force in</span>
+0027 <span class="comment">% DOFs 1, 2, and 4, and responses in DOFs 5 to 12. H will in this case be</span>
+0028 <span class="comment">% of dimension (N, 8, 3) where N is the number of frequency values.</span>
+0029 
+0030 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0031 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0032 <span class="comment">% Version: 1.0 2011-06-23</span>
+0033 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0034 
+0035 <span class="comment">% Code:</span>
+0036 <span class="comment">% Parse Input Parameters</span>
+0037 <span class="keyword">if</span> nargin &lt; 4
+0038     error(<span class="string">'Too few input variables. At least f, M, C, and K must be used!'</span>)
+0039 <span class="keyword">elseif</span> nargin == 4
+0040     indof=1;
+0041     outdof=1;
+0042     type=<span class="string">'V'</span>;
+0043 <span class="keyword">elseif</span> nargin == 5
+0044     outdof=1;
+0045     type=<span class="string">'V'</span>;
+0046 <span class="keyword">elseif</span> nargin == 6
+0047     type=<span class="string">'V'</span>;
+0048 <span class="keyword">end</span>
+0049 
+0050 <span class="keyword">if</span> strcmp(upper(type),<span class="string">'FLEXIBILITY'</span>)
+0051     type=<span class="string">'D'</span>;
+0052 <span class="keyword">elseif</span> strcmp(upper(type),<span class="string">'MOBILITY'</span>)
+0053     type=<span class="string">'V'</span>;
+0054 <span class="keyword">elseif</span> strcmp(upper(type),<span class="string">'ACCELERANCE'</span>)
+0055     type=<span class="string">'A'</span>;
+0056 <span class="keyword">elseif</span> strcmp(upper(type),<span class="string">'D'</span>) || strcmp(upper(type),<span class="string">'V'</span>) |<span class="keyword">...</span>
+0057         strcmp(upper(type),<span class="string">'A'</span>)
+0058     type=upper(type);
+0059 <span class="keyword">else</span>
+0060     error(<span class="string">'Wrong input type!'</span>)
+0061 <span class="keyword">end</span>
+0062 
+0063 <span class="comment">% Find dimensions</span>
+0064 N = length(f);
+0065 D = length(outdof);
+0066 R = length(indof);
+0067 
+0068 <span class="comment">% Allocate H MATRIX for output</span>
+0069 H = zeros(N,D,R);
+0070 
+0071 <span class="comment">% Main</span>
+0072 <span class="comment">% Loop through frequencies and use inverse of system impedance matrix:</span>
+0073 <span class="comment">% B(s)*X(s)=F(s) ==&gt; B(s) in form of B=F/X</span>
+0074 <span class="comment">% H(s) = inv(B(s)) ==&gt; X(s)/F(s), so that H(s)*F(s)=X(s)</span>
+0075 <span class="comment">%</span>
+0076 <span class="keyword">for</span> n = 1:N         <span class="comment">% Frequency index</span>
+0077     w = 2*pi*f(n);  <span class="comment">% Omega for this frequency</span>
+0078     Denom = -(w^2)*M+j*w*C+K;           <span class="comment">% Newton's equation in denominator of Hv</span>
+0079     InvDenom = Denom\eye(size(Denom));   <span class="comment">% Inverse denominator, same as inv(Denom) but Gaussian elimination</span>
+0080     <span class="keyword">for</span> r = 1:R
+0081         <span class="keyword">if</span> strcmp(type,<span class="string">'D'</span>)
+0082             H(n,:,r) = InvDenom(outdof,indof(r));
+0083         <span class="keyword">elseif</span> strcmp(type,<span class="string">'V'</span>)
+0084             H(n,:,r) = j*w*InvDenom(outdof,indof(r));
+0085         <span class="keyword">else</span>
+0086             H(n,:,r) = -(w^2)*InvDenom(outdof,indof(r));
+0087         <span class="keyword">end</span>
+0088     <span class="keyword">end</span>
+0089 <span class="keyword">end</span>
+0090 
+0091</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

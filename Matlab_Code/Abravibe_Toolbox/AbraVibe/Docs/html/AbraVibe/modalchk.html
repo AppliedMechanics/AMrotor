@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of modalchk</title>
+  <meta name="keywords" content="modalchk">
+  <meta name="description" content="MODALCHK  Standard checks on FRF matrix for exp. modal analysis">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; modalchk.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>modalchk
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>MODALCHK  Standard checks on FRF matrix for exp. modal analysis</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [Hrec,RecDof, Hdp, DpDof, MissingDofs] = modalchk(H,f,Rdof,Rdir,Fdof,Fdir,FillMtrx,Type) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> MODALCHK  Standard checks on FRF matrix for exp. modal analysis
+
+ modalchk(H,f,Rdof,Rdir,Fdof,Fdir,FillMtrx,Type) produces appropriate plots
+       
+ [Hrec,RecDof, Hdp, DpDof, MissingDofs] = modalchk(H,f,Rdof,Rdir,Fdof,Fdir,FillMtrx,Type)
+ produces outputs in requested variables
+
+       Hrec        Reciprocity matrix N-by-2-by-(R-1)! with corresponding FRFs
+                   to/from each reference R and, in H(:,:,R)
+       RecDof      2-by-(R-1)! cell array with dof string for H(:,m,n) in
+                   RecDof{m,n) (see headpstr command)
+       Hdp         Driving point FRFs, N-by-R, with reference to Fdof(n)
+                   in Hdp(:,n)
+       DpDof       Cell array with dof string for Hdp(:,n) in DpDof{n};
+       MissingDofs Index into H in case  there are missing measurements.
+                   If not, MissingDofs is empty
+       H           FRF matrix with accelerances, sorted by DATA2FRF
+       f           Frequency axis for H
+       Rdof        Response dofs (or force dofs if impact test)
+       Rdir        Response directions
+       Fdof        Force dofs (or response if impact test)
+       Fdir        Force directions
+       FillMtrx    Matrix with a 1 in positions with an FRF in H
+       Type        String with options for which tests
+                   'all' (Default) performs all of the following:
+                   'reciprocity'
+                   'imaginary' check imaginary part of driving points
+                   'complete' checks if missing</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="nbr2dir.html" class="code" title="function DirString = nbr2dir(DirNumber)">nbr2dir</a>	NBR2DIR   Convert numeric direction to string</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [Hrec,RecDof, Hdp, DpDof, MissingDofs] = modalchk(H,f,Rdof,Rdir,Fdof,Fdir,FillMtrx,Type)</a>
+0002 <span class="comment">% MODALCHK  Standard checks on FRF matrix for exp. modal analysis</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">% modalchk(H,f,Rdof,Rdir,Fdof,Fdir,FillMtrx,Type) produces appropriate plots</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">% [Hrec,RecDof, Hdp, DpDof, MissingDofs] = modalchk(H,f,Rdof,Rdir,Fdof,Fdir,FillMtrx,Type)</span>
+0007 <span class="comment">% produces outputs in requested variables</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%       Hrec        Reciprocity matrix N-by-2-by-(R-1)! with corresponding FRFs</span>
+0010 <span class="comment">%                   to/from each reference R and, in H(:,:,R)</span>
+0011 <span class="comment">%       RecDof      2-by-(R-1)! cell array with dof string for H(:,m,n) in</span>
+0012 <span class="comment">%                   RecDof{m,n) (see headpstr command)</span>
+0013 <span class="comment">%       Hdp         Driving point FRFs, N-by-R, with reference to Fdof(n)</span>
+0014 <span class="comment">%                   in Hdp(:,n)</span>
+0015 <span class="comment">%       DpDof       Cell array with dof string for Hdp(:,n) in DpDof{n};</span>
+0016 <span class="comment">%       MissingDofs Index into H in case  there are missing measurements.</span>
+0017 <span class="comment">%                   If not, MissingDofs is empty</span>
+0018 <span class="comment">%       H           FRF matrix with accelerances, sorted by DATA2FRF</span>
+0019 <span class="comment">%       f           Frequency axis for H</span>
+0020 <span class="comment">%       Rdof        Response dofs (or force dofs if impact test)</span>
+0021 <span class="comment">%       Rdir        Response directions</span>
+0022 <span class="comment">%       Fdof        Force dofs (or response if impact test)</span>
+0023 <span class="comment">%       Fdir        Force directions</span>
+0024 <span class="comment">%       FillMtrx    Matrix with a 1 in positions with an FRF in H</span>
+0025 <span class="comment">%       Type        String with options for which tests</span>
+0026 <span class="comment">%                   'all' (Default) performs all of the following:</span>
+0027 <span class="comment">%                   'reciprocity'</span>
+0028 <span class="comment">%                   'imaginary' check imaginary part of driving points</span>
+0029 <span class="comment">%                   'complete' checks if missing</span>
+0030 <span class="comment">%</span>
+0031 
+0032 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0033 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0034 <span class="comment">% Version: 1.0 2011-06-23</span>
+0035 <span class="comment">%          1.1 2012-04-23 Fixed bug, if force/response have different</span>
+0036 <span class="comment">%                         direction, crashed before</span>
+0037 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0038 
+0039 <span class="comment">% Parse inputs</span>
+0040 <span class="keyword">if</span> nargin == 7
+0041     Type=<span class="string">'ALL'</span>;
+0042 <span class="keyword">elseif</span> nargin == 8
+0043     Type=upper(Type);
+0044 <span class="keyword">else</span>
+0045     error(<span class="string">'Wrong number of inputs. Only Type is optional!'</span>)
+0046 <span class="keyword">end</span>
+0047 
+0048 [N,D,R]=size(H);
+0049 
+0050 <span class="comment">% Convert dof and directions to a combined number</span>
+0051 <span class="keyword">for</span> n=1:length(Rdof)
+0052     a=Rdir(n);
+0053     Rdofs(n)=sign(a)*(10*Rdof(n)+abs(a));         <span class="comment">% Dof 13Z- is now -133</span>
+0054 <span class="keyword">end</span>
+0055 <span class="keyword">for</span> n=1:length(Fdof)
+0056     a=Fdir(n);
+0057     Fdofs(n)=sign(a)*(10*Fdof(n)+abs(a));         <span class="comment">% Dof 13Z- is now -133</span>
+0058 <span class="keyword">end</span>
+0059 
+0060 <span class="keyword">if</span> strcmp(Type,<span class="string">'ALL'</span>) | strcmp(<span class="string">'RECIPROCITY'</span>)
+0061 <span class="comment">% 1. Reciprocity</span>
+0062 <span class="comment">% For each pair of force dofs, find corresponding measurements</span>
+0063     <span class="keyword">for</span> n = 1:R
+0064         <span class="keyword">for</span> m = n+1:R
+0065             <span class="comment">% Following two lines fixed bug 2012-04-23 by introducing abs()</span>
+0066             Ridx1=find(abs(Rdofs) == abs(Fdofs(n)));      <span class="comment">% Response for F(n)</span>
+0067             Ridx2=find(abs(Rdofs) == abs(Fdofs(m)));      <span class="comment">% Response for F(m)</span>
+0068             Hrec(:,1,n)=H(:,Ridx1,m);
+0069             RecDof{1,n}=strcat(int2str(Rdof(Ridx1)),<a href="nbr2dir.html" class="code" title="function DirString = nbr2dir(DirNumber)">nbr2dir</a>(Rdir(Ridx1)),<span class="string">'/'</span>,int2str(Fdof(m)),<a href="nbr2dir.html" class="code" title="function DirString = nbr2dir(DirNumber)">nbr2dir</a>(Fdir(m)));
+0070             Hrec(:,2,n)=H(:,Ridx2,n);
+0071             RecDof{2,n}=strcat(int2str(Rdof(Ridx2)),<a href="nbr2dir.html" class="code" title="function DirString = nbr2dir(DirNumber)">nbr2dir</a>(Rdir(Ridx2)),<span class="string">'/'</span>,int2str(Fdof(n)),<a href="nbr2dir.html" class="code" title="function DirString = nbr2dir(DirNumber)">nbr2dir</a>(Fdir(n)));
+0072             <span class="keyword">if</span> nargout == 0
+0073                 <span class="comment">% Produce plot</span>
+0074                 figure
+0075                 semilogy(f,abs(Hrec(:,1,n)),f,abs(Hrec(:,2,n)))
+0076                 legend(RecDof{1,n},RecDof{2,n})
+0077                 xlabel(<span class="string">'Frequency [Hz]'</span>)
+0078                 title(<span class="string">'Reciprocity plot'</span>)
+0079             <span class="keyword">end</span>
+0080         <span class="keyword">end</span>
+0081     <span class="keyword">end</span>
+0082 <span class="keyword">end</span>
+0083 <span class="keyword">if</span> strcmp(Type,<span class="string">'ALL'</span>) | strcmp(Type,<span class="string">'IMAGINARY'</span>)
+0084 <span class="comment">% 2. Imaginary part of driving points are checked for peaks and directions:</span>
+0085     <span class="keyword">for</span> r=1:R
+0086         Ridx=find(Rdof == Fdof(r));
+0087         Hdp(:,r)=H(:,Ridx,r);
+0088         DpDof{r}=strcat(int2str(Rdof(Ridx)),<a href="nbr2dir.html" class="code" title="function DirString = nbr2dir(DirNumber)">nbr2dir</a>(Rdir(Ridx)),<span class="string">'/'</span>,int2str(Fdof(r)),<a href="nbr2dir.html" class="code" title="function DirString = nbr2dir(DirNumber)">nbr2dir</a>(Fdir(r)));
+0089     <span class="keyword">end</span>
+0090     <span class="keyword">if</span> nargout == 0
+0091         figure
+0092         <span class="keyword">for</span> r=1:R
+0093             subplot(R,1,r)
+0094             plot(f,imag(Hdp(:,r)))
+0095             ylabel(<span class="string">'Imaginary part'</span>)
+0096             title([<span class="string">'Driving point '</span> DpDof{r} <span class="string">'; If both sensors have common sign, peaks should be positive!'</span>])
+0097             xlabel(<span class="string">'Frequency [Hz]'</span>)
+0098         <span class="keyword">end</span>
+0099     <span class="keyword">end</span>
+0100 <span class="keyword">end</span>
+0101 <span class="keyword">if</span> strcmp(Type,<span class="string">'ALL'</span>) | strcmp(Type,<span class="string">'COMPLETE'</span>)
+0102     <span class="keyword">if</span> (FillMtrx == 0) ~= zeros(size(FillMtrx))
+0103         warning(<span class="string">'Missing measurements!'</span>)
+0104         [a,b]=find(FillMtrx == 0);
+0105         MissingDofs=[a b];
+0106     <span class="keyword">end</span>
+0107 <span class="keyword">end</span>
+0108</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

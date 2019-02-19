@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of mfdfilt</title>
+  <meta name="keywords" content="mfdfilt">
+  <meta name="description" content="MFDFILT    Calculate filter coefficients for a maximum flat differentiator">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; mfdfilt.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>mfdfilt
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>MFDFILT    Calculate filter coefficients for a maximum flat differentiator</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [B,A] = mfdfilt(N) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> MFDFILT    Calculate filter coefficients for a maximum flat differentiator
+
+       [B,A] = mfdfilt(N)
+
+       B       Filter numerator coefficients
+       A       Filter denominator coefficients
+
+       N       Filter order, length(B) = 2N+1. MUST be even number for
+               integer sample filter delay
+
+ 10 times oversampling should be used with these filters. Delay is N
+ samples.
+
+ See also <a href="timediff.html" class="code" title="function y = timediff(x,fs,Type);">TIMEDIFF</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="timediff.html" class="code" title="function y = timediff(x,fs,Type);">timediff</a>	TIMEDIFF Differentiate time signal</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [B,A] = mfdfilt(N)</a>
+0002 <span class="comment">% MFDFILT    Calculate filter coefficients for a maximum flat differentiator</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%       [B,A] = mfdfilt(N)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%       B       Filter numerator coefficients</span>
+0007 <span class="comment">%       A       Filter denominator coefficients</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%       N       Filter order, length(B) = 2N+1. MUST be even number for</span>
+0010 <span class="comment">%               integer sample filter delay</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">% 10 times oversampling should be used with these filters. Delay is N</span>
+0013 <span class="comment">% samples.</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">% See also TIMEDIFF</span>
+0016 
+0017 <span class="comment">% This is an internal function used by timediff</span>
+0018 
+0019 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0020 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0021 <span class="comment">% Version: 1.0 2011-06-23</span>
+0022 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0023 
+0024 c(1)=-N/(N+1);
+0025 <span class="keyword">for</span> n = 2:N
+0026     c(n)=(-1)*c(n-1)*(n-1)*(N-n+1)/n/(N+n);
+0027 <span class="keyword">end</span>
+0028 <span class="comment">% Filter coefficients</span>
+0029 A=1;
+0030 B=-[fliplr(c) 0 -c];
+0031 
+0032</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

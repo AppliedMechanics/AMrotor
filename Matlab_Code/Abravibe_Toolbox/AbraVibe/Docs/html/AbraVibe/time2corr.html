@@ -1,0 +1,209 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of time2corr</title>
+  <meta name="keywords" content="time2corr">
+  <meta name="description" content="TIME2CORR    Process ABRAVIBE time data files into correlation function files">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; time2corr.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>time2corr
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>TIME2CORR    Process ABRAVIBE time data files into correlation function files</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function LastNumber = time2corr(InPrefix,StartNo,StopNo,OutPrefix,OutStartNo,Blocksize,RefChannel,DownSample,Type,start,stop) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> TIME2CORR    Process ABRAVIBE time data files into correlation function files
+
+   LastNumber = time2corr(InPrefix,StartNo,StopNo,OutPrefix,OutStartNo,Blocksize,RefChannel,DownSample,Type,start,stop)
+           LastNumber      Last number of last saved file
+           Prefix          Prefix for input files
+           StartNo         Number of first input file
+           StopNo          Number of last input file
+           OutPrefix       Prefix of output files
+           OutStartNo      First number for output files
+           Blocksize       Block size for correlation estimation if Welch
+                           is used. The number of lags in the CF if
+                           periodogram method is used
+           RefChannel      References, by file number, e.g. [1 7]. 
+           Downsample      (optional) Factor of downsampling, must be positive integer)
+           Type            (optional) Method for CF estimation, 'Welch'
+                           approach (default) or 'periodogram' approach
+           start           (optional) start sample in original data
+           stop            (optional) last sample in original data
+
+
+ Typical application: Operational modal analysis, OMA
+ Correlation function can be collected into a matrix for processing by DATA2HMTRX
+ by specifying FunctionType = [7 8] 
+
+ See also  <a href="time2spec.html" class="code" title="function LastNumber = time2spec(InPrefix,StartNo,StopNo,OutPrefix,OutStartNo,Blocksize,RefChannel,DownSample,Type,start,stop)">TIME2SPEC</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="axcorrp.html" class="code" title="function [Ryx,t,Gyx,f] = axcorrp(x,y,fs,N)">axcorrp</a>	AXCORRP      Scaled cross-correlation between x (input) and y (output)</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="timeproc.html" class="code" title="function LastNumber = timeproc(InPrefix,StartNo,StopNo,OutPrefix,OutStartNo,FunctionType,Settings)">timeproc</a>	TIME2PROC    Process time data files into ABRAVIBE function files</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function LastNumber = time2corr(InPrefix,StartNo,StopNo,OutPrefix,OutStartNo,Blocksize,RefChannel,DownSample,Type,start,stop)</a>
+0002 <span class="comment">% TIME2CORR    Process ABRAVIBE time data files into correlation function files</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%   LastNumber = time2corr(InPrefix,StartNo,StopNo,OutPrefix,OutStartNo,Blocksize,RefChannel,DownSample,Type,start,stop)</span>
+0005 <span class="comment">%           LastNumber      Last number of last saved file</span>
+0006 <span class="comment">%           Prefix          Prefix for input files</span>
+0007 <span class="comment">%           StartNo         Number of first input file</span>
+0008 <span class="comment">%           StopNo          Number of last input file</span>
+0009 <span class="comment">%           OutPrefix       Prefix of output files</span>
+0010 <span class="comment">%           OutStartNo      First number for output files</span>
+0011 <span class="comment">%           Blocksize       Block size for correlation estimation if Welch</span>
+0012 <span class="comment">%                           is used. The number of lags in the CF if</span>
+0013 <span class="comment">%                           periodogram method is used</span>
+0014 <span class="comment">%           RefChannel      References, by file number, e.g. [1 7].</span>
+0015 <span class="comment">%           Downsample      (optional) Factor of downsampling, must be positive integer)</span>
+0016 <span class="comment">%           Type            (optional) Method for CF estimation, 'Welch'</span>
+0017 <span class="comment">%                           approach (default) or 'periodogram' approach</span>
+0018 <span class="comment">%           start           (optional) start sample in original data</span>
+0019 <span class="comment">%           stop            (optional) last sample in original data</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">% Typical application: Operational modal analysis, OMA</span>
+0023 <span class="comment">% Correlation function can be collected into a matrix for processing by DATA2HMTRX</span>
+0024 <span class="comment">% by specifying FunctionType = [7 8]</span>
+0025 <span class="comment">%</span>
+0026 <span class="comment">% See also  TIME2SPEC</span>
+0027 
+0028 <span class="comment">% Copyright (c) 2014 by Anders Brandt</span>
+0029 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0030 <span class="comment">% Version:  1.0 2015-12-06 Harmonized with other toolbox commands</span>
+0031 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0032 <span class="comment">% Thanks to Esben Orlowitz for initial version</span>
+0033 
+0034 OutFileNumber=OutStartNo;
+0035 <span class="keyword">if</span> nargin &lt; 8
+0036     DownSample=0;
+0037     Type=<span class="string">'Welch'</span>;
+0038 <span class="keyword">elseif</span> nargin&lt;9
+0039     Type=<span class="string">'Welch'</span>;
+0040 <span class="keyword">end</span>
+0041 
+0042 
+0043 h=waitbar(0,<span class="string">'Computing Correlation Functions...'</span>,<span class="string">'Name'</span>,<span class="string">'Time2corr'</span>);
+0044 
+0045 <span class="keyword">for</span> RefFileNo=1:length(RefChannel)
+0046     waitbar(RefFileNo/length(RefChannel))
+0047 <span class="comment">% If cross-correlations are requested, load reference channel</span>
+0048     <span class="keyword">if</span> RefChannel(1) ~= 0      
+0049         RefFileName=strcat(InPrefix,int2str(RefChannel(RefFileNo)),<span class="string">'.mat'</span>);
+0050         <span class="keyword">if</span> exist(RefFileName,<span class="string">'file'</span>) ==2
+0051             load(RefFileName,<span class="string">'-mat'</span>)
+0052             <span class="keyword">if</span> exist(<span class="string">'start'</span>,<span class="string">'var'</span>)
+0053                 Data=Data(start:stop);
+0054             <span class="keyword">end</span>
+0055             <span class="keyword">if</span> exist(<span class="string">'DownSample'</span>,<span class="string">'var'</span>) &amp; DownSample &gt; 1
+0056                 fprintf(<span class="string">'Downsampling by factor %i\n'</span>,DownSample)
+0057                 RefData=resample(Data,1,DownSample);
+0058             <span class="keyword">else</span>
+0059                 RefData=Data;
+0060             <span class="keyword">end</span>
+0061             RefHeader=Header;
+0062             clear Data Header
+0063         <span class="keyword">end</span>
+0064     <span class="keyword">end</span>
+0065     
+0066     FileNoVector=StartNo:StopNo;
+0067     <span class="keyword">for</span> fileno=1:length(FileNoVector)
+0068         FileName=strcat(InPrefix,int2str(FileNoVector(fileno)),<span class="string">'.mat'</span>);
+0069         <span class="keyword">if</span> exist(FileName,<span class="string">'file'</span>) == 2
+0070             load(FileName,<span class="string">'-mat'</span>)
+0071             <span class="keyword">if</span> exist(<span class="string">'start'</span>)
+0072                 Data=Data(start:stop);
+0073             <span class="keyword">end</span>
+0074             <span class="keyword">if</span> exist(<span class="string">'DownSample'</span>) &amp; DownSample &gt; 1
+0075                 Header.xIncrement=Header.xIncrement*DownSample;
+0076                 Data=resample(Data,1,DownSample);
+0077                 fs=1/Header.xIncrement/DownSample;
+0078             <span class="keyword">else</span>
+0079                 fs=1/Header.xIncrement;
+0080             <span class="keyword">end</span>
+0081             <span class="keyword">if</span> strcmp(upper(Type),<span class="string">'periodogram'</span>)
+0082                 <span class="keyword">if</span> RefChannel(1) ~= 0
+0083                     fs=1/Header.xIncrement;
+0084                     Ryx = <a href="axcorrp.html" class="code" title="function [Ryx,t,Gyx,f] = axcorrp(x,y,fs,N)">axcorrp</a>(Data,RefData,fs,0);
+0085                 <span class="keyword">else</span>    <span class="comment">% Only autocorrelations requested</span>
+0086                     Ryx = <a href="axcorrp.html" class="code" title="function [Ryx,t,Gyx,f] = axcorrp(x,y,fs,N)">axcorrp</a>(Data,Data,fs,0);
+0087                 <span class="keyword">end</span>
+0088                 Ryx=Ryx(1:Blocksize);
+0089             <span class="keyword">else</span> <span class="comment">% Welch's method</span>
+0090                 <span class="keyword">if</span> RefChannel(1) ~= 0
+0091                     Ryx = <a href="axcorrp.html" class="code" title="function [Ryx,t,Gyx,f] = axcorrp(x,y,fs,N)">axcorrp</a>(Data,RefData,fs,Blocksize);
+0092                 <span class="keyword">else</span>        <span class="comment">% Only autocorrelations requested</span>
+0093                     Ryx = <a href="axcorrp.html" class="code" title="function [Ryx,t,Gyx,f] = axcorrp(x,y,fs,N)">axcorrp</a>(Data,Data,fs,Blocksize);
+0094                 <span class="keyword">end</span>
+0095             <span class="keyword">end</span>
+0096             <span class="keyword">if</span> fileno==1
+0097                 DataLength=length(Data);
+0098             <span class="keyword">end</span>
+0099             clear Data
+0100             
+0101             Data=Ryx;
+0102             <span class="keyword">if</span> RefChannel(1) == 0
+0103                 Header.FunctionType=7;
+0104             <span class="keyword">else</span>
+0105                 <span class="keyword">if</span> RefHeader.Dof==Header.Dof
+0106                     Header.FunctionType=7;
+0107                 <span class="keyword">else</span>
+0108                     Header.FunctionType=8;
+0109                 <span class="keyword">end</span>
+0110                 Header.RefDof=RefHeader.Dof;
+0111                 Header.RefDir=RefHeader.Dir;
+0112             <span class="keyword">end</span>
+0113             Header.NoValues=length(Data);
+0114             Header.Blocksize=Blocksize;
+0115             <span class="keyword">if</span> isfield(Header,<span class="string">'SeqNo'</span>)
+0116                 Header=rmfield(Header,<span class="string">'SeqNo'</span>);
+0117             <span class="keyword">end</span>
+0118             <span class="keyword">if</span> isfield(Header,<span class="string">'RespId'</span>)
+0119                 Header=rmfield(Header,<span class="string">'RespId'</span>);
+0120             <span class="keyword">end</span>
+0121             <span class="keyword">if</span> isfield(Header,<span class="string">'Date'</span>)
+0122                 Header.OriginalDate=Header.Date;
+0123                 Header.Date=date(now);
+0124             <span class="keyword">end</span>
+0125             <span class="keyword">if</span> isfield(Header,<span class="string">'Unit'</span>)
+0126                 Header.Unit=strcat(<span class="string">'('</span>,Header.Unit,<span class="string">')^2'</span>);
+0127             <span class="keyword">end</span>
+0128             FileName=strcat(OutPrefix,int2str(OutFileNumber));
+0129             save(FileName,<span class="string">'Data'</span>,<span class="string">'Header'</span>)
+0130             
+0131             clear Data Header Ryx
+0132         <span class="keyword">end</span>
+0133         OutFileNumber=OutFileNumber+1;
+0134     <span class="keyword">end</span>
+0135 <span class="keyword">end</span>
+0136 LastNumber=OutFileNumber-1;
+0137 close(h)
+0138</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

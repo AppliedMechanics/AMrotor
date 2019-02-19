@@ -1,0 +1,281 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of unvw58</title>
+  <meta name="keywords" content="unvw58">
+  <meta name="description" content="function [XData,Data,UnvHead] = unvw58(fid);">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; unvw58.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>unvw58
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [XData,Data,UnvHead] = unvw58(fid);</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function unvw58(fid,XData,Data,UnvHead); </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> function [XData,Data,UnvHead] = unvw58(fid); 
+
+ This function writes one SDRC Universal File dataset, type 58 (Test Data).
+ 
+ Input:    fid    handle to Universal file
+        XData            contains x-axis for unevenly spaced data, or 0 if evenly spaced
+        Data            contains data in a column vector
+        UnvHead         contains all header values in a structure</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="dir2nbr.html" class="code" title="function DirNumber = dir2nbr(DirString)">dir2nbr</a>	DIR2NBR   Convert Header direction string to number</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="unvwrite.html" class="code" title="function unvwrite(varargin)">unvwrite</a>	UNVWRITE Write a universal file</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function unvw58(fid,XData,Data,UnvHead); </a>
+0002 <span class="comment">% function [XData,Data,UnvHead] = unvw58(fid);</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">% This function writes one SDRC Universal File dataset, type 58 (Test Data).</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">% Input:    fid    handle to Universal file</span>
+0007 <span class="comment">%        XData            contains x-axis for unevenly spaced data, or 0 if evenly spaced</span>
+0008 <span class="comment">%        Data            contains data in a column vector</span>
+0009 <span class="comment">%        UnvHead         contains all header values in a structure</span>
+0010 <span class="comment">%</span>
+0011 
+0012 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0013 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0014 <span class="comment">% Version: 1.0 2011-06-23</span>
+0015 <span class="comment">%          1.1 2012-01-10   Minor bugs fixed when Header not complete</span>
+0016 <span class="comment">%          1.2 2017-10-31   Fixed erroneous field Unv.RefDof to RefDir</span>
+0017 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0018 
+0019 dummy=fprintf(fid,<span class="string">'%6s\n'</span>,<span class="string">'    -1'</span>);
+0020 dummy=fprintf(fid,<span class="string">'%6s\n'</span>,<span class="string">'    58'</span>);
+0021 <span class="comment">%---------------------------------------------------------------------------------</span>
+0022 <span class="comment">%</span>
+0023 <span class="comment">% Record 1 - 5, ID lines</span>
+0024 <span class="comment">%-----------------------------------------------------------------------------------------------</span>
+0025 dummy=fprintf(fid,<span class="string">'%s\n'</span>,UnvHead.Title);            <span class="comment">% ID line 1</span>
+0026 <span class="keyword">if</span> isfield(UnvHead,<span class="string">'Title2'</span>)
+0027     dummy=fprintf(fid,<span class="string">'%s\n'</span>,UnvHead.Title2);            <span class="comment">% ID line 2</span>
+0028 <span class="keyword">else</span>
+0029     dummy=fprintf(fid,<span class="string">'%s\n'</span>,<span class="string">'NONE'</span>);
+0030 <span class="keyword">end</span>
+0031 <span class="keyword">if</span> isfield(UnvHead,<span class="string">'Date'</span>)                          <span class="comment">% Added 2012-01-10</span>
+0032     dummy=fprintf(fid,<span class="string">'%s\n'</span>,UnvHead.Date);             <span class="comment">% ID line 3 (Date)</span>
+0033 <span class="keyword">else</span>
+0034     dummy=fprintf(fid,<span class="string">'%s\n'</span>,<span class="string">'NONE'</span>);
+0035 <span class="keyword">end</span>
+0036 <span class="keyword">if</span> isfield(UnvHead,<span class="string">'Title3'</span>)
+0037     dummy=fprintf(fid,<span class="string">'%s\n'</span>,UnvHead.Title3);            <span class="comment">% ID line 4</span>
+0038 <span class="keyword">else</span>
+0039     dummy=fprintf(fid,<span class="string">'%s\n'</span>,<span class="string">'NONE'</span>);
+0040 <span class="keyword">end</span>
+0041 <span class="keyword">if</span> isfield(UnvHead,<span class="string">'Title4'</span>)
+0042     dummy=fprintf(fid,<span class="string">'%s\n'</span>,UnvHead.Title4);            <span class="comment">% ID line 5</span>
+0043 <span class="keyword">else</span>
+0044     dummy=fprintf(fid,<span class="string">'%s\n'</span>,<span class="string">'NONE'</span>);
+0045 <span class="keyword">end</span>
+0046 <span class="comment">%-----------------------------------------------------------------------------------------------</span>
+0047 <span class="comment">% Record 6 - DOF Identification</span>
+0048 <span class="keyword">if</span> ~isfield(UnvHead,<span class="string">'FuncId'</span>)
+0049     UnvHead.FuncId=1;
+0050 <span class="keyword">end</span>
+0051 <span class="keyword">if</span> ~isfield(UnvHead,<span class="string">'ChannelNo'</span>)
+0052     UnvHead.ChannelNo=1;
+0053 <span class="keyword">end</span>
+0054 <span class="keyword">if</span> ~isfield(UnvHead,<span class="string">'LoadCase'</span>)
+0055     UnvHead.LoadCase=0;                     <span class="comment">% Single point excitation</span>
+0056 <span class="keyword">end</span>
+0057 dummy=fprintf(fid,<span class="string">'%5i%10i%5i%10i'</span>,UnvHead.FunctionType,UnvHead.FuncId,UnvHead.ChannelNo,UnvHead.LoadCase);
+0058 <span class="keyword">if</span> ~isfield(UnvHead,<span class="string">'RespId'</span>)
+0059     UnvHead.RespId=<span class="string">'NONE'</span>;
+0060 <span class="keyword">end</span>
+0061 dummy=fprintf(fid,<span class="string">' %-10s%10i%4i'</span>,deblank(UnvHead.RespId),UnvHead.Dof,<a href="dir2nbr.html" class="code" title="function DirNumber = dir2nbr(DirString)">dir2nbr</a>(UnvHead.Dir));
+0062 <span class="keyword">if</span> ~isfield(UnvHead,<span class="string">'RefId'</span>)
+0063     UnvHead.RefId=<span class="string">'NONE'</span>;
+0064 <span class="keyword">end</span>
+0065 <span class="keyword">if</span> ~isfield(UnvHead,<span class="string">'RefDof'</span>)
+0066     UnvHead.RefDof=0;
+0067 <span class="keyword">end</span>
+0068 <span class="keyword">if</span> ~isfield(UnvHead,<span class="string">'RefDir'</span>)
+0069     UnvHead.RefDir=0;               <span class="comment">% Bug fix 2017-10-31</span>
+0070 <span class="keyword">end</span>
+0071 dummy=fprintf(fid,<span class="string">' %-10s%10i%4i\n'</span>,deblank(UnvHead.RefId),UnvHead.RefDof,<a href="dir2nbr.html" class="code" title="function DirNumber = dir2nbr(DirString)">dir2nbr</a>(UnvHead.RefDir));
+0072 <span class="comment">%-----------------------------------------------------------------------------------------------</span>
+0073 <span class="comment">% Record 7 - Data Form</span>
+0074 <span class="keyword">if</span> isreal(Data)
+0075     UnvHead.OrdDataType=2;
+0076 <span class="keyword">else</span>
+0077     UnvHead.OrdDataType=5;
+0078 <span class="keyword">end</span>    
+0079 UnvHead.NoValues=length(Data);
+0080 <span class="keyword">if</span> XData == 0                   <span class="comment">% Even abscissa spacing</span>
+0081     UnvHead.xSpacing=1;
+0082 <span class="keyword">else</span>
+0083     UnvHead.xSpacing=0;
+0084     UnvHead.xStart=XData(1);
+0085     UnvHead.xIncrement=0;
+0086 <span class="keyword">end</span>
+0087 <span class="keyword">if</span> ~isfield(UnvHead,<span class="string">'zValue'</span>)
+0088     UnvHead.zValue=0;
+0089 <span class="keyword">end</span>
+0090 dummy=fprintf(fid,<span class="string">'%10i%10i%10i%13.5E%13.5E%13.5E\n'</span>,UnvHead.OrdDataType,UnvHead.NoValues,UnvHead.xSpacing,UnvHead.xStart,UnvHead.xIncrement,UnvHead.zValue);
+0091 <span class="comment">%-----------------------------------------------------------------------------------------------</span>
+0092 <span class="comment">% Record 8 - Abscissa Data Characteristics</span>
+0093 <span class="keyword">if</span> ~isfield(UnvHead,<span class="string">'xSpecDataType'</span>)
+0094     <span class="keyword">if</span> UnvHead.FunctionType == 1 | UnvHead.FunctionType == 7 | UnvHead.FunctionType == 8
+0095         UnvHead.xSpecDataType=17;       <span class="comment">% Time</span>
+0096     <span class="keyword">else</span>
+0097         UnvHead.xSpecDataType=18;       <span class="comment">% Frequency</span>
+0098     <span class="keyword">end</span>
+0099 <span class="keyword">end</span>
+0100 <span class="keyword">if</span> ~isfield(UnvHead,<span class="string">'xLUnitsExp'</span>)
+0101     UnvHead.xLUnitsExp=0;
+0102 <span class="keyword">end</span>
+0103 <span class="keyword">if</span> ~isfield(UnvHead,<span class="string">'xFUnitsExp'</span>)
+0104     UnvHead.xFUnitsExp=0;
+0105 <span class="keyword">end</span>
+0106 <span class="keyword">if</span> ~isfield(UnvHead,<span class="string">'xTUnitsExp'</span>)
+0107     UnvHead.xTUnitsExp=0;
+0108 <span class="keyword">end</span>
+0109 <span class="keyword">if</span> ~isfield(UnvHead,<span class="string">'xLabel'</span>)
+0110     UnvHead.xLabel=<span class="string">'NONE'</span>;
+0111 <span class="keyword">end</span>
+0112 <span class="keyword">if</span> ~isfield(UnvHead,<span class="string">'xUnit'</span>)
+0113     <span class="keyword">if</span> UnvHead.xSpecDataType == 17
+0114         UnvHead.xUnit=<span class="string">'Time'</span>;
+0115     <span class="keyword">else</span>
+0116         UnvHead.xUnit=<span class="string">'Frequency'</span>;
+0117     <span class="keyword">end</span>
+0118 <span class="keyword">end</span>
+0119 dummy=fprintf(fid,<span class="string">'%10i%5i%5i%5i'</span>,UnvHead.xSpecDataType,UnvHead.xLUnitsExp,UnvHead.xFUnitsExp,UnvHead.xTUnitsExp);
+0120 dummy=fprintf(fid,<span class="string">' %-20s %-20s\n'</span>,deblank(UnvHead.xLabel),deblank(UnvHead.xUnit));
+0121 <span class="comment">%-----------------------------------------------------------------------------------------------</span>
+0122 <span class="comment">% Record 9 - Ordinate (or ordinate numerator) Data Characteristic</span>
+0123 <span class="keyword">if</span> ~isfield(UnvHead,<span class="string">'OrdSpecDataType'</span>)
+0124         UnvHead.OrdSpecDataType=0;       <span class="comment">%</span>
+0125 <span class="keyword">end</span>
+0126 <span class="keyword">if</span> ~isfield(UnvHead,<span class="string">'OrdLUnitsExp'</span>)
+0127     UnvHead.OrdLUnitsExp=0;
+0128 <span class="keyword">end</span>
+0129 <span class="keyword">if</span> ~isfield(UnvHead,<span class="string">'OrdFUnitsExp'</span>)
+0130     UnvHead.OrdFUnitsExp=0;
+0131 <span class="keyword">end</span>
+0132 <span class="keyword">if</span> ~isfield(UnvHead,<span class="string">'OrdTUnitsExp'</span>)
+0133     UnvHead.OrdTUnitsExp=0;
+0134 <span class="keyword">end</span>
+0135 <span class="keyword">if</span> ~isfield(UnvHead,<span class="string">'Label'</span>)
+0136     UnvHead.Label=<span class="string">'NONE'</span>;
+0137 <span class="keyword">end</span>
+0138 <span class="keyword">if</span> ~isfield(UnvHead,<span class="string">'Unit'</span>)
+0139     UnvHead.Unit=<span class="string">'NONE'</span>;
+0140 <span class="keyword">end</span>
+0141 dummy=fprintf(fid,<span class="string">'%10i%5i%5i%5i'</span>,UnvHead.OrdSpecDataType,UnvHead.OrdLUnitsExp,UnvHead.OrdFUnitsExp,UnvHead.OrdTUnitsExp);
+0142 dummy=fprintf(fid,<span class="string">' %-20s %-20s\n'</span>,deblank(UnvHead.Label),deblank(UnvHead.Unit));
+0143 <span class="comment">%-----------------------------------------------------------------------------------------------</span>
+0144 <span class="comment">% Record 10 - Ordinate Denominator Data Characteristic</span>
+0145 <span class="keyword">if</span> ~isfield(UnvHead,<span class="string">'DenSpecDataType'</span>)
+0146         UnvHead.DenSpecDataType=0;       <span class="comment">%</span>
+0147 <span class="keyword">end</span>
+0148 <span class="keyword">if</span> ~isfield(UnvHead,<span class="string">'DenLUnitsExp'</span>)
+0149     UnvHead.DenLUnitsExp=0;
+0150 <span class="keyword">end</span>
+0151 <span class="keyword">if</span> ~isfield(UnvHead,<span class="string">'DenFUnitsExp'</span>)
+0152     UnvHead.DenFUnitsExp=0;
+0153 <span class="keyword">end</span>
+0154 <span class="keyword">if</span> ~isfield(UnvHead,<span class="string">'DenTUnitsExp'</span>)
+0155     UnvHead.DenTUnitsExp=0;
+0156 <span class="keyword">end</span>
+0157 <span class="keyword">if</span> ~isfield(UnvHead,<span class="string">'RefLabel'</span>)
+0158     UnvHead.RefLabel=<span class="string">'NONE'</span>;
+0159 <span class="keyword">end</span>
+0160 <span class="keyword">if</span> ~isfield(UnvHead,<span class="string">'RefUnit'</span>)
+0161     UnvHead.RefUnit=<span class="string">'NONE'</span>;
+0162 <span class="keyword">end</span>
+0163 dummy=fprintf(fid,<span class="string">'%10i%5i%5i%5i'</span>,UnvHead.DenSpecDataType,UnvHead.DenLUnitsExp,UnvHead.DenFUnitsExp,UnvHead.DenTUnitsExp);
+0164 dummy=fprintf(fid,<span class="string">' %-20s %-20s\n'</span>,deblank(UnvHead.RefLabel),deblank(UnvHead.RefUnit));
+0165 <span class="comment">%-----------------------------------------------------------------------------------------------</span>
+0166 <span class="comment">% Record 11 - Z-axis Data Characteristic</span>
+0167 <span class="keyword">if</span> ~isfield(UnvHead,<span class="string">'zSpecDataType'</span>)
+0168         UnvHead.zSpecDataType=0;       <span class="comment">%</span>
+0169 <span class="keyword">end</span>
+0170 <span class="keyword">if</span> ~isfield(UnvHead,<span class="string">'zLUnitsExp'</span>)
+0171     UnvHead.zLUnitsExp=0;
+0172 <span class="keyword">end</span>
+0173 <span class="keyword">if</span> ~isfield(UnvHead,<span class="string">'zFUnitsExp'</span>)
+0174     UnvHead.zFUnitsExp=0;
+0175 <span class="keyword">end</span>
+0176 <span class="keyword">if</span> ~isfield(UnvHead,<span class="string">'zTUnitsExp'</span>)
+0177     UnvHead.zTUnitsExp=0;
+0178 <span class="keyword">end</span>
+0179 <span class="keyword">if</span> ~isfield(UnvHead,<span class="string">'zLabel'</span>)
+0180     UnvHead.zLabel=<span class="string">'NONE'</span>;
+0181 <span class="keyword">end</span>
+0182 <span class="keyword">if</span> ~isfield(UnvHead,<span class="string">'zUnit'</span>)
+0183     UnvHead.zUnit=<span class="string">'NONE'</span>;
+0184 <span class="keyword">end</span>
+0185 dummy=fprintf(fid,<span class="string">'%10i%5i%5i%5i'</span>,UnvHead.zSpecDataType,UnvHead.zLUnitsExp,UnvHead.zFUnitsExp,UnvHead.zTUnitsExp);
+0186 dummy=fprintf(fid,<span class="string">' %-20s %-20s\n'</span>,deblank(UnvHead.zLabel),deblank(UnvHead.zUnit));
+0187 <span class="comment">%-----------------------------------------------------------------------------------------------</span>
+0188 <span class="comment">% Data values - check for real or complex, and even or uneven data</span>
+0189 FormatDescr1=<span class="string">'%13.5E%13.5E%13.5E%13.5E%13.5E%13.5E\n'</span>;    <span class="comment">% Single precision</span>
+0190 FormatDescr2=<span class="string">'%20.12E%20.12E%20.12E%20.12E\n'</span>;            <span class="comment">% Real/Complex, Even, Double Precision</span>
+0191 FormatDescr3=<span class="string">'%13.5E%20.12E%13.5E%20.12E\n'</span>;            <span class="comment">% Real, Uneven, Double Precision</span>
+0192 FormatDescr4=<span class="string">'%13.5E%20.12E%20.12E\n'</span>;                <span class="comment">% Complex, Uneven, Double Precision</span>
+0193 
+0194 <span class="keyword">if</span> (UnvHead.xSpacing == 1)    <span class="comment">% Even data, i.e. no x-axes values</span>
+0195     <span class="keyword">if</span> (UnvHead.OrdDataType == 2)
+0196         fprintf(fid,FormatDescr1,Data);                <span class="comment">% Real, Single precision</span>
+0197         R=rem(UnvHead.NoValues,6);                        <span class="comment">% To see if needs forcing &lt;CR&gt;</span>
+0198     <span class="keyword">elseif</span> (UnvHead.OrdDataType == 4)
+0199         fprintf(fid,FormatDescr2,Data);                <span class="comment">% Real, Double precision</span>
+0200         R=rem(UnvHead.NoValues,4);
+0201     <span class="keyword">elseif</span> (UnvHead.OrdDataType == 5)
+0202         fprintf(fid,FormatDescr1,[real(Data),imag(Data)]');    <span class="comment">% Complex, Single precision</span>
+0203         R=rem(2*UnvHead.NoValues,6);
+0204     <span class="keyword">elseif</span> (UnvHead.OrdDataType == 6)
+0205         fprintf(fid,FormatDescr2,[real(Data),imag(Data)]');    <span class="comment">% Complex, Double precision</span>
+0206         R=rem(2*UnvHead.NoValues,4);
+0207     <span class="keyword">end</span>
+0208 <span class="keyword">elseif</span> (UnvHead.xSpacing == 0)    <span class="comment">% Uneven data, i.e. x axes value prior to each data value</span>
+0209     <span class="keyword">if</span> (UnvHead.OrdDataType == 2)
+0210         fprintf(fid,FormatDescr1,[XData,Data]');            <span class="comment">% Real, Single precision</span>
+0211         R=rem(2*UnvHead.NoValues,6);
+0212     <span class="keyword">elseif</span> (UnvHead.OrdDataType == 4)
+0213         fprintf(fid,FormatDescr3,[XData,Data]');            <span class="comment">% Real, Double precision</span>
+0214         R=rem(2*UnvHead.NoValues,4);
+0215     <span class="keyword">elseif</span> (UnvHead.OrdDataType == 5)
+0216         fprintf(fid,FormatDescr1,[XData,real(Data),imag(Data)]');    <span class="comment">% Complex, Single precision</span>
+0217         R=rem(3*UnvHead.NoValues,6);
+0218     <span class="keyword">elseif</span> (UnvHead.OrdDataType == 6)
+0219         fprintf(fid,FormatDescr4,[XData,real(Data),imag(Data)]');    <span class="comment">% Complex, Double precision</span>
+0220         R=rem(3*UnvHead.NoValues,3);
+0221     <span class="keyword">end</span>
+0222 <span class="keyword">end</span>
+0223 <span class="keyword">if</span> R ~= 0
+0224     fprintf(fid,<span class="string">'\n'</span>);        <span class="comment">% If not an integer number of rows were written: an extra &lt;CR&gt;</span>
+0225 <span class="keyword">end</span>
+0226 <span class="comment">%-----------------------------------------------------------------------------------------------</span>
+0227 dummy=fprintf(fid,<span class="string">'%6s\n'</span>,<span class="string">'    -1'</span>);</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

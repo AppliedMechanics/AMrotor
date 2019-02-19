@@ -1,0 +1,325 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of frfp2modes</title>
+  <meta name="keywords" content="frfp2modes">
+  <meta name="description" content="FRFP2MODES     Estimate mode shapes from FRFs and poles in frequency domain">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; frfp2modes.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>frfp2modes
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>FRFP2MODES     Estimate mode shapes from FRFs and poles in frequency domain</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [V,L,Res] = frfp2modes(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> FRFP2MODES     Estimate mode shapes from FRFs and poles in frequency domain
+
+ V = frfp2modes(H,f,p,Plot) for an N-by-1 vector H, estimates mode
+ shape coefficients for one FRF, without residual terms. If Plot=1 an
+ overlay plot is generated showing the result.
+ [V,Res] = frfp2modes(H,f,p,Plot) for an N-by-1 vector H, estimates mode
+ shape coefficients for one FRF, including residual terms. If Plot=1 an
+ overlay plot is generated showing the result.
+ V = frfp2modes(H,f,p,ScaleDof,DispTime) for an N-by-D matrix H estimates a
+ D-by-Nm matrix with mode shapes scaled to the driving point in ScaleDof.
+ If DispTime~=0 or empty, an overlay plot is generated showing the result
+ during DispTime seconds.
+ [V,Res] = frfp2modes(H,f,p,ScaleDof,DispTime) for an N-by-D matrix H generates a
+ D-by-Nm matrix with mode shapes scaled to the driving point in ScaleDof.
+ [V,L] = frfp2modes(H,f,p,L,DispTime,Fdof) or
+ [V,L,Res] = frfp2modes(H,f,p,L,DispTime,Fdof) generates D-by-Nm mode
+ shapes in the case of poles and modal participation factors if  a
+ multiple-reference method has been used for pole extraction and L is a matrix.
+
+       V           Mode shape matrix with modes in columns D-by-Nm
+       Res         Residual terms (Optional) [const1;const2/w^2 ], 2*R-by-D
+       L           Modified modal participation factors after scaling for
+                   unity modal A
+
+       H           Accelerance FRF matrix, up to N-by-D-by-R (see text)
+       f           Frequency axis for H, containin (as H) the frequencies
+                   that should be used for the curve fitting
+       p           Vector with poles for those modes that should be fitted
+       L           Modal participation matrix, 1 if single reference,
+                   otherwise output from multiref. curve fitting for poles
+       ScaleDof    Dof for scaling of FRFs (driving point)
+       Type        String with specification of method:
+                   'lsfreq' for least squares frequency domain (Default)
+       DispTime    If ~= 0 (or not given), then each FRF is plotted in overlay
+                   with the estimated model FRF during DispTime seconds
+       Fdof        Vector with which response number in H that corresponds
+                   to each reference number
+
+ Mode shapes are scaled to unity modal A using the largest modal participation
+ factor for each mode, see modal2frf
+
+ See also <a href="frf2msdof.html" class="code" title="function [p,V] = frf2msdof(H,f,fstart,NoLines,Type,ScaleDof)">FRF2MSDOF</a> <a href="modal2frf.html" class="code" title="function H = modal2frf(f,p,V,indof,outdof,Type)">MODAL2FRF</a> <a href="frfsynt.html" class="code" title="function Hs = frfsynt(H,f,p,V,Res,indof,outdof,Type,DispTime,Fdof)">FRFSYNT</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="fint.html" class="code" title="function Y = fint(X,f,Type,NumberInt)">fint</a>	FINT Frequency integration by jw division</li><li><a href="frfsynt.html" class="code" title="function Hs = frfsynt(H,f,p,V,Res,indof,outdof,Type,DispTime,Fdof)">frfsynt</a>	FRFSYNT  Synthesize FRF(s) after modal parameter extraction</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [V,L,Res] = frfp2modes(varargin)</a>
+0002 <span class="comment">% FRFP2MODES     Estimate mode shapes from FRFs and poles in frequency domain</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">% V = frfp2modes(H,f,p,Plot) for an N-by-1 vector H, estimates mode</span>
+0005 <span class="comment">% shape coefficients for one FRF, without residual terms. If Plot=1 an</span>
+0006 <span class="comment">% overlay plot is generated showing the result.</span>
+0007 <span class="comment">% [V,Res] = frfp2modes(H,f,p,Plot) for an N-by-1 vector H, estimates mode</span>
+0008 <span class="comment">% shape coefficients for one FRF, including residual terms. If Plot=1 an</span>
+0009 <span class="comment">% overlay plot is generated showing the result.</span>
+0010 <span class="comment">% V = frfp2modes(H,f,p,ScaleDof,DispTime) for an N-by-D matrix H estimates a</span>
+0011 <span class="comment">% D-by-Nm matrix with mode shapes scaled to the driving point in ScaleDof.</span>
+0012 <span class="comment">% If DispTime~=0 or empty, an overlay plot is generated showing the result</span>
+0013 <span class="comment">% during DispTime seconds.</span>
+0014 <span class="comment">% [V,Res] = frfp2modes(H,f,p,ScaleDof,DispTime) for an N-by-D matrix H generates a</span>
+0015 <span class="comment">% D-by-Nm matrix with mode shapes scaled to the driving point in ScaleDof.</span>
+0016 <span class="comment">% [V,L] = frfp2modes(H,f,p,L,DispTime,Fdof) or</span>
+0017 <span class="comment">% [V,L,Res] = frfp2modes(H,f,p,L,DispTime,Fdof) generates D-by-Nm mode</span>
+0018 <span class="comment">% shapes in the case of poles and modal participation factors if  a</span>
+0019 <span class="comment">% multiple-reference method has been used for pole extraction and L is a matrix.</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">%       V           Mode shape matrix with modes in columns D-by-Nm</span>
+0022 <span class="comment">%       Res         Residual terms (Optional) [const1;const2/w^2 ], 2*R-by-D</span>
+0023 <span class="comment">%       L           Modified modal participation factors after scaling for</span>
+0024 <span class="comment">%                   unity modal A</span>
+0025 <span class="comment">%</span>
+0026 <span class="comment">%       H           Accelerance FRF matrix, up to N-by-D-by-R (see text)</span>
+0027 <span class="comment">%       f           Frequency axis for H, containin (as H) the frequencies</span>
+0028 <span class="comment">%                   that should be used for the curve fitting</span>
+0029 <span class="comment">%       p           Vector with poles for those modes that should be fitted</span>
+0030 <span class="comment">%       L           Modal participation matrix, 1 if single reference,</span>
+0031 <span class="comment">%                   otherwise output from multiref. curve fitting for poles</span>
+0032 <span class="comment">%       ScaleDof    Dof for scaling of FRFs (driving point)</span>
+0033 <span class="comment">%       Type        String with specification of method:</span>
+0034 <span class="comment">%                   'lsfreq' for least squares frequency domain (Default)</span>
+0035 <span class="comment">%       DispTime    If ~= 0 (or not given), then each FRF is plotted in overlay</span>
+0036 <span class="comment">%                   with the estimated model FRF during DispTime seconds</span>
+0037 <span class="comment">%       Fdof        Vector with which response number in H that corresponds</span>
+0038 <span class="comment">%                   to each reference number</span>
+0039 <span class="comment">%</span>
+0040 <span class="comment">% Mode shapes are scaled to unity modal A using the largest modal participation</span>
+0041 <span class="comment">% factor for each mode, see modal2frf</span>
+0042 <span class="comment">%</span>
+0043 <span class="comment">% See also FRF2MSDOF MODAL2FRF FRFSYNT</span>
+0044 
+0045 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0046 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0047 <span class="comment">% Version: 1.0 2011-06-23</span>
+0048 <span class="comment">%          1.1 2012-10-23  Updated to work with changed frf2ptime results</span>
+0049 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0050 
+0051 <span class="comment">%**********************************************************</span>
+0052 <span class="comment">% This function is still in development!!!</span>
+0053 <span class="comment">% Still needs improved scaling before inverting B</span>
+0054 <span class="comment">%**********************************************************</span>
+0055 
+0056 
+0057 <span class="comment">% Parse inputs</span>
+0058 <span class="keyword">if</span> nargin == 3
+0059     H=varargin{1};
+0060     [N,D,R]=size(H);
+0061     f=varargin{2};
+0062     p=varargin{3};
+0063     DispTime=0;
+0064 <span class="keyword">elseif</span> nargin == 4
+0065     H=varargin{1};
+0066     [N,D,R]=size(H);
+0067     f=varargin{2};
+0068     p=varargin{3};
+0069     ScaleDof=varargin{4};
+0070     <span class="keyword">if</span> D == 1   <span class="comment">% Single FRF, then 4th parameter is Plot, but we use DispTime</span>
+0071         DispTime=varargin{4};
+0072         ScaleDof=1;
+0073     <span class="keyword">else</span>
+0074         [m,n]=size(ScaleDof);
+0075         <span class="keyword">if</span> m &gt; 1 &amp;&amp; n &gt; 1
+0076             L=ScaleDof;
+0077             DispTime=0;
+0078         <span class="keyword">else</span>
+0079             DispTime=ScaleDof;
+0080         <span class="keyword">end</span>
+0081     <span class="keyword">end</span>
+0082 <span class="keyword">elseif</span> nargin == 5
+0083     H=varargin{1};
+0084     [N,D,R]=size(H);
+0085     f=varargin{2};
+0086     p=varargin{3};
+0087     ScaleDof=varargin{4};
+0088     DispTime=varargin{5};
+0089     Fdof=ScaleDof;
+0090 <span class="keyword">elseif</span> nargin == 6
+0091     H=varargin{1};
+0092     [N,D,R]=size(H);
+0093     <span class="keyword">if</span> R == 1
+0094         error(<span class="string">'Too many input parameters for single-dimension H!'</span>)
+0095     <span class="keyword">else</span>
+0096         f=varargin{2};
+0097         p=varargin{3};
+0098         L=varargin{4};
+0099         DispTime=varargin{5};
+0100         Fdof=varargin{6};
+0101     <span class="keyword">end</span>
+0102 <span class="keyword">end</span>
+0103 <span class="keyword">if</span> nargout == 2
+0104     Res=[];
+0105 <span class="keyword">end</span>
+0106 Nm=length(p);
+0107 
+0108 <span class="comment">%============================================================</span>
+0109 <span class="comment">% Convert FRFs to receptance</span>
+0110 Hp=<a href="fint.html" class="code" title="function Y = fint(X,f,Type,NumberInt)">fint</a>(H,f,<span class="string">'lin'</span>,2);
+0111 
+0112 <span class="comment">% Normalize FRFs to unity maximum</span>
+0113 <span class="comment">% M=max(max(max(abs(H))))</span>
+0114 <span class="comment">% H=H/M;</span>
+0115 
+0116 <span class="comment">% Expand size of p to 2N by including complex conjugate poles</span>
+0117 p=p(:);                 <span class="comment">% Force to column</span>
+0118 p=[p ; conj(p)];
+0119 <span class="comment">% If multiple-reference, same with L</span>
+0120 <span class="keyword">if</span> exist(<span class="string">'L'</span>,<span class="string">'var'</span>)
+0121     L=[L;conj(L)];
+0122 <span class="keyword">end</span>
+0123 
+0124 <span class="comment">% First, single-reference case</span>
+0125 <span class="keyword">if</span> ~exist(<span class="string">'L'</span>,<span class="string">'var'</span>)
+0126     <span class="comment">% Set up matrices</span>
+0127     jw=j*2*pi*f;
+0128     Lambda=zeros(N,2*Nm);
+0129     <span class="keyword">for</span> mode = 1:2*Nm
+0130         Lambda(:,mode)=1./(jw-p(mode));
+0131     <span class="keyword">end</span>
+0132     <span class="keyword">if</span> nargout == 2
+0133         Lambda(:,2*Nm+1)=1./(jw.^2);
+0134         Lambda(:,2*Nm+2)=ones(N,1);
+0135     <span class="keyword">end</span>
+0136     <span class="comment">% Compute modes and residuals</span>
+0137     <span class="keyword">if</span> nargout == 1
+0138         A=zeros(D,2*Nm);                    <span class="comment">% Residues, scaling to modes later</span>
+0139     <span class="keyword">else</span>
+0140         A=zeros(D,2*Nm+2);                  <span class="comment">% Residues, scaling to modes later</span>
+0141     <span class="keyword">end</span>
+0142     Res=zeros(D,2);
+0143     <span class="keyword">for</span> d = 1:D
+0144         Vt=pinv(Lambda)*H(:,d);
+0145         <span class="comment">%         Vt=Lambda\H(:,d);         % Alternative solution</span>
+0146         A(d,:)=Vt.';
+0147         <span class="keyword">if</span> ~exist(<span class="string">'h'</span>,<span class="string">'var'</span>) &amp; DispTime &gt; 0
+0148             h=figure;
+0149         <span class="keyword">end</span>
+0150         <span class="keyword">if</span> DispTime &gt; 0
+0151             Hsynt=Lambda*A(d,:).';
+0152             semilogy(f,abs(H(:,d)),f,abs(Hsynt),<span class="string">'k--'</span>)
+0153             title([<span class="string">'Curve fit result, DOF='</span> int2str(d)])
+0154             xlabel(<span class="string">'Frequency [Hz]'</span>)
+0155             ylabel(<span class="string">'Accelerance'</span>)
+0156             legend(<span class="string">'Measured'</span>,<span class="string">'Synthesized'</span>)
+0157             pause(DispTime)
+0158         <span class="keyword">end</span>
+0159     <span class="keyword">end</span>
+0160     <span class="comment">% Split A into modes and residuals, and shrink down to D-by-Nm</span>
+0161     <span class="keyword">if</span> nargout == 2
+0162         Res=A(:,2*Nm+1:2*Nm+2);
+0163     <span class="keyword">end</span>
+0164     <span class="keyword">for</span> mode = 1:Nm
+0165         V(:,mode)=A(:,mode)/sqrt(A(ScaleDof,mode));
+0166     <span class="keyword">end</span>
+0167 <span class="keyword">else</span>        <span class="comment">% If more than one reference, i.e. L exist</span>
+0168     <span class="comment">% Initialize variables</span>
+0169     V=zeros(D,Nm);
+0170     jw=j*2*pi*f;
+0171     <span class="keyword">if</span> nargout == 3
+0172         Res=zeros(2*R,D);
+0173     <span class="keyword">end</span>
+0174     <span class="comment">% Build the B matrix</span>
+0175     <span class="comment">% Build the extendedMPF matrix if residuals are requested, else use the</span>
+0176     <span class="comment">% modal participation matrix alone</span>
+0177     <span class="keyword">if</span> nargout == 3
+0178         MPFe=[L.' eye(R) eye(R)];
+0179         B=zeros(R,2*(Nm+R));
+0180     <span class="keyword">else</span>
+0181         MPFe=L.';
+0182         B=zeros(R,2*Nm);
+0183     <span class="keyword">end</span>
+0184     <span class="keyword">for</span> n = 1:N
+0185         Lambdae=diag(1./(jw(n)-p));
+0186         <span class="keyword">if</span> nargout == 3
+0187             Lambdae=[Lambdae zeros(2*Nm,2*R);,<span class="keyword">...</span>
+0188                 zeros(R,2*Nm) eye(R) zeros(R);,<span class="keyword">...</span>
+0189                 zeros(R,2*Nm+R) 1/(jw(n)^2)*eye(R)];
+0190         <span class="keyword">end</span>
+0191         B(1+(n-1)*R:n*R,:)=MPFe*Lambdae;
+0192     <span class="keyword">end</span>
+0193     Binv=pinv(B);
+0194     clear MPFe Lambdae
+0195     <span class="comment">% Loop responses</span>
+0196     <span class="comment">% Permute the FRF matrix for easier setup</span>
+0197     Hp=permute(Hp,[3 1 2]);
+0198     <span class="keyword">for</span> d = 1:D
+0199         <span class="comment">% Produce column vector with FRFs</span>
+0200         Ht=squeeze(Hp(:,:,d));
+0201         Ht=Ht(:);
+0202         <span class="comment">% Store mode shape coefficients in row for response d</span>
+0203         <span class="comment">%         A(d,:)=(Binv*Ht).';</span>
+0204         A(d,:)=(Binv*Ht).';
+0205         <span class="comment">%         A(d,:)=(B.'*B)\(B.'*Ht);</span>
+0206     <span class="keyword">end</span>
+0207     <span class="comment">% Remove complex conjugate mode shapes and residual terms</span>
+0208     <span class="keyword">if</span> nargout == 3
+0209         Res=A(:,end-2*R+1:end).';       <span class="comment">% Residuals are in last columns</span>
+0210         V=A(:,1:1:Nm);
+0211         L=L(1:Nm,:);
+0212     <span class="keyword">else</span>
+0213         V=A(:,1:Nm);
+0214         L=L(1:Nm,:);
+0215     <span class="keyword">end</span>
+0216     <span class="comment">% Scale mode shapes using first the reference having the largest MPF</span>
+0217     <span class="comment">% for each mode</span>
+0218     <span class="keyword">for</span> r = 1:Nm
+0219         [dum,I]=max(abs(L(r,:)));
+0220         VV=L(r,I)*V(:,r);
+0221         L(r,:)=L(r,:)/L(r,I);               <span class="comment">% Product of VV and L constant</span>
+0222         V(:,r)=VV/sqrt(VV(Fdof(I)));
+0223         L(r,:)=L(r,:)*sqrt(VV(Fdof(I)));
+0224     <span class="keyword">end</span>
+0225     <span class="comment">% Plot fits if requested</span>
+0226     <span class="keyword">if</span> DispTime &gt; 0
+0227         p=p(1:end/2);
+0228         <span class="keyword">if</span> ~exist(<span class="string">'Res'</span>,<span class="string">'var'</span>)
+0229             Res=[];
+0230         <span class="keyword">end</span>
+0231         Hsynt=<a href="frfsynt.html" class="code" title="function Hs = frfsynt(H,f,p,V,Res,indof,outdof,Type,DispTime,Fdof)">frfsynt</a>(H,f,p,V,Res,Fdof,1:D,<span class="string">'a'</span>,DispTime,Fdof);
+0232     <span class="keyword">end</span>
+0233 <span class="keyword">end</span>
+0234 
+0235 <span class="keyword">if</span> ~exist(<span class="string">'L'</span>,<span class="string">'var'</span>)
+0236     L=Res;
+0237 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

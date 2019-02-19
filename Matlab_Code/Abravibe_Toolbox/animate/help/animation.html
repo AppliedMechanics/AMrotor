@@ -1,0 +1,670 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta name="GENERATOR" content="Microsoft FrontPage 5.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>File</title>
+</head>
+
+<body>
+
+<p><i>Modal Vector Animation</i> is a set of Matlab created functions originally created 
+to assist students at the University of Cincinnati with visualizing the modal 
+parameters determined by code written by the students from data acquired by the 
+students in an academic setting.&nbsp; The original code was modified to provide 
+a complete tool to be deployable for an individual or company with the need or 
+desire to visualize modal vectors obtained from experimental data parameter 
+estimation.&nbsp; The compiled code can be delivered with the experimental 
+results to a customer without the need for Matlab or costly commercial software.</p>
+<p>The appearance and functionality is based on the java animation used for 
+the University of Cincinnati Structural Dynamics Research Laboratory's 
+experimental data analysis software, X-Modal II which is Matlab based software 
+providing tools to perform Modal Parameter Estimation using classic parameter 
+estimation routines and the Advanced Mode Indicator Function parameter 
+estimation, Impedance Modeling, Computed Order Tracking, and Data Visualization.&nbsp; 
+More information about the X-Modal II software can be obtained from 
+<a href="http://www.sdrl.uc.edu">UC-SDRL</a>.</p>
+<p>Experimental Data Viewer is another tool that may be useful for individuals 
+or company's interested in viewing raw data obtained from experimental 
+techniques in the universal file format.</p>
+<p>This software can be freely distributed with the understanding that support 
+does not exist (you get what you pay for).</p>
+<p>&nbsp;</p>
+<p>Some of the features used in this software were obtained from the 
+<a href="http://www.mathworks.com">Mathworks</a> 
+user contributed files website.&nbsp; I would like to express my gratitude to 
+the authors for providing valuable code to Matlab users.</p>
+<p><b>View3d</b></p>
+<font SIZE="2" COLOR="#228b22">
+<p style="margin-top: 0; margin-bottom: 0">% Torsten Vogel 09.04.1999 </p>
+<p style="margin-top: 0; margin-bottom: 0">% tv.volke@bmw.de</p>
+<p style="margin-top: 0; margin-bottom: 0">% tested under Matlab 5.2</p>
+</font>
+<p>It provides the zoom and pan as well as the XY and Z rotation features.&nbsp; This file was slightly modified to incorporate multiple axes (cross-eyed, 
+red/blue glasses, and quad views).</p>
+<p>&nbsp;</p>
+<p><b>Universal file reading and writing</b></p>
+<font SIZE="2" COLOR="#228b22">
+<p style="margin-top: 0; margin-bottom: 0">% FREE SOFTWARE - please refer the 
+source</p>
+<p style="margin-top: 0; margin-bottom: 0">% Copyright (c) 2004-2005 by Primoz 
+Cermelj</p>
+<p style="margin-top: 0; margin-bottom: 0">% First release on 30.05.2004</p>
+<p style="margin-top: 0; margin-bottom: 0">% Primoz Cermelj, Slovenia</p>
+<p style="margin-top: 0; margin-bottom: 0">% Contact: primoz.cermelj@email.si</p>
+<p style="margin-top: 0; margin-bottom: 0">% Download location: http://www.mathworks.com/matlabcentral/fileexchange/loadFile.do?objectId=6395&amp;objectType=file</p>
+</font>
+<p>Several modifications were made to these scripts.&nbsp; Errors were 
+encountered with almost all universal files not supplied by the author.&nbsp; 
+Also, coordinate system files (UF Type 18) support was added, as well as reading 
+the abscissa, ordinate numerator, and ordinate denominator information and other 
+fields not originally supported.&nbsp; This is, however, a very useful 
+contribution by the original author.</p>
+<p>&nbsp;</p>
+<p><b><font size="4"><a name="Main"></a>Modal Vector Animation Help</font></b></p>
+<p>The image below contains hotspots linked to relevant help and information. </p>
+<p>&nbsp;<img border="0" src="main.jpg" usemap="#FPMap0" width="648" height="535"><map name="FPMap0"><area alt="Animation" href="#Animation" shape="rect" coords="5, 50, 36, 91"><area alt="Pan &amp; Zoom" href="#Pan & Zoom" shape="rect" coords="35, 51, 67, 92"><area alt="Rotate" href="#Rotate" shape="rect" coords="67, 50, 97, 92"><area alt="Mode List" href="#Mode List" shape="rect" coords="105, 51, 229, 94"><area alt="Frames Per Cycle" href="#FPC" shape="rect" coords="231, 52, 294, 93"><area alt="Amplitude" href="#Amplitude" shape="rect" coords="292, 53, 354, 91"><area alt="Spin Degrees Per Cycle" href="#Deg" shape="rect" coords="353, 53, 416, 91"><area alt="File Menu" href="#File" shape="rect" coords="3, 31, 35, 50"><area alt="Display Menu" href="#Display" shape="rect" coords="34, 30, 75, 50"><area alt="View Menu" href="#View" shape="rect" coords="75, 28, 113, 51"><area alt="Help Menu" href="#Help" shape="rect" coords="114, 28, 149, 51"><area alt="Figure Size and Close" href="#FigureSize" shape="rect" coords="573, 5, 647, 29"><area alt="Mode Annotation" href="#Annotate" shape="rect" coords="4, 92, 161, 132"><area alt="Graphics Area" href="#Graphics" shape="rect" coords="5, 131, 645, 532"></map></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><a name="File"></a><b><font size="4">File Menu</font></b></p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0"><i><b>Load</b></i></p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">The load menu allows 
+two type of files for importing.</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0"><i><b>Universal File</b></i></p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">Universal file 
+format can be used to import geometry, wireframe connectivity, and modal data, 
+and coordinate system information from the same universal file.&nbsp; The 
+supported UF data types are 15, 18, 55, 82, 151, &amp; 164.&nbsp; Component 
+information is only supported with universal files.&nbsp; Cylindrical 
+coordinates systems are supported but may not always work properly.</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0"><i>Note</i>: 
+Spherical coordinate systems are not supported and using local coordinate 
+systems referenced to another local coordinate system will produce incorrect 
+results.</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0"><i><b>Matlab</b></i></p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">Matlab structured 
+array variables can also be used when the variables are in the following format.&nbsp; 
+An example data fill is include for reference (<i>cplate_geo&amp;vectors.mat</i>).</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">GEOMETRY.node&nbsp;&nbsp;&nbsp; 
+=&gt; Column vector with node labels (double)</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">GEOMETRY.x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+=&gt; Column vector with node X-axis data (double)</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">GEOMETRY.y&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+=&gt; Column vector with node Y-axis data (double)</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">GEOMETRY.z&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+=&gt; Column vector with node Z-axis data (double)</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">GEOMETRY.conn&nbsp;&nbsp;&nbsp; 
+=&gt; Row vector with node labels describing the wireframe.&nbsp; A line-break 
+(pen-up) can use a NaN, 0, or -1 (double)</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">MODAL is a 
+structured array, MODAL(#).xxx with each position defining a single modes data.</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">MODAL.Freq&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+=&gt; Complex value for modal frequency in Hz.</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">MODAL.Node&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+=&gt; Column vector with node labels (double)</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">MODAL.X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+=&gt; Column vector with node X-axis maximum deflection (double)</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">MODAL.Y&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+=&gt; Column vector with node Y-axis maximum deflection (double)</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">MODAL.Z&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+=&gt; Column vector with node Z-axis maximum deflection (double)</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0"><i><b>Save</b></i></p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">The save menu allows 
+data to be saved in two importable formats, a variety of still images, and AVI 
+video format.</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0"><i><b>Universal File</b></i></p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">The data is saved in 
+the universal file format.&nbsp; If coordinate system files were used when 
+importing the data, the resulting saved data will be transformed into the global 
+coordinate system.&nbsp; This was done to eliminate problems with other 
+commercial software not always handling UF type 18 files correctly.&nbsp; Also, 
+cylindrical coordinate systems are converted to Cartesian coordinates.</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0"><i><b>Matlab</b></i></p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">A Matlab structured 
+variable can be saved.&nbsp; The geometry and modal data is in the global 
+coordinate system with no support for components.</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0"><b><i>Snapshot</i></b></p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">Snapshots save a 
+still image and the current figure configuration.&nbsp; The file type, 
+resolution, and renderer can be specified in the <a href="#Preferences">
+Preferences</a>.</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0"><b><i>AVI</i></b></p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">AVI video file of 
+the current figure which will record one animation cycle.&nbsp; The video codec, 
+quality, and movie time length can be specified in the <a href="#Preferences">
+Preferences</a>.</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0"><b><i>Preferences</i></b></p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">This will open the 
+animation preferences figure.&nbsp; More information can be found in
+<a href="#Preferences">Preferences</a>.</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0"><b><i>Recent files</i></b></p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">Populated as files are opened 
+and saved.&nbsp; Up to four recent files will be provided for easy recall.</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p>&nbsp;</p>
+<p><a href="#Main">Back to Animation Figure</a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><a name="Display"></a><b><font size="4">Display</font></b></p>
+<p style="margin-top: 0; margin-bottom: 0"><i><b>Annotate</b></i></p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">Turns on/off the 
+mode information text in the graphics area.&nbsp; A check indicates on.</p>
+<p style="margin-top: 0; margin-bottom: 0"><b><i>Static</i></b></p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">Turns on/off the 
+undeformed static shape in the graphics area.&nbsp; A check indicates on.</p>
+<p style="margin-top: 0; margin-bottom: 0"><b><i>Markers</i></b></p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">Turns on/off the 
+node markers in the graphics area.&nbsp; A check indicates on.</p>
+<p style="margin-top: 0; margin-bottom: 0"><b><i>Labels</i></b></p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">Turns on/off the 
+node labels in the graphics area.&nbsp; A check indicates on.</p>
+<p style="margin-top: 0; margin-bottom: 0"><b><i>UCS</i></b></p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">Turns on/off the 
+origin of the global coordinate system.&nbsp; A check indicates on.</p>
+<p style="margin-top: 0; margin-bottom: 0"><b><i>Spin</i></b></p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">Turns on/off the 
+animation spin or revolving shape about the vertical axis.&nbsp; A check 
+indicates on.</p>
+<p style="margin-top: 0; margin-bottom: 0"><b><i>Max Deflection</i></b></p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">This will cause the 
+animation to stop when the the animation has reached the frame with the most 
+deformation.&nbsp; The animation must be running prior to selecting this option.</p>
+<p style="margin-top: 0; margin-bottom: 0"><b><i>Components</i></b></p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">Opens the components 
+figure.&nbsp; Components are only supported with universal files.&nbsp; A 
+generic, single component is created for Matlab loaded files.&nbsp; More information can be found in <a href="#Components">
+Components</a>.</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p>&nbsp;</p>
+<p><a href="#Main">Back to Animation Figure</a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><a name="View"></a><b><font size="4">View</font></b></p>
+<p style="margin-top: 0; margin-bottom: 0"><b><i>Display Type</i></b></p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0"><i><b>Single</b></i></p>
+<p style="margin-left: 20; margin-top: 0; margin-bottom: 0">Displays a single 
+animation display in the graphics area.&nbsp; The shape can use
+<a href="#Pan & Zoom">Pan &amp; Zoom</a>, <a href="#Rotate">Rotate</a>, and can
+<a href="#Deg">Spin</a>.</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0"><b><i>Quad</i></b></p>
+<p style="margin-left: 20; margin-top: 0; margin-bottom: 0">Displays four 
+animation display axes in the graphics area.&nbsp; Only the top right shape can 
+use <a href="#Pan & Zoom">Pan &amp; Zoom</a>, <a href="#Rotate">Rotate</a>, and can
+<a href="#Deg">Spin</a>.</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0"><b><i>Cross-eyed</i></b></p>
+<p style="margin-left: 20; margin-top: 0; margin-bottom: 0">Displays two 
+animation display axes in the graphics area.&nbsp; The shape can use
+<a href="#Pan & Zoom">Pan &amp; Zoom</a>, <a href="#Rotate">Rotate</a>, and can
+<a href="#Deg">Spin</a>.&nbsp; An easy trick to help view the display in 
+simulated 3D is to close you right eye and use your left hand, about 12&quot; from 
+your face,&nbsp; to cover the axes on the left.&nbsp; Leaving you left hand and 
+your head in the same location, close your left eye and cover the axes on the 
+right with your right hand.&nbsp; Looking between your hand should reveal the 
+&quot;third axes&quot; which may require a little effort to focus the image.&nbsp; This 
+animation is more easily focused with the viewer's head about 3 feet from the 
+screen.&nbsp; </p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0"><b><i>Red/Blue 
+Glasses</i></b></p>
+<p style="margin-left: 20; margin-top: 0; margin-bottom: 0">Displays two 
+animation display axes in the graphics area with one colored red and the other 
+cyan.&nbsp; By using a cheap pair of the red/blue cellophane glasses, a 3D image 
+can be seen.&nbsp; Depending on the glasses, the colors of the red &amp; blue images 
+may need to be tweaked to eliminate ghosting and can be done in
+<a href="#Preferences">Preferences</a>.&nbsp; The shapes can use
+<a href="#Pan & Zoom">Pan &amp; Zoom</a>, <a href="#Rotate">Rotate</a>, and can
+<a href="#Deg">Spin</a>.&nbsp; The fill effect does not work with this display 
+type.</p>
+<p>&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0"><b><i>View</i></b></p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">This option is also 
+available via a context menu with a right-click on the graphics area.</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0"><b><i>+X</i></b></p>
+<p style="margin-left: 20; margin-top: 0; margin-bottom: 0">Changes the view to 
+the +X axis.</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0"><b><i>+Y</i></b></p>
+<p style="margin-left: 20; margin-top: 0; margin-bottom: 0">Changes the view to 
+the +Y axis.</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0"><b><i>+Z</i></b></p>
+<p style="margin-left: 20; margin-top: 0; margin-bottom: 0">Changes the view to 
+the +Z axis </p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0"><b><i>Ortho</i></b></p>
+<p style="margin-left: 20; margin-top: 0; margin-bottom: 0">Changes the view to 
+an orthographic image.</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0"><b><i>Up Vector</i></b></p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">Specifies which axis 
+should be considered the vertical axis.</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0"><b><i>+X</i></b></p>
+<p style="margin-left: 20; margin-top: 0; margin-bottom: 0">Changes the up 
+vector to the +X axis.</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0"><b><i>+Y</i></b></p>
+<p style="margin-left: 20; margin-top: 0; margin-bottom: 0">Changes the up 
+vector to the +Y axis.</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0"><b><i>+Z</i></b></p>
+<p style="margin-left: 20; margin-top: 0; margin-bottom: 0">Changes the up 
+vector to the +Z axis </p>
+<p>&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0"><b><i>Vector Type</i></b></p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">Specifies what type 
+of modal data to display</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0"><b><i>Real</i></b></p>
+<p style="margin-left: 20; margin-top: 0; margin-bottom: 0">Only animates using 
+the real part of the modal vector.</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0"><b><i>Imaginary</i></b></p>
+<p style="margin-left: 20; margin-top: 0; margin-bottom: 0">Only animates using 
+the imaginary part of the modal vector.</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0"><b><i>Complex</i></b></p>
+<p style="margin-left: 20; margin-top: 0; margin-bottom: 0">Animates using the 
+real and imaginary parts of the modal vector and includes the associated 
+phasing.</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p>&nbsp;</p>
+<p><a href="#Main">Back to Animation Figure</a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><a name="Help"></a><b><font size="4">Help</font></b></p>
+<p style="margin-top: 0; margin-bottom: 0"><b><i>Animation Help</i></b></p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">Opens this file in a 
+web browser.</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0"><b><i>About</i></b></p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">Provides information 
+about this software.</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p>&nbsp;</p>
+<p><a href="#Main">Back to Animation Figure</a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0"><a name="Animation"></a><b><font size="4">Animation</font></b></p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">The animation icon turns the animation on &amp; off.&nbsp; In Matlab R13 this is 
+a toggle button.&nbsp; In later releases due to a Windows XP/Matlab glitch this 
+may not look like a toggle button.</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">The speed of the animation is dependent 
+these factors.</p>
+<p style="margin-top: 0; margin-bottom: 0">1) A large amount of data can slow 
+the animation down (large node number, Quad display, etc.).</p>
+<p style="margin-top: 0; margin-bottom: 0">2) Including markers will slightly 
+slow the animation down.</p>
+<p style="margin-top: 0; margin-bottom: 0">3) Including labels may greatly 
+reduce the animation speed.&nbsp; This is due to the way Matlab handles text 
+objects.</p>
+<p style="margin-top: 0; margin-bottom: 0">4) Including the fill effects on 
+components can reduce the speed.</p>
+<p style="margin-top: 0; margin-bottom: 0">5) The larger the animation figure, 
+the slower the animation speed will be.</p>
+<p style="margin-top: 0; margin-bottom: 0">6) Turning on Spin will slightly slow 
+the animation.</p>
+<p style="margin-top: 0; margin-bottom: 0">7) The number of frames per cycle 
+directly impacts the animation speed.</p>
+<p style="margin-top: 0; margin-bottom: 0">8) The CPU and graphics hardware will 
+influence the speed of the animation.</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p>&nbsp;</p>
+<p><a href="#Main">Back to Animation Figure</a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0"><a name="Pan &amp; Zoom"></a><b><font size="4">Pan &amp; Zoom</font></b></p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">The Pan &amp; Zoom&nbsp; icon turns the pan &amp; zoom functionality on &amp; off.&nbsp; 
+In Matlab R13 this is a toggle button.&nbsp; In later releases due to a Windows 
+XP/Matlab glitch this may not look like a toggle button.</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">When the left mouse button is pressed and held, the user can drag the mouse 
+to change the zoom level.&nbsp; Center click and hold (shift+Alt+left click and 
+hold for 2 button mouse) allows the user to drag the image creating a panning 
+effect.</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p>&nbsp;</p>
+<p><a href="#Main">Back to Animation Figure</a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0"><a name="Rotate"></a><b><font size="4">Rotate</font></b></p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">The Rotate&nbsp; icon turns the rotation functionality on &amp; off.&nbsp; In 
+Matlab R13 this is a toggle button.&nbsp; In later releases due to a Windows XP/Matlab 
+glitch this may not look like a toggle button.</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">When the left mouse button is pressed and held, the user can drag the mouse 
+to rotate the object in the XY plane.&nbsp; Center click and hold (shift+Alt+left 
+click and hold for 2 button mouse) allows the user to rotate the image about the 
+Z axis.</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p>&nbsp;</p>
+<p><a href="#Main">Back to Animation Figure</a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0"><a name="Mode List"></a><b><font size="4">Mode List</font></b></p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">The mode list popup provides a list of positive frequency modes sorted by 
+frequency.&nbsp; Selecting a mode from the list will change the shape of the 
+animation to that mode.</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p>&nbsp;</p>
+<p><a href="#Main">Back to Animation Figure</a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0"><a name="FPC"></a><b><font size="4">FPC (Frame Per Cycle)</font></b></p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">The FPC (Frames per cycle) specifies the total number of frames used during 
+one animation cycle.&nbsp; This affects the speed and the smoothness of the 
+animation.</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">The edit box can be used to specify values between 3 and 503 frames per 
+cycle.&nbsp; The sliders change the number of frames by +/- 5 frames per cycle.</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p>&nbsp;</p>
+<p><a href="#Main">Back to Animation Figure</a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0"><a name="Amplitude"></a><b><font size="4">Amplitude</font></b></p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">Amp (Amplitude) specifies a scalar value used to increase or decrease the 
+degree of displayed deformation.</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">The edit box can be used to specify values between 0.01 and 100.01.&nbsp; The 
+sliders change the scalar by a factor of +/- 1.</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p>&nbsp;</p>
+<p><a href="#Main">Back to Animation Figure</a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0"><a name="Deg"></a><b><font size="4">Deg. (Spin Degrees Per Cycle)</font></b></p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">Deg (Spin Degrees Per Cycle) specifies the amount, in degrees, of spin or 
+revolution the animation will change for each animation cycle.&nbsp; E.g. a Deg. 
+value of 90 will require four animation cycles to complete a full 360 degree 
+revolution of the shape. </p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">The edit box can be used to specify values between -360 and 360 degrees.&nbsp; 
+The sliders change the value by +/- 5 degrees.</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p>&nbsp;</p>
+<p><a href="#Main">Back to Animation Figure</a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0"><a name="Annotate"></a><b><font size="4">Annotate</font></b></p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">The annotation text area provides information about the current data file and 
+selected mode.&nbsp; The text box can be turned on or off via the
+<a href="#Display">Display Menu</a>.</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p>&nbsp;</p>
+<p><a href="#Main">Back to Animation Figure</a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0"><a name="Graphics"></a><b><font size="4">Graphics</font></b></p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">The graphics display area contains the objects displayed for the animation.&nbsp; 
+The objects displayed can be set using the <a href="#Display">Display Menu</a>, 
+and the type of display can be set using the <a href="#View">View Menu</a>.</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">A right click in the graphics area will display a context menu with options 
+to change the current view of the animated shape.&nbsp; This context menu is 
+only available on the top right axes when a Quad display type is selected.</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p>&nbsp;</p>
+<p><a href="#Main">Back to Animation Figure</a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0"><b><font size="4"><a name="FigureSize"></a>Figure Size</font></b></p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">The animation figure size can be adjusted using the maximize and minimize 
+window buttons.&nbsp; Also, the figure can be resize by dragging an edge of the 
+animation figure to the desired screen location.&nbsp; The size of the animation 
+figure can change the speed of animation.</p>
+<p>&nbsp;</p>
+<p><a href="#Main">Back to Animation Figure</a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><b><font size="4"><a name="Preferences"></a>Preferences</font></b></p>
+<p>The preferences figure can be used to adjust all the parameters used during 
+animation.&nbsp; When the preferences are opened, the parameters reflect the 
+current configuration of the animation figure.&nbsp; If a change is made on the 
+animation figure, e.g. the static shape is turned off, the change is also made 
+in the preference figure.&nbsp; Multiple changes can be made to the animation 
+display using the preferences figure and applied all at once using the Apply 
+pushbutton.&nbsp; If the Auto apply checkbox is checked, changes to the 
+preferences will be immediately applied to the animation.</p>
+<p>
+<map name="FPMap1">
+<area alt="Animation" href="#Pref:Animation" shape="rect" coords="11, 29, 293, 88">
+<area alt="Display" href="#Pref:Animation" shape="rect" coords="10, 87, 295, 145">
+<area alt="View" href="#Pref:View" shape="rect" coords="10, 146, 296, 238">
+<area alt="Color" href="#Pref:Colors" shape="rect" coords="12, 242, 297, 314">
+<area alt="AVI &amp; Snapshot" coords="13, 311, 293, 473" shape="rect" href="#Pref:AVI & Snap">
+</map>
+<img border="0" src="prefs.jpg" width="306" height="532" usemap="#FPMap1"></p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0"><i><b><a name="Pref:Animation"></a>
+Animation</b></i></p>
+<p style="margin-top: 0; margin-bottom: 0">The Animation area represents the 
+values related to the animation of the vectors and are equivalent to the
+<a href="#FPC">FPC</a>, <a href="#Amplitude">Amp</a>, and <a href="#Deg">Deg.</a> 
+parameters on the animation figure.</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0"><i><b><a name="Pref:Display"></a>
+Display</b></i></p>
+<p style="margin-top: 0; margin-bottom: 0">The Display area represents the 
+values shown in the <a href="#Display">Display Menu</a>.</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0"><i><b><a name="Pref:View"></a>View</b></i></p>
+<p style="margin-top: 0; margin-bottom: 0">The View area represents the 
+parameters shown in the <a href="#View">View Menu.</a></p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0"><i><b><a name="Pref:Colors"></a>
+Colors</b></i></p>
+<p style="margin-top: 0; margin-bottom: 0">The area below the View area 
+consisting of the nine pushbuttons allows the user to adjust the colors of 
+display objects.&nbsp; The button below the eight labeled buttons represents the 
+background color of the graphics area.&nbsp; The labeled buttons are used to 
+change the colors of the objects defined by the label.&nbsp; Note that the 
+background color may not be represented when saving a snapshot of the animation 
+figure.</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0"><i><b><a name="Pref:AVI &amp; Snap">
+</a>AVI and Snapshot</b></i></p>
+<p style="margin-top: 0; margin-bottom: 0">The AVI and Snapshot are contain the 
+parameters for each type.&nbsp; The AVI parameters are listed below the AVI 
+header, and the Snapshot parameters are listed below the Snapshot header.</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0"><i><b>AVI</b></i></p>
+<p style="margin-left: 20; margin-top: 0; margin-bottom: 0"><b>Format</b> : the 
+video codec used for AVI compression.&nbsp; Currently only Matlab supported 
+true color codecs are listed.</p>
+<p style="margin-left: 20; margin-top: 0; margin-bottom: 0"><b>Quality</b> : the 
+amount of compression resulting in quality loss.&nbsp; A value of 100% indicates 
+no compression.</p>
+<p style="margin-left: 20; margin-top: 0; margin-bottom: 0"><b>Time sec.</b> : 
+the amount of time the AVI file will take to complete one animation cycle in a 
+media player.</p>
+<p style="margin-left: 20; margin-top: 0; margin-bottom: 0"><b>Do all modes</b> 
+: This checkbox can be used to indicate that when the user selects AVI from Save 
+in the File Menu, all modes will be saved without user intervention to change 
+the mode list, select Save... AVI, and specify a file name.&nbsp; All the modes 
+will be saved to the Default path with a file naming convention of &quot;<i>defaultPath</i>\Mode##(####.###Hz).avi&quot;.</p>
+<p style="margin-left: 20; margin-top: 0; margin-bottom: 0">Note: The total 
+length of the AVI file name, including the default path and extension, cannot 
+exceed 64 characters.</p>
+<p style="margin-left: 10; margin-top: 0; margin-bottom: 0"><b><i>Snapshot</i></b></p>
+<p style="margin-left: 20; margin-top: 0; margin-bottom: 0"><b>Format</b> : The 
+type of graphics file. Several common file types are supported and include 
+(monochrome BMP, 24-bit BMP, EMF metafile, EPS level 1 black &amp; white, EPS level 
+1 color, EPS level 2 black &amp; white, EPS level 2 color, 24-bit JPEG, 24-bit PCX, 
+Adobe PDF, 24-bit PNG, and TIFF.</p>
+<p style="margin-left: 20; margin-top: 0; margin-bottom: 0"><b>Renderer</b> : 
+The option specifies how the image is drawn.&nbsp; The options are, painters, 
+OpenGL, and Z-buffer.&nbsp; The painters option uses vectors and produces the 
+best results for EPS and EMF files. OpenGL and Z-buffer produce raster images.&nbsp; 
+These options may produce better results with bitmap file type.</p>
+<p style="margin-left: 20; margin-top: 0; margin-bottom: 0"><b>Resolution.</b> : 
+The resolution of the saved image.</p>
+<p style="margin-left: 20; margin-top: 0; margin-bottom: 0"><b>Do all modes</b> 
+: This checkbox can be used to indicate that when the user selects Snapshot from Save 
+in the File Menu, all modes will be saved without user intervention to change 
+the mode list, select Save... Snapshot, and specify a file name.&nbsp; All the modes 
+will be saved to the Default path with a file naming convention of &quot;<i>defaultPath</i>\Mode##(####.###Hz).<i>ext</i>&quot;.&nbsp; 
+The snapshots are created when the shape is at the maximum deformation.</p>
+<p>&nbsp;</p>
+<p><a href="#Main">Back to Animation Figure</a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><b><font size="4"><a name="Components"></a>Components</font></b></p>
+<p>Currently, components are only supported for universal files.&nbsp; The 
+components result for the name field in the UF82 files.&nbsp; The wireframe 
+components are displayed in the same manor as the entire shape.</p>
+<p>The Red/Blue Glasses display type is not supported in component viewing. </p>
+<p>The fill effect is produced using the Matlab fill3 command defined by the 
+wireframe node order.&nbsp; It may take some practice in order to produce the 
+correct fill effects from a wireframe model.&nbsp; An example of creating a ring 
+is presented <a href="#Comp:RingEx">here</a>.</p>
+<p><b><font size="4"><map name="FPMap2">
+<area alt="Component List" href="#Comp:List" shape="rect" coords="12, 29, 291, 249">
+<area alt="Component Name" href="#Comp:Name" shape="rect" coords="10, 256, 112, 293">
+<area alt="Visible" href="#Comp:Visible" shape="rect" coords="119, 250, 181, 271">
+<area alt="Fill" href="#Comp:Fill" shape="rect" coords="121, 268, 181, 293">
+<area alt="Wireframe" href="#Comp:Wireframe" shape="rect" coords="102, 294, 180, 323">
+<area alt="Component Color" href="#Comp:Color" shape="rect" coords="200, 256, 282, 283">
+</map><img border="0" src="comps.jpg" width="306" height="332" usemap="#FPMap2"></font></b></p>
+<p style="margin-top: 0; margin-bottom: 0"><a name="Comp:List"></a><b><i>
+Component List</i></b></p>
+<p style="margin-top: 0; margin-bottom: 0">The component list shows the names 
+and parameters of the components found for the loaded modal file.&nbsp; 
+Selecting a single component updates the parameters below the list.&nbsp; 
+Selecting multiple components will cause the parameters below the list to 
+display the values for the first component selected in the list.&nbsp; Changes 
+to the parameters can be made to a single selection or multiple selections at 
+the same time.</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0"><a name="Comp:Name"></a><b><i>Name</i></b></p>
+<p style="margin-top: 0; margin-bottom: 0">The component name can be changed for 
+a single or multiple items selected.&nbsp; A change to a component name will 
+only be of value when the file is saved to a universal file.</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0"><a name="Comp:Visible"></a><b><i>
+Visible</i></b></p>
+<p style="margin-top: 0; margin-bottom: 0">The visible checkbox allows the user 
+to turn on or off a single or multiple components' wireframe.&nbsp; When labels 
+are turned on in the Display Menu, they will only be displayed if a component is 
+visible.&nbsp; If the wireframe checkbox is selected, this overrides the 
+component labels and will display all node labels.&nbsp; If markers are turned 
+on, they will only be displayed if a component is visible or the wireframe 
+checkbox is selected.</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0"><a name="Comp:Fill"></a><b><i>Fill</i></b></p>
+<p style="margin-top: 0; margin-bottom: 0">The fill checkbox allows the user to 
+turn on or off a single or multiple components' solid fill effect.&nbsp; The 
+fill effect has no influence on displaying node labels or markers.&nbsp; </p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0"><a name="Comp:Color"></a><b><i>Fill 
+Color</i></b></p>
+<p style="margin-top: 0; margin-bottom: 0">The fill color pushbutton allows the 
+user to change the color of a single or multiple components.</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+<p style="margin-top: 0; margin-bottom: 0"><a name="Comp:Wireframe"></a><b><i>
+Wireframe</i></b></p>
+<p style="margin-top: 0; margin-bottom: 0">The wireframe checkbox allows the 
+user to turn on or off the default wireframe image.&nbsp; If labels or markers 
+are enabled, all node labels or markers will be displayed if the wireframe is 
+enabled.&nbsp; When the wireframe is enabled and a component is marked visible 
+and/or filled, the component will overlay the default wireframe.</p>
+<p>&nbsp;</p>
+<p><a href="#Main">Back to Animation Figure</a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><b><font size="4"><a name="Comp:RingEx"></a>Ring Example</font></b></p>
+<p>This example demonstrates the wireframe node order to produce a hollow ring 
+when the fill effect is applied.&nbsp; The wireframe used for this example is 
+shown below.</p>
+<p><img border="0" src="comp_ex1.jpg" width="646" height="524"></p>
+<p>The node order used in the UF82 to produce the hollow ring effect below from 
+the wireframe above is as follows</p>
+<p>1 2 3 4 5 6 7 8 9 10 11 12 1 13 24 2 22 21 20 19 18 17 16 15 14 13</p>
+<p>The fill effect can is accomplished by completely closing the component.</p>
+<p><img border="0" src="comp_ex2.jpg" width="646" height="524"></p>
+<p>Another example of how to produce the fill effect is to define smaller 
+sections of each component.&nbsp; The following example contains three 
+components.&nbsp; The wireframe model was created by defining each trapezoid on 
+the structure and using the pen-up to separate the individual trapezoids. For 
+example using the node labels shown in the above wireframe, the fill effect can 
+be accomplished with the following UF82 line</p>
+<p>1 2 14 13 1 0 2 3 15 14 2 0 ...</p>
+<p>The solid fill effect has not been used historically in structural dynamics, 
+and is only included in this code to see if the author could do it.&nbsp; There 
+is most likely a simpler and more efficient method of producing this effect but 
+not worth the time investigating it right now.</p>
+<p><img border="0" src="main_fill.jpg" width="648" height="535"></p>
+<p>&nbsp;</p>
+<p><a href="#Main">Back to Animation Figure</a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+</body>
+
+</html>

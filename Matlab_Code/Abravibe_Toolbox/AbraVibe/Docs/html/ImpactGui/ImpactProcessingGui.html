@@ -1,0 +1,702 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of ImpactProcessingGui</title>
+  <meta name="keywords" content="ImpactProcessingGui">
+  <meta name="description" content="IMPACTPROCESSINGGUI MATLAB code for ImpactProcessingGui.fig">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">ImpactGui</a> &gt; ImpactProcessingGui.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for ImpactGui&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>ImpactProcessingGui
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>IMPACTPROCESSINGGUI MATLAB code for ImpactProcessingGui.fig</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function varargout = ImpactProcessingGui(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> IMPACTPROCESSINGGUI MATLAB code for ImpactProcessingGui.fig
+      IMPACTPROCESSINGGUI, by itself, creates a new IMPACTPROCESSINGGUI or raises the existing
+      singleton*.
+
+      H = IMPACTPROCESSINGGUI returns the handle to a new IMPACTPROCESSINGGUI or the handle to
+      the existing singleton*.
+
+      IMPACTPROCESSINGGUI('CALLBACK',hObject,eventData,handles,...) calls the local
+      function named CALLBACK in IMPACTPROCESSINGGUI.M with the given input arguments.
+
+      IMPACTPROCESSINGGUI('Property','Value',...) creates a new IMPACTPROCESSINGGUI or raises the
+      existing singleton*.  Starting from the left, property value pairs are
+      applied to the GUI before ImpactProcessingGui_OpeningFcn gets called.  An
+      unrecognized property name or invalid value makes property application
+      stop.  All inputs are passed to ImpactProcessingGui_OpeningFcn via varargin.
+
+      *See GUI Options on GUIDE's Tools menu.  Choose &quot;GUI allows only one
+      instance to run (singleton)&quot;.
+
+ See also: GUIDE, GUIDATA, GUIHANDLES</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="GuiImptrig.html" class="code" title="function [TrigIdx, DIdx, AIdx] = GuiImpTrig(x,N,TrigPerc,PreTrigger)">GuiImptrig</a>	GUIIMPTRIG    Impact testing triggering and double impact detection for</li><li><a href="Imp2FrfGui.html" class="code" title="function [H,f,C,Tff, ImpactNos] = Imp2FrfGui(x,y,fs,N,TrigIdx,DIdx,FWinLength,ExpWinPar,Type,flo,fhi)">Imp2FrfGui</a>	IMP2FRFGUI  Calculate FRF(s) from impact time data recording (ImpactGui version)</li><li><a href="ImpactContDlg.html" class="code" title="function varargout = ImpactContDlg(varargin)">ImpactContDlg</a>	IMPACTCONTDLG MATLAB code for ImpactContDlg.fig</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="ImpactGui.html" class="code" title="function varargout = ImpactGui(varargin)">ImpactGui</a>	IMPACTGUI ABRAVIBE impact testing GUI</li></ul>
+<!-- crossreference -->
+
+<h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="#_sub1" class="code">function ImpactProcessingGui_OpeningFcn(hObject, eventdata, handles, varargin)</a></li><li><a href="#_sub2" class="code">function varargout = ImpactProcessingGui_OutputFcn(~, eventdata, handles)</a></li><li><a href="#_sub3" class="code">function SaveButton_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub4" class="code">function ProcessModePopup_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub5" class="code">function ProcessModePopup_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub6" class="code">function PlotChannelsListbox_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub7" class="code">function PlotChannelsListbox_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub8" class="code">function UseImpactsListbox_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub9" class="code">function UseImpactsListbox_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub10" class="code">function CurrentFilePopup_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub11" class="code">function CurrentFilePopup_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub12" class="code">function figure1_CloseRequestFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub13" class="code">function UpdateTimePlots(handles)</a></li><li><a href="#_sub14" class="code">function FillUseFilesPopoup(handles)</a></li><li><a href="#_sub15" class="code">function handles = UpdateFreqPlots(handles)</a></li><li><a href="#_sub16" class="code">function handles = SaveFiles(handles)</a></li></ul>
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = ImpactProcessingGui(varargin)</a>
+0002 <span class="comment">% IMPACTPROCESSINGGUI MATLAB code for ImpactProcessingGui.fig</span>
+0003 <span class="comment">%      IMPACTPROCESSINGGUI, by itself, creates a new IMPACTPROCESSINGGUI or raises the existing</span>
+0004 <span class="comment">%      singleton*.</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%      H = IMPACTPROCESSINGGUI returns the handle to a new IMPACTPROCESSINGGUI or the handle to</span>
+0007 <span class="comment">%      the existing singleton*.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%      IMPACTPROCESSINGGUI('CALLBACK',hObject,eventData,handles,...) calls the local</span>
+0010 <span class="comment">%      function named CALLBACK in IMPACTPROCESSINGGUI.M with the given input arguments.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%      IMPACTPROCESSINGGUI('Property','Value',...) creates a new IMPACTPROCESSINGGUI or raises the</span>
+0013 <span class="comment">%      existing singleton*.  Starting from the left, property value pairs are</span>
+0014 <span class="comment">%      applied to the GUI before ImpactProcessingGui_OpeningFcn gets called.  An</span>
+0015 <span class="comment">%      unrecognized property name or invalid value makes property application</span>
+0016 <span class="comment">%      stop.  All inputs are passed to ImpactProcessingGui_OpeningFcn via varargin.</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%      *See GUI Options on GUIDE's Tools menu.  Choose &quot;GUI allows only one</span>
+0019 <span class="comment">%      instance to run (singleton)&quot;.</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">% See also: GUIDE, GUIDATA, GUIHANDLES</span>
+0022 
+0023 <span class="comment">% Copyright (c) 2009-2014 by Anders Brandt</span>
+0024 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0025 <span class="comment">% Version: 1.0 2014-07-15</span>
+0026 <span class="comment">%          1.1 2018-05-12 Fixed bug in active impacts after first save</span>
+0027 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0028 
+0029 
+0030 <span class="comment">% Last Modified by GUIDE v2.5 12-Jul-2014 15:05:18</span>
+0031 
+0032 <span class="comment">% Begin initialization code - DO NOT EDIT</span>
+0033 gui_Singleton = 1;
+0034 gui_State = struct(<span class="string">'gui_Name'</span>,       mfilename, <span class="keyword">...</span>
+0035     <span class="string">'gui_Singleton'</span>,  gui_Singleton, <span class="keyword">...</span>
+0036     <span class="string">'gui_OpeningFcn'</span>, @<a href="#_sub1" class="code" title="subfunction ImpactProcessingGui_OpeningFcn(hObject, eventdata, handles, varargin)">ImpactProcessingGui_OpeningFcn</a>, <span class="keyword">...</span>
+0037     <span class="string">'gui_OutputFcn'</span>,  @<a href="#_sub2" class="code" title="subfunction varargout = ImpactProcessingGui_OutputFcn(~, eventdata, handles)">ImpactProcessingGui_OutputFcn</a>, <span class="keyword">...</span>
+0038     <span class="string">'gui_LayoutFcn'</span>,  [] , <span class="keyword">...</span>
+0039     <span class="string">'gui_Callback'</span>,   []);
+0040 <span class="keyword">if</span> nargin &amp;&amp; ischar(varargin{1})
+0041     gui_State.gui_Callback = str2func(varargin{1});
+0042 <span class="keyword">end</span>
+0043 
+0044 <span class="keyword">if</span> nargout
+0045     [varargout{1:nargout}] = gui_mainfcn(gui_State, varargin{:});
+0046 <span class="keyword">else</span>
+0047     gui_mainfcn(gui_State, varargin{:});
+0048 <span class="keyword">end</span>
+0049 <span class="comment">% End initialization code - DO NOT EDIT</span>
+0050 
+0051 
+0052 <span class="comment">% --- Executes just before ImpactProcessingGui is made visible.</span>
+0053 <a name="_sub1" href="#_subfunctions" class="code">function ImpactProcessingGui_OpeningFcn(hObject, eventdata, handles, varargin)</a>
+0054 <span class="comment">% This function has no output args, see OutputFcn.</span>
+0055 <span class="comment">% hObject    handle to figure</span>
+0056 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0057 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0058 <span class="comment">% varargin   command line arguments to ImpactProcessingGui (see VARARGIN)</span>
+0059 
+0060 <span class="comment">% Keep handles to Main gui to be able to update file numbers in that GUI as</span>
+0061 <span class="comment">% files are processed</span>
+0062 MainHandles=varargin{1};
+0063 <span class="comment">% set(MainHandles.InputStartNoEdit,'String','3');</span>
+0064 handles.ImpactGui=MainHandles.ImpactGui;
+0065 handles.ProcessType=<span class="string">'FREQUENCYMANUAL'</span>;
+0066 
+0067 <span class="comment">% Load first data file based on the input settings and fill the Acc.</span>
+0068 <span class="comment">% Channels listbox</span>
+0069 FileName=fullfile(handles.ImpactGui.InputDirectory,handles.ImpactGui.InputFileList{1});
+0070 <span class="keyword">if</span> exist(FileName,<span class="string">'file'</span>) == 2
+0071     load(FileName,<span class="string">'-mat'</span>)
+0072     handles.Data=Data;
+0073     handles.Header=Header;
+0074 <span class="keyword">else</span>
+0075     <a href="ImpactContDlg.html" class="code" title="function varargout = ImpactContDlg(varargin)">ImpactContDlg</a>(<span class="string">'Title'</span>,<span class="string">'Input file does not exist!'</span>)
+0076 <span class="keyword">end</span>
+0077 handles.CurrentFile=FileName;
+0078 NumberChannels=length(Data);    <span class="comment">% Number of channels including force channel</span>
+0079 PlotForArray=cell(NumberChannels,1);
+0080 PlotForArray{1}=[<span class="string">'Channel(s)'</span>];
+0081 PlotForArray{2}=[num2str(2,<span class="string">'%4i'</span>)];
+0082 <span class="keyword">for</span> n=3:NumberChannels
+0083     PlotForArray{n}=[num2str(n,<span class="string">'%4i'</span>)];
+0084 <span class="keyword">end</span>
+0085 set(handles.PlotChannelsListbox,<span class="string">'String'</span>,PlotForArray)
+0086 handles.UseChannels=2;
+0087 set(handles.PlotChannelsListbox,<span class="string">'Value'</span>,handles.UseChannels)
+0088 
+0089 <span class="comment">% Now fill Use Impacts table</span>
+0090 <span class="comment">% For this we first need data</span>
+0091 handles.x=cell2mat(Data(1));
+0092 handles.y=cell2mat(Data(2:end));
+0093 handles.fs=1/Header(1).xIncrement;
+0094 handles.N=handles.ImpactGui.BlocksizeNumbers(handles.ImpactGui.BlocksizeNumber);
+0095 <span class="comment">% Now find trigger events, including double impacts</span>
+0096 [handles.TrigIdx,handles.DIdx,handles.AIdx]=<a href="GuiImptrig.html" class="code" title="function [TrigIdx, DIdx, AIdx] = GuiImpTrig(x,N,TrigPerc,PreTrigger)">GuiImptrig</a>(handles.x,handles.N,<span class="keyword">...</span>
+0097     handles.ImpactGui.TrigLevel,handles.ImpactGui.Pretrigger);
+0098 <span class="comment">% Fill the listbox with as many impacts as were found</span>
+0099 C=cell(length(handles.TrigIdx),1);
+0100 <span class="keyword">for</span> n = 1:length(handles.TrigIdx)
+0101     C{n} = num2str(n,<span class="string">'%4i'</span>);
+0102 <span class="keyword">end</span>
+0103 set(handles.UseImpactsListbox,<span class="string">'String'</span>,C)
+0104 <span class="comment">% Make only those not being double impacts as active. This allows the user</span>
+0105 <span class="comment">% to select double impact blocks, but they are not used by default</span>
+0106 handles.UseImpacts=setdiff(1:length(handles.TrigIdx),handles.DIdx);
+0107 set(handles.UseImpactsListbox,<span class="string">'Value'</span>,handles.UseImpacts)
+0108 
+0109 <span class="comment">% Fill the Current file popup</span>
+0110 <a href="#_sub14" class="code" title="subfunction FillUseFilesPopoup(handles)">FillUseFilesPopoup</a>(handles);
+0111 
+0112 
+0113 <span class="comment">% Next, plot FRF and coherence for default acc. channel no. 2 and using</span>
+0114 <span class="comment">% default (all) impacts</span>
+0115 ScreenSize=get(0,<span class="string">'ScreenSize'</span>);
+0116 <span class="comment">% Plot time plot</span>
+0117 handles.h1=figure(<span class="string">'Position'</span>,[ScreenSize(3)/2 ScreenSize(4)*2/3-15 ScreenSize(3)/2*.8 ScreenSize(4)/3*.8]);
+0118 <a href="#_sub13" class="code" title="subfunction UpdateTimePlots(handles)">UpdateTimePlots</a>(handles);
+0119 <span class="comment">% Plot mag. FRF and Coherence</span>
+0120 handles.h2=figure(<span class="string">'Position'</span>,[ScreenSize(3)/2 ScreenSize(2)+40 ScreenSize(3)/2*.8 ScreenSize(4)*2/3*.8]);
+0121 handles=<a href="#_sub15" class="code" title="subfunction handles = UpdateFreqPlots(handles)">UpdateFreqPlots</a>(handles);
+0122 
+0123 <span class="comment">% Choose default command line output for ImpactProcessingGui</span>
+0124 handles.output = hObject;
+0125 
+0126 <span class="comment">% Update handles structure</span>
+0127 guidata(hObject, handles);
+0128 
+0129 <span class="comment">% UIWAIT makes ImpactProcessingGui wait for user response (see UIRESUME)uiwait(handles.figure1);</span>
+0130 uiwait(handles.figure1);
+0131 
+0132 
+0133 <span class="comment">% --- Outputs from this function are returned to the command line.</span>
+0134 <a name="_sub2" href="#_subfunctions" class="code">function varargout = ImpactProcessingGui_OutputFcn(~, eventdata, handles)</a>
+0135 <span class="comment">% varargout  cell array for returning output args (see VARARGOUT);</span>
+0136 <span class="comment">% hObject    handle to figure</span>
+0137 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0138 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0139 
+0140 <span class="comment">% Get default command line output from handles structure</span>
+0141 <span class="comment">% varargout{1} = handles.output;</span>
+0142 <span class="keyword">if</span> isfield(handles,<span class="string">'h1'</span>) &amp; ishghandle(handles.h1)
+0143     close(handles.h1)
+0144 <span class="keyword">end</span>
+0145 <span class="keyword">if</span> isfield(handles,<span class="string">'h2'</span>) &amp; ishghandle(handles.h2)
+0146     close(handles.h2)
+0147 <span class="keyword">end</span>
+0148 
+0149 <span class="comment">% --- Executes on button press in SaveButton.</span>
+0150 <a name="_sub3" href="#_subfunctions" class="code">function SaveButton_Callback(hObject, eventdata, handles)</a>
+0151 <span class="comment">% hObject    handle to SaveButton (see GCBO)</span>
+0152 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0153 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0154 <span class="comment">% Save FRF, Coherence, and force spectrum for each response channel</span>
+0155 <span class="comment">% This means the force spectrum is repeated; this makes it easier to figure</span>
+0156 <span class="comment">% out which force spectrum belongs to which FRF</span>
+0157 <span class="keyword">if</span> strcmp(upper(handles.ProcessType),<span class="string">'FREQUENCYMANUAL'</span>) | <span class="keyword">...</span>
+0158         strcmp(upper(handles.ProcessType),<span class="string">'TIMESYNCHRONOUSMANUAL'</span>)
+0159     handles = <a href="#_sub16" class="code" title="subfunction handles = SaveFiles(handles)">SaveFiles</a>(handles);
+0160     <span class="comment">% Update current file popup to next file, if not end of list!</span>
+0161     <span class="comment">% If list is up, close Post Processing window</span>
+0162     FileNames=get(handles.CurrentFilePopup,<span class="string">'String'</span>);
+0163     FileNo=get(handles.CurrentFilePopup,<span class="string">'Value'</span>);
+0164     <span class="keyword">if</span> FileNo &lt; length(FileNames)
+0165         FileNo=FileNo+1;
+0166         set(handles.CurrentFilePopup,<span class="string">'Value'</span>,FileNo);
+0167         FileName=fullfile(handles.ImpactGui.InputDirectory,FileNames{FileNo});
+0168         load(FileName,<span class="string">'-mat'</span>);
+0169         handles.CurrentFile=FileName;
+0170         <span class="comment">% Check if impacts are negative, then &quot;flip&quot; positive</span>
+0171         handles.x=cell2mat(Data(1));
+0172         [M,I]=max(abs(handles.x));
+0173         <span class="keyword">if</span> handles.x(I) &lt; 0
+0174             handles.x=-handles.x;
+0175             Dir=dir2nbr(Header(1).Dir);
+0176             Header.Dir=nbr2dir(-Dir);
+0177         <span class="keyword">end</span>
+0178         handles.y=cell2mat(Data(2:end));
+0179         handles.Header=Header;
+0180         [handles.TrigIdx,handles.DIdx,handles.AIdx]=<a href="GuiImptrig.html" class="code" title="function [TrigIdx, DIdx, AIdx] = GuiImpTrig(x,N,TrigPerc,PreTrigger)">GuiImptrig</a>(handles.x,handles.N,<span class="keyword">...</span>
+0181             handles.ImpactGui.TrigLevel,handles.ImpactGui.Pretrigger);
+0182         <span class="comment">% Fill the listbox with as many impacts as were found</span>
+0183         C=cell(length(handles.TrigIdx),1);
+0184         <span class="keyword">for</span> n = 1:length(handles.TrigIdx)
+0185             C{n} = num2str(n,<span class="string">'%4i'</span>);
+0186         <span class="keyword">end</span>
+0187         set(handles.UseImpactsListbox,<span class="string">'String'</span>,C)
+0188         <span class="comment">%         handles.UseImpacts=[1:length(handles.TrigIdx)];</span>
+0189 <span class="comment">%         set(handles.UseImpactsListbox,'String',{handles.UseImpacts'});</span>
+0190         handles.UseImpacts=setdiff(1:length(handles.TrigIdx),handles.DIdx);
+0191         set(handles.UseImpactsListbox,<span class="string">'Value'</span>,handles.UseImpacts);
+0192 
+0193         <a href="#_sub13" class="code" title="subfunction UpdateTimePlots(handles)">UpdateTimePlots</a>(handles);
+0194         handles=<a href="#_sub15" class="code" title="subfunction handles = UpdateFreqPlots(handles)">UpdateFreqPlots</a>(handles);
+0195         guidata(hObject,handles)
+0196     <span class="keyword">else</span>
+0197         <span class="keyword">if</span> isfield(handles,<span class="string">'h1'</span>) &amp; ishghandle(handles.h1)
+0198             close(handles.h1)
+0199         <span class="keyword">end</span>
+0200         <span class="keyword">if</span> isfield(handles,<span class="string">'h2'</span>) &amp; ishghandle(handles.h2)
+0201             close(handles.h2)
+0202         <span class="keyword">end</span>
+0203         uiresume;
+0204         delete(handles.figure1);
+0205     <span class="keyword">end</span>
+0206 <span class="comment">%     guidata(hObject,handles)</span>
+0207 <span class="keyword">else</span> <span class="comment">% if automatic processing mode: process and save results for all files</span>
+0208      <span class="comment">% in the input list</span>
+0209     <span class="comment">% Reread the current file in the UseFiles popup, and loop through all</span>
+0210     <span class="comment">% files, process, and save</span>
+0211     FileNames=get(handles.CurrentFilePopup,<span class="string">'String'</span>);
+0212     FileNo=get(handles.CurrentFilePopup,<span class="string">'Value'</span>);
+0213     h=waitbar(0,<span class="string">'Processing .imptime files...'</span>);
+0214     <span class="keyword">for</span> n = FileNo:length(FileNames)
+0215         waitbar(n/length(FileNames),h)
+0216         figure(h)
+0217         FileName=fullfile(handles.ImpactGui.InputDirectory,FileNames{n});
+0218         load(FileName,<span class="string">'-mat'</span>)
+0219         handles.CurrentFile=FileName;
+0220         <span class="comment">% Check if impacts are negative, then &quot;flip&quot; positive</span>
+0221         handles.x=cell2mat(Data(1));
+0222         [M,I]=max(abs(handles.x));
+0223         <span class="keyword">if</span> handles.x(I) &lt; 0
+0224             handles.x=-handles.x;
+0225             Dir=dir2nbr(Header(1).Dir);
+0226             Header.Dir=nbr2dir(-Dir);
+0227         <span class="keyword">end</span>
+0228         handles.y=cell2mat(Data(2:end));
+0229         handles.Header=Header;
+0230         <span class="comment">% Compute new triggers</span>
+0231         [handles.TrigIdx,handles.DIdx,handles.AIdx]=<a href="GuiImptrig.html" class="code" title="function [TrigIdx, DIdx, AIdx] = GuiImpTrig(x,N,TrigPerc,PreTrigger)">GuiImptrig</a>(handles.x,handles.N,<span class="keyword">...</span>
+0232             handles.ImpactGui.TrigLevel,handles.ImpactGui.Pretrigger);
+0233         <span class="comment">% Compute FRFs, Coherences, and force spectrum</span>
+0234         [handles.H,handles.f, handles.C, handles.Tff,handles.UseImpacts] = <a href="Imp2FrfGui.html" class="code" title="function [H,f,C,Tff, ImpactNos] = Imp2FrfGui(x,y,fs,N,TrigIdx,DIdx,FWinLength,ExpWinPar,Type,flo,fhi)">Imp2FrfGui</a>(handles.x,<span class="keyword">...</span>
+0235             handles.y,handles.fs,handles.N,handles.TrigIdx,<span class="keyword">...</span>
+0236             handles.DIdx,handles.ImpactGui.ForceWindowLength,<span class="keyword">...</span>
+0237             handles.ImpactGui.ExpWindowPercent,handles.ProcessType,<span class="keyword">...</span>
+0238             handles.flo,handles.fhi);
+0239         <span class="comment">% Save files</span>
+0240         handles = <a href="#_sub16" class="code" title="subfunction handles = SaveFiles(handles)">SaveFiles</a>(handles);
+0241     <span class="keyword">end</span> <span class="comment">% for</span>
+0242     <span class="comment">% Close all windows</span>
+0243     <span class="keyword">if</span> isfield(handles,<span class="string">'h1'</span>) &amp; ishghandle(handles.h1)
+0244         close(handles.h1)
+0245     <span class="keyword">end</span>
+0246     <span class="keyword">if</span> isfield(handles,<span class="string">'h2'</span>) &amp; ishghandle(handles.h2)
+0247         close(handles.h2)
+0248     <span class="keyword">end</span>
+0249     uiresume;
+0250     delete(handles.figure1);
+0251     close(h)
+0252 <span class="keyword">end</span>
+0253 
+0254 <span class="comment">% --- Executes on selection change in ProcessModePopup.</span>
+0255 <a name="_sub4" href="#_subfunctions" class="code">function ProcessModePopup_Callback(hObject, eventdata, handles)</a>
+0256 <span class="comment">% hObject    handle to ProcessModePopup (see GCBO)</span>
+0257 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0258 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0259 
+0260 <span class="comment">% Hints: contents = cellstr(get(hObject,'String')) returns ProcessModePopup contents as cell array</span>
+0261 <span class="comment">%        contents{get(hObject,'Value')} returns selected item from ProcessModePopup</span>
+0262 n=get(hObject,<span class="string">'Value'</span>);
+0263 <span class="keyword">if</span> n == 1  <span class="comment">% Freq. manual mode</span>
+0264     <span class="keyword">if</span> isfield(handles,<span class="string">'flo'</span>)
+0265         handles=rmfield(handles,<span class="string">'flo'</span>);
+0266     <span class="keyword">end</span>
+0267     handles.ProcessType=<span class="string">'FrequencyManual'</span>;
+0268     set(handles.SaveButton,<span class="string">'String'</span>,<span class="string">'Save and Next'</span>)
+0269     handles=<a href="#_sub15" class="code" title="subfunction handles = UpdateFreqPlots(handles)">UpdateFreqPlots</a>(handles);
+0270     set(handles.PlotChannelsListbox,<span class="string">'Visible'</span>,<span class="string">'on'</span>)
+0271     set(handles.UseImpactsListbox,<span class="string">'Visible'</span>,<span class="string">'on'</span>)
+0272     set(handles.CurrentFilePopup,<span class="string">'Visible'</span>,<span class="string">'on'</span>)
+0273 <span class="keyword">elseif</span> n == 2 <span class="comment">% Time Synchr. manual mode</span>
+0274     <span class="keyword">if</span> isfield(handles,<span class="string">'flo'</span>)
+0275         handles=rmfield(handles,<span class="string">'flo'</span>);
+0276     <span class="keyword">end</span>
+0277     handles.ProcessType=<span class="string">'TimeSynchronousManual'</span>;
+0278     set(handles.SaveButton,<span class="string">'String'</span>,<span class="string">'Save and Next'</span>)
+0279     handles=<a href="#_sub15" class="code" title="subfunction handles = UpdateFreqPlots(handles)">UpdateFreqPlots</a>(handles);
+0280     set(handles.PlotChannelsListbox,<span class="string">'Visible'</span>,<span class="string">'on'</span>)
+0281     set(handles.UseImpactsListbox,<span class="string">'Visible'</span>,<span class="string">'on'</span>)
+0282     set(handles.CurrentFilePopup,<span class="string">'Visible'</span>,<span class="string">'on'</span>)
+0283 <span class="keyword">elseif</span> n == 3 <span class="comment">% Best two optimization mode</span>
+0284     figure(handles.h2)
+0285     subplot(4,1,[1 2])
+0286     title(<span class="string">'Select lower and upper frequency range for optimization!'</span>)
+0287     h=helpdlg(<span class="string">'Choose upper and lower frequencies in the FRF/Coherence plot! Then select OK!'</span>);
+0288     figure(handles.h2)
+0289     [xx,dum]=ginput(2);
+0290     waitfor(h)
+0291     handles.flo=xx(1);
+0292     handles.fhi=xx(2);
+0293     handles.ProcessType=<span class="string">'BestTwo'</span>;
+0294     set(handles.SaveButton,<span class="string">'String'</span>,<span class="string">'Process All'</span>)
+0295     set(handles.PlotChannelsListbox,<span class="string">'Visible'</span>,<span class="string">'off'</span>)
+0296     set(handles.UseImpactsListbox,<span class="string">'Visible'</span>,<span class="string">'off'</span>)
+0297     set(handles.CurrentFilePopup,<span class="string">'Visible'</span>,<span class="string">'off'</span>)
+0298 <span class="keyword">end</span>
+0299 guidata(hObject,handles)
+0300 
+0301 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0302 <a name="_sub5" href="#_subfunctions" class="code">function ProcessModePopup_CreateFcn(hObject, eventdata, handles)</a>
+0303 <span class="comment">% hObject    handle to ProcessModePopup (see GCBO)</span>
+0304 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0305 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0306 
+0307 <span class="comment">% Hint: popupmenu controls usually have a white background on Windows.</span>
+0308 <span class="comment">%       See ISPC and COMPUTER.</span>
+0309 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0310     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0311 <span class="keyword">end</span>
+0312 
+0313 
+0314 <span class="comment">% --- Executes on selection change in PlotChannelsListbox.</span>
+0315 <a name="_sub6" href="#_subfunctions" class="code">function PlotChannelsListbox_Callback(hObject, eventdata, handles)</a>
+0316 <span class="comment">% hObject    handle to PlotChannelsListbox (see GCBO)</span>
+0317 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0318 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0319 
+0320 <span class="comment">% Hints: contents = cellstr(get(hObject,'String')) returns PlotChannelsListbox contents as cell array</span>
+0321 <span class="comment">%        contents{get(hObject,'Value')} returns selected item from PlotChannelsListbox</span>
+0322 n=get(hObject,<span class="string">'Value'</span>);
+0323 <span class="keyword">if</span> isempty(n) |  n == 1
+0324     n=handles.UseChannels;
+0325     set(hObject,<span class="string">'Value'</span>,n);
+0326 <span class="keyword">else</span>
+0327     handles.UseChannels=n;
+0328 <span class="keyword">end</span>
+0329 <a href="#_sub13" class="code" title="subfunction UpdateTimePlots(handles)">UpdateTimePlots</a>(handles);
+0330 handles=<a href="#_sub15" class="code" title="subfunction handles = UpdateFreqPlots(handles)">UpdateFreqPlots</a>(handles);
+0331 guidata(hObject,handles);
+0332 
+0333 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0334 <a name="_sub7" href="#_subfunctions" class="code">function PlotChannelsListbox_CreateFcn(hObject, eventdata, handles)</a>
+0335 <span class="comment">% hObject    handle to PlotChannelsListbox (see GCBO)</span>
+0336 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0337 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0338 
+0339 <span class="comment">% Hint: listbox controls usually have a white background on Windows.</span>
+0340 <span class="comment">%       See ISPC and COMPUTER.</span>
+0341 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0342     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0343 <span class="keyword">end</span>
+0344 
+0345 
+0346 <span class="comment">% --- Executes on selection change in UseImpactsListbox.</span>
+0347 <a name="_sub8" href="#_subfunctions" class="code">function UseImpactsListbox_Callback(hObject, eventdata, handles)</a>
+0348 <span class="comment">% hObject    handle to UseImpactsListbox (see GCBO)</span>
+0349 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0350 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0351 
+0352 <span class="comment">% Hints: contents = cellstr(get(hObject,'String')) returns UseImpactsListbox contents as cell array</span>
+0353 <span class="comment">%        contents{get(hObject,'Value')} returns selected item from UseImpactsListbox</span>
+0354 n=get(hObject,<span class="string">'Value'</span>);
+0355 <span class="keyword">if</span> isempty(n)
+0356     questdlg(<span class="string">'You must use at least one impact!'</span>,<span class="string">'OK'</span>);
+0357 <span class="keyword">else</span>
+0358     handles.UseImpacts=n;
+0359 <span class="keyword">end</span>
+0360 set(handles.UseImpactsListbox,<span class="string">'Value'</span>,handles.UseImpacts);
+0361 <a href="#_sub13" class="code" title="subfunction UpdateTimePlots(handles)">UpdateTimePlots</a>(handles);
+0362 handles=<a href="#_sub15" class="code" title="subfunction handles = UpdateFreqPlots(handles)">UpdateFreqPlots</a>(handles);
+0363 guidata(hObject,handles)
+0364 
+0365 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0366 <a name="_sub9" href="#_subfunctions" class="code">function UseImpactsListbox_CreateFcn(hObject, eventdata, handles)</a>
+0367 <span class="comment">% hObject    handle to UseImpactsListbox (see GCBO)</span>
+0368 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0369 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0370 
+0371 <span class="comment">% Hint: listbox controls usually have a white background on Windows.</span>
+0372 <span class="comment">%       See ISPC and COMPUTER.</span>
+0373 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0374     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0375 <span class="keyword">end</span>
+0376 
+0377 
+0378 <span class="comment">% --- Executes on selection change in CurrentFilePopup.</span>
+0379 <a name="_sub10" href="#_subfunctions" class="code">function CurrentFilePopup_Callback(hObject, eventdata, handles)</a>
+0380 <span class="comment">% hObject    handle to CurrentFilePopup (see GCBO)</span>
+0381 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0382 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0383 
+0384 <span class="comment">% Hints: contents = cellstr(get(hObject,'String')) returns CurrentFilePopup contents as cell array</span>
+0385 <span class="comment">%        contents{get(hObject,'Value')} returns selected item from CurrentFilePopup</span>
+0386 contents=cellstr(get(hObject,<span class="string">'String'</span>));
+0387 FileName=contents{get(hObject,<span class="string">'Value'</span>)};
+0388 FileName=fullfile(handles.ImpactGui.InputDirectory,FileName);
+0389 handles.CurrentFile=FileName;
+0390 load(FileName,<span class="string">'-mat'</span>);
+0391     <span class="comment">% Check if impacts are negative, then &quot;flip&quot; positive</span>
+0392     handles.x=cell2mat(Data(1));
+0393     [M,I]=max(abs(handles.x));
+0394     <span class="keyword">if</span> handles.x(I) &lt; 0
+0395         handles.x=-handles.x;
+0396         Dir=dir2nbr(Header(1).Dir);
+0397         Header.Dir=nbr2dir(-Dir);
+0398     <span class="keyword">end</span>
+0399 handles.x=cell2mat(Data(1));
+0400 handles.y=cell2mat(Data(2:end));
+0401 handles.Header=Header;
+0402 [handles.TrigIdx,handles.DIdx,handles.AIdx]=<a href="GuiImptrig.html" class="code" title="function [TrigIdx, DIdx, AIdx] = GuiImpTrig(x,N,TrigPerc,PreTrigger)">GuiImptrig</a>(handles.x,handles.N,<span class="keyword">...</span>
+0403     handles.ImpactGui.TrigLevel,handles.ImpactGui.Pretrigger);
+0404 handles.UseImpacts=[1:length(handles.TrigIdx)];
+0405 set(handles.UseImpactsListbox,<span class="string">'String'</span>,{handles.UseImpacts'});
+0406 set(handles.UseImpactsListbox,<span class="string">'Value'</span>,handles.UseImpacts);
+0407 <a href="#_sub13" class="code" title="subfunction UpdateTimePlots(handles)">UpdateTimePlots</a>(handles);
+0408 handles=<a href="#_sub15" class="code" title="subfunction handles = UpdateFreqPlots(handles)">UpdateFreqPlots</a>(handles);
+0409 guidata(hObject,handles)
+0410 
+0411 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0412 <a name="_sub11" href="#_subfunctions" class="code">function CurrentFilePopup_CreateFcn(hObject, eventdata, handles)</a>
+0413 <span class="comment">% hObject    handle to CurrentFilePopup (see GCBO)</span>
+0414 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0415 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0416 
+0417 <span class="comment">% Hint: popupmenu controls usually have a white background on Windows.</span>
+0418 <span class="comment">%       See ISPC and COMPUTER.</span>
+0419 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0420     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0421 <span class="keyword">end</span>
+0422 
+0423 
+0424 <span class="comment">% --- Executes when user attempts to close figure1.</span>
+0425 <a name="_sub12" href="#_subfunctions" class="code">function figure1_CloseRequestFcn(hObject, eventdata, handles)</a>
+0426 <span class="comment">% hObject    handle to figure1 (see GCBO)</span>
+0427 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0428 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0429 
+0430 <span class="comment">% Hint: delete(hObject) closes the figure</span>
+0431 <span class="keyword">if</span> isfield(handles,<span class="string">'h1'</span>) &amp; ishghandle(handles.h1)
+0432     close(handles.h1)
+0433 <span class="keyword">end</span>
+0434 <span class="keyword">if</span> isfield(handles,<span class="string">'h2'</span>) &amp; ishghandle(handles.h2)
+0435     close(handles.h2)
+0436 <span class="keyword">end</span>
+0437 varargout{1} = <span class="string">''</span>;
+0438 delete(hObject);
+0439 
+0440 <span class="comment">%=====================================================================</span>
+0441 <span class="comment">% User defined functions</span>
+0442 <span class="comment">%=====================================================================</span>
+0443 
+0444 <a name="_sub13" href="#_subfunctions" class="code">function UpdateTimePlots(handles)</a>
+0445 <span class="comment">% Update the time plots of force and acceleration(s)</span>
+0446 <span class="comment">% Plot first layer</span>
+0447 figure(handles.h1);
+0448 subplot(2,1,1)
+0449 t=makexaxis(handles.x,1/handles.fs);
+0450 plot(t,handles.x)
+0451 ylabel(<span class="string">'Force'</span>,<span class="string">'FontSize'</span>,8)
+0452 set(gca,<span class="string">'FontSize'</span>,8)
+0453 axis tight
+0454 hold on
+0455 <span class="comment">% Put text with trigger number next to each impact.</span>
+0456 Ax=axis;
+0457 ylevel=0.9*Ax(4);              <span class="comment">% text y level</span>
+0458 <span class="keyword">for</span> n = 1:length(handles.AIdx)
+0459     text(t(handles.AIdx(n)),ylevel,int2str(n),<span class="string">'FontSize'</span>,7);
+0460 <span class="keyword">end</span>
+0461 <span class="comment">% Overlay with all triggered blocks in green</span>
+0462 N=handles.ImpactGui.BlocksizeNumbers(handles.ImpactGui.BlocksizeNumber);
+0463 TrigIdx=handles.TrigIdx(handles.UseImpacts);
+0464 <span class="keyword">for</span> n=1:length(TrigIdx)
+0465     idx=TrigIdx(n):TrigIdx(n)+N-1;
+0466     plot(t(idx),handles.x(idx),<span class="string">'g'</span>)
+0467 <span class="keyword">end</span>
+0468 <span class="keyword">if</span> handles.DIdx ~= 0
+0469     <span class="keyword">for</span> n=1:length(handles.DIdx)
+0470         idx=handles.TrigIdx(handles.DIdx(n)):handles.TrigIdx(handles.DIdx(n))+N-1;
+0471         plot(t(idx),handles.x(idx),<span class="string">'r'</span>)
+0472     <span class="keyword">end</span>
+0473 <span class="keyword">end</span>
+0474 hold off
+0475 <span class="comment">% Plot response(s)</span>
+0476 subplot(2,1,2)
+0477 plot(t,handles.y(:,handles.UseChannels-1),<span class="string">'b'</span>)
+0478 ylabel(<span class="string">'Response(s)'</span>,<span class="string">'FontSize'</span>,8)
+0479 xlabel(<span class="string">'Time [s]'</span>,<span class="string">'FontSize'</span>,8)
+0480 axis tight
+0481 set(gca,<span class="string">'FontSize'</span>,8)
+0482 hold on
+0483 <span class="keyword">for</span> n=1:length(TrigIdx)
+0484     idx=TrigIdx(n):TrigIdx(n)+N-1;
+0485     plot(t(idx),handles.y(idx,handles.UseChannels-1),<span class="string">'g'</span>)
+0486 <span class="keyword">end</span>
+0487 <span class="keyword">if</span> handles.DIdx ~= 0
+0488     <span class="keyword">for</span> n=1:length(handles.DIdx)
+0489         idx=handles.TrigIdx(handles.DIdx(n)):handles.TrigIdx(handles.DIdx(n))+N-1;
+0490         plot(t(idx),handles.y(idx,handles.UseChannels-1),<span class="string">'r'</span>)
+0491     <span class="keyword">end</span>
+0492 <span class="keyword">end</span>
+0493 hold off
+0494 
+0495 <a name="_sub14" href="#_subfunctions" class="code">function FillUseFilesPopoup(handles)</a>
+0496 <span class="comment">% After an update in the input files settings, the popup menu with all</span>
+0497 <span class="comment">% imptime files in the current input directory with Prefix and StartNo,</span>
+0498 <span class="comment">% LastNo needs to be filled. If no files found, that is written to the</span>
+0499 <span class="comment">% popup menu</span>
+0500 <span class="comment">% Fill popup menu for imptime files in input directory</span>
+0501 <span class="comment">% Filelist=handles.ImpactGui.InputFileList);</span>
+0502 <span class="comment">% FileList={};</span>
+0503 <span class="comment">% for n = handles.ImpactGui.InputStartNo:handles.ImpactGui.InputLastNo</span>
+0504 <span class="comment">%     FileName=strcat(FilePrefix,int2str(n),'.imptime');</span>
+0505 <span class="comment">%     if exist(FileName,'file') == 2</span>
+0506 <span class="comment">%         FileList=[FileList; strcat(handles.ImpactGui.InputPrefix,int2str(n))];</span>
+0507 <span class="comment">%     end</span>
+0508 <span class="comment">% end</span>
+0509 <span class="keyword">if</span> length(handles.ImpactGui.InputFileList) == 1
+0510     FileList={<span class="string">'No Files!'</span>};
+0511     set(handles.CurrentFilePopup,<span class="string">'Value'</span>,1);
+0512 <span class="keyword">end</span>
+0513 set(handles.CurrentFilePopup,<span class="string">'String'</span>,handles.ImpactGui.InputFileList)
+0514 
+0515 
+0516 
+0517 <a name="_sub15" href="#_subfunctions" class="code">function handles = UpdateFreqPlots(handles)</a>
+0518 <span class="comment">% Update the Frequency domain plots</span>
+0519 
+0520 <span class="comment">% Compute FRF(s) etc.</span>
+0521 <span class="keyword">if</span> ~isfield(handles,<span class="string">'flo'</span>)  <span class="comment">% Manual methods</span>
+0522     [handles.H,handles.f, handles.C, handles.Tff] = <a href="Imp2FrfGui.html" class="code" title="function [H,f,C,Tff, ImpactNos] = Imp2FrfGui(x,y,fs,N,TrigIdx,DIdx,FWinLength,ExpWinPar,Type,flo,fhi)">Imp2FrfGui</a>(handles.x,<span class="keyword">...</span>
+0523         handles.y,handles.fs,handles.N,handles.TrigIdx(handles.UseImpacts),<span class="keyword">...</span>
+0524         handles.DIdx,handles.ImpactGui.ForceWindowLength,<span class="keyword">...</span>
+0525         handles.ImpactGui.ExpWindowPercent,handles.ProcessType);
+0526 <span class="keyword">else</span>    <span class="comment">% optimization methods</span>
+0527     [handles.H,handles.f, handles.C, handles.Tff, handles.UseImpacts] = <a href="Imp2FrfGui.html" class="code" title="function [H,f,C,Tff, ImpactNos] = Imp2FrfGui(x,y,fs,N,TrigIdx,DIdx,FWinLength,ExpWinPar,Type,flo,fhi)">Imp2FrfGui</a>(handles.x,<span class="keyword">...</span>
+0528         handles.y,handles.fs,handles.N,handles.TrigIdx(handles.UseImpacts),<span class="keyword">...</span>
+0529         handles.DIdx,handles.ImpactGui.ForceWindowLength,<span class="keyword">...</span>
+0530         handles.ImpactGui.ExpWindowPercent,handles.ProcessType,<span class="keyword">...</span>
+0531         handles.flo,handles.fhi);
+0532 <span class="keyword">end</span>
+0533 figure(handles.h2);
+0534 <span class="comment">% Plot FRF, Coherence, and Force Spectrum</span>
+0535 subplot(4,1,[1 2])
+0536 semilogy(handles.f,abs(handles.H(:,handles.UseChannels-1)))
+0537 ylabel(<span class="string">'Mag. FRF'</span>,<span class="string">'FontSize'</span>,8)
+0538 axis tight
+0539 grid
+0540 set(gca,<span class="string">'FontSize'</span>,8)
+0541 subplot(4,1,3)
+0542 <span class="keyword">if</span> isempty(handles.C)
+0543     A=axis;
+0544     plot(0,0)
+0545     axis(A)
+0546     text(0.1*(handles.f(end)-handles.f(1)),0.5,<span class="string">'Coherence undefined'</span>)
+0547 <span class="keyword">elseif</span> handles.C == 0 
+0548     A=axis;
+0549     plot(0,0)
+0550     axis(A)
+0551     text(0.1*(handles.f(end)-handles.f(1)),0.5,<span class="string">'Coherence undefined'</span>)
+0552 <span class="keyword">else</span>
+0553     plot(handles.f,handles.C(:,handles.UseChannels-1))
+0554     ylabel(<span class="string">'Coherence'</span>,<span class="string">'FontSize'</span>,8)
+0555     axis tight
+0556     grid
+0557     ylim([0 1.05])
+0558     set(gca,<span class="string">'FontSize'</span>,8)
+0559 <span class="keyword">end</span>
+0560 subplot(4,1,4)
+0561 semilogy(handles.f,handles.Tff)
+0562 xlabel(<span class="string">'Frequency [Hz]'</span>,<span class="string">'FontSize'</span>,8)
+0563 ylabel(<span class="string">'Force Spectrum'</span>,<span class="string">'FontSize'</span>,8)
+0564 axis tight
+0565 grid
+0566 set(gca,<span class="string">'FontSize'</span>,8)
+0567 
+0568 
+0569 
+0570 <a name="_sub16" href="#_subfunctions" class="code">function handles = SaveFiles(handles)</a>
+0571 <span class="comment">% Save the FRFs, coherences, and force spectrum in handles.H, etc.</span>
+0572 <span class="comment">% Also update handles fields for next file save</span>
+0573 InHeader=handles.Header;
+0574 D=length(handles.y(1,:));
+0575 <span class="keyword">for</span> k=1:D
+0576     Header=InHeader(k+1);
+0577     Header.RefDof=InHeader(1).Dof;
+0578     Header.RefDir=InHeader(1).Dir;
+0579     Header.Unit=strcat(<span class="string">'('</span>,InHeader(k+1).Unit,<span class="string">')/'</span>,InHeader(1).Unit);
+0580     Header.FunctionType=4;
+0581     Header.xIncrement=handles.f(2);
+0582     Header.NoValues=length(handles.H);
+0583     <span class="comment">% Add special fields for impact FRFs</span>
+0584     Header.ExpWinEndPercent=handles.ImpactGui.ExpWindowPercent;
+0585     <span class="keyword">if</span> iscell(handles.UseImpacts)  <span class="comment">% If ProcessMode is automatic</span>
+0586         Header.ImpactNumbers=handles.UseImpacts{k};
+0587     <span class="keyword">else</span>
+0588         Header.ImpactNumbers=handles.UseImpacts;
+0589     <span class="keyword">end</span>
+0590     Header.OrgFileName=handles.CurrentFile;
+0591     Header.ProcessingMode=handles.ProcessType;
+0592     FileName=strcat(handles.ImpactGui.OutputDirectory,<span class="string">'\'</span>,<span class="keyword">...</span>
+0593         handles.ImpactGui.OutputPrefix,<span class="string">'H'</span>,<span class="keyword">...</span>
+0594         int2str(handles.ImpactGui.OutputStartNo));
+0595     Data=handles.H(:,k);
+0596     <span class="keyword">if</span> k == 1
+0597         <span class="comment">% First check if first file already exists, then ask if overwrite</span>
+0598         <span class="keyword">if</span> exist(FileName,<span class="string">'file'</span>) == 2
+0599             status=questdlg(<span class="string">'File exists! Overwrite?'</span>);
+0600         <span class="keyword">else</span>
+0601             status=<span class="string">'YES'</span>;
+0602         <span class="keyword">end</span>
+0603     <span class="keyword">end</span>
+0604     <span class="keyword">if</span> strcmp(upper(status),<span class="string">'YES'</span>)
+0605         <span class="keyword">if</span> k == 1
+0606             fprintf(<span class="string">'Saving files to directory: %s\n'</span>,handles.ImpactGui.OutputDirectory);
+0607         <span class="keyword">end</span>
+0608         fprintf(<span class="string">'Saving file: %s\n'</span>,<span class="keyword">...</span>
+0609             strcat(handles.ImpactGui.OutputPrefix,<span class="string">'H'</span>,<span class="keyword">...</span>
+0610             int2str(handles.ImpactGui.OutputStartNo)));
+0611         save(FileName,<span class="string">'Data'</span>,<span class="string">'Header'</span>)
+0612         Header.Unit=<span class="string">''</span>;
+0613         Header.FunctionType=6;
+0614         FileName=strcat(handles.ImpactGui.OutputDirectory,<span class="string">'\'</span>,<span class="keyword">...</span>
+0615             handles.ImpactGui.OutputPrefix,<span class="string">'C'</span>,<span class="keyword">...</span>
+0616             int2str(handles.ImpactGui.OutputStartNo));
+0617         Data=handles.C(:,k);
+0618         save(FileName,<span class="string">'Data'</span>,<span class="string">'Header'</span>)
+0619         Header.FunctionType=30;
+0620         Header.Unit=strcat(InHeader(1).Unit,<span class="string">'s'</span>);
+0621         Header.Dof=InHeader(1).Dof;
+0622         Header.Dir=InHeader(1).Dir;
+0623         Header=rmfield(Header,<span class="string">'RefDof'</span>);
+0624         Header=rmfield(Header,<span class="string">'RefDir'</span>);
+0625         FileName=strcat(handles.ImpactGui.OutputDirectory,<span class="string">'\'</span>,<span class="keyword">...</span>
+0626             handles.ImpactGui.OutputPrefix,<span class="string">'F'</span>,<span class="keyword">...</span>
+0627             int2str(handles.ImpactGui.OutputStartNo));
+0628         Data=handles.Tff;
+0629         save(FileName,<span class="string">'Data'</span>,<span class="string">'Header'</span>)
+0630         handles.ImpactGui.OutputStartNo=handles.ImpactGui.OutputStartNo+1;
+0631     <span class="keyword">elseif</span> strcmp(upper(status),<span class="string">'NO'</span>)
+0632         <a href="ImpactContDlg.html" class="code" title="function varargout = ImpactContDlg(varargin)">ImpactContDlg</a>(<span class="string">'Title'</span>,<span class="string">'Go back to Main GUI and change output directory'</span>)
+0633     <span class="keyword">end</span>
+0634 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

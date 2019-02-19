@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of timediff</title>
+  <meta name="keywords" content="timediff">
+  <meta name="description" content="TIMEDIFF Differentiate time signal">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; timediff.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>timediff
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>TIMEDIFF Differentiate time signal</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function y = timediff(x,fs,Type); </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> TIMEDIFF Differentiate time signal 
+
+       y = timediff(x,fs,Type);
+
+       y       Time derivative of x
+
+       x       Input time signal, in columns if more than one channel
+       fs      Sampling frequency
+       Type    'Remez' (default and best), or 'MaxFlat' (faster)
+
+ For Type='Remez' , an oversampling factor of 2.5 is sufficient. 
+ For Type='MaxFlat' you should use at least 10 times oversampling.
+
+ Note that both types of differentiation implemented by this command
+ introduce different amounts of time delay. The samples before the delay 
+ is reached are thrown away, so that the first sample in y is synchronous 
+ with the first sample in x, which is suitable for input/output analysis 
+ etc. This, however, means that the length of y is not equal to the length 
+ of x! You should throw away the LAST samples of x if you want the data 
+ to be same length and x synchronous with y.
+
+ NOTE! For both methods, it is highly recommended that you throw away an
+ additional 20 samples from the beginning of all your signals after 
+ differentiation, as the diff. filters have some transient behavior!
+
+ See inside timediff.m for more information on the different methods.
+
+ See also <a href="timeint.html" class="code" title="function y = timeint(x,fs,Type,Par);">TIMEINT</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="checksw.html" class="code" title="function sw = checksw">checksw</a>	CHECKSW  Check if running MATLAB or GNU/Octave</li><li><a href="mfdfilt.html" class="code" title="function [B,A] = mfdfilt(N)">mfdfilt</a>	MFDFILT    Calculate filter coefficients for a maximum flat differentiator</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="timefresp.html" class="code" title="function  [y,H,f] = timefresp(varargin);">timefresp</a>	TIMEFRESP     Time domain forced response</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function y = timediff(x,fs,Type);</a>
+0002 <span class="comment">% TIMEDIFF Differentiate time signal</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%       y = timediff(x,fs,Type);</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%       y       Time derivative of x</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%       x       Input time signal, in columns if more than one channel</span>
+0009 <span class="comment">%       fs      Sampling frequency</span>
+0010 <span class="comment">%       Type    'Remez' (default and best), or 'MaxFlat' (faster)</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">% For Type='Remez' , an oversampling factor of 2.5 is sufficient.</span>
+0013 <span class="comment">% For Type='MaxFlat' you should use at least 10 times oversampling.</span>
+0014 <span class="comment">%</span>
+0015 <span class="comment">% Note that both types of differentiation implemented by this command</span>
+0016 <span class="comment">% introduce different amounts of time delay. The samples before the delay</span>
+0017 <span class="comment">% is reached are thrown away, so that the first sample in y is synchronous</span>
+0018 <span class="comment">% with the first sample in x, which is suitable for input/output analysis</span>
+0019 <span class="comment">% etc. This, however, means that the length of y is not equal to the length</span>
+0020 <span class="comment">% of x! You should throw away the LAST samples of x if you want the data</span>
+0021 <span class="comment">% to be same length and x synchronous with y.</span>
+0022 <span class="comment">%</span>
+0023 <span class="comment">% NOTE! For both methods, it is highly recommended that you throw away an</span>
+0024 <span class="comment">% additional 20 samples from the beginning of all your signals after</span>
+0025 <span class="comment">% differentiation, as the diff. filters have some transient behavior!</span>
+0026 <span class="comment">%</span>
+0027 <span class="comment">% See inside timediff.m for more information on the different methods.</span>
+0028 <span class="comment">%</span>
+0029 <span class="comment">% See also TIMEINT</span>
+0030 
+0031 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0032 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0033 <span class="comment">% Version: 1.0 2011-06-23</span>
+0034 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0035 
+0036 <span class="comment">%</span>
+0037 <span class="comment">% The 'Remez' method is using an optimal FIR filter design with a complex</span>
+0038 <span class="comment">% relative error of &lt; -120 dB up to fs/2.5.</span>
+0039 <span class="comment">% The filter produces an integer filter delay (of 20 samples). Odd order</span>
+0040 <span class="comment">% filters perform better, but have a fractional delay, which is not suitable</span>
+0041 <span class="comment">% if analysis of unfiltered and filtered data are to be used, as for</span>
+0042 <span class="comment">% example in input/output analysis.</span>
+0043 <span class="comment">%</span>
+0044 <span class="comment">% The 'maxflat' method uses a 6-order maximum flat FIR filter with a</span>
+0045 <span class="comment">% recursive algorithm from reference</span>
+0046 <span class="comment">% Lebihan, J. &quot;Maximally Linear Fir Digital Differentiators,&quot; Circuits</span>
+0047 <span class="comment">% Systems And Signal Processing, 1995, 14, 633-637.</span>
+0048 
+0049 Type=upper(Type);
+0050 
+0051 <span class="comment">% Check parameters</span>
+0052 <span class="keyword">if</span> nargin == 2
+0053     Type=<span class="string">'FIR'</span>;
+0054     N=40;
+0055 <span class="keyword">elseif</span> nargin == 3
+0056     <span class="keyword">if</span> strcmp(Type,<span class="string">'MAXFLAT'</span>)
+0057         N=6;                           <span class="comment">% Change to 2 or 4 for faster but less</span>
+0058                                          <span class="comment">% accurate differentiation</span>
+0059     <span class="keyword">elseif</span> strcmp(Type,<span class="string">'REMEZ'</span>)
+0060         N=40;                          <span class="comment">% Order (length-1) of FIR filter</span>
+0061         <span class="keyword">if</span> strcmp(<a href="checksw.html" class="code" title="function sw = checksw">checksw</a>,<span class="string">'OCTAVE'</span>)
+0062             error(<span class="string">'Remez type does not work in Octave!, choose Maxflat!'</span>);
+0063 
+0064         <span class="keyword">end</span>
+0065     <span class="keyword">else</span>
+0066         fprintf(<span class="string">'Wrong parameter ''Type'', se help'</span>)
+0067         <span class="keyword">return</span>;
+0068     <span class="keyword">end</span>
+0069 <span class="keyword">end</span>
+0070 
+0071 [n,m]=size(x);
+0072 <span class="keyword">for</span> k = 1:m
+0073     x(:,k)=x(:,k)-mean(x(:,k));
+0074 <span class="keyword">end</span>
+0075 
+0076 <span class="comment">% Process each case separately</span>
+0077 <span class="keyword">if</span> strcmp(upper(Type),<span class="string">'MAXFLAT'</span>)
+0078     <span class="comment">% Create simple differentiation filter</span>
+0079     [B,A]=<a href="mfdfilt.html" class="code" title="function [B,A] = mfdfilt(N)">mfdfilt</a>(N);
+0080     y=zeros(n,m);
+0081     <span class="keyword">for</span> k = 1:m
+0082         y(:,k)=fs*filter(B,A,x(:,k));
+0083     <span class="keyword">end</span>
+0084     y=y(N+1:<span class="keyword">end</span>,:);             <span class="comment">% Filter has N samples delay</span>
+0085 <span class="keyword">elseif</span> strcmp(upper(Type),<span class="string">'REMEZ'</span>)
+0086     <span class="keyword">if</span> strcmp(<a href="checksw.html" class="code" title="function sw = checksw">checksw</a>,<span class="string">'MATLAB'</span>)
+0087         B=fs*firpm(N,[0 0.8],[0 0.8*pi],<span class="string">'differentiator'</span>);
+0088     <span class="keyword">elseif</span> strcmp(<a href="checksw.html" class="code" title="function sw = checksw">checksw</a>,<span class="string">'OCTAVE'</span>)
+0089         B=fs*remez(N,[0 0.8],[0 0.8]*pi,<span class="string">'differentiator'</span>,4*1024);
+0090     <span class="keyword">end</span>        
+0091     y=zeros(n,m);
+0092     <span class="keyword">for</span> k = 1:m
+0093         y(:,k)=filter(B,1,x(:,k));
+0094     <span class="keyword">end</span>
+0095     y=y(N/2+1:<span class="keyword">end</span>,:);           <span class="comment">% Filter has N/2 samples delay</span>
+0096 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

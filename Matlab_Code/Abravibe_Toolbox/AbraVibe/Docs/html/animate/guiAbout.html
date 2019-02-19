@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of guiAbout</title>
+  <meta name="keywords" content="guiAbout">
+  <meta name="description" content="">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">animate</a> &gt; guiAbout.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for animate&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>guiAbout
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong></strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function h0=guiAbout(aniFig,SETUP); </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>	</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function h0=guiAbout(aniFig,SETUP);</a>
+0002 
+0003 bcolor=[1 1 1]*0.8;
+0004 pos = [250 100];
+0005 POS = get(aniFig,<span class="string">'Position'</span>);
+0006 h0=figure(<span class="string">'Color'</span>           ,bcolor, <span class="keyword">...</span>
+0007    <span class="string">'MenuBar'</span>                ,<span class="string">'none'</span>, <span class="keyword">...</span>
+0008    <span class="string">'NumberTitle'</span>            ,<span class="string">'off'</span>, <span class="keyword">...</span>
+0009    <span class="string">'Name'</span>                   ,<span class="string">'About'</span>, <span class="keyword">...</span>
+0010    <span class="string">'Position'</span>               ,[POS(1)+(POS(3)-pos(1))/2 POS(2)+(POS(4)-pos(2))/2 pos(1) pos(2)], <span class="keyword">...</span>
+0011    <span class="string">'Resize'</span>                 ,<span class="string">'off'</span>,<span class="keyword">...</span>
+0012    <span class="string">'Tag'</span>                    ,<span class="string">'ANIMATE:ABOUT'</span>,<span class="keyword">...</span>
+0013    <span class="string">'CloseRequestFcn'</span>        ,[<span class="string">'command(''close'',''about'');'</span>]);
+0014 
+0015 <span class="comment">%icon    = imread(fullfile(SETUP.Path.Root,'ani.icon.bmp'));</span>
+0016 
+0017 <span class="comment">% Text Pic</span>
+0018 <span class="comment">%h2=uicontrol('Parent',h0,...</span>
+0019 <span class="comment">%   'Units'                  , 'pixels',...</span>
+0020 <span class="comment">%   'Style'                  , 'toggle',...</span>
+0021 <span class="comment">%   'Position'               , [10 20 size(icon,2) size(icon,1)],...</span>
+0022 <span class="comment">%   'CData'                  , icon);</span>
+0023 <span class="comment">% Text Info</span>
+0024 str = sprintf(<span class="string">'Modal Vector Animation\nver. %s\n\nDan Lazor : UC-SDRL\n%s'</span>,SETUP.Version.Nr,SETUP.Version.Date);
+0025 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0026    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0027    <span class="string">'Style'</span>                  , <span class="string">'Text'</span>,<span class="keyword">...</span>
+0028    <span class="string">'Position'</span>               , [10 10 230 80],<span class="keyword">...</span>
+0029    <span class="string">'HorizontalAlignment'</span>    , <span class="string">'center'</span>,<span class="keyword">...</span>
+0030    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*0.8,<span class="keyword">...</span>
+0031    <span class="string">'String'</span>                 , str);</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

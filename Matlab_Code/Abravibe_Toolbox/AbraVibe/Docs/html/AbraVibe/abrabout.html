@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of abrabout</title>
+  <meta name="keywords" content="abrabout">
+  <meta name="description" content="ABRABOUT Type abrabout to print some information on screen">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; abrabout.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>abrabout
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>ABRABOUT Type abrabout to print some information on screen</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>This is a script file. </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> ABRABOUT Type abrabout to print some information on screen
+
+ The ABRAVIBE toolbox is an accompanying toolbox which can and should be 
+ used together with the book
+ Brandt, Anders: &quot;Noise and Vibration Analysis: Signal Analysis and
+ Experimental Procedures,&quot; Wiley 2011. ISBN: 13-978-0-470-74644-8.
+--------------------------------------------------------------------------
+ 
+ The toolbox and all its source code is FREE SOFTWARE as defined in
+ the GNU GPL license. This particularly means that you are free to use
+ this software without any charge at all, with some specific limitations 
+ that are laid out in the license file. This file (abrabout.m) tries to
+ put some basic ideas in the GNU GPL license in simpler terms, but it IS 
+ the GNU GPL license file that applies!
+
+ For example, YOU MAY NOT:
+ (not limited to this, see license for details):
+ 1. Use any part of this code in ANY software which is NOT UNDER GNU GPL.
+ 2. Remove the copyright notice etc. in any file.
+ 
+ However, YOU MAY 
+ 1. USE the code as it is, for commercial or noncommercial purposes, 
+ on as many computers as you please.
+ 2. CHANGE the code, as long as you do not remove the copyright
+ notice, and as long as you keep information about where the code 
+ originates from, and as long as you clearly document your changes.
+ 3. REDISTRIBUTE the software, modified or not, as long as the license 
+ file and this abrabout.m file are kept unchanged, and (thus) as long as 
+ the new software (if modified) is also published under GNU GPL.
+
+--------------------------------------------------------------------------
+
+ I publish this software in an educational spirit, to show how things
+ can be done and to aid a general understanding of noise and vibration 
+ analysis. Things in the code may not necessarily always be done in the 
+ best possible way, so feel free to improve it! It is my sincere hope that
+ you (whoever you are) will find use of this, and that you will learn
+ something about the fun world of NVA!
+--------------------------------------------------------------------------
+
+ I can of course not resume any responsibility for your use of this code
+ and I cannot promise to respond if you have any difficulties. But I will
+ try my best.
+ 
+ Particularly, you should know from the license file, that
+ &quot;...THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM &quot;AS IS&quot; 
+ WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT 
+ NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR 
+ A PARTICULAR PURPOSE.  THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE 
+ OF THE PROGRAM IS WITH YOU.  SHOULD THE PROGRAM PROVE DEFECTIVE, YOU 
+ ASSUME THE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION.&quot;
+--------------------------------------------------------------------------
+
+ To keep this code at a high quality level, there is a directory 'abratest'
+ under the abravibe directory (or where you put the m-files). In this
+ directory you can run a script called abracheck which checks major files
+ in the toolbox for consistency etc. See inside that file for more details.
+
+ If you find bugs in the code, I appreciate you letting me know.
+--------------------------------------------------------------------------
+ Copyright 2009-2012 Anders Brandt.
+--------------------------------------------------------------------------</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="abrabout.html" class="code" title="">abrabout</a>	ABRABOUT Type abrabout to print some information on screen</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="abrabout.html" class="code" title="">abrabout</a>	ABRABOUT Type abrabout to print some information on screen</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <span class="comment">% ABRABOUT Type abrabout to print some information on screen</span>
+0002 <span class="comment">%</span>
+0003 <span class="comment">% The ABRAVIBE toolbox is an accompanying toolbox which can and should be</span>
+0004 <span class="comment">% used together with the book</span>
+0005 <span class="comment">% Brandt, Anders: &quot;Noise and Vibration Analysis: Signal Analysis and</span>
+0006 <span class="comment">% Experimental Procedures,&quot; Wiley 2011. ISBN: 13-978-0-470-74644-8.</span>
+0007 <span class="comment">%--------------------------------------------------------------------------</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">% The toolbox and all its source code is FREE SOFTWARE as defined in</span>
+0010 <span class="comment">% the GNU GPL license. This particularly means that you are free to use</span>
+0011 <span class="comment">% this software without any charge at all, with some specific limitations</span>
+0012 <span class="comment">% that are laid out in the license file. This file (abrabout.m) tries to</span>
+0013 <span class="comment">% put some basic ideas in the GNU GPL license in simpler terms, but it IS</span>
+0014 <span class="comment">% the GNU GPL license file that applies!</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">% For example, YOU MAY NOT:</span>
+0017 <span class="comment">% (not limited to this, see license for details):</span>
+0018 <span class="comment">% 1. Use any part of this code in ANY software which is NOT UNDER GNU GPL.</span>
+0019 <span class="comment">% 2. Remove the copyright notice etc. in any file.</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">% However, YOU MAY</span>
+0022 <span class="comment">% 1. USE the code as it is, for commercial or noncommercial purposes,</span>
+0023 <span class="comment">% on as many computers as you please.</span>
+0024 <span class="comment">% 2. CHANGE the code, as long as you do not remove the copyright</span>
+0025 <span class="comment">% notice, and as long as you keep information about where the code</span>
+0026 <span class="comment">% originates from, and as long as you clearly document your changes.</span>
+0027 <span class="comment">% 3. REDISTRIBUTE the software, modified or not, as long as the license</span>
+0028 <span class="comment">% file and this abrabout.m file are kept unchanged, and (thus) as long as</span>
+0029 <span class="comment">% the new software (if modified) is also published under GNU GPL.</span>
+0030 <span class="comment">%</span>
+0031 <span class="comment">%--------------------------------------------------------------------------</span>
+0032 <span class="comment">%</span>
+0033 <span class="comment">% I publish this software in an educational spirit, to show how things</span>
+0034 <span class="comment">% can be done and to aid a general understanding of noise and vibration</span>
+0035 <span class="comment">% analysis. Things in the code may not necessarily always be done in the</span>
+0036 <span class="comment">% best possible way, so feel free to improve it! It is my sincere hope that</span>
+0037 <span class="comment">% you (whoever you are) will find use of this, and that you will learn</span>
+0038 <span class="comment">% something about the fun world of NVA!</span>
+0039 <span class="comment">%--------------------------------------------------------------------------</span>
+0040 <span class="comment">%</span>
+0041 <span class="comment">% I can of course not resume any responsibility for your use of this code</span>
+0042 <span class="comment">% and I cannot promise to respond if you have any difficulties. But I will</span>
+0043 <span class="comment">% try my best.</span>
+0044 <span class="comment">%</span>
+0045 <span class="comment">% Particularly, you should know from the license file, that</span>
+0046 <span class="comment">% &quot;...THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM &quot;AS IS&quot;</span>
+0047 <span class="comment">% WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT</span>
+0048 <span class="comment">% NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR</span>
+0049 <span class="comment">% A PARTICULAR PURPOSE.  THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE</span>
+0050 <span class="comment">% OF THE PROGRAM IS WITH YOU.  SHOULD THE PROGRAM PROVE DEFECTIVE, YOU</span>
+0051 <span class="comment">% ASSUME THE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION.&quot;</span>
+0052 <span class="comment">%--------------------------------------------------------------------------</span>
+0053 <span class="comment">%</span>
+0054 <span class="comment">% To keep this code at a high quality level, there is a directory 'abratest'</span>
+0055 <span class="comment">% under the abravibe directory (or where you put the m-files). In this</span>
+0056 <span class="comment">% directory you can run a script called abracheck which checks major files</span>
+0057 <span class="comment">% in the toolbox for consistency etc. See inside that file for more details.</span>
+0058 <span class="comment">%</span>
+0059 <span class="comment">% If you find bugs in the code, I appreciate you letting me know.</span>
+0060 <span class="comment">%--------------------------------------------------------------------------</span>
+0061 <span class="comment">% Copyright 2009-2012 Anders Brandt.</span>
+0062 <span class="comment">%--------------------------------------------------------------------------</span>
+0063 
+0064 help <a href="abrabout.html" class="code" title="">abrabout</a>
+0065</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

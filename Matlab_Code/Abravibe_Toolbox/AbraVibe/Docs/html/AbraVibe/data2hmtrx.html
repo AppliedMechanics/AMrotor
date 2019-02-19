@@ -1,0 +1,219 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of data2hmtrx</title>
+  <meta name="keywords" content="data2hmtrx">
+  <meta name="description" content="DATA2HMTRX      Import Abravibe FRF data into H matrix">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; data2hmtrx.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>data2hmtrx
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>DATA2HMTRX      Import Abravibe FRF data into H matrix</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [H,f,RespDof,RespDir,RefDof,RefDir,FillMtrx] = data2hmtrx(Prefix,StartNo,StopNo,FuncType) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> DATA2HMTRX      Import Abravibe FRF data into H matrix
+
+       [H,f,RespDof,RespDir,RefDof,RefDir,FillMtrx] = data2hmtrx(Prefix,StartNo,StopNo,FuncType)
+
+       H               FRF matrix, N-by-D-by-R
+       RespDof         Row vector with response dofs in 2nd dim in H
+       RespDir         Numeric direction identifier for RespDof (+/- 1,2,3)
+       RefDof          Row vector with Ref dofs in 3rd dim in H
+       RefDir          Numeric direction identifier for RefDof
+       FillMtrx        D-by-R matrix with ones in positions where H is filled
+
+       Prefix          File prefix for Abravibe files
+       StartNo         File number for first file in series
+       StopNo          File number for last file in series
+       FuncType        Optional vector. Only specified FuncType(s) (numeric) are imported
+
+ The series of file names from StartNo to StopNo does not need to be
+ complete, only existing files are loaded.
+
+ NOTE! If impact data with roving Ref are detected (number of refs &gt;
+ number of responses), H is automatically transposed and RespDof and
+ RefDof are reversed. This means that the code for processing of H
+ matrices for curve fitting etc. do not need to take into account whether
+ the test was a shaker test or an impact test.
+
+ NOTE! For some applications you may need to read both auto and
+ cross-spectra or correlation functions; then specify a vector for
+ FuncType. For example for (correlation based) OMA, specify function
+ types 7 and 8.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="dofdir2n.html" class="code" title="function    nDof = dofdir2n(Dof,Dir)">dofdir2n</a>	DOFDIR2N  Convert dof number and dir string to numeric format</li><li><a href="makexaxis.html" class="code" title="function x = makexaxis(y,dx,x0);">makexaxis</a>	MAKEXAXIS Create a time or frequency x axis</li><li><a href="n2dofdir.html" class="code" title="function    [Dof,nDir] = n2dofdir(nDof)">n2dofdir</a>	N2DOFDIR  Convert dof numeric format to dof number and numeric dir</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [H,f,RespDof,RespDir,RefDof,RefDir,FillMtrx] = data2hmtrx(Prefix,StartNo,StopNo,FuncType)</a>
+0002 <span class="comment">% DATA2HMTRX      Import Abravibe FRF data into H matrix</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%       [H,f,RespDof,RespDir,RefDof,RefDir,FillMtrx] = data2hmtrx(Prefix,StartNo,StopNo,FuncType)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%       H               FRF matrix, N-by-D-by-R</span>
+0007 <span class="comment">%       RespDof         Row vector with response dofs in 2nd dim in H</span>
+0008 <span class="comment">%       RespDir         Numeric direction identifier for RespDof (+/- 1,2,3)</span>
+0009 <span class="comment">%       RefDof          Row vector with Ref dofs in 3rd dim in H</span>
+0010 <span class="comment">%       RefDir          Numeric direction identifier for RefDof</span>
+0011 <span class="comment">%       FillMtrx        D-by-R matrix with ones in positions where H is filled</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%       Prefix          File prefix for Abravibe files</span>
+0014 <span class="comment">%       StartNo         File number for first file in series</span>
+0015 <span class="comment">%       StopNo          File number for last file in series</span>
+0016 <span class="comment">%       FuncType        Optional vector. Only specified FuncType(s) (numeric) are imported</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">% The series of file names from StartNo to StopNo does not need to be</span>
+0019 <span class="comment">% complete, only existing files are loaded.</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">% NOTE! If impact data with roving Ref are detected (number of refs &gt;</span>
+0022 <span class="comment">% number of responses), H is automatically transposed and RespDof and</span>
+0023 <span class="comment">% RefDof are reversed. This means that the code for processing of H</span>
+0024 <span class="comment">% matrices for curve fitting etc. do not need to take into account whether</span>
+0025 <span class="comment">% the test was a shaker test or an impact test.</span>
+0026 <span class="comment">%</span>
+0027 <span class="comment">% NOTE! For some applications you may need to read both auto and</span>
+0028 <span class="comment">% cross-spectra or correlation functions; then specify a vector for</span>
+0029 <span class="comment">% FuncType. For example for (correlation based) OMA, specify function</span>
+0030 <span class="comment">% types 7 and 8.</span>
+0031 
+0032 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0033 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0034 <span class="comment">% Version: 1.0 2011-06-23</span>
+0035 <span class="comment">%          1.1 2012-04-23 Added functionality for filtering single function</span>
+0036 <span class="comment">%                         type, and to ignore non-Abravibe files</span>
+0037 <span class="comment">%          1.2 2013-11-28 Fixed sorting also if negative directions measured</span>
+0038 <span class="comment">%          1.3 2015-12-06 Added functionality for several function types</span>
+0039 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0040 
+0041 Count=1;
+0042 h=waitbar(0,<span class="string">'Importing functions'</span>);
+0043 <span class="keyword">for</span> n=StartNo:StopNo
+0044     waitbar(n/(StopNo-StartNo),h)
+0045     FileName=strcat(Prefix,int2str(n));
+0046     <span class="keyword">if</span> exist(strcat(FileName,<span class="string">'.mat'</span>),<span class="string">'file'</span>) == 2
+0047         <span class="comment">% Check if file is an abravibe file, i.e. it contains a variable</span>
+0048         <span class="comment">% &quot;Header&quot;</span>
+0049         s=whos(<span class="string">'-file'</span>,FileName,<span class="string">'Header'</span>);
+0050         <span class="keyword">if</span> isempty(s)
+0051             <span class="comment">% ignore file, it is not an abravibe file</span>
+0052         <span class="keyword">else</span>
+0053             <span class="comment">% Check if FuncType is specified, if so only read file if</span>
+0054             <span class="comment">% correponding header type</span>
+0055             LoadFile=false;
+0056             <span class="keyword">if</span> exist(<span class="string">'FuncType'</span>,<span class="string">'var'</span>)
+0057                 load(FileName,<span class="string">'Header'</span>)
+0058                 <span class="keyword">if</span> ismember(Header.FunctionType,FuncType)
+0059                     LoadFile=true;
+0060                 <span class="keyword">end</span>
+0061             <span class="keyword">else</span>
+0062                 LoadFile=true;      <span class="comment">% FuncType is not specified, so read regardless of what it is</span>
+0063             <span class="keyword">end</span>
+0064             <span class="keyword">if</span> LoadFile
+0065 <span class="comment">%                 fprintf('loading %s...\n',FileName)</span>
+0066                 load(FileName)
+0067                 RespDof(Count)=Header.Dof;
+0068                 RespDir{Count}=Header.Dir;
+0069                 <span class="keyword">if</span> isfield(Header,<span class="string">'RefDof'</span>)
+0070                     RefDof(Count)=Header.RefDof;
+0071                     RefDir{Count}=Header.RefDir;
+0072                 <span class="keyword">elseif</span> isfield(Header,<span class="string">'ForceDof'</span>)
+0073                     RefDof(Count)=Header.ForceDof;
+0074                     RefDir{Count}=Header.ForceDir;
+0075                 <span class="keyword">end</span>
+0076                 Htemp(:,Count)=Data;
+0077                 Count=Count+1;
+0078             <span class="keyword">end</span>
+0079         <span class="keyword">end</span>
+0080     <span class="keyword">end</span>
+0081 <span class="keyword">end</span>
+0082 close(h)
+0083 
+0084 <span class="comment">% Check that at least some file was found, else quit</span>
+0085 <span class="keyword">if</span> Count == 1
+0086     error(<span class="string">'No file was found!'</span>)
+0087 <span class="keyword">end</span>
+0088 
+0089 <span class="comment">% Combine Dof and Dir info into unique numbers by adding a digit at end of</span>
+0090 <span class="comment">% Dof info.</span>
+0091 <span class="comment">% The direction number is +/-1 to +/- 3, so we use last (least significant)</span>
+0092 <span class="comment">% integer plus the sign to indicate direction</span>
+0093 Rdd=<a href="dofdir2n.html" class="code" title="function    nDof = dofdir2n(Dof,Dir)">dofdir2n</a>(RespDof,RespDir);
+0094 Fdd=<a href="dofdir2n.html" class="code" title="function    nDof = dofdir2n(Dof,Dir)">dofdir2n</a>(RefDof,RefDir);
+0095 <span class="comment">% Count unique ref and response dofs</span>
+0096 NoRefs=length(unique(Fdd));
+0097 NoResps=length(unique(Rdd));
+0098 N=length(Data);
+0099 
+0100 <span class="comment">% Sort into 3D H matrix N-by-D-by-R, freqs, responses, by Refs</span>
+0101 H=zeros(N,NoResps,NoRefs);              <span class="comment">% Data matrix</span>
+0102 FillMtrx=zeros(NoResps,NoRefs);         <span class="comment">% Filled when FRF found, to check availability of all Dofs</span>
+0103 <span class="comment">% 2013-11-28: Fixed sort algorithm to give ascending dof number also if</span>
+0104 <span class="comment">% negative directions</span>
+0105 a=unique(Fdd);
+0106 [dum,I]=sort(abs(a));
+0107 UniqueRefs=a(I);                        <span class="comment">% List of unique combined Ref dof/dir</span>
+0108 <span class="comment">%                                       % These are indexes into 3rd dim in H</span>
+0109 a=unique(Rdd);
+0110 [dum,I]=sort(abs(a));
+0111 UniqueResps=a(I);                       <span class="comment">% Index into 2nd dim in H</span>
+0112 <span class="keyword">for</span> n = 1:length(Rdd)
+0113     Refidx=find(UniqueRefs == Fdd(n));
+0114     respidx=find(UniqueResps == Rdd(n));
+0115     <span class="keyword">if</span> isequal(H(:,respidx,Refidx),zeros(N,1))
+0116         H(:,respidx,Refidx)=Htemp(:,n);
+0117         FillMtrx(respidx,Refidx)=1;
+0118     <span class="keyword">else</span>
+0119         warning([<span class="string">'Duplicate FRF found for resp='</span> int2str(Rdd(n)) <span class="string">', Ref='</span> int2str(Fdd(n)) <span class="string">'. Ignored.'</span>]);
+0120     <span class="keyword">end</span>
+0121 <span class="keyword">end</span>
+0122 <span class="comment">% Fill numeric response and Ref dof vectors</span>
+0123 [RespDof,RespDir]=<a href="n2dofdir.html" class="code" title="function    [Dof,nDir] = n2dofdir(nDof)">n2dofdir</a>(UniqueResps);
+0124 [RefDof,RefDir]=<a href="n2dofdir.html" class="code" title="function    [Dof,nDir] = n2dofdir(nDof)">n2dofdir</a>(UniqueRefs);
+0125 
+0126 <span class="comment">% Detect if impact test with roving Ref: if so, the matrix is permuted</span>
+0127 <span class="comment">% to 'shaker format' using reciprocity, and Resp and Ref variables swapped</span>
+0128 <span class="keyword">if</span> NoResps &lt; NoRefs
+0129     H=permute(H,[1 3 2]);
+0130     a=RefDof;
+0131     b=RefDir;
+0132     RefDof=RespDof;
+0133     RefDir=RespDir;
+0134     RespDof=a;
+0135     RespDir=b;
+0136     FillMtrx=FillMtrx';
+0137 <span class="keyword">end</span>
+0138 
+0139 <span class="keyword">if</span> ~isequal(FillMtrx, ones(size(FillMtrx)))
+0140     warning(<span class="string">'Missing Dofs in H matrix! Check output in FillMtrx.'</span>)
+0141 <span class="keyword">end</span>
+0142 
+0143 <span class="comment">% Create f axis</span>
+0144 f=<a href="makexaxis.html" class="code" title="function x = makexaxis(y,dx,x0);">makexaxis</a>(H(:,1,1),Header.xIncrement);</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

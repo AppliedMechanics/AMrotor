@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of statchkf</title>
+  <meta name="keywords" content="statchkf">
+  <meta name="description" content="STATCHK Create standard statistics for time signal(s) in ABRAVIBE files">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; statchkf.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>statchkf
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>STATCHK Create standard statistics for time signal(s) in ABRAVIBE files</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function statchkf(Prefix,StartNo,StopNo,FileName) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment">STATCHK Create standard statistics for time signal(s) in ABRAVIBE files
+
+           statchk(Prefix,StartNo,StopNo,FileName)
+
+           Prefix      Filename prefix
+           StartNo     First file number (i.e. file name is &lt;prefix&gt;StartNo
+           StopNo      Last file number. 
+           FileName    If this string is given, the output of statchkf is
+                       redirected to a log file FileName.log in the 
+                       current directory (or in the directory indicated in 
+                       the string FileName if a full path is given). 
+                       Also, the actual statistical vectors are stored in 
+                       mat file FileName.mat.
+
+ This function performs some standard statistical analysis of time data in 
+ ABRAVIBE files. Not all files in the range from StartNo to StopNo must exist,
+ as only existing files are opened. Results are written to a log file, or,
+ if FileName is not given, to the screen.
+
+ No results are plotted by this function. See STATCHK for that purpose.
+ 
+ WARNING! This command will overwrite an existing log file with the name
+ in FileName!
+
+ See also <a href="statchk.html" class="code" title="function statchk(x, N, NPlot, FileName);">STATCHK</a> <a href="framestat.html" class="code" title="function F = framestat(y,N,func,NPlot)">FRAMESTAT</a> <a href="teststat.html" class="code" title="function status = teststat(y,alfa,Type)">TESTSTAT</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="akurtosis.html" class="code" title="function K = akurtosis(x);">akurtosis</a>	AKURTOSIS Calculate kurtosis</li><li><a href="askewness.html" class="code" title="function S = askewness(x);">askewness</a>	ASKEWNESS Calculate skewness</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function statchkf(Prefix,StartNo,StopNo,FileName)</a>
+0002 <span class="comment">%STATCHK Create standard statistics for time signal(s) in ABRAVIBE files</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%           statchk(Prefix,StartNo,StopNo,FileName)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%           Prefix      Filename prefix</span>
+0007 <span class="comment">%           StartNo     First file number (i.e. file name is &lt;prefix&gt;StartNo</span>
+0008 <span class="comment">%           StopNo      Last file number.</span>
+0009 <span class="comment">%           FileName    If this string is given, the output of statchkf is</span>
+0010 <span class="comment">%                       redirected to a log file FileName.log in the</span>
+0011 <span class="comment">%                       current directory (or in the directory indicated in</span>
+0012 <span class="comment">%                       the string FileName if a full path is given).</span>
+0013 <span class="comment">%                       Also, the actual statistical vectors are stored in</span>
+0014 <span class="comment">%                       mat file FileName.mat.</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">% This function performs some standard statistical analysis of time data in</span>
+0017 <span class="comment">% ABRAVIBE files. Not all files in the range from StartNo to StopNo must exist,</span>
+0018 <span class="comment">% as only existing files are opened. Results are written to a log file, or,</span>
+0019 <span class="comment">% if FileName is not given, to the screen.</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">% No results are plotted by this function. See STATCHK for that purpose.</span>
+0022 <span class="comment">%</span>
+0023 <span class="comment">% WARNING! This command will overwrite an existing log file with the name</span>
+0024 <span class="comment">% in FileName!</span>
+0025 <span class="comment">%</span>
+0026 <span class="comment">% See also STATCHK FRAMESTAT TESTSTAT</span>
+0027 
+0028 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0029 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0030 <span class="comment">% Version: 1.0 2011-06-23</span>
+0031 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0032 
+0033 
+0034 <span class="keyword">if</span> nargin == 3
+0035        fid=1;
+0036 <span class="keyword">elseif</span> nargin == 4
+0037     fid=fopen(strcat(FileName,<span class="string">'.log'</span>),<span class="string">'w'</span>);
+0038 <span class="keyword">elseif</span> nargin &gt; 4 | nargin &lt; 3
+0039    error(<span class="string">'Wrong number of parameters!'</span>)
+0040 <span class="keyword">end</span>
+0041 
+0042 FileNumber=StartNo:StopNo;
+0043 FilePointer=1;
+0044 <span class="keyword">for</span> n = 1:length(FileNumber)
+0045     InFile=strcat(Prefix,int2str(FileNumber(n)),<span class="string">'.mat'</span>);
+0046     <span class="keyword">if</span> exist(InFile,<span class="string">'file'</span>) == 2
+0047         load(InFile);
+0048         FileNo(FilePointer)=n;
+0049         m(FilePointer)=mean(Data);
+0050         Sigma2(FilePointer)=var(Data);
+0051         Sigma(FilePointer)=sqrt(Sigma2(FilePointer));
+0052         Skewness(FilePointer)=<a href="askewness.html" class="code" title="function S = askewness(x);">askewness</a>(Data);
+0053         Kurtosis(FilePointer)=<a href="akurtosis.html" class="code" title="function K = akurtosis(x);">akurtosis</a>(Data);
+0054         RMS(FilePointer)=sqrt(1/length(Data)*sum(Data.^2));
+0055         Crest(FilePointer)=max(abs(Data))./RMS(FilePointer);
+0056         XMax(FilePointer)=max(Data);
+0057         XMin(FilePointer)=min(Data);
+0058         FilePointer=FilePointer+1;
+0059     <span class="keyword">end</span>
+0060 <span class="keyword">end</span>
+0061 
+0062 <span class="keyword">if</span> fid ~= 1
+0063     fprintf(fid,<span class="string">'Output of command STATCHKF\n'</span>);
+0064     fprintf(fid,<span class="string">'Date: %s\n'</span>,datestr(now));
+0065     fprintf(fid,<span class="string">'File Prefix: %s\n'</span>,Prefix);
+0066 <span class="keyword">end</span>
+0067 fprintf(fid,<span class="string">'Statistical parameters:\n'</span>);
+0068 fprintf(fid,<span class="string">'============================\n'</span>);
+0069 [S,E]=sprintf(<span class="string">'%5s%12s%12s%12s%12s%12s%12s%12s%12s%12s\n'</span>,<span class="string">'File #'</span>,<span class="string">'Max'</span>,<span class="string">'Min'</span>,<span class="string">'Mean'</span>,<span class="string">'Crest'</span>,<span class="string">'RMS'</span>,<span class="string">'Std dev'</span>,<span class="keyword">...</span>
+0070 <span class="string">'Variance'</span>,<span class="string">'Skewness'</span>,<span class="string">'Kurtosis'</span>);
+0071 fprintf(fid,<span class="string">'%s'</span>,S);
+0072 <span class="keyword">for</span> n=1:length(FileNo),
+0073    S2=sprintf(<span class="string">'%5d%12.2g%12.2g%12.2g%12.2g%12.2g%12.2g%12.2g%12.2g%12.2g'</span>,FileNo(n),XMax(n),XMin(n),<span class="keyword">...</span>
+0074    m(n),Crest(n),RMS(n),Sigma(n),Sigma2(n),Skewness(n),Kurtosis(n));  
+0075    fprintf(fid,<span class="string">'%s\n'</span>,S2);
+0076 <span class="keyword">end</span>
+0077 
+0078 <span class="comment">%</span>
+0079 <span class="keyword">if</span> nargin == 4
+0080     <span class="comment">% 2012-01-14 next line changed to work better in Octave</span>
+0081    S=[<span class="string">'save -mat '</span> strcat(FileName,<span class="string">'.mat'</span>) <span class="string">' FileNo XMax XMin m Crest RMS Sigma Sigma2 Skewness Kurtosis'</span>];
+0082    eval(S)
+0083    fclose(fid);
+0084    fprintf(<span class="string">'Data saved in mat file %s.mat\n'</span>,FileName)
+0085 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

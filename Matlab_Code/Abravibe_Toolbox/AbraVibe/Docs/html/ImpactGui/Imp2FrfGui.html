@@ -1,0 +1,245 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of Imp2FrfGui</title>
+  <meta name="keywords" content="Imp2FrfGui">
+  <meta name="description" content="IMP2FRFGUI  Calculate FRF(s) from impact time data recording (ImpactGui version)">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">ImpactGui</a> &gt; Imp2FrfGui.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for ImpactGui&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>Imp2FrfGui
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>IMP2FRFGUI  Calculate FRF(s) from impact time data recording (ImpactGui version)</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [H,f,C,Tff, ImpactNos] = Imp2FrfGui(x,y,fs,N,TrigIdx,DIdx,FWinLength,ExpWinPar,Type,flo,fhi) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> IMP2FRFGUI  Calculate FRF(s) from impact time data recording (ImpactGui version)
+
+        [H,f,C,Tff, ImpactNos] = imp2frf2(x,y,fs,N,TrigIdx,DIdx,FWinLength,FWinLength,ExpWinPar,Type,flo,fhi)
+
+           H           Frequency response(s), N/2+1-by-D
+           f           Frequency axis, N/2+1-by-1
+           C           Coherence function(s), N/2+1-by-D
+           Tff         Transient spectrum of force signal
+           ImpactNos   For automatic processing types this parameter
+                       contains a cell array with vectors of the impact 
+                       numbers that was used to process the FRFs
+
+           x           Force vector
+           y           Response signal(s) in D column(s)
+           fs          Sampling frequency
+           N           Block size for FFT
+           TrigIdx     Trigger indeces from imptrig
+           DIdx        Double impact indeces from imptrig
+           FWinLength  Force window in percent of N
+           ExpWinPar   End value of exponential window in percent
+           Type        Process type can be:
+                       FrequencyManual         % 'Normal' impact testing
+                       TimeSynchronousManual   % Averaging is done in time domain
+                       BestCoherenceOptimization % Automatic mode 1
+           flo         Low frequency limit for optimization methods
+           fhi         High frequency limit for optimization methods
+
+ This is an internal, special version of imp2frf for use in ImpactGui.
+ It does not prompt for user selection but uses predefined trigger events.
+
+ See also IMPSETUP IMPMASSCAL IMPPROC IMPTRIG AFORCEW AEXPW</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="ImpactProcessingGui.html" class="code" title="function varargout = ImpactProcessingGui(varargin)">ImpactProcessingGui</a>	IMPACTPROCESSINGGUI MATLAB code for ImpactProcessingGui.fig</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [H,f,C,Tff, ImpactNos] = Imp2FrfGui(x,y,fs,N,TrigIdx,DIdx,FWinLength,ExpWinPar,Type,flo,fhi)</a>
+0002 <span class="comment">% IMP2FRFGUI  Calculate FRF(s) from impact time data recording (ImpactGui version)</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%        [H,f,C,Tff, ImpactNos] = imp2frf2(x,y,fs,N,TrigIdx,DIdx,FWinLength,FWinLength,ExpWinPar,Type,flo,fhi)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%           H           Frequency response(s), N/2+1-by-D</span>
+0007 <span class="comment">%           f           Frequency axis, N/2+1-by-1</span>
+0008 <span class="comment">%           C           Coherence function(s), N/2+1-by-D</span>
+0009 <span class="comment">%           Tff         Transient spectrum of force signal</span>
+0010 <span class="comment">%           ImpactNos   For automatic processing types this parameter</span>
+0011 <span class="comment">%                       contains a cell array with vectors of the impact</span>
+0012 <span class="comment">%                       numbers that was used to process the FRFs</span>
+0013 <span class="comment">%</span>
+0014 <span class="comment">%           x           Force vector</span>
+0015 <span class="comment">%           y           Response signal(s) in D column(s)</span>
+0016 <span class="comment">%           fs          Sampling frequency</span>
+0017 <span class="comment">%           N           Block size for FFT</span>
+0018 <span class="comment">%           TrigIdx     Trigger indeces from imptrig</span>
+0019 <span class="comment">%           DIdx        Double impact indeces from imptrig</span>
+0020 <span class="comment">%           FWinLength  Force window in percent of N</span>
+0021 <span class="comment">%           ExpWinPar   End value of exponential window in percent</span>
+0022 <span class="comment">%           Type        Process type can be:</span>
+0023 <span class="comment">%                       FrequencyManual         % 'Normal' impact testing</span>
+0024 <span class="comment">%                       TimeSynchronousManual   % Averaging is done in time domain</span>
+0025 <span class="comment">%                       BestCoherenceOptimization % Automatic mode 1</span>
+0026 <span class="comment">%           flo         Low frequency limit for optimization methods</span>
+0027 <span class="comment">%           fhi         High frequency limit for optimization methods</span>
+0028 <span class="comment">%</span>
+0029 <span class="comment">% This is an internal, special version of imp2frf for use in ImpactGui.</span>
+0030 <span class="comment">% It does not prompt for user selection but uses predefined trigger events.</span>
+0031 <span class="comment">%</span>
+0032 <span class="comment">% See also IMPSETUP IMPMASSCAL IMPPROC IMPTRIG AFORCEW AEXPW</span>
+0033 <span class="comment">%</span>
+0034 
+0035 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0036 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0037 <span class="comment">% Version: 1.0 2014-07-06</span>
+0038 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0039 
+0040 <span class="comment">% References</span>
+0041 <span class="comment">% Brandt, A. &quot;Noise and Vibration Analysis - Signal Analysis and</span>
+0042 <span class="comment">% Experimental Procedures,&quot; John Wiley and Sons, 2011</span>
+0043 <span class="comment">% Specially for the Best coherence optimization: This method finds the two</span>
+0044 <span class="comment">% impacts that give the best coherence.</span>
+0045 <span class="comment">% Brandt, A. &amp; Brincker, R. Impact Excitation Processing for Improved</span>
+0046 <span class="comment">% Frequency Response Quality Proc. 28th International Modal Analysis</span>
+0047 <span class="comment">% Conference, Jacksonville, FL, 2010</span>
+0048 
+0049 <span class="comment">% Check consistency</span>
+0050 <span class="comment">% Find lengths and dimensions</span>
+0051 D=length(y(1,:));
+0052 <span class="keyword">if</span> length(x(1,:)) &gt; 1
+0053     x=x(:,1);
+0054 <span class="keyword">end</span>
+0055 <span class="keyword">if</span> length(y(1,:)) &gt; 1
+0056     D=length(y(1,:));       <span class="comment">% Number of responses</span>
+0057 <span class="keyword">end</span>
+0058 
+0059 ImpactNos=[];
+0060 
+0061 <span class="keyword">if</span> strcmp(upper(Type),<span class="string">'FREQUENCYMANUAL'</span>)
+0062     <span class="comment">% Use the selected impacts to calculate FRF etc for each response (column)</span>
+0063     <span class="comment">% in y</span>
+0064     yin=y; clear y
+0065     <span class="keyword">for</span> k = 1:D
+0066         y=yin(:,k);
+0067         L=N/2+1;
+0068         Tyf=zeros(L,1);
+0069         Tyy=zeros(L,1);
+0070         Tff=zeros(L,1);
+0071         fw=aforcew(N,FWinLength);
+0072         ew=aexpw(N,ExpWinPar);
+0073         <span class="keyword">for</span> n=1:length(TrigIdx)
+0074             F=x(TrigIdx(n):TrigIdx(n)+N-1);
+0075             F=F-F(1);
+0076             F=F.*fw.*ew;
+0077             Ff=fft(F);
+0078             Ff=Ff(1:L);
+0079             Y=y(TrigIdx(n):TrigIdx(n)+N-1);
+0080             Y=Y.*ew;
+0081             Yf=fft(Y);
+0082             Yf=Yf(1:L);
+0083             Tyf=Tyf+(Yf.*conj(Ff));
+0084             Tyy=Tyy+abs(Yf).^2;
+0085             Tff=Tff+abs(Ff).^2;
+0086         <span class="keyword">end</span>
+0087         H(:,k)=Tyf./Tff;
+0088         f=(0:fs/N:fs/2)';
+0089         <span class="keyword">if</span> length(TrigIdx) == 1     <span class="comment">% Undefined coherence</span>
+0090             C=0;
+0091         <span class="keyword">else</span>
+0092             C(:,k)=abs(Tyf).^2./Tff./Tyy;
+0093         <span class="keyword">end</span>
+0094     <span class="keyword">end</span>
+0095     Tff=Tff/n/fs;               <span class="comment">% Scaled as transient average spectrum</span>
+0096 <span class="keyword">elseif</span> strcmp(upper(Type),<span class="string">'TIMESYNCHRONOUSMANUAL'</span>)
+0097     <span class="comment">% Use the selected impacts to calculate time synchronous averages of</span>
+0098     <span class="comment">% each signal (force, and each response). Then produce FRF by simply</span>
+0099     <span class="comment">% dividing spectra</span>
+0100     xavg=zeros(N,1);
+0101     yavg=zeros(N,D);
+0102     <span class="keyword">for</span> n=1:length(TrigIdx)
+0103         xtemp=x(TrigIdx(n):TrigIdx(n)+N-1);
+0104 <span class="comment">%         xtemp=xtemp-xtemp(1);       % Remove value at time 0</span>
+0105         xavg=xavg+xtemp;
+0106         ytemp=y(TrigIdx(n):TrigIdx(n)+N-1,:);
+0107 <span class="comment">%         ytemp=ytemp-ones(N,1)*ytemp(1,:);</span>
+0108         yavg=yavg+ytemp;
+0109     <span class="keyword">end</span>
+0110     xavg=xavg/length(TrigIdx);
+0111     yavg=yavg/length(TrigIdx);
+0112     <span class="comment">% Now produce FFT results and compute outputs:</span>
+0113     fw=aforcew(N,FWinLength);
+0114     ew=aexpw(N,ExpWinPar);
+0115     L=N/2+1;
+0116     F=xavg.*fw.*ew;        <span class="comment">% Force and exponential window on force, still</span>
+0117     Ff=fft(F);
+0118     Ff=Ff(1:L);
+0119     y=yavg.*(ew*ones(1,D));
+0120     Yf=fft(y);
+0121     Yf=Yf(1:L,:);
+0122     H=Yf./(Ff*ones(1,D));
+0123     f=(0:fs/N:fs/2)';
+0124     C=[];                         <span class="comment">% Undefined coherence</span>
+0125     Tff=abs(Ff)/fs;               <span class="comment">% Scaled as transient average spectrum</span>
+0126 <span class="keyword">elseif</span> strcmp(upper(Type),<span class="string">'BESTTWO'</span>)
+0127     minCSum=1e10;
+0128     minPair=[0 0];
+0129     CSumIdx=1;
+0130     IdxPair=[];
+0131     <span class="comment">% Find the pair of impacts that gives the &quot;best coherence&quot; (i.e.</span>
+0132     <span class="comment">% minimum df(1-g^2)</span>
+0133     <span class="keyword">for</span> ch=1:D;
+0134         <span class="keyword">for</span> l=1:length(TrigIdx)
+0135             Tidx1=TrigIdx(l);
+0136             <span class="keyword">for</span> k=l+1:length(TrigIdx)
+0137                 Tidx2=TrigIdx(k);
+0138                 [Ht,ft,Ct] = imp2frf2(x,y(:,ch),fs,N,TrigIdx([l k]),0,FWinLength,ExpWinPar,0);
+0139                 idx1=min(find(ft&gt;=flo));
+0140                 idx2=min(find(ft&gt;=fhi));
+0141                 fidx=idx1:idx2;
+0142                 CSum(CSumIdx)=sum(1-Ct(fidx));
+0143                 <span class="keyword">if</span> CSum(CSumIdx) &lt; minCSum;
+0144                     minCSum=CSum(CSumIdx);
+0145                     minPair=[Tidx1 Tidx2];
+0146                 <span class="keyword">end</span>
+0147                 CSumIdx=CSumIdx+1;
+0148             <span class="keyword">end</span>
+0149         <span class="keyword">end</span>
+0150         idx=find(TrigIdx~=minPair(1) &amp; TrigIdx~=minPair(2));
+0151         <span class="keyword">for</span> k=1:length(idx)
+0152             <span class="keyword">if</span> ismember(minPair,TrigIdx(k)) == zeros(size(minPair))
+0153                 Triggers=[minPair TrigIdx(k)];
+0154                 [Ht,ft,Ct,Tfft] = imp2frf2(x,y(:,1),fs,N,Triggers,0,FWinLength,ExpWinPar,0);
+0155                 CSum=sum(1-Ct(fidx));
+0156                 <span class="keyword">if</span> CSum &lt; minCSum;
+0157                     minCSum=CSum;
+0158                     minPair=Triggers;
+0159                 <span class="keyword">end</span>
+0160             <span class="keyword">end</span>
+0161         <span class="keyword">end</span>
+0162         Triggers=minPair;           <span class="comment">% Better name</span>
+0163         ImpactNos{ch} = find(ismember(TrigIdx,Triggers));
+0164         [H(:,ch),f,C(:,ch),Tff] = imp2frf2(x,y(:,ch),fs,N,Triggers,0,FWinLength,ExpWinPar,0);
+0165     <span class="keyword">end</span>
+0166 <span class="keyword">end</span>
+0167 
+0168 f=f(:);</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

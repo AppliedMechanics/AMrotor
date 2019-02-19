@@ -1,0 +1,211 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of timeproc</title>
+  <meta name="keywords" content="timeproc">
+  <meta name="description" content="TIME2PROC    Process time data files into ABRAVIBE function files">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; timeproc.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>timeproc
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>TIME2PROC    Process time data files into ABRAVIBE function files</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function LastNumber = timeproc(InPrefix,StartNo,StopNo,OutPrefix,OutStartNo,FunctionType,Settings) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> TIME2PROC    Process time data files into ABRAVIBE function files
+
+  *********** THIS FILE IS UNDER DEVELOPMENT AND MAY NOT WORK*********
+
+   LastNumber = timeproc(InPrefix,StartNo,StopNo,OutPrefix,OutStartNo,FunctionType,Settings)
+
+           LastNumber      Last number of last saved file
+           Prefix          Prefix for input files
+           StartNo         Number of first .imptime file
+           StopNo          Number of last .imptime file
+           OutPrefix       Prefix of output files
+           OutStartNo      First number for output files
+           FunctionType    Output function type(s), see function FUNCTYPE
+                           Specified either as number or short string.
+                           Currently supported: [8](cross correlations),
+                           9(PSD/CSD) (See NOTE below)
+           Settings        Struct with fields according to the
+                           FunctionType. See inside file for details of
+                           Settings fields for the various outputs
+
+
+ Typical applications: Spectrum analysis, ODS, OMA
+
+ NOTE! For correlation functions:
+ Even though the function type to specify correlation functions is
+ 8 (cross-correlation), the autocorrelation functions are stored with
+ function type 7, which specifies autocorrelation. This means that to use
+ data2hmtrx to import those files into a correlation function matrix for
+ use in OMA appliations, you have to specify FunctionType as a vector [7 8]
+
+ Fields for different FunctionTypes
+ ALL function types:
+   OutputDirectory     Directory for output files. If not given, a defauls
+                       name PSD/CORR is used
+   Downsample          If existant, data are downsampled by this factor
+                       prior to the processing
+   RefChannels         References, by file number, e.g. [1 7], [2:7]. If
+                       not defined, or if = 0, only auto functions are computed
+                       for FunctionType=9.
+
+ FOR PSDs/CSDs:
+   Blocksize       Blocksize for Welch method
+   Overlap         Overlap in Percentage. 50% is default if field not defined
+
+ FOR CORR:
+   ProcType        'Welch' or 'PERIODOGRAM' (default)
+   BlockSize       Blocksize for Welch method. Maximum lag to store for 
+                   type 'PERIODOGRAM'. 1024 is default value in both cases</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="functype.html" class="code" title="function FuncType = functype(FuncType)">functype</a>	FUNCTYPE  Convert between numeric and string function type</li><li><a href="time2corr.html" class="code" title="function LastNumber = time2corr(InPrefix,StartNo,StopNo,OutPrefix,OutStartNo,Blocksize,RefChannel,DownSample,Type,start,stop)">time2corr</a>	TIME2CORR    Process ABRAVIBE time data files into correlation function files</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function LastNumber = timeproc(InPrefix,StartNo,StopNo,OutPrefix,OutStartNo,FunctionType,Settings)</a>
+0002 <span class="comment">% TIME2PROC    Process time data files into ABRAVIBE function files</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%  *********** THIS FILE IS UNDER DEVELOPMENT AND MAY NOT WORK*********</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%   LastNumber = timeproc(InPrefix,StartNo,StopNo,OutPrefix,OutStartNo,FunctionType,Settings)</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%           LastNumber      Last number of last saved file</span>
+0009 <span class="comment">%           Prefix          Prefix for input files</span>
+0010 <span class="comment">%           StartNo         Number of first .imptime file</span>
+0011 <span class="comment">%           StopNo          Number of last .imptime file</span>
+0012 <span class="comment">%           OutPrefix       Prefix of output files</span>
+0013 <span class="comment">%           OutStartNo      First number for output files</span>
+0014 <span class="comment">%           FunctionType    Output function type(s), see function FUNCTYPE</span>
+0015 <span class="comment">%                           Specified either as number or short string.</span>
+0016 <span class="comment">%                           Currently supported: [8](cross correlations),</span>
+0017 <span class="comment">%                           9(PSD/CSD) (See NOTE below)</span>
+0018 <span class="comment">%           Settings        Struct with fields according to the</span>
+0019 <span class="comment">%                           FunctionType. See inside file for details of</span>
+0020 <span class="comment">%                           Settings fields for the various outputs</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">%</span>
+0023 <span class="comment">% Typical applications: Spectrum analysis, ODS, OMA</span>
+0024 <span class="comment">%</span>
+0025 <span class="comment">% NOTE! For correlation functions:</span>
+0026 <span class="comment">% Even though the function type to specify correlation functions is</span>
+0027 <span class="comment">% 8 (cross-correlation), the autocorrelation functions are stored with</span>
+0028 <span class="comment">% function type 7, which specifies autocorrelation. This means that to use</span>
+0029 <span class="comment">% data2hmtrx to import those files into a correlation function matrix for</span>
+0030 <span class="comment">% use in OMA appliations, you have to specify FunctionType as a vector [7 8]</span>
+0031 <span class="comment">%</span>
+0032 <span class="comment">% Fields for different FunctionTypes</span>
+0033 <span class="comment">% ALL function types:</span>
+0034 <span class="comment">%   OutputDirectory     Directory for output files. If not given, a defauls</span>
+0035 <span class="comment">%                       name PSD/CORR is used</span>
+0036 <span class="comment">%   Downsample          If existant, data are downsampled by this factor</span>
+0037 <span class="comment">%                       prior to the processing</span>
+0038 <span class="comment">%   RefChannels         References, by file number, e.g. [1 7], [2:7]. If</span>
+0039 <span class="comment">%                       not defined, or if = 0, only auto functions are computed</span>
+0040 <span class="comment">%                       for FunctionType=9.</span>
+0041 <span class="comment">%</span>
+0042 <span class="comment">% FOR PSDs/CSDs:</span>
+0043 <span class="comment">%   Blocksize       Blocksize for Welch method</span>
+0044 <span class="comment">%   Overlap         Overlap in Percentage. 50% is default if field not defined</span>
+0045 <span class="comment">%</span>
+0046 <span class="comment">% FOR CORR:</span>
+0047 <span class="comment">%   ProcType        'Welch' or 'PERIODOGRAM' (default)</span>
+0048 <span class="comment">%   BlockSize       Blocksize for Welch method. Maximum lag to store for</span>
+0049 <span class="comment">%                   type 'PERIODOGRAM'. 1024 is default value in both cases</span>
+0050 <span class="comment">%</span>
+0051 
+0052 <span class="comment">%</span>
+0053 <span class="comment">% Copyright (c) 2015 by Anders Brandt</span>
+0054 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0055 <span class="comment">% Version:  1.0 2015-12-20</span>
+0056 <span class="comment">%</span>
+0057 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0058 
+0059 <span class="keyword">if</span> nargin ~= 7
+0060     error(<span class="string">'Wrong number of input arguments!'</span>)
+0061 <span class="keyword">end</span>
+0062 
+0063 <span class="comment">% Make FunctionType numeric, and check a valid function type is given</span>
+0064 <span class="keyword">if</span> ~isnumeric(FunctionType)
+0065     FunctionType=<a href="functype.html" class="code" title="function FuncType = functype(FuncType)">functype</a>(FunctionType);
+0066     <span class="keyword">if</span> FunctionType &lt;= 0
+0067         error(<span class="string">'Wrong FunctionType!'</span>)
+0068     <span class="keyword">end</span>
+0069 <span class="keyword">elseif</span> FunctionType &lt;= 0 || isempty(ismember(FunctionType,[7 8 9]))
+0070     error(<span class="string">'Unsupported FunctionType!'</span>)
+0071 <span class="keyword">end</span>
+0072 
+0073 <span class="comment">% Check Settings fields common to all function types</span>
+0074 <span class="keyword">if</span> ~isfield(Settings,<span class="string">'OutputDirectory'</span>)
+0075     <span class="keyword">if</span> FunctionType == 7 |FunctionType == 8
+0076         Settings.OutputDirectory=<span class="string">'CORR'</span>;
+0077     <span class="keyword">else</span>
+0078         Settings.OutputDirectory=<span class="string">'PSD'</span>;
+0079     <span class="keyword">end</span>
+0080 <span class="keyword">end</span>
+0081 <span class="keyword">if</span> ~isfield(Settings,<span class="string">'DownSample'</span>)
+0082     Settings.DownSample=1;
+0083 <span class="keyword">end</span>
+0084 <span class="keyword">if</span> ~isfield(Settings,<span class="string">'RefChannels'</span>)
+0085     Settings.RefChannels=0;
+0086 <span class="keyword">end</span>
+0087 
+0088 
+0089 <span class="comment">% Process data depending on FunctionType</span>
+0090 <span class="keyword">if</span> FunctionType == 8    <span class="comment">% Correlation functions. NOTE! Even if 8 is specified as function type,</span>
+0091                         <span class="comment">% the autocorrelations are stored with 7 in the Header.</span>
+0092     <span class="comment">% Check that valid parameters are available in the Settings struct</span>
+0093     <span class="keyword">if</span> isfield(Settings,<span class="string">'ProcType'</span>)
+0094         <span class="keyword">if</span> strcmp(upper(Settings.ProcType),<span class="string">'WELCH'</span>)
+0095             ProcType=<span class="string">'WELCH'</span>;
+0096         <span class="keyword">elseif</span> strcmp(upper(Settings.ProcType),<span class="string">'PERIODOGRAM'</span>)
+0097             ProcType=<span class="string">'PERIODOGRAM'</span>;
+0098         <span class="keyword">else</span>
+0099             error(<span class="string">'Wrong ProcType for correlation functions!'</span>)
+0100         <span class="keyword">end</span>
+0101     <span class="keyword">else</span>
+0102         Settings.ProcType=<span class="string">'PERIODOGRAM'</span>;
+0103     <span class="keyword">end</span>
+0104     <span class="keyword">if</span> isfield(Settings,<span class="string">'Blocksize'</span>)
+0105         N=Settings.Blocksize;
+0106     <span class="keyword">else</span>
+0107         N=1024;
+0108     <span class="keyword">end</span>
+0109 <span class="keyword">if</span> exist(Settings.OutputDirectory,<span class="string">'dir'</span>) ~= 7
+0110         mkdir(Settings.OutputDirectory)
+0111     <span class="keyword">end</span>
+0112     OutPrefix=fullfile(Settings.OutputDirectory,OutPrefix);
+0113     LastNumber=<a href="time2corr.html" class="code" title="function LastNumber = time2corr(InPrefix,StartNo,StopNo,OutPrefix,OutStartNo,Blocksize,RefChannel,DownSample,Type,start,stop)">time2corr</a>(InPrefix,StartNo,StopNo,OutPrefix,OutStartNo,N,Settings.RefChannels,Settings.DownSample,ProcType);
+0114 <span class="keyword">elseif</span> FunctionType == 9        <span class="comment">% PSDs and (maybe) CSDs</span>
+0115     <span class="comment">% Check that valid fields are defined in the Settings struct.</span>
+0116 <span class="comment">%    if isfield(Settings,</span>
+0117 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>
