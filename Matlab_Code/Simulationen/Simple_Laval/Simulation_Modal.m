@@ -1,4 +1,4 @@
-%% DPS - Modalanalyse
+%% Simple Laval - Modalanalyse
 
 
 %% Clean up
@@ -19,8 +19,10 @@ r=Rotorsystem(cnfg,'Lavasl-System');
 r.assemble; %fuehrt Funktion assemble.m mit Eingabe Objekt r aus Klasse Rotorsystem aus
 r.show; % Funktion AMrotor\Matlab_Code\+AMrotorSIM\+Rotor\+FEMRotor\@FeModel\print.m
 
-%r.rotor.geometry.show_2D(); % Darstellung des Innenradius hinzufuegen
-%r.rotor.geometry.show_3D();
+
+r.rotor.show_2D(); % compare discretisation and user input
+% r.rotor.geometry.show_2D(); 
+% r.rotor.geometry.show_3D(); % funktioniert nicht richtig
 
 % r.rotor.mesh.show_2D(); 
 %r.rotor.mesh.show_3D();
@@ -49,10 +51,10 @@ esf.plot_displacements();
 % esf.set_plots(10,'Overlay','Skip',5,'tangentialPoints',30,'scale',3) %specify additional options, first input is index of mode
 Janitor.cleanFigures();
 
-return
+
 % Campbell-Diagramm
 cmp = Experiments.Campbell(r);
-cmp.set_up(1e2:1e2:6e3,8); 
+cmp.set_up(1e2:1e2:10e3,8); 
 cmp.calculate();% input of set_up is (1/min, Number of Modes)
 cmpDiagramm = Graphs.Campbell(cmp);
 cmpDiagramm.print_damping_zero_crossing()
