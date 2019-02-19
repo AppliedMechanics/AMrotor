@@ -10,7 +10,7 @@ function [f,Y] = DPS_FFT_C (y,t)
 %% Parameter für FFT
 t = t - t(1);                       % Zeit beginnt bei 0s;
 NFFT = length(t);                   % AnzahlMessungen 
-Fs = NFFT/t(NFFT);                  % Sampling frequency   
+Fs = 1/(t(2)-t(1));%NFFT/t(NFFT);                  % Sampling frequency   
 %% FFT
 Y = fft(y,NFFT)/NFFT;               %FFT
 Y_norm = 2*abs(Y(1:floor(NFFT/2)+1));      %Normierte Amplitude
