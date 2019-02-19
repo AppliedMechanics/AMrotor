@@ -12,8 +12,13 @@ function h = get_loc_load_vec(obj,time,varargin)
     fy0 = obj.cnfg.frequency_y_0;
     t_end = obj.cnfg.t_end;
     
-    obj.h(1) =  chirp(time,fx0,t_end,fx)*Fx;
-    obj.h(2) =  chirp(time,fy0,t_end,fy)*Fy;
+    if time < t_end
+        obj.h(1) =  chirp(time,fx0,t_end,fx)*Fx;
+        obj.h(2) =  chirp(time,fy0,t_end,fy)*Fy;
+    else
+        obj.h(1) = 0;
+        obj.h(2) = 0;
+    end
     
     h = obj.h;
 end
