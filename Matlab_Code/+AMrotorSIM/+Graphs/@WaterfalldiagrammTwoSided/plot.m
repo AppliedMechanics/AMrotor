@@ -23,8 +23,8 @@ for sensor = sensors
     f=f(2:end);
     % Plot
     figure('name',[sensor.name, ' at position ',num2str(sensor.Position), '; Waterfall'], 'NumberTitle', 'off');
-    ffull=[flip(-f(:,1:end/4)) f(:,1:end/4)];
-    ampfull=[flip(amp_Rminus(:,1:1:end/4),2) amp_Rplus(:,1:1:end/4)];
+    ffull=[flip(-f(:,1:end)) f(:,1:end)];
+    ampfull=[flip(amp_Rminus(:,1:1:end),2) amp_Rplus(:,1:1:end)];
     waterfall(ffull,rpm_vec./60,ampfull)
     xlabel('Frequenz [Hz]')
     ylabel('Drehzahl [U/s]')
@@ -32,7 +32,7 @@ for sensor = sensors
     title ('Two Sided Waterfalldiagram')
     colormap( [ 0 0 0 ] )
     axis tight
-    %xlim([-300 300]);
+%     xlim([-300 300]);
     view([12.74 41.52]);
     set(gca,'fontsize',16)
     
