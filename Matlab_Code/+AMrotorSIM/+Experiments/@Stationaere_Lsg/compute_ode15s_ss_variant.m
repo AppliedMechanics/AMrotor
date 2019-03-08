@@ -25,7 +25,7 @@
          
          
         % solver parameters
-        options = odeset('AbsTol', 1e-5, 'RelTol', 1e-5,'OutputFcn',@odeOutputFcn_plotBeam);
+        options = odeset('AbsTol', 1e-5, 'RelTol', 1e-5,'OutputFcn',@odeOutputFcn_plotBeam,'MaxStep',obj.time(2)-obj.time(1));
 %         options = odeset('AbsTol', 1e-5, 'RelTol', 1e-5); % ohne live-plot
 
         Timer.restart();
