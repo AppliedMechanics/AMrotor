@@ -15,11 +15,8 @@ cnfg.cnfg_rotor.material.damping.rayleigh_alpha2= 0;%0.001;
 rW = 10e-3; % Radius der Welle
 rS = 50e-3; % Radius der Scheibe
 
-% cnfg.cnfg_rotor.geo_nodes = {[0 rW 0], [0.220 rW 0], [0.220 rS 0], ...
-%     [0.280 rS 0], [0.280 rW 0], [0.500 rW 0]}; % Format {[z, r_aussen, r_innen], ...} % ohne Anfangs und Endknoten
-% cnfg.cnfg_rotor.geo_nodes = {[0 rW 0], [0.500 rW 0]};
-cnfg.cnfg_rotor.geo_nodes = {[0 rW 0], [0.2 rW 0], [0.2 50e-3 0], [0.3 50e-3 0], [0.3 rW 0], [0.500 rW 0]};
-% cnfg.cnfg_rotor.geo_nodes = {[0 rW 0], [0.120 rW 0], [0.120 rS 0], [0.130 rS 0], [0.130 rW 0], [0.245 rW 0], [0.245 rS 0], [0.255 rS 0], [0.255 rW 0], [0.370 rW 0], [0.370 rS 0], [0.380 rS 0], [0.380 rW 0] [0.500 rW 0]}; % Mehrscheiben
+cnfg.cnfg_rotor.geo_nodes = {[0 rW 0], [0.220 rW 0], [0.220 rS 0], ...
+    [0.280 rS 0], [0.280 rW 0], [0.500 rW 0]}; % Format {[z, r_aussen, r_innen], ...} % ohne Anfangs und Endknoten
 clear rW rS
 
 
