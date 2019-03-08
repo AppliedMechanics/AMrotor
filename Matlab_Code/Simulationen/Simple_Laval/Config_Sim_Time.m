@@ -15,8 +15,8 @@ cnfg.cnfg_rotor.material.damping.rayleigh_alpha2= 0.001;
 rW = 10e-3; % Radius der Welle
 rS = 50e-3; % Radius der Scheibe
 
-cnfg.cnfg_rotor.geo_nodes = {[0 rW], [0.220 rW], [0.220 rS], ...
-    [0.280 rS], [0.280 rW], [0.500 rW]}; % Format {[z, r_aussen], ...} % ohne Anfangs und Endknoten
+cnfg.cnfg_rotor.geo_nodes = {[0 rW 0], [0.220 rW 0], [0.220 rS 0], ...
+    [0.280 rS 0], [0.280 rW 0], [0.500 rW 0]}; % Format {[z, r_aussen, r_innen], ...} % ohne Anfangs und Endknoten
 clear rW rS
 
 
