@@ -18,21 +18,21 @@ function mesh = create_mesh(self,mesh_opt,Geometry,material)
     %% Meshing of the Geometry
 
     node_number = 1;
-    i = 1;
     for k=2:n_nodes
 
         if geo_node_z(k-1) ~= geo_node_z(k)
 
             distance_nodes = geo_node_z(k)-geo_node_z(k-1);
-            for j = mesh.d_min:mesh.d_min:mesh.d_max
-                n_mesh_el = distance_nodes/j;
+            for d = linspace(mesh.d_max,mesh.d_min,mesh.n_refinement)
+                n_mesh_el = distance_nodes/d;                
 
-                if round(n_mesh_el) == n_mesh_el
+                if n_mesh_el > 0.5 || ((round(n_mesh_el)>n_mesh_el-1e-10) && (round(n_mesh_el)<n_mesh_el+1e-10))
+                    % Falls das aktuelle d mindestens einmal in den Abstand 'distance_nodes' hineinpasst
                      break
                 end
 
             end
-            z = linspace(geo_node_z(k-1), geo_node_z(k), n_mesh_el);
+            z = linspace(geo_node_z(k-1), geo_node_z(k), ceil(n_mesh_el)+1); %"+1" fuer n_Knoten
 
             [m,b] = linegradient(geo_node_z(k-1),...
                 geo_node_x(k-1), geo_node_z(k), geo_node_x(k));
@@ -60,6 +60,9 @@ function mesh = create_mesh(self,mesh_opt,Geometry,material)
                       %Wenn die z Koordinaten vom vorherigem Knoten
                       %mit dem jetzigen möglichen Knoten übereinstimmt, Knoten nicht
                       %doppelt erstellen
+                      % immer den kleinsten Wert abspeichern
+                      mesh.nodes(node_number-1).radius_outer = max(mesh.nodes(node_number-1).radius_outer, r(a));
+                      mesh.nodes(node_number-1).radius_inner = max(mesh.nodes(node_number-1).radius_inner, ri(a));
                   else
                     mesh.nodes(node_number) =...
                         AMrotorSIM.Rotor.FEMRotor.MeshNode(node_number, z(a), r(a), ri(a));
