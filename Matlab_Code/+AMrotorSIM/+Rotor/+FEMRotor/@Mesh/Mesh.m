@@ -4,6 +4,7 @@ classdef Mesh < handle
         name
         d_min
         d_max
+        n_refinement
         approximation
         nodes@AMrotorSIM.Rotor.FEMRotor.MeshNode vector
         elements@AMrotorSIM.Rotor.FEMRotor.Element.TimoshenkoLinearElement vector
@@ -19,6 +20,7 @@ classdef Mesh < handle
                 self.name = optn.name;
                 self.d_min = optn.d_min;
                 self.d_max = optn.d_max;
+                self.n_refinement = optn.n_refinement;
                 self.approximation = optn.approx;
             end
         end

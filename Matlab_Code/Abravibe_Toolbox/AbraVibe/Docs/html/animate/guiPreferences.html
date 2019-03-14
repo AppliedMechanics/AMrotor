@@ -1,0 +1,651 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of guiPreferences</title>
+  <meta name="keywords" content="guiPreferences">
+  <meta name="description" content="">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">animate</a> &gt; guiPreferences.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for animate&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>guiPreferences
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong></strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function h0=guiComponents(aniFig,SETUP); </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>	</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function h0=guiComponents(aniFig,SETUP);</a>
+0002 
+0003 bcolor=[1 1 1]*0.8;
+0004 pos = [300 500];
+0005 POS = get(aniFig,<span class="string">'Position'</span>);
+0006 h0=figure(<span class="string">'Color'</span>           , bcolor, <span class="keyword">...</span>
+0007    <span class="string">'MenuBar'</span>                , <span class="string">'none'</span>, <span class="keyword">...</span>
+0008    <span class="string">'NumberTitle'</span>            , <span class="string">'off'</span>, <span class="keyword">...</span>
+0009    <span class="string">'Name'</span>                   , <span class="string">'Preferences'</span>, <span class="keyword">...</span>
+0010    <span class="string">'Position'</span>               , [POS(1)+(POS(3)-pos(1))/2 POS(2)+(POS(4)-pos(2))/2+15 pos(1) pos(2)], <span class="keyword">...</span>
+0011    <span class="string">'Resize'</span>                 , <span class="string">'off'</span>,<span class="keyword">...</span>
+0012    <span class="string">'Tag'</span>                    , <span class="string">'ANIMATE:PREFERENCES'</span>,<span class="keyword">...</span>
+0013    <span class="string">'WindowButtonUpFcn'</span>      , <span class="string">'command(''preferences'',''stack'');'</span>,<span class="keyword">...</span>
+0014    <span class="string">'CloseRequestFcn'</span>        , [<span class="string">'command(''close'',''preferences'');'</span>]);
+0015 
+0016 framePos    = [10 pos(2)-55 pos(1)-20 50];
+0017 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0018    <span class="string">'Style'</span>                  , <span class="string">'Frame'</span>,<span class="keyword">...</span>
+0019    <span class="string">'Tag'</span>                    , <span class="string">'Frame:Controls'</span>,<span class="keyword">...</span>
+0020    <span class="string">'BackgroundColor'</span>        , [1 1 1]*.8,<span class="keyword">...</span>
+0021    <span class="string">'Position'</span>               , framePos);
+0022 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0023    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0024    <span class="string">'Style'</span>                  , <span class="string">'Text'</span>,<span class="keyword">...</span>
+0025    <span class="string">'Position'</span>               , [30 framePos(2)+40 50 17],<span class="keyword">...</span>
+0026    <span class="string">'HorizontalAlignment'</span>    , <span class="string">'center'</span>,<span class="keyword">...</span>
+0027    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*0.8,<span class="keyword">...</span>
+0028    <span class="string">'String'</span>                 , <span class="string">'Animation'</span>);
+0029 
+0030 <span class="comment">% Frames Text/Popup</span>
+0031 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0032    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0033    <span class="string">'Style'</span>                  , <span class="string">'Text'</span>,<span class="keyword">...</span>
+0034    <span class="string">'Position'</span>               , [20 framePos(2)+25 80 17],<span class="keyword">...</span>
+0035    <span class="string">'HorizontalAlignment'</span>    , <span class="string">'center'</span>,<span class="keyword">...</span>
+0036    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*0.8,<span class="keyword">...</span>
+0037    <span class="string">'String'</span>                 , <span class="string">'Frames / cycle'</span>);
+0038 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0039    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0040    <span class="string">'Style'</span>                  , <span class="string">'Edit'</span>,<span class="keyword">...</span>
+0041    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*1,<span class="keyword">...</span>
+0042    <span class="string">'Value'</span>                  , 1,<span class="keyword">...</span>
+0043    <span class="string">'Position'</span>               , [20 framePos(2)+10 80 20],<span class="keyword">...</span>
+0044    <span class="string">'String'</span>                 , num2str(SETUP.Animation.Frames),<span class="keyword">...</span>
+0045    <span class="string">'Callback'</span>               , <span class="string">'command(''preferences'',''animation'',''FPC'');'</span>,<span class="keyword">...</span>
+0046    <span class="string">'Tag'</span>                    , <span class="string">'Preferences:FPC'</span>);
+0047 
+0048 <span class="comment">% Amplitude Text/Popup</span>
+0049 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0050    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0051    <span class="string">'Style'</span>                  , <span class="string">'Text'</span>,<span class="keyword">...</span>
+0052    <span class="string">'Position'</span>               , [110 framePos(2)+25 70 17],<span class="keyword">...</span>
+0053    <span class="string">'HorizontalAlignment'</span>    , <span class="string">'center'</span>,<span class="keyword">...</span>
+0054    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*0.8,<span class="keyword">...</span>
+0055    <span class="string">'String'</span>                 , <span class="string">'Amplitude'</span>);
+0056 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0057    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0058    <span class="string">'Style'</span>                  , <span class="string">'Edit'</span>,<span class="keyword">...</span>
+0059    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*1,<span class="keyword">...</span>
+0060    <span class="string">'Value'</span>                  , 1,<span class="keyword">...</span>
+0061    <span class="string">'Position'</span>               , [110 framePos(2)+10 80 20],<span class="keyword">...</span>
+0062    <span class="string">'String'</span>                 , num2str(SETUP.Animation.Amplitude),<span class="keyword">...</span>
+0063    <span class="string">'Callback'</span>               , <span class="string">'command(''preferences'',''animation'',''Amp'');'</span>,<span class="keyword">...</span>
+0064    <span class="string">'Tag'</span>                    , <span class="string">'Preferences:Amp'</span>);
+0065 
+0066 <span class="comment">% Theta Text/Popup</span>
+0067 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0068    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0069    <span class="string">'Style'</span>                  , <span class="string">'Text'</span>,<span class="keyword">...</span>
+0070    <span class="string">'Position'</span>               , [200 framePos(2)+25 80 17],<span class="keyword">...</span>
+0071    <span class="string">'HorizontalAlignment'</span>    , <span class="string">'center'</span>,<span class="keyword">...</span>
+0072    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*0.8,<span class="keyword">...</span>
+0073    <span class="string">'String'</span>                 , <span class="string">'Spin deg/cyc'</span>);
+0074 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0075    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0076    <span class="string">'Style'</span>                  , <span class="string">'Edit'</span>,<span class="keyword">...</span>
+0077    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*1,<span class="keyword">...</span>
+0078    <span class="string">'Value'</span>                  , 1,<span class="keyword">...</span>
+0079    <span class="string">'Position'</span>               , [200 framePos(2)+10 80 20],<span class="keyword">...</span>
+0080    <span class="string">'String'</span>                 , num2str(SETUP.Animation.Theta),<span class="keyword">...</span>
+0081    <span class="string">'Callback'</span>               , <span class="string">'command(''preferences'',''animation'',''Deg'');'</span>,<span class="keyword">...</span>
+0082    <span class="string">'Tag'</span>                    , <span class="string">'Preferences:Deg'</span>);
+0083 
+0084 <span class="comment">% Display----</span>
+0085 framePos    = [10 pos(2)-115 pos(1)-20 50];
+0086 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0087    <span class="string">'Style'</span>                  , <span class="string">'Frame'</span>,<span class="keyword">...</span>
+0088    <span class="string">'Tag'</span>                    , <span class="string">'Frame:Controls'</span>,<span class="keyword">...</span>
+0089    <span class="string">'BackgroundColor'</span>        , [1 1 1]*.8,<span class="keyword">...</span>
+0090    <span class="string">'Position'</span>               , framePos);
+0091 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0092    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0093    <span class="string">'Style'</span>                  , <span class="string">'Text'</span>,<span class="keyword">...</span>
+0094    <span class="string">'Position'</span>               , [30 framePos(2)+40 42 17],<span class="keyword">...</span>
+0095    <span class="string">'HorizontalAlignment'</span>    , <span class="string">'center'</span>,<span class="keyword">...</span>
+0096    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*0.8,<span class="keyword">...</span>
+0097    <span class="string">'String'</span>                 , <span class="string">'Display'</span>);
+0098 <span class="comment">% Annotate</span>
+0099 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0100    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0101    <span class="string">'Style'</span>                  , <span class="string">'Checkbox'</span>,<span class="keyword">...</span>
+0102    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*0.8,<span class="keyword">...</span>
+0103    <span class="string">'Position'</span>               , [20 framePos(2)+25 80 20],<span class="keyword">...</span>
+0104    <span class="string">'Value'</span>                  , SETUP.Display.Annotate,<span class="keyword">...</span>
+0105    <span class="string">'String'</span>                 , <span class="string">'Annotate'</span>,<span class="keyword">...</span>
+0106    <span class="string">'Callback'</span>               , <span class="string">'command(''preferences'',''display'',''Annotate'');'</span>,<span class="keyword">...</span>
+0107    <span class="string">'Tag'</span>                    , <span class="string">'Preferences:Annotate'</span>);
+0108 <span class="comment">% Static</span>
+0109 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0110    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0111    <span class="string">'Style'</span>                  , <span class="string">'Checkbox'</span>,<span class="keyword">...</span>
+0112    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*0.8,<span class="keyword">...</span>
+0113    <span class="string">'Position'</span>               , [120 framePos(2)+25 80 20],<span class="keyword">...</span>
+0114    <span class="string">'Value'</span>                  , SETUP.Display.Static,<span class="keyword">...</span>
+0115    <span class="string">'String'</span>                 , <span class="string">'Static'</span>,<span class="keyword">...</span>
+0116    <span class="string">'Callback'</span>               , <span class="string">'command(''preferences'',''display'',''Static'');'</span>,<span class="keyword">...</span>
+0117    <span class="string">'Tag'</span>                    , <span class="string">'Preferences:Static'</span>);
+0118 <span class="comment">% Markers</span>
+0119 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0120    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0121    <span class="string">'Style'</span>                  , <span class="string">'Checkbox'</span>,<span class="keyword">...</span>
+0122    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*0.8,<span class="keyword">...</span>
+0123    <span class="string">'Position'</span>               , [220 framePos(2)+25 60 20],<span class="keyword">...</span>
+0124    <span class="string">'Value'</span>                  , SETUP.Display.Markers,<span class="keyword">...</span>
+0125    <span class="string">'String'</span>                 , <span class="string">'Markers'</span>,<span class="keyword">...</span>
+0126    <span class="string">'Callback'</span>               , <span class="string">'command(''preferences'',''display'',''Markers'');'</span>,<span class="keyword">...</span>
+0127    <span class="string">'Tag'</span>                    , <span class="string">'Preferences:Markers'</span>);
+0128 <span class="comment">% Labels</span>
+0129 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0130    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0131    <span class="string">'Style'</span>                  , <span class="string">'Checkbox'</span>,<span class="keyword">...</span>
+0132    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*0.8,<span class="keyword">...</span>
+0133    <span class="string">'Position'</span>               , [20 framePos(2)+5 80 20],<span class="keyword">...</span>
+0134    <span class="string">'Value'</span>                  , SETUP.Display.Labels,<span class="keyword">...</span>
+0135    <span class="string">'String'</span>                 , <span class="string">'Labels'</span>,<span class="keyword">...</span>
+0136    <span class="string">'Callback'</span>               , <span class="string">'command(''preferences'',''display'',''Labels'');'</span>,<span class="keyword">...</span>
+0137    <span class="string">'Tag'</span>                    , <span class="string">'Preferences:Labels'</span>);
+0138 <span class="comment">% UCS</span>
+0139 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0140    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0141    <span class="string">'Style'</span>                  , <span class="string">'Checkbox'</span>,<span class="keyword">...</span>
+0142    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*0.8,<span class="keyword">...</span>
+0143    <span class="string">'Position'</span>               , [120 framePos(2)+5 80 20],<span class="keyword">...</span>
+0144    <span class="string">'Value'</span>                  , SETUP.Display.UCS,<span class="keyword">...</span>
+0145    <span class="string">'String'</span>                 , <span class="string">'UCS'</span>,<span class="keyword">...</span>
+0146    <span class="string">'Callback'</span>               , <span class="string">'command(''preferences'',''display'',''UCS'');'</span>,<span class="keyword">...</span>
+0147    <span class="string">'Tag'</span>                    , <span class="string">'Preferences:UCS'</span>);
+0148 <span class="comment">% Spin</span>
+0149 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0150    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0151    <span class="string">'Style'</span>                  , <span class="string">'Checkbox'</span>,<span class="keyword">...</span>
+0152    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*0.8,<span class="keyword">...</span>
+0153    <span class="string">'Position'</span>               , [220 framePos(2)+5 60 20],<span class="keyword">...</span>
+0154    <span class="string">'Value'</span>                  , SETUP.Display.Spin,<span class="keyword">...</span>
+0155    <span class="string">'String'</span>                 , <span class="string">'Spin'</span>,<span class="keyword">...</span>
+0156    <span class="string">'Callback'</span>               , <span class="string">'command(''preferences'',''display'',''Spin'');'</span>,<span class="keyword">...</span>
+0157    <span class="string">'Tag'</span>                    , <span class="string">'Preferences:Spin'</span>);
+0158 
+0159 <span class="comment">% View----</span>
+0160 framePos    = [10 pos(2)-205 pos(1)-20 80];
+0161 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0162    <span class="string">'Style'</span>                  , <span class="string">'Frame'</span>,<span class="keyword">...</span>
+0163    <span class="string">'Tag'</span>                    , <span class="string">'Frame:Controls'</span>,<span class="keyword">...</span>
+0164    <span class="string">'BackgroundColor'</span>        , [1 1 1]*.8,<span class="keyword">...</span>
+0165    <span class="string">'Position'</span>               , framePos);
+0166 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0167    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0168    <span class="string">'Style'</span>                  , <span class="string">'Text'</span>,<span class="keyword">...</span>
+0169    <span class="string">'Position'</span>               , [30 framePos(2)+framePos(4)-10 32 17],<span class="keyword">...</span>
+0170    <span class="string">'HorizontalAlignment'</span>    , <span class="string">'center'</span>,<span class="keyword">...</span>
+0171    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*0.8,<span class="keyword">...</span>
+0172    <span class="string">'String'</span>                 , <span class="string">'View'</span>);
+0173 <span class="comment">% View Text/Popup</span>
+0174 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0175    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0176    <span class="string">'Style'</span>                  , <span class="string">'Text'</span>,<span class="keyword">...</span>
+0177    <span class="string">'Position'</span>               , [20 framePos(2)+60 100 17],<span class="keyword">...</span>
+0178    <span class="string">'HorizontalAlignment'</span>    , <span class="string">'center'</span>,<span class="keyword">...</span>
+0179    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*0.8,<span class="keyword">...</span>
+0180    <span class="string">'String'</span>                 , <span class="string">'Axis'</span>);
+0181 str = {<span class="string">'X'</span>,<span class="string">'Y'</span>,<span class="string">'Z'</span>,<span class="string">'Ortho'</span>};
+0182 val = find(ismember(str,SETUP.View.Axis));
+0183 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0184    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0185    <span class="string">'Style'</span>                  , <span class="string">'Popup'</span>,<span class="keyword">...</span>
+0186    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*1,<span class="keyword">...</span>
+0187    <span class="string">'Value'</span>                  , val,<span class="keyword">...</span>
+0188    <span class="string">'Position'</span>               , [20 framePos(2)+45 110 20],<span class="keyword">...</span>
+0189    <span class="string">'String'</span>                 , str,<span class="keyword">...</span>
+0190    <span class="string">'Callback'</span>               , <span class="string">'command(''preferences'',''view'',''Axis'');'</span>,<span class="keyword">...</span>
+0191    <span class="string">'Tag'</span>                    , <span class="string">'Preferences:Axis'</span>);
+0192 <span class="comment">% Type Text/Popup</span>
+0193 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0194    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0195    <span class="string">'Style'</span>                  , <span class="string">'Text'</span>,<span class="keyword">...</span>
+0196    <span class="string">'Position'</span>               , [20 framePos(2)+25 100 17],<span class="keyword">...</span>
+0197    <span class="string">'HorizontalAlignment'</span>    , <span class="string">'center'</span>,<span class="keyword">...</span>
+0198    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*0.8,<span class="keyword">...</span>
+0199    <span class="string">'String'</span>                 , <span class="string">'Type'</span>);
+0200 str = {<span class="string">'Single'</span>,<span class="string">'Quad'</span>,<span class="string">'Cross-eyed'</span>,<span class="string">'Red/Blue Glasses'</span>};
+0201 val = find(ismember(str,SETUP.View.Type));
+0202 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0203    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0204    <span class="string">'Style'</span>                  , <span class="string">'Popup'</span>,<span class="keyword">...</span>
+0205    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*1,<span class="keyword">...</span>
+0206    <span class="string">'Value'</span>                  , val,<span class="keyword">...</span>
+0207    <span class="string">'Position'</span>               , [20 framePos(2)+10 110 20],<span class="keyword">...</span>
+0208    <span class="string">'String'</span>                 , str,<span class="keyword">...</span>
+0209    <span class="string">'Callback'</span>               , <span class="string">'command(''preferences'',''view'',''Type'');'</span>,<span class="keyword">...</span>
+0210    <span class="string">'Tag'</span>                    , <span class="string">'Preferences:Type'</span>);
+0211 <span class="comment">% Up Vector Text/Popup</span>
+0212 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0213    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0214    <span class="string">'Style'</span>                  , <span class="string">'Text'</span>,<span class="keyword">...</span>
+0215    <span class="string">'Position'</span>               , [150 framePos(2)+60 100 17],<span class="keyword">...</span>
+0216    <span class="string">'HorizontalAlignment'</span>    , <span class="string">'center'</span>,<span class="keyword">...</span>
+0217    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*0.8,<span class="keyword">...</span>
+0218    <span class="string">'String'</span>                 , <span class="string">'Up vector'</span>);
+0219 str = {<span class="string">'+X'</span>,<span class="string">'+Y'</span>,<span class="string">'+Z'</span>};
+0220 val = find(ismember(str,SETUP.View.UpVector));
+0221 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0222    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0223    <span class="string">'Style'</span>                  , <span class="string">'Popup'</span>,<span class="keyword">...</span>
+0224    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*1,<span class="keyword">...</span>
+0225    <span class="string">'Value'</span>                  , val,<span class="keyword">...</span>
+0226    <span class="string">'Position'</span>               , [150 framePos(2)+45 110 20],<span class="keyword">...</span>
+0227    <span class="string">'String'</span>                 , str,<span class="keyword">...</span>
+0228    <span class="string">'Callback'</span>               , <span class="string">'command(''preferences'',''view'',''UpVector'');'</span>,<span class="keyword">...</span>
+0229    <span class="string">'Tag'</span>                    , <span class="string">'Preferences:UpVector'</span>);
+0230 <span class="comment">% Vector Type Text/Popup</span>
+0231 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0232    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0233    <span class="string">'Style'</span>                  , <span class="string">'Text'</span>,<span class="keyword">...</span>
+0234    <span class="string">'Position'</span>               , [150 framePos(2)+25 100 17],<span class="keyword">...</span>
+0235    <span class="string">'HorizontalAlignment'</span>    , <span class="string">'center'</span>,<span class="keyword">...</span>
+0236    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*0.8,<span class="keyword">...</span>
+0237    <span class="string">'String'</span>                 , <span class="string">'Vector type'</span>);
+0238 str = {<span class="string">'Real'</span>,<span class="string">'Imaginary'</span>,<span class="string">'Complex'</span>};
+0239 val = find(ismember(str,SETUP.View.VectorType));
+0240 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0241    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0242    <span class="string">'Style'</span>                  , <span class="string">'Popup'</span>,<span class="keyword">...</span>
+0243    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*1,<span class="keyword">...</span>
+0244    <span class="string">'Value'</span>                  , val,<span class="keyword">...</span>
+0245    <span class="string">'Position'</span>               , [150 framePos(2)+10 110 20],<span class="keyword">...</span>
+0246    <span class="string">'String'</span>                 , str,<span class="keyword">...</span>
+0247    <span class="string">'Callback'</span>               , <span class="string">'command(''preferences'',''view'',''VectorType'');'</span>,<span class="keyword">...</span>
+0248    <span class="string">'Tag'</span>                    , <span class="string">'Preferences:VectorType'</span>);
+0249 
+0250 <span class="comment">% Colors----</span>
+0251 framePos    = [10 pos(2)-280 pos(1)-20 65];
+0252 bcb         = SETUP.Colors.Background;
+0253 <span class="comment">% Background</span>
+0254 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0255    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0256    <span class="string">'Style'</span>                  , <span class="string">'Pushbutton'</span>,<span class="keyword">...</span>
+0257    <span class="string">'Backgroundcolor'</span>        , bcb,<span class="keyword">...</span>
+0258    <span class="string">'ForegroundColor'</span>        , SETUP.Colors.Background,<span class="keyword">...</span>
+0259    <span class="string">'Position'</span>               , framePos,<span class="keyword">...</span>
+0260    <span class="string">'Callback'</span>               , <span class="string">'command(''preferences'',''color'',''Background'');'</span>,<span class="keyword">...</span>
+0261    <span class="string">'Tag'</span>                    , <span class="string">'Preferences:BackgroundColor'</span>);
+0262 <span class="comment">%Annotate</span>
+0263 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0264    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0265    <span class="string">'Style'</span>                  , <span class="string">'Pushbutton'</span>,<span class="keyword">...</span>
+0266    <span class="string">'Backgroundcolor'</span>        , bcb,<span class="keyword">...</span>
+0267    <span class="string">'ForegroundColor'</span>        , SETUP.Colors.Annotate,<span class="keyword">...</span>
+0268    <span class="string">'Position'</span>               , [20 framePos(2)+35 60 20],<span class="keyword">...</span>
+0269    <span class="string">'String'</span>                 , <span class="string">'Annotate'</span>,<span class="keyword">...</span>
+0270    <span class="string">'Callback'</span>               , <span class="string">'command(''preferences'',''color'',''Annotate'');'</span>,<span class="keyword">...</span>
+0271    <span class="string">'Tag'</span>                    , <span class="string">'Preferences:AnnotateColor'</span>);
+0272 <span class="comment">% Static</span>
+0273 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0274    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0275    <span class="string">'Style'</span>                  , <span class="string">'Pushbutton'</span>,<span class="keyword">...</span>
+0276    <span class="string">'Backgroundcolor'</span>        , bcb,<span class="keyword">...</span>
+0277    <span class="string">'ForegroundColor'</span>        , SETUP.Colors.Static,<span class="keyword">...</span>
+0278    <span class="string">'Position'</span>               , [85 framePos(2)+35 60 20],<span class="keyword">...</span>
+0279    <span class="string">'String'</span>                 , <span class="string">'Static'</span>,<span class="keyword">...</span>
+0280    <span class="string">'Callback'</span>               , <span class="string">'command(''preferences'',''color'',''Static'');'</span>,<span class="keyword">...</span>
+0281    <span class="string">'Tag'</span>                    , <span class="string">'Preferences:StaticColor'</span>);
+0282 <span class="comment">% Markers</span>
+0283 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0284    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0285    <span class="string">'Style'</span>                  , <span class="string">'Pushbutton'</span>,<span class="keyword">...</span>
+0286    <span class="string">'Backgroundcolor'</span>        , bcb,<span class="keyword">...</span>
+0287    <span class="string">'ForegroundColor'</span>        , SETUP.Colors.Markers,<span class="keyword">...</span>
+0288    <span class="string">'Position'</span>               , [150 framePos(2)+35 60 20],<span class="keyword">...</span>
+0289    <span class="string">'String'</span>                 , <span class="string">'Markers'</span>,<span class="keyword">...</span>
+0290    <span class="string">'Callback'</span>               , <span class="string">'command(''preferences'',''color'',''Markers'');'</span>,<span class="keyword">...</span>
+0291    <span class="string">'Tag'</span>                    , <span class="string">'Preferences:MarkersColor'</span>);
+0292 <span class="comment">% Labels</span>
+0293 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0294    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0295    <span class="string">'Style'</span>                  , <span class="string">'Pushbutton'</span>,<span class="keyword">...</span>
+0296    <span class="string">'Backgroundcolor'</span>        , bcb,<span class="keyword">...</span>
+0297    <span class="string">'ForegroundColor'</span>        , SETUP.Colors.Labels,<span class="keyword">...</span>
+0298    <span class="string">'Position'</span>               , [215 framePos(2)+35 60 20],<span class="keyword">...</span>
+0299    <span class="string">'String'</span>                 , <span class="string">'Labels'</span>,<span class="keyword">...</span>
+0300    <span class="string">'Callback'</span>               , <span class="string">'command(''preferences'',''color'',''Labels'');'</span>,<span class="keyword">...</span>
+0301    <span class="string">'Tag'</span>                    , <span class="string">'Preferences:LabelsColor'</span>);
+0302 
+0303 <span class="comment">%Shape</span>
+0304 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0305    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0306    <span class="string">'Style'</span>                  , <span class="string">'Pushbutton'</span>,<span class="keyword">...</span>
+0307    <span class="string">'Backgroundcolor'</span>        , bcb,<span class="keyword">...</span>
+0308    <span class="string">'ForegroundColor'</span>        , SETUP.Colors.Shape,<span class="keyword">...</span>
+0309    <span class="string">'Position'</span>               , [20 framePos(2)+10 60 20],<span class="keyword">...</span>
+0310    <span class="string">'String'</span>                 , <span class="string">'Shape'</span>,<span class="keyword">...</span>
+0311    <span class="string">'Callback'</span>               , <span class="string">'command(''preferences'',''color'',''Shape'');'</span>,<span class="keyword">...</span>
+0312    <span class="string">'Tag'</span>                    , <span class="string">'Preferences:ShapeColor'</span>);
+0313 <span class="comment">% UCS</span>
+0314 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0315    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0316    <span class="string">'Style'</span>                  , <span class="string">'Pushbutton'</span>,<span class="keyword">...</span>
+0317    <span class="string">'Backgroundcolor'</span>        , bcb,<span class="keyword">...</span>
+0318    <span class="string">'ForegroundColor'</span>        , SETUP.Colors.UCS,<span class="keyword">...</span>
+0319    <span class="string">'Position'</span>               , [85 framePos(2)+10 60 20],<span class="keyword">...</span>
+0320    <span class="string">'String'</span>                 , <span class="string">'UCS'</span>,<span class="keyword">...</span>
+0321    <span class="string">'Callback'</span>               , <span class="string">'command(''preferences'',''color'',''UCS'');'</span>,<span class="keyword">...</span>
+0322    <span class="string">'Tag'</span>                    , <span class="string">'Preferences:UCSColor'</span>);
+0323 <span class="comment">% LeftEye</span>
+0324 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0325    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0326    <span class="string">'Style'</span>                  , <span class="string">'Pushbutton'</span>,<span class="keyword">...</span>
+0327    <span class="string">'Backgroundcolor'</span>        , bcb,<span class="keyword">...</span>
+0328    <span class="string">'ForegroundColor'</span>        , SETUP.Colors.LeftEye,<span class="keyword">...</span>
+0329    <span class="string">'Position'</span>               , [150 framePos(2)+10 60 20],<span class="keyword">...</span>
+0330    <span class="string">'String'</span>                 , <span class="string">'Left Eye'</span>,<span class="keyword">...</span>
+0331    <span class="string">'Callback'</span>               , <span class="string">'command(''preferences'',''color'',''LeftEye'');'</span>,<span class="keyword">...</span>
+0332    <span class="string">'Tag'</span>                    , <span class="string">'Preferences:LeftEyeColor'</span>);
+0333 <span class="comment">% RightEye</span>
+0334 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0335    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0336    <span class="string">'Style'</span>                  , <span class="string">'Pushbutton'</span>,<span class="keyword">...</span>
+0337    <span class="string">'Backgroundcolor'</span>        , bcb,<span class="keyword">...</span>
+0338    <span class="string">'ForegroundColor'</span>        , SETUP.Colors.RightEye,<span class="keyword">...</span>
+0339    <span class="string">'Position'</span>               , [215 framePos(2)+10 60 20],<span class="keyword">...</span>
+0340    <span class="string">'String'</span>                 , <span class="string">'Right Eye'</span>,<span class="keyword">...</span>
+0341    <span class="string">'Callback'</span>               , <span class="string">'command(''preferences'',''color'',''RightEye'');'</span>,<span class="keyword">...</span>
+0342    <span class="string">'Tag'</span>                    , <span class="string">'Preferences:RightEyeColor'</span>);
+0343 
+0344 
+0345 <span class="comment">% AVI / SNAPSHOT Option</span>
+0346 framePos    = [10 pos(2)-440 pos(1)-20 150];
+0347 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0348    <span class="string">'Style'</span>                  , <span class="string">'Frame'</span>,<span class="keyword">...</span>
+0349    <span class="string">'Tag'</span>                    , <span class="string">'Frame:Controls'</span>,<span class="keyword">...</span>
+0350    <span class="string">'BackgroundColor'</span>        , [1 1 1]*.8,<span class="keyword">...</span>
+0351    <span class="string">'Position'</span>               , framePos);
+0352 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0353    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0354    <span class="string">'Style'</span>                  , <span class="string">'Text'</span>,<span class="keyword">...</span>
+0355    <span class="string">'Position'</span>               , [60 framePos(2)+framePos(4)-10 25 17],<span class="keyword">...</span>
+0356    <span class="string">'HorizontalAlignment'</span>    , <span class="string">'center'</span>,<span class="keyword">...</span>
+0357    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*0.8,<span class="keyword">...</span>
+0358    <span class="string">'String'</span>                 , <span class="string">'AVI'</span>);
+0359 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0360    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0361    <span class="string">'Style'</span>                  , <span class="string">'Text'</span>,<span class="keyword">...</span>
+0362    <span class="string">'Position'</span>               , [190 framePos(2)+framePos(4)-10 55 17],<span class="keyword">...</span>
+0363    <span class="string">'HorizontalAlignment'</span>    , <span class="string">'center'</span>,<span class="keyword">...</span>
+0364    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*0.8,<span class="keyword">...</span>
+0365    <span class="string">'String'</span>                 , <span class="string">'Snapshot'</span>);
+0366 <span class="comment">% AVI Options</span>
+0367 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0368    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0369    <span class="string">'Style'</span>                  , <span class="string">'Text'</span>,<span class="keyword">...</span>
+0370    <span class="string">'Position'</span>               , [20 framePos(2)+130 100 17],<span class="keyword">...</span>
+0371    <span class="string">'HorizontalAlignment'</span>    , <span class="string">'center'</span>,<span class="keyword">...</span>
+0372    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*0.8,<span class="keyword">...</span>
+0373    <span class="string">'String'</span>                 , <span class="string">'Format'</span>);
+0374 str = {<span class="string">'Indeo3'</span>;<span class="string">'Indeo5'</span>;<span class="string">'Cinepak'</span>;<span class="string">'None'</span>};
+0375 val = find(ismember(str,SETUP.AVI.Format));
+0376 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0377    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0378    <span class="string">'Style'</span>                  , <span class="string">'Popup'</span>,<span class="keyword">...</span>
+0379    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*1,<span class="keyword">...</span>
+0380    <span class="string">'Value'</span>                  , val,<span class="keyword">...</span>
+0381    <span class="string">'Position'</span>               , [20 framePos(2)+115 110 20],<span class="keyword">...</span>
+0382    <span class="string">'String'</span>                 , str,<span class="keyword">...</span>
+0383    <span class="string">'Callback'</span>               , <span class="string">'command(''preferences'',''avi'',''Format'');'</span>,<span class="keyword">...</span>
+0384    <span class="string">'Tag'</span>                    , <span class="string">'Preferences:AviFormat'</span>);
+0385 
+0386 <span class="comment">% AVI Quality</span>
+0387 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0388    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0389    <span class="string">'Style'</span>                  , <span class="string">'Text'</span>,<span class="keyword">...</span>
+0390    <span class="string">'Position'</span>               , [20 framePos(2)+90 60 17],<span class="keyword">...</span>
+0391    <span class="string">'HorizontalAlignment'</span>    , <span class="string">'left'</span>,<span class="keyword">...</span>
+0392    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*0.8,<span class="keyword">...</span>
+0393    <span class="string">'String'</span>                 , <span class="string">'Quality %'</span>);
+0394 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0395    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0396    <span class="string">'Style'</span>                  , <span class="string">'Edit'</span>,<span class="keyword">...</span>
+0397    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*1,<span class="keyword">...</span>
+0398    <span class="string">'Position'</span>               , [80 framePos(2)+90 50 20],<span class="keyword">...</span>
+0399    <span class="string">'String'</span>                 , num2str(SETUP.AVI.Quality),<span class="keyword">...</span>
+0400    <span class="string">'Callback'</span>               , <span class="string">'command(''preferences'',''avi'',''Quality'');'</span>,<span class="keyword">...</span>
+0401    <span class="string">'Tag'</span>                    , <span class="string">'Preferences:AviQuality'</span>);
+0402 <span class="comment">% AVI Length</span>
+0403 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0404    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0405    <span class="string">'Style'</span>                  , <span class="string">'Text'</span>,<span class="keyword">...</span>
+0406    <span class="string">'Position'</span>               , [20 framePos(2)+65 60 17],<span class="keyword">...</span>
+0407    <span class="string">'HorizontalAlignment'</span>    , <span class="string">'left'</span>,<span class="keyword">...</span>
+0408    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*0.8,<span class="keyword">...</span>
+0409    <span class="string">'TooltipString'</span>          , <span class="string">'Movie length in seconds.'</span>,<span class="keyword">...</span>
+0410    <span class="string">'String'</span>                 , <span class="string">'Time sec.'</span>);
+0411 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0412    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0413    <span class="string">'Style'</span>                  , <span class="string">'Edit'</span>,<span class="keyword">...</span>
+0414    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*1,<span class="keyword">...</span>
+0415    <span class="string">'Position'</span>               , [80 framePos(2)+65 50 20],<span class="keyword">...</span>
+0416    <span class="string">'String'</span>                 , num2str(SETUP.AVI.TimeLength),<span class="keyword">...</span>
+0417    <span class="string">'Callback'</span>               , <span class="string">'command(''preferences'',''avi'',''TimeLength'');'</span>,<span class="keyword">...</span>
+0418    <span class="string">'TooltipString'</span>          , <span class="string">'Movie length in seconds.'</span>,<span class="keyword">...</span>
+0419    <span class="string">'Tag'</span>                    , <span class="string">'Preferences:AviTimeLength'</span>);
+0420 <span class="comment">% AVI Do All Modes</span>
+0421 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0422    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0423    <span class="string">'Style'</span>                  , <span class="string">'checkbox'</span>,<span class="keyword">...</span>
+0424    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*0.8,<span class="keyword">...</span>
+0425    <span class="string">'Position'</span>               , [20 framePos(2)+45 110 20],<span class="keyword">...</span>
+0426    <span class="string">'String'</span>                 , <span class="string">'Do all modes'</span>,<span class="keyword">...</span>
+0427    <span class="string">'Value'</span>                  , SETUP.AVI.DoAllModes,<span class="keyword">...</span>
+0428    <span class="string">'Callback'</span>               , <span class="string">'command(''preferences'',''avi'',''DoAllModes'');'</span>,<span class="keyword">...</span>
+0429    <span class="string">'TooltipString'</span>          , <span class="string">'Movie length in seconds.'</span>,<span class="keyword">...</span>
+0430    <span class="string">'Tag'</span>                    , <span class="string">'Preferences:AviDoAllModes'</span>);
+0431 
+0432 <span class="comment">% Snapshot Options</span>
+0433 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0434    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0435    <span class="string">'Style'</span>                  , <span class="string">'Text'</span>,<span class="keyword">...</span>
+0436    <span class="string">'Position'</span>               , [170 framePos(2)+130 100 17],<span class="keyword">...</span>
+0437    <span class="string">'HorizontalAlignment'</span>    , <span class="string">'center'</span>,<span class="keyword">...</span>
+0438    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*0.8,<span class="keyword">...</span>
+0439    <span class="string">'String'</span>                 , <span class="string">'Format'</span>);
+0440 str = {<span class="string">'BMP monochrome'</span>;<span class="string">'BMP 24-bit'</span>;<span class="string">'EMF metafile'</span>;<span class="string">'EPS b&amp;w'</span>;<span class="string">'EPS color'</span>;<span class="string">'EPS2 B&amp;W'</span>;<span class="string">'EPS2 color'</span>;<span class="string">'JPEG 24-bit'</span>;<span class="string">'PCX 24-bit'</span>;<span class="string">'PDF color'</span>;<span class="string">'PNG 24-bit'</span>;<span class="string">'TIFF 24-bit'</span>};
+0441 val = find(ismember(str,SETUP.Snapshot.Format));
+0442 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0443    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0444    <span class="string">'Style'</span>                  , <span class="string">'Popup'</span>,<span class="keyword">...</span>
+0445    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*1,<span class="keyword">...</span>
+0446    <span class="string">'Value'</span>                  , val,<span class="keyword">...</span>
+0447    <span class="string">'Position'</span>               , [170 framePos(2)+115 110 20],<span class="keyword">...</span>
+0448    <span class="string">'String'</span>                 , str,<span class="keyword">...</span>
+0449    <span class="string">'Callback'</span>               , <span class="string">'command(''preferences'',''snapshot'',''Format'');'</span>,<span class="keyword">...</span>
+0450    <span class="string">'Tag'</span>                    , <span class="string">'Preferences:SSFormat'</span>);
+0451 <span class="comment">% Snapshot Quality</span>
+0452 <span class="comment">%h1=uicontrol('Parent',h0,...</span>
+0453 <span class="comment">%   'Units'                  , 'pixels',...</span>
+0454 <span class="comment">%   'Style'                  , 'Text',...</span>
+0455 <span class="comment">%   'Position'               , [170 framePos(2)+90 60 17],...</span>
+0456 <span class="comment">%   'HorizontalAlignment'    , 'left',...</span>
+0457 <span class="comment">%   'Backgroundcolor'        , [1 1 1]*0.8,...</span>
+0458 <span class="comment">%   'String'                 , 'Quality %');</span>
+0459 <span class="comment">%h1=uicontrol('Parent',h0,...</span>
+0460 <span class="comment">%   'Units'                  , 'pixels',...</span>
+0461 <span class="comment">%   'Style'                  , 'Edit',...</span>
+0462 <span class="comment">%   'Backgroundcolor'        , [1 1 1]*1,...</span>
+0463 <span class="comment">%   'Position'               , [230 framePos(2)+90 50 20],...</span>
+0464 <span class="comment">%   'String'                 , num2str(SETUP.Snapshot.Quality),...</span>
+0465 <span class="comment">%   'Callback'               , 'command(''preferences'',''snapshot'',''Quality'');',...</span>
+0466 <span class="comment">%   'Tag'                    , 'Preferences:SSQuality');</span>
+0467 str = {<span class="string">'Z-buffer'</span>;<span class="string">'Open GL'</span>;<span class="string">'Painters'</span>};
+0468 val = find(ismember(str,SETUP.Snapshot.Renderer));
+0469 <span class="comment">% Snapshot Renderer</span>
+0470 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0471    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0472    <span class="string">'Style'</span>                  , <span class="string">'Text'</span>,<span class="keyword">...</span>
+0473    <span class="string">'Position'</span>               , [170 framePos(2)+90 60 17],<span class="keyword">...</span>
+0474    <span class="string">'HorizontalAlignment'</span>    , <span class="string">'left'</span>,<span class="keyword">...</span>
+0475    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*0.8,<span class="keyword">...</span>
+0476    <span class="string">'String'</span>                 , <span class="string">'Render'</span>);
+0477 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0478    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0479    <span class="string">'Style'</span>                  , <span class="string">'Popup'</span>,<span class="keyword">...</span>
+0480    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*1,<span class="keyword">...</span>
+0481    <span class="string">'Position'</span>               , [210 framePos(2)+90 70 20],<span class="keyword">...</span>
+0482    <span class="string">'String'</span>                 , str,<span class="keyword">...</span>
+0483    <span class="string">'Value'</span>                  , val,<span class="keyword">...</span>
+0484    <span class="string">'Callback'</span>               , <span class="string">'command(''preferences'',''snapshot'',''Renderer'');'</span>,<span class="keyword">...</span>
+0485    <span class="string">'Tag'</span>                    , <span class="string">'Preferences:SSRender'</span>);
+0486 <span class="comment">% Snapshot resolution</span>
+0487 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0488    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0489    <span class="string">'Style'</span>                  , <span class="string">'Text'</span>,<span class="keyword">...</span>
+0490    <span class="string">'Position'</span>               , [170 framePos(2)+65 60 17],<span class="keyword">...</span>
+0491    <span class="string">'HorizontalAlignment'</span>    , <span class="string">'Left'</span>,<span class="keyword">...</span>
+0492    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*0.8,<span class="keyword">...</span>
+0493    <span class="string">'String'</span>                 , <span class="string">'Resolution'</span>);
+0494 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0495    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0496    <span class="string">'Style'</span>                  , <span class="string">'Edit'</span>,<span class="keyword">...</span>
+0497    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*1,<span class="keyword">...</span>
+0498    <span class="string">'Position'</span>               , [230 framePos(2)+65 50 20],<span class="keyword">...</span>
+0499    <span class="string">'String'</span>                 , num2str(SETUP.Snapshot.Resolution),<span class="keyword">...</span>
+0500    <span class="string">'Callback'</span>               , <span class="string">'command(''preferences'',''snapshot'',''Resolution'');'</span>,<span class="keyword">...</span>
+0501    <span class="string">'TooltipString'</span>          , <span class="string">'Movie length in seconds.'</span>,<span class="keyword">...</span>
+0502    <span class="string">'Tag'</span>                    , <span class="string">'Preferences:SSResolution'</span>);
+0503 <span class="comment">% Snapshot Do All Modes</span>
+0504 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0505    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0506    <span class="string">'Style'</span>                  , <span class="string">'checkbox'</span>,<span class="keyword">...</span>
+0507    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*0.8,<span class="keyword">...</span>
+0508    <span class="string">'Position'</span>               , [170 framePos(2)+45 110 20],<span class="keyword">...</span>
+0509    <span class="string">'String'</span>                 , <span class="string">'Do all modes'</span>,<span class="keyword">...</span>
+0510    <span class="string">'Value'</span>                  , SETUP.Snapshot.DoAllModes,<span class="keyword">...</span>
+0511    <span class="string">'Callback'</span>               , <span class="string">'command(''preferences'',''snapshot'',''DoAllModes'');'</span>,<span class="keyword">...</span>
+0512    <span class="string">'TooltipString'</span>          , <span class="string">'Movie length in seconds.'</span>,<span class="keyword">...</span>
+0513    <span class="string">'Tag'</span>                    , <span class="string">'Preferences:SSDoAllModes'</span>);
+0514 
+0515 <span class="comment">% Output path</span>
+0516 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0517    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0518    <span class="string">'Style'</span>                  , <span class="string">'Text'</span>,<span class="keyword">...</span>
+0519    <span class="string">'Position'</span>               , [20 framePos(2)+25 60 17],<span class="keyword">...</span>
+0520    <span class="string">'HorizontalAlignment'</span>    , <span class="string">'Left'</span>,<span class="keyword">...</span>
+0521    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*0.8,<span class="keyword">...</span>
+0522    <span class="string">'TooltipString'</span>          , <span class="string">'Default path to save all modes for AVI and snapshots.'</span>,<span class="keyword">...</span>
+0523    <span class="string">'String'</span>                 , <span class="string">'Default path'</span>);
+0524 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0525    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0526    <span class="string">'Style'</span>                  , <span class="string">'edit'</span>,<span class="keyword">...</span>
+0527    <span class="string">'Backgroundcolor'</span>        , [1 1 1],<span class="keyword">...</span>
+0528    <span class="string">'Position'</span>               , [20 framePos(2)+10 230 20],<span class="keyword">...</span>
+0529    <span class="string">'HorizontalAlignment'</span>    , <span class="string">'left'</span>,<span class="keyword">...</span>
+0530    <span class="string">'String'</span>                 , SETUP.Path.Export,<span class="keyword">...</span>
+0531    <span class="string">'Callback'</span>               , <span class="string">'command(''preferences'',''exportPath'',''edit'');'</span>,<span class="keyword">...</span>
+0532    <span class="string">'TooltipString'</span>          , <span class="string">'Default path to save all modes for AVI and snapshots.'</span>,<span class="keyword">...</span>
+0533    <span class="string">'Tag'</span>                    , <span class="string">'Preferences:EditExportPath'</span>);
+0534 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0535    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0536    <span class="string">'Style'</span>                  , <span class="string">'Pushbutton'</span>,<span class="keyword">...</span>
+0537    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*0.8,<span class="keyword">...</span>
+0538    <span class="string">'Position'</span>               , [250 framePos(2)+10 30 20],<span class="keyword">...</span>
+0539    <span class="string">'String'</span>                 , <span class="string">'...'</span>,<span class="keyword">...</span>
+0540    <span class="string">'Callback'</span>               , <span class="string">'command(''preferences'',''exportPath'',''push'');'</span>,<span class="keyword">...</span>
+0541    <span class="string">'TooltipString'</span>          , <span class="string">'Default path to save all modes for AVI and snapshots.'</span>,<span class="keyword">...</span>
+0542    <span class="string">'Tag'</span>                    , <span class="string">'Preferences:PushbuttonExportPath'</span>);
+0543 
+0544 <span class="comment">% AutoApply</span>
+0545 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0546    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0547    <span class="string">'Style'</span>                  , <span class="string">'checkbox'</span>,<span class="keyword">...</span>
+0548    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*.8,<span class="keyword">...</span>
+0549    <span class="string">'Position'</span>               , [10 35 100 20],<span class="keyword">...</span>
+0550    <span class="string">'String'</span>                 , <span class="string">'Auto apply'</span>,<span class="keyword">...</span>
+0551    <span class="string">'Value'</span>                  , SETUP.Animation.AutoApplyPrefs,<span class="keyword">...</span>
+0552    <span class="string">'Callback'</span>               , <span class="string">'command(''preferences'',''autoapply'');'</span>,<span class="keyword">...</span>
+0553    <span class="string">'Tooltipstring'</span>          , <span class="string">'Apply changes immediately'</span>,<span class="keyword">...</span>
+0554    <span class="string">'Tag'</span>                    , <span class="string">'Preferences:AutoApply'</span>);
+0555 <span class="comment">% Apply</span>
+0556 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0557    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0558    <span class="string">'Style'</span>                  , <span class="string">'Pushbutton'</span>,<span class="keyword">...</span>
+0559    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*.8,<span class="keyword">...</span>
+0560    <span class="string">'Position'</span>               , [10 5 65 25],<span class="keyword">...</span>
+0561    <span class="string">'String'</span>                 , <span class="string">'Apply'</span>,<span class="keyword">...</span>
+0562    <span class="string">'Callback'</span>               , <span class="string">'command(''preferences'',''apply'');'</span>,<span class="keyword">...</span>
+0563    <span class="string">'Tooltipstring'</span>          , <span class="string">'Apply pending changes'</span>,<span class="keyword">...</span>
+0564    <span class="string">'Tag'</span>                    , <span class="string">'Preferences:Apply'</span>);
+0565 <span class="comment">% Cancel</span>
+0566 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0567    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0568    <span class="string">'Style'</span>                  , <span class="string">'Pushbutton'</span>,<span class="keyword">...</span>
+0569    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*.8,<span class="keyword">...</span>
+0570    <span class="string">'Position'</span>               , [80 5 65 25],<span class="keyword">...</span>
+0571    <span class="string">'String'</span>                 , <span class="string">'Cancel'</span>,<span class="keyword">...</span>
+0572    <span class="string">'Callback'</span>               , <span class="string">'command(''close'',''preferences'');'</span>,<span class="keyword">...</span>
+0573    <span class="string">'Tooltipstring'</span>          , <span class="string">'Cancel changes not applied and close'</span>,<span class="keyword">...</span>
+0574    <span class="string">'Tag'</span>                    , <span class="string">'Preferences:Cancel'</span>);
+0575 <span class="comment">% Save</span>
+0576 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0577    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0578    <span class="string">'Style'</span>                  , <span class="string">'Pushbutton'</span>,<span class="keyword">...</span>
+0579    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*.8,<span class="keyword">...</span>
+0580    <span class="string">'Position'</span>               , [150 5 65 25],<span class="keyword">...</span>
+0581    <span class="string">'String'</span>                 , <span class="string">'Save'</span>,<span class="keyword">...</span>
+0582    <span class="string">'Callback'</span>               , <span class="string">'command(''preferences'',''save'');'</span>,<span class="keyword">...</span>
+0583    <span class="string">'Tooltipstring'</span>          , <span class="string">'Save preferences'</span>,<span class="keyword">...</span>
+0584    <span class="string">'Tag'</span>                    , <span class="string">'Preferences:Save'</span>);
+0585 <span class="comment">% Reset</span>
+0586 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0587    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0588    <span class="string">'Style'</span>                  , <span class="string">'Pushbutton'</span>,<span class="keyword">...</span>
+0589    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*.8,<span class="keyword">...</span>
+0590    <span class="string">'Position'</span>               , [220 30 65 25],<span class="keyword">...</span>
+0591    <span class="string">'String'</span>                 , <span class="string">'Reset'</span>,<span class="keyword">...</span>
+0592    <span class="string">'Callback'</span>               , <span class="string">'command(''preferences'',''reset'');'</span>,<span class="keyword">...</span>
+0593    <span class="string">'Tooltipstring'</span>          , <span class="string">'Restore software defaults'</span>,<span class="keyword">...</span>
+0594    <span class="string">'Tag'</span>                    , <span class="string">'Preferences:Reset'</span>);
+0595 <span class="comment">% Defaults</span>
+0596 h1=uicontrol(<span class="string">'Parent'</span>,h0,<span class="keyword">...</span>
+0597    <span class="string">'Units'</span>                  , <span class="string">'pixels'</span>,<span class="keyword">...</span>
+0598    <span class="string">'Style'</span>                  , <span class="string">'Pushbutton'</span>,<span class="keyword">...</span>
+0599    <span class="string">'Backgroundcolor'</span>        , [1 1 1]*.8,<span class="keyword">...</span>
+0600    <span class="string">'Position'</span>               , [220 5 65 25],<span class="keyword">...</span>
+0601    <span class="string">'String'</span>                 , <span class="string">'Defaults'</span>,<span class="keyword">...</span>
+0602    <span class="string">'Callback'</span>               , <span class="string">'command(''preferences'',''defaults'');'</span>,<span class="keyword">...</span>
+0603    <span class="string">'Tooltipstring'</span>          , <span class="string">'Reload saved parameters'</span>,<span class="keyword">...</span>
+0604    <span class="string">'Tag'</span>                    , <span class="string">'Preferences:Defaults'</span>);</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

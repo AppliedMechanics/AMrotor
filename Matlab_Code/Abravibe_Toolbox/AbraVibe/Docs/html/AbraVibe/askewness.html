@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of askewness</title>
+  <meta name="keywords" content="askewness">
+  <meta name="description" content="ASKEWNESS Calculate skewness">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; askewness.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>askewness
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>ASKEWNESS Calculate skewness</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function S = askewness(x); </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment">ASKEWNESS Calculate skewness
+
+       S = askewness(x);
+
+       S           Skewness (third moment over sigma^3)
+
+       x           Time data, if more than one column, each column is
+                   computed and S is a row vector</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="amoment.html" class="code" title="function M = amoment(x,n);">amoment</a>	AMOMENT    Calculate statistical moment</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="statchk.html" class="code" title="function statchk(x, N, NPlot, FileName);">statchk</a>	STATCHK Create standard statistics for time signal(s) in matrix</li><li><a href="statchkf.html" class="code" title="function statchkf(Prefix,StartNo,StopNo,FileName)">statchkf</a>	STATCHK Create standard statistics for time signal(s) in ABRAVIBE files</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function S = askewness(x);</a>
+0002 <span class="comment">%ASKEWNESS Calculate skewness</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%       S = askewness(x);</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%       S           Skewness (third moment over sigma^3)</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%       x           Time data, if more than one column, each column is</span>
+0009 <span class="comment">%                   computed and S is a row vector</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%</span>
+0012 
+0013 
+0014 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0015 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0016 <span class="comment">% Version: 1.0 2011-06-23</span>
+0017 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0018 
+0019 Sigma=std(x);
+0020 S=<a href="amoment.html" class="code" title="function M = amoment(x,n);">amoment</a>(x,3)./(Sigma.^3);</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

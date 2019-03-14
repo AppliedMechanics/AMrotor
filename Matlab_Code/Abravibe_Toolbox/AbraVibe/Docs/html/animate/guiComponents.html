@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of guiComponents</title>
+  <meta name="keywords" content="guiComponents">
+  <meta name="description" content="">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">animate</a> &gt; guiComponents.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for animate&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>guiComponents
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong></strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function h0=guiComponents(aniFig,SETUP,varargin); </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>	</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function h0=guiComponents(aniFig,SETUP,varargin);</a>
+0002 
+0003 bcolor=[1 1 1]*0.8;
+0004 pos = [300 300];
+0005 POS = get(aniFig,<span class="string">'Position'</span>);
+0006 <span class="keyword">if</span> nargin&gt;2
+0007     POS = varargin{end};
+0008 <span class="keyword">else</span>
+0009     POS = [POS(1)+(POS(3)-pos(1))/2 POS(2)+(POS(4)-pos(2))/2 pos(1) pos(2)];
+0010 <span class="keyword">end</span>
+0011 h0=figure(<span class="string">'Color'</span>           , bcolor, <span class="keyword">...</span>
+0012    <span class="string">'MenuBar'</span>                , <span class="string">'none'</span>, <span class="keyword">...</span>
+0013    <span class="string">'NumberTitle'</span>            , <span class="string">'off'</span>, <span class="keyword">...</span>
+0014    <span class="string">'Name'</span>                   , <span class="string">'Components'</span>, <span class="keyword">...</span>
+0015    <span class="string">'Position'</span>               , POS, <span class="keyword">...</span>
+0016    <span class="string">'Resize'</span>                 , <span class="string">'off'</span>,<span class="keyword">...</span>
+0017    <span class="string">'Tag'</span>                    , <span class="string">'ANIMATE:COMPONENTS'</span>,<span class="keyword">...</span>
+0018    <span class="string">'WindowButtonUpFcn'</span>      , <span class="string">'command(''components'',''stack'');'</span>,<span class="keyword">...</span>
+0019    <span class="string">'CloseRequestFcn'</span>        , [<span class="string">'command(''close'',''components'');'</span>]);
+0020 
+0021 <span class="comment">% Listbox</span>
+0022 h1  = uicontrol(<span class="string">'Style'</span>     , <span class="string">'Text'</span>,<span class="keyword">...</span>
+0023     <span class="string">'Position'</span>              , [10 pos(2)-22 pos(1)-20 17],<span class="keyword">...</span>
+0024     <span class="string">'backgroundcolor'</span>       , bcolor,<span class="keyword">...</span>
+0025     <span class="string">'HorizontalAlignment'</span>   , <span class="string">'left'</span>,<span class="keyword">...</span>
+0026     <span class="string">'String'</span>                , sprintf(<span class="string">'Name       Vis Fill     Color'</span>),<span class="keyword">...</span>
+0027     <span class="string">'FontName'</span>              , <span class="string">'Courier New'</span>);
+0028 h1  = uicontrol(<span class="string">'Style'</span>     , <span class="string">'listbox'</span>,<span class="keyword">...</span>
+0029     <span class="string">'Position'</span>              , [10 80 pos(1)-20 pos(2)-100],<span class="keyword">...</span>
+0030     <span class="string">'FontName'</span>              , <span class="string">'Courier New'</span>,<span class="keyword">...</span>
+0031     <span class="string">'Backgroundcolor'</span>       , [1 1 1],<span class="keyword">...</span>
+0032     <span class="string">'Min'</span>                   , -1,<span class="keyword">...</span>
+0033     <span class="string">'Max'</span>                   , 1,<span class="keyword">...</span>
+0034     <span class="string">'Tag'</span>                   ,<span class="string">'Component:Listbox'</span>,<span class="keyword">...</span>
+0035     <span class="string">'Callback'</span>              ,<span class="string">'command(''components'',''select'');'</span>);
+0036 
+0037 <span class="comment">% Name</span>
+0038 h1  = uicontrol(<span class="string">'Style'</span>     , <span class="string">'Text'</span>,<span class="keyword">...</span>
+0039     <span class="string">'Position'</span>              , [10 55 40 17],<span class="keyword">...</span>
+0040     <span class="string">'backgroundcolor'</span>       , bcolor,<span class="keyword">...</span>
+0041     <span class="string">'String'</span>                , <span class="string">'Name'</span>);
+0042 h1  = uicontrol(<span class="string">'Style'</span>     , <span class="string">'Edit'</span>,<span class="keyword">...</span>
+0043     <span class="string">'Position'</span>              , [10 40 100 20],<span class="keyword">...</span>
+0044     <span class="string">'backgroundcolor'</span>       , [1 1 1],<span class="keyword">...</span>
+0045     <span class="string">'String'</span>                , <span class="string">''</span>,<span class="keyword">...</span>
+0046     <span class="string">'Tag'</span>                   ,<span class="string">'Component:Name'</span>,<span class="keyword">...</span>
+0047     <span class="string">'Callback'</span>              ,<span class="string">'command(''components'',''name'');'</span>);
+0048 <span class="comment">% Visible</span>
+0049 h1  = uicontrol(<span class="string">'Style'</span>     , <span class="string">'Checkbox'</span>,<span class="keyword">...</span>
+0050     <span class="string">'Position'</span>              , [120 60 100 17],<span class="keyword">...</span>
+0051     <span class="string">'backgroundcolor'</span>       , bcolor,<span class="keyword">...</span>
+0052     <span class="string">'String'</span>                , <span class="string">'Visible'</span>,<span class="keyword">...</span>
+0053     <span class="string">'Tag'</span>                   ,<span class="string">'Component:Visible'</span>,<span class="keyword">...</span>
+0054     <span class="string">'Callback'</span>              ,<span class="string">'command(''components'',''visible'');'</span>);
+0055 <span class="comment">% Fill</span>
+0056 h1  = uicontrol(<span class="string">'Style'</span>     , <span class="string">'checkbox'</span>,<span class="keyword">...</span>
+0057     <span class="string">'Position'</span>              , [120 40 100 20],<span class="keyword">...</span>
+0058     <span class="string">'backgroundcolor'</span>       , bcolor,<span class="keyword">...</span>
+0059     <span class="string">'String'</span>                , <span class="string">'Fill'</span>,<span class="keyword">...</span>
+0060     <span class="string">'Tag'</span>                   ,<span class="string">'Component:Fill'</span>,<span class="keyword">...</span>
+0061     <span class="string">'Callback'</span>              ,<span class="string">'command(''components'',''fill'');'</span>);
+0062 <span class="comment">% Fill color</span>
+0063 h1  = uicontrol(<span class="string">'Style'</span>     , <span class="string">'pushbutton'</span>,<span class="keyword">...</span>
+0064     <span class="string">'Position'</span>              , [200 50 80 24],<span class="keyword">...</span>
+0065     <span class="string">'backgroundcolor'</span>       , bcolor,<span class="keyword">...</span>
+0066     <span class="string">'String'</span>                , <span class="string">'Fill Color'</span>,<span class="keyword">...</span>
+0067     <span class="string">'Tag'</span>                   ,<span class="string">'Component:FillColor'</span>,<span class="keyword">...</span>
+0068     <span class="string">'Callback'</span>              ,<span class="string">'command(''components'',''fillColor'');'</span>);
+0069 <span class="comment">% Wireframe</span>
+0070 <span class="comment">% Fill</span>
+0071 h1  = uicontrol(<span class="string">'Style'</span>     , <span class="string">'checkbox'</span>,<span class="keyword">...</span>
+0072     <span class="string">'Position'</span>              , [100 10 100 20],<span class="keyword">...</span>
+0073     <span class="string">'backgroundcolor'</span>       , bcolor,<span class="keyword">...</span>
+0074     <span class="string">'String'</span>                , <span class="string">'Wireframe'</span>,<span class="keyword">...</span>
+0075     <span class="string">'Tag'</span>                   ,<span class="string">'Component:Wireframe'</span>,<span class="keyword">...</span>
+0076     <span class="string">'Callback'</span>              ,<span class="string">'command(''components'',''wireframe'');'</span>);
+0077 <span class="comment">% Close</span>
+0078 h1  = uicontrol(<span class="string">'Style'</span>     , <span class="string">'pushbutton'</span>,<span class="keyword">...</span>
+0079     <span class="string">'Position'</span>              , [180 10 110 24],<span class="keyword">...</span>
+0080     <span class="string">'backgroundcolor'</span>       , bcolor,<span class="keyword">...</span>
+0081     <span class="string">'String'</span>                , <span class="string">'Close'</span>,<span class="keyword">...</span>
+0082     <span class="string">'Tag'</span>                   ,<span class="string">'Component:Close'</span>,<span class="keyword">...</span>
+0083     <span class="string">'Callback'</span>              ,<span class="string">'command(''close'',''components'');'</span>);</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

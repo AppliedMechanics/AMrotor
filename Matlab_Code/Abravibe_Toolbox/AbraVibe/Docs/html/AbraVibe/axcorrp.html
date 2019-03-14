@@ -1,0 +1,168 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of axcorrp</title>
+  <meta name="keywords" content="axcorrp">
+  <meta name="description" content="AXCORRP      Scaled cross-correlation between x (input) and y (output)">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; axcorrp.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>axcorrp
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>AXCORRP      Scaled cross-correlation between x (input) and y (output)</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [Ryx,t,Gyx,f] = axcorrp(x,y,fs,N) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> AXCORRP      Scaled cross-correlation between x (input) and y (output)
+              For positive lags
+
+       [Ryx,t,Gyx,f] = axcorr(x,y,fs,N)
+
+       Ryx         Scaled cross correlation, N-by-D-by-R
+       t           Time lag vector
+       Gyx         Single-sided PSD (Note! No window!), 2N-by-D-by-R
+       f           Frequency axis for Gyx
+
+       x           Input signal(s), with time data in R column(s)
+       y           Output signal(s), with time data in D columns
+       fs          Sampling frequency
+       N           Length of correlation function
+
+ This function estimates unbiased cross correlation for positive lags only.
+ Use axcorrp(x,x,...) to produce autocorrelation.
+ For N~=0, calculations are made using Welch method on zero padded data 
+ with length 2N, so spectra are twice as large as from, e.g., APSDW.
+ For N=0, the periodogram based approach is used, i.e. the correlation is
+ computed as a convolution produced by making FFTs of the entire data, with 
+ zero padding by as many zeros as the length of x, multiplying the
+ spectra, and going back to time domain. Unbiased estimates are then
+ produces by compensating for the triangular window.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="makexaxis.html" class="code" title="function x = makexaxis(y,dx,x0);">makexaxis</a>	MAKEXAXIS Create a time or frequency x axis</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="time2corr.html" class="code" title="function LastNumber = time2corr(InPrefix,StartNo,StopNo,OutPrefix,OutStartNo,Blocksize,RefChannel,DownSample,Type,start,stop)">time2corr</a>	TIME2CORR    Process ABRAVIBE time data files into correlation function files</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [Ryx,t,Gyx,f] = axcorrp(x,y,fs,N)</a>
+0002 <span class="comment">% AXCORRP      Scaled cross-correlation between x (input) and y (output)</span>
+0003 <span class="comment">%              For positive lags</span>
+0004 <span class="comment">%</span>
+0005 <span class="comment">%       [Ryx,t,Gyx,f] = axcorr(x,y,fs,N)</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%       Ryx         Scaled cross correlation, N-by-D-by-R</span>
+0008 <span class="comment">%       t           Time lag vector</span>
+0009 <span class="comment">%       Gyx         Single-sided PSD (Note! No window!), 2N-by-D-by-R</span>
+0010 <span class="comment">%       f           Frequency axis for Gyx</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%       x           Input signal(s), with time data in R column(s)</span>
+0013 <span class="comment">%       y           Output signal(s), with time data in D columns</span>
+0014 <span class="comment">%       fs          Sampling frequency</span>
+0015 <span class="comment">%       N           Length of correlation function</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">% This function estimates unbiased cross correlation for positive lags only.</span>
+0018 <span class="comment">% Use axcorrp(x,x,...) to produce autocorrelation.</span>
+0019 <span class="comment">% For N~=0, calculations are made using Welch method on zero padded data</span>
+0020 <span class="comment">% with length 2N, so spectra are twice as large as from, e.g., APSDW.</span>
+0021 <span class="comment">% For N=0, the periodogram based approach is used, i.e. the correlation is</span>
+0022 <span class="comment">% computed as a convolution produced by making FFTs of the entire data, with</span>
+0023 <span class="comment">% zero padding by as many zeros as the length of x, multiplying the</span>
+0024 <span class="comment">% spectra, and going back to time domain. Unbiased estimates are then</span>
+0025 <span class="comment">% produces by compensating for the triangular window.</span>
+0026 
+0027 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0028 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0029 <span class="comment">% Version: 1.0 2011-06-23</span>
+0030 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0031 
+0032 <span class="keyword">if</span> N == 0
+0033     N=length(x(:,1));
+0034 <span class="keyword">end</span>
+0035 
+0036 <span class="comment">% Set up parameters</span>
+0037 df=fs/(2*N);                        <span class="comment">% Blocks augmented by N zeros</span>
+0038 ovlp=N; <span class="comment">%floor(N/2);</span>
+0039 R=length(x(1,:));                   <span class="comment">% Number references (inputs)</span>
+0040 D=length(y(1,:));                   <span class="comment">% Number responses (outputs)</span>
+0041 
+0042 <span class="comment">% Process each time block (column) in x and y and accumulate CSD</span>
+0043 Nsamp=length(x(:,1));
+0044 Syx=zeros(2*N,D,R);
+0045 <span class="keyword">for</span> ref = 1:R
+0046     x(:,ref)=x(:,ref)-mean(x(:,ref));           <span class="comment">% Remove mean</span>
+0047     <span class="keyword">for</span> resp = 1:D
+0048         y(:,resp)=y(:,resp)-mean(y(:,resp));    <span class="comment">% Remove mean</span>
+0049         n=1;                                    <span class="comment">% Block number</span>
+0050         i1=1+(n-1)*ovlp;                        <span class="comment">% First sample in next block</span>
+0051         i2=i1+N-1;                              <span class="comment">% Last sample in next block</span>
+0052         x_tmp=x(i1:i2,ref);                     <span class="comment">% Reference block</span>
+0053         y_tmp=y(i1:i2,resp);                    <span class="comment">% Response block</span>
+0054         X=fft(x_tmp,2*N)/(2*N);                 <span class="comment">% Zero-padded fft %%%%%%%%%%%%% CHANGES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+0055         Y=fft(y_tmp,2*N)/(2*N);                 <span class="comment">% Zero-padded fft %%%%%%%%%%%%% CHANGES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+0056         Syx(:,resp,ref)=Y.*conj(X);                <span class="comment">% Double-sided PSD</span>
+0057         n=2;                                    <span class="comment">% Next block number</span>
+0058         i1=1+(n-1)*ovlp;                        <span class="comment">% Index into y</span>
+0059         i2=i1+N-1;
+0060         <span class="keyword">while</span>  i2 &lt;= Nsamp                      <span class="comment">% Loop through data with overlap</span>
+0061             x_tmp=x(i1:i2,ref);                 <span class="comment">% Reference block</span>
+0062             x_tmp=[x_tmp;zeros(size(x_tmp))];   <span class="comment">% Augment data with zeros</span>
+0063             y_tmp=y(i1:i2,resp);                <span class="comment">% Response block</span>
+0064             y_tmp=[y_tmp;zeros(size(y_tmp))];   <span class="comment">% Augment data with zeros</span>
+0065             X=fft(x_tmp)/(2*N);                 <span class="comment">% Scaled, windowed FFT</span>
+0066             Y=fft(y_tmp)/(2*N);                 <span class="comment">% Scaled, windowed FFT</span>
+0067             Syx(:,resp,ref)=(n-1)/n*Syx(:,resp,ref)+Y.*conj(X)/n;  <span class="comment">% Double-sided average accumulation</span>
+0068             n=n+1;                              <span class="comment">% Next average number</span>
+0069             i1=1+(n-1)*ovlp;                    <span class="comment">% Index into y</span>
+0070             i2=i1+N-1;
+0071         <span class="keyword">end</span>
+0072     <span class="keyword">end</span>
+0073 <span class="keyword">end</span>
+0074 Syx=2*Syx/df;     <span class="comment">% Compensate for zero padding and scale to CSD</span>
+0075 <span class="comment">% Go through Syx and calculate corresponding Ryx</span>
+0076 Ryx=zeros(N,D,R);
+0077 n=(0:N-1)';
+0078 w=N./(N-n);
+0079 <span class="keyword">for</span> r = 1:R
+0080     <span class="keyword">for</span> d = 1:D
+0081         Rt=ifft(Syx(:,d,r));
+0082         Rt=w.*Rt(1:N)*fs;
+0083         Ryx(:,d,r)=Rt;
+0084     <span class="keyword">end</span>
+0085 <span class="keyword">end</span>
+0086 t=<a href="makexaxis.html" class="code" title="function x = makexaxis(y,dx,x0);">makexaxis</a>(Ryx,1/fs);
+0087 
+0088 <span class="keyword">if</span> nargout &gt;= 3
+0089     <span class="keyword">for</span> d=1:D
+0090         <span class="keyword">for</span> r=1:R
+0091             Gyx(:,d,r)=Syx(1:N+1,d,r);          <span class="comment">% Positive frequencies</span>
+0092             Gyx(2:<span class="keyword">end</span>,d,r)=2*Gyx(2:<span class="keyword">end</span>,d,r) ;   <span class="comment">% Single-sided scaling</span>
+0093         <span class="keyword">end</span>
+0094     <span class="keyword">end</span>
+0095 <span class="keyword">end</span>
+0096 <span class="keyword">if</span> nargout == 4
+0097     f=(0:fs/(2*N):fs/2)';
+0098 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of tacho2rpm</title>
+  <meta name="keywords" content="tacho2rpm">
+  <meta name="description" content="TACHO2RPM     Extract rpm/time profile from tacho time signal">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; tacho2rpm.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>tacho2rpm
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>TACHO2RPM     Extract rpm/time profile from tacho time signal</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [rpm,t] = tacho2rpm(x,fs,TLevel,Slope,PPR,NewFs,FilterL) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> TACHO2RPM     Extract rpm/time profile from tacho time signal
+
+       [rpm,trpm] = tacho2rpm(x,fs,TLevel,Slope,PPRNewFs,FilterL)
+
+       rpm         Instantaneous rpm
+       t           Time axis for rpm
+ 
+       x           Tacho time signal
+       fs          Sampling frequency (in Hz) for x
+       TLevel      Trigger level
+       Slope       +1, or -1 for positive and negative slope, respectively
+       PPR         Number of pulses per revolution for tacho signal
+       NewFs       (optional) sampling frequency for rpm. Default is fs
+       FilterL     Length of smoothing filter, Default is 5 pulses
+
+ See also</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="checksw.html" class="code" title="function sw = checksw">checksw</a>	CHECKSW  Check if running MATLAB or GNU/Octave</li><li><a href="makexaxis.html" class="code" title="function x = makexaxis(y,dx,x0);">makexaxis</a>	MAKEXAXIS Create a time or frequency x axis</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [rpm,t] = tacho2rpm(x,fs,TLevel,Slope,PPR,NewFs,FilterL)</a>
+0002 <span class="comment">% TACHO2RPM     Extract rpm/time profile from tacho time signal</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%       [rpm,trpm] = tacho2rpm(x,fs,TLevel,Slope,PPRNewFs,FilterL)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%       rpm         Instantaneous rpm</span>
+0007 <span class="comment">%       t           Time axis for rpm</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%       x           Tacho time signal</span>
+0010 <span class="comment">%       fs          Sampling frequency (in Hz) for x</span>
+0011 <span class="comment">%       TLevel      Trigger level</span>
+0012 <span class="comment">%       Slope       +1, or -1 for positive and negative slope, respectively</span>
+0013 <span class="comment">%       PPR         Number of pulses per revolution for tacho signal</span>
+0014 <span class="comment">%       NewFs       (optional) sampling frequency for rpm. Default is fs</span>
+0015 <span class="comment">%       FilterL     Length of smoothing filter, Default is 5 pulses</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">% See also</span>
+0018 <span class="comment">%</span>
+0019 
+0020 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0021 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0022 <span class="comment">% Version: 1.0 2011-06-23</span>
+0023 <span class="comment">%          1.1 2012-01-15 Modified to work in Octave</span>
+0024 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0025 
+0026 <span class="comment">% Parse inputs</span>
+0027 <span class="keyword">if</span> nargin == 5
+0028     NewFs = fs;
+0029     FilterL=5;
+0030 <span class="keyword">elseif</span> nargin == 6
+0031     FilterL=5;
+0032 <span class="keyword">elseif</span> nargin &lt; 7
+0033     error(<span class="string">'Wrong number of input parameters'</span>)
+0034 <span class="keyword">end</span>
+0035 
+0036 <span class="comment">% Define time axis for tacho signal</span>
+0037 t=<a href="makexaxis.html" class="code" title="function x = makexaxis(y,dx,x0);">makexaxis</a>(x,1/fs);
+0038 
+0039 <span class="comment">% Get trigger times</span>
+0040 xDiff=diff(sign(x-TLevel));     <span class="comment">% Produces +/- 2 where trigger event</span>
+0041 tDiff=t(2:end);                 <span class="comment">% Diff shifts one sample</span>
+0042 <span class="keyword">if</span> Slope &gt; 0
+0043     tTacho=tDiff(find(xDiff == 2));    <span class="comment">% Tacho trigger positive slope instances</span>
+0044 <span class="keyword">else</span>
+0045     tTacho=tDiff(find(xDiff == -2));   <span class="comment">% Tacho trigger negative slope instances</span>
+0046 <span class="keyword">end</span>
+0047 
+0048 <span class="comment">% Calculate rpm from time between tacho pulses. Assign rpm to second tacho</span>
+0049 <span class="comment">% pulse of each pair</span>
+0050 rpmt=60/PPR./diff(tTacho);              <span class="comment">% Instantaneous rpm values</span>
+0051 <span class="comment">% Average each pair of rpm estimates and put on time of middle tacho pulse</span>
+0052 rpmt=0.5*(rpmt(1:end-1)+rpmt(2:end));
+0053 tTacho=(tTacho(2:end-1));               <span class="comment">% diff shifted one sample</span>
+0054 
+0055 <span class="comment">% Smooth to obtain more stable values</span>
+0056 <span class="keyword">if</span> FilterL &gt; 1
+0057     a=1;
+0058     b=1/FilterL*ones(1,FilterL);
+0059     <span class="keyword">if</span> strcmp(<a href="checksw.html" class="code" title="function sw = checksw">checksw</a>,<span class="string">'MATLAB'</span>)
+0060         rpmt=filtfilt(b,a,rpmt);
+0061     <span class="keyword">else</span>                            <span class="comment">% Octave filtfilt does not work</span>
+0062         rpmt=filter(b,a,rpmt);
+0063     <span class="keyword">end</span>
+0064 <span class="keyword">end</span>
+0065 
+0066 
+0067 <span class="comment">% Interpolate to NewFs resolution</span>
+0068 t=(0:1/NewFs:t(end))';
+0069 rpm=interp1(tTacho,rpmt,t,<span class="string">'linear'</span>,<span class="string">'extrap'</span>);
+0070</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

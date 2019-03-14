@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of GuiImptrig</title>
+  <meta name="keywords" content="GuiImptrig">
+  <meta name="description" content="GUIIMPTRIG    Impact testing triggering and double impact detection for">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">ImpactGui</a> &gt; GuiImptrig.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for ImpactGui&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>GuiImptrig
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>GUIIMPTRIG    Impact testing triggering and double impact detection for</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [TrigIdx, DIdx, AIdx] = GuiImpTrig(x,N,TrigPerc,PreTrigger) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> GUIIMPTRIG    Impact testing triggering and double impact detection for
+               Gui version
+
+       [TrigIdx, DIdx, AIdx] = imptrig(x,N,TrigPerc,PreTrigger)
+
+       TrigIdx         Indeces into x where trigger condition is fulfilled
+       DIdx            Indeces into TrigIdx where a double impact is detected
+       AIdx            Contains all triggering events, also those 
+                       which are double impacts
+
+       x               Data (force) vector. If a matrix, first column is used
+       N               Block size for double impact detection
+       TrigPerc        Trigger level, positive slope, in % of max(abs(x))
+       PreTrigger      Number of samples pretrigger (positive number!)
+       
+ Triggering is analyzed as follows: (new procedure for Gui version!)
+ First all points where the force passes the trig level are found.
+ Second, triggers that are found within 3 percent of blocksize after each trigger
+ are interpreted as &quot;normal&quot;, and due to filtering effects (when a short pulse 
+ is sampled under its bandwidth, there is a ringing effect). These trigger
+ positions are removed from the list.
+ Third, trigger positions that remain, which are less than N
+ samples larger than previous trigger idx are interpreted as double impacts.
+ This means that you are better off setting a low TrigPerc (2-5 percent if 
+ your force signal is not too noisy), so that you are likely to detect the 
+ double impacts even if they are low.
+
+ NOTE! This function assumes positive peaks, and positive slope, so if you have 
+ negative peaks, call the function with -x and take care of the direction change!
+
+ This is a special version used by ImpactGui and its subprograms!
+
+ See also IMP2FRF</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="ImpactProcessingGui.html" class="code" title="function varargout = ImpactProcessingGui(varargin)">ImpactProcessingGui</a>	IMPACTPROCESSINGGUI MATLAB code for ImpactProcessingGui.fig</li><li><a href="ImpactSettings.html" class="code" title="function varargout = ImpactSettings(varargin)">ImpactSettings</a>	IMPACTSETTINGS MATLAB code for ImpactSettings.fig</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [TrigIdx, DIdx, AIdx] = GuiImpTrig(x,N,TrigPerc,PreTrigger)</a>
+0002 <span class="comment">% GUIIMPTRIG    Impact testing triggering and double impact detection for</span>
+0003 <span class="comment">%               Gui version</span>
+0004 <span class="comment">%</span>
+0005 <span class="comment">%       [TrigIdx, DIdx, AIdx] = imptrig(x,N,TrigPerc,PreTrigger)</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%       TrigIdx         Indeces into x where trigger condition is fulfilled</span>
+0008 <span class="comment">%       DIdx            Indeces into TrigIdx where a double impact is detected</span>
+0009 <span class="comment">%       AIdx            Contains all triggering events, also those</span>
+0010 <span class="comment">%                       which are double impacts</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%       x               Data (force) vector. If a matrix, first column is used</span>
+0013 <span class="comment">%       N               Block size for double impact detection</span>
+0014 <span class="comment">%       TrigPerc        Trigger level, positive slope, in % of max(abs(x))</span>
+0015 <span class="comment">%       PreTrigger      Number of samples pretrigger (positive number!)</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">% Triggering is analyzed as follows: (new procedure for Gui version!)</span>
+0018 <span class="comment">% First all points where the force passes the trig level are found.</span>
+0019 <span class="comment">% Second, triggers that are found within 3 percent of blocksize after each trigger</span>
+0020 <span class="comment">% are interpreted as &quot;normal&quot;, and due to filtering effects (when a short pulse</span>
+0021 <span class="comment">% is sampled under its bandwidth, there is a ringing effect). These trigger</span>
+0022 <span class="comment">% positions are removed from the list.</span>
+0023 <span class="comment">% Third, trigger positions that remain, which are less than N</span>
+0024 <span class="comment">% samples larger than previous trigger idx are interpreted as double impacts.</span>
+0025 <span class="comment">% This means that you are better off setting a low TrigPerc (2-5 percent if</span>
+0026 <span class="comment">% your force signal is not too noisy), so that you are likely to detect the</span>
+0027 <span class="comment">% double impacts even if they are low.</span>
+0028 <span class="comment">%</span>
+0029 <span class="comment">% NOTE! This function assumes positive peaks, and positive slope, so if you have</span>
+0030 <span class="comment">% negative peaks, call the function with -x and take care of the direction change!</span>
+0031 <span class="comment">%</span>
+0032 <span class="comment">% This is a special version used by ImpactGui and its subprograms!</span>
+0033 <span class="comment">%</span>
+0034 <span class="comment">% See also IMP2FRF</span>
+0035 
+0036 <span class="comment">% Copyright (c) 2009-2014 by Anders Brandt</span>
+0037 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0038 <span class="comment">% Version: 1.0 2011-06-23 Versions kept from original imptrig</span>
+0039 <span class="comment">%          1.1 2014-07-06 Fixed bug which always made last impact untriggered</span>
+0040 <span class="comment">%</span>
+0041 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0042 
+0043 <span class="keyword">if</span> nargin == 3
+0044     PreTrigger=0;
+0045 <span class="keyword">end</span>
+0046 
+0047 a=x(end);                   <span class="comment">% Bug fix 2014-07-06, to incorporate last impact</span>
+0048 x(end)=max(x);              <span class="comment">% Including x(end)=a below if statement, row 57</span>
+0049 
+0050 xM=max(x);
+0051 TL=TrigPerc*xM/100;         <span class="comment">% Trigger level in units of x</span>
+0052 dx=diff(sign(x-TL));
+0053 TrigIdx=find(dx == 2);
+0054 
+0055 <span class="comment">% Remove triggers that are within 3 percent after another trigger.</span>
+0056 <span class="keyword">if</span> ~isempty(TrigIdx)
+0057     Dt=diff(TrigIdx);
+0058     xidx=find(Dt &gt; round(0.03*N));
+0059     TrigIdx=TrigIdx(xidx);
+0060 <span class="keyword">end</span>
+0061 x(end)=a;
+0062 
+0063 <span class="comment">% Find double impacts: go through TrigIdx, if next value is &lt; last value+N,</span>
+0064 <span class="comment">% mark last value as double impact</span>
+0065 n=1;            <span class="comment">% Trigger point to test</span>
+0066 NewTrigIdx=[];
+0067 DIdx=[];
+0068 <span class="keyword">while</span> n &lt;= length(TrigIdx)
+0069     NewTrigIdx=[NewTrigIdx TrigIdx(n)];         <span class="comment">% Save reference trigger event</span>
+0070     D=TrigIdx(n+1:end)-TrigIdx(n);              <span class="comment">% Compare ref trigger with all higher triggers</span>
+0071     a=find(D&lt;N);                                <span class="comment">% See if there are any triggers</span>
+0072                                                 <span class="comment">% 'before a blocksize away'</span>
+0073     <span class="keyword">if</span> ~isempty(a)                              <span class="comment">% If found double impact(s)</span>
+0074         DIdx=[DIdx length(NewTrigIdx)];         <span class="comment">% Indicate NewTrigIdx(n) as a double</span>
+0075         n=n+length(a)+1;                        <span class="comment">% n points to next main trigger</span>
+0076     <span class="keyword">else</span>  <span class="comment">% If there was no double impact</span>
+0077         n=n+1;
+0078     <span class="keyword">end</span>
+0079 <span class="keyword">end</span>
+0080 
+0081 <span class="comment">% Make output and extract pretrigger from trigger level crossings</span>
+0082 <span class="keyword">if</span> ~isempty(NewTrigIdx)
+0083     TrigIdx=NewTrigIdx-PreTrigger;
+0084     <span class="comment">% Check that last trigger index leaves N samples to end of record</span>
+0085     <span class="comment">% If not, remove entirely as it cannot be used to indicate double impacts</span>
+0086     <span class="comment">% either</span>
+0087     <span class="keyword">if</span> TrigIdx(end)+N-1 &gt; length(x)
+0088         TrigIdx=TrigIdx(1:end-1);
+0089     <span class="keyword">end</span>
+0090 <span class="keyword">else</span>
+0091     TrigIdx=0;                          <span class="comment">% Means no trigger conditions found</span>
+0092 <span class="keyword">end</span>
+0093 
+0094 <span class="comment">% Check that the first trigger minus the pretrigger is not negative</span>
+0095 TrigIdx=TrigIdx(find(TrigIdx &gt; 0));
+0096 
+0097 <span class="comment">% Store all triggers</span>
+0098 AIdx=TrigIdx;
+0099 
+0100 <span class="keyword">if</span> isempty(DIdx)
+0101     DIdx=0;
+0102 <span class="keyword">else</span>
+0103     <span class="comment">% Check that last double impact leaves N samples to end of record</span>
+0104     <span class="keyword">if</span> DIdx(end)+N-1 &gt; length(x)
+0105         DIdx=DIdx(1:end-1);
+0106     <span class="keyword">end</span>
+0107 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

@@ -1,4 +1,15 @@
-function glob_dof = get_gdof(self,direction,Node)
+function glob_dof = get_gdof(self,direction,Node,varargin)
+
+    % falls weniger als 6 dof benutzt werden
+    n.nodes = length(self.mesh.nodes);    
+    if nargin == 3
+        n.dof = 6*n.nodes;
+    else
+        A = varargin{1};
+        n.dof = length(A)/2;
+    end
+    n.dofPerNode = n.dof/n.nodes;
+    
     dof_name = {'u_x','u_y','u_z','psi_x','psi_y','psi_z'};
     dof_loc = [1,2,3,4,5,6];
     
@@ -15,6 +26,6 @@ function glob_dof = get_gdof(self,direction,Node)
         error ('Error: Input not existent as a degree of freedom')
     end
     
-    glob_dof = (Node-1)*6+entry_nr;
+    glob_dof = (Node-1)*n.dofPerNode+entry_nr;
    
 end

@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of uma2umm</title>
+  <meta name="keywords" content="uma2umm">
+  <meta name="description" content="UMA2UMM   Rescale mode shapes from unity modal A to unity modal mass">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; uma2umm.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>uma2umm
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>UMA2UMM   Rescale mode shapes from unity modal A to unity modal mass</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function V = uma2umm(Vold,p) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> UMA2UMM   Rescale mode shapes from unity modal A to unity modal mass
+
+       V = uma2umm(Vold,p)
+
+       V       New mode shapes with unity modal mass scaling
+
+       Vold    Old mode shapes with unity modal A scaling, as from, e.g.,
+               MCK2MODAL, mode shapes in columns
+       p       poles, same size as V
+
+ See also <a href="mck2modal.html" class="code" title="function [p,V,Prop] = mck2modal(varargin)">MCK2MODAL</a> <a href="umm2uma.html" class="code" title="function V = umm2uma(Vold,p)">UMM2UMA</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function V = uma2umm(Vold,p)</a>
+0002 <span class="comment">% UMA2UMM   Rescale mode shapes from unity modal A to unity modal mass</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%       V = uma2umm(Vold,p)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%       V       New mode shapes with unity modal mass scaling</span>
+0007 <span class="comment">%</span>
+0008 <span class="comment">%       Vold    Old mode shapes with unity modal A scaling, as from, e.g.,</span>
+0009 <span class="comment">%               MCK2MODAL, mode shapes in columns</span>
+0010 <span class="comment">%       p       poles, same size as V</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">% See also MCK2MODAL UMM2UMA</span>
+0013 
+0014 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0015 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0016 <span class="comment">% Version: 1.0 2011-06-23</span>
+0017 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0018 
+0019 <span class="keyword">if</span> length(p) ~= length(Vold(1,:))
+0020     error(<span class="string">'Wrong sizes! length(p) ~= length(V(1,:))'</span>)
+0021 <span class="keyword">end</span>
+0022 
+0023 <span class="keyword">for</span> n = 1:length(p)
+0024     wd=imag(p(n));
+0025     V(:,n)=Vold(:,n)*sqrt(j*2*wd);
+0026 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

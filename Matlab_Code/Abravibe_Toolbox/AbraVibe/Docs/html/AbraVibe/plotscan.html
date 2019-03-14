@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of plotscan</title>
+  <meta name="keywords" content="plotscan">
+  <meta name="description" content="PLOTSCAN      Scan a vector with time data and plot blockwise">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; plotscan.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>plotscan
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>PLOTSCAN      Scan a vector with time data and plot blockwise</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function plotscan(x,N,fs); </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> PLOTSCAN      Scan a vector with time data and plot blockwise
+ 
+               scan(x,N,fs)
+
+               x           Time data in column vector
+               N           Block size (number of samples per plot)
+               fs          Sampling frequency (for scaled x axis)
+
+ This function plots N samples at a time of the function x, and pauses, until end of data is reached.
+ N and dt are optional, to give dt, also N has to be given. N=1024 is used as default.
+ If the parameter dt is given, the corresponding time axis is used for each plot , otherwise dt=1 is used.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function plotscan(x,N,fs);</a>
+0002 <span class="comment">% PLOTSCAN      Scan a vector with time data and plot blockwise</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%               scan(x,N,fs)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%               x           Time data in column vector</span>
+0007 <span class="comment">%               N           Block size (number of samples per plot)</span>
+0008 <span class="comment">%               fs          Sampling frequency (for scaled x axis)</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">% This function plots N samples at a time of the function x, and pauses, until end of data is reached.</span>
+0011 <span class="comment">% N and dt are optional, to give dt, also N has to be given. N=1024 is used as default.</span>
+0012 <span class="comment">% If the parameter dt is given, the corresponding time axis is used for each plot , otherwise dt=1 is used.</span>
+0013 <span class="comment">%</span>
+0014 
+0015 
+0016 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0017 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0018 <span class="comment">% Version: 1.0 2011-06-23</span>
+0019 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0020 
+0021 
+0022 <span class="comment">% Set up depending on input</span>
+0023 <span class="keyword">if</span> nargin == 1
+0024    N=1024;
+0025    dt=1;
+0026 <span class="keyword">elseif</span> nargin == 2
+0027    dt=1;
+0028 <span class="keyword">elseif</span> nargin == 3
+0029     dt=1/fs;
+0030 <span class="keyword">else</span>
+0031    error(<span class="string">'Wrong number of parameters!'</span>)
+0032 <span class="keyword">end</span>
+0033 
+0034 NoBlocks=fix(length(x)/N);
+0035 <span class="keyword">if</span> (rem(length(x),N) ~= 0)
+0036    NoBlocks=NoBlocks+1;
+0037 <span class="keyword">end</span>
+0038 t=(0:dt:(N-1)*dt);
+0039 <span class="keyword">for</span> n=1:NoBlocks
+0040    plot(t,x(1+(n-1)*N:n*N));
+0041    <span class="keyword">if</span> nargin &lt; 3
+0042        xlabel(<span class="string">'Sample Number'</span>)
+0043    <span class="keyword">else</span>
+0044        xlabel(<span class="string">'Time [seconds]'</span>)
+0045    <span class="keyword">end</span>
+0046    disp(<span class="string">'Press &lt;ENTER&gt; for next record...'</span>)
+0047    pause
+0048    t=(N*dt)+t;
+0049 <span class="keyword">end</span>
+0050 disp(<span class="string">'Last record. Function ended.'</span>)</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

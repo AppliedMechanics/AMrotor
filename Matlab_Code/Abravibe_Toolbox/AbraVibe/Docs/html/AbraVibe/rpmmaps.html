@@ -1,0 +1,174 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of rpmmaps</title>
+  <meta name="keywords" content="rpmmaps">
+  <meta name="description" content="RPMMAPS    Compute rpm/order spectral map for order tracking, synchronuous sampling">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; rpmmaps.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>rpmmaps
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>RPMMAPS    Compute rpm/order spectral map for order tracking, synchronuous sampling</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [S,F,R] = rpmmaps(xs,rpm,OrdRes,MaxOrd,MinRpm,MaxRpm,DeltaRpm,WinStr,PhaseRef) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> RPMMAPS    Compute rpm/order spectral map for order tracking, synchronuous sampling
+
+       [S,F,R] = rpmmaps(xs,rpm,OrdRes,MaxOrd,MinRpm,MaxRpm,DeltaRpm,WinStr,PhaseRef)
+
+       S           Linear spectra, see Method
+       F           Order axis for S
+       R           RPM axis for S
+
+       xs          Synchronuously sampled time signal, from SYNCHSAMP
+       rpm         RPM signal, output from SYNCHSAMP
+       OrdRes      Order resolution (determines FFT size together with MaxOrd)
+       MaxOrd      Maximum order to plot, the same as used for SYNCHSAMP 
+       MinRpm      Minimum RPM for map
+       MaxRpm      Maximum RPM for map
+       DeltaRpm    RPM step for map
+       WinStr      String with time window, e.g. 'aflattop'
+       PhaseRef    (Optional) signal for phase reference (for example
+                   tacho signal). MUST have same sampling as xs
+
+ S is produced using linear spectrum and the time window defined by WinStr.
+ If PhaseRef is given, S is a complex matrix with magnitude from spectra
+ of x, and phase relative to the vector PhaseRef. If PhaseRef is not
+ given, S contains linear spectra of x with no phase information.
+
+ A check is made that MinRpm and MaxRpm are possible, given the data at
+ hand. If not, the resulting MinRpm and MaxRpm in the map will be the
+ closest possible rpm values in the sequence MinRpm:DeltaRpm:MaxRpm
+ 
+
+   See also <a href="tacho2rpm.html" class="code" title="function [rpm,t] = tacho2rpm(x,fs,TLevel,Slope,PPR,NewFs,FilterL)">TACHO2RPM</a> <a href="plotrpmmapc.html" class="code" title="function h = plotrpmmapc(S,F,R,MinY,MaxY,Mode)">PLOTRPMMAPC</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="alinspec.html" class="code" title="function [Lyy,f] = alinspec(y,fs,w,M,ovlp);">alinspec</a>	ALINSPEC Calculate linear (rms) spectrum from time data</li><li><a href="alinspecp.html" class="code" title="function [Lyx,f] = alinspecp(y,x,fs,w,M,ovlp);">alinspecp</a>	ALINSPECP Calculate linear (rms) spectrum of time data, with phase</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [S,F,R] = rpmmaps(xs,rpm,OrdRes,MaxOrd,MinRpm,MaxRpm,DeltaRpm,WinStr,PhaseRef)</a>
+0002 <span class="comment">% RPMMAPS    Compute rpm/order spectral map for order tracking, synchronuous sampling</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%       [S,F,R] = rpmmaps(xs,rpm,OrdRes,MaxOrd,MinRpm,MaxRpm,DeltaRpm,WinStr,PhaseRef)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%       S           Linear spectra, see Method</span>
+0007 <span class="comment">%       F           Order axis for S</span>
+0008 <span class="comment">%       R           RPM axis for S</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%       xs          Synchronuously sampled time signal, from SYNCHSAMP</span>
+0011 <span class="comment">%       rpm         RPM signal, output from SYNCHSAMP</span>
+0012 <span class="comment">%       OrdRes      Order resolution (determines FFT size together with MaxOrd)</span>
+0013 <span class="comment">%       MaxOrd      Maximum order to plot, the same as used for SYNCHSAMP</span>
+0014 <span class="comment">%       MinRpm      Minimum RPM for map</span>
+0015 <span class="comment">%       MaxRpm      Maximum RPM for map</span>
+0016 <span class="comment">%       DeltaRpm    RPM step for map</span>
+0017 <span class="comment">%       WinStr      String with time window, e.g. 'aflattop'</span>
+0018 <span class="comment">%       PhaseRef    (Optional) signal for phase reference (for example</span>
+0019 <span class="comment">%                   tacho signal). MUST have same sampling as xs</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">% S is produced using linear spectrum and the time window defined by WinStr.</span>
+0022 <span class="comment">% If PhaseRef is given, S is a complex matrix with magnitude from spectra</span>
+0023 <span class="comment">% of x, and phase relative to the vector PhaseRef. If PhaseRef is not</span>
+0024 <span class="comment">% given, S contains linear spectra of x with no phase information.</span>
+0025 <span class="comment">%</span>
+0026 <span class="comment">% A check is made that MinRpm and MaxRpm are possible, given the data at</span>
+0027 <span class="comment">% hand. If not, the resulting MinRpm and MaxRpm in the map will be the</span>
+0028 <span class="comment">% closest possible rpm values in the sequence MinRpm:DeltaRpm:MaxRpm</span>
+0029 <span class="comment">%</span>
+0030 <span class="comment">%</span>
+0031 <span class="comment">%   See also TACHO2RPM PLOTRPMMAPC</span>
+0032 
+0033 
+0034 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0035 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0036 <span class="comment">% Version: 1.0 2011-06-23</span>
+0037 <span class="comment">%          1.1 2013-03-13 Fixed bug if PhaseRef given, indeces where wrong</span>
+0038 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0039 
+0040 <span class="comment">% Parse inputs</span>
+0041 <span class="keyword">if</span> nargin &lt; 8
+0042     error(<span class="string">'Too few input parameters'</span>)
+0043 <span class="keyword">end</span>
+0044 
+0045 <span class="comment">% Determine FFT blocksize based on max order and order resolution</span>
+0046 N=2*OrdRes*MaxOrd;
+0047 <span class="comment">% Calculate time window</span>
+0048 Win=feval(WinStr,N);
+0049 
+0050 <span class="comment">%========================================================================</span>
+0051 <span class="comment">% Determine start indeces of each block in x, depending on the rpm/time</span>
+0052 <span class="comment">% profile, and requested RPMs.</span>
+0053 <span class="comment">% NOTE: rpm values are taken from the average of rpm over N samples, so</span>
+0054 <span class="comment">% that each block has a mean rpm of the requested target</span>
+0055 
+0056 <span class="comment">% Compute average RPM over blocksize N</span>
+0057 Filt=1/N*ones(1,N);
+0058 rpmav=conv(rpm,Filt);
+0059 rpmav=rpmav(N:end-N+1);
+0060 <span class="comment">% Find closest match to target RPMs</span>
+0061 TargetRpm=[MinRpm:DeltaRpm:MaxRpm];
+0062 TargetIdx=[];
+0063 <span class="keyword">for</span> n = 1:length(TargetRpm)
+0064     <span class="keyword">if</span> TargetRpm(n) &lt;= max(rpmav) &amp; TargetRpm(n) &gt;= min(rpmav)
+0065         TargetIdx=[TargetIdx N/2+round(min(find(rpmav &gt;= TargetRpm(n))))];
+0066     <span class="keyword">end</span>
+0067 <span class="keyword">end</span>
+0068 <span class="comment">% Ensure that there are N/2 samples after each TargetIdx, so that data are</span>
+0069 <span class="comment">% not exhausted at the end of data</span>
+0070 TargetIdx=TargetIdx(find(TargetIdx &lt; length(xs)-N/2));
+0071 
+0072 <span class="comment">%========================================================================</span>
+0073 <span class="comment">% Compute linear spectra at these target indeces</span>
+0074 S=zeros(N/2+1,length(TargetIdx));
+0075 F=zeros(length(TargetIdx),1);
+0076 R=zeros(1,length(TargetIdx));
+0077 <span class="keyword">for</span> n = 1:length(TargetIdx)
+0078     xt=xs(TargetIdx(n)-N/2+1:TargetIdx(n)+N/2);
+0079     <span class="keyword">if</span> n == 1
+0080         [S(:,n),F]=<a href="alinspec.html" class="code" title="function [Lyy,f] = alinspec(y,fs,w,M,ovlp);">alinspec</a>(xt,2*MaxOrd,Win,1);
+0081     <span class="keyword">else</span>
+0082         S(:,n)=<a href="alinspec.html" class="code" title="function [Lyy,f] = alinspec(y,fs,w,M,ovlp);">alinspec</a>(xt,2*MaxOrd,Win,1);
+0083     <span class="keyword">end</span>
+0084 <span class="comment">%     R(n)=rpm(TargetIdx(n));</span>
+0085 <span class="keyword">end</span>
+0086 R=TargetRpm;
+0087 R=R(find(R &gt;= min(rpmav) &amp; R &lt;= max(rpmav)));
+0088 
+0089 <span class="comment">% If phase reference is given, add phase relative to this signal</span>
+0090 <span class="keyword">if</span> exist(<span class="string">'PhaseRef'</span>,<span class="string">'var'</span>)         <span class="comment">% Phase reference given</span>
+0091     <span class="keyword">for</span> n = 1:length(TargetIdx)
+0092         xt=xs(TargetIdx(n)-N/2+1:TargetIdx(n)+N/2);         <span class="comment">% Changed 2013-03-13</span>
+0093         rt=PhaseRef(TargetIdx(n)-N/2+1:TargetIdx(n)+N/2);   <span class="comment">% Changed 2013-03-13</span>
+0094         Pspec(:,n)=<a href="alinspecp.html" class="code" title="function [Lyx,f] = alinspecp(y,x,fs,w,M,ovlp);">alinspecp</a>(xt,rt,2*MaxOrd,Win,1);
+0095         S(:,n)=S(:,n).*exp(j*angle(Pspec(:,n)));
+0096     <span class="keyword">end</span>
+0097 <span class="keyword">end</span>
+0098</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

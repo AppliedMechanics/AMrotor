@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of animate_fcn</title>
+  <meta name="keywords" content="animate_fcn">
+  <meta name="description" content="">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">animate</a> &gt; animate_fcn.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for animate&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>animate_fcn
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong></strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function retVal = animate_fcn; </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>	</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>	</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function retVal = animate_fcn;</a>
+0002 
+0003 <span class="keyword">global</span> UDATA SETUP
+0004 aniFig=findobj(0,<span class="string">'TAG'</span>,<span class="string">'ANIMATE'</span>);
+0005 
+0006 aniAxis=findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Axes:Single'</span>);
+0007 retVal  =  get(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Toggle:Animate'</span>),<span class="string">'Value'</span>);
+0008 
+0009 NUDATA  = get(aniAxis,<span class="string">'Userdata'</span>);
+0010 ANI     = NUDATA.ANI;
+0011 <span class="comment">%Nodes   = NUDATA.NODES;</span>
+0012 
+0013 UDATA.ActiveFrame   = UDATA.ActiveFrame+1;
+0014 <span class="keyword">if</span> UDATA.ActiveFrame==UDATA.Frames+1;
+0015     UDATA.ActiveFrame=1;
+0016 <span class="keyword">end</span>
+0017 
+0018 set(UDATA.Handles.Conn,<span class="string">'XData'</span>,ANI(1,UDATA.ActiveFrame).X,<span class="string">'YData'</span>,ANI(1,UDATA.ActiveFrame).Y,<span class="string">'ZData'</span>,ANI(1,UDATA.ActiveFrame).Z);
+0019 
+0020 <span class="comment">% animate the data point</span>
+0021 set(UDATA.Handles.Markers,<span class="string">'XData'</span>,NUDATA.NODES(:,1,UDATA.ActiveFrame),<span class="keyword">...</span>
+0022     <span class="string">'YData'</span>,NUDATA.NODES(:,2,UDATA.ActiveFrame),<span class="keyword">...</span>
+0023     <span class="string">'ZData'</span>,NUDATA.NODES(:,3,UDATA.ActiveFrame));
+0024 
+0025 <span class="comment">% animate text</span>
+0026 <span class="keyword">for</span> ii=1:length(UDATA.Handles.Labels)
+0027     set(UDATA.Handles.Labels(ii,:),<span class="string">'Position'</span>,NUDATA.NODES(ii,:,UDATA.ActiveFrame));
+0028 <span class="keyword">end</span>
+0029 
+0030 <span class="comment">% animate component</span>
+0031 <span class="keyword">if</span> SETUP.Component.Open
+0032     <span class="keyword">for</span> comp=1:size(SETUP.Component.Name,1)
+0033         set(UDATA.Handles.Wire(comp,:),<span class="string">'XData'</span>,NUDATA.CompNodes(SETUP.Component.WireIndex{comp},1,UDATA.ActiveFrame),<span class="keyword">...</span>
+0034             <span class="string">'YData'</span>,NUDATA.CompNodes(SETUP.Component.WireIndex{comp},2,UDATA.ActiveFrame),<span class="keyword">...</span>
+0035             <span class="string">'ZData'</span>,NUDATA.CompNodes(SETUP.Component.WireIndex{comp},3,UDATA.ActiveFrame));
+0036         set(UDATA.Handles.Mark(comp,:),<span class="string">'XData'</span>,NUDATA.CompNodes(SETUP.Component.WireIndex{comp},1,UDATA.ActiveFrame),<span class="keyword">...</span>
+0037             <span class="string">'YData'</span>,NUDATA.CompNodes(SETUP.Component.WireIndex{comp},2,UDATA.ActiveFrame),<span class="keyword">...</span>
+0038             <span class="string">'ZData'</span>,NUDATA.CompNodes(SETUP.Component.WireIndex{comp},3,UDATA.ActiveFrame));
+0039         ind     = find(SETUP.Component.FillComps==comp);
+0040         <span class="keyword">for</span> ii=1:length(ind)
+0041             <span class="comment">%keyboard</span>
+0042             set(UDATA.Handles.Fill(ind(ii),:),<span class="string">'XData'</span>,NUDATA.NODES(SETUP.Component.FillConn{ind(ii)},1,UDATA.ActiveFrame),<span class="keyword">...</span>
+0043                 <span class="string">'YData'</span>,NUDATA.NODES(SETUP.Component.FillConn{ind(ii)},2,UDATA.ActiveFrame),<span class="keyword">...</span>
+0044                 <span class="string">'ZData'</span>,NUDATA.NODES(SETUP.Component.FillConn{ind(ii)},3,UDATA.ActiveFrame));
+0045         <span class="keyword">end</span>
+0046     <span class="keyword">end</span>
+0047 <span class="keyword">end</span>
+0048 
+0049 
+0050 <span class="comment">% Spin Axis</span>
+0051 <span class="keyword">if</span> SETUP.Display.Spin;
+0052     camorbit(aniAxis,SETUP.Animation.Theta/UDATA.Frames,0,<span class="string">'camera'</span>,SETUP.View.UpVector(2))
+0053     <span class="keyword">switch</span> SETUP.View.Type,
+0054         <span class="keyword">case</span> <span class="string">'Red/Blue Glasses'</span>
+0055             <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'updateRotate'</span>)
+0056         <span class="keyword">case</span> <span class="string">'Cross-eyed'</span>
+0057             camorbit(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Axes:Ortho11'</span>),SETUP.Animation.Theta/UDATA.Frames,0,<span class="string">'camera'</span>,SETUP.View.UpVector(2))
+0058     <span class="keyword">end</span>
+0059 <span class="keyword">end</span>
+0060 
+0061 drawnow;
+0062 <span class="keyword">if</span> SETUP.Display.MaxDeflection &amp; UDATA.ActiveFrame==SETUP.Animation.MaxFrame;
+0063     set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Toggle:Animate'</span>),<span class="string">'Value'</span>,0);
+0064     retVal  = 0;
+0065 <span class="keyword">end</span>
+0066 
+0067 
+0068 <span class="comment">% Make AVI File</span>
+0069 <span class="keyword">if</span> SETUP.AVI.On &amp; SETUP.Display.MaxDeflection==0;
+0070     <span class="keyword">if</span> SETUP.AVI.On==1 &amp; (UDATA.ActiveFrame==1 | SETUP.AVI.Start==1);
+0071         <span class="keyword">if</span> UDATA.ActiveFrame==1 &amp; SETUP.AVI.Start==0;
+0072             SETUP.AVI.Start = 1;
+0073             warning off
+0074             SETUP.AVI.Object= avifile(SETUP.AVI.FileName,<span class="string">'fps'</span>,round(SETUP.Animation.Frames/SETUP.AVI.TimeLength),<span class="string">'quality'</span>,SETUP.AVI.Quality,<span class="string">'compression'</span>,SETUP.AVI.Format);
+0075             warning on
+0076         <span class="keyword">end</span>
+0077         SETUP.AVI.Frame     =SETUP.AVI.Frame+1;
+0078         SETUP.AVI.Object    =addframe(SETUP.AVI.Object,getframe(gcf));
+0079         <span class="keyword">if</span> SETUP.AVI.Frame&gt;3 &amp; UDATA.ActiveFrame==1;
+0080             SETUP.AVI.On=0;
+0081             SETUP.AVI.Start=0;
+0082             SETUP.AVI.Frame=0;
+0083             SETUP.AVI.Object = close(SETUP.AVI.Object);
+0084             SETUP.AVI.Object = [];
+0085             <span class="keyword">if</span> SETUP.AVI.DoAllModes
+0086                 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Toggle:Animate'</span>),<span class="string">'Value'</span>,0);
+0087                 retVal  = 0;
+0088             <span class="keyword">end</span>
+0089         <span class="keyword">end</span>
+0090     <span class="keyword">end</span>
+0091 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

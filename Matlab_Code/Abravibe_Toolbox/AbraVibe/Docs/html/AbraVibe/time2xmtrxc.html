@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of time2xmtrxc</title>
+  <meta name="keywords" content="time2xmtrxc">
+  <meta name="description" content="TIME2XMTRXC   Computes In-/Out cross spectral matrices from time data by cyclic averaging">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; time2xmtrxc.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>time2xmtrxc
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>TIME2XMTRXC   Computes In-/Out cross spectral matrices from time data by cyclic averaging</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [Pxx,Pyx,Pyy,f,NBlocks] = time2xmtrxc(x,y,fs,N,NCycles) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> TIME2XMTRXC   Computes In-/Out cross spectral matrices from time data by cyclic averaging
+
+           [Pxx,Pyx,Pyy,f,Nblocks] = time2xmtrxc(x,y,fs,N,NCycles), OR
+           [Pxx,Pyx,Pyy,f,Nblocks] = time2xmtrxc(x,y,fs,w,w_cyc), OR
+
+           Pxx         Input cross spectral matrix, N/2+1-by-R-by-R
+           Pyx         In-/Out cross spectral matrix, N/2+1-by-D-by-R
+           Pyy         PSD of time signal(s) y, N/2+1-by-D
+           f           Frequency vector for Pyy, N/2+1-by-D
+           NBlocks     Number of overlapped FFT blocks used (see WELCHERR)
+
+           x           Input time data in column vector(s). If more than one
+                       column, each column is treated separately
+           y           Output time data in column vector(s). If more than one
+                       column, each column is treated separately
+           fs          Sampling frequency for y
+           N           FFT block size, using rectangular window, power of 2 (1024, 2048,...)
+           w           time window, usually boxcar(N) for cyclic averaging
+           NCycles     Number of cycles to average, 0 for all data (only
+                       one time block is sent to PSD computation)
+                       If NCycles is a vector, e.g. ahann(4*N), it is treated as a window
+                       function to be put on each larger block before the
+                       cyclic averaging.
+           w_cyc       Cyclic window, usually ahann(Nc*N) for cyclic averaging
+
+           D           Number of time records (columns in y)
+
+ Time data in x and y MUST BE in columns.
+
+ See also <a href="welcherr.html" class="code" title="function Eps_r = welcherr(win,O,K)">WELCHERR</a> <a href="apsdw.html" class="code" title="function [Pxx,f,Nblocks] = apsdw(x,fs,N,POverlap);">APSDW</a> <a href="acsdw.html" class="code" title="function [Pyx,f,Nblocks] = acsdw(x,y,fs,N,POverlap);">ACSDW</a> <a href="xmtrx2frf.html" class="code" title="function [H,Cm,Cxx] = xmtrx2frf(Gxx,Gyx,Gyy)">XMTRX2FRF</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="acsdw.html" class="code" title="function [Pyx,f,Nblocks] = acsdw(x,y,fs,N,POverlap);">acsdw</a>	ACSDW Calculate cross PSD from time data, Welch's method (standard)</li><li><a href="apsdw.html" class="code" title="function [Pxx,f,Nblocks] = apsdw(x,fs,N,POverlap);">apsdw</a>	APSDW  Calculate auto PSD from time data, Welch's method (standard)</li><li><a href="winacf.html" class="code" title="function Aw = winacf(w);">winacf</a>	WINACF Calculate amplitude correction factor of time window</li><li><a href="winenbw.html" class="code" title="function Be = winenbw(w);">winenbw</a>	WINENBW Calculate equivalent noise bandwidth of time window</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [Pxx,Pyx,Pyy,f,NBlocks] = time2xmtrxc(x,y,fs,N,NCycles)</a>
+0002 <span class="comment">% TIME2XMTRXC   Computes In-/Out cross spectral matrices from time data by cyclic averaging</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%           [Pxx,Pyx,Pyy,f,Nblocks] = time2xmtrxc(x,y,fs,N,NCycles), OR</span>
+0005 <span class="comment">%           [Pxx,Pyx,Pyy,f,Nblocks] = time2xmtrxc(x,y,fs,w,w_cyc), OR</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%           Pxx         Input cross spectral matrix, N/2+1-by-R-by-R</span>
+0008 <span class="comment">%           Pyx         In-/Out cross spectral matrix, N/2+1-by-D-by-R</span>
+0009 <span class="comment">%           Pyy         PSD of time signal(s) y, N/2+1-by-D</span>
+0010 <span class="comment">%           f           Frequency vector for Pyy, N/2+1-by-D</span>
+0011 <span class="comment">%           NBlocks     Number of overlapped FFT blocks used (see WELCHERR)</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%           x           Input time data in column vector(s). If more than one</span>
+0014 <span class="comment">%                       column, each column is treated separately</span>
+0015 <span class="comment">%           y           Output time data in column vector(s). If more than one</span>
+0016 <span class="comment">%                       column, each column is treated separately</span>
+0017 <span class="comment">%           fs          Sampling frequency for y</span>
+0018 <span class="comment">%           N           FFT block size, using rectangular window, power of 2 (1024, 2048,...)</span>
+0019 <span class="comment">%           w           time window, usually boxcar(N) for cyclic averaging</span>
+0020 <span class="comment">%           NCycles     Number of cycles to average, 0 for all data (only</span>
+0021 <span class="comment">%                       one time block is sent to PSD computation)</span>
+0022 <span class="comment">%                       If NCycles is a vector, e.g. ahann(4*N), it is treated as a window</span>
+0023 <span class="comment">%                       function to be put on each larger block before the</span>
+0024 <span class="comment">%                       cyclic averaging.</span>
+0025 <span class="comment">%           w_cyc       Cyclic window, usually ahann(Nc*N) for cyclic averaging</span>
+0026 <span class="comment">%</span>
+0027 <span class="comment">%           D           Number of time records (columns in y)</span>
+0028 <span class="comment">%</span>
+0029 <span class="comment">% Time data in x and y MUST BE in columns.</span>
+0030 <span class="comment">%</span>
+0031 <span class="comment">% See also WELCHERR APSDW ACSDW XMTRX2FRF</span>
+0032 
+0033 <span class="comment">% Copyright (c) 2009 by Anders Brandt</span>
+0034 <span class="comment">% Email: abra@ib.sdu.dk</span>
+0035 <span class="comment">% Version: 0.1 2009-05-25</span>
+0036 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0037 
+0038 <span class="comment">% Reference:</span>
+0039 <span class="comment">% Phillips, A. W. &amp; Allemang, R. J. An overview of MIMO-FRF excitation</span>
+0040 <span class="comment">% /averaging/processing techniques Journal of Sound and Vibration, 2003,</span>
+0041 <span class="comment">% 262, pp. 651-675.</span>
+0042 
+0043 <span class="comment">% Set up depending on input parameters</span>
+0044 <span class="keyword">if</span> nargin ~= 5
+0045    error(<span class="string">'Wrong number of input variables, must be 5!'</span>);
+0046 <span class="keyword">end</span>
+0047 
+0048 <span class="keyword">if</span> length(N) &gt; 1
+0049     w=N;
+0050     N=length(w);
+0051 <span class="keyword">else</span>
+0052     w=boxcar(N);
+0053 <span class="keyword">end</span>
+0054 
+0055 <span class="keyword">if</span> NCycles == 0
+0056     NCycles=floor(length(x)/N);
+0057     AllCycles=1;                <span class="comment">% For check at end of this file</span>
+0058     CyclicWindow=boxcar(N);
+0059 <span class="keyword">elseif</span> length(NCycles) &gt; 1
+0060     AllCycles=0;
+0061     CyclicWindow=NCycles;
+0062     NCycles=floor(length(NCycles)/N);
+0063 <span class="keyword">else</span>
+0064     AllCycles=0;
+0065     CyclicWindow=boxcar(N);
+0066 <span class="keyword">end</span>
+0067 
+0068 <span class="comment">% Make the cyclic averaging in time domain</span>
+0069 startidx=1;             <span class="comment">% Index into start of block in cyclic average output</span>
+0070 xnew=[]; ynew=[];
+0071 xidx=0;
+0072 CompFactor=<a href="winacf.html" class="code" title="function Aw = winacf(w);">winacf</a>(CyclicWindow)/sqrt(<a href="winenbw.html" class="code" title="function Be = winenbw(w);">winenbw</a>(CyclicWindow));
+0073 <span class="keyword">while</span> xidx(end) + N*NCycles &lt;= length(x)
+0074     xnew=[xnew;zeros(N,1)];
+0075     ynew=[ynew;zeros(N,1)];
+0076     <span class="keyword">if</span> startidx == 1
+0077         xidx=1:N*NCycles;
+0078     <span class="keyword">else</span>
+0079         xidx=xidx+N*NCycles;
+0080     <span class="keyword">end</span>
+0081     x(xidx)=x(xidx).*CyclicWindow*CompFactor;
+0082     y(xidx)=y(xidx).*CyclicWindow*CompFactor;
+0083     <span class="keyword">for</span> n = 1:NCycles
+0084         xnew(startidx:startidx+N-1) = xnew(startidx:startidx+N-1)+x(xidx((n-1)*N+1):xidx(n*N));
+0085         ynew(startidx:startidx+N-1) = ynew(startidx:startidx+N-1)+y(xidx((n-1)*N+1):xidx(n*N));
+0086     <span class="keyword">end</span>
+0087     startidx=startidx+N;
+0088 <span class="keyword">end</span>
+0089 xnew=xnew/NCycles;
+0090 ynew=ynew/NCycles;
+0091 
+0092 [Pxx,f,NBlocks]=<a href="acsdw.html" class="code" title="function [Pyx,f,Nblocks] = acsdw(x,y,fs,N,POverlap);">acsdw</a>(xnew,xnew,fs,w,0);
+0093 Pyx=<a href="acsdw.html" class="code" title="function [Pyx,f,Nblocks] = acsdw(x,y,fs,N,POverlap);">acsdw</a>(xnew,ynew,fs,w,0);
+0094 Pyy=<a href="apsdw.html" class="code" title="function [Pxx,f,Nblocks] = apsdw(x,fs,N,POverlap);">apsdw</a>(ynew,fs,w,0);
+0095 
+0096 <span class="comment">% If all data were used for cyclic averages, report number of blocks in</span>
+0097 <span class="comment">% NBlocks</span>
+0098 <span class="keyword">if</span> AllCycles == 1
+0099     NBlocks=NCycles;
+0100 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

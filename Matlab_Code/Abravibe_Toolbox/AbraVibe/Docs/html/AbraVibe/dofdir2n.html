@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of dofdir2n</title>
+  <meta name="keywords" content="dofdir2n">
+  <meta name="description" content="DOFDIR2N  Convert dof number and dir string to numeric format">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; dofdir2n.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>dofdir2n
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>DOFDIR2N  Convert dof number and dir string to numeric format</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function    nDof = dofdir2n(Dof,Dir) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> DOFDIR2N  Convert dof number and dir string to numeric format
+
+           nDof = dofdir2n(DofDir);
+           nDof = dofdir2n(Dof,Dir)
+
+           nDof        Numeric dof/dir number, where last number is
+                       direction and sign(nDof) is the sign of dir
+
+           DofDir      Combined dof and dir string, can be a cell array if
+                       length(DofDir)&gt;1
+           Dof         Point number, can be a vector; if only input        
+           Dir         Direction string, e.g. 'X+' or '+X', can be a cell
+                       array same length as Dof, IF length(Dof)&gt;1
+
+ Examples:
+ dofdir2n('13Y-') returns -132
+ dofdir2n(13,'Y-') returns -132
+ dofdir2n({'22y+','234Z-'}) returns the vector [222   -2343]
+
+ see also <a href="n2dofdir.html" class="code" title="function    [Dof,nDir] = n2dofdir(nDof)">n2dofdir</a> <a href="headpstr.html" class="code" title="function DofString = headpstr(Header)">headpstr</a> <a href="dir2nbr.html" class="code" title="function DirNumber = dir2nbr(DirString)">dir2nbr</a> <a href="nbr2dir.html" class="code" title="function DirString = nbr2dir(DirNumber)">nbr2dir</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="dir2nbr.html" class="code" title="function DirNumber = dir2nbr(DirString)">dir2nbr</a>	DIR2NBR   Convert Header direction string to number</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="data2hmtrx.html" class="code" title="function [H,f,RespDof,RespDir,RefDof,RefDir,FillMtrx] = data2hmtrx(Prefix,StartNo,StopNo,FuncType)">data2hmtrx</a>	DATA2HMTRX      Import Abravibe FRF data into H matrix</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function    nDof = dofdir2n(Dof,Dir)</a>
+0002 <span class="comment">% DOFDIR2N  Convert dof number and dir string to numeric format</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%           nDof = dofdir2n(DofDir);</span>
+0005 <span class="comment">%           nDof = dofdir2n(Dof,Dir)</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%           nDof        Numeric dof/dir number, where last number is</span>
+0008 <span class="comment">%                       direction and sign(nDof) is the sign of dir</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%           DofDir      Combined dof and dir string, can be a cell array if</span>
+0011 <span class="comment">%                       length(DofDir)&gt;1</span>
+0012 <span class="comment">%           Dof         Point number, can be a vector; if only input</span>
+0013 <span class="comment">%           Dir         Direction string, e.g. 'X+' or '+X', can be a cell</span>
+0014 <span class="comment">%                       array same length as Dof, IF length(Dof)&gt;1</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">% Examples:</span>
+0017 <span class="comment">% dofdir2n('13Y-') returns -132</span>
+0018 <span class="comment">% dofdir2n(13,'Y-') returns -132</span>
+0019 <span class="comment">% dofdir2n({'22y+','234Z-'}) returns the vector [222   -2343]</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">% see also n2dofdir headpstr dir2nbr nbr2dir</span>
+0022 
+0023 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0024 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0025 <span class="comment">% Version: 1.0 2011-06-23</span>
+0026 <span class="comment">%          1.1 2014-07-15 Added support for input strings of form 'NNX+' etc.</span>
+0027 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0028 
+0029 <span class="keyword">if</span> nargin == 2
+0030     <span class="keyword">for</span> n = 1:length(Dof)
+0031         a=<a href="dir2nbr.html" class="code" title="function DirNumber = dir2nbr(DirString)">dir2nbr</a>(Dir{n});
+0032         nDof(n)=sign(a)*(10*Dof(n)+abs(a));         <span class="comment">% Dof 13Z- is now -133</span>
+0033     <span class="keyword">end</span>
+0034 <span class="keyword">elseif</span> nargin == 1
+0035     <span class="keyword">if</span> ~iscell(Dof)    <span class="comment">% Only one input</span>
+0036         <span class="comment">% Split into number and dof string</span>
+0037         n=1;
+0038         <span class="keyword">while</span> ~isempty(str2num(Dof(1:n))) &amp; n &lt; length(Dof)
+0039             n=n+1;
+0040         <span class="keyword">end</span>
+0041         n=n-1;
+0042         a=<a href="dir2nbr.html" class="code" title="function DirNumber = dir2nbr(DirString)">dir2nbr</a>(Dof(n+1:end));                    <span class="comment">% String part of Dof</span>
+0043         Dof=str2num(Dof(1:n));                      <span class="comment">% Numeric part of Dof</span>
+0044         nDof=sign(a)*(10*Dof+abs(a));               <span class="comment">% Dof 13Z- is now -133</span>
+0045     <span class="keyword">else</span>   <span class="comment">% Dof is a cell array, thus several</span>
+0046         SaveDof=Dof;
+0047         <span class="keyword">for</span> m=1:length(SaveDof)
+0048             Dof=SaveDof{m};
+0049             <span class="keyword">if</span> ~iscell(Dof)
+0050                 <span class="comment">% Split into number and dof string</span>
+0051                 n=1;
+0052                 <span class="keyword">while</span> ~isempty(str2num(Dof(1:n))) &amp; n &lt; length(Dof)
+0053                     n=n+1;
+0054                 <span class="keyword">end</span>
+0055                 n=n-1;
+0056                 a=<a href="dir2nbr.html" class="code" title="function DirNumber = dir2nbr(DirString)">dir2nbr</a>(Dof(n+1:end));                    <span class="comment">% String part of Dof</span>
+0057                 Dof=str2num(Dof(1:n));                      <span class="comment">% Numeric part of Dof</span>
+0058                 nDof(m)=sign(a)*(10*Dof+abs(a));         <span class="comment">% Dof 13Z- is now -133</span>
+0059             <span class="keyword">end</span>
+0060         <span class="keyword">end</span>
+0061     <span class="keyword">end</span>
+0062 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

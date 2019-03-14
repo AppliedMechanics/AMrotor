@@ -18,7 +18,7 @@ cnfg.cnfg_rotor.mesh_opt.name = 'Mesh 1';
 cnfg.cnfg_rotor.mesh_opt.d_min= 0.002;
 cnfg.cnfg_rotor.mesh_opt.d_max = 0.005;
 cnfg.cnfg_rotor.mesh_opt.approx = 'mean';   %Approximation for linear functions with gradient 1=0;
-                                % Insert: upper sum, lower sum, mean.
+                                % Insert: upper sum, lower sum, mean, symmetric.
 
     
 %% ========================================================================

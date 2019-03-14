@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of alinspecp</title>
+  <meta name="keywords" content="alinspecp">
+  <meta name="description" content="ALINSPECP Calculate linear (rms) spectrum of time data, with phase">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; alinspecp.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>alinspecp
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>ALINSPECP Calculate linear (rms) spectrum of time data, with phase</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [Lyx,f] = alinspecp(y,x,fs,w,M,ovlp); </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment">ALINSPECP Calculate linear (rms) spectrum of time data, with phase
+
+           [Lyx,f] = alinspecp(y,x,fs,w,M,ovlp)
+
+           Lyx         Linear spectrum of time signal y with phase from Gyx
+           f           Frequency vector for Lyx, N/2+1-by-1
+
+           y           Time data in column vector(s). If more than one
+                       column, each column is treated separately
+           x           Time data for phase reference
+           fs          Sampling frequency for y
+           w           Time window with length(FFT blocksize), power of 2 (1024, 2048,...)
+           M           Number of averages (FFTs), default is 1
+           ovlp        Overlap in percent, default is 0
+
+           D           Number of vectors (columns) in y
+
+ Example: 
+           [Lyx,f]=alinspecp(y,x,1000,aflattop(1024),10,50)
+
+ ALINSPECP produces a linear, rms weighted spectrum as if y was a periodic
+ signal. A peak in Lyx is interpreted as a sine at that frequency with an
+ RMS value corresponding to the peak value in Lyx and with phase relative 
+ to signal x.
+
+ See also <a href="alinspec.html" class="code" title="function [Lyy,f] = alinspec(y,fs,w,M,ovlp);">alinspec</a> <a href="winacf.html" class="code" title="function Aw = winacf(w);">winacf</a> <a href="apsdw.html" class="code" title="function [Pxx,f,Nblocks] = apsdw(x,fs,N,POverlap);">apsdw</a> <a href="ahann.html" class="code" title="function w = ahann(N);">ahann</a> <a href="aflattop.html" class="code" title="function w = aflattop(N,type);">aflattop</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="winacf.html" class="code" title="function Aw = winacf(w);">winacf</a>	WINACF Calculate amplitude correction factor of time window</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="rpmmap.html" class="code" title="function [S,F,R] = rpmmap(x,fs,rpm,trpm,MinRpm,MaxRpm,DeltaRpm,Win,PhaseRef)">rpmmap</a>	RPMMAP    Compute rpm/frequency spectral map for order tracking, fixed fs</li><li><a href="rpmmaps.html" class="code" title="function [S,F,R] = rpmmaps(xs,rpm,OrdRes,MaxOrd,MinRpm,MaxRpm,DeltaRpm,WinStr,PhaseRef)">rpmmaps</a>	RPMMAPS    Compute rpm/order spectral map for order tracking, synchronuous sampling</li><li><a href="time2spec.html" class="code" title="function LastNumber = time2spec(InPrefix,StartNo,StopNo,OutPrefix,OutStartNo,Blocksize,RefChannel,DownSample,Type,start,stop)">time2spec</a>	TIME2CORR    Process ABRAVIBE time data files into spectral density function files</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [Lyx,f] = alinspecp(y,x,fs,w,M,ovlp);</a>
+0002 <span class="comment">%ALINSPECP Calculate linear (rms) spectrum of time data, with phase</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%           [Lyx,f] = alinspecp(y,x,fs,w,M,ovlp)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%           Lyx         Linear spectrum of time signal y with phase from Gyx</span>
+0007 <span class="comment">%           f           Frequency vector for Lyx, N/2+1-by-1</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%           y           Time data in column vector(s). If more than one</span>
+0010 <span class="comment">%                       column, each column is treated separately</span>
+0011 <span class="comment">%           x           Time data for phase reference</span>
+0012 <span class="comment">%           fs          Sampling frequency for y</span>
+0013 <span class="comment">%           w           Time window with length(FFT blocksize), power of 2 (1024, 2048,...)</span>
+0014 <span class="comment">%           M           Number of averages (FFTs), default is 1</span>
+0015 <span class="comment">%           ovlp        Overlap in percent, default is 0</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%           D           Number of vectors (columns) in y</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">% Example:</span>
+0020 <span class="comment">%           [Lyx,f]=alinspecp(y,x,1000,aflattop(1024),10,50)</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">% ALINSPECP produces a linear, rms weighted spectrum as if y was a periodic</span>
+0023 <span class="comment">% signal. A peak in Lyx is interpreted as a sine at that frequency with an</span>
+0024 <span class="comment">% RMS value corresponding to the peak value in Lyx and with phase relative</span>
+0025 <span class="comment">% to signal x.</span>
+0026 <span class="comment">%</span>
+0027 <span class="comment">% See also alinspec winacf apsdw ahann aflattop</span>
+0028 
+0029 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0030 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0031 <span class="comment">% Version: 1.0 2011-06-23</span>
+0032 <span class="comment">%          1.1 2011-10-07 Fixed new syntax, was not working</span>
+0033 <span class="comment">%          1.2 2014-10-01 Fixed bug line 84</span>
+0034 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0035 
+0036 <span class="comment">% Set up depending on input parameters</span>
+0037 <span class="keyword">if</span> nargin &lt; 4
+0038    error(<span class="string">'Wrong number of input variables, must be at least 4!'</span>);
+0039 <span class="keyword">elseif</span> nargin == 4
+0040     M=1;
+0041     ovlp=0;
+0042 <span class="keyword">elseif</span> nargin == 5
+0043     ovlp=0;
+0044 <span class="keyword">elseif</span> nargin &gt; 6
+0045    error(<span class="string">'Wrong number of input variables, must be 4, 5, or 6!'</span>);
+0046 <span class="keyword">end</span>
+0047 
+0048 <span class="comment">% Set up parameters</span>
+0049 N=length(w);                <span class="comment">% FFT block size</span>
+0050 df=fs/N;                    <span class="comment">% Frequency increment</span>
+0051 acf=<a href="winacf.html" class="code" title="function Aw = winacf(w);">winacf</a>(w);              <span class="comment">% Window amplitude correction factor</span>
+0052 K=floor((1-ovlp/100)*N);    <span class="comment">% Overlap in samples</span>
+0053 <span class="keyword">if</span> length(y(:,1)) &lt; N
+0054     error(<span class="string">'Not enough data, not even one time block!'</span>)
+0055 <span class="keyword">end</span>
+0056 
+0057 <span class="comment">% Process each time block (column) in y</span>
+0058 [Nsamp,Nvectors]=size(y);
+0059 <span class="comment">% Check that specified overlap and number of FFTs does not exhaust data</span>
+0060 L=N+(M-1)*K;
+0061 <span class="keyword">if</span> L &gt; Nsamp
+0062     error(<span class="string">'Not enough data in y to perform requested number of averages!'</span>)
+0063 <span class="keyword">end</span>
+0064 
+0065 Pyy=zeros(N,Nvectors);
+0066 <span class="keyword">for</span> vec = 1:Nvectors
+0067     y(:,vec)=y(:,vec)-mean(y(:,vec));     <span class="comment">% Remove mean</span>
+0068     n=1;                        <span class="comment">% Block number</span>
+0069     i1=1+(n-1)*K;               <span class="comment">% Index into x</span>
+0070     i2=i1+N-1;
+0071     y_tmp=y(i1:i2,vec);
+0072     x_tmp=x(i1:i2);
+0073     Y=acf*fft(y_tmp.*w)/N;      <span class="comment">% Scaled, windowed FFT</span>
+0074     YX=fft(y_tmp).*conj(fft(x_tmp));
+0075     Pyy(:,vec)=abs(Y).^2;       <span class="comment">% Window (amplitude) correction</span>
+0076     Pyx(:,vec)=YX;              <span class="comment">% Cross spectrum accumulation</span>
+0077     n=2;                        <span class="comment">% Next block number</span>
+0078     i1=1+(n-1)*K;               <span class="comment">% Index into y</span>
+0079     i2=i1+N-1;
+0080     <span class="keyword">while</span>  n &lt;= M 
+0081         y_tmp=y(i1:i2,vec);
+0082         x_tmp=x(i1:i2);
+0083         Y=acf*fft(y_tmp.*w)/N;
+0084         YX=fft(y_tmp).*conj(fft(x_tmp));
+0085         Y=Y.*exp(j*angle(YX));  <span class="comment">% Bug .* fixed 2014-10-01</span>
+0086         Pyy(:,vec)=(n-1)/n*Pyy(:,vec)+abs(Y).^2/n; <span class="comment">% Linear average accumulation</span>
+0087         Pyx(:,vec)=(n-1)/n*Pyx(:,vec)+(YX)/n; <span class="comment">% Linear average accumulation</span>
+0088         n=n+1;
+0089         i1=1+(n-1)*K;            <span class="comment">% Index into x</span>
+0090         i2=i1+N-1;
+0091     <span class="keyword">end</span>
+0092     Ayx(:,vec)=Pyy(:,vec).*exp(j*angle(Pyx(:,vec)));     <span class="comment">% Phased power spectrum</span>
+0093 <span class="keyword">end</span>
+0094 <span class="comment">% Convert to single-sided spectra and take square root</span>
+0095 Ayx=Ayx(1:N/2+1,:);
+0096 Ayx(2:<span class="keyword">end</span>,:)=2*Ayx(2:<span class="keyword">end</span>,:);
+0097 <span class="keyword">for</span> vec=1:Nvectors
+0098     Lyx(:,vec)=sqrt(abs(Ayx(:,vec))).*exp(j*angle(Ayx(:,vec)));
+0099 <span class="keyword">end</span>
+0100 f=(0:df:N/2*df)';
+0101</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

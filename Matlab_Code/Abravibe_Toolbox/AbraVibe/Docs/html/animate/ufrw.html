@@ -1,0 +1,1475 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of ufrw</title>
+  <meta name="keywords" content="ufrw">
+  <meta name="description" content="">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">animate</a> &gt; ufrw.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for animate&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>ufrw
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong></strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [ufOut,dsnID] = ufrw(action,varargin); </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment">
+   UFRW.M - Read/write universal file format.
+   Supports DSN : 15,18,55,58,58b,82,151,164
+
+   [uf,dsnID]=ufrw(''load'',fileName)
+     uf       : universal file data in a structured array.
+     dsnID    : column vector of DSN
+     fileName : location of universal file to load
+
+   ufrw(''save'',fileName,uff,type)
+     uff      : universal file data in a structured array
+     fileName : location to save universal file
+     type     : ['ascii' | {'binary'}]
+
+  06-July-2005\n</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>	</li></ul>
+<!-- crossreference -->
+
+<h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="#_sub1" class="code">function ud = unparseData(U,binary);</a></li><li><a href="#_sub2" class="code">function ud = parseData(U);</a></li><li><a href="#_sub3" class="code">function [UffDataSets,Info,errmsg] = readuff(fileName)</a></li><li><a href="#_sub4" class="code">function [dataSet,DataSetProp,blockLines,errMessage] = get_block_prop(so,eo,FILE_DATA)</a></li><li><a href="#_sub5" class="code">function [UFF,errMessage] = extract18(fileName,DATA,blockLines,DataSetProp)</a></li><li><a href="#_sub6" class="code">function [UFF,errMessage] = extract58(fileName,DATA,blockLines,DataSetProp)</a></li><li><a href="#_sub7" class="code">function [UFF,errMessage] = extract151(DATA,blockLines)</a></li><li><a href="#_sub8" class="code">function [UFF,errMessage] = extract164(DATA,blockLines)</a></li><li><a href="#_sub9" class="code">function [UFF,errMessage] = extract15(DATA,blockLines)</a></li><li><a href="#_sub10" class="code">function [UFF,errMessage] = extract82(DATA,blockLines)</a></li><li><a href="#_sub11" class="code">function [UFF,errMessage] = extract55(DATA,blockLines)</a></li><li><a href="#_sub12" class="code">function Info = writeuff(fileName,UffDataSets,action)</a></li><li><a href="#_sub13" class="code">function errMessage = write15(fid,UFF)</a></li><li><a href="#_sub14" class="code">function errMessage = write82(fid,UFF)</a></li><li><a href="#_sub15" class="code">function errMessage = write55(fid,UFF)</a></li><li><a href="#_sub16" class="code">function errMessage = write58(fid,UFF)</a></li><li><a href="#_sub17" class="code">function errMessage = write151(fid,UFF)</a></li><li><a href="#_sub18" class="code">function errMessage = write164(fid,UFF)</a></li><li><a href="#_sub19" class="code">function errMessage = write18(fid,UFF)</a></li></ul>
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [ufOut,dsnID] = ufrw(action,varargin);</a>
+0002 <span class="comment">%</span>
+0003 <span class="comment">%   UFRW.M - Read/write universal file format.</span>
+0004 <span class="comment">%   Supports DSN : 15,18,55,58,58b,82,151,164</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%   [uf,dsnID]=ufrw(''load'',fileName)</span>
+0007 <span class="comment">%     uf       : universal file data in a structured array.</span>
+0008 <span class="comment">%     dsnID    : column vector of DSN</span>
+0009 <span class="comment">%     fileName : location of universal file to load</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%   ufrw(''save'',fileName,uff,type)</span>
+0012 <span class="comment">%     uff      : universal file data in a structured array</span>
+0013 <span class="comment">%     fileName : location to save universal file</span>
+0014 <span class="comment">%     type     : ['ascii' | {'binary'}]</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%  06-July-2005\n</span>
+0017 
+0018 <span class="keyword">switch</span> action
+0019     <span class="keyword">case</span> <span class="string">'load'</span>  <span class="comment">% LOAD =====================================================================</span>
+0020         fileName    = varargin{1};
+0021         
+0022         <span class="comment">% Check for valid file</span>
+0023         <span class="keyword">if</span> exist(fileName)~=2
+0024             error(<span class="string">'File does not exist. Exiting.'</span>)
+0025             ufOut   = [];
+0026             <span class="keyword">return</span>
+0027         <span class="keyword">end</span>
+0028         
+0029         <span class="comment">% Load UF</span>
+0030         [uf,info]=<a href="#_sub3" class="code" title="subfunction [UffDataSets,Info,errmsg] = readuff(fileName)">readuff</a>(fileName);
+0031         
+0032         <span class="comment">% Check for UF data</span>
+0033         <span class="keyword">if</span> isempty(uf)
+0034             error(<span class="string">'No UFF data found. Exiting.'</span>)
+0035             ufOut   = [];
+0036             <span class="keyword">return</span>
+0037         <span class="keyword">end</span>
+0038         
+0039         <span class="comment">% Parse UF dataset</span>
+0040         <span class="keyword">for</span> ii=1:length(uf)
+0041             ufOut{ii,1}     = <a href="#_sub2" class="code" title="subfunction ud = parseData(U); ">parseData</a>(uf{ii});
+0042             ufOut{ii,1}.UID = ii;
+0043         <span class="keyword">end</span>
+0044         <span class="keyword">if</span> nargout&gt;1
+0045             <span class="keyword">for</span> rec=1:length(ufOut)
+0046                 dsnID(rec,1)    = [ufOut{rec}.DSN];
+0047             <span class="keyword">end</span>
+0048         <span class="keyword">end</span>
+0049         
+0050         
+0051     <span class="keyword">case</span> <span class="string">'save'</span>  <span class="comment">% SAVE =====================================================================</span>
+0052         <span class="keyword">if</span> nargin&lt;3
+0053             error(<span class="string">'??? Not enought input arguments.'</span>);
+0054             <span class="keyword">return</span>
+0055         <span class="keyword">end</span>
+0056         fileName    = varargin{1};
+0057         uf          = varargin{2};
+0058         
+0059         <span class="keyword">if</span> nargin&gt;3
+0060             type = varargin{end};
+0061             <span class="keyword">if</span> strcmp(type,<span class="string">'ascii'</span>)
+0062                 binary  = 0;
+0063             <span class="keyword">elseif</span> strcmp(type,<span class="string">'binary'</span>)
+0064                 binary = 1;
+0065             <span class="keyword">else</span>
+0066                 warning(<span class="string">'Unrecognized UFF format.  Defaulting to &quot;binary&quot;.'</span>)
+0067             <span class="keyword">end</span>
+0068         <span class="keyword">else</span>
+0069             <span class="comment">% Unspecified defaults to binary</span>
+0070             binary  = 1;
+0071         <span class="keyword">end</span>
+0072 
+0073         
+0074         <span class="keyword">for</span> ii=1:length(uf)
+0075             ufOut{ii,1}     = <a href="#_sub1" class="code" title="subfunction ud = unparseData(U,binary); ">unparseData</a>(uf{ii},binary);
+0076             <span class="keyword">if</span> ufOut{ii,1}.dsType==151
+0077                 ufOut{ii,1}.dateSaved   = datestr(now,1);
+0078                 ufOut{ii,1}.timeSaved   = datestr(now,13);
+0079             <span class="keyword">end</span>
+0080         <span class="keyword">end</span>
+0081         
+0082         info    = <a href="#_sub12" class="code" title="subfunction Info = writeuff(fileName,UffDataSets,action)">writeuff</a>(fileName,ufOut,<span class="string">'replace'</span>);
+0083         ufOut   = 1;
+0084         dsnID   = 1;
+0085         
+0086 <span class="keyword">end</span>
+0087 
+0088 <a name="_sub1" href="#_subfunctions" class="code">function ud = unparseData(U,binary); </a><span class="comment">% UNPARSE =====================================================</span>
+0089 <span class="keyword">switch</span> U.DSN
+0090     <span class="keyword">case</span> 15 <span class="comment">% NODES</span>
+0091         ud.dsType   = U.DSN;
+0092         <span class="keyword">for</span> n=1:length(U.Node)
+0093             ud.nodeN(n,1)           = U.Node(n,1).Label;
+0094             ud.defCS(n,1)           = U.Node(n,1).defCS;
+0095             ud.dispCS(n,1)          = U.Node(n,1).dispCS;
+0096             ud.color(n,1)           = U.Node(n,1).Color;
+0097             ud.x(n,1)               = U.Node(n,1).Crd(1);
+0098             ud.y(n,1)               = U.Node(n,1).Crd(2);
+0099             ud.z(n,1)               = U.Node(n,1).Crd(3);
+0100         <span class="keyword">end</span>
+0101         ud.binary               = binary;
+0102         
+0103     <span class="keyword">case</span> 18 <span class="comment">% COORDINATE SYSTEM</span>
+0104         ud  = U;
+0105         ud.binary   = binary;
+0106         
+0107     <span class="keyword">case</span> 55 <span class="comment">% NODAL DATA</span>
+0108         ud.dsType           = U.DSN;
+0109         ud.modelType        = U.modelType;
+0110         ud.analysisType     = U.analysisType;
+0111         ud.dataCharacter    = U.dataChar; 
+0112         ud.responseType     = U.specificType;
+0113         <span class="keyword">switch</span> ud.analysisType
+0114             <span class="keyword">case</span> 2  <span class="comment">% NORMAL MODES</span>
+0115                 <span class="comment">%ud.modeNum          = U.Int(2);</span>
+0116                 <span class="comment">%ud.modeFreq</span>
+0117                 <span class="comment">%ud.modeMass</span>
+0118                 <span class="comment">%ud.mode_v_damping_ratio</span>
+0119                 <span class="comment">%ud.mode_h_damping_ratio</span>
+0120                 
+0121             <span class="keyword">case</span> {3,7} <span class="comment">% COMPLEX MODES</span>
+0122                 ud.modeNum          = U.Int(2);
+0123                 ud.eigVal           = U.Real(1)+U.Real(2)*j;
+0124                 ud.modalA           = U.Real(3)+U.Real(4)*j;
+0125                 ud.modalB           = U.Real(5)+U.Real(6)*j;
+0126                 
+0127             <span class="keyword">case</span> 5  <span class="comment">% FREQUENCY RESPONSE</span>
+0128                 <span class="comment">%ud.freqNum</span>
+0129                 <span class="comment">%ud.freq</span>
+0130         <span class="keyword">end</span>
+0131         <span class="keyword">for</span> n=1:length(U.Node);
+0132             ud.nodeNum(n,1) = U.Node(n).Num;
+0133             ud.r1(n,1)      = U.Node(n).Data(1);
+0134             ud.r2(n,1)      = U.Node(n).Data(2);
+0135             ud.r3(n,1)      = U.Node(n).Data(3);
+0136             <span class="comment">%ud.r4(n,1)      = 0;</span>
+0137             <span class="comment">%ud.r5(n,1)      = 0;</span>
+0138             <span class="comment">%ud.r6(n,1)      = 0;</span>
+0139         <span class="keyword">end</span>
+0140         ud.ID_1     = U.ID{1};
+0141         ud.ID_2     = U.ID{2};
+0142         ud.ID_3     = U.ID{3};
+0143         ud.ID_4     = U.ID{4};
+0144         ud.ID_5     = U.ID{5};
+0145         ud.binary   = binary;
+0146         
+0147     <span class="keyword">case</span> 58 <span class="comment">% MEASUREMENT</span>
+0148         ud.dsType           = U.DSN;
+0149         ud.functionType     = U.Type;
+0150         ud.number           = U.Number;
+0151         ud.version          = U.Version;
+0152         ud.loadCaseId       = U.LoadCase;
+0153         ud.rspEntName       = U.Response.Name;
+0154         ud.rspNode          = U.Response.Node;
+0155         ud.rspDir           = U.Response.Dir;
+0156         ud.refEntName       = U.Reference.Name;
+0157         ud.refNode          = U.Reference.Node;
+0158         ud.refDir           = U.Reference.Dir;
+0159         ud.xmin             = U.AbscissaMinimum;
+0160         ud.dx               = U.AbscissaIncrement;
+0161         ud.Abscissa         = U.Abscissa;
+0162         ud.OrdinateNumer    = U.OrdinateNumer;
+0163         ud.OrdinateDenom    = U.OrdinateDenom;
+0164         ud.Zaxis            = U.Zaxis;
+0165         ud.measData         = U.DataValues.';
+0166         ud.x                = U.AbscissaValues;
+0167         ud.ID_1             = U.ID{1};
+0168         ud.ID_2             = U.ID{2};
+0169         ud.ID_3             = U.ID{3};
+0170         ud.ID_4             = U.ID{4};
+0171         ud.ID_5             = U.ID{5};
+0172         ud.binary   = binary;
+0173         
+0174     <span class="keyword">case</span> 82 <span class="comment">% TRACELINES</span>
+0175         ud.dsType   = U.DSN;
+0176         ud.ID       = U.ID;
+0177         ud.traceNum = U.TraceNum;
+0178         ud.color    = U.Color;
+0179         ud.lines    = U.Trace.';
+0180         ud.binary   = binary;
+0181         
+0182     <span class="keyword">case</span> 151 <span class="comment">% HEADER</span>
+0183         ud.dsType       = U.DSN;
+0184         ud.modelName    = U.ModelFileName;
+0185         ud.description  = U.ModelFileDescription;
+0186         ud.dbApp        = U.ProgramDB;
+0187         ud.dateCreated  = U.DateCreated;
+0188         ud.timeCreated  = U.TimeCreated;
+0189         ud.dbVersion1   = U.Version1;
+0190         ud.dbVersion2   = U.Version2;
+0191         ud.fileType     = U.FileType;
+0192         ud.dateSaved    = U.DateSaved;
+0193         ud.timeSaved    = U.TimeSaved;
+0194         ud.uffApp       = U.ProgramUF;
+0195         ud.binary       = binary;
+0196         
+0197     <span class="keyword">case</span> 164 <span class="comment">% UNITS</span>
+0198         ud.dsType           = U.DSN;
+0199         ud.unitsCode        = U.UnitsCode;
+0200         ud.unitsDescription = U.UnitsDescription;
+0201         ud.tempMode         = U.TempMode;
+0202         ud.facLength        = U.Length;
+0203         ud.facForce         = U.Force;
+0204         ud.facTemp          = U.Temperature;
+0205         ud.facTempOffset    = U.TemperatureOffset;
+0206         ud.binary           = binary;
+0207         
+0208 <span class="keyword">end</span>
+0209 
+0210 <a name="_sub2" href="#_subfunctions" class="code">function ud = parseData(U); </a><span class="comment">% PARSE =========================================================</span>
+0211 
+0212 <span class="keyword">switch</span> U.dsType
+0213     <span class="keyword">case</span> 151 <span class="comment">% HEADER</span>
+0214         ud.DSN                  = U.dsType;
+0215         ud.UID                  = 0;
+0216         ud.EXT                  = [];
+0217         ud.ModelFileName        = U.modelName;
+0218         ud.ModelFileDescription = U.description;
+0219         ud.ProgramDB            = U.dbApp;
+0220         ud.DateCreated          = U.dateCreated;
+0221         ud.TimeCreated          = U.timeCreated;
+0222         ud.Version1             = U.dbVersion1;
+0223         ud.Version2             = U.dbVersion2;
+0224         ud.FileType             = U.fileType;
+0225         ud.DateSaved            = U.dateSaved;
+0226         ud.TimeSaved            = U.timeSaved;
+0227         ud.ProgramUF            = U.uffApp;
+0228         ud.DateWritten          = U.dateSaved;      <span class="comment">% DNE</span>
+0229         ud.TimeWritten          = U.timeSaved;      <span class="comment">% DNE</span>
+0230         
+0231     <span class="keyword">case</span> 164  <span class="comment">% UNITS</span>
+0232         ud.DSN                  = U.dsType;
+0233         ud.UID                  = 0;
+0234         ud.EXT                  = [];
+0235         ud.UnitsCode            = U.unitsCode;
+0236         ud.UnitsDescription     = U.unitsDescription;
+0237         ud.TempMode             = U.tempMode;
+0238         ud.Length               = U.facLength;
+0239         ud.Force                = U.facForce;
+0240         ud.Temperature          = U.facTemp;
+0241         ud.TemperatureOffset    = U.facTempOffset;
+0242 
+0243     <span class="keyword">case</span> 15 <span class="comment">% NODES</span>
+0244         ud.DSN                  = U.dsType;
+0245         ud.UID                  = 0;
+0246         ud.EXT                  = [];
+0247         <span class="keyword">for</span> n=1:length(U.nodeN)
+0248             ud.Node(n,1).Label  = U.nodeN(n,1);
+0249             ud.Node(n,1).defCS  = U.defCS(n,1);
+0250             ud.Node(n,1).dispCS = U.dispCS(n,1);
+0251             ud.Node(n,1).Color  = U.color(n,1);
+0252             ud.Node(n,1).Crd    = [U.x(n,1) U.y(n,1) U.z(n,1)];
+0253         <span class="keyword">end</span>
+0254         
+0255     <span class="keyword">case</span> 82 <span class="comment">% TRACELINES</span>
+0256         ud.DSN      = U.dsType;
+0257         ud.UID      = 0;
+0258         ud.EXT      = [];
+0259         ud.ID       = U.ID;
+0260         ud.TraceNum = U.traceNum;
+0261         ud.Color    = U.color;
+0262         ud.Trace    = U.lines.';
+0263 
+0264     <span class="keyword">case</span> 58 <span class="comment">% DATA</span>
+0265         ud.DSN                  = U.dsType;
+0266         ud.UID                  = 0;
+0267         ud.EXT                  = [];
+0268         ud.ID{1,1}              = U.ID_1;
+0269         ud.ID{1,2}              = U.ID_2;
+0270         ud.ID{1,3}              = U.ID_3;
+0271         ud.ID{1,4}              = U.ID_4;
+0272         ud.ID{1,5}              = U.ID_5;
+0273         ud.Type                 = U.functionType;
+0274         ud.Number               = U.number;
+0275         ud.Version              = U.version;
+0276         ud.LoadCase             = U.loadCaseId;
+0277         ud.Response.Name        = U.rspEntName;
+0278         ud.Response.Node        = U.rspNode;
+0279         ud.Response.Dir         = U.rspDir;
+0280         ud.Reference.Name       = U.refEntName;
+0281         ud.Reference.Node       = U.refNode;
+0282         ud.Reference.Dir        = U.refDir;
+0283         ud.AbscissaMinimum      = U.xmin;
+0284         ud.AbscissaIncrement    = U.dx;
+0285         ud.ZaxisValue           = 0;
+0286         ud.Abscissa             = U.Abscissa;
+0287         ud.OrdinateNumer        = U.OrdinateNumer;
+0288         ud.OrdinateDenom        = U.OrdinateDenom;
+0289         ud.Zaxis                = U.Zaxis;
+0290         ud.DataValues           = U.measData.';
+0291         ud.AbscissaValues       = U.x;
+0292         
+0293     <span class="keyword">case</span> 18 <span class="comment">% COORDINATE SYSTEM DATA</span>
+0294         ud.DSN  = U.dsType;
+0295         ud.UID  = 0;
+0296         ud.EXT  = [];
+0297         ud.CS   = U.CS;
+0298         
+0299         
+0300     <span class="keyword">case</span> 55 <span class="comment">% NODAL DATA</span>
+0301         ud.DSN          = U.dsType;
+0302         ud.UID          = 0;
+0303         ud.EXT          = [];
+0304         ud.ID{1,1}      = U.ID_1;
+0305         ud.ID{2,1}      = U.ID_2;
+0306         ud.ID{3,1}      = U.ID_3;
+0307         ud.ID{4,1}      = U.ID_4;
+0308         ud.ID{5,1}      = U.ID_5;
+0309         ud.modelType    = U.modelType;
+0310         ud.analysisType = U.analysisType;
+0311         ud.dataChar     = U.dataCharacter; 
+0312         ud.specificType = U.responseType; <span class="comment">% REC 6</span>
+0313         ud.Int          = [1 U.modeNum];
+0314         ud.Real         = [real(U.eigVal) imag(U.eigVal) real(U.modalA) imag(U.modalA) real(U.modalB) imag(U.modalB)];
+0315         <span class="keyword">for</span> n=1:length(U.nodeNum);
+0316             ud.Node(n).Num  = U.nodeNum(n);
+0317             ud.Node(n).Data = [U.r1(n) U.r2(n) U.r3(n)];
+0318         <span class="keyword">end</span>
+0319 <span class="keyword">end</span>
+0320 
+0321 
+0322 <span class="comment">%==========================================================================</span>
+0323 <span class="comment">%========================     READUFF      ================================</span>
+0324 <span class="comment">%==========================================================================</span>
+0325 <a name="_sub3" href="#_subfunctions" class="code">function [UffDataSets,Info,errmsg] = readuff(fileName)</a>
+0326 
+0327 UffDataSets = [];
+0328 Info.errcode = [];
+0329 Info.nDataSets = 0;
+0330 Info.dsTypes = [];
+0331 Info.binary = [];
+0332 Info.errmsg = [];
+0333 Info.nErrors = 0;
+0334 errmsg = [];
+0335 
+0336 <span class="comment">%--------------</span>
+0337 <span class="comment">% Some variables</span>
+0338 <span class="comment">%--------------</span>
+0339 errN = 0;               <span class="comment">% current global error number (data-set number independant)</span>
+0340 
+0341 <span class="keyword">try</span>
+0342     fid = fopen(fileName,<span class="string">'r'</span>);
+0343     <span class="keyword">if</span> fid == -1,
+0344         errN = errN + 1;
+0345         errmsg{errN,1} = [<span class="string">'could not open file: '</span> fileName];
+0346         disp(errmsg{errN});
+0347         <span class="keyword">return</span>
+0348     <span class="keyword">end</span>
+0349     FILE_DATA = (fread(fid,<span class="string">'char=&gt;char'</span>)).';
+0350 <span class="keyword">catch</span>
+0351     errN = errN + 1;
+0352     errmsg{errN,1} = [<span class="string">'error reading file contents: '</span> lasterr];
+0353     disp(errmsg{errN});
+0354     <span class="comment">% Close the file</span>
+0355     fclose(fid);
+0356     <span class="keyword">return</span>
+0357 <span class="keyword">end</span>
+0358 <span class="comment">% Close the file</span>
+0359 err = fclose(fid);
+0360 <span class="keyword">if</span> err == -1
+0361     errN = errN + 1;
+0362     errmsg{errN,1} = <span class="string">'error while closing file'</span>;
+0363     disp(errmsg{errN});
+0364 <span class="keyword">end</span>
+0365 
+0366 ind = strfind(FILE_DATA,<span class="string">'    -1'</span>);
+0367 nBlocks = floor(length(ind)/2);
+0368 <span class="keyword">if</span> nBlocks &lt; 1
+0369     errN = errN + 1;
+0370     errmsg{errN,1} = <span class="string">'No valid blocks found'</span>;
+0371     disp(errmsg{errN});
+0372     <span class="keyword">return</span>
+0373 <span class="keyword">end</span>
+0374 blocks = zeros(nBlocks,2);
+0375 blocks(:,1) = ind(1:2:end).';
+0376 blocks(:,2) = ind(2:2:end).'-1;
+0377 
+0378 dataSetN = 0;       <span class="comment">% counts VALID data-sets (including non-supported ones)</span>
+0379 <span class="keyword">try</span>
+0380     <span class="keyword">for</span> ii=1:nBlocks
+0381         
+0382         [data_set_type,DataSetProp,blockLines,errMessage] = <a href="#_sub4" class="code" title="subfunction [dataSet,DataSetProp,blockLines,errMessage] = get_block_prop(so,eo,FILE_DATA)">get_block_prop</a>(blocks(ii,1),blocks(ii,2),FILE_DATA);
+0383         <span class="keyword">if</span> ~isempty(errMessage)
+0384             errN = errN + 1;
+0385             errmsg{errN,1} = errMessage;
+0386             <span class="keyword">continue</span>
+0387         <span class="keyword">end</span>
+0388         
+0389         dataSetN = dataSetN + 1;
+0390         <span class="keyword">if</span> data_set_type == 58      <span class="comment">% Function at nodal dof</span>
+0391             [ds_data,ds_errmsg] = <a href="#_sub6" class="code" title="subfunction [UFF,errMessage] = extract58(fileName,DATA,blockLines,DataSetProp)">extract58</a>(fileName,FILE_DATA,blockLines,DataSetProp);
+0392         <span class="keyword">elseif</span> data_set_type == 15  <span class="comment">% Coordinate data</span>
+0393             [ds_data,ds_errmsg] = <a href="#_sub9" class="code" title="subfunction [UFF,errMessage] = extract15(DATA,blockLines)">extract15</a>(FILE_DATA,blockLines);
+0394         <span class="keyword">elseif</span> data_set_type == 151 <span class="comment">% Header data</span>
+0395             [ds_data,ds_errmsg] = <a href="#_sub7" class="code" title="subfunction [UFF,errMessage] = extract151(DATA,blockLines)">extract151</a>(FILE_DATA,blockLines);
+0396         <span class="keyword">elseif</span> data_set_type == 164 <span class="comment">% Units data</span>
+0397             [ds_data,ds_errmsg] = <a href="#_sub8" class="code" title="subfunction [UFF,errMessage] = extract164(DATA,blockLines)">extract164</a>(FILE_DATA,blockLines);
+0398         <span class="keyword">elseif</span> data_set_type == 82  <span class="comment">% Display Sequence data</span>
+0399             [ds_data,ds_errmsg] = <a href="#_sub10" class="code" title="subfunction [UFF,errMessage] = extract82(DATA,blockLines)">extract82</a>(FILE_DATA,blockLines);
+0400         <span class="keyword">elseif</span> data_set_type == 55  <span class="comment">% Modal data file</span>
+0401             [ds_data,ds_errmsg] = <a href="#_sub11" class="code" title="subfunction [UFF,errMessage] = extract55(DATA,blockLines)">extract55</a>(FILE_DATA,blockLines);
+0402         <span class="keyword">elseif</span> data_set_type == 18  <span class="comment">% Coord Sys data</span>
+0403             [ds_data,ds_errmsg] = <a href="#_sub5" class="code" title="subfunction [UFF,errMessage] = extract18(fileName,DATA,blockLines,DataSetProp)">extract18</a>(fileName,FILE_DATA,blockLines,DataSetProp);
+0404         <span class="keyword">else</span>
+0405             ds_data = [];
+0406             ds_errmsg = [<span class="string">'unknown data-set ('</span> num2str(data_set_type)  <span class="string">') found in '</span> num2str(ii) <span class="string">'-th data-set '</span>];
+0407         <span class="keyword">end</span>
+0408         
+0409         UffDataSets{dataSetN,1} = ds_data;
+0410         UffDataSets{dataSetN,1}.dsType = data_set_type;
+0411         UffDataSets{dataSetN,1}.binary = DataSetProp.binary;
+0412         Info.errmsg{dataSetN,1} = ds_errmsg;
+0413         Info.dsTypes(dataSetN,1) = data_set_type;
+0414         Info.binary(dataSetN,1) = DataSetProp.binary;
+0415         <span class="keyword">if</span> isempty(ds_errmsg)
+0416             Info.errcode(dataSetN,1) = 0;
+0417         <span class="keyword">else</span>
+0418             Info.errcode(dataSetN,1) = 1;
+0419         <span class="keyword">end</span>
+0420     <span class="keyword">end</span>
+0421     
+0422 <span class="keyword">catch</span>
+0423     errN = errN + 1;
+0424     errmsg{errN,1} = lasterr;      
+0425 <span class="keyword">end</span>
+0426 
+0427 Info.nErrors = length(find(Info.errcode));
+0428 Info.nDataSets = dataSetN;
+0429 Info.errorMsgs = Info.errmsg(find(Info.errcode));
+0430 
+0431 <span class="keyword">if</span> ~isempty(errmsg)
+0432     <span class="keyword">for</span> ii=1:length(errmsg)
+0433         disp(errmsg{ii});
+0434     <span class="keyword">end</span>
+0435 <span class="keyword">end</span>
+0436 
+0437 
+0438 <span class="comment">%--------------------------------------------------------------------------</span>
+0439 <a name="_sub4" href="#_subfunctions" class="code">function [dataSet,DataSetProp,blockLines,errMessage] = get_block_prop(so,eo,FILE_DATA)</a>
+0440 errMessage = [];
+0441 <span class="keyword">try</span>
+0442     blockData = FILE_DATA(so:eo);
+0443     dataLen = length(blockData);
+0444     lineBreaks = find(blockData==10 | blockData==13);
+0445 
+0446     fromInd = ones(length(lineBreaks),1);
+0447     toInd = ones(length(lineBreaks),1);
+0448     <span class="keyword">for</span> ii=2:length(toInd)
+0449         <span class="keyword">if</span> (lineBreaks(ii)-1) == lineBreaks(ii-1)
+0450             toInd(ii) = 0;
+0451         <span class="keyword">end</span>
+0452         <span class="keyword">if</span> (lineBreaks(ii-1)+1) == lineBreaks(ii)
+0453             fromInd(ii-1) = 0;
+0454         <span class="keyword">end</span>
+0455     <span class="keyword">end</span>
+0456     from = ([1 lineBreaks(find(fromInd))+1])';
+0457     to = (lineBreaks(find(toInd))-1)';
+0458     <span class="keyword">if</span> from(end) &gt;= dataLen
+0459         from(end) = [];
+0460     <span class="keyword">end</span>
+0461     <span class="keyword">if</span> (dataLen &gt; to(end)+1) &amp; (lineBreaks(end)~=dataLen)
+0462         to = [to ; dataLen];
+0463     <span class="keyword">end</span>
+0464     
+0465     <span class="keyword">if</span> length(to)&gt;length(from)
+0466         to  = to(1:length(from));
+0467     <span class="keyword">else</span>
+0468         from    = from(1:length(to));
+0469     <span class="keyword">end</span>
+0470     
+0471     <span class="comment">% Local blockLines</span>
+0472     blockLines = [from to];
+0473 
+0474     dataSetLine = blockData(blockLines(2,1):blockLines(2,2));
+0475     dataSet = sscanf(dataSetLine(1:6),<span class="string">'%i'</span>,1);
+0476     <span class="keyword">if</span> isempty(dataSet)
+0477         errMessage = [<span class="string">'invalid data-set type specification found'</span>];
+0478         <span class="keyword">return</span>
+0479     <span class="keyword">end</span>
+0480     
+0481     <span class="keyword">if</span> length(dataSetLine) &lt; 7
+0482         format = <span class="string">''</span>;
+0483     <span class="keyword">else</span>
+0484         format = sscanf(dataSetLine(7),<span class="string">'%c'</span>,1);
+0485     <span class="keyword">end</span>
+0486     
+0487     <span class="keyword">if</span> strcmpi(format,<span class="string">'b'</span>)
+0488         DataSetProp.binary = 1;
+0489         DataSetProp.byteOrdering = sscanf(dataSetLine(8:13),<span class="string">'%i'</span>,1);
+0490         DataSetProp.fpFormat = sscanf(dataSetLine(14:19),<span class="string">'%i'</span>,1);
+0491         DataSetProp.nAsciiLines = sscanf(dataSetLine(20:31),<span class="string">'%i'</span>,1);
+0492         DataSetProp.nBytes = sscanf(dataSetLine(32:43),<span class="string">'%i'</span>,1);
+0493         <span class="keyword">if</span> length(dataSetLine)&gt;=68
+0494             DataSetProp.d1 = sscanf(dataSetLine(44:49),<span class="string">'%i'</span>,1);
+0495             DataSetProp.d2 = sscanf(dataSetLine(50:55),<span class="string">'%i'</span>,1);
+0496             DataSetProp.d3 = sscanf(dataSetLine(56:67),<span class="string">'%i'</span>,1);
+0497             DataSetProp.d4 = sscanf(dataSetLine(68:end),<span class="string">'%i'</span>,1);
+0498         <span class="keyword">else</span>
+0499             DataSetProp.d1 = [];
+0500             DataSetProp.d2 = [];
+0501             DataSetProp.d3 = [];
+0502             DataSetProp.d4 = [];
+0503         <span class="keyword">end</span>
+0504     <span class="keyword">else</span>
+0505         DataSetProp.binary = 0;
+0506     <span class="keyword">end</span>
+0507     
+0508     <span class="comment">% Global blockLines (with respect to FILE_DATA)</span>
+0509     blockLines = blockLines(3:<span class="keyword">end</span>,:) + so - 1;
+0510     <span class="keyword">if</span> size(blockLines,1) &lt; 2
+0511         errMessage = [<span class="string">'empty data block found'</span>];
+0512         <span class="keyword">return</span>
+0513     <span class="keyword">end</span>
+0514     
+0515 <span class="keyword">catch</span>
+0516     errMessage = [<span class="string">'error reading data-set properties: '</span> lasterr];
+0517     <span class="keyword">return</span>
+0518 <span class="keyword">end</span>
+0519 
+0520 
+0521 
+0522 
+0523 <span class="comment">%--------------------------------------------------------------------------</span>
+0524 <a name="_sub5" href="#_subfunctions" class="code">function [UFF,errMessage] = extract18(fileName,DATA,blockLines,DataSetProp)</a>
+0525 <span class="comment">% #18 - Extract coordinate system data</span>
+0526 UFF = [];
+0527 errMessage = [];
+0528 lineN = 1;
+0529 nLines = size(blockLines,1);
+0530 
+0531 <span class="keyword">try</span>
+0532     <span class="comment">% Line 1</span>
+0533     tmpLine = DATA(blockLines(1,1):blockLines(1,2));
+0534     tmpLine = [tmpLine repmat(<span class="string">' '</span>,1,80-length(tmpLine))];
+0535     UFF.CS.Number       = sscanf(tmpLine(1:10),<span class="string">'%i'</span>,1);      <span class="comment">% Field 1</span>
+0536     UFF.CS.Type         = sscanf(tmpLine(11:20),<span class="string">'%i'</span>,1);     <span class="comment">% Field 2</span>
+0537     UFF.CS.refNumber    = sscanf(tmpLine(21:30),<span class="string">'%i'</span>,1);    <span class="comment">% field 3</span>
+0538     UFF.CS.Color        = sscanf(tmpLine(31:40),<span class="string">'%i'</span>,1);    <span class="comment">% Field 4</span>
+0539     UFF.CS.defMethod    = sscanf(tmpLine(41:50),<span class="string">'%i'</span>,1);    <span class="comment">% Field 4</span>
+0540     lineN = lineN + 1;
+0541 
+0542     <span class="comment">% Line 2</span>
+0543     tmpLine     = DATA(blockLines(1,1):blockLines(1,2));
+0544     tmpLine     = [tmpLine repmat(<span class="string">' '</span>,1,80-length(tmpLine))];
+0545     UFF.Name    = sscanf(tmpLine(1:20),<span class="string">'%s'</span>,1);
+0546     lineN = lineN + 1;
+0547 
+0548     <span class="comment">% Line 3</span>
+0549     tmpLine         = DATA(blockLines(3,1):blockLines(3,2));
+0550     tmpLine         = [tmpLine repmat(<span class="string">' '</span>,1,80-length(tmpLine))];
+0551     tmp             = sscanf(tmpLine,<span class="string">'%g'</span>,6);
+0552     UFF.CS.Origin   = tmp(1:3).';
+0553     UFF.CS.Xaxis    = tmp(4:6).';
+0554     
+0555     <span class="comment">% Line 4</span>
+0556     tmpLine         = DATA(blockLines(4,1):blockLines(4,2));
+0557     tmpLine         = [tmpLine repmat(<span class="string">' '</span>,1,80-length(tmpLine))];
+0558     tmp             = sscanf(tmpLine,<span class="string">'%g'</span>,3);
+0559     UFF.CS.XZplane  = tmp(1:3).';
+0560     
+0561     
+0562 <span class="keyword">catch</span>
+0563     errMessage = [<span class="string">'error reading header data at line '</span> num2str(lineN) <span class="string">' relatively to current data-set'</span>];
+0564     <span class="keyword">return</span>
+0565 <span class="keyword">end</span>
+0566 
+0567 
+0568 <span class="comment">%--------------------------------------------------------------------------</span>
+0569 <a name="_sub6" href="#_subfunctions" class="code">function [UFF,errMessage] = extract58(fileName,DATA,blockLines,DataSetProp)</a>
+0570 <span class="comment">% #58 - Extract data-set type 58 data</span>
+0571 
+0572 UFF = [];
+0573 UFF.measData = [];
+0574 errMessage = [];
+0575 lineN = 1;
+0576 nLines = size(blockLines,1);
+0577 
+0578 <span class="keyword">try</span>
+0579     UFF.ID_1 = sscanf(DATA(blockLines(1,1):blockLines(1,2)),<span class="string">'%c'</span>,80);    lineN = lineN + 1;
+0580     UFF.ID_2 = sscanf(DATA(blockLines(2,1):blockLines(2,2)),<span class="string">'%c'</span>,80);    lineN = lineN + 1;
+0581     UFF.ID_3 = sscanf(DATA(blockLines(3,1):blockLines(3,2)),<span class="string">'%c'</span>,80);    lineN = lineN + 1;
+0582     UFF.ID_4 = sscanf(DATA(blockLines(4,1):blockLines(4,2)),<span class="string">'%c'</span>,80);    lineN = lineN + 1;
+0583     UFF.ID_5 = sscanf(DATA(blockLines(5,1):blockLines(5,2)),<span class="string">'%c'</span>,80);    lineN = lineN + 1;
+0584 
+0585     <span class="comment">% Line 6</span>
+0586     tmpLine = DATA(blockLines(6,1):blockLines(6,2));
+0587     tmpLine = [tmpLine repmat(<span class="string">' '</span>,1,80-length(tmpLine))];
+0588     UFF.functionType    = sscanf(tmpLine(1:5),<span class="string">'%i'</span>,1);      <span class="comment">% Field 1</span>
+0589     UFF.number          = sscanf(tmpLine(6:15),<span class="string">'%i'</span>,1);     <span class="comment">% Field 2</span>
+0590     UFF.version         = sscanf(tmpLine(16:20),<span class="string">'%i'</span>,1);    <span class="comment">% field 3</span>
+0591     UFF.loadCaseId      = sscanf(tmpLine(21:30),<span class="string">'%i'</span>,1);    <span class="comment">% Field 4</span>
+0592     <span class="keyword">if</span> UFF.loadCaseId ~= 0,
+0593         errMessage = [<span class="string">'need single point excitation at: '</span> num2str(lineN)];
+0594         <span class="keyword">return</span>
+0595     <span class="keyword">end</span>
+0596     UFF.rspEntName = sscanf(tmpLine(32:41),<span class="string">'%s'</span>,1);
+0597     UFF.rspNode = sscanf(tmpLine(42:51),<span class="string">'%i'</span>,1);
+0598     UFF.rspDir = sscanf(tmpLine(52:55),<span class="string">'%i'</span>,1);
+0599     UFF.refEntName = sscanf(tmpLine(57:66),<span class="string">'%s'</span>,1);
+0600     UFF.refNode = sscanf(tmpLine(67:76),<span class="string">'%i'</span>,1);
+0601     UFF.refDir = sscanf(tmpLine(77:80),<span class="string">'%i'</span>,1);
+0602     lineN = lineN + 1;
+0603 
+0604     <span class="comment">% Line 7; data form</span>
+0605     tmpLine = DATA(blockLines(7,1):blockLines(7,2));
+0606     tmpLine = [tmpLine repmat(<span class="string">' '</span>,1,80-length(tmpLine))];
+0607     ordDataType = sscanf(tmpLine(1:10),<span class="string">'%i'</span>,1);
+0608     numpt = sscanf(tmpLine(11:20),<span class="string">'%i'</span>,1);
+0609     spacingType = sscanf(tmpLine(21:30),<span class="string">'%i'</span>,1);
+0610     <span class="keyword">if</span> spacingType ~= 1,
+0611         errMessage = [<span class="string">'need evenly spaced frequency/time at:'</span> num2str(lineN)];
+0612         <span class="keyword">return</span>
+0613     <span class="keyword">end</span>
+0614     UFF.xmin = sscanf(tmpLine(31:43),<span class="string">'%g'</span>,1);
+0615     UFF.dx = sscanf(tmpLine(44:56),<span class="string">'%g'</span>,1);
+0616     zValue = sscanf(tmpLine(57:69),<span class="string">'%g'</span>,1);
+0617     lineN = lineN + 1;
+0618 
+0619     <span class="comment">% Line 8; abscissa data characteristics</span>
+0620     tmpLine = DATA(blockLines(8,1):blockLines(8,2));
+0621     tmpLine = [tmpLine repmat(<span class="string">' '</span>,1,80-length(tmpLine))];
+0622     abDataType = sscanf(tmpLine(1:10),<span class="string">'%i'</span>,1);
+0623     <span class="keyword">if</span> ~(abDataType == 18 | abDataType == 17 | abDataType),  <span class="comment">% Frequency, time, or unknown</span>
+0624         errMessage = [<span class="string">'need frequency, time, or unknown data on abcissa at:'</span> num2str(lineN)];
+0625         <span class="keyword">return</span>
+0626     <span class="keyword">end</span>
+0627     UFF.Abscissa.Type           = abDataType;
+0628     UFF.Abscissa.LengthUnitsExp = sscanf(tmpLine(11:15),<span class="string">'%i'</span>,1);
+0629     UFF.Abscissa.ForceUnitsExp  = sscanf(tmpLine(16:20),<span class="string">'%i'</span>,1);
+0630     UFF.Abscissa.TempUnitsExp   = sscanf(tmpLine(21:25),<span class="string">'%i'</span>,1);
+0631     UFF.Abscissa.Label          = sscanf(tmpLine(27:46),<span class="string">'%s'</span>,1);
+0632     UFF.Abscissa.UnitsLabel     = sscanf(tmpLine(48:end),<span class="string">'%s'</span>,1);
+0633     lineN = lineN + 1;
+0634 
+0635     <span class="comment">% Line 9; Ordinate (or ordinate numerator) Data Characteristics</span>
+0636     tmpLine = DATA(blockLines(9,1):blockLines(9,2));
+0637     tmpLine = [tmpLine repmat(<span class="string">' '</span>,1,80-length(tmpLine))];
+0638     ordNumeratorDataType = sscanf(tmpLine(1:10),<span class="string">'%i'</span>,1);
+0639     UFF.OrdinateNumer.Type          = ordNumeratorDataType;
+0640     UFF.OrdinateNumer.LengthUnitsExp= sscanf(tmpLine(11:15),<span class="string">'%i'</span>,1);
+0641     UFF.OrdinateNumer.ForceUnitsExp = sscanf(tmpLine(16:20),<span class="string">'%i'</span>,1);
+0642     UFF.OrdinateNumer.TempUnitsExp  = sscanf(tmpLine(21:25),<span class="string">'%i'</span>,1);
+0643     UFF.OrdinateNumer.Label         = sscanf(tmpLine(27:46),<span class="string">'%s'</span>,1);
+0644     UFF.OrdinateNumer.UnitsLabel    = sscanf(tmpLine(48:end),<span class="string">'%s'</span>,1);
+0645     lineN = lineN + 1;
+0646 
+0647     <span class="comment">% Line 10; Ordinate Denominator Data Characteristics</span>
+0648     tmpLine = DATA(blockLines(10,1):blockLines(10,2));
+0649     tmpLine = [tmpLine repmat(<span class="string">' '</span>,1,80-length(tmpLine))];
+0650     ordDenominatorDataType = sscanf(tmpLine(1:10),<span class="string">'%i'</span>,1);
+0651     UFF.OrdinateDenom.Type          = ordDenominatorDataType;
+0652     UFF.OrdinateDenom.LengthUnitsExp= sscanf(tmpLine(11:15),<span class="string">'%i'</span>,1);
+0653     UFF.OrdinateDenom.ForceUnitsExp = sscanf(tmpLine(16:20),<span class="string">'%i'</span>,1);
+0654     UFF.OrdinateDenom.TempUnitsExp  = sscanf(tmpLine(21:25),<span class="string">'%i'</span>,1);
+0655     UFF.OrdinateDenom.Label         = sscanf(tmpLine(27:46),<span class="string">'%s'</span>,1);
+0656     UFF.OrdinateDenom.UnitsLabel    = sscanf(tmpLine(48:end),<span class="string">'%s'</span>,1);
+0657     lineN = lineN + 1;
+0658 
+0659     <span class="comment">% Line 11; Z-axis Data Characteristics</span>
+0660     tmpLine = DATA(blockLines(11,1):blockLines(11,2));
+0661     tmpLine = [tmpLine repmat(<span class="string">' '</span>,1,80-length(tmpLine))];
+0662     UFF.Zaxis.Type          = sscanf(tmpLine(1:10),<span class="string">'%i'</span>,1);
+0663     UFF.Zaxis.LengthUnitsExp= sscanf(tmpLine(11:15),<span class="string">'%i'</span>,1);
+0664     UFF.Zaxis.ForceUnitsExp = sscanf(tmpLine(16:20),<span class="string">'%i'</span>,1);
+0665     UFF.Zaxis.TempUnitsExp  = sscanf(tmpLine(21:25),<span class="string">'%i'</span>,1);
+0666     UFF.Zaxis.Label         = sscanf(tmpLine(27:46),<span class="string">'%s'</span>,1);
+0667     UFF.Zaxis.UnitsLabel    = sscanf(tmpLine(48:end),<span class="string">'%s'</span>,1);
+0668     lineN = lineN + 1;
+0669 
+0670     <span class="comment">% Line 12 ...; Data Values</span>
+0671     <span class="keyword">if</span> DataSetProp.binary
+0672         <span class="keyword">if</span> DataSetProp.byteOrdering == 1; format = <span class="string">'l'</span>; <span class="keyword">else</span>; format = <span class="string">'b'</span>; <span class="keyword">end</span>;
+0673         <span class="keyword">if</span> (ordDataType==2 | ordDataType==5);
+0674             prec = <span class="string">'float32'</span>;
+0675             numLen = 4;
+0676         <span class="keyword">else</span>
+0677             prec = <span class="string">'double'</span>;
+0678             numLen = 8;
+0679         <span class="keyword">end</span>
+0680         fid = fopen(fileName,<span class="string">'r'</span>,format);
+0681         <span class="keyword">if</span> fid == -1
+0682             errMessage = [<span class="string">'could not reopen file for binary data reading: '</span> fileName];
+0683             <span class="keyword">return</span>
+0684         <span class="keyword">end</span>
+0685         status = fseek(fid, blockLines(12,1)-1, <span class="string">'bof'</span>);
+0686         <span class="keyword">if</span> status
+0687             errMessage = [<span class="string">'could not start reading binary data from '</span> fileName];
+0688             <span class="keyword">return</span>
+0689         <span class="keyword">end</span>
+0690         values = fread(fid, round(DataSetProp.nBytes/numLen), prec);
+0691         fclose(fid);
+0692     <span class="keyword">else</span>
+0693         values = sscanf(DATA(blockLines(12,1):blockLines(<span class="keyword">end</span>,2)),<span class="string">'%g'</span>);
+0694     <span class="keyword">end</span>
+0695     
+0696     <span class="comment">% In all cases, even abscissa is assumed</span>
+0697     <span class="keyword">if</span> (ordDataType == 2 | ordDataType == 4)        <span class="comment">% real, single or double precision</span>
+0698         UFF.measData = values;
+0699     <span class="keyword">elseif</span> (ordDataType == 5 | ordDataType == 6)    <span class="comment">% complex, single or double precision</span>
+0700         UFF.measData = values(1:2:end-1) + j*values(2:2:end);
+0701     <span class="keyword">else</span>
+0702         errMessage = [<span class="string">'error reading measurement data at:'</span> num2str(lineN)];
+0703         <span class="keyword">return</span>
+0704     <span class="keyword">end</span>
+0705     nVal = length(UFF.measData);
+0706     <span class="comment">% Abscissa</span>
+0707     UFF.x = [ UFF.xmin : UFF.dx : (nVal-1)*UFF.dx ];
+0708 <span class="keyword">catch</span>
+0709     errMessage = [<span class="string">'error reading measurement data: '</span> lasterr];
+0710     <span class="keyword">return</span>
+0711 <span class="keyword">end</span>
+0712 
+0713 
+0714 <span class="comment">%--------------------------------------------------------------------------</span>
+0715 <a name="_sub7" href="#_subfunctions" class="code">function [UFF,errMessage] = extract151(DATA,blockLines)</a>
+0716 <span class="comment">% #151 - Extract data-set type 151 data</span>
+0717 
+0718 UFF = [];
+0719 errMessage = [];
+0720 lineN = 1;
+0721 nLines = size(blockLines,1);
+0722 
+0723 <span class="keyword">try</span>
+0724     UFF.modelName = sscanf(DATA(blockLines(1,1):blockLines(1,2)),<span class="string">'%c'</span>,80);    lineN = lineN + 1;
+0725     UFF.description = sscanf(DATA(blockLines(2,1):blockLines(2,2)),<span class="string">'%c'</span>,80);    lineN = lineN + 1;
+0726     UFF.dbApp = sscanf(DATA(blockLines(3,1):blockLines(3,2)),<span class="string">'%c'</span>,80);    lineN = lineN + 1;
+0727     tmpLine = DATA(blockLines(4,1):blockLines(4,2));
+0728     tmpLine = [tmpLine repmat(<span class="string">' '</span>,1,80-length(tmpLine))];
+0729     UFF.dateCreated = sscanf(tmpLine(1:10),<span class="string">'%s'</span>,10);
+0730     UFF.timeCreated = sscanf(tmpLine(11:20),<span class="string">'%s'</span>,10);
+0731     UFF.dbVersion1  = sscanf(tmpLine(21:30),<span class="string">'%i'</span>,10);
+0732     UFF.dbVersion2  = sscanf(tmpLine(31:40),<span class="string">'%i'</span>,10);
+0733     UFF.fileType    = sscanf(tmpLine(41:50),<span class="string">'%i'</span>,10);
+0734     lineN = lineN + 1;       
+0735     <span class="comment">% Line 5</span>
+0736     tmpLine = DATA(blockLines(5,1):blockLines(5,2));
+0737     tmpLine = [tmpLine repmat(<span class="string">' '</span>,1,80-length(tmpLine))];
+0738     UFF.dateSaved = sscanf(tmpLine(1:10),<span class="string">'%s'</span>,10);
+0739     UFF.timeSaved = sscanf(tmpLine(11:20),<span class="string">'%s'</span>,10);
+0740     lineN = lineN + 1;       
+0741     <span class="comment">% Line 6</span>
+0742     UFF.uffApp = sscanf(DATA(blockLines(6,1):blockLines(6,2)),<span class="string">'%c'</span>,80);
+0743 <span class="keyword">catch</span>
+0744     errMessage = [<span class="string">'error reading header data at line '</span> num2str(lineN) <span class="string">' relatively to current data-set'</span>];
+0745     <span class="keyword">return</span>
+0746 <span class="keyword">end</span>
+0747 
+0748 
+0749 <span class="comment">%--------------------------------------------------------------------------</span>
+0750 <a name="_sub8" href="#_subfunctions" class="code">function [UFF,errMessage] = extract164(DATA,blockLines)</a>
+0751 <span class="comment">% #164 - Extract data-set type 164 data</span>
+0752 UFF = [];
+0753 errMessage = [];
+0754 lineN = 1;
+0755 nLines = size(blockLines,1);
+0756 <span class="keyword">try</span>
+0757     <span class="comment">% Line 1</span>
+0758     tmpLine = DATA(blockLines(1,1):blockLines(1,2));
+0759     tmpLine = [tmpLine repmat(<span class="string">' '</span>,1,80-length(tmpLine))];
+0760     UFF.unitsCode = sscanf(tmpLine(1:10),<span class="string">'%i'</span>);    
+0761     UFF.unitsDescription = sscanf(tmpLine(11:31),<span class="string">'%c'</span>);
+0762     UFF.tempMode = sscanf(tmpLine(32:41),<span class="string">'%i'</span>);
+0763     lineN = lineN + 1;
+0764     <span class="comment">% Line 2</span>
+0765     tmpLine = DATA(blockLines(2,1):blockLines(2,2));
+0766     tmpLine = lower([tmpLine repmat(<span class="string">' '</span>,1,80-length(tmpLine))]);
+0767     tmpLine = strrep(tmpLine,<span class="string">'d-'</span>,<span class="string">'e-'</span>);
+0768     tmpLine = strrep(tmpLine,<span class="string">'d+'</span>,<span class="string">'e+'</span>);
+0769     UFF.facLength = sscanf(tmpLine(1:25),<span class="string">'%f'</span>);
+0770     UFF.facForce = sscanf(tmpLine(26:50),<span class="string">'%f'</span>);
+0771     UFF.facTemp = sscanf(tmpLine(51:75),<span class="string">'%f'</span>);
+0772     lineN = lineN + 1;
+0773     <span class="comment">% Line 3</span>
+0774     tmpLine = DATA(blockLines(3,1):blockLines(3,2));
+0775     tmpLine = lower([tmpLine repmat(<span class="string">' '</span>,1,80-length(tmpLine))]);
+0776     tmpLine = strrep(tmpLine,<span class="string">'d-'</span>,<span class="string">'e-'</span>);
+0777     tmpLine = strrep(tmpLine,<span class="string">'d+'</span>,<span class="string">'e+'</span>);
+0778     UFF.facTempOffset = sscanf(tmpLine(1:25),<span class="string">'%f'</span>);
+0779 <span class="keyword">catch</span>
+0780     errMessage = [<span class="string">'error reading units data at line'</span> num2str(lineN) <span class="string">' relatively to current data-set: '</span> lasterr];
+0781     <span class="keyword">return</span>
+0782 <span class="keyword">end</span>
+0783 
+0784 
+0785 
+0786 <span class="comment">%--------------------------------------------------------------------------</span>
+0787 <a name="_sub9" href="#_subfunctions" class="code">function [UFF,errMessage] = extract15(DATA,blockLines)</a>
+0788 <span class="comment">% #15 - Extract data-set type 15 data</span>
+0789 
+0790 UFF = [];
+0791 errMessage = [];
+0792 nLines = size(blockLines,1);
+0793 
+0794 <span class="keyword">try</span>
+0795     values = sscanf(DATA(blockLines(1,1):blockLines(<span class="keyword">end</span>,2)),<span class="string">'%g'</span>);
+0796     nVals = length(values);
+0797     nNodes = round(nVals/7);
+0798     values = reshape(values,7,nNodes).';
+0799     <span class="comment">%</span>
+0800     UFF.nodeN = round(values(:,1));
+0801     UFF.defCS = round(values(:,2));
+0802     UFF.dispCS = round(values(:,3));
+0803     UFF.color = round(values(:,4));
+0804     UFF.x = values(:,5);
+0805     UFF.y = values(:,6);
+0806     UFF.z = values(:,7);
+0807 <span class="keyword">catch</span>
+0808     errMessage = [<span class="string">'error reading coordinate data: '</span> lasterr];
+0809     <span class="keyword">return</span>
+0810 <span class="keyword">end</span>
+0811 
+0812 
+0813 
+0814 <span class="comment">%--------------------------------------------------------------------------</span>
+0815 <a name="_sub10" href="#_subfunctions" class="code">function [UFF,errMessage] = extract82(DATA,blockLines)</a>
+0816 <span class="comment">% #82 - Extract display sequence data-set type 82 data</span>
+0817 
+0818 UFF = [];
+0819 errMessage = [];
+0820 lineN = 1;
+0821 nLines = size(blockLines,1);
+0822 <span class="keyword">try</span>
+0823     <span class="comment">% Line 1</span>
+0824     tmpLine = DATA(blockLines(1,1):blockLines(1,2));
+0825     tmpLine = [tmpLine repmat(<span class="string">' '</span>,1,80-length(tmpLine))];
+0826     UFF.traceNum = sscanf(tmpLine(1:10),<span class="string">'%i'</span>,1);
+0827     UFF.nNodes = sscanf(tmpLine(11:20),<span class="string">'%i'</span>,1);
+0828     UFF.color = sscanf(tmpLine(21:30),<span class="string">'%i'</span>,1);    lineN = lineN + 1;
+0829     UFF.ID = sscanf(DATA(blockLines(2,1):blockLines(2,2)),<span class="string">'%c'</span>);    lineN = lineN + 1;
+0830     UFF.lines = sscanf(DATA(blockLines(3,1):blockLines(<span class="keyword">end</span>,2)),<span class="string">'%g'</span>);
+0831 <span class="keyword">catch</span>
+0832     errMessage = [<span class="string">'error reading trace-line data at line'</span> num2str(lineN) <span class="string">' relatively to current data-set: '</span> lasterr];
+0833     <span class="keyword">return</span>
+0834 <span class="keyword">end</span>
+0835 
+0836 
+0837 
+0838 <span class="comment">%--------------------------------------------------------------------------</span>
+0839 <a name="_sub11" href="#_subfunctions" class="code">function [UFF,errMessage] = extract55(DATA,blockLines)</a>
+0840 <span class="comment">% #55 - Extract modal data-set type 55 data</span>
+0841 
+0842 UFF = [];
+0843 errMessage = [];
+0844 lineN = 1;
+0845 nLines = size(blockLines,1);
+0846 errN = 0;
+0847 
+0848 <span class="keyword">try</span>
+0849     UFF.ID_1 = sscanf(DATA(blockLines(1,1):blockLines(1,2)),<span class="string">'%c'</span>,80);    lineN = lineN + 1;
+0850     UFF.ID_2 = sscanf(DATA(blockLines(2,1):blockLines(2,2)),<span class="string">'%c'</span>,80);    lineN = lineN + 1;
+0851     UFF.ID_3 = sscanf(DATA(blockLines(3,1):blockLines(3,2)),<span class="string">'%c'</span>,80);    lineN = lineN + 1;
+0852     UFF.ID_4 = sscanf(DATA(blockLines(4,1):blockLines(4,2)),<span class="string">'%c'</span>,80);
+0853     UFF.ID_5 = sscanf(DATA(blockLines(5,1):blockLines(5,2)),<span class="string">'%s'</span>,1);
+0854     lineN = lineN + 1;
+0855     tmpLine = DATA(blockLines(6,1):blockLines(6,2));
+0856     tmpLine = [tmpLine repmat(<span class="string">' '</span>,1,80-length(tmpLine))];
+0857     UFF.modelType = sscanf(tmpLine(1:10),<span class="string">'%i'</span>,1);
+0858     lineN = lineN + 1;
+0859     <span class="keyword">if</span> UFF.modelType ~=1,
+0860         errMessage = [<span class="string">'not structural model type (line: '</span> num2str(lineN) <span class="string">' relatively to current data-set)'</span>];
+0861         <span class="keyword">return</span>
+0862     <span class="keyword">end</span>
+0863     UFF.analysisType = sscanf(tmpLine(11:20),<span class="string">'%i'</span>,1);
+0864     UFF.dataCharacter = sscanf(tmpLine(21:30),<span class="string">'%i'</span>,1);
+0865     UFF.responseType = sscanf(tmpLine(31:40),<span class="string">'%i'</span>,1);
+0866     UFF.dataType = sscanf(tmpLine(41:50),<span class="string">'%i'</span>,1);
+0867     num_data_per_pt = sscanf(tmpLine(51:60),<span class="string">'%s'</span>,1);
+0868 
+0869     <span class="comment">% Read records 7 and 8 which are analysis-type dependant</span>
+0870     <span class="keyword">if</span> UFF.analysisType == 2  <span class="comment">% Normal Mode</span>
+0871         <span class="comment">% Line 7</span>
+0872         tmpLine = DATA(blockLines(7,1):blockLines(7,2));
+0873         tmpLine = [tmpLine repmat(<span class="string">' '</span>,1,80-length(tmpLine))];
+0874         two = sscanf(tmpLine(1:10),<span class="string">'%i'</span>,1);
+0875         lineN = lineN + 1;
+0876         <span class="keyword">if</span> two ~= 2,
+0877             errMessage = [<span class="string">'unexpected value at line '</span> num2str(lineN) <span class="string">' relatively to current data-set'</span>];
+0878             <span class="keyword">return</span>
+0879         <span class="keyword">end</span>
+0880         four = sscanf(tmpLine(11:20),<span class="string">'%i'</span>,1);
+0881         <span class="keyword">if</span> four ~= 4,
+0882             errMessage = [<span class="string">'unexpected value at line: '</span> num2str(lineN) <span class="string">' relatively to current data-set'</span>];
+0883             <span class="keyword">return</span>
+0884         <span class="keyword">end</span>
+0885         tmp = sscanf(tmpLine(21:30),<span class="string">'%i'</span>,1);
+0886         UFF.modeNum = sscanf(tmpLine(31:40),<span class="string">'%i'</span>,1);
+0887         <span class="comment">% Line 8</span>
+0888         tmpLine = DATA(blockLines(8,1):blockLines(8,2));
+0889         tmpLine = [tmpLine repmat(<span class="string">' '</span>,1,80-length(tmpLine))];
+0890         lineN = lineN + 1;
+0891         UFF.modeFreq = sscanf(tmpLine(1:13),<span class="string">'%g'</span>,1);
+0892         UFF.modeMass = sscanf(tmpLine(14:26),<span class="string">'%g'</span>,1);
+0893         UFF.mode_v_damping_ratio = sscanf(tmpLine(27:39),<span class="string">'%g'</span>,1);
+0894         UFF.mode_h_damping_ratio = sscanf(tmpLine(40:52),<span class="string">'%g'</span>,1);
+0895 
+0896     <span class="keyword">elseif</span> UFF.analysisType == 3, <span class="comment">% Complex Eigenvalue, First Order (Displacement)</span>
+0897         <span class="comment">% Line 7</span>
+0898         tmpLine = DATA(blockLines(7,1):blockLines(7,2));
+0899         tmpLine = [tmpLine repmat(<span class="string">' '</span>,1,80-length(tmpLine))];
+0900         lineN = lineN + 1;
+0901         two = sscanf(tmpLine(1:10),<span class="string">'%i'</span>,1);
+0902         <span class="keyword">if</span> two ~= 2,
+0903             errMessage = [<span class="string">'unexpected value at line '</span> num2str(lineN) <span class="string">' relatively to current data-set'</span>];
+0904             <span class="keyword">return</span>
+0905         <span class="keyword">end</span>
+0906         six = sscanf(tmpLine(11:20),<span class="string">'%i'</span>,1);
+0907         <span class="keyword">if</span> six ~= 6,
+0908             errMessage = [<span class="string">'unexpected value at line: '</span> num2str(lineN) <span class="string">' relatively to current data-set'</span>];
+0909             <span class="keyword">return</span>
+0910         <span class="keyword">end</span>
+0911         tmp = sscanf(tmpLine(21:30),<span class="string">'%i'</span>,1);
+0912         UFF.modeNum = sscanf(tmpLine(31:40),<span class="string">'%i'</span>,1);
+0913 
+0914         <span class="comment">% Line 8</span>
+0915         tmpLine = DATA(blockLines(8,1):blockLines(8,2));
+0916         tmpLine = [tmpLine repmat(<span class="string">' '</span>,1,80-length(tmpLine))];
+0917         lineN = lineN + 1;
+0918         real_part = sscanf(tmpLine(1:13),<span class="string">'%g'</span>,1);
+0919         imaginary_part = sscanf(tmpLine(14:26),<span class="string">'%g'</span>,1);
+0920         UFF.eigVal = real_part + j * imaginary_part;
+0921         real_part = sscanf(tmpLine(27:39),<span class="string">'%g'</span>,1);
+0922         imaginary_part = sscanf(tmpLine(40:52),<span class="string">'%g'</span>,1);
+0923         UFF.modalA = real_part + j * imaginary_part;
+0924         real_part = sscanf(tmpLine(53:65),<span class="string">'%g'</span>,1);
+0925         imaginary_part = sscanf(tmpLine(66:78),<span class="string">'%g'</span>,1);
+0926         UFF.modalB = real_part + j * imaginary_part;
+0927 
+0928     <span class="keyword">elseif</span> UFF.analysisType == 5, <span class="comment">% Frequency Response</span>
+0929         <span class="comment">% Line 7</span>
+0930         tmpLine = DATA(blockLines(7,1):blockLines(7,2));
+0931         tmpLine = [tmpLine repmat(<span class="string">' '</span>,1,80-length(tmpLine))];
+0932         lineN = lineN + 1;
+0933         two = sscanf(tmpLine(1:10),<span class="string">'%i'</span>,1);
+0934         <span class="keyword">if</span> two ~= 2,
+0935             errMessage = [<span class="string">'unexpected value at line '</span> num2str(lineN) <span class="string">' relatively to current data-set'</span>];
+0936             <span class="keyword">return</span>
+0937         <span class="keyword">end</span>
+0938         one = sscanf(tmpLine(11:20),<span class="string">'%i'</span>,1);
+0939         <span class="keyword">if</span> one ~= 1,            
+0940             errMessage = [<span class="string">'unexpected value at line '</span> num2str(lineN) <span class="string">' relatively to current data-set'</span>];
+0941             <span class="keyword">return</span>
+0942         <span class="keyword">end</span>
+0943         tmp = sscanf(tmpLine(21:30),<span class="string">'%i'</span>,1);
+0944         UFF.freqNum = sscanf(tmpLine(31:40),<span class="string">'%i'</span>,1);
+0945 
+0946         <span class="comment">% Line 8</span>
+0947         tmpLine = DATA(blockLines(8,1):blockLines(8,2));
+0948         tmpLine = [tmpLine repmat(<span class="string">' '</span>,1,80-length(tmpLine))];
+0949         lineN = lineN + 1;
+0950         UFF.freq = sscanf(tmpLine(1:13),<span class="string">'%g'</span>,1);    <span class="comment">% in Hz</span>
+0951 
+0952     <span class="keyword">elseif</span> UFF.analysisType == 7  <span class="comment">% Complex Eigenvalue, Second Order (Velocity)</span>
+0953         <span class="comment">% Line 7</span>
+0954         tmpLine = DATA(blockLines(7,1):blockLines(7,2));
+0955         tmpLine = [tmpLine repmat(<span class="string">' '</span>,1,80-length(tmpLine))];
+0956         lineN = lineN + 1;
+0957         two = sscanf(tmpLine(1:10),<span class="string">'%i'</span>,1);
+0958         <span class="keyword">if</span> two ~= 2,
+0959             errMessage = [<span class="string">'unexpected value at line '</span> num2str(lineN) <span class="string">' relatively to current data-set'</span>];
+0960             <span class="keyword">return</span>
+0961         <span class="keyword">end</span>
+0962         six = sscanf(tmpLine(11:20),<span class="string">'%i'</span>,1);
+0963         <span class="keyword">if</span> six ~= 6,
+0964             errMessage = [<span class="string">'unexpected value at line '</span> num2str(lineN) <span class="string">' relatively to current data-set'</span>];
+0965             <span class="keyword">return</span>
+0966         <span class="keyword">end</span>
+0967         tmp = sscanf(tmpLine(21:30),<span class="string">'%i'</span>,1);
+0968         UFF.modeNum = sscanf(tmpLine(31:40),<span class="string">'%i'</span>,1);
+0969 
+0970         <span class="comment">% Line 8</span>
+0971         tmpLine = DATA(blockLines(8,1):blockLines(8,2));
+0972         tmpLine = [tmpLine repmat(<span class="string">' '</span>,1,80-length(tmpLine))];
+0973         lineN = lineN + 1;
+0974         real_part = sscanf(tmpLine(1:13),<span class="string">'%g'</span>,1);
+0975         imaginary_part = sscanf(tmpLine(14:26),<span class="string">'%g'</span>,1);
+0976         UFF.eigVal = real_part + j * imaginary_part;
+0977         real_part = sscanf(tmpLine(27:39),<span class="string">'%g'</span>,1);
+0978         imaginary_part = sscanf(tmpLine(40:52),<span class="string">'%g'</span>,1);
+0979         UFF.modalA = real_part + j * imaginary_part;
+0980         real_part = sscanf(tmpLine(53:65),<span class="string">'%g'</span>,1);
+0981         imaginary_part = sscanf(tmpLine(66:78),<span class="string">'%g'</span>,1);
+0982         UFF.modalB = real_part + j * imaginary_part;
+0983 
+0984     <span class="keyword">else</span>
+0985         errMessage = [<span class="string">'analysis type is not supported at line '</span> num2str(lineN) <span class="string">' relatively to current data-set'</span>];
+0986         <span class="keyword">return</span>
+0987     <span class="keyword">end</span>
+0988 
+0989     <span class="comment">% Read response data by x,y,...components into r1..r6</span>
+0990     ii = 0;
+0991     nnodes = floor((nLines-9)/2)+1;
+0992     r1 = zeros(nnodes,1);
+0993     r2 = r1;
+0994     r3 = r1;
+0995     r4 = r1;
+0996     r5 = r1;
+0997     r6 = r1;
+0998     nodeNum = r1;
+0999     <span class="keyword">for</span> lne = 9:2:nLines-1,
+1000         ii = ii + 1;
+1001         <span class="comment">%========</span>
+1002         <span class="comment">%    line = 9; % line 9 type of line</span>
+1003         <span class="comment">%========</span>
+1004         lineRead = lne;
+1005         tmpLine = DATA(blockLines(lineRead,1):blockLines(lineRead,2));
+1006         nodeNum(ii) = sscanf(tmpLine(1:10),<span class="string">'%i'</span>,1);
+1007         lineN = lineN + 1;
+1008 
+1009         <span class="comment">%========</span>
+1010         <span class="comment">%    line = 10; % line 9 type of line</span>
+1011         <span class="comment">%========</span>
+1012         lineRead = lne + 1;
+1013         lineN = lineN + 1;
+1014         tmpLine = DATA(blockLines(lineRead,1):blockLines(lineRead,2));
+1015 <span class="comment">%         tmpLine = [tmpLine repmat(' ',1,80-length(tmpLine))];</span>
+1016         <span class="keyword">if</span> UFF.dataType == 2,       <span class="comment">% real data</span>
+1017             r1(ii) = sscanf(tmpLine(1:13),<span class="string">'%g'</span>,1);
+1018             r2(ii) = sscanf(tmpLine(14:26),<span class="string">'%g'</span>,1);
+1019             r3(ii) = sscanf(tmpLine(27:39),<span class="string">'%g'</span>,1);
+1020             <span class="keyword">if</span> num_data_per_pt == 6,
+1021                 r4(ii) = sscanf(tmpLine(40:52),<span class="string">'%g'</span>,1);
+1022                 r5(ii) = sscanf(tmpLine(53:65),<span class="string">'%g'</span>,1);
+1023                 r6(ii) = sscanf(tmpLine(66:78),<span class="string">'%g'</span>,1);
+1024             <span class="keyword">end</span>
+1025         <span class="keyword">elseif</span> UFF.dataType == 5,   <span class="comment">% complex data</span>
+1026             p1 = sscanf(tmpLine(1:13),<span class="string">'%g'</span>,1);
+1027             p2 = sscanf(tmpLine(14:26),<span class="string">'%g'</span>,1);
+1028             r1(ii) = p1 + j * p2;
+1029             p3 = sscanf(tmpLine(27:39),<span class="string">'%g'</span>,1);
+1030             p4 = sscanf(tmpLine(40:52),<span class="string">'%g'</span>,1);
+1031             r2(ii) = p3 + j * p4;
+1032             p5 = sscanf(tmpLine(53:65),<span class="string">'%g'</span>,1);
+1033             p6 = sscanf(tmpLine(66:78),<span class="string">'%g'</span>,1);
+1034             r3(ii) = p5 + j * p6;
+1035             <span class="keyword">if</span> num_data_per_pt == 6,
+1036                 errMessage = [<span class="string">'not setup to handle six coordinate of complex data at line '</span> num2str(lineN) <span class="string">' relatively to current data-set'</span>];
+1037                 <span class="keyword">return</span>
+1038             <span class="keyword">end</span>
+1039         <span class="keyword">else</span>
+1040             errMessage = [<span class="string">'what kind of data type was that at line '</span> num2str(lineN) <span class="string">' relatively to current data-set?'</span>];
+1041             <span class="keyword">return</span>
+1042         <span class="keyword">end</span>
+1043     <span class="keyword">end</span>
+1044     UFF.r1 = r1;
+1045     UFF.r2 = r2;
+1046     UFF.r3 = r3;
+1047     UFF.r4 = r4;
+1048     UFF.r5 = r5;
+1049     UFF.r6 = r6;
+1050     UFF.nodeNum = nodeNum;
+1051 <span class="keyword">catch</span>
+1052     errMessage = [<span class="string">'error reading modal data: '</span> lasterr];
+1053     <span class="keyword">return</span>
+1054 <span class="keyword">end</span>
+1055 
+1056 
+1057 <span class="comment">%==========================================================================</span>
+1058 <span class="comment">%=======================     WRITEUFF      ================================</span>
+1059 <span class="comment">%==========================================================================</span>
+1060 <a name="_sub12" href="#_subfunctions" class="code">function Info = writeuff(fileName,UffDataSets,action)</a>
+1061 error(nargchk(2,3,nargin));
+1062 <span class="keyword">if</span> nargin &lt; 3 || isempty(action)
+1063     action = <span class="string">'add'</span>;
+1064 <span class="keyword">end</span>
+1065 <span class="keyword">if</span> ~iscell(UffDataSets)
+1066     error(<span class="string">'UffDataSets must be given as a cell array of structures'</span>);
+1067 <span class="keyword">end</span>
+1068 
+1069 <span class="comment">%--------------</span>
+1070 <span class="comment">% Open the file for writing</span>
+1071 <span class="comment">%--------------</span>
+1072 <span class="keyword">if</span> strcmpi(action,<span class="string">'replace'</span>)
+1073     [fid,ermesage] = fopen(fileName,<span class="string">'w'</span>);
+1074 <span class="keyword">else</span>
+1075     [fid,ermesage] = fopen(fileName,<span class="string">'a'</span>);
+1076 <span class="keyword">end</span>
+1077 <span class="keyword">if</span> fid == -1,
+1078     error([<span class="string">'could not open file: '</span> fileName]);
+1079 <span class="keyword">end</span>
+1080 
+1081 <span class="comment">%--------------</span>
+1082 <span class="comment">% Go through all the data sets and write each data set according to its type</span>
+1083 <span class="comment">%--------------</span>
+1084 nDataSets = length(UffDataSets);
+1085 
+1086 Info.errcode = zeros(nDataSets,1);
+1087 Info.errmsg = cell(nDataSets,1);
+1088 Info.nErrors = 0;
+1089 
+1090 <span class="keyword">for</span> ii=1:nDataSets
+1091     <span class="keyword">try</span>
+1092         <span class="comment">%</span>
+1093         <span class="keyword">switch</span> UffDataSets{ii}.dsType
+1094             <span class="keyword">case</span> {15,82,55,58,151,164}
+1095                 fprintf(fid,<span class="string">'%6i%s'</span>,-1,char(10));
+1096                 <span class="keyword">switch</span> UffDataSets{ii}.dsType
+1097                     <span class="keyword">case</span> 15
+1098                         Info.errmsg{ii} = <a href="#_sub13" class="code" title="subfunction errMessage = write15(fid,UFF)">write15</a>(fid,UffDataSets{ii});
+1099                     <span class="keyword">case</span> 18
+1100                         Info.errmsg{ii} = <a href="#_sub19" class="code" title="subfunction errMessage = write18(fid,UFF)">write18</a>(fid,UffDataSets{ii});
+1101                     <span class="keyword">case</span> 82
+1102                         Info.errmsg{ii} = <a href="#_sub14" class="code" title="subfunction errMessage = write82(fid,UFF)">write82</a>(fid,UffDataSets{ii});
+1103                     <span class="keyword">case</span> 55
+1104                         Info.errmsg{ii} = <a href="#_sub15" class="code" title="subfunction errMessage = write55(fid,UFF)">write55</a>(fid,UffDataSets{ii});
+1105                     <span class="keyword">case</span> 58
+1106                         Info.errmsg{ii} = <a href="#_sub16" class="code" title="subfunction errMessage = write58(fid,UFF)">write58</a>(fid,UffDataSets{ii});
+1107                     <span class="keyword">case</span> 151
+1108                         Info.errmsg{ii} = <a href="#_sub17" class="code" title="subfunction errMessage = write151(fid,UFF)">write151</a>(fid,UffDataSets{ii});
+1109                     <span class="keyword">case</span> 164
+1110                         Info.errmsg{ii} = <a href="#_sub18" class="code" title="subfunction errMessage = write164(fid,UFF)">write164</a>(fid,UffDataSets{ii});
+1111                 <span class="keyword">end</span>
+1112                 fprintf(fid,<span class="string">'%6i%s'</span>,-1,char(10));
+1113             <span class="keyword">otherwise</span>
+1114                 Info.errmsg{ii} = [<span class="string">'Unsupported data set: '</span> num2str(UffDataSets{ii}.dsType)];
+1115         <span class="keyword">end</span>
+1116         <span class="comment">%</span>
+1117     <span class="keyword">catch</span>
+1118         fclose(fid);
+1119         error([<span class="string">'Error writing uff file: '</span> fileName <span class="string">': '</span> lasterr]);
+1120     <span class="keyword">end</span>
+1121 <span class="keyword">end</span>
+1122 fclose(fid);
+1123 
+1124 <span class="keyword">for</span> ii=1:nDataSets
+1125     <span class="keyword">if</span> ~isempty(Info.errmsg{ii})
+1126         Info.errcode(ii) = 1;
+1127     <span class="keyword">end</span>
+1128 <span class="keyword">end</span>
+1129 Info.nErrors = length(find(Info.errcode));
+1130 Info.errorMsgs = Info.errmsg(find(Info.errcode));
+1131 
+1132 <span class="comment">%--------------------------------------------------------------------------</span>
+1133 <a name="_sub13" href="#_subfunctions" class="code">function errMessage = write15(fid,UFF)</a>
+1134 <span class="comment">% #15 - Write data-set type 15 data</span>
+1135 errMessage = [];
+1136 <span class="keyword">if</span> ispc
+1137     F_13 = <span class="string">'%13.4E'</span>;
+1138 <span class="keyword">else</span>
+1139     F_13 = <span class="string">'%13.5E'</span>;
+1140 <span class="keyword">end</span>
+1141 <span class="keyword">try</span>
+1142     n = length(UFF.nodeN);
+1143     <span class="keyword">if</span> ~isfield(UFF,<span class="string">'defCS'</span>);   UFF.defCS = zeros(n,1);  <span class="keyword">end</span>;
+1144     <span class="keyword">if</span> ~isfield(UFF,<span class="string">'dispCS'</span>);  UFF.dispCS = zeros(n,1); <span class="keyword">end</span>;
+1145     <span class="keyword">if</span> ~isfield(UFF,<span class="string">'color'</span>);   UFF.color = zeros(n,1);  <span class="keyword">end</span>;
+1146     fprintf(fid,<span class="string">'%6i%s'</span>,15,char(10));
+1147     <span class="keyword">for</span> ii=1:n
+1148         fprintf(fid,[<span class="string">'%10i%10i%10i%10i'</span> F_13 F_13 F_13 <span class="string">'%s'</span>],UFF.nodeN(ii),UFF.defCS(ii),UFF.dispCS(ii),UFF.color(ii), <span class="keyword">...</span>
+1149             UFF.x(ii),UFF.y(ii),UFF.z(ii),char(10));
+1150     <span class="keyword">end</span>
+1151 <span class="keyword">catch</span>
+1152     errMessage = [<span class="string">'error writing coordinate data: '</span> lasterr];
+1153 <span class="keyword">end</span>
+1154 <span class="comment">%-----------------------------------------------------------------</span>
+1155 
+1156 <span class="comment">%--------------------------------------------------------------------------</span>
+1157 <a name="_sub14" href="#_subfunctions" class="code">function errMessage = write82(fid,UFF)</a>
+1158 <span class="comment">% #82 - Write data-set type 82 data</span>
+1159 errMessage = [];
+1160 <span class="keyword">try</span>
+1161     <span class="keyword">if</span> ~isfield(UFF,<span class="string">'ID'</span>);      UFF.ID = <span class="string">'NONE'</span>; <span class="keyword">end</span>;
+1162     <span class="keyword">if</span> ~isfield(UFF,<span class="string">'color'</span>);   UFF.color = 0;  <span class="keyword">end</span>;
+1163     fprintf(fid,<span class="string">'%6i%s'</span>,82,char(10));
+1164     fprintf(fid,<span class="string">'%10i%10i%10i%s'</span>,UFF.traceNum,length(UFF.lines),UFF.color,char(10));  <span class="comment">% line 1</span>
+1165     fprintf(fid,<span class="string">'%-s%s'</span>,UFF.ID,char(10)); <span class="comment">% line 2</span>
+1166     fprintf(fid,<span class="string">'%10i%10i%10i%10i%10i%10i%10i%10i\n'</span>,UFF.lines); <span class="comment">% line 3</span>
+1167     <span class="keyword">if</span> rem(length(UFF.lines),8)~=0,
+1168         fprintf(fid,<span class="string">'%s'</span>,char(10));
+1169     <span class="keyword">end</span>
+1170 <span class="keyword">catch</span>
+1171     errMessage = [<span class="string">'error writing display-sequence data: '</span> lasterr];
+1172 <span class="keyword">end</span>
+1173 <span class="comment">%-----------------------------------------------------------------</span>
+1174 
+1175 
+1176 <span class="comment">%--------------------------------------------------------------------------</span>
+1177 <a name="_sub15" href="#_subfunctions" class="code">function errMessage = write55(fid,UFF)</a>
+1178 <span class="comment">% #55 - Write data-set type 55 data</span>
+1179 <span class="keyword">if</span> ispc
+1180     F_13 = <span class="string">'%13.4e'</span>;
+1181 <span class="keyword">else</span>
+1182     F_13 = <span class="string">'%13.5e'</span>;
+1183 <span class="keyword">end</span>
+1184 errMessage = [];
+1185 <span class="keyword">try</span>
+1186     <span class="keyword">if</span> isfield(UFF,<span class="string">'r4'</span>) &amp; isfield(UFF,<span class="string">'r5'</span>) &amp; isfield(UFF,<span class="string">'r6'</span>)
+1187         num_data_per_pt = 6;
+1188     <span class="keyword">else</span>
+1189         num_data_per_pt = 3;
+1190     <span class="keyword">end</span>
+1191 
+1192     fprintf(fid,<span class="string">'%6i%s'</span>,55,char(10));
+1193     fprintf(fid,<span class="string">'%-s%s'</span>,UFF.ID_1,char(10)); <span class="comment">%line 1</span>
+1194     fprintf(fid,<span class="string">'%-s%s'</span>,UFF.ID_2,char(10)); <span class="comment">%line 2</span>
+1195     fprintf(fid,<span class="string">'%-s%s'</span>,UFF.ID_3,char(10)); <span class="comment">%line 3</span>
+1196     fprintf(fid,<span class="string">'%-s%s'</span>,UFF.ID_4,char(10)); <span class="comment">%line 4</span>
+1197     fprintf(fid,<span class="string">'%-s%s'</span>,UFF.ID_5,char(10)); <span class="comment">%line 5</span>
+1198     <span class="comment">% ASSUME ALWAYS COMPLEX</span>
+1199     <span class="comment">%if imag(UFF.r1)~=0 &amp; imag(UFF.r2)~=0 &amp; imag(UFF.r3)~=0,</span>
+1200     <span class="comment">%    data_type = 2;</span>
+1201     <span class="comment">%else,</span>
+1202         data_type = 5;
+1203     <span class="comment">%end</span>
+1204     fprintf(fid,<span class="string">'%10i%10i%10i%10i%10i%10i%s'</span>,1,UFF.analysisType,UFF.dataCharacter, <span class="keyword">...</span>
+1205         UFF.responseType,data_type,num_data_per_pt,char(10)); <span class="comment">%line 6</span>
+1206     <span class="keyword">if</span> UFF.analysisType == 2,                               <span class="comment">% Normal modes</span>
+1207         fprintf(fid,<span class="string">'%10i%10i%10i%10i%s'</span>,2,4,0,UFF.modeNum,char(10)); <span class="comment">%line 7</span>
+1208         fprintf(fid,[F_13 F_13 F_13 F_13 <span class="string">'%s'</span>], <span class="keyword">...</span>
+1209             UFF.modeFreq,UFF.modeMass,UFF.mode_v_damping,UFF.mode_h_damping,char(10)); <span class="comment">%line 8</span>
+1210     <span class="keyword">elseif</span> UFF.analysisType == 5,                           <span class="comment">% Frequency Response</span>
+1211         fprintf(fid,<span class="string">'%10i%10i%10i%10i%s'</span>,2,1,0,UFF.freqNum,char(10)); <span class="comment">%line 7</span>
+1212         fprintf(fid,<span class="string">'%13.4e%s'</span>, UFF.freq,char(10)); <span class="comment">%line 8</span>
+1213     <span class="keyword">elseif</span> UFF.analysisType == 3 | UFF.analysisType == 7,   <span class="comment">% Complex modes</span>
+1214         fprintf(fid,<span class="string">'%10i%10i%10i%10i%s'</span>,2,6,0,UFF.modeNum,char(10)); <span class="comment">%line 7</span>
+1215         fprintf(fid,[F_13 F_13 F_13 F_13 F_13 F_13 <span class="string">'%s'</span>], <span class="keyword">...</span>
+1216             real(UFF.eigVal),imag(UFF.eigVal),real(UFF.modalA),imag(UFF.modalA), <span class="keyword">...</span>
+1217             real(UFF.modalB),imag(UFF.modalB),char(10)); <span class="comment">%line 8</span>
+1218     <span class="keyword">else</span>
+1219         errMessage = [<span class="string">'Unsupported analysis type: '</span> num2str(UFF.analysisType)];
+1220         <span class="keyword">return</span>
+1221     <span class="keyword">end</span>
+1222     <span class="keyword">if</span> data_type == 2,  <span class="comment">% real data</span>
+1223         <span class="keyword">if</span> num_data_per_pt == 3,
+1224             <span class="keyword">for</span> k=1:length(UFF.nodeNum);
+1225                 fprintf(fid,<span class="string">'%10i%s'</span>,UFF.nodeNum(k),char(10));
+1226                 fprintf(fid,[F_13 F_13 F_13 <span class="string">'%s'</span>],UFF.r1(k),UFF.r2(k),UFF.r3(k),char(10));
+1227             <span class="keyword">end</span>
+1228         <span class="keyword">else</span>,
+1229             <span class="keyword">for</span> k=1:length(UFF.nodeNum);
+1230                 fprintf(fid,<span class="string">'%10i%s'</span>,UFF.nodeNum(k),char(10));
+1231                 fprintf(fid,[F_13 F_13 F_13 F_13 F_13 F_13 <span class="string">'%s'</span>], <span class="keyword">...</span>
+1232                     UFF.r1(k),UFF.r2(k),UFF.r3(k),UFF.r4(k),UFF.r5(k),UFF.r6(k),char(10));
+1233             <span class="keyword">end</span>
+1234         <span class="keyword">end</span>
+1235     <span class="keyword">else</span>,               <span class="comment">% complex data</span>
+1236         <span class="keyword">for</span> k=1:length(UFF.nodeNum);
+1237             fprintf(fid,<span class="string">'%10i%s'</span>,UFF.nodeNum(k),char(10));
+1238             fprintf(fid,[F_13 F_13 F_13 F_13 F_13 F_13 <span class="string">'%s'</span>], <span class="keyword">...</span>
+1239                 real(UFF.r1(k)),imag(UFF.r1(k)), real(UFF.r2(k)),imag(UFF.r2(k)), <span class="keyword">...</span>
+1240                 real(UFF.r3(k)),imag(UFF.r3(k)),char(10));
+1241         <span class="keyword">end</span>
+1242     <span class="keyword">end</span>
+1243 
+1244 <span class="keyword">catch</span>
+1245     errMessage = [<span class="string">'error writing modal data: '</span> lasterr];
+1246 <span class="keyword">end</span>
+1247 <span class="comment">%-----------------------------------------------------------------</span>
+1248 
+1249 
+1250 <span class="comment">%--------------------------------------------------------------------------</span>
+1251 <a name="_sub16" href="#_subfunctions" class="code">function errMessage = write58(fid,UFF)</a>
+1252 <span class="comment">% #58 - Write data-set type 58 data</span>
+1253 <span class="keyword">if</span> ispc
+1254     F_13 = <span class="string">'%13.4e'</span>;
+1255     F_20 = <span class="string">'%20.11e'</span>;
+1256 <span class="keyword">else</span>
+1257     F_13 = <span class="string">'%13.5e'</span>;
+1258     F_20 = <span class="string">'%20.12e'</span>;
+1259 <span class="keyword">end</span>
+1260 errMessage = [];
+1261 <span class="keyword">try</span>
+1262     <span class="keyword">if</span> ~find(UFF.functionType == [1 2 3 4 6])
+1263         errMessage = [<span class="string">'Unsupported function type: '</span> num2str(UFF.functionType)];
+1264         <span class="keyword">return</span>
+1265     <span class="keyword">end</span>
+1266     <span class="keyword">if</span> UFF.binary
+1267         [filename, mode, machineformat] = fopen(fid);
+1268         <span class="keyword">if</span> strcmpi(machineformat(1:7),<span class="string">'ieee-le'</span>)
+1269             byteOrdering = 1;
+1270         <span class="keyword">else</span>
+1271             byteOrdering = 2;
+1272         <span class="keyword">end</span>
+1273         <span class="keyword">if</span> imag(UFF.measData)==0
+1274             nBytes = length(UFF.measData)*8;
+1275         <span class="keyword">else</span>
+1276             nBytes = length(UFF.measData)*16;
+1277         <span class="keyword">end</span>
+1278         fprintf(fid,<span class="string">'%6i%1s%6i%6i%12i%12i%6i%6i%12i%12i%s'</span>,58,<span class="string">'b'</span>,byteOrdering,2,11,nBytes,0,0,0,0,char(10));
+1279     <span class="keyword">else</span>
+1280         fprintf(fid,<span class="string">'%6i%s'</span>,58,char(10));
+1281     <span class="keyword">end</span>
+1282     <span class="keyword">if</span> length(UFF.ID_1)&lt;=80,
+1283         fprintf(fid,<span class="string">'%-s%s'</span>,UFF.ID_1,char(10));   <span class="comment">%  line 1</span>
+1284     <span class="keyword">else</span>
+1285         fprintf(fid,<span class="string">'%-s%s'</span>,UFF.ID_1(1:80),char(10));   <span class="comment">%  line 1</span>
+1286     <span class="keyword">end</span>
+1287     <span class="keyword">if</span> length(UFF.ID_2)&lt;=80,
+1288         fprintf(fid,<span class="string">'%-s%s'</span>,UFF.ID_2,char(10));   <span class="comment">%  line 2</span>
+1289     <span class="keyword">else</span>
+1290         fprintf(fid,<span class="string">'%-s%s'</span>,UFF.ID_2(1:80),char(10));   <span class="comment">%  line 2</span>
+1291     <span class="keyword">end</span>
+1292     <span class="keyword">if</span> length(UFF.ID_3)&lt;=80,
+1293         fprintf(fid,<span class="string">'%-s%s'</span>,UFF.ID_3,char(10));   <span class="comment">%  line 3</span>
+1294     <span class="keyword">else</span>
+1295         fprintf(fid,<span class="string">'%-s%s'</span>,UFF.ID_3(1:80),char(10));   <span class="comment">%  line 3</span>
+1296     <span class="keyword">end</span>
+1297     <span class="keyword">if</span> length(UFF.ID_4)&lt;=80,
+1298         fprintf(fid,<span class="string">'%-s%s'</span>,UFF.ID_4,char(10));   <span class="comment">%  line 4</span>
+1299     <span class="keyword">else</span>
+1300         fprintf(fid,<span class="string">'%-s%s'</span>,UFF.ID_4(1:80),char(10));   <span class="comment">%  line 4</span>
+1301     <span class="keyword">end</span>
+1302     <span class="keyword">if</span> length(UFF.ID_5)&lt;=80,
+1303         fprintf(fid,<span class="string">'%-s%s'</span>,UFF.ID_5,char(10));   <span class="comment">%  line 5</span>
+1304     <span class="keyword">else</span>
+1305         fprintf(fid,<span class="string">'%-s%s'</span>,UFF.ID_5(1:80),char(10));   <span class="comment">%  line 5</span>
+1306     <span class="keyword">end</span>
+1307     <span class="comment">%</span>
+1308     fprintf(fid,<span class="string">'%5i%10i%5i%10i %-10s%10i%4i %-10s%10i%4i%s'</span>,UFF.functionType,UFF.number,UFF.version,UFF.loadCaseId,UFF.rspEntName,<span class="keyword">...</span>
+1309         UFF.rspNode,UFF.rspDir,UFF.refEntName,UFF.refNode,UFF.refDir,char(10));    <span class="comment">% line 6</span>
+1310     numpt = length(UFF.measData);
+1311     <span class="keyword">if</span> isreal(UFF.measData)
+1312         fprintf(fid,[<span class="string">'%10i%10i%10i'</span> F_13 F_13 F_13 <span class="string">'%s'</span>],4,numpt,1,UFF.xmin,UFF.dx,0,char(10));  <span class="comment">% line 7</span>
+1313     <span class="keyword">else</span>,
+1314         fprintf(fid,[<span class="string">'%10i%10i%10i'</span> F_13 F_13 F_13 <span class="string">'%s'</span>],6,numpt,1,UFF.xmin,UFF.dx,0,char(10));  <span class="comment">% line 7</span>
+1315     <span class="keyword">end</span>
+1316     <span class="comment">% line 8</span>
+1317     fprintf(fid,<span class="string">'%10i%5i%5i%5i %-20s %-20s%s'</span>,UFF.Abscissa.Type,UFF.Abscissa.LengthUnitsExp,UFF.Abscissa.ForceUnitsExp,UFF.Abscissa.TempUnitsExp,UFF.Abscissa.Label,UFF.Abscissa.UnitsLabel,char(10));
+1318     <span class="comment">% line 9</span>
+1319     fprintf(fid,<span class="string">'%10i%5i%5i%5i %-20s %-20s%s'</span>,UFF.OrdinateNumer.Type,UFF.OrdinateNumer.LengthUnitsExp,UFF.OrdinateNumer.ForceUnitsExp,UFF.OrdinateNumer.TempUnitsExp,UFF.OrdinateNumer.Label,UFF.OrdinateNumer.UnitsLabel,char(10));
+1320     <span class="comment">% line 10</span>
+1321     fprintf(fid,<span class="string">'%10i%5i%5i%5i %-20s %-20s%s'</span>,UFF.OrdinateDenom.Type,UFF.OrdinateDenom.LengthUnitsExp,UFF.OrdinateDenom.ForceUnitsExp,UFF.OrdinateDenom.TempUnitsExp,UFF.OrdinateDenom.Label,UFF.OrdinateDenom.UnitsLabel,char(10));
+1322     <span class="comment">% line 11</span>
+1323     fprintf(fid,<span class="string">'%10i%5i%5i%5i %-20s %-20s%s'</span>,UFF.Zaxis.Type,UFF.Zaxis.LengthUnitsExp,UFF.Zaxis.ForceUnitsExp,UFF.Zaxis.TempUnitsExp,UFF.Zaxis.Label,UFF.Zaxis.UnitsLabel,char(10));
+1324     <span class="comment">% line 12:</span>
+1325     <span class="keyword">if</span> UFF.binary
+1326         <span class="keyword">if</span> isreal(UFF.measData)
+1327             fwrite(fid,UFF.measData,<span class="string">'double'</span>);
+1328         <span class="keyword">else</span>
+1329             indxs=2*[1:length(UFF.measData)];
+1330             newdata(indxs)=imag(UFF.measData);
+1331             newdata(indxs-1)=real(UFF.measData);
+1332             fwrite(fid,newdata,<span class="string">'double'</span>);
+1333         <span class="keyword">end</span>
+1334     <span class="keyword">else</span>
+1335         <span class="keyword">if</span> isreal(UFF.measData)
+1336             fprintf(fid,[F_20 F_20 F_20 F_20 <span class="string">'%s'</span>],UFF.measData,char(10));
+1337             newdata=UFF.measData;
+1338         <span class="keyword">else</span>,
+1339             indxs=2*[1:length(UFF.measData)];
+1340             newdata(indxs)=imag(UFF.measData);
+1341             newdata(indxs-1)=real(UFF.measData);
+1342             fprintf(fid,[F_20 F_20 F_20 F_20 <span class="string">'%s'</span>],newdata,char(10));
+1343         <span class="keyword">end</span>
+1344         <span class="keyword">if</span> rem(length(newdata),4)~=0,
+1345             fprintf(fid,<span class="string">'%s'</span>,char(10));
+1346         <span class="keyword">end</span>
+1347     <span class="keyword">end</span>
+1348 
+1349 <span class="keyword">catch</span>
+1350     errMessage = [<span class="string">'error writing measurement data: '</span> lasterr];
+1351 <span class="keyword">end</span>
+1352 <span class="comment">%--------------------------------------------------------------------------</span>
+1353 
+1354 <span class="comment">%--------------------------------------------------------------------------</span>
+1355 <a name="_sub17" href="#_subfunctions" class="code">function errMessage = write151(fid,UFF)</a>
+1356 <span class="comment">% #151 - Write data-set type 151 data</span>
+1357 errMessage =[];
+1358 <span class="keyword">try</span>
+1359     fprintf(fid,<span class="string">'%6i%s'</span>,151,char(10));
+1360     fprintf(fid,<span class="string">'%-s%s'</span>,UFF.modelName,char(10)); <span class="comment">% line 1</span>
+1361     fprintf(fid,<span class="string">'%-s%s'</span>,UFF.description,char(10)); <span class="comment">% line 2</span>
+1362     fprintf(fid,<span class="string">'%-s%s'</span>,UFF.dbApp,char(10)); <span class="comment">% line 3</span>
+1363     d = datestr(now,1);
+1364     d(end-3:end-2) = [];
+1365     fprintf(fid,<span class="string">'%-10s%-10s%10i%10i%10i%s'</span>,UFF.dateCreated,UFF.timeCreated,UFF.dbVersion1,UFF.dbVersion2,0,char(10)); <span class="comment">% line 4</span>
+1366     fprintf(fid,<span class="string">'%-10s%-10s%s'</span>,UFF.dateSaved,UFF.timeSaved,char(10)); <span class="comment">% line 5</span>
+1367     fprintf(fid,<span class="string">'%-s%s'</span>,UFF.uffApp,char(10)); <span class="comment">% line 6</span>
+1368     fprintf(fid,<span class="string">'%-10s%-10s%s'</span>,d,datestr(now,13),char(10)); <span class="comment">% line 7</span>
+1369 <span class="keyword">catch</span>
+1370     errMessage = [<span class="string">'error writing header data: '</span> lasterr];
+1371 <span class="keyword">end</span>
+1372 <span class="comment">%--------------------------------------------------------------------------</span>
+1373 
+1374 
+1375 <span class="comment">%--------------------------------------------------------------------------</span>
+1376 <a name="_sub18" href="#_subfunctions" class="code">function errMessage = write164(fid,UFF)</a>
+1377 <span class="comment">% #164 - Write data-set type 164 data</span>
+1378 errMessage = [];
+1379 <span class="keyword">try</span>
+1380     <span class="keyword">if</span> ~isfield(UFF,<span class="string">'unitsDescription'</span>); UFF.unitsDescription = <span class="string">' '</span>; <span class="keyword">end</span>;
+1381     fprintf(fid,<span class="string">'%6i%s'</span>,164,char(10));
+1382 
+1383     fprintf(fid,<span class="string">'%10i%-20s%10i%s'</span>,UFF.unitsCode,UFF.unitsDescription,UFF.tempMode,char(10)); <span class="comment">% line 1</span>
+1384     str = upper(sprintf(<span class="string">'%25.17e%25.17e%25.17e'</span>,UFF.facLength,UFF.facForce,UFF.facTemp)); <span class="comment">% line 2</span>
+1385     fprintf(fid,<span class="string">'%s%s'</span>,str,char(10));
+1386     str = upper(sprintf(<span class="string">'%25.17e'</span>,UFF.facTempOffset)); <span class="comment">% line 3</span>
+1387     fprintf(fid,<span class="string">'%s%s'</span>,str,char(10));
+1388 <span class="keyword">catch</span>
+1389     errMessage = [<span class="string">'error writing units data: '</span> lasterr];
+1390 <span class="keyword">end</span>
+1391 <span class="comment">%--------------------------------------------------------------------------</span>
+1392 
+1393 
+1394 <span class="comment">%--------------------------------------------------------------------------</span>
+1395 <a name="_sub19" href="#_subfunctions" class="code">function errMessage = write18(fid,UFF)</a>
+1396 <span class="comment">% #18 - Write data-set type 18 data</span>
+1397 errMessage = [];
+1398 <span class="keyword">if</span> ispc
+1399     F_13 = <span class="string">'%13.4e'</span>;
+1400 <span class="keyword">else</span>
+1401     F_13 = <span class="string">'%13.5e'</span>;
+1402 <span class="keyword">end</span>
+1403 <span class="keyword">try</span>
+1404     fprintf(fid,<span class="string">'%6i%s'</span>,18,char(10));
+1405     fprintf(fid,<span class="string">'%10i%10i%10i%10i%10i%s'</span>, UFF.CS.Number,UFF.CS.Type,UFF.CS.refNumber,UFF.CS.Color,UFF.CS.defMethod,char(10))
+1406     fprintf(fid,<span class="string">'%-20s%s'</span>,UFF.CS.Name,char(10));
+1407     fprintf(fid,[F_13 F_13 F_13 F_13 F_13 F_13 <span class="string">'%s'</span>],UFF.CS.Origin,UFF.CS.Xaxis,char(10));
+1408     fprintf(fid,[F_13 F_13 F_13 <span class="string">'%s'</span>],UFF.CS.XZplane,char(10));
+1409 <span class="keyword">catch</span>
+1410     errMessage = [<span class="string">'error writing coordinate system data: '</span> lasterr];
+1411 <span class="keyword">end</span>
+1412 <span class="comment">%--------------------------------------------------------------------------</span></pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

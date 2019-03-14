@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of fint</title>
+  <meta name="keywords" content="fint">
+  <meta name="description" content="FINT Frequency integration by jw division">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; fint.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>fint
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>FINT Frequency integration by jw division</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function Y = fint(X,f,Type,NumberInt) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment">FINT Frequency integration by jw division
+
+       Y = fint(X,f,Type,NumberInt)
+
+       Y           Integrated spectrum (multiplied once or twice by jw)
+                   Y can be up to 3 dimensions (for example for FRF
+                   matrices)
+
+       X           Input spectrum (linear or power spectrum)
+       f           Frequency axis for G
+       Type        'lin' for linear spectrum/FRF, or 'power' for PSD, or
+                   other power spectrum. Default = 'lin'
+       NumberInt   Number of integrations, 1 (default) or 2
+
+ See also <a href="fdiff.html" class="code" title="function Y = fdiff(X,f,Type,NumberDiff)">FDIFF</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="frf2msdof.html" class="code" title="function [p,V] = frf2msdof(H,f,fstart,NoLines,Type,ScaleDof)">frf2msdof</a>	FRF2MSDOF Curve fit FRFs into poles and mode shapes, SDOF techniques</li><li><a href="frf2ptime.html" class="code" title="function [p,L,fLimits] = frf2ptime(H,f,Nlines,MaxModes,MifType,EstType)">frf2ptime</a>	FRF2PTIME Time domain MDOF methods for parameter extraction</li><li><a href="frfp2modes.html" class="code" title="function [V,L,Res] = frfp2modes(varargin)">frfp2modes</a>	FRFP2MODES     Estimate mode shapes from FRFs and poles in frequency domain</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function Y = fint(X,f,Type,NumberInt)</a>
+0002 <span class="comment">%FINT Frequency integration by jw division</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%       Y = fint(X,f,Type,NumberInt)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%       Y           Integrated spectrum (multiplied once or twice by jw)</span>
+0007 <span class="comment">%                   Y can be up to 3 dimensions (for example for FRF</span>
+0008 <span class="comment">%                   matrices)</span>
+0009 <span class="comment">%</span>
+0010 <span class="comment">%       X           Input spectrum (linear or power spectrum)</span>
+0011 <span class="comment">%       f           Frequency axis for G</span>
+0012 <span class="comment">%       Type        'lin' for linear spectrum/FRF, or 'power' for PSD, or</span>
+0013 <span class="comment">%                   other power spectrum. Default = 'lin'</span>
+0014 <span class="comment">%       NumberInt   Number of integrations, 1 (default) or 2</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">% See also FDIFF</span>
+0017 
+0018 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0019 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0020 <span class="comment">% Version: 1.0 2011-06-23</span>
+0021 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0022 
+0023 <span class="keyword">if</span> nargin == 2
+0024     Type=<span class="string">'LIN'</span>;
+0025     NumberInt=1;
+0026 <span class="keyword">elseif</span> nargin == 3
+0027     Type=upper(Type);
+0028     NumberInt=1;
+0029 <span class="keyword">elseif</span> nargin == 4
+0030     Type=upper(Type);
+0031 <span class="keyword">end</span>
+0032 
+0033 <span class="comment">% Avoid division by zero</span>
+0034 jw=j*2*pi*f;
+0035 <span class="keyword">if</span> jw(1) == 0
+0036     jw(1)=jw(2);
+0037 <span class="keyword">end</span>
+0038 
+0039 <span class="keyword">if</span> strcmp(Type,<span class="string">'LIN'</span>)
+0040     <span class="keyword">if</span> NumberInt == 1
+0041         op=1./jw;                <span class="comment">% Operator is 1/jw</span>
+0042     <span class="keyword">elseif</span> NumberInt == 2
+0043         op=1./(jw).^2;            <span class="comment">% Operator is 1/(jw)^2</span>
+0044     <span class="keyword">else</span>
+0045         error(<span class="string">'Wrong parameter NumberInt! Only 1 or 2 allowed'</span>)
+0046     <span class="keyword">end</span>
+0047 <span class="keyword">elseif</span> strcmp(Type,<span class="string">'POWER'</span>)
+0048     <span class="keyword">if</span> NumberInt == 1
+0049         op=-1./(jw).^2;             <span class="comment">% Operator is 1/w^2</span>
+0050     <span class="keyword">elseif</span> NumberInt == 2
+0051         op=1./(jw).^4;            <span class="comment">% Operator is 1/w^4</span>
+0052     <span class="keyword">else</span>
+0053         error(<span class="string">'Wrong parameter NumberInt! Only 1 or 2 allowed'</span>)
+0054     <span class="keyword">end</span>
+0055 <span class="keyword">else</span>
+0056     error(<span class="string">'Wrong Type parameter! Only ''lin'' or ''power'' allowed.'</span>)
+0057 <span class="keyword">end</span>
+0058 
+0059 [N,D,R]=size(X);
+0060 Y=zeros(size(X));
+0061 
+0062 <span class="keyword">for</span> n = 1:D
+0063     <span class="keyword">if</span> R == 1
+0064         Y(:,n)=X(:,n).*op;
+0065     <span class="keyword">else</span>
+0066         <span class="keyword">for</span> m=1:R
+0067             Y(:,n,m)=X(:,n,m).*op;
+0068         <span class="keyword">end</span>
+0069     <span class="keyword">end</span>
+0070 <span class="keyword">end</span>
+0071 
+0072 Y(1,:,:)=0;
+0073 
+0074</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

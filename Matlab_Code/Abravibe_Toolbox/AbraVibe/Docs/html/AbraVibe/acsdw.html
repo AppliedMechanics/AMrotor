@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of acsdw</title>
+  <meta name="keywords" content="acsdw">
+  <meta name="description" content="ACSDW Calculate cross PSD from time data, Welch's method (standard)">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; acsdw.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>acsdw
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>ACSDW Calculate cross PSD from time data, Welch's method (standard)</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [Pyx,f,Nblocks] = acsdw(x,y,fs,N,POverlap); </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment">ACSDW Calculate cross PSD from time data, Welch's method (standard)
+
+           [Pyx,f,Nblocks] = acsdw(x,y,fs,N,POverlap), OR
+           [Pyx,f,Nblocks] = acsdw(x,y,fs,w,POverlap)
+
+           Pyx         CSD of time signal y, N/2+1-by-D-by-R
+           f           Frequency vector for Pyy, N/2+1-by-1
+           Nblocks     Number of overlapped FFT blocks used (see WELCHERR)
+
+           x           Input time signal(s)
+           y           Output time signals in column vector(s). If more than one
+                       column, each column is treated separately
+           fs          Sampling frequency for x, and y
+           N           FFT block size, power of 2 (1024, 2048,...), OR,
+           w           time window, e.g. ahann(1024)
+           POverlap    Overlap in percent &gt;= 0 (default = 50)
+
+           D           Number of time records (columns in y)
+           R           Number of references (columns in x)
+
+ ACSDW by default uses 50% overlap and Hanning window to produce the CSDs 
+ using all time data in x and y (or as much as fits the blocksize and overlap). 
+ The mean values of (each column in) x and y are removed before processing.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="ahann.html" class="code" title="function w = ahann(N);">ahann</a>	AHANN Calculate a Hanning window</li><li><a href="winacf.html" class="code" title="function Aw = winacf(w);">winacf</a>	WINACF Calculate amplitude correction factor of time window</li><li><a href="winenbw.html" class="code" title="function Be = winenbw(w);">winenbw</a>	WINENBW Calculate equivalent noise bandwidth of time window</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="time2spec.html" class="code" title="function LastNumber = time2spec(InPrefix,StartNo,StopNo,OutPrefix,OutStartNo,Blocksize,RefChannel,DownSample,Type,start,stop)">time2spec</a>	TIME2CORR    Process ABRAVIBE time data files into spectral density function files</li><li><a href="time2xmtrx.html" class="code" title="function [Pxx,Pyx,Pyy,f,NBlocks] = time2xmtrx(x,y,fs,N,POverlap)">time2xmtrx</a>	TIME2XMTRX Calculate In-/Out cross spectral matrices for MIMO analysis</li><li><a href="time2xmtrxc.html" class="code" title="function [Pxx,Pyx,Pyy,f,NBlocks] = time2xmtrxc(x,y,fs,N,NCycles)">time2xmtrxc</a>	TIME2XMTRXC   Computes In-/Out cross spectral matrices from time data by cyclic averaging</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [Pyx,f,Nblocks] = acsdw(x,y,fs,N,POverlap);</a>
+0002 <span class="comment">%ACSDW Calculate cross PSD from time data, Welch's method (standard)</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%           [Pyx,f,Nblocks] = acsdw(x,y,fs,N,POverlap), OR</span>
+0005 <span class="comment">%           [Pyx,f,Nblocks] = acsdw(x,y,fs,w,POverlap)</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%           Pyx         CSD of time signal y, N/2+1-by-D-by-R</span>
+0008 <span class="comment">%           f           Frequency vector for Pyy, N/2+1-by-1</span>
+0009 <span class="comment">%           Nblocks     Number of overlapped FFT blocks used (see WELCHERR)</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%           x           Input time signal(s)</span>
+0012 <span class="comment">%           y           Output time signals in column vector(s). If more than one</span>
+0013 <span class="comment">%                       column, each column is treated separately</span>
+0014 <span class="comment">%           fs          Sampling frequency for x, and y</span>
+0015 <span class="comment">%           N           FFT block size, power of 2 (1024, 2048,...), OR,</span>
+0016 <span class="comment">%           w           time window, e.g. ahann(1024)</span>
+0017 <span class="comment">%           POverlap    Overlap in percent &gt;= 0 (default = 50)</span>
+0018 <span class="comment">%</span>
+0019 <span class="comment">%           D           Number of time records (columns in y)</span>
+0020 <span class="comment">%           R           Number of references (columns in x)</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">% ACSDW by default uses 50% overlap and Hanning window to produce the CSDs</span>
+0023 <span class="comment">% using all time data in x and y (or as much as fits the blocksize and overlap).</span>
+0024 <span class="comment">% The mean values of (each column in) x and y are removed before processing.</span>
+0025 <span class="comment">%</span>
+0026 
+0027 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0028 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0029 <span class="comment">% Version: 1.0 2011-06-23</span>
+0030 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0031 
+0032 <span class="comment">% Set up depending on input parameters</span>
+0033 <span class="keyword">if</span> nargin &lt; 4
+0034    error(<span class="string">'Wrong number of input variables, must be 4 or 5!'</span>);
+0035 <span class="keyword">elseif</span> nargin == 4
+0036     [m,n]=size(N);
+0037     <span class="keyword">if</span> m == n
+0038         w=<a href="ahann.html" class="code" title="function w = ahann(N);">ahann</a>(N);
+0039     <span class="keyword">else</span>
+0040         w=N;
+0041         N=length(w);
+0042     <span class="keyword">end</span>
+0043     NOverlap=N/2;
+0044 <span class="keyword">elseif</span> nargin == 5
+0045     [m,n]=size(N);
+0046     <span class="keyword">if</span> m == n
+0047         w=<a href="ahann.html" class="code" title="function w = ahann(N);">ahann</a>(N);
+0048     <span class="keyword">else</span>
+0049         w=N;
+0050         N=length(w);
+0051     <span class="keyword">end</span>
+0052     NOverlap=floor(POverlap*N/100);
+0053 <span class="keyword">end</span>
+0054 
+0055 <span class="comment">% Check enough data</span>
+0056 <span class="keyword">if</span> length(y(:,1)) &lt; N
+0057     error(<span class="string">'Not enough data, not even one time block!'</span>)
+0058 <span class="keyword">end</span>
+0059 <span class="comment">% Make input and output signals equally long, if different lengths</span>
+0060 <span class="keyword">if</span> length(x(:,1)) ~= length(y(:,1))
+0061     L=min(length(x(:,1)),length(y(:,1)))
+0062     x=x(1:L,:);
+0063     y=y(1:L,:);
+0064 <span class="keyword">end</span>
+0065 
+0066 <span class="comment">% Set up parameters</span>
+0067 df=fs/N;
+0068 blkstep=N-NOverlap;
+0069 Be=<a href="winenbw.html" class="code" title="function Be = winenbw(w);">winenbw</a>(w);
+0070 acf=<a href="winacf.html" class="code" title="function Aw = winacf(w);">winacf</a>(w);
+0071 R=length(x(1,:));               <span class="comment">% Number references (inputs)</span>
+0072 D=length(y(1,:));               <span class="comment">% Number responses (outputs)</span>
+0073 
+0074 <span class="comment">% Process each time block (column) in y and accumulate PSD</span>
+0075 Nsamp=length(x(:,1));
+0076 M=floor((Nsamp-N)/blkstep+1);
+0077 Pyx=zeros(N/2+1,D,R);
+0078 <span class="keyword">for</span> ref = 1:R
+0079     x(:,ref)=x(:,ref)-mean(x(:,ref));           <span class="comment">% Remove mean</span>
+0080     <span class="keyword">for</span> resp = 1:D
+0081         y(:,resp)=y(:,resp)-mean(y(:,resp));    <span class="comment">% Remove mean</span>
+0082         <span class="keyword">for</span> n = 1:M                             <span class="comment">% Loop through averages</span>
+0083             i1=1+(n-1)*blkstep;                     <span class="comment">% First sample in current block</span>
+0084             i2=i1+N-1;                              <span class="comment">% Last sample in current block</span>
+0085             x_tmp=x(i1:i2,ref);                     <span class="comment">% Reference block</span>
+0086             y_tmp=y(i1:i2,resp);                    <span class="comment">% Response block</span>
+0087             X=acf*fft(x_tmp.*w)/N;                  <span class="comment">% Scaled, windowed FFT, ampl. corrected</span>
+0088             Y=acf*fft(y_tmp.*w)/N;                  <span class="comment">% Scaled, windowed FFT, ampl. corrected</span>
+0089             YX=Y.*conj(X);                          <span class="comment">% Pyx=E[Y*conj(X)]</span>
+0090             Pyx(:,resp,ref)=(n-1)/n*Pyx(:,resp,ref)+YX(1:N/2+1)/n;   <span class="comment">% Single-sided values</span>
+0091         <span class="keyword">end</span>
+0092     <span class="keyword">end</span>
+0093     Pyx(2:<span class="keyword">end</span>,:,ref)=2*Pyx(2:<span class="keyword">end</span>,:,ref);        <span class="comment">% Single-sided scaling, not DC component</span>
+0094 <span class="keyword">end</span>
+0095 <span class="comment">% Divide by equiv. bandwidth</span>
+0096 Pyx=Pyx/df/Be;
+0097 f=(0:fs/N:fs/2)';
+0098 <span class="keyword">if</span> nargout == 3
+0099     Nblocks=M;
+0100 <span class="keyword">end</span>
+0101</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

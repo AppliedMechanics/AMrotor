@@ -4,9 +4,7 @@ function [A,B] = get_state_space_matrices(obj,omega)
                              % matrices will be stated as state space
                              % system, including torsional and axial modes
 
-    [M,C,G,K]= obj.rotorsystem.assemble_system_matrices();
-
-    C = sparse(size(C,1),size(C,1)); %neglect damping for better convergence
+    [M,C,G,K]= obj.rotorsystem.assemble_system_matrices(omega*60/2/pi);
     
     A = sparse(n.entries,n.entries);
     B = sparse(n.entries,n.entries);

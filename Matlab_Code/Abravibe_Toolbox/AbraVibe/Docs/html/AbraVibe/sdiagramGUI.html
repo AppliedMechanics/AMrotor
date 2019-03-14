@@ -1,0 +1,345 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of sdiagramGUI</title>
+  <meta name="keywords" content="sdiagramGUI">
+  <meta name="description" content="SDIAGRAMGUI MATLAB code for sdiagramGUI.fig. This is an internal function">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; sdiagramGUI.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>sdiagramGUI
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>SDIAGRAMGUI MATLAB code for sdiagramGUI.fig. This is an internal function</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function varargout = sdiagramGUI(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> SDIAGRAMGUI MATLAB code for sdiagramGUI.fig. This is an internal function
+ called by sdiagramnew.m.
+
+      [p,N] = sdiagramGUI(fmif,MIF,NoPoles,nSign,Poles,fOffset)</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="poles2fz.html" class="code" title="function [fr,zr] = poles2fz(poles)">poles2fz</a>	POLES2FZ Convert poles to frequencies and relative damping</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="sdiagramnew.html" class="code" title="function [p,N] = sdiagram(varargin);">sdiagramnew</a>	SDIAGRAM Stability diagram, used for all methods (internal function)</li></ul>
+<!-- crossreference -->
+
+<h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="#_sub1" class="code">function sdiagramGUI_OpeningFcn(hObject, eventdata, handles, varargin)</a></li><li><a href="#_sub2" class="code">function varargout = sdiagramGUI_OutputFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub3" class="code">function MinXValueEdit_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub4" class="code">function MinXValueEdit_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub5" class="code">function MaxXValueEdit_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub6" class="code">function MaxXValueEdit_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub7" class="code">function PoleTable_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub8" class="code">function LeftAutoButton_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub9" class="code">function RightAutoButton_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub10" class="code">function handles = FillPlot(hObject,handles)</a></li><li><a href="#_sub11" class="code">function figure1_CloseRequestFcn(hObject, eventdata, handles)</a></li></ul>
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = sdiagramGUI(varargin)</a>
+0002 <span class="comment">% SDIAGRAMGUI MATLAB code for sdiagramGUI.fig. This is an internal function</span>
+0003 <span class="comment">% called by sdiagramnew.m.</span>
+0004 <span class="comment">%</span>
+0005 <span class="comment">%      [p,N] = sdiagramGUI(fmif,MIF,NoPoles,nSign,Poles,fOffset)</span>
+0006 <span class="comment">%</span>
+0007 
+0008 <span class="comment">% Copyright (c) 2018 by Anders Brandt</span>
+0009 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0010 <span class="comment">% Version: 1.0 2018-03-12 First version of GUI</span>
+0011 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0012 
+0013 <span class="comment">% Last Modified by GUIDE v2.5 11-Mar-2018 13:07:41</span>
+0014 
+0015 <span class="comment">% Begin initialization code - DO NOT EDIT</span>
+0016 gui_Singleton = 1;
+0017 gui_State = struct(<span class="string">'gui_Name'</span>,       mfilename, <span class="keyword">...</span>
+0018                    <span class="string">'gui_Singleton'</span>,  gui_Singleton, <span class="keyword">...</span>
+0019                    <span class="string">'gui_OpeningFcn'</span>, @<a href="#_sub1" class="code" title="subfunction sdiagramGUI_OpeningFcn(hObject, eventdata, handles, varargin)">sdiagramGUI_OpeningFcn</a>, <span class="keyword">...</span>
+0020                    <span class="string">'gui_OutputFcn'</span>,  @<a href="#_sub2" class="code" title="subfunction varargout = sdiagramGUI_OutputFcn(hObject, eventdata, handles)">sdiagramGUI_OutputFcn</a>, <span class="keyword">...</span>
+0021                    <span class="string">'gui_LayoutFcn'</span>,  [] , <span class="keyword">...</span>
+0022                    <span class="string">'gui_Callback'</span>,   []);
+0023 <span class="keyword">if</span> nargin &amp;&amp; ischar(varargin{1})
+0024     gui_State.gui_Callback = str2func(varargin{1});
+0025 <span class="keyword">end</span>
+0026 
+0027 <span class="keyword">if</span> nargout
+0028     [varargout{1:nargout}] = gui_mainfcn(gui_State, varargin{:});
+0029 <span class="keyword">else</span>
+0030     gui_mainfcn(gui_State, varargin{:});
+0031 <span class="keyword">end</span>
+0032 <span class="comment">% End initialization code - DO NOT EDIT</span>
+0033 
+0034 
+0035 <span class="comment">% --- Executes just before sdiagramGUI is made visible.</span>
+0036 <a name="_sub1" href="#_subfunctions" class="code">function sdiagramGUI_OpeningFcn(hObject, eventdata, handles, varargin)</a>
+0037 <span class="comment">% This function has no output args, see OutputFcn.</span>
+0038 <span class="comment">% hObject    handle to figure</span>
+0039 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0040 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0041 <span class="comment">% varargin   command line arguments to sdiagramGUI (see VARARGIN)</span>
+0042 
+0043 <span class="comment">% Choose default command line output for sdiagramGUI</span>
+0044 handles.output = hObject;
+0045 
+0046 <span class="comment">% Defaults</span>
+0047 <span class="comment">% Hardcode parameters</span>
+0048 handles.fLim=0.001;             <span class="comment">% pole is 'frequency stable' if relative diff less than fLim</span>
+0049 handles.zLim=0.05;              <span class="comment">% pole is stable if relative difference in damping less than zLim AND</span>
+0050 <span class="comment">% fLim is also fulfilled</span>
+0051 handles.nSign=<span class="string">'ro'</span>;             <span class="comment">% Marker for new poles is red + sign</span>
+0052 handles.fSign=<span class="string">'bd'</span>;             <span class="comment">% Marker for stable frequency is blue diamond</span>
+0053 handles.sSign=<span class="string">'g+'</span>;             <span class="comment">% Marker for stable pole is green plus</span>
+0054 handles.MarkerSize=4;           <span class="comment">% Size of markers</span>
+0055 
+0056 
+0057 <span class="comment">% Parse inputs</span>
+0058 handles.fmif=varargin{1};
+0059 handles.MIF=varargin{2};
+0060 handles.NoPoles=varargin{3};
+0061 handles.nSign=varargin{4};
+0062 handles.Poles=varargin{5};
+0063 handles.fOffset=varargin{6};
+0064 
+0065 <span class="comment">% Default values</span>
+0066 handles.ContinueSelecting=true;
+0067 
+0068 <span class="comment">% Define help menu and items</span>
+0069 h1 = uimenu(<span class="string">'Label'</span>, <span class="string">'Help'</span>);
+0070      uimenu(h1,<span class="string">'Label'</span>,<span class="string">'Help'</span>,<span class="string">'Callback'</span>,<span class="string">'StabDiaHelp'</span>);
+0071      uimenu(h1,<span class="string">'Label'</span>,<span class="string">'About'</span>,<span class="string">'Callback'</span>,<span class="string">'StabdiaGUIAbout'</span>);
+0072 
+0073 <span class="comment">%=========================================================================</span>
+0074 <span class="comment">% Start processing; fill the stabilization diagram with symbols</span>
+0075 handles=<a href="#_sub10" class="code" title="subfunction handles = FillPlot(hObject,handles)">FillPlot</a>(hObject,handles);
+0076 
+0077 <span class="comment">% Wait for mouse clicking and act</span>
+0078 axes(handles.StabPlot);
+0079 dcm_obj = datacursormode(gcf);
+0080 set(dcm_obj,<span class="string">'DisplayStyle'</span>,<span class="string">'datatip'</span>,<span class="string">'SnapToDataVertex'</span>,<span class="string">'on'</span>,<span class="string">'Enable'</span>,<span class="string">'on'</span>)
+0081 <span class="keyword">while</span> handles.ContinueSelecting
+0082     k=waitforbuttonpress;
+0083     <span class="keyword">if</span> k == 0
+0084         c_info = getCursorInfo(dcm_obj);
+0085         <span class="comment">% Make sure a pole was selected, and not a point on a MIF function.</span>
+0086         <span class="comment">% This is done by checking that the array selected has Marker being</span>
+0087         <span class="comment">% a +, o, or d</span>
+0088         clear poles OrderIdx
+0089         idx=1;          <span class="comment">% Used for actual pole selections</span>
+0090         <span class="keyword">for</span> n=1:length(c_info)
+0091             <span class="comment">% Only process poles, and not if one of the MIF functions</span>
+0092             <span class="comment">% was accidentally marked</span>
+0093             <span class="keyword">if</span> strcmp(c_info(n).Target.Marker,<span class="string">'+'</span>) | strcmp(c_info(n).Target.Marker,<span class="string">'o'</span>) | strcmp(c_info(n).Target.Marker,<span class="string">'d'</span>)
+0094                 <span class="comment">%       % Find closest selected model order</span>
+0095                 OrderIdx(idx)=find(c_info(n).Position(2) == handles.NoPoles);
+0096                 <span class="comment">% Find the pole at that model order, by equal frequency</span>
+0097                 [~,PoleIdx]=min(abs((c_info(n).Position(1)*2*pi - abs(handles.Poles{OrderIdx(idx)}))));
+0098                 poles(idx)=handles.Poles{OrderIdx(idx)}(PoleIdx);
+0099                 idx=idx+1;
+0100             <span class="keyword">end</span>
+0101         <span class="keyword">end</span>
+0102         <span class="comment">% Sort in ascending order</span>
+0103         <span class="comment">%         listpoles(poles)</span>
+0104         <span class="keyword">if</span> exist(<span class="string">'poles'</span>)
+0105             [~,I]=sort(abs(poles));
+0106             poles=poles(I);
+0107             <span class="comment">%         listpoles(poles)</span>
+0108             OrderIdx=OrderIdx(I);
+0109             <span class="comment">% Fill frequency/damping table with the values found</span>
+0110             [fr,zr]=<a href="poles2fz.html" class="code" title="function [fr,zr] = poles2fz(poles)">poles2fz</a>(poles(:));
+0111             A=[fr 100*zr];
+0112             list=num2cell(A);
+0113             set(handles.PoleTable,<span class="string">'data'</span>,list)
+0114         <span class="keyword">end</span>
+0115     <span class="keyword">else</span>
+0116         handles.ContinueSelecting=false;
+0117     <span class="keyword">end</span>
+0118 <span class="keyword">end</span>
+0119 
+0120 <span class="comment">% Define outputs</span>
+0121 handles.SelectedPoles=poles(:);
+0122 <span class="keyword">for</span> n=1:length(OrderIdx)
+0123     handles.SelectedOrders{n}=handles.NoPoles(OrderIdx(n));
+0124 <span class="keyword">end</span>
+0125 
+0126 
+0127 <span class="comment">% Update handles structure</span>
+0128 guidata(hObject, handles);
+0129 
+0130 
+0131 <span class="comment">% UIWAIT makes sdiagramGUI wait for user response (see UIRESUME)</span>
+0132 <span class="comment">% uiwait(handles.figure1);</span>
+0133 
+0134 
+0135 <span class="comment">% --- Outputs from this function are returned to the command line.</span>
+0136 <a name="_sub2" href="#_subfunctions" class="code">function varargout = sdiagramGUI_OutputFcn(hObject, eventdata, handles) </a>
+0137 <span class="comment">% varargout  cell array for returning output args (see VARARGOUT);</span>
+0138 <span class="comment">% hObject    handle to figure</span>
+0139 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0140 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0141 
+0142 <span class="comment">% Get default command line output from handles structure</span>
+0143 varargout{1} = handles.SelectedPoles;
+0144 varargout{2} = handles.SelectedOrders;
+0145 
+0146 
+0147 
+0148 <a name="_sub3" href="#_subfunctions" class="code">function MinXValueEdit_Callback(hObject, eventdata, handles)</a>
+0149 <span class="comment">% hObject    handle to MinXValueEdit (see GCBO)</span>
+0150 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0151 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0152 
+0153 <span class="comment">% Hints: get(hObject,'String') returns contents of MinXValueEdit as text</span>
+0154 <span class="comment">%        str2double(get(hObject,'String')) returns contents of MinXValueEdit as a double</span>
+0155 xmin=str2double(get(hObject,<span class="string">'String'</span>));
+0156 A=xlim;
+0157 xlim([xmin A(2)]);
+0158 
+0159 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0160 <a name="_sub4" href="#_subfunctions" class="code">function MinXValueEdit_CreateFcn(hObject, eventdata, handles)</a>
+0161 <span class="comment">% hObject    handle to MinXValueEdit (see GCBO)</span>
+0162 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0163 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0164 
+0165 <span class="comment">% Hint: edit controls usually have a white background on Windows.</span>
+0166 <span class="comment">%       See ISPC and COMPUTER.</span>
+0167 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0168     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0169 <span class="keyword">end</span>
+0170 
+0171 
+0172 
+0173 <a name="_sub5" href="#_subfunctions" class="code">function MaxXValueEdit_Callback(hObject, eventdata, handles)</a>
+0174 <span class="comment">% hObject    handle to MaxXValueEdit (see GCBO)</span>
+0175 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0176 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0177 
+0178 <span class="comment">% Hints: get(hObject,'String') returns contents of MaxXValueEdit as text</span>
+0179 <span class="comment">%        str2double(get(hObject,'String')) returns contents of MaxXValueEdit as a double</span>
+0180 xmax=str2double(get(hObject,<span class="string">'String'</span>));
+0181 A=xlim;
+0182 xlim([A(1) xmax]);
+0183 
+0184 
+0185 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0186 <a name="_sub6" href="#_subfunctions" class="code">function MaxXValueEdit_CreateFcn(hObject, eventdata, handles)</a>
+0187 <span class="comment">% hObject    handle to MaxXValueEdit (see GCBO)</span>
+0188 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0189 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0190 
+0191 <span class="comment">% Hint: edit controls usually have a white background on Windows.</span>
+0192 <span class="comment">%       See ISPC and COMPUTER.</span>
+0193 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0194     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0195 <span class="keyword">end</span>
+0196 
+0197 
+0198 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0199 <a name="_sub7" href="#_subfunctions" class="code">function PoleTable_CreateFcn(hObject, eventdata, handles)</a>
+0200 <span class="comment">% hObject    handle to PoleTable (see GCBO)</span>
+0201 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0202 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0203 
+0204 
+0205 <span class="comment">% --- Executes on button press in LeftAutoButton.</span>
+0206 <a name="_sub8" href="#_subfunctions" class="code">function LeftAutoButton_Callback(hObject, eventdata, handles)</a>
+0207 <span class="comment">% hObject    handle to LeftAutoButton (see GCBO)</span>
+0208 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0209 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0210 <span class="comment">% Read current max limit. Restore left value to default</span>
+0211 A=xlim;
+0212 xmax=A(2);
+0213 xlim([handles.DefaultMinXAxisValue xmax])
+0214 set(handles.MinXValueEdit,<span class="string">'String'</span>,num2str(handles.DefaultMinXAxisValue));
+0215 guidata(hObject,handles)
+0216 
+0217 <span class="comment">% --- Executes on button press in RightAutoButton.</span>
+0218 <a name="_sub9" href="#_subfunctions" class="code">function RightAutoButton_Callback(hObject, eventdata, handles)</a>
+0219 <span class="comment">% hObject    handle to RightAutoButton (see GCBO)</span>
+0220 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0221 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0222 A=xlim;
+0223 xmin=A(1);
+0224 xlim([xmin handles.DefaultMaxXAxisValue])
+0225 set(handles.MaxXValueEdit,<span class="string">'String'</span>,num2str(handles.DefaultMaxXAxisValue));
+0226 guidata(hObject,handles)
+0227 
+0228 
+0229 <a name="_sub10" href="#_subfunctions" class="code">function handles = FillPlot(hObject,handles)</a>
+0230 <span class="comment">% Internal function that plots the stability diagram in the init of the</span>
+0231 <span class="comment">% main function</span>
+0232     <span class="comment">% Read inputs from handles</span>
+0233     fmif=handles.fmif;
+0234     MIF=handles.MIF;
+0235     NoPoles=handles.NoPoles;
+0236     nSign=handles.nSign;
+0237     Poles=handles.Poles;
+0238     fOffset=handles.fOffset;
+0239     MarkerSize=handles.MarkerSize;
+0240     <span class="comment">% Plot stabilization diagram</span>
+0241     axes(handles.StabPlot);
+0242     <span class="comment">% Plot MIF function and hold plot for poles to be plotted</span>
+0243     handles.MIFHandle=plot(fmif,MIF*max(NoPoles));
+0244 <span class="comment">%     set(gcf,'toolbar','figure')</span>
+0245     axis([min(fmif) max(fmif) 0 max(NoPoles)])
+0246     xlabel(<span class="string">'Frequency [Hz]'</span>)
+0247     ylabel(<span class="string">'Number of Poles'</span>)
+0248     title(<span class="string">'Stabilization Diagram, green=stable; blue=stable freq.; red=unstable'</span>)
+0249     hold on
+0250     
+0251     <span class="comment">% Check stability and plot symbols accordingly</span>
+0252     NPoles=NoPoles(1);
+0253     LastRow=Poles{1};               <span class="comment">% First row stored</span>
+0254     wp=abs(LastRow);                <span class="comment">% Previous freqs</span>
+0255     zp=-real(LastRow)./abs(LastRow);
+0256     handles.PolesHandle=plot(wp/2/pi+fOffset,NPoles,nSign,<span class="string">'MarkerSize'</span>,MarkerSize);
+0257     <span class="keyword">for</span> n = 2:length(NoPoles)                <span class="comment">% Each row (model order) in diagram</span>
+0258         NPoles=NoPoles(n);
+0259         <span class="keyword">for</span> m = 1:length(Poles{n})   <span class="comment">% Each pole m from order n</span>
+0260             wr=sqrt(abs(Poles{n}(m))^2);
+0261             zr=-real(Poles{n}(m))/abs(Poles{n}(m));
+0262             <span class="comment">% See if the pole is within limits of a pole in last row</span>
+0263             fDist=abs(wr-wp)./abs(wp);
+0264             zDist=abs(zr-zp)./abs(zp);
+0265             <span class="keyword">if</span> min(fDist) &lt; handles.fLim &amp; min(zDist) &lt; handles.zLim    <span class="comment">% Stable pole</span>
+0266                 plot(wr/2/pi+fOffset,NPoles,handles.sSign,<span class="string">'MarkerSize'</span>,MarkerSize)
+0267             <span class="keyword">elseif</span> min(abs(wr-wp)/abs(wp)) &lt; handles.fLim       <span class="comment">% Stable frequency</span>
+0268                 plot(wr/2/pi+fOffset,NPoles,fSign,<span class="string">'MarkerSize'</span>,MarkerSize)
+0269             <span class="keyword">else</span>
+0270                 plot(wr/2/pi+fOffset,NPoles,nSign,<span class="string">'MarkerSize'</span>,MarkerSize)       <span class="comment">% New pole</span>
+0271             <span class="keyword">end</span>
+0272         <span class="keyword">end</span>
+0273         LastRow=Poles{n};               <span class="comment">% First row stored</span>
+0274         wp=abs(LastRow);     <span class="comment">% Previous freqs</span>
+0275         zp=-real(LastRow)./abs(LastRow);
+0276     <span class="keyword">end</span>
+0277     A=xlim;
+0278     handles.DefaultMinXAxisValue=A(1);
+0279     handles.DefaultMaxXAxisValue=A(2);
+0280     set(handles.MinXValueEdit,<span class="string">'String'</span>,num2str(handles.DefaultMinXAxisValue));
+0281     set(handles.MaxXValueEdit,<span class="string">'String'</span>,num2str(handles.DefaultMaxXAxisValue));
+0282     guidata(hObject, handles);
+0283 
+0284 <span class="comment">% --- Executes when user attempts to close figure1.</span>
+0285 <a name="_sub11" href="#_subfunctions" class="code">function figure1_CloseRequestFcn(hObject, eventdata, handles)</a>
+0286 <span class="comment">% hObject    handle to figure1 (see GCBO)</span>
+0287 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0288 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0289 
+0290 <span class="comment">% Hint: delete(hObject) closes the figure</span>
+0291 <span class="comment">% close(handles.figure1)</span>
+0292 <span class="comment">% sdiagramGUI_OutputFcn(hObject, eventdata, handles)</span>
+0293 delete(hObject);</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

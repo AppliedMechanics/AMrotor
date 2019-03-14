@@ -7,14 +7,15 @@ figure('Name','Campbell-Diagramm (Backward)','NumberTitle','off');
             hold on;
             set_plot_labels(axBackward,'Backward')
 
-omega = obj.experimentCampbell.get_omega()*30/pi;
+rpm = obj.experimentCampbell.get_omega()*30/pi;
 num = obj.experimentCampbell.get_number_of_eigenvalues();
 EW = obj.experimentCampbell.get_eigenvalues();
 
 for b = 1:num.backward
-    plot_omegas(axBackward,omega,EW.backward(b,:),...
+    plot_omegas(axBackward,rpm,EW.backward(b,:),...
                obj.ColorHandler.getColor(b+num.forward))
 end
+plot_harmonic( axBackward,rpm )
 
 pause(0.1) % somehow needed for setting limits
 lim.backward =max(max(imag(EW.backward)));

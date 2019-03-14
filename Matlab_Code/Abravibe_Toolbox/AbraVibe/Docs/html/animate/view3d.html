@@ -1,0 +1,436 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of view3d</title>
+  <meta name="keywords" content="view3d">
+  <meta name="description" content="Torsten Vogel 09.04.1999">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">animate</a> &gt; view3d.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for animate&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>view3d
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>Torsten Vogel 09.04.1999</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function view3d(arg,arg2) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> Torsten Vogel 09.04.1999 
+ tv.volke@bmw.de
+ tested under Matlab 5.2
+
+ Modified for quad plots - DRL 19-Jul-2005
+   Removed keypress</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>	</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>	</li></ul>
+<!-- crossreference -->
+
+<h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="#_sub1" class="code">function viewact(fig,what)</a></li><li><a href="#_sub2" class="code">function view3dDownFcn</a></li><li><a href="#_sub3" class="code">function view3dUpFcn</a></li><li><a href="#_sub4" class="code">function view3dxyFcn</a></li><li><a href="#_sub5" class="code">function view3dzFcn</a></li><li><a href="#_sub6" class="code">function view3dzoomFcn</a></li><li><a href="#_sub7" class="code">function view3dpanFcn</a></li><li><a href="#_sub8" class="code">function view3dObj = makeview3dObj(fig)</a></li><li><a href="#_sub9" class="code">function ViewData = manageViewData(how,data)</a></li><li><a href="#_sub10" class="code">function shape = pointershapes(arg)</a></li><li><a href="#_sub11" class="code">function changeQuad(action,varargin)</a></li></ul>
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function view3d(arg,arg2)</a>
+0002 <span class="comment">% Torsten Vogel 09.04.1999</span>
+0003 <span class="comment">% tv.volke@bmw.de</span>
+0004 <span class="comment">% tested under Matlab 5.2</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">% Modified for quad plots - DRL 19-Jul-2005</span>
+0007 <span class="comment">%   Removed keypress</span>
+0008 
+0009 <span class="comment">% ---------------------------------------------- inputs --------------</span>
+0010 <span class="keyword">if</span> nargin == 0
+0011    error(<span class="string">'not enough inputs'</span>)
+0012 <span class="keyword">elseif</span> nargin == 1
+0013    <span class="keyword">if</span> ishandle(arg)s
+0014       error(<span class="string">'not enough inputs'</span>)
+0015       <span class="keyword">return</span>
+0016    <span class="keyword">else</span>
+0017       <span class="keyword">switch</span>(lower(arg))
+0018       <span class="keyword">case</span> <span class="string">'rot'</span>
+0019          <a href="#_sub1" class="code" title="subfunction viewact(fig,what)">viewact</a>(gcf,<span class="string">'rot'</span>)
+0020       <span class="keyword">case</span> <span class="string">'zoom'</span>
+0021          <a href="#_sub1" class="code" title="subfunction viewact(fig,what)">viewact</a>(gcf,<span class="string">'zoom'</span>)
+0022       <span class="keyword">case</span> <span class="string">'off'</span>
+0023          <a href="#_sub1" class="code" title="subfunction viewact(fig,what)">viewact</a>(gcf,<span class="string">'off'</span>)
+0024       <span class="keyword">case</span> <span class="string">'down'</span>
+0025          <a href="#_sub2" class="code" title="subfunction view3dDownFcn">view3dDownFcn</a>
+0026       <span class="keyword">case</span> <span class="string">'up'</span>
+0027          <a href="#_sub3" class="code" title="subfunction view3dUpFcn">view3dUpFcn</a>
+0028       <span class="keyword">case</span> <span class="string">'view_xy'</span> <span class="comment">% rotate via screen xy axis</span>
+0029          <a href="#_sub4" class="code" title="subfunction view3dxyFcn">view3dxyFcn</a>
+0030          <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'updateRotate'</span>)
+0031       <span class="keyword">case</span> <span class="string">'view_z'</span>  <span class="comment">% rotate via screen z axis</span>
+0032          <a href="#_sub5" class="code" title="subfunction view3dzFcn">view3dzFcn</a>
+0033          <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'updateRotate'</span>)
+0034       <span class="keyword">case</span> <span class="string">'view_zoom'</span> <span class="comment">% zoom in and out</span>
+0035          <a href="#_sub6" class="code" title="subfunction view3dzoomFcn">view3dzoomFcn</a>
+0036       <span class="keyword">case</span> <span class="string">'view_pan'</span>  <span class="comment">% move the plot</span>
+0037          <a href="#_sub7" class="code" title="subfunction view3dpanFcn">view3dpanFcn</a>
+0038       <span class="keyword">end</span>
+0039    <span class="keyword">end</span>
+0040 <span class="keyword">elseif</span> nargin==2
+0041    <span class="keyword">if</span> ~ishandle(arg)
+0042       error(<span class="string">'bad figure handle'</span>)
+0043    <span class="keyword">end</span>
+0044    <span class="keyword">switch</span>(lower(arg2))
+0045    <span class="keyword">case</span> <span class="string">'rot'</span>
+0046       <a href="#_sub1" class="code" title="subfunction viewact(fig,what)">viewact</a>(arg,<span class="string">'rot'</span>)
+0047    <span class="keyword">case</span> <span class="string">'zoom'</span>
+0048       <a href="#_sub1" class="code" title="subfunction viewact(fig,what)">viewact</a>(arg,<span class="string">'zoom'</span>)
+0049    <span class="keyword">case</span> <span class="string">'off'</span>
+0050       <a href="#_sub1" class="code" title="subfunction viewact(fig,what)">viewact</a>(arg,<span class="string">'off'</span>)
+0051    <span class="keyword">end</span>
+0052 <span class="keyword">end</span>
+0053 
+0054 
+0055 <span class="comment">% ---------------------------------------------- activation ----------</span>
+0056 <a name="_sub1" href="#_subfunctions" class="code">function viewact(fig,what)</a>
+0057 
+0058 
+0059 <span class="comment">% de-/activates view3d for the given figure</span>
+0060 
+0061 
+0062 view3dObj = findobj(allchild(fig),<span class="string">'Tag'</span>,<span class="string">'view3dObj'</span>);
+0063 
+0064 
+0065 <span class="keyword">if</span> strcmp(what,<span class="string">'rot'</span>)
+0066    <span class="keyword">if</span> isempty(view3dObj)
+0067       view3dObj = <a href="#_sub8" class="code" title="subfunction view3dObj = makeview3dObj(fig)">makeview3dObj</a>(fig); <span class="comment">%the small text box at the lower left corner</span>
+0068    <span class="keyword">end</span>
+0069    vdata = get(view3dObj,<span class="string">'UserData'</span>);
+0070    vdata.what = <span class="string">'rot'</span>;
+0071    set(view3dObj,<span class="string">'UserData'</span>,vdata);
+0072 <span class="keyword">elseif</span> strcmp(what,<span class="string">'zoom'</span>)
+0073    <span class="keyword">if</span> isempty(view3dObj)
+0074       view3dObj = <a href="#_sub8" class="code" title="subfunction view3dObj = makeview3dObj(fig)">makeview3dObj</a>(fig); <span class="comment">%the small text box at the lower left corner</span>
+0075    <span class="keyword">end</span>
+0076    vdata = get(view3dObj,<span class="string">'UserData'</span>);
+0077    vdata.what = <span class="string">'zoom'</span>;
+0078    set(view3dObj,<span class="string">'UserData'</span>,vdata);
+0079 <span class="keyword">elseif</span> strcmp(what,<span class="string">'off'</span>)
+0080    <span class="keyword">if</span> isempty(view3dObj)
+0081       <span class="keyword">return</span>
+0082    <span class="keyword">end</span>
+0083    vdata = get(view3dObj,<span class="string">'UserData'</span>);
+0084    uirestore(vdata.uistate);
+0085    delete(view3dObj);
+0086 <span class="keyword">end</span>
+0087 
+0088 
+0089 <span class="comment">% ---------------------------------------------- view3dDownFcn -------</span>
+0090 <a name="_sub2" href="#_subfunctions" class="code">function view3dDownFcn</a>
+0091 
+0092 
+0093 view3dObj  = findobj(allchild(gcf),<span class="string">'Tag'</span>,<span class="string">'view3dObj'</span>);
+0094 mouseclick = get(gcf,<span class="string">'SelectionType'</span>);
+0095 <span class="keyword">if</span> isempty(view3dObj)
+0096    <span class="keyword">return</span>
+0097 <span class="keyword">end</span> 
+0098 vdata = get(view3dObj,<span class="string">'UserData'</span>);
+0099 vdata.oldunits = get(gcf,<span class="string">'Units'</span>);
+0100 set(gcf,<span class="string">'Units'</span>,<span class="string">'pixels'</span>);
+0101 vdata.old_pt = get(0,<span class="string">'PointerLocation'</span>);
+0102 <span class="comment">%  ----------------- store or restore previous view</span>
+0103 ViewData = get(get(gca,<span class="string">'zlabel'</span>),<span class="string">'UserData'</span>); 
+0104 <span class="keyword">if</span> isempty(ViewData)
+0105    ViewData = <a href="#_sub9" class="code" title="subfunction ViewData = manageViewData(how,data)">manageViewData</a>(<span class="string">'get_from_axes'</span>);
+0106    set(get(gca,<span class="string">'zlabel'</span>),<span class="string">'UserData'</span>,ViewData)
+0107 <span class="keyword">end</span>
+0108 <span class="keyword">if</span> strcmp(mouseclick,<span class="string">'open'</span>)
+0109    <a href="#_sub9" class="code" title="subfunction ViewData = manageViewData(how,data)">manageViewData</a>(<span class="string">'set_axes'</span>,ViewData);
+0110    set(gcf,<span class="string">'Units'</span>,vdata.oldunits)
+0111    <span class="keyword">return</span>
+0112 <span class="keyword">end</span>
+0113 <span class="comment">%  ----------------- display text box</span>
+0114 fig_color = get(gcf,<span class="string">'Color'</span>);
+0115 c = sum([.3 .6 .1].*fig_color);
+0116 set(vdata.textbox,<span class="string">'BackgroundColor'</span>,fig_color);
+0117 <span class="keyword">if</span>(c &gt; .5)
+0118    set(vdata.textbox,<span class="string">'ForegroundColor'</span>,[0 0 0]);
+0119 <span class="keyword">else</span>
+0120    set(vdata.textbox,<span class="string">'ForegroundColor'</span>,[1 1 1]);
+0121 <span class="keyword">end</span>
+0122 <span class="comment">%  ----------------- what to do?</span>
+0123 <span class="keyword">if</span> strcmp(vdata.what,<span class="string">'rot'</span>)
+0124    <span class="keyword">if</span> strcmp(mouseclick,<span class="string">'normal'</span>)
+0125       set(vdata.textbox,<span class="string">'string'</span>,<span class="string">'Screen XY Rotation'</span>);
+0126       set(gcf,<span class="string">'WindowButtonMotionFcn'</span>,<span class="string">'view3d(''view_xy'')'</span>);
+0127       set(gcf,<span class="string">'Pointer'</span>,<span class="string">'custom'</span>,<span class="string">'pointershapecdata'</span>,<a href="#_sub10" class="code" title="subfunction shape = pointershapes(arg)">pointershapes</a>(<span class="string">'rot'</span>));
+0128    <span class="keyword">elseif</span> strcmp(mouseclick,<span class="string">'extend'</span>)
+0129       set(vdata.textbox,<span class="string">'string'</span>,<span class="string">'Screen Z Rotation'</span>);
+0130       set(gcf,<span class="string">'WindowButtonMotionFcn'</span>,<span class="string">'view3d(''view_z'')'</span>);
+0131       set(gcf,<span class="string">'Pointer'</span>,<span class="string">'custom'</span>,<span class="string">'pointershapecdata'</span>,<a href="#_sub10" class="code" title="subfunction shape = pointershapes(arg)">pointershapes</a>(<span class="string">'rot'</span>));
+0132    <span class="keyword">end</span>
+0133 <span class="keyword">else</span>
+0134    <span class="keyword">if</span> strcmp(mouseclick,<span class="string">'normal'</span>)
+0135       set(vdata.textbox,<span class="string">'string'</span>,<span class="string">'Zoom'</span>);
+0136       set(gcf,<span class="string">'WindowButtonMotionFcn'</span>,<span class="string">'view3d(''view_zoom'')'</span>);
+0137       set(gcf,<span class="string">'Pointer'</span>,<span class="string">'custom'</span>,<span class="string">'pointershapecdata'</span>,<a href="#_sub10" class="code" title="subfunction shape = pointershapes(arg)">pointershapes</a>(<span class="string">'zoom'</span>));
+0138    <span class="keyword">elseif</span> strcmp(mouseclick,<span class="string">'extend'</span>)
+0139       set(vdata.textbox,<span class="string">'string'</span>,<span class="string">'Pan'</span>);
+0140       set(gcf,<span class="string">'WindowButtonMotionFcn'</span>,<span class="string">'view3d(''view_pan'')'</span>);
+0141       set(gcf,<span class="string">'Pointer'</span>,<span class="string">'custom'</span>,<span class="string">'pointershapecdata'</span>,<a href="#_sub10" class="code" title="subfunction shape = pointershapes(arg)">pointershapes</a>(<span class="string">'pan'</span>));
+0142    <span class="keyword">end</span>
+0143 <span class="keyword">end</span>
+0144 set(view3dObj,<span class="string">'UserData'</span>,vdata)
+0145 set(vdata.textbox,<span class="string">'visi'</span>,<span class="string">'on'</span>)
+0146 
+0147 
+0148 <span class="comment">% ---------------------------------------------- view3dUpFcn ---------</span>
+0149 <a name="_sub3" href="#_subfunctions" class="code">function view3dUpFcn</a>
+0150 view3dObj  = findobj(allchild(gcf),<span class="string">'Tag'</span>,<span class="string">'view3dObj'</span>);
+0151 <span class="keyword">if</span> isempty(view3dObj)
+0152    <span class="keyword">return</span>
+0153 <span class="keyword">end</span>
+0154 vdata = get(view3dObj,<span class="string">'UserData'</span>);
+0155 set(gcf,<span class="string">'WindowButtonMotionFcn'</span>,<span class="string">''</span>,<span class="string">'Units'</span>,vdata.oldunits,<span class="string">'pointer'</span>,<span class="string">'arrow'</span>)
+0156 set(view3dObj,<span class="string">'visi'</span>,<span class="string">'off'</span>)
+0157 
+0158 
+0159 
+0160 <span class="comment">% ---------------------------------------------- view3dxyFcn ---------</span>
+0161 <a name="_sub4" href="#_subfunctions" class="code">function view3dxyFcn</a>
+0162 <span class="keyword">if</span> ~ismember(get(gca,<span class="string">'Tag'</span>),{<span class="string">'Axes:Single'</span>,<span class="string">'Axes:Ortho11'</span>})
+0163     <span class="keyword">return</span>
+0164 <span class="keyword">end</span>
+0165 view3dObj  = findobj(allchild(gcf),<span class="string">'Tag'</span>,<span class="string">'view3dObj'</span>);
+0166 vdata = get(view3dObj,<span class="string">'UserData'</span>);
+0167 new_pt = get(0,<span class="string">'PointerLocation'</span>);
+0168 old_pt = vdata.old_pt;
+0169 dx = (new_pt(1) - old_pt(1))*.5;
+0170 dy = (new_pt(2) - old_pt(2))*.5;
+0171 direction = [0 0 1];
+0172 coordsys  = <span class="string">'camera'</span>;
+0173 pos  = get(gca,<span class="string">'cameraposition'</span> );
+0174 targ = get(gca,<span class="string">'cameratarget'</span>   );
+0175 dar  = get(gca,<span class="string">'dataaspectratio'</span>);
+0176 up   = get(gca,<span class="string">'cameraupvector'</span> );
+0177 [newPos newUp] = camrotate(pos,targ,dar,up,-dx,-dy,coordsys,direction);
+0178 set(gca,<span class="string">'cameraposition'</span>, newPos, <span class="string">'cameraupvector'</span>, newUp);
+0179 vdata.old_pt = new_pt;
+0180 set(view3dObj,<span class="string">'UserData'</span>,vdata)
+0181 <a href="#_sub11" class="code" title="subfunction changeQuad(action,varargin)">changeQuad</a>(<span class="string">'rotXY'</span>,dx,dy,coordsys,direction);
+0182 
+0183 
+0184 <span class="comment">% ---------------------------------------------- view3dzFcn ----------</span>
+0185 <a name="_sub5" href="#_subfunctions" class="code">function view3dzFcn</a>
+0186 <span class="keyword">if</span> ~ismember(get(gca,<span class="string">'Tag'</span>),{<span class="string">'Axes:Single'</span>,<span class="string">'Axes:Ortho11'</span>})
+0187 <span class="comment">%if ~strcmp(get(gca,'Tag'),'Axes:Single')</span>
+0188     <span class="keyword">return</span>
+0189 <span class="keyword">end</span>
+0190 view3dObj  = findobj(allchild(gcf),<span class="string">'Tag'</span>,<span class="string">'view3dObj'</span>);
+0191 vdata = get(view3dObj,<span class="string">'UserData'</span>);
+0192 new_pt = get(0,<span class="string">'PointerLocation'</span>);
+0193 old_pt = vdata.old_pt;
+0194 dy = (new_pt(2) - old_pt(2))*.5;
+0195 camroll(gca,-dy)
+0196 vdata.old_pt = new_pt;
+0197 set(view3dObj,<span class="string">'UserData'</span>,vdata)
+0198 <a href="#_sub11" class="code" title="subfunction changeQuad(action,varargin)">changeQuad</a>(<span class="string">'rotZ'</span>,dy)
+0199 
+0200 
+0201 <span class="comment">% ---------------------------------------------- view3dzoomFcn -------</span>
+0202 <a name="_sub6" href="#_subfunctions" class="code">function view3dzoomFcn</a>
+0203 view3dObj  = findobj(allchild(gcf),<span class="string">'Tag'</span>,<span class="string">'view3dObj'</span>);
+0204 vdata = get(view3dObj,<span class="string">'UserData'</span>);
+0205 new_pt = get(0,<span class="string">'PointerLocation'</span>);
+0206 old_pt = vdata.old_pt;
+0207 dy = (new_pt(2) - old_pt(2))/abs(old_pt(2));
+0208 camzoom(gca,1-dy)
+0209 vdata.old_pt = new_pt;
+0210 set(view3dObj,<span class="string">'UserData'</span>,vdata)
+0211 <a href="#_sub11" class="code" title="subfunction changeQuad(action,varargin)">changeQuad</a>(<span class="string">'zoom'</span>,dy)
+0212 
+0213 <span class="comment">% ---------------------------------------------- view3dpanFcn --------</span>
+0214 <a name="_sub7" href="#_subfunctions" class="code">function view3dpanFcn</a>
+0215 
+0216 
+0217 view3dObj  = findobj(allchild(gcf),<span class="string">'Tag'</span>,<span class="string">'view3dObj'</span>);
+0218 vdata = get(view3dObj,<span class="string">'UserData'</span>);
+0219 new_pt = get(0,<span class="string">'PointerLocation'</span>);
+0220 old_pt = vdata.old_pt;
+0221 dx = (new_pt(1) - old_pt(1))/old_pt(1)*4;
+0222 dy = (new_pt(2) - old_pt(2))/old_pt(2)*4;
+0223 campan(gca,-dx,-dy,<span class="string">'camera'</span>)
+0224 vdata.old_pt = new_pt;
+0225 set(view3dObj,<span class="string">'UserData'</span>,vdata)
+0226 <a href="#_sub11" class="code" title="subfunction changeQuad(action,varargin)">changeQuad</a>(<span class="string">'pan'</span>,dx,dy)
+0227 
+0228 
+0229 <span class="comment">% ---------------------------------------------- make view3dObj ------</span>
+0230 <a name="_sub8" href="#_subfunctions" class="code">function view3dObj = makeview3dObj(fig)</a>
+0231 
+0232 
+0233 <span class="comment">% save the previous state of the figure window</span>
+0234 vdata.uistate  = uisuspend(fig);
+0235 <span class="comment">% the data structure</span>
+0236 vdata.what     = [];
+0237 vdata.olp_pt   = [];
+0238 vdata.textbox  = [];
+0239 vdata.oldunits = [];
+0240 <span class="comment">% view3dObj</span>
+0241 view3dObj = uicontrol(<span class="string">'style'</span>,<span class="string">'text'</span>,<span class="string">'parent'</span>,fig,<span class="string">'Units'</span>,<span class="string">'Pixels'</span>,<span class="keyword">...</span><span class="comment"> </span>
+0242                       <span class="string">'Position'</span>,[2 2 130 20],<span class="string">'Visible'</span>,<span class="string">'off'</span>, <span class="keyword">...</span>
+0243                       <span class="string">'HandleVisibility'</span>,<span class="string">'off'</span>,<span class="string">'tag'</span>,<span class="string">'view3dObj'</span>);
+0244 vdata.textbox  = view3dObj;
+0245 <span class="comment">% store current view</span>
+0246 ViewData = <a href="#_sub9" class="code" title="subfunction ViewData = manageViewData(how,data)">manageViewData</a>(<span class="string">'get_from_axes'</span>);
+0247 set(get(gca,<span class="string">'zlabel'</span>),<span class="string">'UserData'</span>,ViewData);
+0248 <span class="comment">% functions</span>
+0249 set(fig,<span class="string">'WindowButtonDownFcn'</span>,<span class="string">'view3d(''down'')'</span>);
+0250 set(fig,<span class="string">'WindowButtonUpFcn'</span>,<span class="string">'view3d(''up'')'</span>);
+0251 set(fig,<span class="string">'WindowButtonMotionFcn'</span>,<span class="string">''</span>);
+0252 set(fig,<span class="string">'ButtonDownFcn'</span>,<span class="string">''</span>);
+0253 
+0254 
+0255 set(view3dObj,<span class="string">'UserData'</span>,vdata);
+0256 <span class="comment">% ---------------------------------------------- manage ViewData -----</span>
+0257 <a name="_sub9" href="#_subfunctions" class="code">function ViewData = manageViewData(how,data)</a>
+0258 
+0259 
+0260 <span class="keyword">if</span> nargin == 1 ; data = [];<span class="keyword">end</span>
+0261 props = {
+0262    <span class="string">'DataAspectRatio'</span>
+0263    <span class="string">'DataAspectRatioMode'</span>
+0264    <span class="string">'CameraPosition'</span>
+0265    <span class="string">'CameraPositionMode'</span>
+0266    <span class="string">'CameraTarget'</span>
+0267    <span class="string">'CameraTargetMode'</span>
+0268    <span class="string">'CameraUpVector'</span>
+0269    <span class="string">'CameraUpVectorMode'</span>
+0270    <span class="string">'CameraViewAngle'</span>
+0271    <span class="string">'CameraViewAngleMode'</span>
+0272    <span class="string">'PlotBoxAspectRatio'</span>
+0273    <span class="string">'PlotBoxAspectRatioMode'</span>
+0274    <span class="string">'Units'</span>
+0275    <span class="string">'Position'</span>
+0276    <span class="string">'View'</span>
+0277    <span class="string">'Projection'</span>
+0278 };
+0279 <span class="keyword">if</span> strcmp(how,<span class="string">'get_from_axes'</span>)
+0280    ViewData = get(gca,props);
+0281 <span class="keyword">elseif</span> strcmp(how,<span class="string">'get_stored'</span>)
+0282    ViewData = get(get(gca,<span class="string">'zlabel'</span>),<span class="string">'UserData'</span>);
+0283 <span class="keyword">elseif</span> strcmp(how,<span class="string">'set_axes'</span>)
+0284    set(gca,props,data)
+0285    ViewData = [];
+0286 <span class="keyword">end</span>
+0287 <span class="comment">% -------------------------------------------------------------------------</span>
+0288 <span class="comment">% get some pointer shapes</span>
+0289 <a name="_sub10" href="#_subfunctions" class="code">function shape = pointershapes(arg)</a>
+0290 
+0291 
+0292 <span class="keyword">if</span> strcmp(arg,<span class="string">'zoom'</span>)
+0293 <span class="comment">% -- zoom</span>
+0294 shape=[ 2   2   2   2   2   2   2   2   2   2 NaN NaN NaN NaN NaN NaN  ;
+0295         2   1   1   1   1   1   1   1   1   2 NaN NaN NaN NaN NaN NaN  ;
+0296         2   1   2   2   2   2   2   2   2   2 NaN NaN NaN NaN NaN NaN  ;
+0297         2   1   2   1   1   1   1   1   1   2 NaN NaN NaN NaN NaN NaN  ;
+0298         2   1   2   1   1   1   1   1   2 NaN NaN NaN NaN NaN NaN NaN  ;
+0299         2   1   2   1   1   1   1   2 NaN NaN NaN NaN NaN NaN NaN NaN  ;
+0300         2   1   2   1   1   1   1   1   2 NaN NaN NaN   2   2   2   2  ;
+0301         2   1   2   1   1   2   1   1   1   2 NaN   2   1   2   1   2  ;
+0302         2   1   2   1   2 NaN   2   1   1   1   2   1   1   2   1   2  ;
+0303         2   2   2   2 NaN NaN NaN   2   1   1   1   1   1   2   1   2  ;
+0304       NaN NaN NaN NaN NaN NaN NaN NaN   2   1   1   1   1   2   1   2  ;
+0305       NaN NaN NaN NaN NaN NaN NaN   2   1   1   1   1   1   2   1   2  ;
+0306       NaN NaN NaN NaN NaN NaN   2   1   1   1   1   1   1   2   1   2  ;
+0307       NaN NaN NaN NaN NaN NaN   2   2   2   2   2   2   2   2   1   2  ;
+0308       NaN NaN NaN NaN NaN NaN   2   1   1   1   1   1   1   1   1   2  ;
+0309       NaN NaN NaN NaN NaN NaN   2   2   2   2   2   2   2   2   2   2  ];
+0310 <span class="keyword">elseif</span> strcmp(arg,<span class="string">'pan'</span>)
+0311 <span class="comment">% -- pan</span>
+0312 shape=[ NaN NaN NaN NaN NaN NaN NaN   2   2 NaN NaN NaN NaN NaN NaN NaN ;
+0313         NaN NaN NaN NaN NaN NaN   2   1   1   2 NaN NaN NaN NaN NaN NaN ;
+0314         NaN NaN NaN NaN NaN   2   1   1   1   1   2 NaN NaN NaN NaN NaN ;
+0315         NaN NaN NaN NaN NaN   1   1   1   1   1   1 NaN NaN NaN NaN NaN ;
+0316         NaN NaN NaN NaN NaN NaN   2   1   1   2 NaN NaN NaN NaN NaN NaN ;
+0317         NaN NaN   2   1 NaN NaN   2   1   1   2 NaN NaN   1   2 NaN NaN ;
+0318         NaN   2   1   1   2   2   2   1   1   2   2   2   1   1   2 NaN ;
+0319           2   1   1   1   1   1   1   1   1   1   1   1   1   1   1   2 ;
+0320           2   1   1   1   1   1   1   1   1   1   1   1   1   1   1   2 ;
+0321         NaN   2   1   1   2   2   2   1   1   2   2   2   1   1   2 NaN ;
+0322         NaN NaN   2   1 NaN NaN   2   1   1   2 NaN NaN   1   2 NaN NaN ;
+0323         NaN NaN NaN NaN NaN NaN   2   1   1   2 NaN NaN NaN NaN NaN NaN ;
+0324         NaN NaN NaN NaN NaN   1   1   1   1   1   1 NaN NaN NaN NaN NaN ;
+0325         NaN NaN NaN NaN NaN   2   1   1   1   1   2 NaN NaN NaN NaN NaN ;
+0326         NaN NaN NaN NaN NaN NaN   2   1   1   2 NaN NaN NaN NaN NaN NaN ;
+0327         NaN NaN NaN NaN NaN NaN NaN   2   2 NaN NaN NaN NaN NaN NaN NaN ];
+0328 <span class="keyword">elseif</span> strcmp(arg,<span class="string">'rot'</span>)
+0329 <span class="comment">% -- rot</span>
+0330 shape=[ NaN NaN NaN   2   2   2   2   2 NaN   2   2 NaN NaN NaN NaN NaN ;
+0331         NaN NaN NaN   1   1   1   1   1   2   1   1   2 NaN NaN NaN NaN ;
+0332         NaN NaN NaN   2   1   1   1   1   2   1   1   1   2 NaN NaN NaN ;
+0333         NaN NaN   2   1   1   1   1   1   2   2   1   1   1   2 NaN NaN ;
+0334         NaN   2   1   1   1   2   1   1   2 NaN NaN   2   1   1   2 NaN ;
+0335         NaN   2   1   1   2 NaN   2   1   2 NaN NaN   2   1   1   2 NaN ;
+0336           2   1   1   2 NaN NaN NaN NaN NaN NaN NaN NaN   2   1   1   2 ;
+0337           2   1   1   2 NaN NaN NaN NaN NaN NaN NaN NaN   2   1   1   2 ;
+0338           2   1   1   2 NaN NaN NaN NaN NaN NaN NaN NaN   2   1   1   2 ;
+0339           2   1   1   2 NaN NaN NaN NaN NaN NaN NaN NaN   2   1   1   2 ;
+0340         NaN   2   1   1   2 NaN NaN   2   1   2 NaN   2   1   1   2 NaN ;
+0341         NaN   2   1   1   2 NaN NaN   2   1   1   2   1   1   1   2 NaN ;
+0342         NaN NaN   2   1   1   1   2   2   1   1   1   1   1   2 NaN NaN ;
+0343         NaN NaN NaN   2   1   1   1   2   1   1   1   1   2 NaN NaN NaN ;
+0344         NaN NaN NaN NaN   2   1   1   2   1   1   1   1   1 NaN NaN NaN ;
+0345         NaN NaN NaN NaN NaN   2   2 NaN   2   2   2   2   2 NaN NaN NaN ];
+0346 
+0347 
+0348 <span class="keyword">end</span>
+0349 
+0350 <a name="_sub11" href="#_subfunctions" class="code">function changeQuad(action,varargin)</a>
+0351 axs     = setdiff(findobj(gcf,<span class="string">'Type'</span>,<span class="string">'Axes'</span>),gca);
+0352 
+0353 <span class="keyword">switch</span> action
+0354     <span class="keyword">case</span> <span class="string">'zoom'</span>
+0355         <span class="keyword">for</span> ii=1:length(axs)
+0356             camzoom(axs(ii),1-varargin{1})
+0357         <span class="keyword">end</span>
+0358     <span class="keyword">case</span> <span class="string">'pan'</span>
+0359         <span class="keyword">for</span> ii=1:length(axs)
+0360             campan(axs(ii),-varargin{1},-varargin{2},<span class="string">'camera'</span>)
+0361         <span class="keyword">end</span>
+0362     <span class="keyword">case</span> <span class="string">'rotXY'</span>
+0363         <span class="keyword">if</span> length(axs)&gt;2
+0364             <span class="keyword">return</span>;
+0365         <span class="keyword">end</span>
+0366         <span class="keyword">for</span> ii=1:length(axs)
+0367             pos  = get(axs(ii),<span class="string">'cameraposition'</span> );
+0368             targ = get(axs(ii),<span class="string">'cameratarget'</span>   );
+0369             dar  = get(axs(ii),<span class="string">'dataaspectratio'</span>);
+0370             up   = get(axs(ii),<span class="string">'cameraupvector'</span> );
+0371             [newPos newUp] = camrotate(pos,targ,dar,up,-varargin{1},-varargin{2},varargin{3},varargin{4});
+0372             set(axs(ii),<span class="string">'cameraposition'</span>, newPos, <span class="string">'cameraupvector'</span>, newUp);
+0373         <span class="keyword">end</span>
+0374     <span class="keyword">case</span> <span class="string">'rotZ'</span>
+0375         <span class="keyword">if</span> length(axs)&gt;2
+0376             <span class="keyword">return</span>;
+0377         <span class="keyword">end</span>
+0378         <span class="keyword">for</span> ii=1:length(axs)
+0379             camroll(axs(ii),-varargin{1})
+0380         <span class="keyword">end</span>
+0381 <span class="keyword">end</span>
+0382</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

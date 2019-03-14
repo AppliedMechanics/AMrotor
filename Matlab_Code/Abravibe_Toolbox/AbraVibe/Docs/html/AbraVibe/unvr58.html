@@ -1,0 +1,202 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of unvr58</title>
+  <meta name="keywords" content="unvr58">
+  <meta name="description" content="UNVR58    Read SDRC universal file test data record">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; unvr58.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>unvr58
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>UNVR58    Read SDRC universal file test data record</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [XData,Data,UnvHead] = unvr58(fid); </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> UNVR58    Read SDRC universal file test data record
+
+       [XData,Data,UnvHead] = unvr58(fid); 
+ 
+ Output:    
+       XData contains x-axis for unevenly spaced data, or 0 if evenly spaced
+        Data    contains data in a column vector
+        UnvHead contains a struct with all header values</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="nbr2dir.html" class="code" title="function DirString = nbr2dir(DirNumber)">nbr2dir</a>	NBR2DIR   Convert numeric direction to string</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="unvread.html" class="code" title="function LastNo = unvread(FileName,Prefix,FirstNo,Type)">unvread</a>	UNVREAD Read a standard UNV file</li></ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [XData,Data,UnvHead] = unvr58(fid); </a>
+0002 <span class="comment">% UNVR58    Read SDRC universal file test data record</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%       [XData,Data,UnvHead] = unvr58(fid);</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">% Output:</span>
+0007 <span class="comment">%       XData contains x-axis for unevenly spaced data, or 0 if evenly spaced</span>
+0008 <span class="comment">%        Data    contains data in a column vector</span>
+0009 <span class="comment">%        UnvHead contains a struct with all header values</span>
+0010 <span class="comment">%</span>
+0011 
+0012 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0013 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0014 <span class="comment">% Version: 1.0 2011-06-23</span>
+0015 <span class="comment">%          1.1 2016-02-06 Fixed problem with title lines starting with blanks</span>
+0016 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0017 
+0018 XData=0;                    <span class="comment">% In case not used later</span>
+0019 <span class="comment">%---------------------------------------------------------------------------------</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">% Record 1 - 5, ID lines</span>
+0022 <span class="comment">%-----------------------------------------------------------------------------------------------</span>
+0023 ID_1=fgetl(fid);                    <span class="comment">% ID line 1</span>
+0024 <span class="keyword">if</span> length(ID_1) == 0
+0025    UnvHead.Title=fgetl(fid);        <span class="comment">% Sometimes fscanf() in unvread leaves a &lt;CR&gt;</span>
+0026 <span class="comment">% elseif (isspace(ID_1(1)))</span>
+0027 <span class="keyword">elseif</span> isequal(isspace(ID_1),ones(1,length(ID_1)))   <span class="comment">% Changed 2016-02-06: handles lines starting with blanks</span>
+0028    UnvHead.Title=fgetl(fid);        <span class="comment">% If 58 in Function ID was followed by blanks</span>
+0029 <span class="keyword">else</span>
+0030     UnvHead.Title=ID_1;
+0031 <span class="keyword">end</span>
+0032 UnvHead.Title2=fgetl(fid);          <span class="comment">% Ditto 2</span>
+0033 UnvHead.Date=fgetl(fid);            <span class="comment">% ID line 3, normally date and time</span>
+0034 UnvHead.Title3=fgetl(fid);            <span class="comment">% ...</span>
+0035 UnvHead.Title4=fgetl(fid);
+0036     
+0037 <span class="comment">% Record 6 - DOF Identification</span>
+0038 <span class="comment">%-----------------------------------------------------------------------------------------------</span>
+0039 L=fgetl(fid);
+0040 UnvHead.FunctionType=sscanf(L(1:5),<span class="string">'%i'</span>);    <span class="comment">% Function Type</span>
+0041 UnvHead.FuncId=sscanf(L(6:15),<span class="string">'%i'</span>);          <span class="comment">% Function ID Number</span>
+0042 UnvHead.SeqNo=sscanf(L(16:20),<span class="string">'%i'</span>);                 <span class="comment">% Version or Sequence Number</span>
+0043 UnvHead.LoadCase=sscanf(L(21:30),<span class="string">'%i'</span>);        <span class="comment">% Load Case ID Number</span>
+0044 Dummy=sscanf(L(31),<span class="string">'%s'</span>);                  <span class="comment">% Blank</span>
+0045 UnvHead.RespId=sscanf(L(32:41),<span class="string">'%s'</span>);        <span class="comment">% Response Entity Name</span>
+0046 UnvHead.Dof=sscanf(L(42:51),<span class="string">'%i'</span>);             <span class="comment">% Response No</span>
+0047 TmpDir=sscanf(L(52:55),<span class="string">'%i'</span>);    <span class="comment">% Response Direction</span>
+0048 UnvHead.Dir=<a href="nbr2dir.html" class="code" title="function DirString = nbr2dir(DirNumber)">nbr2dir</a>(TmpDir);    <span class="comment">% Response Direction</span>
+0049 Dummy=sscanf(L(56),<span class="string">'%s'</span>);                  <span class="comment">% Blank</span>
+0050 UnvHead.RefId=sscanf(L(57:66),<span class="string">'%s'</span>);            <span class="comment">% Reference Entity Name</span>
+0051 UnvHead.RefDof=sscanf(L(67:76),<span class="string">'%i'</span>);          <span class="comment">% Reference Node Number</span>
+0052 TmpDir=sscanf(L(77:80),<span class="string">'%i'</span>); <span class="comment">% Reference Direction</span>
+0053 UnvHead.RefDir=<a href="nbr2dir.html" class="code" title="function DirString = nbr2dir(DirNumber)">nbr2dir</a>(TmpDir); <span class="comment">% Reference Direction</span>
+0054 
+0055 <span class="comment">% Record 7 - Data Form</span>
+0056 <span class="comment">%-----------------------------------------------------------------------------------------------</span>
+0057 L=fgetl(fid);
+0058 UnvHead.OrdDataType=sscanf(L(1:10),<span class="string">'%i'</span>);        <span class="comment">% Ordinate Data Type (real or imaginary)</span>
+0059 UnvHead.NoValues=sscanf(L(11:20),<span class="string">'%i'</span>);        <span class="comment">% No Data Pairs (uneven), or Values (even)</span>
+0060 UnvHead.xSpacing=sscanf(L(21:30),<span class="string">'%i'</span>);         <span class="comment">% Abscissa Spacing (even or uneven)</span>
+0061 UnvHead.xStart=sscanf(L(31:43),<span class="string">'%g'</span>);          <span class="comment">% Abscissa minimum</span>
+0062 UnvHead.xIncrement=sscanf(L(44:56),<span class="string">'%g'</span>);      <span class="comment">% Abscissa increment</span>
+0063 UnvHead.zValue=sscanf(L(57:69),<span class="string">'%g'</span>);          <span class="comment">% Z-axis value</span>
+0064 
+0065 <span class="comment">% Record 8 - Abscissa Data Characteristics</span>
+0066 <span class="comment">%-----------------------------------------------------------------------------------------------</span>
+0067 L=fgetl(fid);
+0068 UnvHead.xSpecDataType=sscanf(L(1:10),<span class="string">'%i'</span>);    <span class="comment">% Specific Data Type</span>
+0069 UnvHead.xLUnitsExp=sscanf(L(11:15),<span class="string">'%i'</span>);        <span class="comment">% Length Units Exponent</span>
+0070 UnvHead.xFUnitsExp=sscanf(L(16:20),<span class="string">'%i'</span>);        <span class="comment">% Force Units Exp.</span>
+0071 UnvHead.xTUnitsExp=sscanf(L(21:25),<span class="string">'%i'</span>);        <span class="comment">% Temp. Units Exp.</span>
+0072 Dummy=sscanf(L(26),<span class="string">'%s'</span>);
+0073 UnvHead.xLabel=sscanf(L(27:46),<span class="string">'%s'</span>);        <span class="comment">% Axis Label</span>
+0074 Dummy=sscanf(L(47),<span class="string">'%s'</span>);
+0075 UnvHead.xUnit=sscanf(L(48:end),<span class="string">'%s'</span>);         <span class="comment">% Axis Units Label</span>
+0076 
+0077 <span class="comment">% Record 9 - Ordinate Data Characteristics</span>
+0078 <span class="comment">%-----------------------------------------------------------------------------------------------</span>
+0079 L=fgetl(fid);
+0080 UnvHead.OrdSpecDataType=sscanf(L(1:10),<span class="string">'%i'</span>);    <span class="comment">% Specific Data Type</span>
+0081 UnvHead.OrdLUnitsExp=sscanf(L(11:15),<span class="string">'%i'</span>);        <span class="comment">% Length Units Exponent</span>
+0082 UnvHead.OrdFUnitsExp=sscanf(L(16:20),<span class="string">'%i'</span>);        <span class="comment">% Force Units Exp.</span>
+0083 UnvHead.OrdTUnitsExp=sscanf(L(21:25),<span class="string">'%i'</span>);        <span class="comment">% Temp. Units Exp.</span>
+0084 Dummy=sscanf(L(26),<span class="string">'%s'</span>);
+0085 UnvHead.Label=sscanf(L(27:46),<span class="string">'%s'</span>);        <span class="comment">% Axis Label</span>
+0086 Dummy=sscanf(L(47),<span class="string">'%s'</span>);
+0087 UnvHead.Unit=sscanf(L(48:end),<span class="string">'%s'</span>);         <span class="comment">% Axis Units Label</span>
+0088 
+0089 <span class="comment">% Record 10 - Denominator Data Characteristics</span>
+0090 <span class="comment">%-----------------------------------------------------------------------------------------------</span>
+0091 L=fgetl(fid);
+0092 UnvHead.DenSpecDataType=sscanf(L(1:10),<span class="string">'%i'</span>);    <span class="comment">% Specific Data Type</span>
+0093 UnvHead.DenLUnitsExp=sscanf(L(11:15),<span class="string">'%i'</span>);        <span class="comment">% Length Units Exponent</span>
+0094 UnvHead.DenFUnitsExp=sscanf(L(16:20),<span class="string">'%i'</span>);        <span class="comment">% Force Units Exp.</span>
+0095 UnvHead.DenTUnitsExp=sscanf(L(21:25),<span class="string">'%i'</span>);        <span class="comment">% Temp. Units Exp.</span>
+0096 Dummy=sscanf(L(26),<span class="string">'%s'</span>);
+0097 UnvHead.RefLabel=sscanf(L(27:46),<span class="string">'%s'</span>);        <span class="comment">% Axis Label</span>
+0098 Dummy=sscanf(L(47),<span class="string">'%s'</span>);
+0099 UnvHead.RefUnit=sscanf(L(48:end),<span class="string">'%s'</span>);         <span class="comment">% Axis Units Label</span>
+0100 
+0101 <span class="comment">% Record 11 - Z-axis Data Characteristics</span>
+0102 <span class="comment">%-----------------------------------------------------------------------------------------------</span>
+0103 L=fgetl(fid);
+0104 UnvHead.zSpecDataType=sscanf(L(1:10),<span class="string">'%i'</span>);     <span class="comment">% Specific Data Type</span>
+0105 UnvHead.zLUnitsExp=sscanf(L(11:15),<span class="string">'%i'</span>);        <span class="comment">% Length Units Exponent</span>
+0106 UnvHead.zFUnitsExp=sscanf(L(16:20),<span class="string">'%i'</span>);        <span class="comment">% Force Units Exp.</span>
+0107 UnvHead.zTUnitsExp=sscanf(L(21:25),<span class="string">'%i'</span>);        <span class="comment">% Temp. Units Exp.</span>
+0108 Dummy=sscanf(L(26),<span class="string">'%s'</span>);
+0109 UnvHead.zLabel=sscanf(L(27:46),<span class="string">'%s'</span>);           <span class="comment">% Axis Label</span>
+0110 Dummy=sscanf(L(47),<span class="string">'%s'</span>);
+0111 UnvHead.zUnit=sscanf(L(48:end),<span class="string">'%s'</span>);           <span class="comment">% Axis Units Label</span>
+0112 
+0113 <span class="comment">%-----------------------------------------------------------------------------------------------</span>
+0114 <span class="comment">% Data values - check for real or complex, and even or uneven data</span>
+0115 <span class="keyword">if</span> (UnvHead.xSpacing == 1)    <span class="comment">% Even data, i.e. no x-axes values</span>
+0116    <span class="keyword">if</span> (UnvHead.OrdDataType == 2)|(UnvHead.OrdDataType == 4)    <span class="comment">% if real even data</span>
+0117       Data=fscanf(fid,<span class="string">'%g'</span>,UnvHead.NoValues);
+0118    <span class="keyword">elseif</span> (UnvHead.OrdDataType == 5)|(UnvHead.OrdDataType == 6)     <span class="comment">% if complex data</span>
+0119       dummy=fscanf(fid,<span class="string">'%g'</span>,[2,UnvHead.NoValues]);            <span class="comment">% (..10) equals No. data PAIRS</span>
+0120       redummy=dummy(1,:)';
+0121       imdummy=dummy(2,:)';
+0122       Data=redummy+i*imdummy;
+0123    <span class="keyword">else</span> 
+0124       disp(<span class="string">'Error. Something is wrong in your universal file.'</span>)
+0125       error(<span class="string">'Record 7 field 1 must be 2, 4, 5 or 6.'</span>)
+0126    <span class="keyword">end</span>
+0127 <span class="keyword">else</span>    <span class="comment">% Uneven data, i.e. x axes value prior to each data value</span>
+0128     <span class="keyword">if</span> (UnvHead.OrdDataType == 2)|(UnvHead.OrdDataType == 4),             <span class="comment">% if real even data</span>
+0129         dummy=fscanf(fid,<span class="string">'%g'</span>,[2,UnvHead.NoValues]);
+0130         XData=dummy(1,:)';
+0131         Data=dummy(2,:)';
+0132     <span class="keyword">elseif</span> (UnvHead.OrdDataType == 5)|(UnvHead.OrdDataType == 6),     <span class="comment">% if complex data</span>
+0133         dummy=fscanf(fid,<span class="string">'%g'</span>,[3,UnvHead.NoValues]);            <span class="comment">% (..10) equals No. data PAIRS</span>
+0134         XData=dummy(1,:)';
+0135         redummy=dummy(2,:)';
+0136         imdummy=dummy(3,:)';
+0137         Data=redummy+i*imdummy;
+0138     <span class="keyword">else</span>
+0139         error(<span class="string">'Error. File Format Error. A 2, 4, 5 or 6, expected for Record 7, field 1.'</span>)
+0140     <span class="keyword">end</span>
+0141 <span class="keyword">end</span>
+0142 <span class="comment">%-----------------------------------------------------------------------------------------------</span>
+0143 F_id=fscanf(fid,<span class="string">'%i'</span>,1);        <span class="comment">% Last -1 of dataset 58.</span>
+0144 <span class="keyword">if</span> (F_id == 0)                  <span class="comment">% Some interfaces add extra zeros to the data, to get a</span>
+0145    dummy=fgetl(fid);            <span class="comment">% whole line at the end. If so, this part forces the last</span>
+0146    F_id=fscanf(fid,<span class="string">'%i'</span>,1);        <span class="comment">% line to end and reads the -1.</span>
+0147 <span class="keyword">end</span>        
+0148</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

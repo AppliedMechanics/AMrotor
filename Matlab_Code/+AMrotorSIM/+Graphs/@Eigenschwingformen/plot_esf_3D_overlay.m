@@ -9,18 +9,24 @@ import AMrotorSIM.*
 g=Graphs.Visu_Rotorsystem(obj.modalsystem.rotorsystem);
 figurehandle = g.show();
 
+x = [obj.modalsystem.rotorsystem.rotor.mesh.nodes.z];
+V_x = obj.modalsystem.eigenVectors.lateral_x(:,number_esf);
+V_y = obj.modalsystem.eigenVectors.lateral_y(:,number_esf);
+scaleFactor = 1/max(abs([V_x;V_y]))*1e-1;%mean([V_x;V_y]);%
+V_x = V_x*scaleFactor;
+V_y = V_y*scaleFactor;
+
 % plotten der Moden
 % set(figurehandle,'Name',sprintf('Eigenschwingform %i',number_esf),'NumberTitle','off');
 % ax = axes;
-title(figurehandle,sprintf('Eigenmode Lateral %1.2f Hz',obj.modalsystem.eigenValues.lateral(number_esf)/(2*pi)))
+title(figurehandle,sprintf('Eigenmode Lateral %1.2f Hz, scaleFactor %.2d',imag(obj.modalsystem.eigenValues.lateral(number_esf))/(2*pi),scaleFactor))
 hold on;
 
-x = [obj.modalsystem.rotorsystem.rotor.mesh.nodes.z];
-plotMode3D(figurehandle,x,obj.modalsystem.eigenVectors.lateral_x(:,number_esf),...
-    obj.modalsystem.eigenVectors.lateral_y(:,number_esf),...
-    obj.modalsystem.eigenValues.lateral(number_esf),...
+plotMode3D(figurehandle,x,V_x, V_y,...
+    imag(obj.modalsystem.eigenValues.lateral(number_esf)),...
     ColorHandler.getColor(number_esf), param)
 
 %legend('show')
 grid('on')
+drawnow
 end

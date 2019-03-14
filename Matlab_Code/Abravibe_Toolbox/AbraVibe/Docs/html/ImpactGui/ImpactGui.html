@@ -1,0 +1,953 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of ImpactGui</title>
+  <meta name="keywords" content="ImpactGui">
+  <meta name="description" content="IMPACTGUI ABRAVIBE impact testing GUI">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">ImpactGui</a> &gt; ImpactGui.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for ImpactGui&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>ImpactGui
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>IMPACTGUI ABRAVIBE impact testing GUI</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function varargout = ImpactGui(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> IMPACTGUI ABRAVIBE impact testing GUI
+
+      h = ImpactGui opens the main GUI which controls the entire post
+      processing. The handle variable, h, is optional
+
+      This is a comprehensive, GUI-driven application that processes time
+      data from impact test recordings. The files with the time data
+      should have extension .imptime, and have the file format
+      documented in the ABRAVIBE User Manual. 
+
+      Several different impact testing process modes are supported, see
+      help for the command Imp2FrfGui. You can easily plug your own
+      processing mode into this file if you like.
+
+      The last settings used in the GUI are saved in a file in the abravibe 
+      directory called ImpactGuiSave.mat. If you want to revert to default 
+      settings for some reason, you can delete that file.
+
+      NOTE! Since ABRAVIBE is aimed at learning vibration analysis,
+      seemingly 'stupid' things, like selecting double impacts, are
+      allowed. 
+
+      Also have a look at the help documentation available directly from 
+      this GUI.
+
+ See also: ABRA2IMP <a href="ImpactGuiReset.html" class="code" title="function ImpactGuiReset">IMPACTGUIRESET</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="CopyFilesGui.html" class="code" title="function varargout = CopyFilesGui(varargin)">CopyFilesGui</a>	COPYFILESGUI MATLAB code for CopyFilesGui.fig</li><li><a href="ImpactContDlg.html" class="code" title="function varargout = ImpactContDlg(varargin)">ImpactContDlg</a>	IMPACTCONTDLG MATLAB code for ImpactContDlg.fig</li><li><a href="ImpactProcessingGui.html" class="code" title="function varargout = ImpactProcessingGui(varargin)">ImpactProcessingGui</a>	IMPACTPROCESSINGGUI MATLAB code for ImpactProcessingGui.fig</li><li><a href="ImpactSettings.html" class="code" title="function varargout = ImpactSettings(varargin)">ImpactSettings</a>	IMPACTSETTINGS MATLAB code for ImpactSettings.fig</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+<h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="#_sub1" class="code">function ImpactGui_OpeningFcn(hObject, eventdata, handles, varargin)</a></li><li><a href="#_sub2" class="code">function varargout = ImpactGui_OutputFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub3" class="code">function listbox1_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub4" class="code">function listbox1_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub5" class="code">function SelectedImpactsListbox_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub6" class="code">function SelectedImpactsListbox_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub7" class="code">function ChangeOutputDirectoryPushbutton_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub8" class="code">function OutputDirectoryEdit_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub9" class="code">function OutputDirectoryEdit_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub10" class="code">function SelectFilesButton_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub11" class="code">function CopyFilesButton_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub12" class="code">function TrigLevelEdit_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub13" class="code">function TrigLevelEdit_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub14" class="code">function PretriggerEdit_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub15" class="code">function PretriggerEdit_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub16" class="code">function ForceWindowEdit_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub17" class="code">function ForceWindowEdit_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub18" class="code">function ExpWindowEdit_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub19" class="code">function ExpWindowEdit_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub20" class="code">function BlocksizePopup_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub21" class="code">function BlocksizePopup_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub22" class="code">function PretestStartButton_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub23" class="code">function AutomaticProcessAllButton_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub24" class="code">function LoadSettingsButton_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub25" class="code">function SaveSettingsButton_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub26" class="code">function OutputStartNoEdit_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub27" class="code">function OutputStartNoEdit_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub28" class="code">function OutputPrefixEdit_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub29" class="code">function OutputPrefixEdit_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub30" class="code">function ChangeOutputDirectoryButton_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub31" class="code">function PretestUseFilePopup_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub32" class="code">function PretestUseFilePopup_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub33" class="code">function PretestUseChannelPopup_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub34" class="code">function PretestUseChannelPopup_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub35" class="code">function InputPrefixEdit_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub36" class="code">function InputPrefixEdit_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub37" class="code">function InputStartNoEdit_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub38" class="code">function InputStartNoEdit_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub39" class="code">function InputLastNoEdit_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub40" class="code">function InputLastNoEdit_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub41" class="code">function ManualProcessButton_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub42" class="code">function ManualNextButton_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub43" class="code">function ContinueButton_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub44" class="code">function PlotChannelsListbox_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub45" class="code">function PlotChannelsListbox_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub46" class="code">function UseImpactsListbox_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub47" class="code">function UseImpactsListbox_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub48" class="code">function FillUseFilesPopoup(handles)</a></li><li><a href="#_sub49" class="code">function UpdateSetupFile(handles)</a></li><li><a href="#_sub50" class="code">function BrowseFilesButton_Callback(hObject, eventdata, handles)</a></li></ul>
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = ImpactGui(varargin)</a>
+0002 <span class="comment">% IMPACTGUI ABRAVIBE impact testing GUI</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%      h = ImpactGui opens the main GUI which controls the entire post</span>
+0005 <span class="comment">%      processing. The handle variable, h, is optional</span>
+0006 <span class="comment">%</span>
+0007 <span class="comment">%      This is a comprehensive, GUI-driven application that processes time</span>
+0008 <span class="comment">%      data from impact test recordings. The files with the time data</span>
+0009 <span class="comment">%      should have extension .imptime, and have the file format</span>
+0010 <span class="comment">%      documented in the ABRAVIBE User Manual.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%      Several different impact testing process modes are supported, see</span>
+0013 <span class="comment">%      help for the command Imp2FrfGui. You can easily plug your own</span>
+0014 <span class="comment">%      processing mode into this file if you like.</span>
+0015 <span class="comment">%</span>
+0016 <span class="comment">%      The last settings used in the GUI are saved in a file in the abravibe</span>
+0017 <span class="comment">%      directory called ImpactGuiSave.mat. If you want to revert to default</span>
+0018 <span class="comment">%      settings for some reason, you can delete that file.</span>
+0019 <span class="comment">%</span>
+0020 <span class="comment">%      NOTE! Since ABRAVIBE is aimed at learning vibration analysis,</span>
+0021 <span class="comment">%      seemingly 'stupid' things, like selecting double impacts, are</span>
+0022 <span class="comment">%      allowed.</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">%      Also have a look at the help documentation available directly from</span>
+0025 <span class="comment">%      this GUI.</span>
+0026 <span class="comment">%</span>
+0027 <span class="comment">% See also: ABRA2IMP IMPACTGUIRESET</span>
+0028 
+0029 <span class="comment">% Copyright (c) 2009-2015 by Anders Brandt</span>
+0030 <span class="comment">%</span>
+0031 <span class="comment">% Version: 1.0 2014-07-15</span>
+0032 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0033 
+0034 <span class="comment">% Last Modified by GUIDE v2.5 18-Dec-2015 11:51:18</span>
+0035 
+0036 <span class="comment">% Begin initialization code - DO NOT EDIT</span>
+0037 gui_Singleton = 1;
+0038 gui_State = struct(<span class="string">'gui_Name'</span>,       mfilename, <span class="keyword">...</span>
+0039                    <span class="string">'gui_Singleton'</span>,  gui_Singleton, <span class="keyword">...</span>
+0040                    <span class="string">'gui_OpeningFcn'</span>, @<a href="#_sub1" class="code" title="subfunction ImpactGui_OpeningFcn(hObject, eventdata, handles, varargin)">ImpactGui_OpeningFcn</a>, <span class="keyword">...</span>
+0041                    <span class="string">'gui_OutputFcn'</span>,  @<a href="#_sub2" class="code" title="subfunction varargout = ImpactGui_OutputFcn(hObject, eventdata, handles)">ImpactGui_OutputFcn</a>, <span class="keyword">...</span>
+0042                    <span class="string">'gui_LayoutFcn'</span>,  [] , <span class="keyword">...</span>
+0043                    <span class="string">'gui_Callback'</span>,   []);
+0044 <span class="keyword">if</span> nargin &amp;&amp; ischar(varargin{1})
+0045     gui_State.gui_Callback = str2func(varargin{1});
+0046 <span class="keyword">end</span>
+0047 
+0048 <span class="keyword">if</span> nargout
+0049     [varargout{1:nargout}] = gui_mainfcn(gui_State, varargin{:});
+0050 <span class="keyword">else</span>
+0051     gui_mainfcn(gui_State, varargin{:});
+0052 <span class="keyword">end</span>
+0053 <span class="comment">% End initialization code - DO NOT EDIT</span>
+0054 
+0055 
+0056 <span class="comment">% --- Executes just before ImpactGui is made visible.</span>
+0057 <a name="_sub1" href="#_subfunctions" class="code">function ImpactGui_OpeningFcn(hObject, eventdata, handles, varargin)</a>
+0058 <span class="comment">% This function has no output args, see OutputFcn.</span>
+0059 <span class="comment">% hObject    handle to figure</span>
+0060 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0061 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0062 <span class="comment">% varargin   command line arguments to ImpactGui (see VARARGIN)</span>
+0063 
+0064 <span class="comment">% Choose default command line output for ImpactGui</span>
+0065 handles.output = hObject;
+0066 
+0067 <span class="comment">%==============================================================================</span>
+0068 <span class="comment">% Some words about the impementation:</span>
+0069 <span class="comment">% Fields directly under the handles struct are used for global variables</span>
+0070 <span class="comment">% necessary only in this GUI (temporarily). A substruct field handles.ImpactGui</span>
+0071 <span class="comment">% is used for all variables that are stored when you issue &quot;save settings&quot;.</span>
+0072 <span class="comment">%==============================================================================</span>
+0073 <span class="comment">% Define fixed variables</span>
+0074 <span class="comment">% ONLY set fixed variables here...</span>
+0075 handles.ImpactGui.BlocksizeAlfaList={<span class="string">'0.5K'</span>,<span class="string">'1K'</span>,<span class="string">'2K'</span>,<span class="string">'4K'</span>,<span class="string">'8K'</span>,<span class="string">'16K'</span>,<span class="string">'32K'</span>,<span class="string">'64K'</span>,<span class="string">'128K'</span>,<span class="string">'256K'</span>};
+0076 handles.ImpactGui.BlocksizeNumbers=1024*[0.5 1 2 4 8 16 32 64 128 256];
+0077 handles.ImpactGui.DefaultBlocksizeNumber=3;  <span class="comment">% 2K default blocksise!</span>
+0078 <span class="comment">%==============================================================================</span>
+0079 
+0080 <span class="comment">% Define default field values in handles struct</span>
+0081 handles.SetupFile=which(<span class="string">'ImpactGuiSave.mat'</span>);
+0082 <span class="keyword">if</span> ~isempty(handles.SetupFile)
+0083     load(handles.SetupFile)
+0084     handles.ImpactGui=ImpactStruct;
+0085 <span class="keyword">else</span>
+0086     D=which(<span class="string">'ImpactGui.m'</span>);
+0087     [Path,Fn,Ext]=fileparts(D);    <span class="comment">% Next clear file path from filename</span>
+0088     D=strcat(Fn,Ext);
+0089     handles.ImpactGuiPath=Path;
+0090     handles.SetupFile=fullfile(Path,<span class="string">'ImpactGuiSave'</span>);
+0091     F=dir(<span class="string">'*.imptime'</span>);
+0092     <span class="keyword">if</span> ~isempty(F)
+0093         Fnames={F.name};
+0094     <span class="keyword">else</span>
+0095         Fnames={<span class="string">''</span>};
+0096     <span class="keyword">end</span>
+0097     handles.ImpactGui.FunctionPath=Path;       <span class="comment">% Points to ImpactGui directory</span>
+0098     handles.ImpactGui.InputDirectory=pwd;
+0099     handles.ImpactGui.InputFileList=Fnames;
+0100     handles.ImpactGui.OutputDirectory=fullfile(handles.ImpactGui.InputDirectory);
+0101 <span class="comment">%     if exist(handles.ImpactGui.OutputDirectory,'dir') ~= 7</span>
+0102 <span class="comment">%         mkdir(handles.ImpactGui.OutputDirectory);</span>
+0103 <span class="comment">%     end</span>
+0104     handles.ImpactGui.OutputPrefix=<span class="string">'abra'</span>;
+0105     handles.ImpactGui.OutputStartNo=1;
+0106     handles.ImpactGui.PretestFileName=1;
+0107     handles.ImpactGui.PretestChannel=2;
+0108     handles.ImpactGui.TrigLevel=5;
+0109     handles.ImpactGui.Pretrigger=100;
+0110     handles.ImpactGui.BlocksizeNumber=handles.ImpactGui.DefaultBlocksizeNumber;
+0111     handles.ImpactGui.ForceWindowLength=100;
+0112     handles.ImpactGui.ExpWindowPercent=100;
+0113     handles.ImpactGui.ProcessMode=<span class="string">'Manual'</span>;
+0114     handles.ImpactGui.UseChannelNo=2;
+0115 <span class="keyword">end</span>
+0116     
+0117 <span class="comment">% Fill GUI opening values</span>
+0118 <span class="comment">% Show only 39 last characters in input directory string</span>
+0119 L=length(handles.ImpactGui.InputDirectory);
+0120 set(handles.InputDirectoryText,<span class="string">'string'</span>,[<span class="string">'...'</span> handles.ImpactGui.InputDirectory(L+1-min(L,39):L)]);
+0121 <span class="keyword">if</span> strcmp(handles.ImpactGui.InputFileList{1},<span class="string">''</span>)
+0122     Fstring=sprintf(<span class="string">'No files selected!'</span>,length(handles.ImpactGui.InputFileList));
+0123 <span class="keyword">else</span>
+0124     Fstring=sprintf(<span class="string">'%i files selected!'</span>,length(handles.ImpactGui.InputFileList));
+0125 <span class="keyword">end</span>
+0126 set(handles.InputNumberFilesText,<span class="string">'string'</span>,Fstring);
+0127 set(handles.OutputDirectoryEdit,<span class="string">'string'</span>,handles.ImpactGui.OutputDirectory);
+0128 set(handles.OutputPrefixEdit,<span class="string">'string'</span>,handles.ImpactGui.OutputPrefix);
+0129 set(handles.OutputStartNoEdit,<span class="string">'string'</span>,handles.ImpactGui.OutputStartNo);
+0130 set(handles.ContinueText,<span class="string">'String'</span>,<span class="string">'When ready with pretest and settings click Continue to open up Gui for processing data!'</span>);
+0131 set(handles.PretestUseFilePopup,<span class="string">'Value'</span>,1);
+0132 
+0133 <span class="comment">% Fill popup menu for imptime files in input directory based on Input Files</span>
+0134 <span class="comment">% panel values</span>
+0135 <a href="#_sub48" class="code" title="subfunction FillUseFilesPopoup(handles)">FillUseFilesPopoup</a>(handles)
+0136 <span class="comment">% Fill the Settings panel</span>
+0137 set(handles.TrigLevelText,<span class="string">'string'</span>,num2str(handles.ImpactGui.TrigLevel));
+0138 set(handles.PretriggerText,<span class="string">'string'</span>,num2str(handles.ImpactGui.Pretrigger));
+0139 set(handles.BlocksizeText,<span class="string">'string'</span>,num2str(handles.ImpactGui.BlocksizeAlfaList{handles.ImpactGui.BlocksizeNumber}));
+0140 set(handles.ForceWindowText,<span class="string">'string'</span>,num2str(handles.ImpactGui.ForceWindowLength));
+0141 set(handles.ExpWindowText,<span class="string">'string'</span>,num2str(handles.ImpactGui.ExpWindowPercent));
+0142 
+0143 <span class="comment">% Define help menu and items</span>
+0144 h1 = uimenu(<span class="string">'Label'</span>, <span class="string">'Help'</span>);
+0145      uimenu(h1,<span class="string">'Label'</span>,<span class="string">'Help'</span>,<span class="string">'Callback'</span>,<span class="string">'ImpHelp'</span>);
+0146      uimenu(h1,<span class="string">'Label'</span>,<span class="string">'About'</span>,<span class="string">'Callback'</span>,<span class="string">'ImpAbout'</span>);
+0147 
+0148 guidata(hObject, handles);
+0149 
+0150 <span class="comment">% UIWAIT makes ImpactGui wait for user response (see UIRESUME)</span>
+0151 <span class="comment">% uiwait(handles.figure1);</span>
+0152 
+0153 
+0154 <span class="comment">% --- Outputs from this function are returned to the command line.</span>
+0155 <a name="_sub2" href="#_subfunctions" class="code">function varargout = ImpactGui_OutputFcn(hObject, eventdata, handles) </a>
+0156 <span class="comment">% varargout  cell array for returning output args (see VARARGOUT);</span>
+0157 <span class="comment">% hObject    handle to figure</span>
+0158 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0159 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0160 
+0161 <span class="comment">% Get default command line output from handles structure</span>
+0162 varargout{1} = handles.output;
+0163 
+0164 
+0165 <span class="comment">% --- Executes on selection change in listbox1.</span>
+0166 <a name="_sub3" href="#_subfunctions" class="code">function listbox1_Callback(hObject, eventdata, handles)</a>
+0167 <span class="comment">% hObject    handle to listbox1 (see GCBO)</span>
+0168 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0169 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0170 
+0171 <span class="comment">% Hints: contents = cellstr(get(hObject,'String')) returns listbox1 contents as cell array</span>
+0172 <span class="comment">%        contents{get(hObject,'Value')} returns selected item from listbox1</span>
+0173 
+0174 
+0175 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0176 <a name="_sub4" href="#_subfunctions" class="code">function listbox1_CreateFcn(hObject, eventdata, handles)</a>
+0177 <span class="comment">% hObject    handle to listbox1 (see GCBO)</span>
+0178 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0179 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0180 
+0181 <span class="comment">% Hint: listbox controls usually have a white background on Windows.</span>
+0182 <span class="comment">%       See ISPC and COMPUTER.</span>
+0183 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0184     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0185 <span class="keyword">end</span>
+0186 
+0187 
+0188 <span class="comment">% --- Executes on selection change in SelectedImpactsListbox.</span>
+0189 <a name="_sub5" href="#_subfunctions" class="code">function SelectedImpactsListbox_Callback(hObject, eventdata, handles)</a>
+0190 <span class="comment">% hObject    handle to SelectedImpactsListbox (see GCBO)</span>
+0191 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0192 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0193 
+0194 <span class="comment">% Hints: contents = cellstr(get(hObject,'String')) returns SelectedImpactsListbox contents as cell array</span>
+0195 <span class="comment">%        contents{get(hObject,'Value')} returns selected item from SelectedImpactsListbox</span>
+0196 
+0197 
+0198 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0199 <a name="_sub6" href="#_subfunctions" class="code">function SelectedImpactsListbox_CreateFcn(hObject, eventdata, handles)</a>
+0200 <span class="comment">% hObject    handle to SelectedImpactsListbox (see GCBO)</span>
+0201 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0202 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0203 
+0204 <span class="comment">% Hint: listbox controls usually have a white background on Windows.</span>
+0205 <span class="comment">%       See ISPC and COMPUTER.</span>
+0206 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0207     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0208 <span class="keyword">end</span>
+0209 
+0210 
+0211 <span class="comment">% --- Executes on button press in ChangeOutputDirectoryPushbutton.</span>
+0212 <a name="_sub7" href="#_subfunctions" class="code">function ChangeOutputDirectoryPushbutton_Callback(hObject, eventdata, handles)</a>
+0213 <span class="comment">% hObject    handle to ChangeOutputDirectoryPushbutton (see GCBO)</span>
+0214 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0215 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0216 
+0217 
+0218 
+0219 <a name="_sub8" href="#_subfunctions" class="code">function OutputDirectoryEdit_Callback(hObject, eventdata, handles)</a>
+0220 <span class="comment">% hObject    handle to OutputDirectoryEdit (see GCBO)</span>
+0221 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0222 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0223 
+0224 <span class="comment">% Hints: get(hObject,'String') returns contents of OutputDirectoryEdit as text</span>
+0225 <span class="comment">%        str2double(get(hObject,'String')) returns contents of OutputDirectoryEdit as a double</span>
+0226 D=get(hObject,<span class="string">'String'</span>);
+0227 <span class="keyword">while</span> exist(D,<span class="string">'dir'</span>) ~= 7
+0228     D=uigetdir(<span class="string">'.'</span>,<span class="string">'Directory does not exist! Select and existing directory!'</span>);
+0229 <span class="keyword">end</span>
+0230 set(hObject,<span class="string">'String'</span>,D);
+0231 handles.ImpactGui.OutputDirectory=D;
+0232 guidata(hObject,handles);
+0233 
+0234 
+0235 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0236 <a name="_sub9" href="#_subfunctions" class="code">function OutputDirectoryEdit_CreateFcn(hObject, eventdata, handles)</a>
+0237 <span class="comment">% hObject    handle to OutputDirectoryEdit (see GCBO)</span>
+0238 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0239 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0240 
+0241 <span class="comment">% Hint: edit controls usually have a white background on Windows.</span>
+0242 <span class="comment">%       See ISPC and COMPUTER.</span>
+0243 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0244     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0245 <span class="keyword">end</span>
+0246 
+0247 <span class="comment">% --- Executes on button press in SelectFilesButton.</span>
+0248 <a name="_sub10" href="#_subfunctions" class="code">function SelectFilesButton_Callback(hObject, eventdata, handles)</a>
+0249 <span class="comment">% hObject    handle to SelectFilesButton (see GCBO)</span>
+0250 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0251 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0252 [Fn,Path]=uigetfile(<span class="string">'*.imptime'</span>,<span class="keyword">...</span>
+0253     <span class="string">'Select files for analysis!'</span>,handles.ImpactGui.InputDirectory,<span class="string">'MultiSelect'</span>,<span class="string">'on'</span>);
+0254 <span class="keyword">if</span> iscell(Fn)
+0255     handles.ImpactGui.InputDirectory=Path;
+0256     L=length(handles.ImpactGui.InputDirectory);
+0257     handles.ImpactGui.InputFileList=Fn;
+0258     S=sprintf(<span class="string">'%i files selected!'</span>,length(handles.ImpactGui.InputFileList));
+0259     set(handles.InputDirectoryText,<span class="string">'string'</span>,[<span class="string">'...'</span> handles.ImpactGui.InputDirectory(L+1-min(L,39):L)]);
+0260     set(handles.InputNumberFilesText,<span class="string">'String'</span>,S);
+0261 <span class="keyword">elseif</span> isstr(Fn)
+0262     handles.ImpactGui.InputDirectory=Path;
+0263     L=length(handles.ImpactGui.InputDirectory);
+0264     handles.ImpactGui.InputFileList={Fn};
+0265     S=sprintf(<span class="string">'%i files selected!'</span>,length(handles.ImpactGui.InputFileList));
+0266     set(handles.InputDirectoryText,<span class="string">'string'</span>,[<span class="string">'...'</span> handles.ImpactGui.InputDirectory(L+1-min(L,39):L)]);
+0267     set(handles.InputNumberFilesText,<span class="string">'String'</span>,S);
+0268 <span class="keyword">else</span>
+0269     <a href="ImpactContDlg.html" class="code" title="function varargout = ImpactContDlg(varargin)">ImpactContDlg</a>(<span class="string">'Title'</span>,<span class="string">'No files selected! Please select files to proceed!'</span>);
+0270 <span class="keyword">end</span>
+0271 <a href="#_sub48" class="code" title="subfunction FillUseFilesPopoup(handles)">FillUseFilesPopoup</a>(handles)
+0272 guidata(hObject,handles);
+0273 
+0274 <span class="comment">% --- Executes on button press in CopyFilesButton.</span>
+0275 <a name="_sub11" href="#_subfunctions" class="code">function CopyFilesButton_Callback(hObject, eventdata, handles)</a>
+0276 <span class="comment">% hObject    handle to CopyFilesButton (see GCBO)</span>
+0277 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0278 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0279 <a href="CopyFilesGui.html" class="code" title="function varargout = CopyFilesGui(varargin)">CopyFilesGui</a>(<span class="string">'dummy'</span>,pwd,handles.ImpactGui.OutputDirectory);
+0280 
+0281 
+0282 <a name="_sub12" href="#_subfunctions" class="code">function TrigLevelEdit_Callback(hObject, eventdata, handles)</a>
+0283 <span class="comment">% hObject    handle to TrigLevelEdit (see GCBO)</span>
+0284 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0285 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0286 
+0287 <span class="comment">% Hints: get(hObject,'String') returns contents of TrigLevelEdit as text</span>
+0288 <span class="comment">%        str2double(get(hObject,'String')) returns contents of TrigLevelEdit as a double</span>
+0289 n = str2double(get(hObject,<span class="string">'String'</span>));
+0290 <span class="keyword">if</span> isnumeric(n)
+0291     handles.ImpactGui.TrigLevel=n;
+0292     guidata(hObject,handles)
+0293 <span class="keyword">else</span>
+0294     <a href="ImpactContDlg.html" class="code" title="function varargout = ImpactContDlg(varargin)">ImpactContDlg</a>(<span class="string">'Title'</span>,<span class="string">'Trig Level must be numeric! Not changing...'</span>)
+0295     set(hObject,<span class="string">'String'</span>,num2str(handles.ImpactGui.TrigLevel));
+0296 <span class="keyword">end</span>
+0297 
+0298 
+0299 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0300 <a name="_sub13" href="#_subfunctions" class="code">function TrigLevelEdit_CreateFcn(hObject, eventdata, handles)</a>
+0301 <span class="comment">% hObject    handle to TrigLevelEdit (see GCBO)</span>
+0302 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0303 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0304 
+0305 <span class="comment">% Hint: edit controls usually have a white background on Windows.</span>
+0306 <span class="comment">%       See ISPC and COMPUTER.</span>
+0307 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0308     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0309 <span class="keyword">end</span>
+0310 
+0311 
+0312 
+0313 <a name="_sub14" href="#_subfunctions" class="code">function PretriggerEdit_Callback(hObject, eventdata, handles)</a>
+0314 <span class="comment">% hObject    handle to PretriggerEdit (see GCBO)</span>
+0315 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0316 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0317 
+0318 <span class="comment">% Hints: get(hObject,'String') returns contents of PretriggerEdit as text</span>
+0319 <span class="comment">%        str2double(get(hObject,'String')) returns contents of PretriggerEdit as a double</span>
+0320 n = str2double(get(hObject,<span class="string">'String'</span>));
+0321 <span class="keyword">if</span> isnumeric(n)
+0322     handles.ImpactGui.Pretrigger=n;
+0323     guidata(hObject,handles)
+0324 <span class="keyword">else</span>
+0325     <a href="ImpactContDlg.html" class="code" title="function varargout = ImpactContDlg(varargin)">ImpactContDlg</a>(<span class="string">'Title'</span>,<span class="string">'Trig Level must be numeric! Not changing...'</span>)
+0326     set(hObject,<span class="string">'String'</span>,num2str(handles.ImpactGui.Pretrigger));
+0327 <span class="keyword">end</span>
+0328 
+0329 
+0330 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0331 <a name="_sub15" href="#_subfunctions" class="code">function PretriggerEdit_CreateFcn(hObject, eventdata, handles)</a>
+0332 <span class="comment">% hObject    handle to PretriggerEdit (see GCBO)</span>
+0333 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0334 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0335 
+0336 <span class="comment">% Hint: edit controls usually have a white background on Windows.</span>
+0337 <span class="comment">%       See ISPC and COMPUTER.</span>
+0338 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0339     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0340 <span class="keyword">end</span>
+0341 
+0342 
+0343 
+0344 <a name="_sub16" href="#_subfunctions" class="code">function ForceWindowEdit_Callback(hObject, eventdata, handles)</a>
+0345 <span class="comment">% hObject    handle to ForceWindowEdit (see GCBO)</span>
+0346 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0347 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0348 
+0349 <span class="comment">% Hints: get(hObject,'String') returns contents of ForceWindowEdit as text</span>
+0350 <span class="comment">%        str2double(get(hObject,'String')) returns contents of ForceWindowEdit as a double</span>
+0351 n = str2double(get(hObject,<span class="string">'String'</span>));
+0352 <span class="keyword">if</span> isnumeric(n)
+0353     <span class="keyword">if</span> n &gt; 0 &amp; n &lt;= 100
+0354         handles.ImpactGui.ForceWindowLength=n;
+0355         guidata(hObject,handles)
+0356     <span class="keyword">else</span>
+0357         <a href="ImpactContDlg.html" class="code" title="function varargout = ImpactContDlg(varargin)">ImpactContDlg</a>(<span class="string">'Title'</span>,<span class="string">'Force window length must be between 0 and 100%!'</span>)
+0358         set(hObject,<span class="string">'String'</span>,num2str(handles.ImpactGui.ForceWindowLength));
+0359     <span class="keyword">end</span>
+0360 <span class="keyword">else</span>
+0361     <a href="ImpactContDlg.html" class="code" title="function varargout = ImpactContDlg(varargin)">ImpactContDlg</a>(<span class="string">'Title'</span>,<span class="string">'Force window length must be numeric! Not changing...'</span>)
+0362     set(hObject,<span class="string">'String'</span>,num2str(handles.ImpactGui.ForceWindowLength));
+0363 <span class="keyword">end</span>
+0364 
+0365 
+0366 
+0367 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0368 <a name="_sub17" href="#_subfunctions" class="code">function ForceWindowEdit_CreateFcn(hObject, eventdata, handles)</a>
+0369 <span class="comment">% hObject    handle to ForceWindowEdit (see GCBO)</span>
+0370 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0371 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0372 
+0373 <span class="comment">% Hint: edit controls usually have a white background on Windows.</span>
+0374 <span class="comment">%       See ISPC and COMPUTER.</span>
+0375 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0376     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0377 <span class="keyword">end</span>
+0378 
+0379 
+0380 
+0381 <a name="_sub18" href="#_subfunctions" class="code">function ExpWindowEdit_Callback(hObject, eventdata, handles)</a>
+0382 <span class="comment">% hObject    handle to ExpWindowEdit (see GCBO)</span>
+0383 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0384 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0385 
+0386 <span class="comment">% Hints: get(hObject,'String') returns contents of ExpWindowEdit as text</span>
+0387 <span class="comment">%        str2double(get(hObject,'String')) returns contents of ExpWindowEdit as a double</span>
+0388 n = str2double(get(hObject,<span class="string">'String'</span>));
+0389 <span class="keyword">if</span> isnumeric(n)
+0390     <span class="keyword">if</span> n &gt; 0 &amp; n &lt;= 100
+0391         handles.ImpactGui.ExpWindowPercent=n;
+0392         guidata(hObject,handles)
+0393     <span class="keyword">else</span>
+0394         <a href="ImpactContDlg.html" class="code" title="function varargout = ImpactContDlg(varargin)">ImpactContDlg</a>(<span class="string">'Title'</span>,<span class="string">'Exponential window End must be between 0 and 100%!'</span>)
+0395         set(hObject,<span class="string">'String'</span>,num2str(handles.ImpactGui.ExpWindowEndPercent));
+0396     <span class="keyword">end</span>
+0397 <span class="keyword">else</span>
+0398     <a href="ImpactContDlg.html" class="code" title="function varargout = ImpactContDlg(varargin)">ImpactContDlg</a>(<span class="string">'Title'</span>,<span class="string">'Exponential window end must be numeric! Not changing...'</span>)
+0399     set(hObject,<span class="string">'String'</span>,num2str(handles.ImpactGui.ExpWindowEndPercent));
+0400 <span class="keyword">end</span>
+0401 
+0402 
+0403 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0404 <a name="_sub19" href="#_subfunctions" class="code">function ExpWindowEdit_CreateFcn(hObject, eventdata, handles)</a>
+0405 <span class="comment">% hObject    handle to ExpWindowEdit (see GCBO)</span>
+0406 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0407 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0408 
+0409 <span class="comment">% Hint: edit controls usually have a white background on Windows.</span>
+0410 <span class="comment">%       See ISPC and COMPUTER.</span>
+0411 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0412     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0413 <span class="keyword">end</span>
+0414 
+0415 
+0416 <span class="comment">% --- Executes on selection change in BlocksizePopup.</span>
+0417 <a name="_sub20" href="#_subfunctions" class="code">function BlocksizePopup_Callback(hObject, eventdata, handles)</a>
+0418 <span class="comment">% hObject    handle to BlocksizePopup (see GCBO)</span>
+0419 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0420 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0421 
+0422 <span class="comment">% Hints: contents = cellstr(get(hObject,'String')) returns BlocksizePopup contents as cell array</span>
+0423 <span class="comment">%        contents{get(hObject,'Value')} returns selected item from BlocksizePopup</span>
+0424 contents=cellstr(get(hObject,<span class="string">'String'</span>));
+0425 handles.ImpactGui.BlocksizeNumber=get(hObject,<span class="string">'Value'</span>);
+0426 guidata(hObject,handles);
+0427 
+0428 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0429 <a name="_sub21" href="#_subfunctions" class="code">function BlocksizePopup_CreateFcn(hObject, eventdata, handles)</a>
+0430 <span class="comment">% hObject    handle to BlocksizePopup (see GCBO)</span>
+0431 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0432 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0433 
+0434 <span class="comment">% Hint: popupmenu controls usually have a white background on Windows.</span>
+0435 <span class="comment">%       See ISPC and COMPUTER.</span>
+0436 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0437     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0438 <span class="keyword">end</span>
+0439 
+0440 
+0441 <span class="comment">% --- Executes on button press in PretestStartButton.</span>
+0442 <a name="_sub22" href="#_subfunctions" class="code">function PretestStartButton_Callback(hObject, eventdata, handles)</a>
+0443 <span class="comment">% hObject    handle to PretestStartButton (see GCBO)</span>
+0444 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0445 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0446 <span class="comment">% handles.ImpactGui = ImpactSettings('String',handles.ImpactGui);</span>
+0447 <span class="comment">% First check if the popup menu for file has been used to select a file</span>
+0448 n=get(handles.PretestUseFilePopup,<span class="string">'Value'</span>);
+0449 <span class="keyword">if</span> n ~= 1 
+0450     m=get(handles.PretestUseChannelPopup,<span class="string">'Value'</span>);
+0451     <span class="keyword">if</span> m &gt; 1
+0452         A=<a href="ImpactSettings.html" class="code" title="function varargout = ImpactSettings(varargin)">ImpactSettings</a>(handles.ImpactGui);
+0453         <span class="comment">% Set GUI fields based on new settings if not empty fields from</span>
+0454         <span class="comment">% ImpactSettings</span>
+0455         <span class="keyword">if</span> ~isempty(A)
+0456             handles.ImpactGui=A;
+0457             set(handles.TrigLevelText,<span class="string">'string'</span>,num2str(handles.ImpactGui.TrigLevel));
+0458             set(handles.PretriggerText,<span class="string">'string'</span>,num2str(handles.ImpactGui.Pretrigger));
+0459             set(handles.BlocksizeText,<span class="string">'string'</span>,num2str(handles.ImpactGui.BlocksizeAlfaList{handles.ImpactGui.BlocksizeNumber}));
+0460             set(handles.ForceWindowText,<span class="string">'string'</span>,num2str(handles.ImpactGui.ForceWindowLength));
+0461             set(handles.ExpWindowText,<span class="string">'string'</span>,num2str(handles.ImpactGui.ExpWindowPercent));
+0462             <a href="#_sub49" class="code" title="subfunction UpdateSetupFile(handles)">UpdateSetupFile</a>(handles);
+0463             guidata(hObject,handles);
+0464         <span class="keyword">end</span>
+0465     <span class="keyword">else</span>
+0466         <a href="ImpactContDlg.html" class="code" title="function varargout = ImpactContDlg(varargin)">ImpactContDlg</a>(<span class="string">'Title'</span>,<span class="string">'Channel to use is not selected!'</span>)
+0467     <span class="keyword">end</span>
+0468 <span class="keyword">else</span>
+0469         <a href="ImpactContDlg.html" class="code" title="function varargout = ImpactContDlg(varargin)">ImpactContDlg</a>(<span class="string">'Title'</span>,<span class="string">'Select file and channel to use!'</span>) 
+0470 <span class="keyword">end</span>
+0471 
+0472 <span class="comment">% --- Executes on button press in AutomaticProcessAllButton.</span>
+0473 <a name="_sub23" href="#_subfunctions" class="code">function AutomaticProcessAllButton_Callback(hObject, eventdata, handles)</a>
+0474 <span class="comment">% hObject    handle to AutomaticProcessAllButton (see GCBO)</span>
+0475 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0476 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0477 
+0478 
+0479 <span class="comment">% --- Executes on button press in LoadSettingsButton.</span>
+0480 <a name="_sub24" href="#_subfunctions" class="code">function LoadSettingsButton_Callback(hObject, eventdata, handles)</a>
+0481 <span class="comment">% hObject    handle to LoadSettingsButton (see GCBO)</span>
+0482 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0483 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0484 handles.ImpactGui.OutputDirectory
+0485 [FileName,PathName]=uigetfile(fullfile(handles.ImpactGui.OutputDirectory,<span class="keyword">...</span>
+0486     <span class="string">'*.ImpGuiSetup'</span>),<span class="string">'Select setup file to open!'</span>);
+0487 <span class="keyword">if</span> FileName ~= 0
+0488     load(fullfile(PathName,FileName),<span class="string">'-mat'</span>);
+0489     handles.ImpactGui=ImpactStruct;
+0490 <span class="keyword">end</span>
+0491 <span class="comment">% Update GUI with new settings</span>
+0492 <span class="comment">% set(handles.InputDirectoryEdit,'string',handles.ImpactGui.InputDirectory);</span>
+0493 <span class="comment">% set(handles.InputPrefixEdit,'string',handles.ImpactGui.InputPrefix);</span>
+0494 <span class="comment">% set(handles.InputStartNoEdit,'string',handles.ImpactGui.InputStartNo);</span>
+0495 <span class="comment">% set(handles.InputLastNoEdit,'string',handles.ImpactGui.InputLastNo);</span>
+0496 set(handles.OutputDirectoryEdit,<span class="string">'string'</span>,handles.ImpactGui.OutputDirectory);
+0497 set(handles.OutputPrefixEdit,<span class="string">'string'</span>,handles.ImpactGui.OutputPrefix);
+0498 set(handles.OutputStartNoEdit,<span class="string">'string'</span>,handles.ImpactGui.OutputStartNo);
+0499 set(handles.ContinueText,<span class="string">'String'</span>,<span class="string">'When ready with pretest and settings click Continue to open up Gui for processing data!'</span>);
+0500 set(handles.PretestUseFilePopup,<span class="string">'Value'</span>,1);
+0501 <span class="comment">% Fill popup menu for imptime files in input directory based on Input Files</span>
+0502 <span class="comment">% panel values</span>
+0503 <a href="#_sub48" class="code" title="subfunction FillUseFilesPopoup(handles)">FillUseFilesPopoup</a>(handles)
+0504 set(handles.TrigLevelText,<span class="string">'string'</span>,num2str(handles.ImpactGui.TrigLevel));
+0505 set(handles.PretriggerText,<span class="string">'string'</span>,num2str(handles.ImpactGui.Pretrigger));
+0506 set(handles.BlocksizeText,<span class="string">'string'</span>,num2str(handles.ImpactGui.BlocksizeAlfaList{handles.ImpactGui.BlocksizeNumber}));
+0507 set(handles.ForceWindowText,<span class="string">'string'</span>,num2str(handles.ImpactGui.ForceWindowLength));
+0508 set(handles.ExpWindowText,<span class="string">'string'</span>,num2str(handles.ImpactGui.ExpWindowPercent));
+0509 <span class="comment">% Save results in backup file</span>
+0510 <a href="#_sub49" class="code" title="subfunction UpdateSetupFile(handles)">UpdateSetupFile</a>(handles);
+0511 
+0512 guidata(hObject,handles);
+0513 
+0514 <span class="comment">% --- Executes on button press in SaveSettingsButton.</span>
+0515 <a name="_sub25" href="#_subfunctions" class="code">function SaveSettingsButton_Callback(hObject, eventdata, handles)</a>
+0516 <span class="comment">% hObject    handle to SaveSettingsButton (see GCBO)</span>
+0517 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0518 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0519 [FileName,PathName]=uiputfile(fullfile(handles.ImpactGui.OutputDirectory,<span class="keyword">...</span>
+0520     <span class="string">'*.ImpGuiSetup'</span>),<span class="string">'Select file to save setup to!'</span>);
+0521 <span class="keyword">if</span> FileName ~= 0
+0522     FileName=fullfile(PathName,FileName);
+0523     ImpactStruct=handles.ImpactGui;
+0524     save(FileName,<span class="string">'ImpactStruct'</span>);
+0525 <span class="keyword">end</span>
+0526 
+0527 
+0528 <a name="_sub26" href="#_subfunctions" class="code">function OutputStartNoEdit_Callback(hObject, eventdata, handles)</a>
+0529 <span class="comment">% hObject    handle to OutputStartNoEdit (see GCBO)</span>
+0530 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0531 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0532 
+0533 <span class="comment">% Hints: get(hObject,'String') returns contents of OutputStartNoEdit as text</span>
+0534 <span class="comment">%        str2double(get(hObject,'String')) returns contents of OutputStartNoEdit as a double</span>
+0535 n=str2double(get(hObject,<span class="string">'String'</span>));
+0536 <span class="keyword">if</span> ~isnan(n)
+0537     handles.ImpactGui.OutputStartNo=n;
+0538     guidata(hObject,handles)
+0539 <span class="keyword">else</span>
+0540     <a href="ImpactContDlg.html" class="code" title="function varargout = ImpactContDlg(varargin)">ImpactContDlg</a>(<span class="string">'Title'</span>,<span class="string">'StartNo must not be empty! Not changing...'</span>) 
+0541     set(hObject,<span class="string">'String'</span>,num2str(handles.ImpactGui.InputStartNo));
+0542 <span class="keyword">end</span>
+0543 
+0544 
+0545 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0546 <a name="_sub27" href="#_subfunctions" class="code">function OutputStartNoEdit_CreateFcn(hObject, eventdata, handles)</a>
+0547 <span class="comment">% hObject    handle to OutputStartNoEdit (see GCBO)</span>
+0548 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0549 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0550 
+0551 <span class="comment">% Hint: edit controls usually have a white background on Windows.</span>
+0552 <span class="comment">%       See ISPC and COMPUTER.</span>
+0553 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0554     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0555 <span class="keyword">end</span>
+0556 
+0557 
+0558 
+0559 <a name="_sub28" href="#_subfunctions" class="code">function OutputPrefixEdit_Callback(hObject, eventdata, handles)</a>
+0560 <span class="comment">% hObject    handle to OutputPrefixEdit (see GCBO)</span>
+0561 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0562 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0563 
+0564 <span class="comment">% Hints: get(hObject,'String') returns contents of OutputPrefixEdit as text</span>
+0565 <span class="comment">%        str2double(get(hObject,'String')) returns contents of OutputPrefixEdit as a double</span>
+0566 s=get(hObject,<span class="string">'String'</span>);
+0567 <span class="keyword">if</span> ~isempty(s)
+0568     handles.ImpactGui.OutputPrefix=s;
+0569     guidata(hObject,handles)
+0570 <span class="keyword">else</span>
+0571     <a href="ImpactContDlg.html" class="code" title="function varargout = ImpactContDlg(varargin)">ImpactContDlg</a>(<span class="string">'Title'</span>,<span class="string">'Prefix must not be empty! Not changing...'</span>)
+0572     set(hObject,<span class="string">'String'</span>,handles.ImpactGui.OutputPrefix);
+0573 <span class="keyword">end</span>
+0574 
+0575 
+0576 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0577 <a name="_sub29" href="#_subfunctions" class="code">function OutputPrefixEdit_CreateFcn(hObject, eventdata, handles)</a>
+0578 <span class="comment">% hObject    handle to OutputPrefixEdit (see GCBO)</span>
+0579 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0580 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0581 
+0582 <span class="comment">% Hint: edit controls usually have a white background on Windows.</span>
+0583 <span class="comment">%       See ISPC and COMPUTER.</span>
+0584 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0585     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0586 <span class="keyword">end</span>
+0587 
+0588 
+0589 <span class="comment">% --- Executes on button press in ChangeOutputDirectoryButton.</span>
+0590 <a name="_sub30" href="#_subfunctions" class="code">function ChangeOutputDirectoryButton_Callback(hObject, eventdata, handles)</a>
+0591 <span class="comment">% hObject    handle to ChangeOutputDirectoryButton (see GCBO)</span>
+0592 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0593 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0594 F=uigetdir(handles.ImpactGui.OutputDirectory,<span class="string">'Set input directory!'</span>);
+0595 <span class="keyword">if</span> F ~= 0
+0596     handles.ImpactGui.OutputDirectory=F;
+0597     set(handles.OutputDirectoryEdit,<span class="string">'String'</span>,handles.ImpactGui.OutputDirectory);
+0598     <a href="#_sub49" class="code" title="subfunction UpdateSetupFile(handles)">UpdateSetupFile</a>(handles);
+0599     guidata(hObject,handles)
+0600 <span class="keyword">end</span>
+0601 
+0602 
+0603 <span class="comment">% --- Executes on selection change in PretestUseFilePopup.</span>
+0604 <a name="_sub31" href="#_subfunctions" class="code">function PretestUseFilePopup_Callback(hObject, eventdata, handles)</a>
+0605 <span class="comment">% hObject    handle to PretestUseFilePopup (see GCBO)</span>
+0606 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0607 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0608 
+0609 <span class="comment">% Hints: contents = cellstr(get(hObject,'String')) returns PretestUseFilePopup contents as cell array</span>
+0610 <span class="comment">%        contents{get(hObject,'Value')} returns selected item from PretestUseFilePopup</span>
+0611 contents=cellstr(get(hObject,<span class="string">'String'</span>));
+0612 FileNo=get(hObject,<span class="string">'Value'</span>);
+0613 <span class="keyword">if</span> FileNo ~= 1
+0614     FileName=fullfile(handles.ImpactGui.InputDirectory,handles.ImpactGui.InputFileList{FileNo-1});
+0615     load(FileName,<span class="string">'-mat'</span>)
+0616     NumberChannels=length(Data);
+0617     ChannelList={<span class="string">'Use Channel'</span>};
+0618     <span class="keyword">for</span> n=2:NumberChannels 
+0619         ChannelList=[ChannelList;int2str(n)];
+0620     <span class="keyword">end</span>
+0621 <span class="comment">%     set(handles.PretestUseChannelPopup,'String',[2:NumberChannels]);</span>
+0622     set(handles.PretestUseChannelPopup,<span class="string">'String'</span>,ChannelList);
+0623     set(handles.PretestUseChannelPopup,<span class="string">'Value'</span>,1);
+0624     handles.ImpactGui.PretestFileName=FileName;
+0625     set(handles.PretestUseChannelPopup,<span class="string">'Visible'</span>,<span class="string">'on'</span>)
+0626     guidata(hObject,handles)
+0627 <span class="keyword">else</span>
+0628     set(handles.PretestUseChannelPopup,<span class="string">'Visible'</span>,<span class="string">'off'</span>)
+0629 <span class="keyword">end</span>
+0630 
+0631 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0632 <a name="_sub32" href="#_subfunctions" class="code">function PretestUseFilePopup_CreateFcn(hObject, eventdata, handles)</a>
+0633 <span class="comment">% hObject    handle to PretestUseFilePopup (see GCBO)</span>
+0634 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0635 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0636 
+0637 <span class="comment">% Hint: popupmenu controls usually have a white background on Windows.</span>
+0638 <span class="comment">%       See ISPC and COMPUTER.</span>
+0639 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0640     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0641 <span class="keyword">end</span>
+0642 
+0643 
+0644 <span class="comment">% --- Executes on selection change in PretestUseChannelPopup.</span>
+0645 <a name="_sub33" href="#_subfunctions" class="code">function PretestUseChannelPopup_Callback(hObject, eventdata, handles)</a>
+0646 <span class="comment">% hObject    handle to PretestUseChannelPopup (see GCBO)</span>
+0647 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0648 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0649 
+0650 <span class="comment">% Hints: contents = cellstr(get(hObject,'String')) returns PretestUseChannelPopup contents as cell array</span>
+0651 <span class="comment">%        contents{get(hObject,'Value')} returns selected item from PretestUseChannelPopup</span>
+0652 contents=cellstr(get(hObject,<span class="string">'String'</span>));
+0653 FileNo=get(hObject,<span class="string">'Value'</span>);
+0654 <span class="keyword">if</span> FileNo ~= 1
+0655     handles.ImpactGui.UseChannelNo=FileNo;
+0656     guidata(hObject,handles)
+0657 <span class="keyword">end</span>
+0658 
+0659 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0660 <a name="_sub34" href="#_subfunctions" class="code">function PretestUseChannelPopup_CreateFcn(hObject, eventdata, handles)</a>
+0661 <span class="comment">% hObject    handle to PretestUseChannelPopup (see GCBO)</span>
+0662 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0663 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0664 
+0665 <span class="comment">% Hint: popupmenu controls usually have a white background on Windows.</span>
+0666 <span class="comment">%       See ISPC and COMPUTER.</span>
+0667 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0668     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0669 <span class="keyword">end</span>
+0670 
+0671 
+0672 
+0673 <a name="_sub35" href="#_subfunctions" class="code">function InputPrefixEdit_Callback(hObject, eventdata, handles)</a>
+0674 <span class="comment">% hObject    handle to InputPrefixEdit (see GCBO)</span>
+0675 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0676 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0677 
+0678 <span class="comment">% Hints: get(hObject,'String') returns contents of InputPrefixEdit as text</span>
+0679 <span class="comment">%        str2double(get(hObject,'String')) returns contents of InputPrefixEdit as a double</span>
+0680 s=get(hObject,<span class="string">'String'</span>);
+0681 <span class="keyword">if</span> ~isempty(s)
+0682     handles.ImpactGui.InputPrefix=s;
+0683     <a href="#_sub48" class="code" title="subfunction FillUseFilesPopoup(handles)">FillUseFilesPopoup</a>(handles)
+0684     guidata(hObject,handles)
+0685 <span class="keyword">else</span>
+0686     <a href="ImpactContDlg.html" class="code" title="function varargout = ImpactContDlg(varargin)">ImpactContDlg</a>(<span class="string">'Title'</span>,<span class="string">'Prefix must not be empty! Not changing...'</span>)
+0687     set(hObject,<span class="string">'String'</span>,handles.ImpactGui.InputPrefix);
+0688 <span class="keyword">end</span>
+0689 
+0690 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0691 <a name="_sub36" href="#_subfunctions" class="code">function InputPrefixEdit_CreateFcn(hObject, eventdata, handles)</a>
+0692 <span class="comment">% hObject    handle to InputPrefixEdit (see GCBO)</span>
+0693 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0694 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0695 
+0696 <span class="comment">% Hint: edit controls usually have a white background on Windows.</span>
+0697 <span class="comment">%       See ISPC and COMPUTER.</span>
+0698 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0699     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0700 <span class="keyword">end</span>
+0701 
+0702 
+0703 
+0704 <a name="_sub37" href="#_subfunctions" class="code">function InputStartNoEdit_Callback(hObject, eventdata, handles)</a>
+0705 <span class="comment">% hObject    handle to InputStartNoEdit (see GCBO)</span>
+0706 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0707 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0708 
+0709 <span class="comment">% Hints: get(hObject,'String') returns contents of InputStartNoEdit as text</span>
+0710 <span class="comment">%        str2double(get(hObject,'String')) returns contents of InputStartNoEdit as a double</span>
+0711 n=str2double(get(hObject,<span class="string">'String'</span>));
+0712 <span class="keyword">if</span> ~isnan(n)
+0713     <span class="keyword">if</span> n &gt; handles.ImpactGui.InputLastNo
+0714         <a href="ImpactContDlg.html" class="code" title="function varargout = ImpactContDlg(varargin)">ImpactContDlg</a>(<span class="string">'Title'</span>,<span class="string">'StartNo must be &lt;= LastNo! Setting = LastNo'</span>)
+0715         set(handles.InputStartNoEdit,<span class="string">'String'</span>,handles.ImpactGui.InputLastNo);
+0716         handles.ImpactGui.InputStartNo=handles.ImpactGui.InputLastNo;
+0717     <span class="keyword">else</span>
+0718         handles.ImpactGui.InputStartNo=n;
+0719     <span class="keyword">end</span>
+0720     <a href="#_sub48" class="code" title="subfunction FillUseFilesPopoup(handles)">FillUseFilesPopoup</a>(handles)
+0721     guidata(hObject,handles)
+0722 <span class="keyword">else</span>
+0723     <a href="ImpactContDlg.html" class="code" title="function varargout = ImpactContDlg(varargin)">ImpactContDlg</a>(<span class="string">'Title'</span>,<span class="string">'StartNo must not be empty! Not changing...'</span>) 
+0724     set(hObject,<span class="string">'String'</span>,num2str(handles.ImpactGui.InputStartNo));
+0725 <span class="keyword">end</span>
+0726 
+0727 
+0728 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0729 <a name="_sub38" href="#_subfunctions" class="code">function InputStartNoEdit_CreateFcn(hObject, eventdata, handles)</a>
+0730 <span class="comment">% hObject    handle to InputStartNoEdit (see GCBO)</span>
+0731 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0732 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0733 
+0734 <span class="comment">% Hint: edit controls usually have a white background on Windows.</span>
+0735 <span class="comment">%       See ISPC and COMPUTER.</span>
+0736 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0737     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0738 <span class="keyword">end</span>
+0739 
+0740 
+0741 
+0742 <a name="_sub39" href="#_subfunctions" class="code">function InputLastNoEdit_Callback(hObject, eventdata, handles)</a>
+0743 <span class="comment">% hObject    handle to InputLastNoEdit (see GCBO)</span>
+0744 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0745 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0746 
+0747 <span class="comment">% Hints: get(hObject,'String') returns contents of InputLastNoEdit as text</span>
+0748 <span class="comment">%        str2double(get(hObject,'String')) returns contents of InputLastNoEdit as a double</span>
+0749 n=str2double(get(hObject,<span class="string">'String'</span>));
+0750 <span class="keyword">if</span> ~isnan(n)
+0751     <span class="keyword">if</span> n &lt; handles.ImpactGui.InputStartNo
+0752         <a href="ImpactContDlg.html" class="code" title="function varargout = ImpactContDlg(varargin)">ImpactContDlg</a>(<span class="string">'Title'</span>,<span class="string">'LastNo must be &lt;= StartNo! Setting = StartNo'</span>)
+0753         set(handles.InputLastNoEdit,<span class="string">'String'</span>,handles.ImpactGui.InputStartNo);
+0754         handles.ImpactGui.InputLastNo=handles.ImpactGui.InputStartNo;
+0755     <span class="keyword">else</span>
+0756         handles.ImpactGui.InputLastNo=n;
+0757     <span class="keyword">end</span>
+0758     <a href="#_sub48" class="code" title="subfunction FillUseFilesPopoup(handles)">FillUseFilesPopoup</a>(handles)
+0759     guidata(hObject,handles)
+0760 <span class="keyword">else</span>
+0761     <a href="ImpactContDlg.html" class="code" title="function varargout = ImpactContDlg(varargin)">ImpactContDlg</a>(<span class="string">'Title'</span>,<span class="string">'LastNo must not be empty! Not changing...'</span>)
+0762     set(hObject,<span class="string">'String'</span>,num2str(handles.ImpactGui.InputLastNo));
+0763 <span class="keyword">end</span>
+0764 
+0765 
+0766 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0767 <a name="_sub40" href="#_subfunctions" class="code">function InputLastNoEdit_CreateFcn(hObject, eventdata, handles)</a>
+0768 <span class="comment">% hObject    handle to InputLastNoEdit (see GCBO)</span>
+0769 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0770 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0771 
+0772 <span class="comment">% Hint: edit controls usually have a white background on Windows.</span>
+0773 <span class="comment">%       See ISPC and COMPUTER.</span>
+0774 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0775     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0776 <span class="keyword">end</span>
+0777 
+0778 
+0779 <span class="comment">% --- Executes on button press in ManualProcessButton.</span>
+0780 <a name="_sub41" href="#_subfunctions" class="code">function ManualProcessButton_Callback(hObject, eventdata, handles)</a>
+0781 <span class="comment">% hObject    handle to ManualProcessButton (see GCBO)</span>
+0782 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0783 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0784 
+0785 
+0786 <span class="comment">% --- Executes on button press in ManualNextButton.</span>
+0787 <a name="_sub42" href="#_subfunctions" class="code">function ManualNextButton_Callback(hObject, eventdata, handles)</a>
+0788 <span class="comment">% hObject    handle to ManualNextButton (see GCBO)</span>
+0789 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0790 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0791 
+0792 <span class="comment">% --- Executes on button press in ContinueButton.</span>
+0793 <a name="_sub43" href="#_subfunctions" class="code">function ContinueButton_Callback(hObject, eventdata, handles)</a>
+0794 <span class="comment">% hObject    handle to ContinueButton (see GCBO)</span>
+0795 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0796 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0797 <a href="ImpactProcessingGui.html" class="code" title="function varargout = ImpactProcessingGui(varargin)">ImpactProcessingGui</a>(handles);
+0798 
+0799 <span class="comment">% --- Executes on selection change in PlotChannelsListbox.</span>
+0800 <a name="_sub44" href="#_subfunctions" class="code">function PlotChannelsListbox_Callback(hObject, eventdata, handles)</a>
+0801 <span class="comment">% hObject    handle to PlotChannelsListbox (see GCBO)</span>
+0802 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0803 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0804 
+0805 <span class="comment">% Hints: contents = cellstr(get(hObject,'String')) returns PlotChannelsListbox contents as cell array</span>
+0806 <span class="comment">%        contents{get(hObject,'Value')} returns selected item from PlotChannelsListbox</span>
+0807 
+0808 
+0809 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0810 <a name="_sub45" href="#_subfunctions" class="code">function PlotChannelsListbox_CreateFcn(hObject, eventdata, handles)</a>
+0811 <span class="comment">% hObject    handle to PlotChannelsListbox (see GCBO)</span>
+0812 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0813 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0814 
+0815 <span class="comment">% Hint: listbox controls usually have a white background on Windows.</span>
+0816 <span class="comment">%       See ISPC and COMPUTER.</span>
+0817 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0818     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0819 <span class="keyword">end</span>
+0820 
+0821 
+0822 <span class="comment">% --- Executes on selection change in UseImpactsListbox.</span>
+0823 <a name="_sub46" href="#_subfunctions" class="code">function UseImpactsListbox_Callback(hObject, eventdata, handles)</a>
+0824 <span class="comment">% hObject    handle to UseImpactsListbox (see GCBO)</span>
+0825 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0826 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0827 
+0828 <span class="comment">% Hints: contents = cellstr(get(hObject,'String')) returns UseImpactsListbox contents as cell array</span>
+0829 <span class="comment">%        contents{get(hObject,'Value')} returns selected item from UseImpactsListbox</span>
+0830 
+0831 
+0832 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0833 <a name="_sub47" href="#_subfunctions" class="code">function UseImpactsListbox_CreateFcn(hObject, eventdata, handles)</a>
+0834 <span class="comment">% hObject    handle to UseImpactsListbox (see GCBO)</span>
+0835 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0836 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0837 
+0838 <span class="comment">% Hint: listbox controls usually have a white background on Windows.</span>
+0839 <span class="comment">%       See ISPC and COMPUTER.</span>
+0840 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0841     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0842 <span class="keyword">end</span>
+0843 
+0844 
+0845 <span class="comment">%=====================================================================</span>
+0846 <span class="comment">% User defined functions</span>
+0847 <span class="comment">%=====================================================================</span>
+0848 
+0849 <a name="_sub48" href="#_subfunctions" class="code">function FillUseFilesPopoup(handles)</a>
+0850 <span class="comment">% After an update in the input files settings, the popup menu with all</span>
+0851 <span class="comment">% imptime files in the current input directory with Prefix and StartNo,</span>
+0852 <span class="comment">% LastNo needs to be filled. If no files found, that is written to the</span>
+0853 <span class="comment">% popup menu</span>
+0854 <span class="comment">% Fill popup menu for imptime files in input directory</span>
+0855 
+0856 FileList={<span class="string">'Select File'</span>};
+0857 FileList=[FileList handles.ImpactGui.InputFileList];
+0858 <span class="keyword">if</span> length(FileList) == 1
+0859     FileList={<span class="string">'No Files!'</span>};
+0860     set(handles.PretestUseFilePopup,<span class="string">'Value'</span>,1);
+0861 <span class="keyword">end</span>
+0862 set(handles.PretestUseFilePopup,<span class="string">'String'</span>,FileList)
+0863 set(handles.PretestUseChannelPopup,<span class="string">'Visible'</span>,<span class="string">'off'</span>)
+0864 ImpactStruct=handles.ImpactGui;
+0865 <a href="#_sub49" class="code" title="subfunction UpdateSetupFile(handles)">UpdateSetupFile</a>(handles);
+0866 
+0867 
+0868 <a name="_sub49" href="#_subfunctions" class="code">function UpdateSetupFile(handles)</a>
+0869 <span class="comment">% Save current data to setup file</span>
+0870 ImpactStruct=handles.ImpactGui;
+0871 save(handles.SetupFile,<span class="string">'ImpactStruct'</span>);
+0872 
+0873 
+0874 <span class="comment">% --- Executes on button press in BrowseFilesButton.</span>
+0875 <a name="_sub50" href="#_subfunctions" class="code">function BrowseFilesButton_Callback(hObject, eventdata, handles)</a>
+0876 <span class="comment">% hObject    handle to BrowseFilesButton (see GCBO)</span>
+0877 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0878 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0879 abrabrowse</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

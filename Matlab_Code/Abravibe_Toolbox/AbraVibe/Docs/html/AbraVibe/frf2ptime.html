@@ -1,0 +1,226 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of frf2ptime</title>
+  <meta name="keywords" content="frf2ptime">
+  <meta name="description" content="FRF2PTIME Time domain MDOF methods for parameter extraction">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; frf2ptime.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>frf2ptime
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>FRF2PTIME Time domain MDOF methods for parameter extraction</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [p,L,fLimits] = frf2ptime(H,f,Nlines,MaxModes,MifType,EstType) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment">FRF2PTIME Time domain MDOF methods for parameter extraction
+
+       [p,L,fLimits] = frf2ptime(H,f,Nlines,MaxModes,MifType,EstType)
+
+       p           Vector with complex poles with positive imaginary part
+       L           This is a variable which varies with the EstType
+                   for EstType='prony' or 'lsce', L = 1.
+                   for EstType='ptd', L contains the modal participation
+                   factors
+       fLimits     2-by-1 vector with flo, fhi of selected frequency range
+
+       H           FRF matrix with accelerances, N-by-D-by-R
+       f           Frequency axis for H
+       Nlines      Number of values in h(t) used for estimation, normally
+                   200-500
+       MaxModes    Maximum number of modes, limit for stabilization
+                   diagram
+       MifType     Mode indicator function type for plot in stabilization
+                   diagram. Can be a column vector with size(f), or a
+                   string corresponding to the input of the AMIF command.
+                   Empty vector or 'default' uses the default mif type in
+                   AMIF.
+       EstType     Estimation method string
+                   'prony' is a local method useful mostly for a single
+                   FRF, but works also for several responses, although in
+                   a tedious way, as one stabilization diagram is produced
+                   for every response. Prony is also known as complex
+                   exponential method.
+                   'lsce' uses complex exponential single reference
+                   method using all data in H (even if R&gt;1) (Default)
+                   'ptd' uses the polyreference time domain method to
+                   produce poles and modal participation matrix
+                   'mmitd' uses a modified multiple-reference Ibrahim time 
+                   domain method to produce poles and modal participation 
+                   matrix
+
+ This function plots the FRFs for the first reference (if several), and
+ allows a selection of frequency range to be used. Thereafter a
+ stabilization diagram is presented where you select the modes interactively.
+
+ See inside file for some parameters you can hardcode to control behavior.
+ Each curve fitting method is also documented inside the file.
+
+ See also <a href="frfp2modes.html" class="code" title="function [V,L,Res] = frfp2modes(varargin)">FRFP2MODES</a> <a href="frf2msdof.html" class="code" title="function [p,V] = frf2msdof(H,f,fstart,NoLines,Type,ScaleDof)">FRF2MSDOF</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="amif.html" class="code" title="function Mif = amif(H,Type)">amif</a>	AMIF   Calculate mode indicator function of (accelerance) FRFs</li><li><a href="enhancefrf.html" class="code" title="function [He,Se] = enhancefrf(H, type);">enhancefrf</a>	ENHANCEFRF     Enhance FRF matrix by Singular Value Decomposition</li><li><a href="fint.html" class="code" title="function Y = fint(X,f,Type,NumberInt)">fint</a>	FINT Frequency integration by jw division</li><li><a href="frf2ir.html" class="code" title="function [h,t,fs] = frf2ir(H,f);">frf2ir</a>	FRF2IR    Convert freqency response(s) to impulse response(s)</li><li><a href="ir2ptime.html" class="code" title="function [p,L,H,f] = ir2ptime(h,fs,NLines,MaxModes,EstType,MIF,f,fOffset);">ir2ptime</a>	IR2PTIME   Time domain MDOF methods for parameter extraction from free</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [p,L,fLimits] = frf2ptime(H,f,Nlines,MaxModes,MifType,EstType)</a>
+0002 <span class="comment">%FRF2PTIME Time domain MDOF methods for parameter extraction</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%       [p,L,fLimits] = frf2ptime(H,f,Nlines,MaxModes,MifType,EstType)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%       p           Vector with complex poles with positive imaginary part</span>
+0007 <span class="comment">%       L           This is a variable which varies with the EstType</span>
+0008 <span class="comment">%                   for EstType='prony' or 'lsce', L = 1.</span>
+0009 <span class="comment">%                   for EstType='ptd', L contains the modal participation</span>
+0010 <span class="comment">%                   factors</span>
+0011 <span class="comment">%       fLimits     2-by-1 vector with flo, fhi of selected frequency range</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%       H           FRF matrix with accelerances, N-by-D-by-R</span>
+0014 <span class="comment">%       f           Frequency axis for H</span>
+0015 <span class="comment">%       Nlines      Number of values in h(t) used for estimation, normally</span>
+0016 <span class="comment">%                   200-500</span>
+0017 <span class="comment">%       MaxModes    Maximum number of modes, limit for stabilization</span>
+0018 <span class="comment">%                   diagram</span>
+0019 <span class="comment">%       MifType     Mode indicator function type for plot in stabilization</span>
+0020 <span class="comment">%                   diagram. Can be a column vector with size(f), or a</span>
+0021 <span class="comment">%                   string corresponding to the input of the AMIF command.</span>
+0022 <span class="comment">%                   Empty vector or 'default' uses the default mif type in</span>
+0023 <span class="comment">%                   AMIF.</span>
+0024 <span class="comment">%       EstType     Estimation method string</span>
+0025 <span class="comment">%                   'prony' is a local method useful mostly for a single</span>
+0026 <span class="comment">%                   FRF, but works also for several responses, although in</span>
+0027 <span class="comment">%                   a tedious way, as one stabilization diagram is produced</span>
+0028 <span class="comment">%                   for every response. Prony is also known as complex</span>
+0029 <span class="comment">%                   exponential method.</span>
+0030 <span class="comment">%                   'lsce' uses complex exponential single reference</span>
+0031 <span class="comment">%                   method using all data in H (even if R&gt;1) (Default)</span>
+0032 <span class="comment">%                   'ptd' uses the polyreference time domain method to</span>
+0033 <span class="comment">%                   produce poles and modal participation matrix</span>
+0034 <span class="comment">%                   'mmitd' uses a modified multiple-reference Ibrahim time</span>
+0035 <span class="comment">%                   domain method to produce poles and modal participation</span>
+0036 <span class="comment">%                   matrix</span>
+0037 <span class="comment">%</span>
+0038 <span class="comment">% This function plots the FRFs for the first reference (if several), and</span>
+0039 <span class="comment">% allows a selection of frequency range to be used. Thereafter a</span>
+0040 <span class="comment">% stabilization diagram is presented where you select the modes interactively.</span>
+0041 <span class="comment">%</span>
+0042 <span class="comment">% See inside file for some parameters you can hardcode to control behavior.</span>
+0043 <span class="comment">% Each curve fitting method is also documented inside the file.</span>
+0044 <span class="comment">%</span>
+0045 <span class="comment">% See also FRFP2MODES FRF2MSDOF</span>
+0046 
+0047 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0048 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0049 <span class="comment">% Version: 1.0 2011-06-23</span>
+0050 <span class="comment">%          1.1 2012-04-15 Added PTD method</span>
+0051 <span class="comment">%          1.2 2013-03-09 Changed parameters to include FRF enhancement</span>
+0052 <span class="comment">%                         with the new function enhancefrf.</span>
+0053 <span class="comment">%          1.3 2013-06-09 Fixed bug in option 'prony' due to previous</span>
+0054 <span class="comment">%                         changes.</span>
+0055 <span class="comment">%          1.4 2014-01-27 Extracted the actual parameter estimation to</span>
+0056 <span class="comment">%                         function ir2ptime for flexibility.</span>
+0057 <span class="comment">%          1.5 2017-11-29 Bugfix to cope with empty MifType</span>
+0058 <span class="comment">%          1.6 2018-05-10 Added MMITD, Modified multireference Ibrahim time domain</span>
+0059 <span class="comment">%</span>
+0060 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0061 
+0062 <span class="comment">%=========================================================================</span>
+0063 <span class="comment">% Initialize hardcode parameters</span>
+0064 <span class="comment">%=========================================================================</span>
+0065 CondHmtrx=1;                <span class="comment">% Set to 1 to include a condensation of the H</span>
+0066 <span class="comment">%                             matrix using an SVD enhancement approach</span>
+0067 <span class="comment">%                             Set to 0 to avoid FRF condensation.</span>
+0068 SelNoSingVal=0;             <span class="comment">% If CondHmtrx=1 this parameter controls whether</span>
+0069 <span class="comment">%                             a manual selection is done by a singular</span>
+0070 <span class="comment">%                             value plot, or not. If this parameter is 0</span>
+0071 <span class="comment">%                             then an automatic selection of a suitable</span>
+0072 <span class="comment">%                             smallest eigenvalue is used.</span>
+0073 <span class="comment">%=========================================================================</span>
+0074 <span class="comment">% Check input parameters</span>
+0075 <span class="comment">%=========================================================================</span>
+0076 <span class="keyword">if</span> nargin &lt; 4
+0077     error(<span class="string">'Too few input parameters, must be &gt;= 4'</span>)
+0078 <span class="keyword">elseif</span> nargin == 4
+0079     MifType=<span class="string">'MIF1'</span>;
+0080     EstType=<span class="string">'LSCE'</span>;
+0081 <span class="keyword">elseif</span> nargin == 5
+0082     MifType=upper(MifType);
+0083     EstType=<span class="string">'LSCE'</span>;
+0084 <span class="keyword">elseif</span> nargin == 6
+0085     EstType=upper(EstType);
+0086 <span class="keyword">end</span>
+0087 
+0088 <span class="comment">%=========================================================================</span>
+0089 <span class="comment">% Make initial calculations and frequency selection</span>
+0090 <span class="comment">%=========================================================================</span>
+0091 <span class="comment">% Plot FRFs and allow selection of frequency range</span>
+0092 h=figure;
+0093 semilogy(f,abs(H(:,:,1)))
+0094 xlabel(<span class="string">'Frequency [Hz]'</span>)
+0095 ylabel(<span class="string">'Accelerance'</span>)
+0096 grid
+0097 title(<span class="string">'Select lower and upper frequency range'</span>)
+0098 [xx,dum]=ginput(2);
+0099 xx=round(xx);
+0100 fidx=find(f &gt;= min(xx) &amp; f &lt;= max(xx));
+0101 fLimits=[min(xx);max(xx)];
+0102 fOffset=fLimits(1);                         <span class="comment">% poles must be adjusted later</span>
+0103 close(h)
+0104 
+0105 <span class="comment">% Calculate MIF function if MifType is a string, otherwise put vector into</span>
+0106 <span class="comment">% MIF variable</span>
+0107 <span class="keyword">if</span> ischar(MifType)   | isempty(MifType)             <span class="comment">% Added to support empty MifType 2017-11-29</span>
+0108     <span class="keyword">if</span> isempty(MifType) | strcmp(MifType,<span class="string">'DEFAULT'</span>)
+0109         MIF=<a href="amif.html" class="code" title="function Mif = amif(H,Type)">amif</a>(H);
+0110     <span class="keyword">else</span>
+0111         MIF=<a href="amif.html" class="code" title="function Mif = amif(H,Type)">amif</a>(H,MifType);
+0112     <span class="keyword">end</span>
+0113 <span class="keyword">else</span>
+0114     MIF=MifType;
+0115 <span class="keyword">end</span>
+0116 
+0117 <span class="comment">% Integrate accelerances to receptance and reduce to selected freqs</span>
+0118 H=<a href="fint.html" class="code" title="function Y = fint(X,f,Type,NumberInt)">fint</a>(H(fidx,:,:),f(fidx),<span class="string">'lin'</span>,2);
+0119 f=f(fidx);
+0120 MIF=MIF(fidx,:);
+0121 
+0122 <span class="keyword">if</span> CondHmtrx == 1
+0123     <span class="keyword">if</span> SelNoSingVal == 1
+0124         H=<a href="enhancefrf.html" class="code" title="function [He,Se] = enhancefrf(H, type);">enhancefrf</a>(H,<span class="string">'manual'</span>);
+0125     <span class="keyword">else</span>
+0126         H=<a href="enhancefrf.html" class="code" title="function [He,Se] = enhancefrf(H, type);">enhancefrf</a>(H,<span class="string">'auto'</span>);
+0127     <span class="keyword">end</span>
+0128 <span class="keyword">end</span>
+0129 
+0130 <span class="comment">% Calculate impulse responses for selected frequency range</span>
+0131 [h,t,fs] = <a href="frf2ir.html" class="code" title="function [h,t,fs] = frf2ir(H,f);">frf2ir</a>(H,f);
+0132 [N,D,R]=size(h);
+0133 
+0134 [p,L] = <a href="ir2ptime.html" class="code" title="function [p,L,H,f] = ir2ptime(h,fs,NLines,MaxModes,EstType,MIF,f,fOffset);">ir2ptime</a>(h,fs,Nlines,MaxModes,EstType,MIF,f,fOffset);
+0135 
+0136</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

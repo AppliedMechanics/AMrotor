@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of synchsampr</title>
+  <meta name="keywords" content="synchsampr">
+  <meta name="description" content="SYNCHSAMPR   Resample data synchronously with RPM, using rpm-time profile">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; synchsampr.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>synchsampr
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>SYNCHSAMPR   Resample data synchronously with RPM, using rpm-time profile</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function  [xs,rpm,tc,tt] = synchsampr(x,fs,rpm,MaxOrd) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> SYNCHSAMPR   Resample data synchronously with RPM, using rpm-time profile
+
+       [xs,rpms,ts] = synchsampr(x,fs,rpm,MaxOrd)
+
+       xs          Synchronously sampled data
+       rpms        rpm values synchronous with samples in xs
+       ts          x axis for xs in cycles
+       t           x axis for xs in seconds
+
+       x           Time data
+       fs          Sampling frequency for x
+       rpm         Instantaneous RPM, sampled with fs
+       MaxOrd      Maximum order (gives number of samples per
+                   revolution)
+
+   see also <a href="tacho2rpm.html" class="code" title="function [rpm,t] = tacho2rpm(x,fs,TLevel,Slope,PPR,NewFs,FilterL)">TACHO2RPM</a> <a href="synchsampt.html" class="code" title="function  [xs,rpm,tc] = synchsampt(x,fs,tacho,TLevel,Slope,PPR,MaxOrd)">SYNCHSAMPT</a> <a href="rpmmaps.html" class="code" title="function [S,F,R] = rpmmaps(xs,rpm,OrdRes,MaxOrd,MinRpm,MaxRpm,DeltaRpm,WinStr,PhaseRef)">RPMMAPS</a> <a href="map2order.html" class="code" title="function Orders = map2order(S,F,R,OrderList,Method,FilterL)">MAP2ORDER</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="makexaxis.html" class="code" title="function x = makexaxis(y,dx,x0);">makexaxis</a>	MAKEXAXIS Create a time or frequency x axis</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function  [xs,rpm,tc,tt] = synchsampr(x,fs,rpm,MaxOrd)</a>
+0002 <span class="comment">% SYNCHSAMPR   Resample data synchronously with RPM, using rpm-time profile</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%       [xs,rpms,ts] = synchsampr(x,fs,rpm,MaxOrd)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%       xs          Synchronously sampled data</span>
+0007 <span class="comment">%       rpms        rpm values synchronous with samples in xs</span>
+0008 <span class="comment">%       ts          x axis for xs in cycles</span>
+0009 <span class="comment">%       t           x axis for xs in seconds</span>
+0010 <span class="comment">%</span>
+0011 <span class="comment">%       x           Time data</span>
+0012 <span class="comment">%       fs          Sampling frequency for x</span>
+0013 <span class="comment">%       rpm         Instantaneous RPM, sampled with fs</span>
+0014 <span class="comment">%       MaxOrd      Maximum order (gives number of samples per</span>
+0015 <span class="comment">%                   revolution)</span>
+0016 <span class="comment">%</span>
+0017 <span class="comment">%   see also TACHO2RPM SYNCHSAMPT RPMMAPS MAP2ORDER</span>
+0018 
+0019 
+0020 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0021 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0022 <span class="comment">% Version: 1.0 2011-06-23</span>
+0023 <span class="comment">%          1.1 2013-02-02 Updated syntax description</span>
+0024 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0025 
+0026 SampPerRev=2*MaxOrd;
+0027 
+0028 <span class="comment">% Upsample x and rpm</span>
+0029 x=resample(x,10,1);
+0030 t1=<a href="makexaxis.html" class="code" title="function x = makexaxis(y,dx,x0);">makexaxis</a>(rpm,1/fs);
+0031 fs=10*fs;
+0032 t2=<a href="makexaxis.html" class="code" title="function x = makexaxis(y,dx,x0);">makexaxis</a>(x,1/fs);
+0033 <span class="comment">% dt=t2(2)-t2(1);</span>
+0034 dt=t1(2)-t1(1);
+0035 <span class="comment">% Now calculate the instantaneous angle as function of time (in part of rev,</span>
+0036 <span class="comment">% not radians!)</span>
+0037 Ainst=dt*cumsum(rpm/60);         
+0038 
+0039 <span class="comment">% Find every 1/SampPerRev of a cycle in Ainst</span>
+0040 minA=min(Ainst);
+0041 maxA=max(Ainst);
+0042 Fractions=ceil(minA*SampPerRev)/SampPerRev:1/SampPerRev:maxA;
+0043 tt=interp1(Ainst,t1,Fractions,<span class="string">'linear'</span>,<span class="string">'extrap'</span>);     <span class="comment">% New sampling times</span>
+0044 
+0045 <span class="comment">% Now resample x on this new time axis</span>
+0046 xs=interp1(t2,x,tt)';
+0047 <span class="comment">% Recalculate the rpm values onto xaxis of xrs (i.e. tt)</span>
+0048 rpm=interp1(t1,rpm,tt)';
+0049 
+0050 tc=Fractions;           <span class="comment">% Output cycles axis</span></pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

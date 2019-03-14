@@ -1,0 +1,513 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of abrabrowse</title>
+  <meta name="keywords" content="abrabrowse">
+  <meta name="description" content="ABRABROWSE GUI-based data browser for ABRAVIBE toolbox data files">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; abrabrowse.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>abrabrowse
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>ABRABROWSE GUI-based data browser for ABRAVIBE toolbox data files</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function varargout = abrabrowse(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> ABRABROWSE GUI-based data browser for ABRAVIBE toolbox data files
+
+      abrabrowse(StartDir)
+
+      StartDir         Cell array with string for directory to open
+                       If not passed, abrabrowse starts in the current directory
+
+      Starts a GUI with options to scroll through, and plot, data stored
+      in the ABRAVIBE file formats. Also, universal files with records of
+      type 58 (test data) can be imported.
+
+      Data are plotted using the command PLOTFILE. See inside the file
+      plotfile.m to see how to change default plot formats.</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="abrahead.html" class="code" title="function status = abrahead(Header)">abrahead</a>	ABRAHEAD  Check if header structure is a valid ABRAVIBE header</li><li><a href="functype.html" class="code" title="function FuncType = functype(FuncType)">functype</a>	FUNCTYPE  Convert between numeric and string function type</li><li><a href="headpstr.html" class="code" title="function DofString = headpstr(Header)">headpstr</a>	HEADPSTR     Create string out of Abravibe header Dof and Dir info</li><li><a href="makexaxis.html" class="code" title="function x = makexaxis(y,dx,x0);">makexaxis</a>	MAKEXAXIS Create a time or frequency x axis</li><li><a href="plotfile.html" class="code" title="function plotfile(FileList,Overlay,col);">plotfile</a>	PLOTFILE  Plot data in ABRABIVE file(s) with default format</li><li><a href="plotreim.html" class="code" title="function h = plotreim(f,H,col,Type);">plotreim</a>	PLOTREIM Plot real and imaginary part of complex function</li><li><a href="unvread.html" class="code" title="function LastNo = unvread(FileName,Prefix,FirstNo,Type)">unvread</a>	UNVREAD Read a standard UNV file</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+<h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="#_sub1" class="code">function abrabrowse_OpeningFcn(hObject, eventdata, handles, varargin)</a></li><li><a href="#_sub2" class="code">function varargout = abrabrowse_OutputFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub3" class="code">function PlotButton_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub4" class="code">function OverlayCheckbox_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub5" class="code">function ChangeDirButton_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub6" class="code">function FileTable_CellSelectionCallback(hObject, eventdata, handles)</a></li><li><a href="#_sub7" class="code">function ImportUnvButton_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub8" class="code">function PlotReimButton_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub9" class="code">function TitleLinePopup_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub10" class="code">function TitleLinePopup_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub11" class="code">function CloseAllButton_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub12" class="code">function DirString_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub13" class="code">function DirString_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub14" class="code">function List = update_list(handles)</a></li><li><a href="#_sub15" class="code">function PlotLogAmpButton_Callback(hObject, eventdata, handles)</a></li></ul>
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = abrabrowse(varargin)</a>
+0002 <span class="comment">% ABRABROWSE GUI-based data browser for ABRAVIBE toolbox data files</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%      abrabrowse(StartDir)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%      StartDir         Cell array with string for directory to open</span>
+0007 <span class="comment">%                       If not passed, abrabrowse starts in the current directory</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%      Starts a GUI with options to scroll through, and plot, data stored</span>
+0010 <span class="comment">%      in the ABRAVIBE file formats. Also, universal files with records of</span>
+0011 <span class="comment">%      type 58 (test data) can be imported.</span>
+0012 <span class="comment">%</span>
+0013 <span class="comment">%      Data are plotted using the command PLOTFILE. See inside the file</span>
+0014 <span class="comment">%      plotfile.m to see how to change default plot formats.</span>
+0015 
+0016 <span class="comment">% Last Modified by GUIDE v2.5 12-May-2018 17:25:36</span>
+0017 
+0018 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0019 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0020 <span class="comment">% Version: 1.0 2011-06-23</span>
+0021 <span class="comment">%          1.1 2012-01-10  Made more robust if some files are not ABRAVIBE</span>
+0022 <span class="comment">%                          files. These are now ignored. Also made more</span>
+0023 <span class="comment">%                          robust for some fields that may not exist but</span>
+0024 <span class="comment">%                          can still be treated as valid files.</span>
+0025 <span class="comment">%          1.2 2014-07-10  Updated to allow .imptime files, and smaller</span>
+0026 <span class="comment">%                          improvements. Close All button no longer closes</span>
+0027 <span class="comment">%                          GUI</span>
+0028 <span class="comment">%          1.3 2014-07-20  Minor robustness fixed</span>
+0029 <span class="comment">%          1.4 2014-10-01  Fixed bug with imptime file headers</span>
+0030 <span class="comment">%          1.5 2014-11-21  Added waitbar while scanning files in new directory</span>
+0031 <span class="comment">%</span>
+0032 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0033 
+0034 <span class="comment">% Begin initialization code - DO NOT EDIT</span>
+0035 gui_Singleton = 1;
+0036 gui_State = struct(<span class="string">'gui_Name'</span>,       mfilename, <span class="keyword">...</span>
+0037     <span class="string">'gui_Singleton'</span>,  gui_Singleton, <span class="keyword">...</span>
+0038     <span class="string">'gui_OpeningFcn'</span>, @<a href="#_sub1" class="code" title="subfunction abrabrowse_OpeningFcn(hObject, eventdata, handles, varargin)">abrabrowse_OpeningFcn</a>, <span class="keyword">...</span>
+0039     <span class="string">'gui_OutputFcn'</span>,  @<a href="#_sub2" class="code" title="subfunction varargout = abrabrowse_OutputFcn(hObject, eventdata, handles)">abrabrowse_OutputFcn</a>, <span class="keyword">...</span>
+0040     <span class="string">'gui_LayoutFcn'</span>,  [] , <span class="keyword">...</span>
+0041     <span class="string">'gui_Callback'</span>,   []);
+0042 <span class="keyword">if</span> nargin &amp;&amp; ischar(varargin{1})
+0043     gui_State.gui_Callback = str2func(varargin{1});
+0044 <span class="keyword">end</span>
+0045 
+0046 <span class="keyword">if</span> nargout
+0047     [varargout{1:nargout}] = gui_mainfcn(gui_State, varargin{:});
+0048 <span class="keyword">else</span>
+0049     gui_mainfcn(gui_State, varargin{:});
+0050 <span class="keyword">end</span>
+0051 <span class="comment">% End initialization code - DO NOT EDIT</span>
+0052 
+0053 
+0054 <span class="comment">% --- Executes just before abrabrowse is made visible.</span>
+0055 <a name="_sub1" href="#_subfunctions" class="code">function abrabrowse_OpeningFcn(hObject, eventdata, handles, varargin)</a>
+0056 <span class="comment">% This function has no output args, see OutputFcn.</span>
+0057 <span class="comment">% hObject    handle to figure</span>
+0058 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0059 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0060 <span class="comment">% varargin   command line arguments to abrabrowse (see VARARGIN)</span>
+0061 
+0062 <span class="comment">% Choose default command line output for abrabrowse</span>
+0063 handles.output = hObject;
+0064 
+0065 <span class="keyword">if</span> length(varargin) &gt; 0
+0066     handles.StartDir=varargin{1};
+0067 <span class="keyword">else</span>
+0068     handles.StartDir=pwd;
+0069 <span class="keyword">end</span>
+0070 
+0071 <span class="comment">% Default values</span>
+0072 handles.CurrSelection=[];
+0073 handles.TitleLine=1;
+0074 handles.Overlay=0;
+0075 
+0076 <span class="comment">% List all files in the current directory and fill list variable</span>
+0077 List=<a href="#_sub14" class="code" title="subfunction List = update_list(handles)">update_list</a>(handles);
+0078 set(handles.FileTable,<span class="string">'Data'</span>,List)
+0079 set(handles.DirString,<span class="string">'string'</span>,handles.StartDir)
+0080 handles.CurrentDirectory=pwd;
+0081 <span class="comment">% Update handles structure</span>
+0082 guidata(hObject, handles);
+0083 
+0084 <span class="comment">% UIWAIT makes abrabrowse wait for user response (see UIRESUME)</span>
+0085 <span class="comment">% uiwait(handles.figure1);</span>
+0086 
+0087 
+0088 <span class="comment">% --- Outputs from this function are returned to the command line.</span>
+0089 <a name="_sub2" href="#_subfunctions" class="code">function varargout = abrabrowse_OutputFcn(hObject, eventdata, handles)</a>
+0090 <span class="comment">% varargout  cell array for returning output args (see VARARGOUT);</span>
+0091 <span class="comment">% hObject    handle to figure</span>
+0092 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0093 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0094 
+0095 <span class="comment">% Get default command line output from handles structure</span>
+0096 varargout{1} = handles.output;
+0097 
+0098 
+0099 <span class="comment">% --- Executes on button press in PlotButton.</span>
+0100 <a name="_sub3" href="#_subfunctions" class="code">function PlotButton_Callback(hObject, eventdata, handles)</a>
+0101 <span class="comment">% hObject    handle to PlotButton (see GCBO)</span>
+0102 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0103 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0104 FileTable=get(handles.FileTable,<span class="string">'Data'</span>);
+0105 <span class="keyword">for</span> n = 1:length(handles.CurrSelection)
+0106     FileList{n}=char(FileTable(handles.CurrSelection(n),1));
+0107 <span class="keyword">end</span>
+0108 <span class="comment">% Check if there are .imptime files in the FileList array</span>
+0109 ImpTimeIdx=findstr(cell2mat(FileList),<span class="string">'.imptime'</span>);
+0110 AbravibeIdx=findstr(cell2mat(FileList),<span class="string">'.mat'</span>);
+0111 <span class="keyword">if</span> handles.Overlay
+0112     <span class="keyword">if</span> ~isempty(ImpTimeIdx) &amp; ~isempty(AbravibeIdx)
+0113         errordlg(<span class="string">'You cannot overlay plot a mix of imptime and ordinary files!'</span>)
+0114     <span class="keyword">elseif</span> ~isempty(AbravibeIdx)
+0115         <a href="plotfile.html" class="code" title="function plotfile(FileList,Overlay,col);">plotfile</a>(FileList,handles.Overlay);
+0116     <span class="keyword">elseif</span> ~isempty(ImpTimeIdx)
+0117         <a href="plotfile.html" class="code" title="function plotfile(FileList,Overlay,col);">plotfile</a>(FileList,handles.Overlay);
+0118 <span class="comment">%         errordlg('You cannot overlay plot imptime files!')</span>
+0119     <span class="keyword">end</span>
+0120 <span class="keyword">else</span>
+0121     <span class="keyword">if</span> ~isempty(ImpTimeIdx) &amp; ~isempty(AbravibeIdx)
+0122         <span class="comment">% Mix of .imptime and regular ABRAVIBE files. Split!</span>
+0123         NextImpIdx=1;
+0124         NextAbraIdx=1;
+0125         <span class="comment">%         ImpList={};</span>
+0126         <span class="comment">%         AbraList={};</span>
+0127         <span class="keyword">for</span> n=1:length(FileList)
+0128             <span class="keyword">if</span> findstr(FileList{n},<span class="string">'.mat'</span>)
+0129                 AbraList{NextAbraIdx}=FileList{n};
+0130                 NextAbraIdx=NextAbraIdx+1;
+0131             <span class="keyword">else</span>
+0132                 ImpList{NextAbraIdx}=FileList{n};
+0133                 NextImpIdx=NextImpIdx+1;
+0134             <span class="keyword">end</span>
+0135         <span class="keyword">end</span>
+0136     <span class="keyword">elseif</span> ~isempty(ImpTimeIdx)
+0137         ImpList=FileList;
+0138     <span class="keyword">elseif</span> ~isempty(AbravibeIdx)
+0139         AbraList=FileList;
+0140     <span class="keyword">end</span>
+0141     <span class="keyword">if</span> ~isempty(ImpTimeIdx)
+0142         <a href="plotfile.html" class="code" title="function plotfile(FileList,Overlay,col);">plotfile</a>(ImpList)
+0143     <span class="keyword">end</span>
+0144     <span class="keyword">if</span> ~isempty(AbravibeIdx)
+0145         <a href="plotfile.html" class="code" title="function plotfile(FileList,Overlay,col);">plotfile</a>(AbraList)
+0146     <span class="keyword">end</span>
+0147 <span class="keyword">end</span>
+0148 
+0149 
+0150 <span class="comment">% --- Executes on button press in OverlayCheckbox.</span>
+0151 <a name="_sub4" href="#_subfunctions" class="code">function OverlayCheckbox_Callback(hObject, eventdata, handles)</a>
+0152 <span class="comment">% hObject    handle to OverlayCheckbox (see GCBO)</span>
+0153 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0154 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0155 
+0156 <span class="comment">% Hint: get(hObject,'Value') returns toggle state of OverlayCheckbox</span>
+0157 handles.Overlay=get(hObject,<span class="string">'Value'</span>);
+0158 guidata(hObject,handles)
+0159 
+0160 <span class="comment">% --- Executes on button press in ChangeDirButton.</span>
+0161 <a name="_sub5" href="#_subfunctions" class="code">function ChangeDirButton_Callback(hObject, eventdata, handles)</a>
+0162 <span class="comment">% hObject    handle to ChangeDirButton (see GCBO)</span>
+0163 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0164 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0165 D=uigetdir;         
+0166 <span class="keyword">if</span> isstr(D)    <span class="comment">% 2014-07-20 Fixed action on Cancel button</span>
+0167     set(handles.DirString,<span class="string">'String'</span>,D);
+0168     cd(D)
+0169     List=<a href="#_sub14" class="code" title="subfunction List = update_list(handles)">update_list</a>(handles);
+0170     set(handles.FileTable,<span class="string">'Data'</span>,List)
+0171     guidata(hObject,handles);
+0172 <span class="keyword">end</span>
+0173 
+0174 <span class="comment">% --- Executes when selected cell(s) is changed in FileTable.</span>
+0175 <a name="_sub6" href="#_subfunctions" class="code">function FileTable_CellSelectionCallback(hObject, eventdata, handles)</a>
+0176 <span class="comment">% hObject    handle to FileTable (see GCBO)</span>
+0177 <span class="comment">% eventdata  structure with the following fields (see UITABLE)</span>
+0178 <span class="comment">%    Indices: row and column indices of the cell(s) currently selecteds</span>
+0179 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0180 selection = eventdata.Indices(:,1);
+0181 <span class="comment">% Remove duplicate row IDs</span>
+0182 selection = unique(selection);
+0183 <span class="comment">% Cache the selection in case the plot type changes</span>
+0184 handles.CurrSelection = selection;
+0185 guidata(hObject,handles)
+0186 
+0187 
+0188 <span class="comment">% --- Executes on button press in ImportUnvButton.</span>
+0189 <a name="_sub7" href="#_subfunctions" class="code">function ImportUnvButton_Callback(hObject, eventdata, handles)</a>
+0190 <span class="comment">% hObject    handle to ImportUnvButton (see GCBO)</span>
+0191 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0192 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0193 FileList=uigetfile({<span class="string">'*.unv'</span>,<span class="string">'Universal files (*.unv)'</span>;<span class="keyword">...</span>
+0194     <span class="string">'*.uff'</span>,<span class="string">'Universal files (*.uff)'</span>},<span class="keyword">...</span>
+0195     <span class="string">'Select one or more unv files'</span>,<span class="keyword">...</span>
+0196     <span class="string">'MultiSelect'</span>,<span class="string">'on'</span>)
+0197 <span class="keyword">if</span> isnumeric(FileList) &amp; FileList == 0
+0198 <span class="keyword">elseif</span> ischar(FileList)
+0199     <a href="unvread.html" class="code" title="function LastNo = unvread(FileName,Prefix,FirstNo,Type)">unvread</a>(FileList,<span class="string">'ab'</span>,1);
+0200 <span class="keyword">elseif</span> iscell(FileList)
+0201     FirstFile=0;
+0202     <span class="keyword">for</span> n=1:length(FileList)
+0203         FileName=FileList{n};
+0204         FirstFile=<a href="unvread.html" class="code" title="function LastNo = unvread(FileName,Prefix,FirstNo,Type)">unvread</a>(FileName,<span class="string">'ab'</span>,FirstFile+1);
+0205     <span class="keyword">end</span>
+0206 <span class="keyword">end</span>
+0207 List=<a href="#_sub14" class="code" title="subfunction List = update_list(handles)">update_list</a>(handles);
+0208 set(handles.FileTable,<span class="string">'Data'</span>,List)
+0209 guidata(hObject,handles);
+0210 
+0211 
+0212 <span class="comment">% --- Executes on button press in PlotReimButton.</span>
+0213 <a name="_sub8" href="#_subfunctions" class="code">function PlotReimButton_Callback(hObject, eventdata, handles)</a>
+0214 <span class="comment">% hObject    handle to PlotReimButton (see GCBO)</span>
+0215 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0216 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0217 FileTable=get(handles.FileTable,<span class="string">'Data'</span>);
+0218 <span class="keyword">for</span> n = 1:length(handles.CurrSelection)
+0219     FileName=char(FileTable(handles.CurrSelection(n),1));
+0220     <span class="keyword">if</span> isempty(findstr(FileName,<span class="string">'.imptime'</span>));
+0221         load(FileName)
+0222         x=<a href="makexaxis.html" class="code" title="function x = makexaxis(y,dx,x0);">makexaxis</a>(Data,Header.xIncrement);
+0223         <a href="plotreim.html" class="code" title="function h = plotreim(f,H,col,Type);">plotreim</a>(x,Data)
+0224         xlabel(<span class="string">'Frequency [Hz]'</span>)
+0225         title(strcat(<a href="functype.html" class="code" title="function FuncType = functype(FuncType)">functype</a>(Header.FunctionType),{<span class="string">' '</span>},Header.Label,{<span class="string">' '</span>},Header.Unit))
+0226     <span class="keyword">end</span>
+0227 <span class="keyword">end</span>
+0228 
+0229 
+0230 <span class="comment">% --- Executes on selection change in TitleLinePopup.</span>
+0231 <a name="_sub9" href="#_subfunctions" class="code">function TitleLinePopup_Callback(hObject, eventdata, handles)</a>
+0232 <span class="comment">% hObject    handle to TitleLinePopup (see GCBO)</span>
+0233 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0234 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0235 
+0236 <span class="comment">% Hints: contents = cellstr(get(hObject,'String')) returns TitleLinePopup contents as cell array</span>
+0237 <span class="comment">%        contents{get(hObject,'Value')} returns selected item from TitleLinePopup</span>
+0238 handles.TitleLine=get(hObject,<span class="string">'Value'</span>);
+0239 <span class="comment">% D=dir('*.mat');</span>
+0240 List=<a href="#_sub14" class="code" title="subfunction List = update_list(handles)">update_list</a>(handles);
+0241 set(handles.FileTable,<span class="string">'Data'</span>,List)
+0242 guidata(hObject,handles);
+0243 
+0244 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0245 <a name="_sub10" href="#_subfunctions" class="code">function TitleLinePopup_CreateFcn(hObject, eventdata, handles)</a>
+0246 <span class="comment">% hObject    handle to TitleLinePopup (see GCBO)</span>
+0247 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0248 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0249 
+0250 <span class="comment">% Hint: popupmenu controls usually have a white background on Windows.</span>
+0251 <span class="comment">%       See ISPC and COMPUTER.</span>
+0252 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0253     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0254 <span class="keyword">end</span>
+0255 
+0256 
+0257 <span class="comment">% --- Executes on button press in CloseAllButton.</span>
+0258 <a name="_sub11" href="#_subfunctions" class="code">function CloseAllButton_Callback(hObject, eventdata, handles)</a>
+0259 <span class="comment">% hObject    handle to CloseAllButton (see GCBO)</span>
+0260 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0261 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0262 set(0, <span class="string">'ShowHiddenHandles'</span>, <span class="string">'on'</span>)
+0263 H=get(0, <span class="string">'Children'</span>);
+0264 <span class="keyword">for</span> n = 2:length(H)
+0265     close(H(n))
+0266 <span class="keyword">end</span>
+0267 
+0268 
+0269 
+0270 <a name="_sub12" href="#_subfunctions" class="code">function DirString_Callback(hObject, eventdata, handles)</a>
+0271 <span class="comment">% hObject    handle to DirString (see GCBO)</span>
+0272 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0273 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0274 
+0275 <span class="comment">% Hints: get(hObject,'String') returns contents of DirString as text</span>
+0276 <span class="comment">%        str2double(get(hObject,'String')) returns contents of DirString as a double</span>
+0277 <span class="comment">% Do not allow edit; if edited, just set it back</span>
+0278 set(hObject,<span class="string">'String'</span>,handles.CurrentDirectory);
+0279 
+0280 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0281 <a name="_sub13" href="#_subfunctions" class="code">function DirString_CreateFcn(hObject, eventdata, handles)</a>
+0282 <span class="comment">% hObject    handle to DirString (see GCBO)</span>
+0283 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0284 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0285 
+0286 <span class="comment">% Hint: edit controls usually have a white background on Windows.</span>
+0287 <span class="comment">%       See ISPC and COMPUTER.</span>
+0288 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0289     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0290 <span class="keyword">end</span>
+0291 
+0292 
+0293 <span class="comment">%=======================================================================</span>
+0294 <span class="comment">% Customized function</span>
+0295 <a name="_sub14" href="#_subfunctions" class="code">function List = update_list(handles)</a>
+0296 
+0297 <span class="comment">% First read all .mat files and add those that contain ABRAVIBE headers to</span>
+0298 <span class="comment">% the file list</span>
+0299 <span class="comment">%_______________________________________</span>
+0300 D=dir(<span class="string">'*.mat'</span>);
+0301 List=[];
+0302 NextLine=1;             <span class="comment">% Lines in List</span>
+0303 <span class="comment">% Open waitbar, as it can take some time to scan a large number of files</span>
+0304 h=waitbar(0,<span class="string">'Scanning for .mat files...'</span>,<span class="string">'Name'</span>,<span class="string">'Abrabrowse'</span>);
+0305 <span class="keyword">for</span> n=1:length(D)
+0306     waitbar(n/length(D),h);
+0307     FileName=D(n).name;
+0308     warning off
+0309     load(FileName,<span class="string">'Header'</span>);
+0310     warning on
+0311     <span class="keyword">if</span> ~exist(<span class="string">'Header'</span>,<span class="string">'var'</span>)
+0312         Header=<span class="string">''</span>;
+0313     <span class="keyword">end</span>
+0314     <span class="keyword">if</span> <a href="abrahead.html" class="code" title="function status = abrahead(Header)">abrahead</a>(Header)             <span class="comment">% Ignore if not an ABRAVIBE file!</span>
+0315         List{NextLine,1}=FileName;
+0316         List{NextLine,2}=<a href="functype.html" class="code" title="function FuncType = functype(FuncType)">functype</a>(Header.FunctionType);
+0317         <span class="keyword">if</span> Header.FunctionType == 4 | Header.FunctionType == 6
+0318             <span class="keyword">if</span> isfield(Header,<span class="string">'RefUnit'</span>)    <span class="comment">% 2012-01-10 added flexibility if REfUnit field not included</span>
+0319                 List{NextLine,3}=strcat(Header.Unit,<span class="string">'/'</span>,Header.RefUnit);
+0320             <span class="keyword">else</span>
+0321                 List{NextLine,3}=strcat(Header.Unit);
+0322             <span class="keyword">end</span>
+0323         <span class="keyword">else</span>
+0324             List{NextLine,3}=Header.Unit;
+0325         <span class="keyword">end</span>
+0326         List{NextLine,4}=char(<a href="headpstr.html" class="code" title="function DofString = headpstr(Header)">headpstr</a>(Header));
+0327         List{NextLine,5}=int2str(Header.NoValues);
+0328         <span class="keyword">if</span> isfield(Header,<span class="string">'Date'</span>)           <span class="comment">% 2012-01-10 added flexibility if Date field not included</span>
+0329             List{NextLine,6}=deblank(Header.Date);
+0330         <span class="keyword">else</span>
+0331             List{NextLine,6}=<span class="string">''</span>;
+0332         <span class="keyword">end</span>
+0333         <span class="keyword">if</span> handles.TitleLine == 1
+0334             List{NextLine,7}=Header.Title;
+0335         <span class="keyword">elseif</span> handles.TitleLine &lt; 5
+0336             <span class="keyword">if</span> handles.TitleLine == 2
+0337                 <span class="keyword">if</span> isfield(Header,<span class="string">'Title2'</span>)
+0338                     List{NextLine,7}=Header.Title2;
+0339                 <span class="keyword">else</span>
+0340                     List{NextLine,7}=<span class="string">'No title line 2'</span>;
+0341                 <span class="keyword">end</span>
+0342             <span class="keyword">elseif</span> handles.TitleLine == 3
+0343                 <span class="keyword">if</span> isfield(Header,<span class="string">'Title3'</span>)
+0344                     List{NextLine,7}=Header.Title3;
+0345                 <span class="keyword">else</span>
+0346                     List{NextLine,7}=<span class="string">'No title line 3'</span>;
+0347                 <span class="keyword">end</span>
+0348             <span class="keyword">elseif</span> handles.TitleLine == 4
+0349                 <span class="keyword">if</span> isfield(Header,<span class="string">'Title4'</span>)
+0350                     List{NextLine,7}=Header.Title4;
+0351                 <span class="keyword">else</span>
+0352                     List{NextLine,7}=<span class="string">'No title line 4'</span>;
+0353                 <span class="keyword">end</span>
+0354             <span class="keyword">end</span>
+0355         <span class="keyword">elseif</span> handles.TitleLine == 5   <span class="comment">% Orig. file name is selected</span>
+0356             <span class="keyword">if</span> isfield(Header,<span class="string">'OrgFileName'</span>)
+0357                 List{NextLine,7}=Header.OrgFileName;
+0358             <span class="keyword">else</span>
+0359                 List{NextLine,7}=<span class="string">'No original file name'</span>;
+0360             <span class="keyword">end</span>
+0361         <span class="keyword">end</span>
+0362         NextLine=NextLine+1;
+0363     <span class="keyword">end</span>
+0364 <span class="keyword">end</span>
+0365 <span class="comment">% Next, list all .imptime files. These are simply assumed to be of ABRAVIBE</span>
+0366 <span class="comment">% format</span>
+0367 D=dir(<span class="string">'*.imptime'</span>);
+0368 <span class="keyword">for</span> n=1:length(D)
+0369     waitbar(n/length(D),h,<span class="string">'Scanning for .imptime files...'</span>);
+0370     FileName=D(n).name;
+0371     load(FileName,<span class="string">'-mat'</span>);
+0372     List{NextLine,1}=FileName;
+0373     List{NextLine,2}=<span class="string">'Impact Time'</span>;
+0374     List{NextLine,3}=strcat(Header(1).Unit,<span class="string">','</span>,Header(2).Unit);
+0375     <span class="keyword">if</span> length(Data) == 2
+0376         List{NextLine,4}=strcat(<span class="string">'('</span>,char(<a href="headpstr.html" class="code" title="function DofString = headpstr(Header)">headpstr</a>(Header(2))),<span class="string">')/'</span>,char(<a href="headpstr.html" class="code" title="function DofString = headpstr(Header)">headpstr</a>(Header(1))));
+0377     <span class="keyword">else</span>
+0378         List{NextLine,4}=strcat(<span class="string">'*/'</span>,char(<a href="headpstr.html" class="code" title="function DofString = headpstr(Header)">headpstr</a>(Header(1))));
+0379     <span class="keyword">end</span>
+0380     <span class="comment">% If old header type, convert</span>
+0381     <span class="keyword">if</span> isfield(Header(1),<span class="string">'NumberSamples'</span>)
+0382         fprintf(<span class="string">'Found old header format.Converting!\n'</span>)
+0383         <span class="keyword">for</span> k=1:length(Data)
+0384             Header(k).NoValues=Header(k).NumberSamples;
+0385         <span class="keyword">end</span>
+0386         Header=rmfield(Header,<span class="string">'NumberSamples'</span>);
+0387         save(FileName,<span class="string">'Data'</span>,<span class="string">'Header'</span>)
+0388     <span class="keyword">elseif</span> ~isfield(Header(1),<span class="string">'NoValues'</span>)   <span class="comment">% Some old files may miss this field</span>
+0389         <span class="keyword">for</span> k=1:length(Data)
+0390             Header(k).NoValues=length(Data{k});
+0391         <span class="keyword">end</span>
+0392         save(FileName,<span class="string">'Data'</span>,<span class="string">'Header'</span>)
+0393     <span class="keyword">end</span>
+0394     List{NextLine,5}=int2str(Header(1).NoValues);
+0395     <span class="keyword">if</span> isfield(Header,<span class="string">'Date'</span>)   <span class="comment">% To account for old format</span>
+0396         List{NextLine,6}=deblank(Header(1).Date);
+0397     <span class="keyword">else</span>
+0398         List{NextLine,6}=<span class="string">'No Date!'</span>;
+0399     <span class="keyword">end</span>
+0400     <span class="keyword">if</span> handles.TitleLine == 1
+0401         List{NextLine,7}=Header(1).Title;
+0402     <span class="keyword">elseif</span> handles.TitleLine &lt; 5
+0403             <span class="keyword">if</span> handles.TitleLine == 2
+0404                 <span class="keyword">if</span> isfield(Header(1),<span class="string">'Title2'</span>)
+0405                     List{NextLine,7}=Header(1).Title2;
+0406                 <span class="keyword">else</span>
+0407                     List{NextLine,7}=<span class="string">'No title line 2'</span>;
+0408                 <span class="keyword">end</span>
+0409             <span class="keyword">elseif</span> handles.TitleLine == 3
+0410                 <span class="keyword">if</span> isfield(Header(1),<span class="string">'Title3'</span>)
+0411                     List{NextLine,7}=Header(1).Title3;
+0412                 <span class="keyword">else</span>
+0413                     List{NextLine,7}=<span class="string">'No title line 3'</span>;
+0414                 <span class="keyword">end</span>
+0415             <span class="keyword">elseif</span> handles.TitleLine == 4
+0416                 <span class="keyword">if</span> isfield(Header(1),<span class="string">'Title4'</span>)
+0417                     List{NextLine,7}=Header(1).Title4;
+0418                 <span class="keyword">else</span>
+0419                     List{NextLine,7}=<span class="string">'No title line 4'</span>;
+0420                 <span class="keyword">end</span>
+0421             <span class="keyword">end</span>
+0422     <span class="keyword">elseif</span> handles.TitleLine == 5   <span class="comment">% Orig. file name is selected</span>
+0423         <span class="keyword">if</span> isfield(Header(1),<span class="string">'OrgFileName'</span>)
+0424             List{NextLine,7}=Header(1).OrgFileName;
+0425         <span class="keyword">else</span>
+0426             List{NextLine,7}=<span class="string">'No original file name'</span>;
+0427         <span class="keyword">end</span>
+0428     <span class="keyword">end</span>
+0429     NextLine=NextLine+1;
+0430 <span class="keyword">end</span>
+0431 close(h)
+0432 List=sortrows(List);
+0433 
+0434 
+0435 <span class="comment">% --- Executes on button press in PlotLogAmpButton.</span>
+0436 <a name="_sub15" href="#_subfunctions" class="code">function PlotLogAmpButton_Callback(hObject, eventdata, handles)</a>
+0437 <span class="comment">% hObject    handle to PlotLogAmpButton (see GCBO)</span>
+0438 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0439 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0440 FileTable=get(handles.FileTable,<span class="string">'Data'</span>);
+0441 <span class="keyword">for</span> n = 1:length(handles.CurrSelection)
+0442     FileName=char(FileTable(handles.CurrSelection(n),1));
+0443     <span class="keyword">if</span> isempty(findstr(FileName,<span class="string">'.imptime'</span>));
+0444         load(FileName)
+0445         <span class="keyword">if</span> Header.FunctionType ~= 1
+0446             x=<a href="makexaxis.html" class="code" title="function x = makexaxis(y,dx,x0);">makexaxis</a>(Data,Header.xIncrement);
+0447             figure;semilogy(x,Data)
+0448             xlabel(<span class="string">'Frequency [Hz]'</span>)
+0449             ylabel(strcat(<a href="functype.html" class="code" title="function FuncType = functype(FuncType)">functype</a>(Header.FunctionType),{<span class="string">' '</span>},Header.Label,{<span class="string">' '</span>},Header.Unit))
+0450         <span class="keyword">end</span>
+0451     <span class="keyword">end</span>
+0452 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

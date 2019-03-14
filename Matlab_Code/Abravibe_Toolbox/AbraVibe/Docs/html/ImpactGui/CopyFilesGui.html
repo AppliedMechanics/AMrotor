@@ -1,0 +1,329 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of CopyFilesGui</title>
+  <meta name="keywords" content="CopyFilesGui">
+  <meta name="description" content="COPYFILESGUI MATLAB code for CopyFilesGui.fig">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">ImpactGui</a> &gt; CopyFilesGui.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for ImpactGui&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>CopyFilesGui
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>COPYFILESGUI MATLAB code for CopyFilesGui.fig</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function varargout = CopyFilesGui(varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"> COPYFILESGUI MATLAB code for CopyFilesGui.fig
+      COPYFILESGUI, by itself, creates a new COPYFILESGUI or raises the existing
+      singleton*.
+
+      H = COPYFILESGUI returns the handle to a new COPYFILESGUI or the handle to
+      the existing singleton*.
+
+      COPYFILESGUI('CALLBACK',hObject,eventData,handles,...) calls the local
+      function named CALLBACK in COPYFILESGUI.M with the given input arguments.
+
+      COPYFILESGUI('Property','Value',...) creates a new COPYFILESGUI or raises the
+      existing singleton*.  Starting from the left, property value pairs are
+      applied to the GUI before CopyFilesGui_OpeningFcn gets called.  An
+      unrecognized property name or invalid value makes property application
+      stop.  All inputs are passed to CopyFilesGui_OpeningFcn via varargin.
+
+      *See GUI Options on GUIDE's Tools menu.  Choose &quot;GUI allows only one
+      instance to run (singleton)&quot;.
+
+ See also: GUIDE, GUIDATA, GUIHANDLES</pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="SelectDirectoryGui.html" class="code" title="function varargout = SelectDirectoryGui(varargin)">SelectDirectoryGui</a>	SELECTDIRECTORYGUI MATLAB code for SelectDirectoryGui.fig</li><li><a href="asplitfilename.html" class="code" title="function [Path,Prefix,Number,Ext] = asplitfilename(FileName)">asplitfilename</a>	ASPLITFILENAME    Split file name in the form Path/Prefix<Number>.Ext</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="ImpactGui.html" class="code" title="function varargout = ImpactGui(varargin)">ImpactGui</a>	IMPACTGUI ABRAVIBE impact testing GUI</li></ul>
+<!-- crossreference -->
+
+<h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="#_sub1" class="code">function CopyFilesGui_OpeningFcn(hObject, eventdata, handles, varargin)</a></li><li><a href="#_sub2" class="code">function varargout = CopyFilesGui_OutputFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub3" class="code">function SelectFilesButton_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub4" class="code">function DeleteFilesButton_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub5" class="code">function DirectoryText_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub6" class="code">function DirectoryText_CreateFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub7" class="code">function figure1_CloseRequestFcn(hObject, eventdata, handles)</a></li><li><a href="#_sub8" class="code">function SelectDirectoriesButton_Callback(hObject, eventdata, handles)</a></li><li><a href="#_sub9" class="code">function UpdateFileTable(hObject,handles)</a></li><li><a href="#_sub10" class="code">function MergeFile(OutputDirectory,FileName)</a></li><li><a href="#_sub11" class="code">function FileTable_CellSelectionCallback(hObject, eventdata, handles)</a></li></ul>
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = CopyFilesGui(varargin)</a>
+0002 <span class="comment">% COPYFILESGUI MATLAB code for CopyFilesGui.fig</span>
+0003 <span class="comment">%      COPYFILESGUI, by itself, creates a new COPYFILESGUI or raises the existing</span>
+0004 <span class="comment">%      singleton*.</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%      H = COPYFILESGUI returns the handle to a new COPYFILESGUI or the handle to</span>
+0007 <span class="comment">%      the existing singleton*.</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%      COPYFILESGUI('CALLBACK',hObject,eventData,handles,...) calls the local</span>
+0010 <span class="comment">%      function named CALLBACK in COPYFILESGUI.M with the given input arguments.</span>
+0011 <span class="comment">%</span>
+0012 <span class="comment">%      COPYFILESGUI('Property','Value',...) creates a new COPYFILESGUI or raises the</span>
+0013 <span class="comment">%      existing singleton*.  Starting from the left, property value pairs are</span>
+0014 <span class="comment">%      applied to the GUI before CopyFilesGui_OpeningFcn gets called.  An</span>
+0015 <span class="comment">%      unrecognized property name or invalid value makes property application</span>
+0016 <span class="comment">%      stop.  All inputs are passed to CopyFilesGui_OpeningFcn via varargin.</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">%      *See GUI Options on GUIDE's Tools menu.  Choose &quot;GUI allows only one</span>
+0019 <span class="comment">%      instance to run (singleton)&quot;.</span>
+0020 <span class="comment">%</span>
+0021 <span class="comment">% See also: GUIDE, GUIDATA, GUIHANDLES</span>
+0022 
+0023 <span class="comment">% Copyright (c) 2009-2014 by Anders Brandt</span>
+0024 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0025 <span class="comment">% Version: 1.0 2014-07-15</span>
+0026 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0027 
+0028 
+0029 <span class="comment">% Last Modified by GUIDE v2.5 18-Dec-2015 11:50:22</span>
+0030 
+0031 <span class="comment">% Begin initialization code - DO NOT EDIT</span>
+0032 gui_Singleton = 1;
+0033 gui_State = struct(<span class="string">'gui_Name'</span>,       mfilename, <span class="keyword">...</span>
+0034                    <span class="string">'gui_Singleton'</span>,  gui_Singleton, <span class="keyword">...</span>
+0035                    <span class="string">'gui_OpeningFcn'</span>, @<a href="#_sub1" class="code" title="subfunction CopyFilesGui_OpeningFcn(hObject, eventdata, handles, varargin)">CopyFilesGui_OpeningFcn</a>, <span class="keyword">...</span>
+0036                    <span class="string">'gui_OutputFcn'</span>,  @<a href="#_sub2" class="code" title="subfunction varargout = CopyFilesGui_OutputFcn(hObject, eventdata, handles)">CopyFilesGui_OutputFcn</a>, <span class="keyword">...</span>
+0037                    <span class="string">'gui_LayoutFcn'</span>,  [] , <span class="keyword">...</span>
+0038                    <span class="string">'gui_Callback'</span>,   []);
+0039 <span class="keyword">if</span> nargin &amp;&amp; ischar(varargin{1})
+0040     gui_State.gui_Callback = str2func(varargin{1});
+0041 <span class="keyword">end</span>
+0042 
+0043 <span class="keyword">if</span> nargout
+0044     [varargout{1:nargout}] = gui_mainfcn(gui_State, varargin{:});
+0045 <span class="keyword">else</span>
+0046     gui_mainfcn(gui_State, varargin{:});
+0047 <span class="keyword">end</span>
+0048 <span class="comment">% End initialization code - DO NOT EDIT</span>
+0049 
+0050 
+0051 <span class="comment">% --- Executes just before CopyFilesGui is made visible.</span>
+0052 <a name="_sub1" href="#_subfunctions" class="code">function CopyFilesGui_OpeningFcn(hObject, eventdata, handles, varargin)</a>
+0053 <span class="comment">% This function has no output args, see OutputFcn.</span>
+0054 <span class="comment">% hObject    handle to figure</span>
+0055 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0056 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0057 <span class="comment">% varargin   command line arguments to CopyFilesGui (see VARARGIN)</span>
+0058 
+0059 <span class="comment">% Choose default command line output for CopyFilesGui</span>
+0060 handles.output = <span class="string">''</span>;
+0061 
+0062 n=nargin;
+0063 <span class="keyword">if</span> nargin &gt;= 3
+0064     a = varargin{2};
+0065     b = varargin{3};
+0066 <span class="keyword">else</span>
+0067     errordlg(<span class="string">'Wrong number of inputs in MergeFilesGui! Must be &gt;= 3!'</span>);
+0068 <span class="keyword">end</span>
+0069 handles.InputDirectory=a;
+0070 handles.OutputDirectory=b;
+0071 <a href="#_sub9" class="code" title="subfunction UpdateFileTable(hObject,handles)">UpdateFileTable</a>(hObject,handles);
+0072 set(handles.DirectoryText,<span class="string">'String'</span>,handles.OutputDirectory)
+0073 <span class="comment">% Update handles structure</span>
+0074 guidata(hObject, handles);
+0075 
+0076 <span class="comment">% UIWAIT makes CopyFilesGui wait for user response (see UIRESUME)</span>
+0077 <span class="comment">% uiwait(handles.figure1);</span>
+0078 
+0079 
+0080 <span class="comment">% --- Outputs from this function are returned to the command line.</span>
+0081 <a name="_sub2" href="#_subfunctions" class="code">function varargout = CopyFilesGui_OutputFcn(hObject, eventdata, handles) </a>
+0082 <span class="comment">% varargout  cell array for returning output args (see VARARGOUT);</span>
+0083 <span class="comment">% hObject    handle to figure</span>
+0084 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0085 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0086 
+0087 <span class="comment">% Get default command line output from handles structure</span>
+0088 varargout{1} = handles.output;
+0089 
+0090 
+0091 <span class="comment">% --- Executes on button press in SelectFilesButton.</span>
+0092 <a name="_sub3" href="#_subfunctions" class="code">function SelectFilesButton_Callback(hObject, eventdata, handles)</a>
+0093 <span class="comment">% hObject    handle to SelectFilesButton (see GCBO)</span>
+0094 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0095 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0096 [Files,Path]=uigetfile(<span class="string">'*.imptime'</span>,<span class="string">'Select Files to merge into output directory!'</span>,<span class="keyword">...</span>
+0097     handles.OutputDirectory,<span class="string">'MultiSelect'</span>,<span class="string">'on'</span>);
+0098 <span class="comment">% Check that files have not been selected that are already in the current</span>
+0099 <span class="comment">% output directory</span>
+0100 <span class="keyword">if</span> strcmp(Path,strcat(handles.OutputDirectory,filesep))
+0101     errordlg(<span class="string">'You cannot select files that are in the output directory!'</span>)
+0102 <span class="keyword">else</span>
+0103     <span class="keyword">if</span> ~iscell(Files)
+0104         <span class="keyword">if</span> Files ~= 0
+0105             Files={Files};
+0106         <span class="keyword">end</span>
+0107     <span class="keyword">end</span>
+0108     <span class="keyword">if</span> iscell(Files)
+0109         <span class="keyword">for</span> n = 1:length(Files)
+0110             <a href="#_sub10" class="code" title="subfunction MergeFile(OutputDirectory,FileName)">MergeFile</a>(handles.OutputDirectory,fullfile(Path,Files{n}));
+0111         <span class="keyword">end</span>
+0112     <span class="keyword">end</span>
+0113     <a href="#_sub9" class="code" title="subfunction UpdateFileTable(hObject,handles)">UpdateFileTable</a>(hObject,handles);
+0114     guidata(hObject,handles)
+0115 <span class="keyword">end</span>
+0116 
+0117 <span class="comment">% --- Executes on button press in DeleteFilesButton.</span>
+0118 <a name="_sub4" href="#_subfunctions" class="code">function DeleteFilesButton_Callback(hObject, eventdata, handles)</a>
+0119 <span class="comment">% hObject    handle to DeleteFilesButton (see GCBO)</span>
+0120 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0121 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0122 
+0123 <span class="comment">% Check that one or more files have been selected in the table</span>
+0124 <span class="keyword">if</span> isfield(handles,<span class="string">'selection'</span>) &amp; ~isempty(handles.selection);
+0125     Files={handles.FileTable.Data{handles.selection}}
+0126     <span class="keyword">if</span> iscell(Files)
+0127         s=questdlg(<span class="string">'Warning! Files will be permanently deleted! Are you sure?'</span>);
+0128         <span class="keyword">if</span> strcmp(upper(s),<span class="string">'YES'</span>)
+0129             <span class="keyword">for</span> n = 1:length(Files)
+0130                 FileName=fullfile(handles.OutputDirectory,Files{n});
+0131                 fprintf(<span class="string">'Deleting file %s \n'</span>,FileName)
+0132                 delete(FileName)
+0133             <span class="keyword">end</span>
+0134         <span class="keyword">end</span>
+0135         <a href="#_sub9" class="code" title="subfunction UpdateFileTable(hObject,handles)">UpdateFileTable</a>(hObject,handles);
+0136         guidata(hObject,handles)
+0137     <span class="keyword">end</span>
+0138 <span class="keyword">else</span> 
+0139     errordlg(<span class="string">'No files selected!'</span>)
+0140 <span class="keyword">end</span>
+0141 
+0142 
+0143 <a name="_sub5" href="#_subfunctions" class="code">function DirectoryText_Callback(hObject, eventdata, handles)</a>
+0144 <span class="comment">% hObject    handle to DirectoryText (see GCBO)</span>
+0145 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0146 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0147 
+0148 <span class="comment">% Hints: get(hObject,'String') returns contents of DirectoryText as text</span>
+0149 <span class="comment">%        str2double(get(hObject,'String')) returns contents of DirectoryText as a double</span>
+0150 <span class="comment">% Do not allow edit!</span>
+0151 set(handles.DirectoryText,<span class="string">'String'</span>,handles.OutputDirectory)
+0152 
+0153 
+0154 <span class="comment">% --- Executes during object creation, after setting all properties.</span>
+0155 <a name="_sub6" href="#_subfunctions" class="code">function DirectoryText_CreateFcn(hObject, eventdata, handles)</a>
+0156 <span class="comment">% hObject    handle to DirectoryText (see GCBO)</span>
+0157 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0158 <span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+0159 
+0160 <span class="comment">% Hint: edit controls usually have a white background on Windows.</span>
+0161 <span class="comment">%       See ISPC and COMPUTER.</span>
+0162 <span class="keyword">if</span> ispc &amp;&amp; isequal(get(hObject,<span class="string">'BackgroundColor'</span>), get(0,<span class="string">'defaultUicontrolBackgroundColor'</span>))
+0163     set(hObject,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>);
+0164 <span class="keyword">end</span>
+0165 
+0166 
+0167 <span class="comment">% --- Executes when user attempts to close figure1.</span>
+0168 <a name="_sub7" href="#_subfunctions" class="code">function figure1_CloseRequestFcn(hObject, eventdata, handles)</a>
+0169 <span class="comment">% hObject    handle to figure1 (see GCBO)</span>
+0170 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0171 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0172 
+0173 <span class="comment">% Hint: delete(hObject) closes the figure</span>
+0174 delete(hObject);
+0175 
+0176 <span class="comment">% --- Executes on button press in SelectDirectoriesButton.</span>
+0177 <a name="_sub8" href="#_subfunctions" class="code">function SelectDirectoriesButton_Callback(hObject, eventdata, handles)</a>
+0178 <span class="comment">% hObject    handle to SelectDirectoriesButton (see GCBO)</span>
+0179 <span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+0180 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0181 D=<a href="SelectDirectoryGui.html" class="code" title="function varargout = SelectDirectoryGui(varargin)">SelectDirectoryGui</a>;       <span class="comment">% Let user select those directories that (may) contain .imptime files to merge</span>
+0182 <span class="comment">% Now, for each directory, find .imptime files, and merge into the output</span>
+0183 <span class="comment">% directory.</span>
+0184 <span class="keyword">for</span> n = 1:length(D)
+0185     ImptimeFiles=dir(fullfile(D{n},<span class="string">'*.imptime'</span>));
+0186     <span class="keyword">for</span> m = 1:length(ImptimeFiles)
+0187         <a href="#_sub10" class="code" title="subfunction MergeFile(OutputDirectory,FileName)">MergeFile</a>(handles.OutputDirectory,fullfile(D{n},ImptimeFiles(m).name));
+0188     <span class="keyword">end</span>
+0189 <span class="keyword">end</span>
+0190 <a href="#_sub9" class="code" title="subfunction UpdateFileTable(hObject,handles)">UpdateFileTable</a>(hObject,handles);
+0191 guidata(hObject,handles)
+0192 
+0193 
+0194 <span class="comment">%=========================================================================</span>
+0195 <span class="comment">% User Functions</span>
+0196 <a name="_sub9" href="#_subfunctions" class="code">function UpdateFileTable(hObject,handles)</a>
+0197 D=dir(fullfile(handles.OutputDirectory,<span class="string">'*.imptime'</span>));
+0198 FileNames={D.name};
+0199 <span class="keyword">for</span> n=1:length(FileNames)
+0200     load(fullfile(handles.OutputDirectory,FileNames{n}),<span class="string">'-mat'</span>);
+0201     List{n,1}=FileNames{n};
+0202     <span class="keyword">if</span> length(Data) == 2
+0203         List{n,2}=strcat(<span class="string">'('</span>,char(headpstr(Header(2))),<span class="string">')/'</span>,char(headpstr(Header(1))));
+0204     <span class="keyword">else</span>
+0205         List{n,2}=strcat(<span class="string">'*/'</span>,char(headpstr(Header(1))));
+0206     <span class="keyword">end</span>
+0207 <span class="keyword">end</span>
+0208 <span class="keyword">if</span> ~exist(<span class="string">'List'</span>,<span class="string">'var'</span>)
+0209     List{1,1}=<span class="string">'Empty Table'</span>;
+0210 <span class="keyword">end</span>
+0211 set(handles.FileTable,<span class="string">'Data'</span>,List)
+0212 guidata(hObject,handles)
+0213 
+0214 
+0215 <a name="_sub10" href="#_subfunctions" class="code">function MergeFile(OutputDirectory,FileName)</a>
+0216 <span class="comment">% Merge one file to the target directory. Check if a file with same name exists, and change if so.</span>
+0217 <span class="comment">% FileName includes full path</span>
+0218 
+0219 <span class="comment">% First check if FileName includes Prefix AND number (if only Prefix, add</span>
+0220 <span class="comment">% the number '1')</span>
+0221 InFileName=FileName;        <span class="comment">% Original file name, needed later</span>
+0222 [Path,Prefix,Number,Ext] = <a href="asplitfilename.html" class="code" title="function [Path,Prefix,Number,Ext] = asplitfilename(FileName)">asplitfilename</a>(FileName);
+0223 <span class="keyword">if</span> isempty(Number)
+0224     Number=1;
+0225     FileName = strcat(Prefix,<span class="string">'1'</span>,Ext);
+0226 <span class="keyword">else</span>
+0227     FileName=strcat(Prefix,int2str(Number),Ext);
+0228 <span class="keyword">end</span>
+0229 <span class="comment">% Next, check if a file with same name exist in the output directory. If</span>
+0230 <span class="comment">% so, increment file number until a file number which does not already</span>
+0231 <span class="comment">% exist in the output directory is found. Then copy the file. If the</span>
+0232 <span class="comment">% filename does not exist, copy directly.</span>
+0233 <span class="keyword">if</span> exist(fullfile(OutputDirectory,FileName),<span class="string">'file'</span>) == 2
+0234     <span class="comment">% Increment file name; first find what current files exist in</span>
+0235     <span class="comment">% terms of prefix and number. NOTE! It is assumed that all</span>
+0236     <span class="comment">% files in the output directory conform to the Prefix&lt;number&gt;</span>
+0237     <span class="comment">% convention, all with the same prefix. Best is to start with an empty</span>
+0238     <span class="comment">% output directory and merge all your files there.</span>
+0239     Number=Number+1;
+0240     FileName=strcat(Prefix,num2str(Number),Ext);
+0241     <span class="keyword">while</span> exist(fullfile(OutputDirectory,FileName),<span class="string">'file'</span>) == 2
+0242         Number=Number+1;
+0243         FileName=strcat(Prefix,num2str(Number),Ext);
+0244     <span class="keyword">end</span>
+0245     OutFileName=fullfile(OutputDirectory,FileName);
+0246     fprintf(<span class="string">'Saving file with new name: %s\n'</span>,FileName)
+0247     copyfile(InFileName,OutFileName);
+0248 <span class="keyword">else</span>
+0249     fprintf(<span class="string">'Saving file %s\n'</span>,FileName)
+0250     copyfile(InFileName,fullfile(OutputDirectory,FileName));
+0251 <span class="keyword">end</span>
+0252 
+0253 
+0254 <span class="comment">% --- Executes when selected cell(s) is changed in FileTable.</span>
+0255 <a name="_sub11" href="#_subfunctions" class="code">function FileTable_CellSelectionCallback(hObject, eventdata, handles)</a>
+0256 <span class="comment">% hObject    handle to FileTable (see GCBO)</span>
+0257 <span class="comment">% eventdata  structure with the following fields (see MATLAB.UI.CONTROL.TABLE)</span>
+0258 <span class="comment">%    Indices: row and column indices of the cell(s) currently selecteds</span>
+0259 <span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+0260 handles.selection = eventdata.Indices(:,1);
+0261 guidata(hObject,handles);</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

@@ -1,0 +1,1939 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of command</title>
+  <meta name="keywords" content="command">
+  <meta name="description" content="">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">animate</a> &gt; command.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for animate&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>command
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong></strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function varargout = command(action,varargin) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment"></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="animate_fcn.html" class="code" title="function retVal = animate_fcn;">animate_fcn</a>	</li><li><a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>	</li><li><a href="defaults.html" class="code" title="function varargout = defaults(action,DATA);">defaults</a>	</li><li><a href="guiAbout.html" class="code" title="function h0=guiAbout(aniFig,SETUP);">guiAbout</a>	</li><li><a href="guiComponents.html" class="code" title="function h0=guiComponents(aniFig,SETUP,varargin);">guiComponents</a>	</li><li><a href="guiPreferences.html" class="code" title="function h0=guiComponents(aniFig,SETUP);">guiPreferences</a>	</li><li><a href="ufrw.html" class="code" title="function [ufOut,dsnID] = ufrw(action,varargin);">ufrw</a>	</li><li><a href="vecompspace.html" class="code" title="function y = vecompspace(d1, d2, n)">vecompspace</a>	VECOMPSPACE</li><li><a href="view3d.html" class="code" title="function view3d(arg,arg2)">view3d</a>	Torsten Vogel 09.04.1999</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="animate.html" class="code" title="function animate;">animate</a>	ANIMATE  Animates wireframe models from universal files or MATLAB structure</li><li><a href="animate_fcn.html" class="code" title="function retVal = animate_fcn;">animate_fcn</a>	</li><li><a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>	</li><li><a href="view3d.html" class="code" title="function view3d(arg,arg2)">view3d</a>	Torsten Vogel 09.04.1999</li></ul>
+<!-- crossreference -->
+
+<h2><a name="_subfunctions"></a>SUBFUNCTIONS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="#_sub1" class="code">function [VWS,CUV] = viewSetup(pV,pC,upVector)</a></li><li><a href="#_sub2" class="code">function [ANI,Nodes]=set_mode(vector)</a></li><li><a href="#_sub3" class="code">function HAND = getHandles(pos,ax,HAND,varargin);</a></li><li><a href="#_sub4" class="code">function SETUP = updateRecentFiles(aniFig,file,type,SETUP);</a></li><li><a href="#_sub5" class="code">function clr = getColor(default,msg);</a></li><li><a href="#_sub6" class="code">function updatePrefs(action,dlg,TEMP)</a></li><li><a href="#_sub7" class="code">function TEMP = getDefaults(TEMP);</a></li><li><a href="#_sub8" class="code">function updateAniFig(aniFig,SETUP,H)</a></li><li><a href="#_sub9" class="code">function str = compListbox(SETUP);</a></li><li><a href="#_sub10" class="code">function UFF = createUFF(GEOMETRY,MODAL,SETUP,UFF);</a></li></ul>
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function varargout = command(action,varargin)</a>
+0002 
+0003 <span class="keyword">global</span> SETUP MODAL GEOMETRY UDATA RESIZE UFF
+0004 
+0005 aniFig  = findobj(0,<span class="string">'Tag'</span>,<span class="string">'ANIMATE'</span>);
+0006 aniAxis = findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Axes:Single'</span>);
+0007 
+0008 <span class="keyword">switch</span> action
+0009     <span class="keyword">case</span> <span class="string">'MaxDeflection'</span>
+0010         SETUP.Display.MaxDeflection=1;
+0011     <span class="keyword">otherwise</span>
+0012         SETUP.Display.MaxDeflection=0;
+0013 <span class="keyword">end</span>
+0014 
+0015 <span class="keyword">switch</span> action
+0016     <span class="keyword">case</span> <span class="string">'initDefaults'</span>
+0017         varargout{1}    = <a href="#_sub7" class="code" title="subfunction TEMP = getDefaults(TEMP);">getDefaults</a>(SETUP);
+0018     <span class="keyword">case</span> <span class="string">'run_animate'</span>
+0019         <span class="keyword">while</span> get(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Toggle:Animate'</span>),<span class="string">'Value'</span>)
+0020             <a href="animate_fcn.html" class="code" title="function retVal = animate_fcn;">animate_fcn</a>;
+0021             <span class="keyword">if</span> ~ishandle(aniFig)
+0022                 <span class="keyword">return</span>
+0023             <span class="keyword">end</span>
+0024         <span class="keyword">end</span>
+0025     <span class="keyword">case</span> <span class="string">'components'</span>
+0026         dlg = findobj(0,<span class="string">'Tag'</span>,<span class="string">'ANIMATE:COMPONENTS'</span>);
+0027         <span class="keyword">if</span> all([isempty(dlg),~strcmp(varargin{1},<span class="string">'init'</span>)])
+0028             <span class="keyword">return</span>
+0029         <span class="keyword">end</span>
+0030         <span class="keyword">switch</span> varargin{1}
+0031             <span class="keyword">case</span> <span class="string">'init'</span>
+0032                 <span class="keyword">if</span> ishandle(dlg)
+0033                     figure(dlg)
+0034                     <span class="keyword">return</span>;
+0035                 <span class="keyword">end</span>
+0036                 <span class="keyword">if</span> strcmp(SETUP.View.Type,<span class="string">'Red/Blue Glasses'</span>)
+0037                     <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'viewType'</span>,<span class="string">'Single'</span>);
+0038                 <span class="keyword">end</span>
+0039                 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Menu:View:RedBlue'</span>),<span class="string">'Enable'</span>,<span class="string">'off'</span>);
+0040                 <span class="keyword">if</span> length(varargin)&lt;2
+0041                     dlg     = <a href="guiComponents.html" class="code" title="function h0=guiComponents(aniFig,SETUP,varargin);">guiComponents</a>(aniFig,SETUP);
+0042                 <span class="keyword">else</span>
+0043                     dlg     = <a href="guiComponents.html" class="code" title="function h0=guiComponents(aniFig,SETUP,varargin);">guiComponents</a>(aniFig,SETUP,varargin{end});
+0044                 <span class="keyword">end</span>
+0045                 <span class="comment">% INIT GUI</span>
+0046                 lbstr   = <a href="#_sub9" class="code" title="subfunction str = compListbox(SETUP);">compListbox</a>(SETUP);
+0047                 str = {<span class="string">'off'</span>,<span class="string">'on'</span>};
+0048                 set(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Component:Listbox'</span>)  ,<span class="string">'String'</span>,lbstr,<span class="string">'Value'</span>,1);
+0049                 set(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Component:Name'</span>)     ,<span class="string">'String'</span>,SETUP.Component.Name{1});
+0050                 set(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Component:Visible'</span>)  ,<span class="string">'Value'</span> ,SETUP.Component.Visible(1));
+0051                 set(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Component:Fill'</span>)     ,<span class="string">'Value'</span> ,SETUP.Component.Fill(1));
+0052                 set(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Component:Wireframe'</span>),<span class="string">'Value'</span> ,SETUP.Component.Wireframe);
+0053                 set(UDATA.Handles.Conn,<span class="string">'Visible'</span>,str{SETUP.Component.Wireframe+1});
+0054                 <span class="keyword">if</span> SETUP.Component.Wireframe &amp; SETUP.Display.Markers
+0055                     set(UDATA.Handles.Markers,<span class="string">'Visible'</span>,<span class="string">'on'</span>)
+0056                 <span class="keyword">else</span>
+0057                     set(UDATA.Handles.Markers,<span class="string">'Visible'</span>,<span class="string">'off'</span>)
+0058                 <span class="keyword">end</span>
+0059                 SETUP.Component.Open    = 1;
+0060                 <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(action,<span class="string">'visible'</span>,find(SETUP.Component.Visible),1);
+0061                 <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(action,<span class="string">'fill'</span>   ,find(SETUP.Component.Fill),1);
+0062                 DATA    = get(aniAxis,<span class="string">'UserData'</span>);
+0063                 <span class="keyword">for</span> comp=1:size(SETUP.Component.Name,1)
+0064                     set(UDATA.Handles.Wire(comp,:),<span class="string">'XData'</span>,DATA.CompNodes(SETUP.Component.WireIndex{comp},1,UDATA.ActiveFrame),<span class="keyword">...</span>
+0065                         <span class="string">'YData'</span>,DATA.CompNodes(SETUP.Component.WireIndex{comp},2,UDATA.ActiveFrame),<span class="keyword">...</span>
+0066                         <span class="string">'ZData'</span>,DATA.CompNodes(SETUP.Component.WireIndex{comp},3,UDATA.ActiveFrame));
+0067                     ind     = find(SETUP.Component.FillComps==comp);
+0068                     <span class="keyword">for</span> ii=1:length(ind)
+0069                         set(UDATA.Handles.Fill(ind(ii),:),<span class="string">'XData'</span>,DATA.NODES(SETUP.Component.FillConn{ind(ii)},1,UDATA.ActiveFrame),<span class="keyword">...</span>
+0070                             <span class="string">'YData'</span>,DATA.NODES(SETUP.Component.FillConn{ind(ii)},2,UDATA.ActiveFrame),<span class="keyword">...</span>
+0071                             <span class="string">'ZData'</span>,DATA.NODES(SETUP.Component.FillConn{ind(ii)},3,UDATA.ActiveFrame));
+0072                     <span class="keyword">end</span>
+0073                 <span class="keyword">end</span>
+0074             <span class="keyword">case</span> <span class="string">'select'</span>
+0075                 val = min(get(gcbo,<span class="string">'Value'</span>));
+0076                 set(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Component:Name'</span>)     ,<span class="string">'String'</span>,SETUP.Component.Name{val});
+0077                 set(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Component:Visible'</span>)  ,<span class="string">'Value'</span> ,SETUP.Component.Visible(val));
+0078                 set(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Component:Fill'</span>)     ,<span class="string">'Value'</span> ,SETUP.Component.Fill(val));
+0079             <span class="keyword">case</span> <span class="string">'name'</span>
+0080                 str     = get(gcbo,<span class="string">'String'</span>);
+0081                 val     = get(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Component:Listbox'</span>),<span class="string">'Value'</span>);
+0082                 <span class="keyword">if</span> length(str)&gt;10
+0083                     str = str(1:10);
+0084                 <span class="keyword">end</span>
+0085                 <span class="keyword">for</span> ii=1:length(val)
+0086                     SETUP.Component.Name{val(ii),1}  = str;
+0087                 <span class="keyword">end</span>
+0088                 lbstr   = <a href="#_sub9" class="code" title="subfunction str = compListbox(SETUP);">compListbox</a>(SETUP);
+0089                 set(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Component:Listbox'</span>)  ,<span class="string">'String'</span>,lbstr);
+0090                 set(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Component:Name'</span>)     ,<span class="string">'String'</span>,SETUP.Component.Name{min(val)});
+0091             <span class="keyword">case</span> <span class="string">'fill'</span>
+0092                 str = {<span class="string">'off'</span>,<span class="string">'on'</span>};
+0093                 <span class="keyword">if</span> nargin==2
+0094                     val  = get(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Component:Listbox'</span>),<span class="string">'Value'</span>);
+0095                     onoff   = get(gcbo,<span class="string">'Value'</span>);
+0096                     SETUP.Component.Fill(val,1)  = onoff;
+0097                     lbstr   = <a href="#_sub9" class="code" title="subfunction str = compListbox(SETUP);">compListbox</a>(SETUP);
+0098                     set(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Component:Listbox'</span>)  ,<span class="string">'String'</span>,lbstr);
+0099                 <span class="keyword">else</span>
+0100                     val     = varargin{2};
+0101                     onoff   = varargin{3};
+0102                 <span class="keyword">end</span>
+0103                 <span class="keyword">for</span> ii=1:length(val)
+0104                     ind = find(SETUP.Component.FillComps==val(ii));
+0105                     set(UDATA.Handles.Fill(ind,:),<span class="string">'Visible'</span>,str{onoff+1});
+0106                 <span class="keyword">end</span>
+0107             <span class="keyword">case</span> <span class="string">'visible'</span>
+0108                 <span class="keyword">if</span> nargin==2
+0109                     val  = get(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Component:Listbox'</span>),<span class="string">'Value'</span>);
+0110                     val     = get(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Component:Listbox'</span>),<span class="string">'Value'</span>);
+0111                     onoff   = get(gcbo,<span class="string">'Value'</span>);
+0112                     SETUP.Component.Visible(val,:)  = onoff;
+0113                     lbstr   = <a href="#_sub9" class="code" title="subfunction str = compListbox(SETUP);">compListbox</a>(SETUP);
+0114                     set(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Component:Listbox'</span>)  ,<span class="string">'String'</span>,lbstr);
+0115                 <span class="keyword">else</span>
+0116                     val     = varargin{2};
+0117                     onoff   = varargin{3};
+0118                 <span class="keyword">end</span>
+0119                 str = {<span class="string">'off'</span>,<span class="string">'on'</span>};
+0120                 set(UDATA.Handles.Wire(val,:),<span class="string">'Visible'</span>,str{onoff+1});
+0121                 <span class="comment">% enable labels</span>
+0122                 <span class="keyword">if</span> SETUP.Display.Labels &amp; ~SETUP.Component.Wireframe
+0123                     offInd  = find(~SETUP.Component.Visible);
+0124                     onInd   = find( SETUP.Component.Visible);
+0125                     indOff  = unique(setdiff([SETUP.Component.WireIndex{offInd}],length(UDATA.Handles.Labels)+1));
+0126                     indOn   = unique(setdiff([SETUP.Component.WireIndex{onInd}] ,length(UDATA.Handles.Labels)+1));
+0127                     set(UDATA.Handles.Labels(indOff,:),<span class="string">'Visible'</span>,<span class="string">'off'</span>);
+0128                     set(UDATA.Handles.Labels(indOn,:) ,<span class="string">'Visible'</span>,<span class="string">'on'</span>);
+0129                 <span class="keyword">end</span>
+0130                 <span class="comment">%keyboard</span>
+0131                 ostr    = str{all([SETUP.Display.Markers,SETUP.Component.Open])+1};
+0132                 set(UDATA.Handles.Mark(find(~SETUP.Component.Visible),:),<span class="string">'Visible'</span>,<span class="string">'off'</span>);
+0133                 set(UDATA.Handles.Mark(find( SETUP.Component.Visible),:),<span class="string">'Visible'</span>,ostr);
+0134             <span class="keyword">case</span> <span class="string">'fillColor'</span>
+0135                 val     = get(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Component:Listbox'</span>),<span class="string">'Value'</span>);
+0136                 clr     = <a href="#_sub5" class="code" title="subfunction clr = getColor(default,msg);">getColor</a>(SETUP.Component.Color(min(val),:),[SETUP.Component.Name{min(val)} <span class="string">' fill color'</span>]);
+0137                 <span class="keyword">if</span> isempty(clr)
+0138                     <span class="keyword">return</span>;
+0139                 <span class="keyword">end</span>
+0140                 SETUP.Component.Color(val,:)    = ones(length(val),1)*clr;
+0141                 lbstr   = <a href="#_sub9" class="code" title="subfunction str = compListbox(SETUP);">compListbox</a>(SETUP);
+0142                 set(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Component:Listbox'</span>)  ,<span class="string">'String'</span>,lbstr);
+0143                 <span class="keyword">for</span> comp=1:length(val)
+0144                     set(UDATA.Handles.Wire(val(comp),:),<span class="string">'Color'</span>,clr);
+0145                     set(UDATA.Handles.Mark(val(comp),:),<span class="string">'Color'</span>,clr);
+0146                     <span class="keyword">for</span> ii=1:length(val)
+0147                         ind = find(SETUP.Component.FillComps==val(ii));
+0148                         set(UDATA.Handles.Fill(ind,:),<span class="string">'FaceColor'</span>,clr);
+0149                     <span class="keyword">end</span>
+0150                 <span class="keyword">end</span>
+0151             <span class="keyword">case</span> <span class="string">'wireframe'</span>
+0152                 str = {<span class="string">'off'</span>,<span class="string">'on'</span>};
+0153                 SETUP.Component.Wireframe = get(gcbo,<span class="string">'Value'</span>);
+0154                 set(UDATA.Handles.Conn,<span class="string">'Visible'</span>,str{SETUP.Component.Wireframe+1});
+0155                 <span class="keyword">if</span> SETUP.Component.Wireframe &amp; SETUP.Display.Labels
+0156                     set(UDATA.Handles.Labels,<span class="string">'Visible'</span>,<span class="string">'on'</span>);
+0157                 <span class="keyword">elseif</span> SETUP.Display.Labels &amp; ~SETUP.Component.Wireframe
+0158                     offInd  = find(~SETUP.Component.Visible);
+0159                     onInd   = find( SETUP.Component.Visible);
+0160                     indOff  = unique(setdiff([SETUP.Component.WireIndex{offInd}],length(UDATA.Handles.Labels)+1));
+0161                     indOn   = unique(setdiff([SETUP.Component.WireIndex{onInd}] ,length(UDATA.Handles.Labels)+1));
+0162                     set(UDATA.Handles.Labels(indOff,:),<span class="string">'Visible'</span>,<span class="string">'off'</span>);
+0163                     set(UDATA.Handles.Labels(indOn,:) ,<span class="string">'Visible'</span>,<span class="string">'on'</span>);
+0164                 <span class="keyword">end</span>
+0165                 <span class="keyword">if</span> SETUP.Component.Wireframe &amp; SETUP.Display.Markers
+0166                     set(UDATA.Handles.Markers,<span class="string">'Visible'</span>,<span class="string">'on'</span>)
+0167                 <span class="keyword">else</span>
+0168                     set(UDATA.Handles.Markers,<span class="string">'Visible'</span>,<span class="string">'off'</span>)
+0169                 <span class="keyword">end</span>
+0170             <span class="keyword">case</span> <span class="string">'stack'</span>
+0171                 <span class="keyword">if</span> ~strcmp(get(dlg,<span class="string">'SelectionType'</span>),<span class="string">'open'</span>)
+0172                     <span class="keyword">return</span>
+0173                 <span class="keyword">end</span>
+0174                 scrSize     = get(0         , <span class="string">'ScreenSize'</span>);
+0175                 aniFigPos   = get(aniFig    , <span class="string">'Position'</span>);
+0176                 dlgFigPos   = get(dlg       , <span class="string">'Position'</span>);
+0177                 <span class="keyword">if</span> aniFigPos(1)-dlgFigPos(3)-7&gt;scrSize(1)
+0178                     Xpos  = aniFigPos(1)-dlgFigPos(3)-7;
+0179                 <span class="keyword">elseif</span> aniFigPos(1)+aniFigPos(3)+7+dlgFigPos(3)&lt;scrSize(3);
+0180                     Xpos  = aniFigPos(1)+aniFigPos(3)+7;
+0181                 <span class="keyword">else</span>
+0182                     Xpos  = aniFigPos(1)+aniFigPos(3)-dlgFigPos(3);
+0183                 <span class="keyword">end</span>
+0184                 <span class="keyword">if</span> aniFigPos(2)&lt;scrSize(2)
+0185                     Ypos  = aniFigPos(2)+aniFigPos(4)+10-dlgFigPos(4);
+0186                 <span class="keyword">elseif</span> scrSize(4)-aniFigPos(4)&lt;80
+0187                     Ypos  = aniFigPos(2)+aniFigPos(4)-dlgFigPos(4)-75;
+0188                 <span class="keyword">else</span>
+0189                     Ypos  = aniFigPos(2)+aniFigPos(4)-dlgFigPos(4)+22;
+0190                 <span class="keyword">end</span>
+0191                 set(dlg,<span class="string">'Position'</span>,[Xpos Ypos dlgFigPos(3) dlgFigPos(4)]);
+0192         <span class="keyword">end</span>
+0193     <span class="keyword">case</span> <span class="string">'help'</span>
+0194         <span class="keyword">switch</span> varargin{1}
+0195             <span class="keyword">case</span> <span class="string">'help'</span>
+0196                 <span class="keyword">if</span> ~exist(fullfile(SETUP.Path.Root,<span class="string">'Help\animation.html'</span>),<span class="string">'file'</span>)
+0197                     [file,path] = uigetfile(fullfile(SETUP.Path.Root,<span class="string">'animation.html'</span>),<span class="string">'Selected animation.html file...'</span>);
+0198                     <span class="keyword">if</span> file==0
+0199                         <span class="keyword">return</span>
+0200                     <span class="keyword">end</span>
+0201                     SETUP.Path.Help = path;
+0202                     <a href="defaults.html" class="code" title="function varargout = defaults(action,DATA);">defaults</a>(<span class="string">'addPaths'</span>,SETUP);
+0203                 <span class="keyword">end</span>
+0204                 open(fullfile(SETUP.Path.Help,<span class="string">'\animation.html'</span>));
+0205             <span class="keyword">case</span> <span class="string">'about'</span>
+0206                 <a href="guiAbout.html" class="code" title="function h0=guiAbout(aniFig,SETUP);">guiAbout</a>(aniFig,SETUP);
+0207         <span class="keyword">end</span>
+0208     <span class="keyword">case</span> <span class="string">'updatePrefs'</span>
+0209         <a href="#_sub6" class="code" title="subfunction updatePrefs(action,dlg,TEMP)">updatePrefs</a>(<span class="string">'all'</span> ,findobj(0,<span class="string">'Tag'</span>,<span class="string">'ANIMATE:PREFERENCES'</span>),SETUP);
+0210         set(findobj(0,<span class="string">'Tag'</span>,<span class="string">'ANIMATE:PREFERENCES'</span>),<span class="string">'Userdata'</span>,SETUP);
+0211         
+0212     <span class="keyword">case</span> <span class="string">'autoApplyPrefs'</span>
+0213         TEMP    = get(findobj(0,<span class="string">'Tag'</span>,<span class="string">'ANIMATE:PREFERENCES'</span>),<span class="string">'Userdata'</span>);
+0214         <a href="#_sub8" class="code" title="subfunction updateAniFig(aniFig,SETUP,H)">updateAniFig</a>(aniFig,TEMP,UDATA.Handles);
+0215         SETUP.Animation = TEMP.Animation;
+0216         SETUP.Display   = TEMP.Display;
+0217         SETUP.View      = TEMP.View;
+0218         SETUP.Colors    = TEMP.Colors;
+0219         SETUP.AVI       = TEMP.AVI;
+0220         SETUP.Snapshot  = TEMP.Snapshot;
+0221         <a href="#_sub6" class="code" title="subfunction updatePrefs(action,dlg,TEMP)">updatePrefs</a>(<span class="string">'all'</span> ,findobj(0,<span class="string">'Tag'</span>,<span class="string">'ANIMATE:PREFERENCES'</span>),SETUP);
+0222         set(findobj(0,<span class="string">'Tag'</span>,<span class="string">'ANIMATE:PREFERENCES'</span>),<span class="string">'Userdata'</span>,TEMP);
+0223         <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'reset_animation'</span>);
+0224     <span class="keyword">case</span> <span class="string">'updateRotate'</span>
+0225         <span class="keyword">if</span> strcmp(SETUP.View.Type,<span class="string">'Red/Blue Glasses'</span>)
+0226             [AZ,EL] = view(aniAxis);
+0227             ortho11 = findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Axes:Ortho11'</span>);
+0228             set(ortho11,<span class="string">'View'</span>,[AZ,EL],<span class="string">'CameraUpVector'</span>,get(aniAxis,<span class="string">'CameraUpVector'</span>));
+0229             camorbit(ortho11, SETUP.View.CrosseyeAngle*2,0,<span class="string">'camera'</span>,SETUP.View.UpVector(2))
+0230         <span class="keyword">end</span>
+0231         
+0232     <span class="keyword">case</span> <span class="string">'preferences'</span>
+0233         dlg = findobj(0,<span class="string">'Tag'</span>,<span class="string">'ANIMATE:PREFERENCES'</span>);
+0234         <span class="keyword">if</span> all([isempty(dlg),~strcmp(varargin{1},<span class="string">'init'</span>)])
+0235             <span class="keyword">return</span>
+0236         <span class="keyword">end</span>
+0237         TEMP    = get(dlg,<span class="string">'Userdata'</span>);
+0238         <span class="keyword">switch</span> varargin{1}
+0239             <span class="keyword">case</span> <span class="string">'autoapply'</span>
+0240                 SETUP.Animation.AutoApplyPrefs  = get(gcbo,<span class="string">'Value'</span>);
+0241                 TEMP.Animation.AutoApplyPrefs   = get(gcbo,<span class="string">'Value'</span>);
+0242             <span class="keyword">case</span> <span class="string">'update'</span>
+0243                 <a href="#_sub6" class="code" title="subfunction updatePrefs(action,dlg,TEMP)">updatePrefs</a>(<span class="string">'all'</span> ,dlg,SETUP);
+0244                 set(dlg,<span class="string">'Userdata'</span>,SETUP);
+0245             <span class="keyword">case</span> <span class="string">'init'</span>
+0246                 <span class="keyword">if</span> ishandle(dlg)
+0247                     figure(dlg)
+0248                     <span class="keyword">return</span>;
+0249                 <span class="keyword">end</span>
+0250                 prefFig = <a href="guiPreferences.html" class="code" title="function h0=guiComponents(aniFig,SETUP);">guiPreferences</a>(aniFig,SETUP);
+0251                 set(prefFig,<span class="string">'Userdata'</span>,SETUP);
+0252                 verargout{1}    = prefFig;
+0253                 TEMP            = SETUP;
+0254             <span class="keyword">case</span> <span class="string">'avi'</span>
+0255                 <span class="keyword">switch</span> varargin{2}
+0256                     <span class="keyword">case</span> <span class="string">'Format'</span>
+0257                         str = get(gcbo,<span class="string">'String'</span>);
+0258                         val = get(gcbo,<span class="string">'Value'</span>);
+0259                         TEMP.AVI.Format = str{val};
+0260                     <span class="keyword">case</span> <span class="string">'Quality'</span>
+0261                         val = abs(str2num(get(gcbo,<span class="string">'String'</span>)));
+0262                         TEMP.AVI.Quality    = round(min([100,max([1,val])]));
+0263                         set(gcbo,<span class="string">'String'</span>,num2str(TEMP.AVI.Quality));
+0264                     <span class="keyword">case</span> <span class="string">'TimeLength'</span>
+0265                         TEMP.AVI.Quality    = abs(str2num(get(gcbo,<span class="string">'String'</span>)));
+0266                         set(gcbo,<span class="string">'String'</span>,num2str(TEMP.AVI.TimeLength));
+0267                     <span class="keyword">case</span> <span class="string">'DoAllModes'</span>
+0268                         TEMP.AVI.DoAllModes = get(gcbo,<span class="string">'Value'</span>);
+0269                 <span class="keyword">end</span>
+0270             <span class="keyword">case</span> <span class="string">'snapshot'</span>
+0271                 <span class="keyword">switch</span> varargin{2}
+0272                     <span class="keyword">case</span> <span class="string">'Format'</span>
+0273                         str = get(gcbo,<span class="string">'String'</span>);
+0274                         val = get(gcbo,<span class="string">'Value'</span>);
+0275                         TEMP.Snapshot.Format    = str{val};
+0276                     <span class="keyword">case</span> <span class="string">'Renderer'</span>
+0277                         str = get(gcbo,<span class="string">'String'</span>);
+0278                         val = get(gcbo,<span class="string">'Value'</span>);
+0279                         TEMP.Snapshot.Renderer  = str{val};
+0280                     <span class="keyword">case</span> <span class="string">'Quality'</span>
+0281                         val = abs(str2num(get(gcbo,<span class="string">'String'</span>)));
+0282                         TEMP.Snapshot.Quality   = round(min([100,max([1,val])]));
+0283                         set(gcbo,<span class="string">'String'</span>,num2str(TEMP.Snapshot.Quality));
+0284                     <span class="keyword">case</span> <span class="string">'Resolution'</span>
+0285                         TEMP.Snapshot.Resolution    = round(abs(str2num(get(gcbo,<span class="string">'String'</span>))));
+0286                         set(gcbo,<span class="string">'String'</span>,num2str(TEMP.Snapshot.Resolution));
+0287                     <span class="keyword">case</span> <span class="string">'DoAllModes'</span>
+0288                         TEMP.Snapshot.DoAllModes    = get(gcbo,<span class="string">'Value'</span>);
+0289                 <span class="keyword">end</span>
+0290                 
+0291             <span class="keyword">case</span> <span class="string">'exportPath'</span>
+0292                 <span class="keyword">switch</span> varargin{2}
+0293                     <span class="keyword">case</span> <span class="string">'edit'</span>
+0294                         dirStr  = get(gcbo,<span class="string">'String'</span>);
+0295                         <span class="keyword">if</span> exist(dirStr,<span class="string">'dir'</span>)~=7
+0296                             resp = questdlg(<span class="string">'%s\n\nDirectory does not exist.\nCreate it now?'</span>,<span class="string">'Animation Warning'</span>,<span class="string">'Yes'</span>,<span class="string">'No'</span>,<span class="string">'Yes'</span>);
+0297                             <span class="keyword">if</span> strcmp(resp,<span class="string">'No'</span>)
+0298                                 set(gcbo,<span class="string">'String'</span>,SETUP.Path.Export)
+0299                                 <span class="keyword">return</span>;
+0300                             <span class="keyword">else</span>
+0301                                 mkdir(dirStr)
+0302                             <span class="keyword">end</span>
+0303                         <span class="keyword">end</span>
+0304                         SETUP.Path.Export   = dirStr;
+0305                     <span class="keyword">case</span> <span class="string">'push'</span>
+0306                         dirStr  = uigetdir(SETUP.Path.Export,<span class="string">'Choose the export directory...'</span>);
+0307                         <span class="keyword">if</span> dirStr == 0
+0308                             <span class="keyword">return</span>;
+0309                         <span class="keyword">end</span>
+0310                         <span class="keyword">if</span> exist(dirStr,<span class="string">'dir'</span>)~=7
+0311                             resp = questdlg(<span class="string">'%s\n\nDirectory does not exist.\nCreate it now?'</span>,<span class="string">'Animation Warning'</span>,<span class="string">'Yes'</span>,<span class="string">'No'</span>,<span class="string">'Yes'</span>);
+0312                             <span class="keyword">if</span> strcmp(resp,<span class="string">'No'</span>)
+0313                                 set(gcbo,<span class="string">'String'</span>,SETUP.Path.Export)
+0314                                 <span class="keyword">return</span>;
+0315                             <span class="keyword">else</span>
+0316                                 mkdir(dirStr)
+0317                             <span class="keyword">end</span>
+0318                         <span class="keyword">end</span>
+0319                         SETUP.Path.Export   = dirStr;
+0320                         set(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Preferences:EditExportPath'</span>),<span class="string">'String'</span>,SETUP.Path.Export)
+0321                 <span class="keyword">end</span>
+0322             <span class="keyword">case</span> <span class="string">'stack'</span>
+0323                 <span class="keyword">if</span> ~strcmp(get(dlg,<span class="string">'SelectionType'</span>),<span class="string">'open'</span>)
+0324                     <span class="keyword">return</span>
+0325                 <span class="keyword">end</span>
+0326                 scrSize     = get(0         , <span class="string">'ScreenSize'</span>);
+0327                 aniFigPos   = get(aniFig    , <span class="string">'Position'</span>);
+0328                 dlgFigPos   = get(dlg       , <span class="string">'Position'</span>);
+0329                 <span class="keyword">if</span> aniFigPos(1)-dlgFigPos(3)-7&gt;scrSize(1)
+0330                     Xpos  = aniFigPos(1)-dlgFigPos(3)-7;
+0331                 <span class="keyword">elseif</span> aniFigPos(1)+aniFigPos(3)+7+dlgFigPos(3)&lt;scrSize(3);
+0332                     Xpos  = aniFigPos(1)+aniFigPos(3)+7;
+0333                 <span class="keyword">else</span>
+0334                     Xpos  = aniFigPos(1)+aniFigPos(3)-dlgFigPos(3);
+0335                 <span class="keyword">end</span>
+0336                 <span class="keyword">if</span> aniFigPos(2)&lt;scrSize(2)
+0337                     Ypos  = aniFigPos(2)+aniFigPos(4)+10-dlgFigPos(4);
+0338                 <span class="keyword">elseif</span> scrSize(4)-aniFigPos(4)&lt;80
+0339                     Ypos  = aniFigPos(2)+aniFigPos(4)-dlgFigPos(4)-75;
+0340                 <span class="keyword">else</span>
+0341                     Ypos  = aniFigPos(2)+aniFigPos(4)-dlgFigPos(4)+22;
+0342                 <span class="keyword">end</span>
+0343                 set(dlg,<span class="string">'Position'</span>,[Xpos Ypos dlgFigPos(3) dlgFigPos(4)]);
+0344             <span class="keyword">case</span> <span class="string">'animation'</span>
+0345                 val = str2num(get(gcbo,<span class="string">'String'</span>));
+0346                 <span class="keyword">if</span> isempty(val)
+0347                     <a href="#_sub6" class="code" title="subfunction updatePrefs(action,dlg,TEMP)">updatePrefs</a>(<span class="string">'animation'</span>,dlg,TEMP);
+0348                     <span class="keyword">return</span>;
+0349                 <span class="keyword">end</span>
+0350                 <span class="keyword">switch</span> varargin{2}
+0351                     <span class="keyword">case</span> <span class="string">'FPC'</span>
+0352                         val = min([max([3,round(val)]),503]);
+0353                         TEMP.Animation.Frames   = val;
+0354                     <span class="keyword">case</span> <span class="string">'Amp'</span>
+0355                         val = min([max([0.01,round(val*100)/100]),100.01]);
+0356                         TEMP.Animation.Amplitude = val;
+0357                         
+0358                     <span class="keyword">case</span> <span class="string">'Deg'</span>
+0359                         val = min([max([-360,round(val)]),360]);
+0360                         TEMP.Animation.Theta   = val;
+0361                 <span class="keyword">end</span>
+0362             <span class="keyword">case</span> <span class="string">'display'</span>
+0363                 eval([<span class="string">'TEMP.Display.'</span> varargin{2} <span class="string">'=~TEMP.Display.'</span> varargin{2} <span class="string">';'</span>]);
+0364             <span class="keyword">case</span> <span class="string">'view'</span>
+0365                 str = get(gcbo,<span class="string">'String'</span>);
+0366                 val = get(gcbo,<span class="string">'Value'</span>);
+0367                 eval([<span class="string">'TEMP.View.'</span> varargin{2} <span class="string">'=str{val};'</span>]);
+0368             <span class="keyword">case</span> <span class="string">'apply'</span>
+0369                 <a href="#_sub8" class="code" title="subfunction updateAniFig(aniFig,SETUP,H)">updateAniFig</a>(aniFig,TEMP,UDATA.Handles);
+0370                 SETUP.Animation = TEMP.Animation;
+0371                 SETUP.Display   = TEMP.Display;
+0372                 SETUP.View      = TEMP.View;
+0373                 SETUP.Colors    = TEMP.Colors;
+0374                 SETUP.AVI       = TEMP.AVI;
+0375                 SETUP.Snapshot  = TEMP.Snapshot;
+0376                 TEMP            = SETUP;
+0377                 <a href="#_sub6" class="code" title="subfunction updatePrefs(action,dlg,TEMP)">updatePrefs</a>(<span class="string">'all'</span>,dlg,TEMP);
+0378                 <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'reset_animation'</span>);
+0379             <span class="keyword">case</span> <span class="string">'reset'</span>
+0380                 TEMP    = <a href="#_sub7" class="code" title="subfunction TEMP = getDefaults(TEMP);">getDefaults</a>(TEMP);
+0381                 SETUP.Animation.AutoApplyPrefs  = TEMP.Animation.AutoApplyPrefs;
+0382                 <a href="#_sub6" class="code" title="subfunction updatePrefs(action,dlg,TEMP)">updatePrefs</a>(<span class="string">'all'</span> ,dlg,TEMP);
+0383             <span class="keyword">case</span> <span class="string">'defaults'</span>
+0384                 TEMP    = <a href="defaults.html" class="code" title="function varargout = defaults(action,DATA);">defaults</a>(<span class="string">'loadDefaults'</span>,SETUP);
+0385                 SETUP.Animation.AutoApplyPrefs  = TEMP.Animation.AutoApplyPrefs;
+0386                 <a href="#_sub6" class="code" title="subfunction updatePrefs(action,dlg,TEMP)">updatePrefs</a>(<span class="string">'all'</span> ,dlg,TEMP);
+0387             <span class="keyword">case</span> <span class="string">'save'</span>
+0388                 <a href="defaults.html" class="code" title="function varargout = defaults(action,DATA);">defaults</a>(<span class="string">'writeINI'</span>,TEMP);
+0389             <span class="keyword">case</span> <span class="string">'color'</span>
+0390                 clr = <a href="#_sub5" class="code" title="subfunction clr = getColor(default,msg);">getColor</a>(eval([<span class="string">'TEMP.Colors.'</span> varargin{2}]),[varargin{2} <span class="string">' Color'</span>]);
+0391                 <span class="keyword">if</span> isempty(clr);<span class="keyword">return</span>;<span class="keyword">end</span>
+0392                 eval([<span class="string">'TEMP.Colors.'</span> varargin{2} <span class="string">'=clr;'</span>]);
+0393         <span class="keyword">end</span> <span class="comment">% END Preferences =============================================</span>
+0394         set(dlg,<span class="string">'Userdata'</span>,TEMP)
+0395         <a href="#_sub6" class="code" title="subfunction updatePrefs(action,dlg,TEMP)">updatePrefs</a>(varargin{1},dlg,TEMP);
+0396         <span class="keyword">if</span> SETUP.Animation.AutoApplyPrefs
+0397             <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'autoApplyPrefs'</span>);
+0398         <span class="keyword">end</span>
+0399 
+0400     <span class="keyword">case</span> <span class="string">'viewType'</span>
+0401         <span class="keyword">if</span> strcmp(SETUP.View.Type,varargin{1})
+0402             <span class="keyword">return</span>;
+0403         <span class="keyword">end</span>
+0404         SETUP.View.Type = varargin{1};
+0405         ortho11 = findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Axes:Ortho11'</span>);
+0406         ortho21 = findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Axes:Ortho21'</span>);
+0407         ortho22 = findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Axes:Ortho22'</span>);
+0408         delete([ortho11,ortho21,ortho22]);
+0409         POS     = get(aniFig,<span class="string">'Position'</span>);
+0410         set(aniAxis,<span class="string">'Position'</span>,[20 20 POS(3)-40 POS(4)-135]);
+0411         set(UDATA.Handles.Markers(1)    ,<span class="string">'Color'</span>,SETUP.Colors.Markers)
+0412         set(UDATA.Handles.Labels(:,1)   ,<span class="string">'Color'</span>,SETUP.Colors.Labels)
+0413         set(UDATA.Handles.Conn(1)       ,<span class="string">'Color'</span>,SETUP.Colors.Shape)
+0414         set(UDATA.Handles.Static(1)     ,<span class="string">'Color'</span>,SETUP.Colors.Static)
+0415         set(UDATA.Handles.UCS(1,:)      ,<span class="string">'Color'</span>,SETUP.Colors.UCS)
+0416         <span class="keyword">switch</span> varargin{1}
+0417             <span class="keyword">case</span> <span class="string">'Single'</span>
+0418                 val =[1 0 0 0];
+0419                 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Menu:View:Single'</span>),<span class="string">'checked'</span>,<span class="string">'on'</span>);
+0420                 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Menu:View:Quad'</span>)  ,<span class="string">'checked'</span>,<span class="string">'off'</span>);
+0421                 HAND    = <a href="#_sub3" class="code" title="subfunction HAND = getHandles(pos,ax,HAND,varargin);">getHandles</a>(1,aniAxis,UDATA.Handles,<span class="string">'empty'</span>);
+0422             
+0423             <span class="keyword">case</span> <span class="string">'Quad'</span>
+0424                 val =[0 1 0 0];
+0425                 ortho11 = copyobj(aniAxis,aniFig);
+0426                 pos     = get(ortho11,<span class="string">'Position'</span>);
+0427                 set(ortho11,<span class="string">'Position'</span>,[pos(1) pos(2)+pos(4)/2 pos(3)/2 pos(4)/2],<span class="string">'Tag'</span>,<span class="string">'Axes:Ortho11'</span>);
+0428                 set(findobj(ortho11,<span class="string">'Tag'</span>,<span class="string">'Axis:Shape'</span>),<span class="string">'Erasemode'</span>,<span class="string">'normal'</span>)
+0429                 [VWS,CUV]   = <a href="#_sub1" class="code" title="subfunction [VWS,CUV] = viewSetup(pV,pC,upVector)">viewSetup</a>(1,1,SETUP.View.UpVector);
+0430                 set(ortho11,<span class="string">'View'</span>,VWS,<span class="string">'CameraUpVector'</span>,CUV)
+0431                 HAND    = <a href="#_sub3" class="code" title="subfunction HAND = getHandles(pos,ax,HAND,varargin);">getHandles</a>(2,ortho11,[]);
+0432 
+0433                 ortho21 = copyobj(aniAxis,aniFig);
+0434                 set(ortho21 ,<span class="string">'Position'</span>,[pos(1) pos(2) pos(3)/2 pos(4)/2],<span class="string">'Tag'</span>,<span class="string">'Axes:Ortho21'</span>);
+0435                 set(findobj(ortho21,<span class="string">'Tag'</span>,<span class="string">'Axis:Shape'</span>),<span class="string">'Erasemode'</span>,<span class="string">'normal'</span>)
+0436                 [VWS,CUV] = <a href="#_sub1" class="code" title="subfunction [VWS,CUV] = viewSetup(pV,pC,upVector)">viewSetup</a>(2,3,SETUP.View.UpVector);
+0437                 set(ortho21,<span class="string">'View'</span>,VWS,<span class="string">'CameraUpVector'</span>,CUV)
+0438                 HAND    = <a href="#_sub3" class="code" title="subfunction HAND = getHandles(pos,ax,HAND,varargin);">getHandles</a>(3,ortho21,HAND);
+0439 
+0440                 ortho22 = copyobj(aniAxis,aniFig);
+0441                 set(ortho22 ,<span class="string">'Position'</span>,[40+pos(1)+pos(3)/2 pos(2) pos(3)/2 pos(4)/2],<span class="string">'Tag'</span>,<span class="string">'Axes:Ortho22'</span>);
+0442                 set(findobj(ortho22,<span class="string">'Tag'</span>,<span class="string">'Axis:Shape'</span>),<span class="string">'Erasemode'</span>,<span class="string">'normal'</span>)
+0443                 [VWS,CUV] = <a href="#_sub1" class="code" title="subfunction [VWS,CUV] = viewSetup(pV,pC,upVector)">viewSetup</a>(3,4,SETUP.View.UpVector);
+0444                 set(ortho22,<span class="string">'View'</span>,VWS,<span class="string">'CameraUpVector'</span>,CUV)
+0445                 HAND    = <a href="#_sub3" class="code" title="subfunction HAND = getHandles(pos,ax,HAND,varargin);">getHandles</a>(4,ortho22,HAND);
+0446 
+0447                 set(aniAxis     ,<span class="string">'Position'</span>,[40+pos(1)+pos(3)/2 pos(2)+pos(4)/2 pos(3)/2 pos(4)/2]);
+0448                 set(findobj(aniAxis,<span class="string">'Tag'</span>,<span class="string">'Axis:Shape'</span>),<span class="string">'Erasemode'</span>,<span class="string">'normal'</span>)
+0449                 [VWS,CUV] = <a href="#_sub1" class="code" title="subfunction [VWS,CUV] = viewSetup(pV,pC,upVector)">viewSetup</a>(1,2,SETUP.View.UpVector);
+0450                 set(aniAxis,<span class="string">'View'</span>,[135 35],<span class="string">'CameraUpVector'</span>,CUV)
+0451                 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Menu:View:Single'</span>),<span class="string">'checked'</span>,<span class="string">'off'</span>);
+0452                 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Menu:View:Quad'</span>)  ,<span class="string">'checked'</span>,<span class="string">'on'</span>);
+0453                 HAND    = <a href="#_sub3" class="code" title="subfunction HAND = getHandles(pos,ax,HAND,varargin);">getHandles</a>(1,aniAxis,HAND);
+0454 
+0455                 delete(findobj(ortho11,<span class="string">'Tag'</span>,<span class="string">'ContextMenu\Axes'</span>))
+0456                 delete(findobj(ortho21,<span class="string">'Tag'</span>,<span class="string">'ContextMenu\Axes'</span>))
+0457                 delete(findobj(ortho22,<span class="string">'Tag'</span>,<span class="string">'ContextMenu\Axes'</span>))
+0458             <span class="keyword">case</span> <span class="string">'Cross-eyed'</span>
+0459                 val =[0 0 1 0];
+0460                 ortho11 = copyobj(aniAxis,aniFig);
+0461                 pos     = get(ortho11,<span class="string">'Position'</span>);
+0462                 set(ortho11,<span class="string">'Position'</span>,[20 20 pos(3)/2 pos(4)],<span class="string">'Tag'</span>,<span class="string">'Axes:Ortho11'</span>);
+0463                 set(findobj(ortho11,<span class="string">'Tag'</span>,<span class="string">'Axis:Shape'</span>),<span class="string">'Erasemode'</span>,<span class="string">'normal'</span>)
+0464                 HAND    = <a href="#_sub3" class="code" title="subfunction HAND = getHandles(pos,ax,HAND,varargin);">getHandles</a>(2,ortho11,[]);
+0465 
+0466                 set(aniAxis     ,<span class="string">'Position'</span>,[40+pos(1)+pos(3)/2 pos(2) pos(3)/2 pos(4)]);
+0467                 set(findobj(aniAxis,<span class="string">'Tag'</span>,<span class="string">'Axis:Shape'</span>),<span class="string">'Erasemode'</span>,<span class="string">'normal'</span>)
+0468                 HAND    = <a href="#_sub3" class="code" title="subfunction HAND = getHandles(pos,ax,HAND,varargin);">getHandles</a>(1,aniAxis,HAND);
+0469                 
+0470                 camorbit(ortho11, SETUP.View.CrosseyeAngle,0,<span class="string">'camera'</span>,SETUP.View.UpVector(2))
+0471                 camorbit(aniAxis,-SETUP.View.CrosseyeAngle,0,<span class="string">'camera'</span>,SETUP.View.UpVector(2))
+0472             <span class="keyword">case</span> <span class="string">'Red/Blue Glasses'</span>
+0473                 val =[0 0 0 1];
+0474                 dPos    = get(aniAxis,<span class="string">'Position'</span>);
+0475 
+0476                 ortho11 = copyobj(aniAxis,aniFig);
+0477                 pos     = get(ortho11,<span class="string">'Position'</span>);
+0478                 set(ortho11,<span class="string">'Position'</span>,dPos-[-5 0 0 0],<span class="string">'Tag'</span>,<span class="string">'Axes:Ortho11'</span>);
+0479                 set(findobj(ortho11,<span class="string">'Tag'</span>,<span class="string">'Axis:Shape'</span>),<span class="string">'Erasemode'</span>,<span class="string">'normal'</span>)
+0480                 HAND    = <a href="#_sub3" class="code" title="subfunction HAND = getHandles(pos,ax,HAND,varargin);">getHandles</a>(2,ortho11,[]);
+0481                 chld    = get(ortho11,<span class="string">'Children'</span>);
+0482                 chld    = setdiff(chld,[HAND.Wire(:,2);HAND.Fill(:,2)]);
+0483                 set(chld,<span class="string">'Color'</span>,SETUP.Colors.RightEye);
+0484 
+0485                 set(aniAxis     ,<span class="string">'Position'</span>,dPos+[5 0 0 0]);
+0486                 set(findobj(aniAxis,<span class="string">'Tag'</span>,<span class="string">'Axis:Shape'</span>),<span class="string">'Erasemode'</span>,<span class="string">'normal'</span>)
+0487                 HAND    = <a href="#_sub3" class="code" title="subfunction HAND = getHandles(pos,ax,HAND,varargin);">getHandles</a>(1,aniAxis,HAND);
+0488                 chld    = get(aniAxis,<span class="string">'Children'</span>);
+0489                 pchld   = findobj(aniAxis,<span class="string">'Type'</span>,<span class="string">'Patch'</span>);
+0490                 chld    = setdiff(chld,[HAND.Wire(:,1);HAND.Fill(:,1)]);
+0491                 set(chld,<span class="string">'Color'</span>,SETUP.Colors.LeftEye);
+0492                 
+0493                 camorbit(ortho11, SETUP.View.CrosseyeAngle*2,0,<span class="string">'camera'</span>,SETUP.View.UpVector(2))
+0494                 camorbit(aniAxis,-SETUP.View.CrosseyeAngle*2,0,<span class="string">'camera'</span>,SETUP.View.UpVector(2))
+0495         <span class="keyword">end</span>
+0496         str = {<span class="string">'off'</span>,<span class="string">'on'</span>};
+0497         set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Menu:View:Single'</span>)    ,<span class="string">'Checked'</span>,str{val(1)+1});
+0498         set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Menu:View:Quad'</span>)      ,<span class="string">'Checked'</span>,str{val(2)+1});
+0499         set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Menu:View:Crosseyed'</span>) ,<span class="string">'Checked'</span>,str{val(3)+1});
+0500         set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Menu:View:RedBlue'</span>)   ,<span class="string">'Checked'</span>,str{val(4)+1});
+0501         UDATA.Handles.Markers   = HAND.Markers;
+0502         UDATA.Handles.Labels    = HAND.Labels;
+0503         UDATA.Handles.Conn      = HAND.Conn;
+0504         UDATA.Handles.Static    = HAND.Static;
+0505         UDATA.Handles.UCS       = HAND.UCS;
+0506         UDATA.Handles.Wire      = HAND.Wire;
+0507         UDATA.Handles.Fill      = HAND.Fill;
+0508         UDATA.Handles.Mark      = HAND.Mark;
+0509         <span class="keyword">if</span> nargin&lt;3;<a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'updatePrefs'</span>);<span class="keyword">end</span>
+0510 
+0511 
+0512     <span class="keyword">case</span> <span class="string">'Save'</span>
+0513         <span class="keyword">switch</span> varargin{1}
+0514             <span class="keyword">case</span> <span class="string">'Matlab'</span>
+0515                 [file,path]=uiputfile([SETUP.Path.Data <span class="string">'*.mat'</span>],<span class="string">'Export Matlab file...'</span>);
+0516                 <span class="keyword">if</span> any([file==0,path==0])
+0517                     path=[];file=[];
+0518                     <span class="keyword">return</span>;
+0519                 <span class="keyword">end</span>
+0520 <span class="comment">%                 [path,file,ext] = fileparts(fullfile(path,[file ext]));</span>
+0521                 <span class="comment">% Modified ABRA 18/2 -10: ext was not defined</span>
+0522                 [path,file,ext] = fileparts(fullfile(path,[file]));
+0523                 save(fullfile(path,[file ext]),<span class="string">'GEOMETRY'</span>,<span class="string">'MODAL'</span>);
+0524                 <span class="comment">% Modified ABRA 18/2 -10: said = p, changed to path</span>
+0525                 SETUP.Path.Data = path;
+0526                 SETUP   = <a href="#_sub4" class="code" title="subfunction SETUP = updateRecentFiles(aniFig,file,type,SETUP);">updateRecentFiles</a>(aniFig,fullfile(path,[file ext]),varargin{1},SETUP);
+0527                 <a href="defaults.html" class="code" title="function varargout = defaults(action,DATA);">defaults</a>(<span class="string">'addRecentFiles'</span>,SETUP);
+0528                 
+0529             <span class="keyword">case</span> <span class="string">'UFF'</span>
+0530                 [file,path]=uiputfile(fullfile(SETUP.Path.Data,<span class="string">'*.ufb'</span>),<span class="string">'Export UFF binary file...'</span>);
+0531                 <span class="keyword">if</span> any([file==0,path==0])
+0532                     path=[];file=[];
+0533                     <span class="keyword">return</span>;
+0534                 <span class="keyword">end</span>
+0535                 [p,n,e] = fileparts(fullfile(path,file));
+0536                 <span class="keyword">if</span> ~strcmp(e,<span class="string">'.ufb'</span>)
+0537                     file = [file <span class="string">'.ufb'</span>];
+0538                 <span class="keyword">end</span>
+0539                 <span class="comment">% Headers</span>
+0540                 <span class="keyword">for</span> ii=1:length(UFF.dsn151)
+0541                     uf{ii,1}    = UFF.DATA{UFF.dsn151(ii)};
+0542                 <span class="keyword">end</span>
+0543                 <span class="comment">% Units</span>
+0544                 uf{end+1,1}     = UFF.DATA{min(UFF.dsn164)};
+0545                 <span class="comment">% Nodes</span>
+0546                 <span class="keyword">for</span> ii=1:length(UFF.dsn15)
+0547                     uf{end+1,1} = UFF.DATA{UFF.dsn15(ii)};
+0548                     <span class="keyword">for</span> node=1:length(uf{end}.Node)
+0549                         uf{end}.Node(node).dispCS   = 0;
+0550                     <span class="keyword">end</span>
+0551                 <span class="keyword">end</span>
+0552                 <span class="comment">% Wireframe</span>
+0553                 clrTable    = [0 0 0 ;10 10 10;1 0 0;0 1 0;0 0 1;0 1 1;1 0 1;1 1 0];
+0554                 <span class="keyword">for</span> ii=1:length(UFF.dsn82)
+0555                     clr = find(ismember(clrTable,SETUP.Component.Color(ii,:),<span class="string">'rows'</span>))-1;
+0556                     <span class="keyword">if</span> isempty(clr)
+0557                         <span class="comment">% find closes</span>
+0558                         lst     = (clrTable-ones(8,1)*SETUP.Component.Color(1,:)).^2;
+0559                         lstInd1 = find(min(lst(:,1))==lst(:,1));
+0560                         lstInd2 = find(min(lst(:,2))==lst(:,2));
+0561                         lstInd3 = find(min(lst(:,3))==lst(:,3));
+0562                         rms     = sqrt(sum((clrTable-ones(8,1)*SETUP.Component.Color(1,:)).^2,2));
+0563                         rmsInd  = find(min(rms)==rms);
+0564                         ind     = [lstInd1;lstInd2;lstInd3;rmsInd];
+0565                         uInd    = unique(ind);
+0566                         <span class="keyword">for</span> jj=1:length(uInd)
+0567                             val(jj) = length(find(uInd(ii)==ind));
+0568                         <span class="keyword">end</span>
+0569                         clr = uInd(min(find(max(val)==val)));
+0570                         <span class="keyword">if</span> isempty(clr)
+0571                             clr = 0;
+0572                         <span class="keyword">end</span>
+0573                     <span class="keyword">end</span>
+0574                     UFF.DATA{UFF.dsn82(ii)}.Color   = clr;
+0575                     UFF.DATA{UFF.dsn82(ii)}.ID      = SETUP.Component.Name{ii};
+0576                     uf{end+1,1} = UFF.DATA{UFF.dsn82(ii)};
+0577                 <span class="keyword">end</span>
+0578                 <span class="comment">% Modes</span>
+0579                 <span class="keyword">for</span> ii=1:length(MODAL)
+0580                     base        = UFF.DATA{UFF.dsn55(ii)}; <span class="comment">% 2012-01-13: bug fix changed 1 to ii so it goes through the modes. from 1 to ii.</span>
+0581                     uf{end+1,1} = base;
+0582                     uf{<span class="keyword">end</span>,1}.UID   = [];
+0583                     uf{<span class="keyword">end</span>,1}.Real  = [real(MODAL(ii).Freq) imag(MODAL(ii).Freq) 0 0 0 0]*2*pi;
+0584                     <span class="keyword">for</span> node=1:length(MODAL(ii).Nodes)
+0585                         NODE(node,1).Num    = MODAL(ii).Nodes(node);
+0586                         NODE(node,1).Data   = MODAL(ii).Data(node,:);
+0587                     <span class="keyword">end</span>
+0588                     uf{<span class="keyword">end</span>,1}.Node  = NODE;
+0589                 <span class="keyword">end</span>
+0590                 file    = fullfile(p,file);
+0591                 <a href="ufrw.html" class="code" title="function [ufOut,dsnID] = ufrw(action,varargin);">ufrw</a>(<span class="string">'save'</span>,file,uf,<span class="string">'binary'</span>);
+0592                 SETUP   = <a href="#_sub4" class="code" title="subfunction SETUP = updateRecentFiles(aniFig,file,type,SETUP);">updateRecentFiles</a>(aniFig,file,varargin{1},SETUP);
+0593                 <a href="defaults.html" class="code" title="function varargout = defaults(action,DATA);">defaults</a>(<span class="string">'addRecentFiles'</span>,SETUP);
+0594             <span class="keyword">case</span> <span class="string">'Snapshot'</span>
+0595                 str     = {<span class="string">'BMP monochrome'</span>;<span class="string">'BMP 24-bit'</span>;<span class="string">'EMF metafile'</span>;<span class="string">'EPS b&amp;w'</span>;<span class="string">'EPS color'</span>;<span class="string">'EPS2 B&amp;W'</span>;<span class="string">'EPS2 color'</span>;<span class="string">'JPEG 24-bit'</span>;<span class="string">'PCX 24-bit'</span>;<span class="string">'PDF color'</span>;<span class="string">'PNG 24-bit'</span>;<span class="string">'TIFF 24-bit'</span>};
+0596                 eqv     = {<span class="string">'-dbmpmono'</span>;<span class="string">'-dbmp'</span>;<span class="string">'-dmeta'</span>;<span class="string">'-deps'</span>;<span class="string">'-depsc'</span>;<span class="string">'-deps2'</span>;<span class="string">'-depsc2'</span>;<span class="string">'-djpeg'</span>;<span class="string">'-dpcx24b'</span>;<span class="string">'-dpdf'</span>;<span class="string">'-dpng'</span>;<span class="string">'-dtiff'</span>};
+0597                 xtn     = {<span class="string">'bmp'</span>;<span class="string">'bmp'</span>;<span class="string">'emf'</span>;<span class="string">'eps'</span>;<span class="string">'eps'</span>;<span class="string">'eps'</span>;<span class="string">'eps'</span>;<span class="string">'jpg'</span>;<span class="string">'pcx'</span>;<span class="string">'pdf'</span>;<span class="string">'png'</span>;<span class="string">'tif'</span>};
+0598                 type    = find(ismember(str,SETUP.Snapshot.Format));
+0599                 str     = {<span class="string">'Z-buffer'</span>;<span class="string">'Open GL'</span>;<span class="string">'Painters'</span>};
+0600                 rnd     = {<span class="string">'-zbuffer'</span>;<span class="string">'-opengl'</span>;<span class="string">'-painters'</span>};
+0601                 rndType = find(ismember(str,SETUP.Snapshot.Renderer));
+0602                 <span class="keyword">if</span> ~SETUP.Snapshot.DoAllModes
+0603                     <span class="comment">% Save current mode only</span>
+0604                     [file,path]=uiputfile(fullfile(SETUP.Path.Export,[<span class="string">'*.'</span> xtn{type}]),<span class="string">'Save snapshot...'</span>);
+0605                     <span class="keyword">if</span> any([file==0,path==0])
+0606                         path=[];file=[];
+0607                         <span class="keyword">return</span>;
+0608                     <span class="keyword">end</span>
+0609                     [path,file,ext]     = fileparts(fullfile(path,file));
+0610                     <span class="keyword">if</span> isempty(ext)
+0611                         ext = xtn{type};
+0612                     <span class="keyword">end</span>
+0613                     SETUP.Path.Export   = path;
+0614                     fileName            = fullfile(path,[file ext]);
+0615                     set(gcf,<span class="string">'PaperPositionMode'</span>,<span class="string">'auto'</span>)
+0616                     print(aniFig,[<span class="string">'-r'</span> num2str(SETUP.Snapshot.Resolution)],eqv{type},rnd{rndType},fileName)
+0617                 <span class="keyword">else</span>
+0618                     resp    = questdlg(<span class="string">'Are you ready to save all modes to snapshots?'</span>,<span class="string">'Snapshot Warning'</span>,<span class="string">'Yes'</span>,<span class="string">'No'</span>,<span class="string">'No'</span>);
+0619                     <span class="keyword">if</span> strcmp(resp,<span class="string">'No'</span>)
+0620                         <span class="keyword">return</span>;
+0621                     <span class="keyword">end</span>
+0622                     <span class="keyword">for</span> mode = 1:length(MODAL);
+0623                         set(findobj(gcf,<span class="string">'Tag'</span>,<span class="string">'popup_modeList'</span>),<span class="string">'Value'</span>,mode);
+0624                         <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'update_mode'</span>);
+0625                         <span class="comment">% Do AVI</span>
+0626                         fname       = sprintf(<span class="string">'Mode%02d(%4.4fHz).%s'</span>,mode,imag(MODAL(mode).Freq),xtn{type});
+0627                         fileName    = fullfile(SETUP.Path.Export,fname);
+0628                         <span class="comment">% Turn on toggle</span>
+0629                         set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Toggle:Animate'</span>),<span class="string">'Value'</span>,1);
+0630                         SETUP.Display.MaxDeflection   = 1;
+0631                         retVal  = 1;
+0632                         drawnow;
+0633                         UDATA.ActiveFrame   = SETUP.Animation.MaxFrame-1;
+0634                         <span class="keyword">while</span> retVal
+0635                             retVal  = <a href="animate_fcn.html" class="code" title="function retVal = animate_fcn;">animate_fcn</a>;
+0636                         <span class="keyword">end</span>
+0637                         set(aniFig,<span class="string">'InvertHardcopy'</span>,<span class="string">'off'</span>);
+0638                         print(aniFig,[<span class="string">'-r'</span> num2str(SETUP.Snapshot.Resolution)],eqv{type},rnd{rndType},fileName);
+0639                         set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Toggle:Animate'</span>),<span class="string">'Value'</span>,0);
+0640                     <span class="keyword">end</span>
+0641                 <span class="keyword">end</span>
+0642             <span class="keyword">case</span> <span class="string">'AVI'</span>
+0643                 <span class="keyword">if</span> ~SETUP.AVI.DoAllModes
+0644                     <span class="comment">% Save current mode only</span>
+0645                     [file,path]=uiputfile(fullfile(SETUP.Path.Data,<span class="string">'*.avi'</span>),<span class="string">'Save AVI file...'</span>);
+0646                     <span class="keyword">if</span> any([file==0,path==0])
+0647                         path=[];file=[];
+0648                         <span class="keyword">return</span>;
+0649                     <span class="keyword">end</span>
+0650                     <span class="keyword">try</span>
+0651                         [path,file,ext] = fileparts(fullfile(path,file));
+0652                         fileName    = fullfile(path,[file ext]);
+0653                         <span class="keyword">if</span> length(fileName)&gt;64
+0654                             str = sprintf(<span class="string">'AVI filenames are limited\nto a total length of 64 characters\n\n%s\n length = %d\n\nNot saving AVI.'</span>,fileName,length(fileName))
+0655                             warndlg(str,<span class="string">'AVI Warning'</span>)
+0656                             SETUP.AVI.On    = 0;
+0657                             SETUP.AVI.Start = 0;
+0658                             SETUP.AVI.Frame = 0;
+0659                             SETUP.AVI.Movie = [];
+0660                             <span class="keyword">return</span>;
+0661                         <span class="keyword">end</span>
+0662                         SETUP.AVI.FileName  = fileName;
+0663                         SETUP.AVI.On        = 1;
+0664                         UDATA.ActiveFrame   = floor(SETUP.Animation.Frames);
+0665                         UDATA.Direction     = 1;
+0666                         drawnow;
+0667                         <span class="keyword">if</span> ~get(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Toggle:Animate'</span>),<span class="string">'Value'</span>)
+0668                             set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Toggle:Animate'</span>),<span class="string">'Value'</span>,1);
+0669                             <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'run_animate'</span>)
+0670                         <span class="keyword">end</span>
+0671                     <span class="keyword">catch</span>
+0672                         warndlg(lasterr,<span class="string">'Animation'</span>)
+0673                         set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Toggle:Animate'</span>),<span class="string">'Value'</span>,0);
+0674                         SETUP.AVI.On    = 0;
+0675                         SETUP.AVI.Start = 0;
+0676                         SETUP.AVI.Frame = 0;
+0677                         SETUP.AVI.Movie = [];
+0678                     <span class="keyword">end</span>
+0679                 <span class="keyword">else</span>
+0680                     <span class="comment">% Save all modes</span>
+0681                     resp    = questdlg(<span class="string">'Are you ready to save all modes to AVI?'</span>,<span class="string">'AVI Warning'</span>,<span class="string">'Yes'</span>,<span class="string">'No'</span>,<span class="string">'No'</span>);
+0682                     <span class="keyword">if</span> strcmp(resp,<span class="string">'No'</span>)
+0683                         <span class="keyword">return</span>;
+0684                     <span class="keyword">end</span>
+0685                     <span class="keyword">for</span> mode = 1:length(MODAL);
+0686                         set(findobj(gcf,<span class="string">'Tag'</span>,<span class="string">'popup_modeList'</span>),<span class="string">'Value'</span>,mode);
+0687                         <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'update_mode'</span>);
+0688                         <span class="comment">% Do AVI</span>
+0689                         fname   = sprintf(<span class="string">'Mode%02d(%4.4fHz).avi'</span>,mode,imag(MODAL(mode).Freq));
+0690                         SETUP.AVI.FileName  = fullfile(SETUP.Path.Export,fname);
+0691                         <span class="comment">% Turn on toggle</span>
+0692                         set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Toggle:Animate'</span>),<span class="string">'Value'</span>,1);
+0693                         SETUP.AVI.On        = 1;
+0694                         retVal              = 1;
+0695                         UDATA.ActiveFrame   = floor(SETUP.Animation.Frames);
+0696                         UDATA.Direction     = 1;
+0697                         drawnow;
+0698                         <span class="keyword">while</span> retVal
+0699                             retVal  = <a href="animate_fcn.html" class="code" title="function retVal = animate_fcn;">animate_fcn</a>;
+0700                         <span class="keyword">end</span>
+0701                         set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Toggle:Animate'</span>),<span class="string">'Value'</span>,0);
+0702                     <span class="keyword">end</span>
+0703                 <span class="keyword">end</span>
+0704         <span class="keyword">end</span>
+0705         <span class="keyword">if</span> ishandle(findobj(0,<span class="string">'Tag'</span>,<span class="string">'ANIMATE:PREFERENCES'</span>))
+0706             set(findobj(findobj(0,<span class="string">'Tag'</span>,<span class="string">'ANIMATE:PREFERENCES'</span>),<span class="string">'Tag'</span>,<span class="string">'Preferences:EditExportPath'</span>),<span class="string">'String'</span>,SETUP.Path.Export);
+0707         <span class="keyword">end</span>
+0708         <a href="defaults.html" class="code" title="function varargout = defaults(action,DATA);">defaults</a>(<span class="string">'addRecentFiles'</span>,SETUP);
+0709     <span class="keyword">case</span> <span class="string">'zoom'</span>
+0710         val = get(varargin{1},<span class="string">'Value'</span>);
+0711         <span class="keyword">if</span> val
+0712             set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Toggle:Rotate'</span>),<span class="string">'Value'</span>,0);
+0713             <a href="view3d.html" class="code" title="function view3d(arg,arg2)">view3d</a> zoom;
+0714         <span class="keyword">else</span>
+0715             <a href="view3d.html" class="code" title="function view3d(arg,arg2)">view3d</a> off;
+0716         <span class="keyword">end</span>
+0717 
+0718     <span class="keyword">case</span> <span class="string">'rotate'</span>
+0719         val = get(varargin{1},<span class="string">'Value'</span>);
+0720         <span class="keyword">if</span> val
+0721             set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Toggle:Zoom'</span>),<span class="string">'Value'</span>,0);
+0722             <a href="view3d.html" class="code" title="function view3d(arg,arg2)">view3d</a> rot;
+0723         <span class="keyword">else</span>
+0724             <a href="view3d.html" class="code" title="function view3d(arg,arg2)">view3d</a> off;
+0725         <span class="keyword">end</span>
+0726 
+0727     <span class="keyword">case</span> <span class="string">'set'</span>
+0728         <span class="keyword">switch</span> varargin{1}
+0729             <span class="keyword">case</span> <span class="string">'FPC'</span>
+0730                 <span class="keyword">switch</span> varargin{2}
+0731                     <span class="keyword">case</span> <span class="string">'edit'</span>
+0732                         val = round(str2num(get(gcbo,<span class="string">'String'</span>)));
+0733                         <span class="keyword">if</span> isempty(val)
+0734                             set(gcbo,<span class="string">'String'</span>,num2str(SETUP.Animation.Frames));
+0735                             set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Slider:FPC'</span>),<span class="string">'Value'</span>,SETUP.Animation.Frames);
+0736                             <span class="keyword">return</span>
+0737                         <span class="keyword">end</span>
+0738                     <span class="keyword">case</span> <span class="string">'slider'</span>
+0739                         val = round(get(gcbo,<span class="string">'Value'</span>));
+0740                 <span class="keyword">end</span>
+0741                 SETUP.Animation.Frames  = min([max([3,val]),503]);
+0742                 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Edit:FPC'</span>)    , <span class="string">'String'</span>,num2str(SETUP.Animation.Frames));
+0743                 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Slider:FPC'</span>)  , <span class="string">'Value'</span>,SETUP.Animation.Frames);
+0744                 <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'reset_animation'</span>);
+0745             <span class="keyword">case</span> <span class="string">'amp'</span>
+0746                 <span class="keyword">switch</span> varargin{2}
+0747                     <span class="keyword">case</span> <span class="string">'edit'</span>
+0748                         val = round(str2num(get(gcbo,<span class="string">'String'</span>))*100)/100;
+0749                         <span class="keyword">if</span> isempty(val)
+0750                             set(gcbo,<span class="string">'String'</span>,num2str(SETUP.Animation.Amplitude));
+0751                             set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Slider:Amp'</span>),<span class="string">'Value'</span>,SETUP.Animation.Amplitude);
+0752                             <span class="keyword">return</span>
+0753                         <span class="keyword">end</span>
+0754                     <span class="keyword">case</span> <span class="string">'slider'</span>
+0755                         val = round(get(gcbo,<span class="string">'Value'</span>)*100)/100;
+0756                 <span class="keyword">end</span>
+0757                 SETUP.Animation.Amplitude   = min([max([.01,val]),100.01]);
+0758                 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Edit:Amp'</span>)    , <span class="string">'String'</span>,num2str(SETUP.Animation.Amplitude));
+0759                 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Slider:Amp'</span>)  , <span class="string">'Value'</span>,SETUP.Animation.Amplitude);
+0760                 <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'reset_animation'</span>);
+0761                 
+0762             <span class="keyword">case</span> <span class="string">'deg'</span>
+0763                 <span class="keyword">switch</span> varargin{2}
+0764                     <span class="keyword">case</span> <span class="string">'edit'</span>
+0765                         val = round(str2num(get(gcbo,<span class="string">'String'</span>)));
+0766                         <span class="keyword">if</span> isempty(val)
+0767                             set(gcbo,<span class="string">'String'</span>,num2str(SETUP.Animation.Theta));
+0768                             set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Slider:Deg'</span>),<span class="string">'Value'</span>,SETUP.Animation.Theta);
+0769                             <span class="keyword">return</span>
+0770                         <span class="keyword">end</span>
+0771                     <span class="keyword">case</span> <span class="string">'slider'</span>
+0772                         val = round(get(gcbo,<span class="string">'Value'</span>));
+0773                 <span class="keyword">end</span>
+0774                 SETUP.Animation.Theta   = min([max([-360,val]),360]);
+0775                 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Edit:Deg'</span>)    , <span class="string">'String'</span>,num2str(SETUP.Animation.Theta));
+0776                 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Slider:Deg'</span>)  , <span class="string">'Value'</span>,SETUP.Animation.Theta);
+0777                 <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'reset_animation'</span>);
+0778         <span class="keyword">end</span> <span class="comment">% END set</span>
+0779         <span class="comment">%if nargin&lt;3;command('updatePrefs');end</span>
+0780         <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'updatePrefs'</span>)
+0781 
+0782     <span class="keyword">case</span> <span class="string">'Change'</span>
+0783         str     = {<span class="string">'off'</span>,<span class="string">'on'</span>};
+0784         <span class="keyword">if</span> nargin&lt;3;
+0785             eval([<span class="string">'SETUP.Display.'</span> varargin{1} <span class="string">'=~SETUP.Display.'</span> varargin{1} <span class="string">';'</span>]);
+0786             value   = eval([<span class="string">'SETUP.Display.'</span> varargin{1} <span class="string">';'</span>]);
+0787             <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'updatePrefs'</span>);
+0788         <span class="keyword">else</span>
+0789             value   = varargin{2};
+0790             eval([<span class="string">'SETUP.Display.'</span> varargin{1} <span class="string">'=value;'</span>]);
+0791         <span class="keyword">end</span>
+0792         set(findobj(aniFig,<span class="string">'Tag'</span>,[<span class="string">'Menu:Display:'</span> varargin{1}]),<span class="string">'Checked'</span>,str{value+1});
+0793         <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'on/off'</span>,varargin{1});
+0794 
+0795     <span class="keyword">case</span> <span class="string">'MultipleChange'</span>
+0796         str     = {<span class="string">'off'</span>,<span class="string">'on'</span>};
+0797         <span class="keyword">switch</span> varargin{1}
+0798             <span class="keyword">case</span> {<span class="string">'Real'</span>,<span class="string">'Imaginary'</span>,<span class="string">'Complex'</span>}
+0799                 option  = {<span class="string">'Real'</span>,<span class="string">'Imaginary'</span>,<span class="string">'Complex'</span>};
+0800                 value   = strcmp(option,varargin{1});
+0801                 SETUP.View.VectorType = option{find(value==1)};
+0802             <span class="keyword">case</span> {<span class="string">'+X'</span>,<span class="string">'+Y'</span>,<span class="string">'+Z'</span>}
+0803                 option  = {<span class="string">'+X'</span>,<span class="string">'+Y'</span>,<span class="string">'+Z'</span>};
+0804                 vectors = eye(3);
+0805                 value   = strcmp(option,varargin{1});
+0806                 SETUP.View.UpVector = option{find(value==1)};
+0807                 <span class="keyword">switch</span> SETUP.View.Type
+0808                     <span class="keyword">case</span> <span class="string">'Single'</span>
+0809                         view(aniAxis,[1,1])
+0810                         set(aniAxis,<span class="string">'CameraUpVector'</span>,vectors(find(value==1),:));
+0811                     <span class="keyword">case</span> {<span class="string">'Cross-eyed'</span>,<span class="string">'Red/Blue Glasses'</span>}
+0812                         view(aniAxis,[1,1])
+0813                         set(aniAxis,<span class="string">'CameraUpVector'</span>,vectors(find(value==1),:));
+0814                         set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Axes:Ortho11'</span>),<span class="string">'CameraUpVector'</span>,vectors(find(value==1),:))
+0815                     <span class="keyword">case</span> <span class="string">'Quad'</span>
+0816                         view(aniAxis,[1,1])
+0817                         set(aniAxis,<span class="string">'CameraUpVector'</span>,vectors(find(value==1),:));
+0818                         [VWS,CUV]   = <a href="#_sub1" class="code" title="subfunction [VWS,CUV] = viewSetup(pV,pC,upVector)">viewSetup</a>(1,1,SETUP.View.UpVector);
+0819                         set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Axes:Ortho11'</span>),<span class="string">'View'</span>,VWS,<span class="string">'CameraUpVector'</span>,CUV)
+0820                         [VWS,CUV]   = <a href="#_sub1" class="code" title="subfunction [VWS,CUV] = viewSetup(pV,pC,upVector)">viewSetup</a>(2,3,SETUP.View.UpVector);
+0821                         set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Axes:Ortho21'</span>),<span class="string">'View'</span>,VWS,<span class="string">'CameraUpVector'</span>,CUV)
+0822                         [VWS,CUV]   = <a href="#_sub1" class="code" title="subfunction [VWS,CUV] = viewSetup(pV,pC,upVector)">viewSetup</a>(3,4,SETUP.View.UpVector);
+0823                         set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Axes:Ortho22'</span>),<span class="string">'View'</span>,VWS,<span class="string">'CameraUpVector'</span>,CUV)
+0824                 <span class="keyword">end</span>
+0825         <span class="keyword">end</span>
+0826         <span class="keyword">for</span> ii=1:length(option)
+0827             set(findobj(aniFig,<span class="string">'Tag'</span>,[<span class="string">'Menu:View:'</span> option{ii}]),<span class="string">'Checked'</span>,str{value(ii)+1});
+0828         <span class="keyword">end</span>
+0829         <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'reset_animation'</span>);
+0830         <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'changeView'</span>)
+0831         <span class="keyword">if</span> nargin&lt;3;<a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'updatePrefs'</span>);<span class="keyword">end</span>
+0832 
+0833     <span class="keyword">case</span> <span class="string">'on/off'</span>
+0834         str     = {<span class="string">'off'</span>,<span class="string">'on'</span>};
+0835         <span class="keyword">switch</span> varargin{1}
+0836             <span class="keyword">case</span> <span class="string">'Annotate'</span>
+0837                 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Text:Annotate'</span>),<span class="string">'Visible'</span>,str{SETUP.Display.Annotate+1});
+0838             <span class="keyword">case</span> <span class="string">'Static'</span>
+0839                 set(UDATA.Handles.Static,<span class="string">'Visible'</span>,str{SETUP.Display.Static+1});
+0840             <span class="keyword">case</span> <span class="string">'Labels'</span>
+0841                 set(UDATA.Handles.Labels,<span class="string">'Visible'</span>,str{SETUP.Display.Labels+1});
+0842             <span class="keyword">case</span> <span class="string">'Markers'</span>
+0843                 set(UDATA.Handles.Markers,<span class="string">'Visible'</span>,str{SETUP.Display.Markers+1});
+0844             <span class="keyword">case</span> <span class="string">'UCS'</span>
+0845                 set(UDATA.Handles.UCS,<span class="string">'Visible'</span>,str{SETUP.Display.UCS+1});
+0846         <span class="keyword">end</span>
+0847         <span class="keyword">if</span> SETUP.Component.Open
+0848             <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'components'</span>,<span class="string">'visible'</span>,find(SETUP.Component.Visible),1);
+0849             <span class="keyword">if</span> ~SETUP.Component.Wireframe
+0850                 set(UDATA.Handles.Markers,<span class="string">'Visible'</span>,<span class="string">'off'</span>);
+0851             <span class="keyword">end</span>
+0852         <span class="keyword">end</span>
+0853         <span class="keyword">if</span> nargin&lt;3;<a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'updatePrefs'</span>);<span class="keyword">end</span>
+0854 
+0855     <span class="keyword">case</span> <span class="string">'reset_animation'</span>
+0856         MAX=max(max(abs(MODAL(SETUP.Animation.ModeNr).Data)))./SETUP.Animation.Amplitude;
+0857         vector.x=MODAL(SETUP.Animation.ModeNr).Data(:,1)./MAX;
+0858         vector.y=MODAL(SETUP.Animation.ModeNr).Data(:,2)./MAX;
+0859         vector.z=MODAL(SETUP.Animation.ModeNr).Data(:,3)./MAX;
+0860         [ANIMATION,NODES]=<a href="#_sub2" class="code" title="subfunction [ANI,Nodes]=set_mode(vector)">set_mode</a>(vector);
+0861 
+0862         <span class="comment">% Set Axis Limits</span>
+0863         maxX    = max(max([ANIMATION.X]));
+0864         maxY    = max(max([ANIMATION.Y]));
+0865         maxZ    = max(max([ANIMATION.Z]));
+0866         scl     = 0.01;
+0867         maxX    = maxX*(1+sign(maxX)*scl);
+0868         maxY    = maxY*(1+sign(maxX)*scl);
+0869         maxZ    = maxZ*(1+sign(maxX)*scl);
+0870 
+0871         minX=min(min([ANIMATION.X]));
+0872         minY=min(min([ANIMATION.Y]));
+0873         minZ=min(min([ANIMATION.Z]));
+0874         minX    = minX*(1-sign(minX)*scl);
+0875         minY    = minY*(1-sign(minX)*scl);
+0876         minZ    = minZ*(1-sign(minX)*scl);
+0877         X   = [minX maxX];
+0878         Y   = [minY maxY];
+0879         Z   = [minZ maxZ];
+0880         <span class="keyword">if</span> diff(X)==0 | max(isnan(X))
+0881             X   = [min(min([ANIMATION.X])) max(max([ANIMATION.X]))]+[-1e-8 1e-8];
+0882         <span class="keyword">end</span>
+0883         <span class="keyword">if</span> diff(Y)==0 | max(isnan(Y))
+0884             Y   = [min(min([ANIMATION.Y])) max(max([ANIMATION.Y]))]+[-1e-8 1e-8];
+0885         <span class="keyword">end</span>
+0886         <span class="keyword">if</span> diff(Z)==0 | max(isnan(Z))
+0887             Z   = [min(min([ANIMATION.Z])) max(max([ANIMATION.Z]))]+[-1e-8 1e-8];
+0888         <span class="keyword">end</span>
+0889         <span class="comment">% MATLAB Version changes</span>
+0890         axs = findobj(aniFig,<span class="string">'Type'</span>,<span class="string">'Axes'</span>);
+0891         <span class="keyword">for</span> ii=1:length(axs)
+0892             <span class="comment">%axis(aniAxis,[minX maxX minY maxY minZ maxZ])</span>
+0893             set(axs(ii),<span class="string">'Xlim'</span>,X,<span class="string">'Ylim'</span>,Y,<span class="string">'Zlim'</span>,Z)
+0894         <span class="keyword">end</span>
+0895 
+0896 
+0897     <span class="keyword">case</span> <span class="string">'geo/con'</span>  <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+0898         warning off;
+0899         set(aniAxis,<span class="string">'CameraViewAngleMode'</span>,<span class="string">'auto'</span>);
+0900         ii=0;
+0901         delete(get(aniAxis,<span class="string">'Children'</span>));
+0902         axis(aniAxis,[-1 1 -1 1 -1 1]);
+0903         hold on
+0904         temp=1:length(GEOMETRY.node);
+0905         ind=temp(ismember(GEOMETRY.node,unique(GEOMETRY.conn(~isnan(GEOMETRY.conn)))));
+0906         <span class="keyword">for</span> i=1:length(ind)
+0907             DATA.PNodes(i,1)= GEOMETRY.node(ind(i));
+0908             DATA.Plot(i,1)  = GEOMETRY.x(ind(i));
+0909             DATA.Plot(i,2)  = GEOMETRY.y(ind(i));
+0910             DATA.Plot(i,3)  = GEOMETRY.z(ind(i));
+0911             DATA.Text(i,1)  = text(DATA.Plot(i,1),DATA.Plot(i,2),DATA.Plot(i,3),[<span class="string">' '</span> num2str(GEOMETRY.node(ind(i)))]);
+0912             labelText(i,1)  = GEOMETRY.node(ind(i));
+0913             set(DATA.Text(i,1),<span class="string">'Color'</span>,SETUP.Colors.Labels,<span class="string">'erasemode'</span>,<span class="string">'normal'</span>,<span class="string">'Fontsize'</span>,7,<span class="string">'Tag'</span>,<span class="string">'Axis:Label'</span>);  <span class="comment">% Text color is black</span>
+0914         <span class="keyword">end</span>
+0915         view(aniAxis,[135 35]);
+0916 
+0917         <span class="comment">% Use single plot command to plot node markers and make markers light purple</span>
+0918         DATA.Plot(end+1,:)=[NaN NaN NaN];
+0919         DATA.Point(1,1)=plot3(DATA.Plot(:,1),DATA.Plot(:,2),DATA.Plot(:,3),<span class="string">'.'</span>);
+0920         set(DATA.Point,<span class="string">'Color'</span>,SETUP.Colors.Markers,<span class="string">'erasemode'</span>,<span class="string">'normal'</span>,<span class="string">'MarkerSize'</span>,5,<span class="string">'Tag'</span>,<span class="string">'Axis:Node'</span>); <span class="comment">% Black Lines</span>
+0921         hold off
+0922         conn=[];
+0923         <span class="keyword">for</span> ii=1:length(GEOMETRY.conn);
+0924             <span class="keyword">if</span> isnan(GEOMETRY.conn(ii))
+0925                 conn(ii)=length(DATA.Plot);
+0926             <span class="keyword">else</span>
+0927                 conn(ii)=find(DATA.PNodes==GEOMETRY.conn(ii));
+0928             <span class="keyword">end</span>
+0929         <span class="keyword">end</span>
+0930         static_handle=line(DATA.Plot(conn,1),DATA.Plot(conn,2),DATA.Plot(conn,3),<span class="string">'Erasemode'</span>,<span class="string">'normal'</span>,<span class="string">'Color'</span>,SETUP.Colors.Static,<span class="string">'LineStyle'</span>,<span class="string">'-'</span>,<span class="string">'Tag'</span>,<span class="string">'Axis:Static'</span>);
+0931         conn_handle  =line(DATA.Plot(conn,1),DATA.Plot(conn,2),DATA.Plot(conn,3),<span class="string">'Erasemode'</span>,<span class="string">'normal'</span>,<span class="string">'Color'</span>,SETUP.Colors.Shape,<span class="string">'Tag'</span>,<span class="string">'Axis:Shape'</span>);
+0932         UDATA.ConnList=conn;
+0933         <span class="comment">%=================================================</span>
+0934         <span class="comment">%=================================================</span>
+0935         SETUP.Component.Handle=[];
+0936         compInd     = [];
+0937         fillHand    = [];
+0938         SETUP.Component.FillHandle      = [];
+0939         SETUP.Component.FillComps       = [];
+0940         SETUP.Component.FillConn        = [];
+0941         connData                        = [];
+0942         <span class="keyword">for</span> comp=1:size(SETUP.Component.Name,1)
+0943             CONN    = SETUP.Component.Nodes{comp,1};
+0944             conn    = [];
+0945             <span class="keyword">for</span> ii=1:length(CONN);
+0946                 <span class="keyword">if</span> isnan(CONN(ii))
+0947                     conn(ii)=length(DATA.Plot);
+0948                 <span class="keyword">else</span>
+0949                     conn(ii)=find(DATA.PNodes==CONN(ii));
+0950                 <span class="keyword">end</span>
+0951             <span class="keyword">end</span>
+0952             ind = find(conn==max(conn));
+0953             <span class="keyword">if</span> ind(1)~=1
+0954                 ind     = [1 ind];
+0955                 conn    = [max(conn) conn];
+0956             <span class="keyword">end</span>
+0957             ind = find(conn==max(conn));
+0958             <span class="keyword">if</span> ind(end)~=length(conn)
+0959                 ind     = [ind length(conn)+1];
+0960                 conn    = [conn max(conn)];
+0961             <span class="keyword">end</span>
+0962             set(gca,<span class="string">'NextPlot'</span>,<span class="string">'add'</span>);
+0963             fillHand    = [];
+0964             fillInd     = [];
+0965             <span class="keyword">for</span> ii=1:length(ind)-1
+0966                 connList            = conn(ind(ii)+1:ind(ii+1)-1);
+0967                 fillInd             = [fillInd;connList.'];
+0968                 fill_handle         = fill3(DATA.Plot(connList,1),DATA.Plot(connList,2),DATA.Plot(connList,3),SETUP.Component.Color(comp,:));
+0969                 fillHand            = [fillHand;fill_handle];
+0970                 compInd             = [compInd;1*comp];
+0971                 connData{end+1,1}   = connList;
+0972                 set(fill_handle,<span class="string">'Edgecolor'</span>,SETUP.Colors.Shape,<span class="string">'Erasemode'</span>,<span class="string">'normal'</span>,<span class="string">'Tag'</span>,<span class="string">'Axis:Fill'</span>,<span class="string">'visible'</span>,<span class="string">'off'</span>);
+0973             <span class="keyword">end</span>
+0974             SETUP.Component.MarkHandle(comp,1)  = plot3(DATA.Plot(conn,1),DATA.Plot(conn,2),DATA.Plot(conn,3),<span class="string">'.'</span>,<span class="string">'Color'</span>,SETUP.Component.Color(comp,:),<span class="string">'Erasemode'</span>,<span class="string">'normal'</span>,<span class="string">'Tag'</span>,<span class="string">'Axis:Mark'</span>,<span class="string">'Visible'</span>,<span class="string">'off'</span>,<span class="string">'MarkerSize'</span>,5);
+0975             SETUP.Component.WireHandle(comp,1)  = line( DATA.Plot(conn,1),DATA.Plot(conn,2),DATA.Plot(conn,3)    ,<span class="string">'Color'</span>,SETUP.Component.Color(comp,:),<span class="string">'Erasemode'</span>,<span class="string">'normal'</span>,<span class="string">'Tag'</span>,<span class="string">'Axis:Wire'</span>,<span class="string">'Visible'</span>,<span class="string">'off'</span>);
+0976             SETUP.Component.WireIndex{comp,1}   = conn;
+0977             SETUP.Component.FillHandle          = [SETUP.Component.FillHandle;fillHand];
+0978             SETUP.Component.FillComps           = compInd;
+0979         <span class="keyword">end</span>
+0980         SETUP.Component.FillConn            = connData;
+0981         set(gca,<span class="string">'NextPlot'</span>,<span class="string">'replace'</span>);
+0982         <span class="comment">%=================================================</span>
+0983         <span class="comment">%=================================================</span>
+0984 
+0985         <span class="comment">% Add a UCS to Fig</span>
+0986         mval    = max([max(GEOMETRY.x)-min(GEOMETRY.x) max(GEOMETRY.y)-min(GEOMETRY.y) max(GEOMETRY.z)-min(GEOMETRY.z)]);
+0987         scl=.075;
+0988         ucs=[0 0 0;
+0989             [1 0 0]*mval*scl;
+0990             [0 1 0]*mval*scl;
+0991             [0 0 1]*mval*scl;
+0992             NaN NaN NaN];
+0993         conn=[2 1 3 5 4 1];
+0994         ucs_handle=line(ucs(conn,1),ucs(conn,2),ucs(conn,3),<span class="string">'Erasemode'</span>,<span class="string">'normal'</span>,<span class="string">'Color'</span>,SETUP.Colors.UCS,<span class="string">'Tag'</span>,<span class="string">'Axis:UCS'</span>);
+0995         str={<span class="string">'X'</span>,<span class="string">'Y'</span>,<span class="string">'Z'</span>};
+0996         <span class="keyword">for</span> ii=1:3
+0997             t_hand(1,ii)=text(ucs(ii+1,1),ucs(ii+1,2),ucs(ii+1,3),str{ii});
+0998             set(t_hand(1,ii),<span class="string">'Color'</span>,[.1 .1 1],<span class="string">'erasemode'</span>,<span class="string">'normal'</span>,<span class="string">'Fontsize'</span>,7,<span class="string">'Tag'</span>,<span class="string">'Axis:UCS'</span>);
+0999         <span class="keyword">end</span>
+1000 
+1001         <span class="comment">% Scale axis to 2*prct in X,Y,&amp; Z</span>
+1002         axis equal;
+1003         ax=axis;
+1004         prct=0.02;
+1005         axis([ax(1)-(ax(2)-ax(1))*prct ax(2)+(ax(2)-ax(1))*prct,<span class="keyword">...</span>
+1006             ax(3)-(ax(4)-ax(3))*prct ax(4)+(ax(4)-ax(3))*prct,<span class="keyword">...</span>
+1007             ax(5)-(ax(6)-ax(5))*prct ax(6)+(ax(6)-ax(5))*prct])
+1008 
+1009         UDATA.Handles.Markers   = DATA.Point;
+1010         UDATA.Handles.Labels    = DATA.Text;
+1011         UDATA.Handles.Conn      = conn_handle;
+1012         UDATA.Handles.Static    = static_handle;
+1013         UDATA.Handles.UCS       = [ucs_handle t_hand];
+1014         UDATA.Handles.Wire      = SETUP.Component.WireHandle;
+1015         UDATA.Handles.Mark      = SETUP.Component.MarkHandle;
+1016         UDATA.Handles.Fill      = SETUP.Component.FillHandle;
+1017         UDATA.Geometry          = DATA.Plot;
+1018         UDATA.Text              = labelText;
+1019         UDATA.ActiveFrame       = 1;
+1020         UDATA.Direction         = 1;
+1021         UDATA.Frames            = SETUP.Animation.Frames;
+1022 
+1023         <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'on/off'</span>,<span class="string">'Labels'</span>);
+1024         <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'on/off'</span>,<span class="string">'Markers'</span>);
+1025         <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'on/off'</span>,<span class="string">'Static'</span>);
+1026         <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'on/off'</span>,<span class="string">'UCS'</span>);
+1027         set(aniAxis,<span class="string">'CameraViewAngleMode'</span>,<span class="string">'manual'</span>);
+1028         <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'MultipleChange'</span>,SETUP.View.UpVector);
+1029         warning on;
+1030 
+1031     <span class="keyword">case</span> <span class="string">'changeView'</span>  <span class="comment">%===================================================</span>
+1032         <span class="keyword">if</span> nargin==1
+1033             value   = SETUP.View.Axis;
+1034         <span class="keyword">else</span>
+1035             value   = varargin{1};
+1036         <span class="keyword">end</span>
+1037         SETUP.View.Axis = value;
+1038         <span class="keyword">switch</span> value
+1039             <span class="keyword">case</span> <span class="string">'X'</span>
+1040                 val = [1 0 0 0];
+1041                 [VWS,CUV] = <a href="#_sub1" class="code" title="subfunction [VWS,CUV] = viewSetup(pV,pC,upVector)">viewSetup</a>(3,1,SETUP.View.UpVector);
+1042                 view(aniAxis,VWS)
+1043             <span class="keyword">case</span> <span class="string">'Y'</span>
+1044                 val = [0 1 0 0];
+1045                 [VWS,CUV] = <a href="#_sub1" class="code" title="subfunction [VWS,CUV] = viewSetup(pV,pC,upVector)">viewSetup</a>(2,1,SETUP.View.UpVector);
+1046                 view(aniAxis,VWS)
+1047             <span class="keyword">case</span> <span class="string">'Z'</span>
+1048                 val = [0 0 1 0];
+1049                 [VWS,CUV] = <a href="#_sub1" class="code" title="subfunction [VWS,CUV] = viewSetup(pV,pC,upVector)">viewSetup</a>(1,1,SETUP.View.UpVector);
+1050                 set(aniAxis,<span class="string">'View'</span>,VWS);
+1051             <span class="keyword">case</span> <span class="string">'Ortho'</span>
+1052                 val = [0 0 0 1];
+1053                 [VWS,CUV] = <a href="#_sub1" class="code" title="subfunction [VWS,CUV] = viewSetup(pV,pC,upVector)">viewSetup</a>(1,2,SETUP.View.UpVector);
+1054                 set(aniAxis,<span class="string">'View'</span>,[135 35],<span class="string">'CameraUpVector'</span>,CUV);
+1055         <span class="keyword">end</span>
+1056         <span class="keyword">switch</span> SETUP.View.Type
+1057             <span class="keyword">case</span> <span class="string">'Cross-eyed'</span>
+1058                 ortho11 = findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Axes:Ortho11'</span>);
+1059                 <span class="keyword">switch</span> value
+1060                     <span class="keyword">case</span> {<span class="string">'X'</span>,<span class="string">'Y'</span>,<span class="string">'Z'</span>}
+1061                         view(ortho11,VWS);
+1062                         camorbit(ortho11, SETUP.View.CrosseyeAngle,0,<span class="string">'camera'</span>,SETUP.View.UpVector(2))
+1063                         camorbit(aniAxis,-SETUP.View.CrosseyeAngle,0,<span class="string">'camera'</span>,SETUP.View.UpVector(2))
+1064                     <span class="keyword">otherwise</span>
+1065                         set(ortho11,<span class="string">'View'</span>,[135 35],<span class="string">'CameraUpVector'</span>,CUV);
+1066                         camorbit(ortho11, SETUP.View.CrosseyeAngle,0,<span class="string">'camera'</span>,SETUP.View.UpVector(2))
+1067                         camorbit(aniAxis,-SETUP.View.CrosseyeAngle,0,<span class="string">'camera'</span>,SETUP.View.UpVector(2))
+1068                 <span class="keyword">end</span>
+1069             <span class="keyword">case</span> <span class="string">'Red/Blue Glasses'</span>
+1070                 <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'updateRotate'</span>)
+1071         <span class="keyword">end</span>
+1072         str     = {<span class="string">'off'</span>,<span class="string">'on'</span>};
+1073         uiStr   = {<span class="string">'X'</span>;<span class="string">'Y'</span>;<span class="string">'Z'</span>;<span class="string">'Ortho'</span>};
+1074         <span class="keyword">for</span> ii=1:4;
+1075             set(findobj(aniFig,<span class="string">'tag'</span>,[<span class="string">'ContextMenu\Axes\'</span> uiStr{ii}])   ,<span class="string">'Checked'</span>,str{val(ii)+1});
+1076             set(findobj(aniFig,<span class="string">'tag'</span>,[<span class="string">'Menu:View:'</span> uiStr{ii}])          ,<span class="string">'Checked'</span>,str{val(ii)+1});
+1077         <span class="keyword">end</span>
+1078         <span class="keyword">if</span> nargin&lt;3;<a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'updatePrefs'</span>);<span class="keyword">end</span>
+1079 
+1080 
+1081     <span class="keyword">case</span> <span class="string">'close'</span>
+1082         <span class="keyword">switch</span> varargin{1}
+1083             <span class="keyword">case</span> <span class="string">'main'</span>
+1084                 resp    = questdlg(<span class="string">'Exit Animation?'</span>,<span class="string">'Animation'</span>,<span class="string">'Yes'</span>,<span class="string">'No'</span>,<span class="string">'No'</span>);
+1085                 <span class="keyword">if</span> strcmp(resp,<span class="string">'No'</span>)
+1086                     <span class="keyword">return</span>;
+1087                 <span class="keyword">end</span>
+1088                 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Toggle:Animate'</span>),<span class="string">'Value'</span>,0);
+1089                 <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'close'</span>,<span class="string">'preferences'</span>);
+1090                 <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'close'</span>,<span class="string">'about'</span>);
+1091                 <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'close'</span>,<span class="string">'components'</span>);
+1092                 delete(aniFig);
+1093             <span class="keyword">case</span> <span class="string">'components'</span>
+1094                 compFig = findobj(0,<span class="string">'Tag'</span>,<span class="string">'ANIMATE:COMPONENTS'</span>);
+1095                 SETUP.Component.Open    = 0;
+1096                 <span class="keyword">if</span> ~isempty(UDATA.Handles)
+1097                     set(UDATA.Handles.Conn,<span class="string">'Visible'</span>,<span class="string">'on'</span>);
+1098                     <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'components'</span>,<span class="string">'visible'</span>,[1:size(SETUP.Component.Name,1)],0);
+1099                     <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'components'</span>,<span class="string">'fill'</span>   ,[1:size(SETUP.Component.Name,1)],0);
+1100                     <span class="keyword">if</span> SETUP.Display.Labels
+1101                         set(UDATA.Handles.Labels,<span class="string">'Visible'</span>,<span class="string">'on'</span>);
+1102                     <span class="keyword">end</span>
+1103                     <span class="keyword">if</span> SETUP.Display.Markers
+1104                         set(UDATA.Handles.Markers,<span class="string">'Visible'</span>,<span class="string">'on'</span>);
+1105                     <span class="keyword">end</span>
+1106                 <span class="keyword">end</span>
+1107                 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Menu:View:RedBlue'</span>),<span class="string">'Enable'</span>,<span class="string">'on'</span>);
+1108                 delete(compFig);
+1109             <span class="keyword">case</span> <span class="string">'preferences'</span>
+1110                 prefFig = findobj(0,<span class="string">'Tag'</span>,<span class="string">'ANIMATE:PREFERENCES'</span>);
+1111                 delete(prefFig);
+1112             <span class="keyword">case</span> <span class="string">'about'</span>
+1113                 abtFig  = findobj(0,<span class="string">'Tag'</span>,<span class="string">'ANIMATE:ABOUT'</span>);
+1114                 delete(abtFig);
+1115         <span class="keyword">end</span>
+1116 
+1117 
+1118     <span class="keyword">case</span> <span class="string">'resize'</span>
+1119         RESIZE.FigPos=get(aniFig,<span class="string">'Position'</span>);
+1120         POS=get(aniFig,<span class="string">'Position'</span>);
+1121         dy=POS(4)-RESIZE.FigPos(4);
+1122         x =POS(3);
+1123         objects=findobj(aniFig,<span class="string">'Type'</span>,<span class="string">'uicontrol'</span>);
+1124         <span class="keyword">for</span> ii=1:length(objects);
+1125             pos=get(objects(ii),<span class="string">'Position'</span>);
+1126             <span class="keyword">if</span> strcmp(get(objects(ii),<span class="string">'Tag'</span>),<span class="string">'Frame:Controls'</span>)
+1127                 set(objects(ii),<span class="string">'Position'</span>,[pos(1), pos(2)+dy, x+2 pos(4)]);
+1128             <span class="keyword">else</span>
+1129                 set(objects(ii),<span class="string">'Position'</span>,[pos(1), pos(2)+dy, pos(3) pos(4)]);
+1130             <span class="keyword">end</span>
+1131         <span class="keyword">end</span>
+1132         RESIZE.FigPos=get(aniFig,<span class="string">'Position'</span>);
+1133         <span class="keyword">if</span> strcmp(SETUP.View.Type,<span class="string">'Quad'</span>);
+1134             set(aniAxis,<span class="string">'Units'</span>,<span class="string">'pixels'</span>,<span class="string">'Position'</span>,[20, 20, POS(3)-70, POS(4)-125]);
+1135             set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Axes:Ortho11'</span>),<span class="string">'Units'</span>,<span class="string">'pixels'</span>,<span class="string">'Position'</span>,[20, 20+(POS(4)-125)/2, (POS(3)-70)/2, (POS(4)-125)/2]);
+1136             set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Axes:Ortho21'</span>),<span class="string">'Units'</span>,<span class="string">'pixels'</span>,<span class="string">'Position'</span>,[20, 20, (POS(3)-70)/2, (POS(4)-125)/2]);
+1137             set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Axes:Ortho22'</span>),<span class="string">'Units'</span>,<span class="string">'pixels'</span>,<span class="string">'Position'</span>,[25+(POS(3))/2, 20, (POS(3)-70)/2, (POS(4)-125)/2]);
+1138             set(aniAxis,<span class="string">'Units'</span>,<span class="string">'pixels'</span>,<span class="string">'Position'</span>,[25+(POS(3))/2, 20+(POS(4)-125)/2, (POS(3)-70)/2, (POS(4)-125)/2]);
+1139         <span class="keyword">elseif</span> strcmp(SETUP.View.Type,<span class="string">'Cross-eyed'</span>);
+1140             set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Axes:Ortho11'</span>),<span class="string">'Units'</span>,<span class="string">'pixels'</span>,<span class="string">'Position'</span>,[20, 20, (POS(3)-70)/2, (POS(4)-125)]);
+1141             set(aniAxis,<span class="string">'Units'</span>,<span class="string">'pixels'</span>,<span class="string">'Position'</span>,[25+(POS(3))/2, 20, (POS(3)-70)/2, (POS(4)-125)]);
+1142 
+1143         <span class="keyword">elseif</span> strcmp(SETUP.View.Type,<span class="string">'Red/Blue Glasses'</span>);
+1144             set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Axes:Ortho11'</span>),<span class="string">'Units'</span>,<span class="string">'pixels'</span>,<span class="string">'Position'</span>,[15, 20, POS(3)-70, POS(4)-125]);
+1145             set(aniAxis,<span class="string">'Units'</span>,<span class="string">'pixels'</span>,<span class="string">'Position'</span>,[25, 20, POS(3)-70, POS(4)-125]);
+1146             
+1147         <span class="keyword">else</span>
+1148             set(aniAxis,<span class="string">'Units'</span>,<span class="string">'pixels'</span>,<span class="string">'Position'</span>,[20, 20, POS(3)-70, POS(4)-125]);
+1149         <span class="keyword">end</span>
+1150         
+1151     <span class="keyword">case</span> <span class="string">'recentFile'</span>
+1152         ii=varargin{1};
+1153         <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'Load'</span>,eval([<span class="string">'SETUP.RecentFiles.Type'</span> ii]),eval([<span class="string">'SETUP.RecentFiles.File'</span> ii]),str2num(ii));
+1154 
+1155     <span class="keyword">case</span> <span class="string">'Load'</span>
+1156         <span class="keyword">if</span> all([~strcmp(SETUP.View.Type,<span class="string">'Single'</span>),~isempty(GEOMETRY)])
+1157             quadTemp    = SETUP.View.Type;
+1158             <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'viewType'</span>,<span class="string">'Single'</span>);
+1159         <span class="keyword">else</span>
+1160             quadTemp    = [];
+1161         <span class="keyword">end</span>
+1162         <span class="keyword">if</span> ishandle(findobj(0,<span class="string">'Tag'</span>,<span class="string">'ANIMATE:COMPONENTS'</span>))
+1163             compTemp    = 1;
+1164             compPos     = get(findobj(0,<span class="string">'Tag'</span>,<span class="string">'ANIMATE:COMPONENTS'</span>),<span class="string">'Position'</span>);
+1165             <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'close'</span>,<span class="string">'components'</span>);
+1166             SETUP.Component.Open    = 0;
+1167         <span class="keyword">else</span>
+1168             compTemp    = 0;
+1169         <span class="keyword">end</span>
+1170         <span class="keyword">if</span> ismember(SETUP.Colors.Background,[0 0 0],<span class="string">'rows'</span>)
+1171             clrTable = [1 1 1;1 1 1];
+1172         <span class="keyword">elseif</span> ismember(SETUP.Colors.Background,[1 1 1],<span class="string">'rows'</span>)
+1173             clrTable = [0 0 0;0 0 0];
+1174         <span class="keyword">else</span>
+1175             clrTable = [0 0 0;1 1 1];
+1176         <span class="keyword">end</span>
+1177         clrTable    = [clrTable;1 0 0;0 1 0;0 0 1;0 1 1;1 0 1;1 1 0];
+1178         <span class="keyword">switch</span> varargin{1}
+1179             <span class="keyword">case</span> <span class="string">'Matlab'</span>
+1180                 errFlg  = [];
+1181                 <span class="keyword">if</span> nargin==2
+1182                     [file,path]=uigetfile(fullfile(SETUP.Path.Data,<span class="string">'*.mat'</span>),<span class="string">'Select data file...'</span>);
+1183                     <span class="keyword">if</span> any([file==0,path==0]);
+1184                         <span class="keyword">return</span>;
+1185                     <span class="keyword">end</span>
+1186                     file    = fullfile(path,file);
+1187                 <span class="keyword">else</span>
+1188                     file    = varargin{2};
+1189                 <span class="keyword">end</span>
+1190                 <span class="keyword">if</span> ~exist(file,<span class="string">'file'</span>)
+1191                     errordlg(<span class="string">'Error finding file.'</span>,<span class="string">'Animation'</span>);
+1192                     <span class="keyword">return</span>
+1193                 <span class="keyword">end</span>
+1194                 <span class="keyword">try</span>
+1195                     D   = load(file,<span class="string">'-mat'</span>);
+1196                 <span class="keyword">catch</span>
+1197                     errFlg{1}   = <span class="string">'Error loading file.'</span>;
+1198                     errFlg{2}   = lasterr;
+1199                 <span class="keyword">end</span>
+1200                 <span class="keyword">try</span>
+1201                     GEOMETRY    = D.GEOMETRY;
+1202                     M           = D.MODAL;
+1203                 <span class="keyword">catch</span>
+1204                     errFlg{1}   = <span class="string">'Invalid animation file.'</span>;
+1205                     errFlg{2}   = lasterr;
+1206                 <span class="keyword">end</span>
+1207                 <span class="keyword">if</span> ~isempty(errFlg)
+1208                     errordlg(errFlg,<span class="string">'Animation'</span>);
+1209                     <span class="keyword">return</span>
+1210                 <span class="keyword">end</span>
+1211                 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Text:LoadGeom'</span>),<span class="string">'String'</span>,file);
+1212 
+1213                 <span class="comment">% VECTORS</span>
+1214                 ModalNodes  = M(1).Node;
+1215                 temp        = 1:length(GEOMETRY.node);
+1216                 ind1        = temp(ismember(GEOMETRY.node,unique(GEOMETRY.conn(~isnan(GEOMETRY.conn)))));
+1217                 GeomNodes   = GEOMETRY.node(ind1);
+1218                 <span class="keyword">for</span> ii=1:length(GeomNodes)
+1219                     ind(ii,1)=find(GeomNodes(ii)==ModalNodes);
+1220                 <span class="keyword">end</span>
+1221                 [Y,FreqInd]=sort(imag([M.Freq]));
+1222                 <span class="keyword">for</span> ii=1:length(M);
+1223                     MODAL(ii).Freq  = M(FreqInd(ii)).Freq;
+1224                     MODAL(ii).Data  = [M(FreqInd(ii)).X(ind) M(FreqInd(ii)).Y(ind) M(FreqInd(ii)).Z(ind)];
+1225                     MODAL(ii).Nodes = ModalNodes(ind);
+1226                     str{ii,1}       = sprintf(<span class="string">'(%02d) %8.3f'</span>,ii,2*pi*poles2fz(MODAL(ii).Freq));  <span class="comment">% Bugfix 2018-05-10 to print actual undamped natural frequency in 'Mode List'</span>
+1227                 <span class="keyword">end</span>
+1228                 [Path,File,Ext]         = fileparts(file);
+1229                 SETUP.Path.Data         = Path;
+1230                 SETUP.Path.ModalFile    = [File,Ext];
+1231                 SETUP.Animation.ModeNr  = 1;
+1232                 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Text:LoadVectors'</span>),<span class="string">'String'</span>,file);
+1233                 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'popup_modeList'</span>)  ,<span class="string">'Value'</span>,1,<span class="string">'String'</span>,str,<span class="string">'Enable'</span>,<span class="string">'on'</span>);
+1234                 UFF = <a href="#_sub10" class="code" title="subfunction UFF = createUFF(GEOMETRY,MODAL,SETUP,UFF);">createUFF</a>(GEOMETRY,MODAL,SETUP,UFF);
+1235                 SETUP.Component.Name    = {<span class="string">'None'</span>};
+1236                 SETUP.Component.Color   = [0 0 0];
+1237                 SETUP.Component.Nodes   = {GEOMETRY.conn};
+1238                 SETUP.Component.Visible = 1;
+1239                 SETUP.Component.Fill    = 0;
+1240 
+1241             <span class="keyword">case</span> <span class="string">'UFF'</span>
+1242                 errFlg      = [];
+1243                 <span class="keyword">if</span> nargin==2
+1244                     [file,path] =uigetfile(fullfile(SETUP.Path.Data,<span class="string">'*.u*'</span>),<span class="string">'Select UF file...'</span>);
+1245                     <span class="keyword">if</span> any([file==0,path==0]);
+1246                         <span class="keyword">return</span>;
+1247                     <span class="keyword">end</span>
+1248                     file    = fullfile(path,file);
+1249                 <span class="keyword">else</span>
+1250                     file    = varargin{2};
+1251                 <span class="keyword">end</span>
+1252                 <span class="keyword">if</span> ~exist(file,<span class="string">'file'</span>)
+1253                     errordlg(<span class="string">'Error finding file.'</span>,<span class="string">'Animation'</span>);
+1254                     <span class="keyword">return</span>
+1255                 <span class="keyword">end</span>
+1256                 
+1257                 <span class="keyword">try</span> 
+1258                     [U,dsn] = <a href="ufrw.html" class="code" title="function [ufOut,dsnID] = ufrw(action,varargin);">ufrw</a>(<span class="string">'load'</span>,file);
+1259                 <span class="keyword">catch</span>
+1260                     errFlg  = <span class="string">'Invalid universal file.'</span>;
+1261                 <span class="keyword">end</span>
+1262                 <span class="keyword">if</span> ~isempty(errFlg)
+1263                     errordlg(errFlg,<span class="string">'Animation'</span>);
+1264                     <span class="keyword">return</span>
+1265                 <span class="keyword">end</span>
+1266                 modeGroups  = find(dsn==55);
+1267                 geom        = find(dsn==15);
+1268                 conn        = find(dsn==82);
+1269                 <span class="keyword">if</span> isempty(modeGroups)
+1270                     errFlg{end+1,1}   = <span class="string">'File contains no mode groups (DSN 55).'</span>;
+1271                 <span class="keyword">end</span>
+1272                 <span class="keyword">if</span> isempty(geom)
+1273                     errFlg{end+1,1}   = <span class="string">'File contains no geometry (DSN 15).'</span>;
+1274                 <span class="keyword">end</span>
+1275                 <span class="keyword">if</span> isempty(conn)
+1276                     errFlg{end+1,1}   = <span class="string">'File contains no wireframe (DSN 82).'</span>;
+1277                 <span class="keyword">end</span>
+1278                 <span class="keyword">if</span> ~isempty(errFlg)
+1279                     errordlg(errFlg,<span class="string">'Animation'</span>);
+1280                     <span class="keyword">return</span>
+1281                 <span class="keyword">end</span>
+1282                 GEOMETRY    = [];
+1283                 MODAL       = [];
+1284                 UFF.DATA    = U;
+1285                 UFF.dsn15   = geom;
+1286                 UFF.dsn18   = find(dsn==18);
+1287                 UFF.dsn55   = modeGroups;
+1288                 UFF.dsn82   = conn;
+1289                 UFF.dsn151  = find(dsn==151);
+1290                 UFF.dsn164  = find(dsn==164);
+1291                 ref18   = [];
+1292                 <span class="keyword">for</span> ii=1:length(UFF.dsn18)
+1293                     ref18(ii)       = U{UFF.dsn18(ii)}.CS.Number;
+1294                     org             = U{UFF.dsn18(ii)}.CS.Origin;
+1295                     xax             = U{UFF.dsn18(ii)}.CS.Xaxis;
+1296                     xzp             = U{UFF.dsn18(ii)}.CS.XZplane;
+1297                     X               = (xax-org)./norm((xax-org));
+1298                     XZp             = (xzp-org)./norm((xzp-org));
+1299                     Y               =-cross(X,XZp)./norm(cross(X,XZp));
+1300                     Z               = cross(X,Y);
+1301                     Tx(:,:,ii)      = [X;Y;Z];
+1302                     <span class="comment">%TxOrg(:,:,ii)   = Tx(:,:,ii);</span>
+1303                     CSType(ii,1)    = U{UFF.dsn18(ii)}.CS.Type;
+1304                     CSOffset(ii,:)  = org;
+1305                     Xaxis(ii,:)     = xax;
+1306                     XZplane(ii,:)   = xzp;
+1307                 <span class="keyword">end</span>
+1308 
+1309                 <span class="keyword">for</span> ii=1:length(U{geom}.Node)
+1310                     <span class="keyword">if</span> U{geom}.Node(ii).defCS&gt;0
+1311                         <span class="comment">% Cylidrical</span>
+1312                         ind  = min(find(ref18==U{geom}.Node(ii).defCS));
+1313                         <span class="keyword">if</span> isempty(ind)
+1314                             warndlg(sprintf(<span class="string">'Refernce CS : %d not found.\nNode : %d is in global.'</span>,U{geom}.Node(ii).defCS,U{geom}.Node(ii).Label),<span class="string">'Universal file...'</span>);
+1315                             x   = U{geom}.Node(ii).Crd(1);
+1316                             y   = U{geom}.Node(ii).Crd(2);
+1317                             z   = U{geom}.Node(ii).Crd(3);
+1318                         <span class="keyword">else</span>
+1319                             <span class="keyword">if</span> CSType(ind,1)==1
+1320                                 <span class="comment">% Cylindrical</span>
+1321                                 <span class="comment">% ASSUME THAT DEF IS R, THETA, Z;</span>
+1322                                 theta   = U{geom}.Node(ii).Crd(2)*pi/180;
+1323                                 tx      = [cos(theta) sin(theta) 0;-sin(theta) cos(theta) 0;0 0 1];
+1324                                 x   = U{geom}.Node(ii).Crd(1)*cos(theta);
+1325                                 y   = U{geom}.Node(ii).Crd(1)*sin(theta);
+1326                                 z   = U{geom}.Node(ii).Crd(3);
+1327                                 val = [x y z]*Tx(:,:,ind);
+1328                                 x   = val(1);
+1329                                 y   = val(2);
+1330                                 z   = val(3);
+1331                             <span class="keyword">else</span>
+1332                                 <span class="comment">% Spherical</span>
+1333                             <span class="keyword">end</span>
+1334                         <span class="keyword">end</span>
+1335                     <span class="keyword">else</span>
+1336                         x   = U{geom}.Node(ii).Crd(1);
+1337                         y   = U{geom}.Node(ii).Crd(2);
+1338                         z   = U{geom}.Node(ii).Crd(3);
+1339                     <span class="keyword">end</span>
+1340                     GEOMETRY.node(ii)  = U{geom}.Node(ii).Label;
+1341                     GEOMETRY.x(ii)     = x;
+1342                     GEOMETRY.y(ii)     = y;
+1343                     GEOMETRY.z(ii)     = z;
+1344                     <span class="keyword">if</span> U{geom}.Node(ii).dispCS&gt;0 &amp; ~isempty(ref18)
+1345                         ind  = min(find(ref18==U{geom}.Node(ii).dispCS));
+1346                         <span class="keyword">if</span> isempty(ind)
+1347                             warndlg(sprintf(<span class="string">'Cannot find dsn18 ref for dispCS &quot;%d&quot; : Node &quot;%d&quot;\nDefault is global.'</span>,U{geom}.Node(ii).dispCS,U{geom}.Node(ii).Label))
+1348                             GEOMETRY.Tx(:,:,ii)  = eye(3);
+1349                         <span class="keyword">else</span>
+1350                             GEOMETRY.Tx(:,:,ii)  = tx*Tx(:,:,ind);
+1351                         <span class="keyword">end</span>
+1352                     <span class="keyword">else</span>
+1353                         GEOMETRY.Tx(:,:,ii)  = eye(3);
+1354                     <span class="keyword">end</span>
+1355                 <span class="keyword">end</span>
+1356                 CONN=[];
+1357                 dmy = 0;
+1358                 <span class="keyword">for</span> ii=1:length(conn)
+1359                     temp=U{conn(ii)}.Trace;
+1360                     temp(find(temp==-1))    = NaN;
+1361                     temp(find(temp== 0))    = NaN;
+1362                     <span class="keyword">if</span> ~isempty(temp)
+1363                         dmy = dmy+1;
+1364                         CONN        = [CONN temp NaN];
+1365                         CNN{dmy,1}  = [temp NaN];
+1366                         <span class="keyword">while</span> U{conn(ii)}.Color+1&gt;8
+1367                             U{conn(ii)}.Color   = U{conn(ii)}.Color-8;
+1368                         <span class="keyword">end</span>
+1369                         CLR(dmy,:)  = clrTable(U{conn(ii)}.Color+1,:);
+1370                         NAME{dmy,1} = U{conn(ii)}.ID;
+1371                     <span class="keyword">end</span>
+1372                 <span class="keyword">end</span>
+1373                 GEOMETRY.conn=CONN;
+1374                 <span class="comment">% group by components</span>
+1375                 unames  = unique(NAME);
+1376                 SETUP.Component.Name    = NAME;
+1377                 SETUP.Component.Color   = CLR;
+1378                 SETUP.Component.Nodes   = CNN;
+1379                 SETUP.Component.Visible = ones(size(CNN,1),1);
+1380                 SETUP.Component.Fill    = zeros(size(CNN,1),1);
+1381 
+1382                 NrPts   = length([U{modeGroups(1)}.Node.Num]);
+1383                 <span class="keyword">for</span> ii=1:length(modeGroups)
+1384                     freq(ii,1)  = U{modeGroups(ii)}.Real(2);
+1385                 <span class="keyword">end</span>
+1386                 indPos  = find(freq&gt;0);
+1387                 MODAL   = [];
+1388                 <span class="keyword">for</span> ii=1:length(indPos)
+1389                     Data   = reshape([U{modeGroups(indPos(ii))}.Node.Data],3,NrPts)';
+1390                     MODAL(ii).Node  = [U{modeGroups(indPos(ii))}.Node.Num]';
+1391                     <span class="keyword">for</span> nn=1:size(Data,1)
+1392                         ind  = find(MODAL(ii).Node(nn)==GEOMETRY.node);
+1393                         <span class="keyword">if</span> ~isempty(ind)
+1394                             Data(nn,:)   = Data(nn,:)*GEOMETRY.Tx(:,:,ind);
+1395                         <span class="keyword">end</span>
+1396                     <span class="keyword">end</span>
+1397                     MODAL(ii).X     = Data(:,1);
+1398                     MODAL(ii).Y     = Data(:,2);
+1399                     MODAL(ii).Z     = Data(:,3);
+1400                     MODAL(ii).Freq  = [U{modeGroups(indPos(ii))}.Real(1)+j*U{modeGroups(indPos(ii))}.Real(2)]./2/pi;
+1401                 <span class="keyword">end</span>
+1402                 M           = MODAL;
+1403                 ModalNodes  = M(1).Node;
+1404                 temp        = 1:length(GEOMETRY.node);
+1405                 ind1        = temp(ismember(GEOMETRY.node,unique(GEOMETRY.conn(~isnan(GEOMETRY.conn)))));
+1406                 GeomNodes   = GEOMETRY.node(ind1);
+1407                 <span class="keyword">for</span> ii=1:length(GeomNodes)
+1408                     ind(ii,1)=find(GeomNodes(ii)==ModalNodes);
+1409                 <span class="keyword">end</span>
+1410                 [Y,FreqInd]=sort(imag([M.Freq]));
+1411                 <span class="keyword">for</span> ii=1:length(M);
+1412                     MODAL(ii).Freq  = M(FreqInd(ii)).Freq;
+1413                     MODAL(ii).Data  = [M(FreqInd(ii)).X(ind) M(FreqInd(ii)).Y(ind) M(FreqInd(ii)).Z(ind)];
+1414                     MODAL(ii).Nodes = ModalNodes(ind);
+1415                     str{ii,1}       = sprintf(<span class="string">'(%02d) %8.3f'</span>,ii,imag(MODAL(ii).Freq));
+1416                 <span class="keyword">end</span>
+1417                 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'popup_modeList'</span>),<span class="string">'Value'</span>,1,<span class="string">'String'</span>,str,<span class="string">'Enable'</span>,<span class="string">'on'</span>);
+1418                 [Path,File,Ext]         = fileparts(file);
+1419                 SETUP.Path.Data         = Path;
+1420                 SETUP.Path.ModalFile    = [File,Ext];
+1421                 SETUP.Animation.ModeNr  = 1;
+1422                 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Menu:Display:Components'</span>),<span class="string">'Enable'</span>,<span class="string">'on'</span>);
+1423         <span class="keyword">end</span>
+1424         <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'geo/con'</span>);
+1425         <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'update_mode'</span>);
+1426         set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Toggle:Animate'</span>)  ,<span class="string">'Enable'</span>,<span class="string">'on'</span>);
+1427         set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Toggle:Zoom'</span>)     ,<span class="string">'Enable'</span>,<span class="string">'on'</span>);
+1428         set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Toggle:Rotate'</span>)   ,<span class="string">'Enable'</span>,<span class="string">'on'</span>);
+1429         set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Menu:Display'</span>)    ,<span class="string">'Enable'</span>,<span class="string">'on'</span>);
+1430         set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Menu:View'</span>)       ,<span class="string">'Enable'</span>,<span class="string">'on'</span>);
+1431         set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Menu:File:Save'</span>)  ,<span class="string">'Enable'</span>,<span class="string">'on'</span>);
+1432         <span class="keyword">if</span> ~isempty(quadTemp)
+1433             <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'viewType'</span>,quadTemp)
+1434         <span class="keyword">end</span>
+1435         <span class="keyword">if</span> compTemp &amp; strcmp(varargin{1},<span class="string">'UFF'</span>)
+1436             <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'components'</span>,<span class="string">'init'</span>,compPos);
+1437         <span class="keyword">end</span>
+1438         SETUP   = <a href="#_sub4" class="code" title="subfunction SETUP = updateRecentFiles(aniFig,file,type,SETUP);">updateRecentFiles</a>(aniFig,file,varargin{1},SETUP);
+1439         <a href="defaults.html" class="code" title="function varargout = defaults(action,DATA);">defaults</a>(<span class="string">'addRecentFiles'</span>,SETUP);
+1440         set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Toggle:Animate'</span>),<span class="string">'Value'</span>,1);
+1441         <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'run_animate'</span>);
+1442 
+1443     <span class="keyword">case</span> <span class="string">'update_mode'</span>
+1444         val=get(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'popup_modeList'</span>),<span class="string">'Value'</span>);
+1445         SETUP.Animation.ModeNr=val;
+1446         <span class="keyword">if</span> imag(MODAL(val).Freq)&gt;0
+1447             SIGN=<span class="string">'-'</span>;
+1448         <span class="keyword">else</span>
+1449             SIGN=<span class="string">'+'</span>;
+1450         <span class="keyword">end</span>
+1451         str=sprintf(<span class="string">'%s\nMode Nr: %02d\nFreq (Hz): %8.3f% 1s%8.3fi'</span>,SETUP.Path.ModalFile,val,real(MODAL(val).Freq),SIGN,abs(imag(MODAL(val).Freq)));
+1452         set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Text:Annotate'</span>),<span class="string">'String'</span>,str);
+1453         <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'reset_animation'</span>);
+1454 
+1455 
+1456     <span class="keyword">case</span> <span class="string">'set_vectorType'</span>
+1457         val=get(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Popup:vectorType'</span>),<span class="string">'Value'</span>);
+1458         str=get(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Popup:vectorType'</span>),<span class="string">'String'</span>);
+1459         SETUP.View.VectorType=str{val};
+1460         <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'update_mode'</span>);
+1461         <span class="keyword">if</span> nargin&lt;3;<a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'updatePrefs'</span>);<span class="keyword">end</span>
+1462 <span class="keyword">end</span>  <span class="comment">% End Switch(action)</span>
+1463 
+1464 <span class="comment">%==========================================================================</span>
+1465 <a name="_sub1" href="#_subfunctions" class="code">function [VWS,CUV] = viewSetup(pV,pC,upVector)</a>
+1466 T       = eye(3);
+1467 str     = {<span class="string">'+X'</span>,<span class="string">'+Y'</span>,<span class="string">'+Z'</span>};
+1468 vw      = [90,0;0,0;0,90];
+1469 vw(:,:,1)   = [90 0;180 0;0 90];
+1470 vw(:,:,2)   = [180 0;0 90;90 0];
+1471 vw(:,:,3)   = [180 90;90 0;180 0];
+1472 vals    = [1 2 3;2 3 1;3 1 2];
+1473 VWS     = vw(:,:,find(ismember(str,upVector)));
+1474 
+1475 <span class="comment">% GCA Camera Up Values</span>
+1476 cuv(:,:,1)  = [0 -1 0;1 0 0; 1  0  0;1 0 0]; <span class="comment">% +X Up view</span>
+1477 cuv(:,:,2)  = [0 0 -1;0 1 0; 0 1  0;0 1 0]; <span class="comment">% +Y Up view</span>
+1478 cuv(:,:,3)  = [-1 0 0;0 0 1; 0 0 1;0 0 1]; <span class="comment">% +Z Up view</span>
+1479 CUV         = cuv(:,:,find(ismember(str,upVector)));
+1480 
+1481 VWS = VWS(pV,:);
+1482 CUV = CUV(pC,:);
+1483 
+1484 
+1485 <span class="comment">%==========================================================================</span>
+1486 <a name="_sub2" href="#_subfunctions" class="code">function [ANI,Nodes]=set_mode(vector)</a>
+1487 <span class="keyword">global</span> UDATA SETUP MODAL
+1488 aniFig          = findobj(0,<span class="string">'Tag'</span>,<span class="string">'ANIMATE'</span>);
+1489 aniAxis         = findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Axes:Single'</span>);
+1490 UDATA.Frames    = SETUP.Animation.Frames;
+1491 
+1492 <span class="keyword">if</span> UDATA.ActiveFrame&gt;UDATA.Frames
+1493    UDATA.ActiveFrame=ceil(UDATA.Frames/2);
+1494 <span class="keyword">end</span>
+1495 
+1496 msx=[vector.x;NaN];
+1497 msy=[vector.y;NaN];
+1498 msz=[vector.z;NaN];
+1499 <span class="keyword">switch</span> SETUP.View.VectorType
+1500 <span class="keyword">case</span> <span class="string">'Real'</span>
+1501     msx=real(msx);
+1502     msy=real(msy);
+1503     msz=real(msz);
+1504     
+1505 <span class="keyword">case</span> <span class="string">'Imaginary'</span>
+1506     msx=imag(msx);
+1507     msy=imag(msy);
+1508     msz=imag(msz);
+1509     
+1510 <span class="keyword">end</span>
+1511 <span class="comment">% complex loop from -max to +max with a phase difference added</span>
+1512 temp.X=<a href="vecompspace.html" class="code" title="function y = vecompspace(d1, d2, n)">vecompspace</a>(abs(msx),angle(msx),UDATA.Frames)+UDATA.Geometry(:,1)*ones(1,UDATA.Frames);
+1513 temp.Y=<a href="vecompspace.html" class="code" title="function y = vecompspace(d1, d2, n)">vecompspace</a>(abs(msy),angle(msy),UDATA.Frames)+UDATA.Geometry(:,2)*ones(1,UDATA.Frames);
+1514 temp.Z=<a href="vecompspace.html" class="code" title="function y = vecompspace(d1, d2, n)">vecompspace</a>(abs(msz),angle(msz),UDATA.Frames)+UDATA.Geometry(:,3)*ones(1,UDATA.Frames);
+1515 
+1516 xx  = abs(temp.X(1:end-1,:)-UDATA.Geometry(1:end-1,1)*ones(1,UDATA.Frames));
+1517 yy  = abs(temp.Y(1:end-1,:)-UDATA.Geometry(1:end-1,1)*ones(1,UDATA.Frames));
+1518 zz  = abs(temp.Z(1:end-1,:)-UDATA.Geometry(1:end-1,1)*ones(1,UDATA.Frames));
+1519 a   = sqrt(sum(xx.^2+yy.^2+zz.^2,1));
+1520 ind = find(a==max(a));
+1521 SETUP.Animation.MaxFrame    = min(ind);
+1522 
+1523 <span class="keyword">for</span> fr=1:UDATA.Frames
+1524    Nodes(:,1:3,fr)      = [temp.X(1:end-1,fr) temp.Y(1:end-1,fr) temp.Z(1:end-1,fr)];
+1525    CompNodes(:,1:3,fr)  = [[temp.X(1:end-1,fr);NaN] [temp.Y(1:end-1,fr);NaN] [temp.Z(1:end-1,fr);NaN]];
+1526    ANI(1,fr).X          = temp.X(UDATA.ConnList,fr);
+1527    ANI(1,fr).Y          = temp.Y(UDATA.ConnList,fr);
+1528    ANI(1,fr).Z          = temp.Z(UDATA.ConnList,fr);
+1529 <span class="keyword">end</span>
+1530 NUDATA.ANI      = ANI;
+1531 NUDATA.NODES    = Nodes;
+1532 NUDATA.CompNodes= CompNodes;
+1533 
+1534 set(aniAxis,<span class="string">'Userdata'</span>,NUDATA);
+1535 
+1536 
+1537 <span class="comment">%==========================================================================</span>
+1538 <a name="_sub3" href="#_subfunctions" class="code">function HAND = getHandles(pos,ax,HAND,varargin);</a>
+1539 <span class="keyword">if</span> nargin&gt;3
+1540     HAND.Conn       = findobj(ax,<span class="string">'Tag'</span>,<span class="string">'Axis:Shape'</span>);
+1541     HAND.Static     = findobj(ax,<span class="string">'Tag'</span>,<span class="string">'Axis:Static'</span>);
+1542     HAND.Markers    = findobj(ax,<span class="string">'Tag'</span>,<span class="string">'Axis:Node'</span>);
+1543     HAND.UCS        = findobj(ax,<span class="string">'Tag'</span>,<span class="string">'Axis:UCS'</span>);
+1544     HAND.Labels     = findobj(ax,<span class="string">'Tag'</span>,<span class="string">'Axis:Label'</span>);
+1545     HAND.Wire       = flipud(findobj(ax,<span class="string">'Tag'</span>,<span class="string">'Axis:Wire'</span>));
+1546     HAND.Mark       = flipud(findobj(ax,<span class="string">'Tag'</span>,<span class="string">'Axis:Mark'</span>));
+1547     HAND.Fill       = flipud(findobj(ax,<span class="string">'Tag'</span>,<span class="string">'Axis:Fill'</span>));
+1548 <span class="keyword">else</span>
+1549     HAND.Conn(pos)      = findobj(ax,<span class="string">'Tag'</span>,<span class="string">'Axis:Shape'</span>);
+1550     HAND.Static(pos)    = findobj(ax,<span class="string">'Tag'</span>,<span class="string">'Axis:Static'</span>);
+1551     HAND.Markers(pos)   = findobj(ax,<span class="string">'Tag'</span>,<span class="string">'Axis:Node'</span>);
+1552     HAND.UCS(pos,:)     = findobj(ax,<span class="string">'Tag'</span>,<span class="string">'Axis:UCS'</span>);
+1553     HAND.Labels(:,pos)  = findobj(ax,<span class="string">'Tag'</span>,<span class="string">'Axis:Label'</span>);
+1554     HAND.Wire(:,pos)    = flipud(findobj(ax,<span class="string">'Tag'</span>,<span class="string">'Axis:Wire'</span>));
+1555     HAND.Mark(:,pos)    = flipud(findobj(ax,<span class="string">'Tag'</span>,<span class="string">'Axis:Mark'</span>));
+1556     HAND.Fill(:,pos)    = flipud(findobj(ax,<span class="string">'Tag'</span>,<span class="string">'Axis:Fill'</span>));
+1557 <span class="keyword">end</span>
+1558 
+1559 <span class="comment">%==========================================================================</span>
+1560 <a name="_sub4" href="#_subfunctions" class="code">function SETUP = updateRecentFiles(aniFig,file,type,SETUP);</a>
+1561 files   = {SETUP.RecentFiles.File1;SETUP.RecentFiles.File2;SETUP.RecentFiles.File3;SETUP.RecentFiles.File4};
+1562 ind     = find(ismember(files,file));
+1563 <span class="keyword">if</span> isempty(ind)
+1564     SETUP.RecentFiles.File4 = SETUP.RecentFiles.File3;
+1565     SETUP.RecentFiles.Type4 = SETUP.RecentFiles.Type3;
+1566     SETUP.RecentFiles.File3 = SETUP.RecentFiles.File2;
+1567     SETUP.RecentFiles.Type3 = SETUP.RecentFiles.Type2;
+1568     SETUP.RecentFiles.File2 = SETUP.RecentFiles.File1;
+1569     SETUP.RecentFiles.Type2 = SETUP.RecentFiles.Type1;
+1570     SETUP.RecentFiles.File1 = file;
+1571     SETUP.RecentFiles.Type1 = type;
+1572 <span class="keyword">else</span>
+1573     temp    = SETUP.RecentFiles;
+1574     rest    = setdiff([1:4],ind);
+1575     <span class="keyword">for</span> ii=3:-1:1;
+1576         eval([<span class="string">'SETUP.RecentFiles.File'</span> num2str(ii+1) <span class="string">'= temp.File'</span> num2str(rest(ii)) <span class="string">';'</span>]);
+1577         eval([<span class="string">'SETUP.RecentFiles.Type'</span> num2str(ii+1) <span class="string">'= temp.Type'</span> num2str(rest(ii)) <span class="string">';'</span>]);
+1578     <span class="keyword">end</span>
+1579     SETUP.RecentFiles.File1 = eval([<span class="string">'temp.File'</span> num2str(ind) <span class="string">';'</span>]);
+1580     SETUP.RecentFiles.Type1 = eval([<span class="string">'temp.Type'</span> num2str(ind) <span class="string">';'</span>]);
+1581 <span class="keyword">end</span>
+1582 
+1583 str = {<span class="string">'on'</span>,<span class="string">'off'</span>};
+1584 [p,fileTemp,e]  = fileparts(SETUP.RecentFiles.File1);
+1585 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Menu:File:File1'</span>),<span class="string">'Label'</span>,[fileTemp,e],<span class="string">'Visible'</span>,str{isempty(SETUP.RecentFiles.File1)+1});
+1586 [p,fileTemp,e]  = fileparts(SETUP.RecentFiles.File2);
+1587 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Menu:File:File2'</span>),<span class="string">'Label'</span>,[fileTemp,e],<span class="string">'Visible'</span>,str{isempty(SETUP.RecentFiles.File2)+1});
+1588 [p,fileTemp,e]  = fileparts(SETUP.RecentFiles.File3);
+1589 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Menu:File:File3'</span>),<span class="string">'Label'</span>,[fileTemp,e],<span class="string">'Visible'</span>,str{isempty(SETUP.RecentFiles.File3)+1});
+1590 [p,fileTemp,e]  = fileparts(SETUP.RecentFiles.File4);
+1591 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Menu:File:File4'</span>),<span class="string">'Label'</span>,[fileTemp,e],<span class="string">'Visible'</span>,str{isempty(SETUP.RecentFiles.File4)+1});
+1592 
+1593 <span class="comment">%==========================================================================</span>
+1594 <a name="_sub5" href="#_subfunctions" class="code">function clr = getColor(default,msg);</a>
+1595 clr = uisetcolor(default,msg);
+1596 <span class="keyword">if</span> ismember(clr,default,<span class="string">'rows'</span>)
+1597     clr = [];
+1598 <span class="keyword">end</span>
+1599 
+1600 <span class="comment">%==========================================================================</span>
+1601 <a name="_sub6" href="#_subfunctions" class="code">function updatePrefs(action,dlg,TEMP)</a>
+1602 set(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Preferences:AutoApply'</span>),<span class="string">'Value'</span>,TEMP.Animation.AutoApplyPrefs);
+1603 <span class="keyword">switch</span> action
+1604     <span class="keyword">case</span> <span class="string">'all'</span>
+1605         <a href="#_sub6" class="code" title="subfunction updatePrefs(action,dlg,TEMP)">updatePrefs</a>(<span class="string">'animation'</span> ,dlg,TEMP)
+1606         <a href="#_sub6" class="code" title="subfunction updatePrefs(action,dlg,TEMP)">updatePrefs</a>(<span class="string">'display'</span>   ,dlg,TEMP)
+1607         <a href="#_sub6" class="code" title="subfunction updatePrefs(action,dlg,TEMP)">updatePrefs</a>(<span class="string">'view'</span>      ,dlg,TEMP)
+1608         <a href="#_sub6" class="code" title="subfunction updatePrefs(action,dlg,TEMP)">updatePrefs</a>(<span class="string">'color'</span>     ,dlg,TEMP)
+1609         
+1610     <span class="keyword">case</span> <span class="string">'animation'</span>
+1611         set(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Preferences:FPC'</span>),<span class="string">'String'</span>,num2str(TEMP.Animation.Frames));
+1612         set(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Preferences:Amp'</span>),<span class="string">'String'</span>,num2str(TEMP.Animation.Amplitude));
+1613         set(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Preferences:Deg'</span>),<span class="string">'String'</span>,num2str(TEMP.Animation.Theta));
+1614     <span class="keyword">case</span> <span class="string">'display'</span>
+1615         set(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Preferences:Annotate'</span>),<span class="string">'Value'</span>,TEMP.Display.Annotate);
+1616         set(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Preferences:Static'</span>)  ,<span class="string">'Value'</span>,TEMP.Display.Static);
+1617         set(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Preferences:Markers'</span>) ,<span class="string">'Value'</span>,TEMP.Display.Markers);
+1618         set(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Preferences:Labels'</span>)  ,<span class="string">'Value'</span>,TEMP.Display.Labels);
+1619         set(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Preferences:UCS'</span>)     ,<span class="string">'Value'</span>,TEMP.Display.UCS);
+1620         set(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Preferences:Spin'</span>)    ,<span class="string">'Value'</span>,TEMP.Display.Spin);
+1621     <span class="keyword">case</span> <span class="string">'view'</span>
+1622         str = get(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Preferences:Axis'</span>),<span class="string">'String'</span>);
+1623         val = find(ismember(str,TEMP.View.Axis));
+1624         set(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Preferences:Axis'</span>),<span class="string">'Value'</span>,val);
+1625         str = {<span class="string">'Single'</span>,<span class="string">'Quad'</span>,<span class="string">'Cross-eyed'</span>,<span class="string">'Red/Blue Glasses'</span>};
+1626         val = find(ismember(str,TEMP.View.Type));
+1627         set(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Preferences:Type'</span>),<span class="string">'Value'</span>,val);
+1628         str = get(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Preferences:UpVector'</span>),<span class="string">'String'</span>);
+1629         val = find(ismember(str,TEMP.View.UpVector));
+1630         set(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Preferences:UpVector'</span>),<span class="string">'Value'</span>,val);
+1631         str = get(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Preferences:VectorType'</span>),<span class="string">'String'</span>);
+1632         val = find(ismember(str,TEMP.View.VectorType));
+1633         set(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Preferences:VectorType'</span>),<span class="string">'Value'</span>,val);
+1634     <span class="keyword">case</span> <span class="string">'color'</span>
+1635         set(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Preferences:BackgroundColor'</span>) ,<span class="string">'BackgroundColor'</span>,TEMP.Colors.Background,<span class="string">'ForegroundColor'</span>,TEMP.Colors.Background);
+1636         set(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Preferences:AnnotateColor'</span>)   ,<span class="string">'BackgroundColor'</span>,TEMP.Colors.Background,<span class="string">'ForegroundColor'</span>,TEMP.Colors.Annotate);
+1637         set(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Preferences:StaticColor'</span>)     ,<span class="string">'BackgroundColor'</span>,TEMP.Colors.Background,<span class="string">'ForegroundColor'</span>,TEMP.Colors.Static);
+1638         set(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Preferences:MarkersColor'</span>)    ,<span class="string">'BackgroundColor'</span>,TEMP.Colors.Background,<span class="string">'ForegroundColor'</span>,TEMP.Colors.Markers);
+1639         set(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Preferences:LabelsColor'</span>)     ,<span class="string">'BackgroundColor'</span>,TEMP.Colors.Background,<span class="string">'ForegroundColor'</span>,TEMP.Colors.Labels);
+1640         set(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Preferences:ShapeColor'</span>)      ,<span class="string">'BackgroundColor'</span>,TEMP.Colors.Background,<span class="string">'ForegroundColor'</span>,TEMP.Colors.Shape);
+1641         set(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Preferences:UCSColor'</span>)        ,<span class="string">'BackgroundColor'</span>,TEMP.Colors.Background,<span class="string">'ForegroundColor'</span>,TEMP.Colors.UCS);
+1642         set(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Preferences:RightEyeColor'</span>)   ,<span class="string">'BackgroundColor'</span>,TEMP.Colors.Background,<span class="string">'ForegroundColor'</span>,TEMP.Colors.RightEye);
+1643         set(findobj(dlg,<span class="string">'Tag'</span>,<span class="string">'Preferences:LeftEyeColor'</span>)    ,<span class="string">'BackgroundColor'</span>,TEMP.Colors.Background,<span class="string">'ForegroundColor'</span>,TEMP.Colors.LeftEye);
+1644 <span class="keyword">end</span>
+1645 
+1646 <span class="comment">%==========================================================================</span>
+1647 <a name="_sub7" href="#_subfunctions" class="code">function TEMP = getDefaults(TEMP);</a>
+1648 TEMP.Version.Nr            = <span class="string">'1.02 beta'</span>;
+1649 TEMP.Version.Date          = <span class="string">'13-Aug-2005'</span>;
+1650 
+1651 TEMP.Display.Annotate      = 1;
+1652 TEMP.Display.Static        = 1;
+1653 TEMP.Display.Markers       = 0;
+1654 TEMP.Display.Labels        = 0;
+1655 TEMP.Display.UCS           = 0;
+1656 TEMP.Display.Spin          = 0;
+1657 TEMP.Display.MaxDeflection = 0;
+1658 TEMP.Display.Renderer      = <span class="string">'zbuffer'</span>;
+1659 TEMP.Display.Fill = 0;
+1660 
+1661 TEMP.Component.Open        = 0;
+1662 TEMP.Component.Wireframe   = 1;
+1663 TEMP.Component.Name        = [];
+1664 TEMP.Component.Color       = [0 0 0];
+1665 TEMP.Component.Visible     = 1;
+1666 TEMP.Component.Fill        = 0;
+1667 
+1668 TEMP.Animation.Frames           = 250;
+1669 TEMP.Animation.Amplitude        = .25;
+1670 TEMP.Animation.Theta            = 30;
+1671 TEMP.Animation.MaxFrame         = round(TEMP.Animation.Frames/2);
+1672 TEMP.Animation.AutoApplyPrefs   = 0;
+1673 
+1674 TEMP.View.Type              = <span class="string">'Single'</span>;
+1675 TEMP.View.Axis              = <span class="string">'Ortho'</span>;
+1676 TEMP.View.CrosseyeAngle     = 3;
+1677 TEMP.View.VectorType        = <span class="string">'Complex'</span>;
+1678 TEMP.View.UpVector          = <span class="string">'+Z'</span>;
+1679 TEMP.View.MaxDeflection     = 0;
+1680 
+1681 TEMP.Colors.Background  = [ 1   1   1  ];
+1682 TEMP.Colors.Annotate    = [ 0   0   0  ];
+1683 TEMP.Colors.Static      = [ 1   0   0  ];
+1684 TEMP.Colors.Markers     = [ 0   0   0  ];
+1685 TEMP.Colors.Labels      = [ 0   0   0  ];
+1686 TEMP.Colors.Shape       = [ 0   0   0  ];
+1687 TEMP.Colors.UCS         = [ 0.1 0.1 1  ];
+1688 TEMP.Colors.RightEye    = [ 1   0   0  ];
+1689 TEMP.Colors.LeftEye     = [ 0   1   1  ];
+1690 
+1691 TEMP.AVI.On                = 0;
+1692 TEMP.AVI.Start             = 0;
+1693 TEMP.AVI.Frame             = 0;
+1694 TEMP.AVI.Movie             = [];
+1695 TEMP.AVI.Format            = <span class="string">'Cinepak'</span>;
+1696 TEMP.AVI.Quality           = 75;
+1697 TEMP.AVI.TimeLength        = 1;
+1698 TEMP.AVI.DoAllModes        = 0;
+1699 
+1700 TEMP.Snapshot.Format       = <span class="string">'EMF metafile'</span>;
+1701 TEMP.Snapshot.Resolution   = 100;
+1702 TEMP.Snapshot.Quality      = 75;
+1703 TEMP.Snapshot.DoAllModes   = 0;
+1704 TEMP.Snapshot.Renderer     = <span class="string">'Z-buffer'</span>;
+1705 
+1706 <span class="comment">%==========================================================================</span>
+1707 <a name="_sub8" href="#_subfunctions" class="code">function updateAniFig(aniFig,SETUP,H)</a>
+1708 <span class="comment">% Display</span>
+1709 str = {<span class="string">'off'</span>,<span class="string">'on'</span>};
+1710 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Menu:Display:Annotate'</span>)   ,<span class="string">'Checked'</span>,str{SETUP.Display.Annotate+1});
+1711 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Menu:Display:Static'</span>)     ,<span class="string">'Checked'</span>,str{SETUP.Display.Static+1});
+1712 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Menu:Display:Markers'</span>)    ,<span class="string">'Checked'</span>,str{SETUP.Display.Markers+1});
+1713 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Menu:Display:Labels'</span>)     ,<span class="string">'Checked'</span>,str{SETUP.Display.Labels+1});
+1714 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Menu:Display:UCS'</span>)        ,<span class="string">'Checked'</span>,str{SETUP.Display.UCS+1});
+1715 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Menu:Display:Spin'</span>)       ,<span class="string">'Checked'</span>,str{SETUP.Display.Spin+1});
+1716 <span class="comment">% View-Axis</span>
+1717 val = ismember({<span class="string">'X'</span>,<span class="string">'Y'</span>,<span class="string">'Z'</span>,<span class="string">'Ortho'</span>},SETUP.View.Axis);
+1718 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Menu:View:X'</span>)     ,<span class="string">'Checked'</span>,str{val(1)+1});
+1719 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Menu:View:Y'</span>)     ,<span class="string">'Checked'</span>,str{val(2)+1});
+1720 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Menu:View:Z'</span>)     ,<span class="string">'Checked'</span>,str{val(3)+1});
+1721 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Menu:View:Ortho'</span>) ,<span class="string">'Checked'</span>,str{val(4)+1});
+1722 <span class="comment">% ContextMenu-Axis</span>
+1723 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'ContextMenu\Axes\X'</span>)      ,<span class="string">'Checked'</span>,str{val(1)+1});
+1724 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'ContextMenu\Axes\Y'</span>)      ,<span class="string">'Checked'</span>,str{val(2)+1});
+1725 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'ContextMenu\Axes\Z'</span>)      ,<span class="string">'Checked'</span>,str{val(3)+1});
+1726 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'ContextMenu\Axes\Ortho'</span>)  ,<span class="string">'Checked'</span>,str{val(4)+1});
+1727 <span class="comment">% View-Type</span>
+1728 val = ismember({<span class="string">'Single'</span>,<span class="string">'Quad'</span>,<span class="string">'Cross-eyed'</span>,<span class="string">'Red/Blue Glasses'</span>},SETUP.View.Type);
+1729 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Menu:View:Single'</span>)    ,<span class="string">'Checked'</span>,str{val(1)+1});
+1730 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Menu:View:Quad'</span>)      ,<span class="string">'Checked'</span>,str{val(2)+1});
+1731 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Menu:View:Crosseyed'</span>) ,<span class="string">'Checked'</span>,str{val(3)+1});
+1732 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Menu:View:RedBlue'</span>)   ,<span class="string">'Checked'</span>,str{val(4)+1});
+1733 <span class="comment">% View-UpVector</span>
+1734 val = ismember({<span class="string">'&quot;X'</span>,<span class="string">'+Y'</span>,<span class="string">'+Z'</span>},SETUP.View.UpVector);
+1735 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Menu:View:+X'</span>),<span class="string">'Checked'</span>,str{val(1)+1});
+1736 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Menu:View:+Y'</span>),<span class="string">'Checked'</span>,str{val(2)+1});
+1737 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Menu:View:+Z'</span>),<span class="string">'Checked'</span>,str{val(3)+1});
+1738 <span class="comment">% View-VectorType</span>
+1739 val = ismember({<span class="string">'Real'</span>,<span class="string">'Imaginary'</span>,<span class="string">'Complex'</span>},SETUP.View.VectorType);
+1740 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Menu:View:Real'</span>)      ,<span class="string">'Checked'</span>,str{val(1)+1});
+1741 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Menu:View:Imaginary'</span>) ,<span class="string">'Checked'</span>,str{val(2)+1});
+1742 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Menu:View:Complex'</span>)   ,<span class="string">'Checked'</span>,str{val(3)+1});
+1743 <span class="comment">% Edits&amp;Sliders</span>
+1744 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Edit:FPC'</span>)    ,<span class="string">'String'</span>,num2str(SETUP.Animation.Frames));
+1745 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Slider:FPC'</span>)  ,<span class="string">'Value'</span> ,SETUP.Animation.Frames);
+1746 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Edit:Amp'</span>)    ,<span class="string">'String'</span>,num2str(SETUP.Animation.Amplitude));
+1747 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Slider:Amp'</span>)  ,<span class="string">'Value'</span> ,SETUP.Animation.Amplitude);
+1748 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Edit:Deg'</span>)    ,<span class="string">'String'</span>,num2str(SETUP.Animation.Theta));
+1749 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Slider:Deg'</span>)  ,<span class="string">'Value'</span> ,SETUP.Animation.Theta);
+1750 
+1751 <span class="comment">% Fig &amp; Axes</span>
+1752 bgc = SETUP.Colors.Background;
+1753 set(aniFig,<span class="string">'Color'</span>,bgc);
+1754 axs = findobj(aniFig,<span class="string">'Type'</span>,<span class="string">'Axes'</span>);
+1755 set(findobj(aniFig,<span class="string">'Tag'</span>,<span class="string">'Text:Annotate'</span>),<span class="string">'ForegroundColor'</span>,SETUP.Colors.Annotate,<span class="string">'BackgroundColor'</span>,bgc)
+1756 <span class="keyword">for</span> ii=1:length(axs)
+1757     set(axs(ii),<span class="string">'Color'</span>,bgc,<span class="string">'Xcolor'</span>,bgc,<span class="string">'Ycolor'</span>,bgc,<span class="string">'Zcolor'</span>,bgc);
+1758 <span class="keyword">end</span>
+1759 <span class="keyword">if</span> ~isempty(H)
+1760     <span class="comment">% Colors -----------------</span>
+1761     <span class="keyword">if</span> strcmp(SETUP.View.Type,<span class="string">'Red/Blue Glasses'</span>)
+1762         clr = [SETUP.Colors.LeftEye;SETUP.Colors.RightEye];
+1763         <span class="keyword">for</span> ii=1:2
+1764             set(H.Static(ii)    ,<span class="string">'Color'</span>,clr(ii,:))
+1765             set(H.Markers(ii)   ,<span class="string">'Color'</span>,clr(ii,:))
+1766             set(H.Labels(:,ii)  ,<span class="string">'Color'</span>,clr(ii,:))
+1767             set(H.UCS(ii)       ,<span class="string">'Color'</span>,clr(ii,:))
+1768             set(H.Conn(ii)      ,<span class="string">'Color'</span>,clr(ii,:))
+1769         <span class="keyword">end</span>
+1770     <span class="keyword">else</span>
+1771         set(H.Static    ,<span class="string">'Color'</span>,SETUP.Colors.Static)
+1772         set(H.Markers   ,<span class="string">'Color'</span>,SETUP.Colors.Markers)
+1773         set(H.Labels    ,<span class="string">'Color'</span>,SETUP.Colors.Labels)
+1774         set(H.UCS       ,<span class="string">'Color'</span>,SETUP.Colors.UCS)
+1775         set(H.Conn      ,<span class="string">'Color'</span>,SETUP.Colors.Shape)
+1776     <span class="keyword">end</span>
+1777     <span class="comment">% Display</span>
+1778     <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'Change'</span>,<span class="string">'Annotate'</span> ,SETUP.Display.Annotate,<span class="string">'skip'</span>)
+1779     <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'Change'</span>,<span class="string">'Static'</span>   ,SETUP.Display.Static,<span class="string">'skip'</span>)
+1780     <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'Change'</span>,<span class="string">'Markers'</span>  ,SETUP.Display.Markers,<span class="string">'skip'</span>)
+1781     <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'Change'</span>,<span class="string">'Labels'</span>   ,SETUP.Display.Labels,<span class="string">'skip'</span>)
+1782     <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'Change'</span>,<span class="string">'UCS'</span>      ,SETUP.Display.UCS,<span class="string">'skip'</span>)
+1783     <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'Change'</span>,<span class="string">'Spin'</span>     ,SETUP.Display.Spin,<span class="string">'skip'</span>)
+1784     
+1785     <span class="comment">% View -------------------</span>
+1786     <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'changeView'</span>    ,SETUP.View.Axis,<span class="string">'skip'</span>);
+1787     <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'viewType'</span>      ,SETUP.View.Type,<span class="string">'skip'</span>);
+1788     <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'MultipleChange'</span>,SETUP.View.UpVector,<span class="string">'skip'</span>)
+1789     <a href="command.html" class="code" title="function varargout = command(action,varargin)">command</a>(<span class="string">'MultipleChange'</span>,SETUP.View.VectorType,<span class="string">'skip'</span>)
+1790 <span class="keyword">end</span>
+1791 
+1792 <span class="comment">%==========================================================================</span>
+1793 <a name="_sub9" href="#_subfunctions" class="code">function str = compListbox(SETUP);</a>
+1794 onStr   = {<span class="string">'off'</span>,<span class="string">'on'</span>};
+1795 <span class="keyword">for</span> ii=1:size(SETUP.Component.Name)
+1796     str{ii,1}   = sprintf(<span class="string">'%-10s %3s %3s  [%0.2f %0.2f %0.2f]'</span>,SETUP.Component.Name{ii},<span class="keyword">...</span>
+1797         onStr{SETUP.Component.Visible(ii,1)+1},<span class="keyword">...</span>
+1798         onStr{SETUP.Component.Fill(ii,1)+1},<span class="keyword">...</span>
+1799         SETUP.Component.Color(ii,:));
+1800 <span class="keyword">end</span>
+1801 
+1802 <span class="comment">%==========================================================================</span>
+1803 <a name="_sub10" href="#_subfunctions" class="code">function UFF = createUFF(GEOMETRY,MODAL,SETUP,UFF);</a>
+1804 UFF = [];
+1805 <span class="comment">% Header (151)</span>
+1806 ii  = 1;
+1807 UFF.dsn151    = ii;
+1808 UFF.DATA{ii,1}.DSN    = 151;
+1809 UFF.DATA{ii,1}.UID    = [];
+1810 UFF.DATA{ii,1}.Ext    = [];
+1811 UFF.DATA{ii,1}.ModelFileName         = SETUP.Path.ModalFile;
+1812 UFF.DATA{ii,1}.ModelFileDescription  = <span class="string">'Modal Vector Animation'</span>;
+1813 UFF.DATA{ii,1}.ProgramDB     = <span class="string">'Modal Vector Animation'</span>;
+1814 UFF.DATA{ii,1}.DateCreated   = datestr(now,1);
+1815 UFF.DATA{ii,1}.TimeCreated   = datestr(now,13);
+1816 UFF.DATA{ii,1}.Version1      = 0;
+1817 UFF.DATA{ii,1}.Version2      = 0;
+1818 UFF.DATA{ii,1}.FileType      = 0;
+1819 UFF.DATA{ii,1}.DateSaved     = datestr(now,1);
+1820 UFF.DATA{ii,1}.TimeSaved     = datestr(now,13);
+1821 UFF.DATA{ii,1}.ProgramUF     = <span class="string">'Modal Vector Animation'</span>;
+1822 UFF.DATA{ii,1}.DateWritten   = datestr(now,1);
+1823 UFF.DATA{ii,1}.TimeWritten   = datestr(now,13);
+1824 <span class="comment">% Units (164)</span>
+1825 ii  = 2;
+1826 UFF.dsn164    = ii;
+1827 UFF.DATA{ii,1}.DSN               = 164;
+1828 UFF.DATA{ii,1}.UID               = [];
+1829 UFF.DATA{ii,1}.Ext               = [];
+1830 UFF.DATA{ii,1}.UnitsCode         = 9;
+1831 UFF.DATA{ii,1}.UnitsDescription  = <span class="string">'User Defined'</span>;
+1832 UFF.DATA{ii,1}.TempMode          = 0;
+1833 UFF.DATA{ii,1}.Length            = 1;
+1834 UFF.DATA{ii,1}.Force             = 1;
+1835 UFF.DATA{ii,1}.Temperature       = 1;
+1836 UFF.DATA{ii,1}.TemperatureOffset = 0;
+1837 
+1838 <span class="comment">% Nodes (15)</span>
+1839 ii  = 3;
+1840 UFF.dsn15     = ii;
+1841 UFF.DATA{ii,1}.DSN    = 15;
+1842 UFF.DATA{ii,1}.UID    = [];
+1843 UFF.DATA{ii,1}.Ext    = [];
+1844 <span class="keyword">for</span> jj=1:length(GEOMETRY.node)
+1845     UFF.DATA{ii,1}.Node(jj,1).Label  = GEOMETRY.node(jj);
+1846     UFF.DATA{ii,1}.Node(jj,1).defCS  = 0;
+1847     UFF.DATA{ii,1}.Node(jj,1).dispCS = 0;
+1848     UFF.DATA{ii,1}.Node(jj,1).Color  = 1;
+1849     UFF.DATA{ii,1}.Node(jj,1).Crd    = [GEOMETRY.x(jj) GEOMETRY.y(jj) GEOMETRY.z(jj)];
+1850 <span class="keyword">end</span>
+1851 
+1852 <span class="comment">% Wireframe (82)</span>
+1853 ii  = 4;
+1854 UFF.dsn82     = ii;
+1855 UFF.DATA{ii,1}.DSN           = 82;
+1856 UFF.DATA{ii,1}.UID           = [];
+1857 UFF.DATA{ii,1}.Ext           = [];
+1858 UFF.DATA{ii,1}.ID            = <span class="string">'None'</span>;
+1859 UFF.DATA{ii,1}.TraceNum      = 1;
+1860 UFF.DATA{ii,1}.Color         = 1;
+1861 conn                    = GEOMETRY.conn;
+1862 conn(find(isnan(conn))) = 0;
+1863 conn(find(conn&lt;0))      = 0;
+1864 UFF.DATA{ii,1}.Trace         = conn;
+1865 
+1866 <span class="comment">% Modes (55)</span>
+1867 <span class="comment">%MODAL=MODAL(1:7);   % Outcommented 2011-11-03, occasional crash</span>
+1868 <span class="keyword">for</span> modeNr = 1:length(MODAL)
+1869     ii  = 4+modeNr;
+1870     UFF.DATA{ii,1}.DSN    = 55;
+1871     UFF.DATA{ii,1}.UID    = [];
+1872     UFF.DATA{ii,1}.Ext    = [];
+1873     <span class="comment">% 2012-01-13: enhancement: Add freq &amp; damping to ID Line 1 for</span>
+1874     <span class="comment">% Engineering Office display</span>
+1875     UFF.DATA{ii,1}.ID{1,1}=[<span class="string">'Freq '</span> num2str(imag(MODAL(modeNr).Freq)) <span class="string">', Damp '</span> num2str(real(MODAL(modeNr).Freq))];
+1876     <span class="keyword">for</span> jj=2:5;
+1877         UFF.DATA{ii,1}.ID{jj,1}  = <span class="string">'None'</span>;
+1878     <span class="keyword">end</span>
+1879     UFF.DATA{ii,1}.modelType     = 1;
+1880     UFF.DATA{ii,1}.analysisType  = 3;
+1881     UFF.DATA{ii,1}.dataChar      = 2;
+1882     UFF.DATA{ii,1}.specificType  = 8;
+1883     UFF.DATA{ii,1}.Int           = [1 modeNr];
+1884     UFF.DATA{ii,1}.Real          = [real(MODAL(modeNr).Freq) imag(MODAL(modeNr).Freq) 0 0 0 0]*2*pi;
+1885     <span class="keyword">for</span> node = 1:size(MODAL(1).Nodes,1)
+1886         UFF.DATA{ii,1}.Node(node,1).Num  = MODAL(modeNr).Nodes(node);
+1887         UFF.DATA{ii,1}.Node(node,1).Data = MODAL(modeNr).Data(node,:);
+1888     <span class="keyword">end</span>
+1889 <span class="keyword">end</span>
+1890 UFF.dsn55   = [5:length(UFF.DATA)].';</pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>

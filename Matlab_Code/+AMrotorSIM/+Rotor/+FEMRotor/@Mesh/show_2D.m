@@ -1,23 +1,26 @@
-function show_2D(self)
-% Plot the mesh in 2D    
-    nodes = self.nodes;
-    mesh_node_z = zeros(1, length(nodes));
-    mesh_node_r = zeros(1, length(nodes));
+function show_2D(self,varargin)
+% plot the distribution of elements in 2D
+if nargin == 1
+    figure
+elseif nargin ==2
+    fig = varargin{1};
+    figure(fig); % open figure
+end
 
-    for k=1:length(self.nodes)
+hold on
+nEle = length(self.elements);
+x = [];
+y = [];
 
-        mesh_node_z(k) = nodes(k).z;
-        mesh_node_r(k) = nodes(k).radius_outer;
-        mesh_node_ri(k) = nodes(k).radius_inner;
-        o = zeros(1, length(mesh_node_z));
-        plot(mesh_node_z, o(k), 'x');
-        %text(mesh_node_z(k),o(k),num2str(k))
-        hold on
-
-        plot([mesh_node_z(k) mesh_node_z(k)],[mesh_node_r(k) o(k)],'b-')
-        plot([mesh_node_z(k) mesh_node_z(k)],[mesh_node_ri(k) o(k)],'b-')
-        axis([-1 5 -1 5]);
-        %hold off
-
-    end
+for k=1:nEle
+    ele = self.elements(k);
+    z1 = ele.node1.z;
+    z2 = ele.node2.z;
+    ro = ele.radius_outer;
+    ri = ele.radius_inner;
+    x = [x, z1, z1, z2, z2, z1, z2];
+    y = [y, ri, ro, ro, ri, ri, ri];
+end
+plot(x,y,'k')
+legend('Elements')
 end

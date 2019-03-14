@@ -1,0 +1,194 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Description of ir2pmitd</title>
+  <meta name="keywords" content="ir2pmitd">
+  <meta name="description" content="ir2MITD Multi-reference Ibrahim Time domain MDOF method for OMA parameter extraction">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="generator" content="m2html v1.5 &copy; 2003-2005 Guillaume Flandin">
+  <meta name="robots" content="index, follow">
+  <link type="text/css" rel="stylesheet" href="../m2html.css">
+</head>
+<body>
+<a name="_top"></a>
+<div><a href="../index.html">Home</a> &gt;  <a href="index.html">AbraVibe</a> &gt; ir2pmitd.m</div>
+
+<!--<table width="100%"><tr><td align="left"><a href="../index.html"><img alt="<" border="0" src="../left.png">&nbsp;Master index</a></td>
+<td align="right"><a href="index.html">Index for AbraVibe&nbsp;<img alt=">" border="0" src="../right.png"></a></td></tr></table>-->
+
+<h1>ir2pmitd
+</h1>
+
+<h2><a name="_name"></a>PURPOSE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>ir2MITD Multi-reference Ibrahim Time domain MDOF method for OMA parameter extraction</strong></div>
+
+<h2><a name="_synopsis"></a>SYNOPSIS <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="box"><strong>function [p,V] = ir2pmitd(h,fs,Nlines,MaxModes,MIF,f) </strong></div>
+
+<h2><a name="_description"></a>DESCRIPTION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre class="comment">ir2MITD Multi-reference Ibrahim Time domain MDOF method for OMA parameter extraction
+
+       [p,V] = ir2pmitd(h,fs,Nlines,MaxModes,MIF,f)
+
+       p           Vector with complex poles with positive imaginary part
+       V           Unscaled mode shapes in columns
+
+       h           IRF matrix with any format (accelerance or other), N-by-D-by-R
+       fs          Sampling frequency
+       Nlines      Number of values in h(t) used for estimation, normally
+                   50-100
+       MaxModes    Maximum number of modes, limit for stabilization
+                   diagram
+       MIF         Mode indicator function, e.g. a PSD
+       f           Frequency axis for MIF
+
+ This function plots a stabilization diagram with the mif function overlaid
+ where you can select the poles interactively.
+ Note that this function computes unscaled mode shapes.
+
+ See inside file for some parameters you can hardcode to control behavior.
+
+ See also <a href="frf2ptime.html" class="code" title="function [p,L,fLimits] = frf2ptime(H,f,Nlines,MaxModes,MifType,EstType)">FRF2PTIME</a></pre></div>
+
+<!-- crossreference -->
+<h2><a name="_cross"></a>CROSS-REFERENCE INFORMATION <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+This function calls:
+<ul style="list-style-image:url(../matlabicon.gif)">
+<li><a href="h2hankel.html" class="code" title="function Hank = h2hankel(h,nr,nc,nstart)">h2hankel</a>	H2HANKEL   Build Hankel matrix of time functions</li><li><a href="sdiagram.html" class="code" title="function [p,N] = sdiagram(varargin);">sdiagram</a>	SDIAGRAM Stability diagram, used for all methods (internal function)</li><li><a href="smoothfilt.html" class="code" title="function newx = smoothfilt(x,L)">smoothfilt</a>	SMOOTHFILT Simple smoothing filter for time domain data</li></ul>
+This function is called by:
+<ul style="list-style-image:url(../matlabicon.gif)">
+</ul>
+<!-- crossreference -->
+
+
+
+<h2><a name="_source"></a>SOURCE CODE <a href="#_top"><img alt="^" border="0" src="../up.png"></a></h2>
+<div class="fragment"><pre>0001 <a name="_sub0" href="#_subfunctions" class="code">function [p,V] = ir2pmitd(h,fs,Nlines,MaxModes,MIF,f)</a>
+0002 <span class="comment">%ir2MITD Multi-reference Ibrahim Time domain MDOF method for OMA parameter extraction</span>
+0003 <span class="comment">%</span>
+0004 <span class="comment">%       [p,V] = ir2pmitd(h,fs,Nlines,MaxModes,MIF,f)</span>
+0005 <span class="comment">%</span>
+0006 <span class="comment">%       p           Vector with complex poles with positive imaginary part</span>
+0007 <span class="comment">%       V           Unscaled mode shapes in columns</span>
+0008 <span class="comment">%</span>
+0009 <span class="comment">%       h           IRF matrix with any format (accelerance or other), N-by-D-by-R</span>
+0010 <span class="comment">%       fs          Sampling frequency</span>
+0011 <span class="comment">%       Nlines      Number of values in h(t) used for estimation, normally</span>
+0012 <span class="comment">%                   50-100</span>
+0013 <span class="comment">%       MaxModes    Maximum number of modes, limit for stabilization</span>
+0014 <span class="comment">%                   diagram</span>
+0015 <span class="comment">%       MIF         Mode indicator function, e.g. a PSD</span>
+0016 <span class="comment">%       f           Frequency axis for MIF</span>
+0017 <span class="comment">%</span>
+0018 <span class="comment">% This function plots a stabilization diagram with the mif function overlaid</span>
+0019 <span class="comment">% where you can select the poles interactively.</span>
+0020 <span class="comment">% Note that this function computes unscaled mode shapes.</span>
+0021 <span class="comment">%</span>
+0022 <span class="comment">% See inside file for some parameters you can hardcode to control behavior.</span>
+0023 <span class="comment">%</span>
+0024 <span class="comment">% See also FRF2PTIME</span>
+0025 
+0026 <span class="comment">% Copyright (c) 2009-2011 by Anders Brandt</span>
+0027 <span class="comment">% Email: abra@iti.sdu.dk</span>
+0028 <span class="comment">% Version: 1.0 2012-01-19</span>
+0029 <span class="comment">% This file is part of ABRAVIBE Toolbox for NVA</span>
+0030 
+0031 <span class="comment">%=========================================================================</span>
+0032 <span class="comment">% Compute MIF function for overlay in stability diagrams</span>
+0033 <span class="comment">%=========================================================================</span>
+0034 <span class="keyword">if</span> nargin == 4
+0035     [n,m,r]=size(h);
+0036     <span class="keyword">if</span> m &gt; 1
+0037         MIF=sum(abs(fft(h(:,:,1)))')';
+0038     <span class="keyword">else</span>
+0039         MIF=abs(fft(h));
+0040     <span class="keyword">end</span>
+0041     f=(0:fs/length(MIF):fs/2)';
+0042 
+0043     MIF=MIF(1:length(MIF)/2+1);
+0044     MIF=<a href="smoothfilt.html" class="code" title="function newx = smoothfilt(x,L)">smoothfilt</a>(MIF,20);
+0045     MIF=log(MIF);
+0046     MIF=MIF-min(MIF(10:end));
+0047     MIF=MIF/max(MIF(20:end));
+0048 <span class="keyword">elseif</span> nargin == 6   <span class="comment">% If both MIF and f given</span>
+0049     MIF=log(MIF);
+0050     MIF=MIF-min(MIF(10:end));
+0051     MIF=MIF/max(MIF(20:end));
+0052     <span class="comment">% Check if frequency increment is the same as for h()</span>
+0053     <span class="comment">% If not, interpolate MIF and f onto a new frequency axis</span>
+0054 <span class="comment">%     df=fs/length(h);</span>
+0055 <span class="comment">%     if df ~= f(2)-f(1)</span>
+0056 <span class="comment">%         fold=f;</span>
+0057 <span class="comment">%         f=(0:fs/length(h):fs/2)';</span>
+0058 <span class="comment">%         MIF=interp1(fold,MIF,f);</span>
+0059 <span class="comment">%     end</span>
+0060 <span class="keyword">else</span>
+0061     error(<span class="string">'Wrong number of input parameters'</span>);
+0062 <span class="keyword">end</span>
+0063 
+0064 <span class="comment">%=========================================================================</span>
+0065 <span class="comment">% Make initial calculations and frequency selection</span>
+0066 <span class="comment">%=========================================================================</span>
+0067 [N,D,R]=size(h);
+0068 
+0069 <span class="comment">%=========================================================================</span>
+0070 <span class="comment">% Start parameter estimation</span>
+0071 <span class="comment">%=========================================================================</span>
+0072 <span class="comment">% This is an implementation of a multi-reference technique based on</span>
+0073 <span class="comment">% the Ibrahim Time Domain method. It computes both poles and mode</span>
+0074 <span class="comment">% shapes with a stabilization diagram in which poles can be chosen.</span>
+0075 <span class="comment">% Closely spaced or repeated modes can be computed with this technique.</span>
+0076 
+0077 <span class="comment">% Build block Hankel matrix of order 2*MaxModes</span>
+0078 <span class="comment">% nr=2*MaxModes;  %</span>
+0079 nr=Nlines/2;      <span class="comment">% 2016-03-18 Fixed to be in line with input params;</span>
+0080 nc=nr;
+0081 <span class="comment">% Build the block Hankel matrices at times t and t+dt (H1 and H2, respectively)</span>
+0082 H1=<a href="h2hankel.html" class="code" title="function Hank = h2hankel(h,nr,nc,nstart)">h2hankel</a>(h,nc,nr,1);
+0083 H2=<a href="h2hankel.html" class="code" title="function Hank = h2hankel(h,nr,nc,nstart)">h2hankel</a>(h,nc,nr,2);
+0084 <span class="comment">% Compute SVD of H1 for compression</span>
+0085 [U,S,V]=svd(H1);
+0086 <span class="comment">% Loop through model orders</span>
+0087 <span class="keyword">for</span> Np = 2:2:2*MaxModes      <span class="comment">% Np is number of poles (2 per mode)</span>
+0088     <span class="comment">% Reduce matrices to size Np</span>
+0089     Up=U(1:D*nr,1:Np);
+0090 <span class="comment">%     Sp=S(1:Np,1:Np);</span>
+0091 <span class="comment">%     Vp=V(1:R*nc,1:Np);</span>
+0092     H1p=Up'*H1;
+0093     H2p=Up'*H2;
+0094     <span class="comment">% Build compressed system matrix</span>
+0095     Aprime=(H2p*H1p')*pinv(H1p*H1p');
+0096     <span class="comment">% Solve eigenvalues and conv to poles</span>
+0097     [Vp,Dp]=eig(Aprime);
+0098     Dp=diag(Dp);
+0099     poles=fs*log(Dp);
+0100     <span class="comment">% Expand mode shapes</span>
+0101     Ve=Up*Vp;
+0102     <span class="comment">% Save to arrays</span>
+0103     NoPoles(Np/2)=Np/2;
+0104     Poles{Np/2}=poles;
+0105     ModeShape{Np/2}=Ve(1:D,:);
+0106 <span class="keyword">end</span>
+0107 <span class="comment">% Adjust frequencies for offset due to limited frequency range</span>
+0108 fOffset=0;
+0109 <span class="keyword">for</span> Order=1:MaxModes
+0110     <span class="keyword">for</span> n=1:length(Poles{Order})
+0111         Sign=sign(imag(Poles{Order}(n)));
+0112         wr=abs(Poles{Order}(n))+2*pi*fOffset;
+0113         zr=abs(real(Poles{Order}(n)))/wr;
+0114         Poles{Order}(n)=-zr*wr+j*Sign*wr*sqrt(1-zr^2);
+0115     <span class="keyword">end</span>
+0116 <span class="keyword">end</span>
+0117 [p,SelOrder]=<a href="sdiagram.html" class="code" title="function [p,N] = sdiagram(varargin);">sdiagram</a>(f,Poles,NoPoles,MIF);        <span class="comment">% Select poles in stability diagram</span>
+0118 
+0119 <span class="comment">% Find mode shapes corresponding to the selected poles</span>
+0120 clear V
+0121 <span class="keyword">for</span> n = 1:length(p)
+0122     o_idx = find(NoPoles == SelOrder{n});           <span class="comment">% which order was clicked?</span>
+0123     [m,p_idx]=min(Poles{o_idx} - p(n));             <span class="comment">% Closest pole</span>
+0124     V(:,n)=ModeShape{o_idx}(:,p_idx);
+0125 <span class="keyword">end</span></pre></div>
+<hr><address>Generated on Sun 13-May-2018 19:04:23 by <strong><a href="http://www.artefact.tk/software/matlab/m2html/" title="Matlab Documentation in HTML">m2html</a></strong> &copy; 2005</address>
+</body>
+</html>
