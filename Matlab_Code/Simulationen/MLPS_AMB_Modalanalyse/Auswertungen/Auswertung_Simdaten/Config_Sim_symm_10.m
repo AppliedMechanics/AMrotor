@@ -7,8 +7,8 @@ cnfg.cnfg_rotor.material.name = 'steel';
 cnfg.cnfg_rotor.material.e_module = 211e9;  %[N/m^2]
 cnfg.cnfg_rotor.material.density  = 7446;   %[kg/m^3] %%SI EINHEITEN!!
 cnfg.cnfg_rotor.material.poisson  = 0.3;    %steel 0.27...0.3 [-]
-cnfg.cnfg_rotor.material.damping.rayleigh_alpha1= 0.1*2.6763e-07;%6.1090e-06;%6.1090e-05;%3.5834e-07;%0;%0.001;    %D=alpha1*K + alpha2*M
-cnfg.cnfg_rotor.material.damping.rayleigh_alpha2= 0.1*1.8334;%0.14707;%1.4707;%30;%1e7;%0.001;
+cnfg.cnfg_rotor.material.damping.rayleigh_alpha1= 6.1090e-06;%6.1090e-05;%3.5834e-07;%0;%0.001;    %D=alpha1*K + alpha2*M
+cnfg.cnfg_rotor.material.damping.rayleigh_alpha2= 0.14707;%1.4707;%30;%1e7;%0.001;
 
 % % Rotor Config
 % cnfg.cnfg_rotor.geo_nodes = {[0 0 0], [0 0.004 0], [0.3495 0.004 0], [0.3495 0.069 0], [0.3605 0.069 0], [0.3605 0.004 0], [0.695 0.004 0], [0.695 0 0]};
@@ -287,7 +287,7 @@ cnfg.cnfg_load(count).position=0.110;%PosML1
 % cnfg.cnfg_load(count).Table.force{5} = zeros(size(t)); %My [N]
 % cnfg.cnfg_load(count).Table.force{6} = zeros(size(t)); %Mz [N]
 % cnfg.cnfg_load(count).Table.time = load_force_table('Inputfiles/noise250Hz.mat'); 
-load('Inputfiles/noise250Hz_1kHz.mat')
+load('Inputfiles/noise250Hz.mat')
 cnfg.cnfg_load(count).Table.time = t;
 cnfg.cnfg_load(count).Table.force{1} = 1e-3*x; %Fx [N]
 cnfg.cnfg_load(count).Table.force{2} = 0*x; %Fy [N]
@@ -298,19 +298,19 @@ cnfg.cnfg_load(count).Table.force{6} = 0*x; %Mz [N]
 cnfg.cnfg_load(count).type='Force_timevariant_look_up';
 clear t x
 
-count = count+1;
-cnfg.cnfg_load(count).name='Noise2';
-cnfg.cnfg_load(count).position=0.590; % Position ML 2
-load('Inputfiles/noise250Hz_b.mat')
-cnfg.cnfg_load(count).Table.time = t;
-cnfg.cnfg_load(count).Table.force{1} = 1e-3*x; %Fx [N]
-cnfg.cnfg_load(count).Table.force{2} = 0*x; %Fy [N]
-cnfg.cnfg_load(count).Table.force{3} = 0*x; %Fz [N]
-cnfg.cnfg_load(count).Table.force{4} = 0*x; %Mx [N]
-cnfg.cnfg_load(count).Table.force{5} = 0*x; %My [N]
-cnfg.cnfg_load(count).Table.force{6} = 0*x; %Mz [N]
-cnfg.cnfg_load(count).type='Force_timevariant_look_up';
-clear t x
+% count = count+1;
+% cnfg.cnfg_load(count).name='Noise2';
+% cnfg.cnfg_load(count).position=0.590; % Position ML 2
+% load('Inputfiles/noise250Hz_b.mat')
+% cnfg.cnfg_load(count).Table.time = t;
+% cnfg.cnfg_load(count).Table.force{1} = 1e-1*x; %Fx [N]
+% cnfg.cnfg_load(count).Table.force{2} = 0*x; %Fy [N]
+% cnfg.cnfg_load(count).Table.force{3} = 0*x; %Fz [N]
+% cnfg.cnfg_load(count).Table.force{4} = 0*x; %Mx [N]
+% cnfg.cnfg_load(count).Table.force{5} = 0*x; %My [N]
+% cnfg.cnfg_load(count).Table.force{6} = 0*x; %Mz [N]
+% cnfg.cnfg_load(count).type='Force_timevariant_look_up';
+% clear t x
 
 % ========================================================================
 % Dichtungen

@@ -1,0 +1,13 @@
+ACHTUNG EXTRAPOLATION DER DICHTUNGSKENNWERTE OBERHALB VON 11k RPM
+
+Nulldurchgang der Dämpfung
+Moden mit forward-whirl
+1. Mode (forward): bei 9978.0901 1/min
+ 
+Kritsche Drehzahlen
+Moden mit forward-whirl
+1. Mode (forward): bei 197.9217 1/min
+2. Mode (forward): bei 11426.4558 1/min
+Moden mit backward-whirl
+1. Mode (backward): bei 591.5487 1/min
+2. Mode (backward): bei 11423.6581 1/min

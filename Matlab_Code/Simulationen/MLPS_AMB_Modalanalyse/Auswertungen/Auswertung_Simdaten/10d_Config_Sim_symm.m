@@ -7,8 +7,8 @@ cnfg.cnfg_rotor.material.name = 'steel';
 cnfg.cnfg_rotor.material.e_module = 211e9;  %[N/m^2]
 cnfg.cnfg_rotor.material.density  = 7446;   %[kg/m^3] %%SI EINHEITEN!!
 cnfg.cnfg_rotor.material.poisson  = 0.3;    %steel 0.27...0.3 [-]
-cnfg.cnfg_rotor.material.damping.rayleigh_alpha1= 0.1*2.6763e-07;%6.1090e-06;%6.1090e-05;%3.5834e-07;%0;%0.001;    %D=alpha1*K + alpha2*M
-cnfg.cnfg_rotor.material.damping.rayleigh_alpha2= 0.1*1.8334;%0.14707;%1.4707;%30;%1e7;%0.001;
+cnfg.cnfg_rotor.material.damping.rayleigh_alpha1= 2.6763e-07;%6.1090e-06;%6.1090e-05;%3.5834e-07;%0;%0.001;    %D=alpha1*K + alpha2*M
+cnfg.cnfg_rotor.material.damping.rayleigh_alpha2= 1.8334;%0.14707;%1.4707;%30;%1e7;%0.001;
 
 % % Rotor Config
 % cnfg.cnfg_rotor.geo_nodes = {[0 0 0], [0 0.004 0], [0.3495 0.004 0], [0.3495 0.069 0], [0.3605 0.069 0], [0.3605 0.004 0], [0.695 0.004 0], [0.695 0 0]};
@@ -180,21 +180,21 @@ cnfg.cnfg_bearing(count).name = 'Torque Lager Links';
 cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
 cnfg.cnfg_bearing(count).type='SimpleTorqueBearing';
 cnfg.cnfg_bearing(count).stiffness=1e10;                     %[N/m]
-cnfg.cnfg_bearing(count).damping = 100;
+cnfg.cnfg_bearing(count).damping = 0;%100;
 
 count = count + 1;
 cnfg.cnfg_bearing(count).name = 'Isotropes Lager 1';
 cnfg.cnfg_bearing(count).position=110e-3;                        %[m]
 cnfg.cnfg_bearing(count).type='SimpleBearing';
 cnfg.cnfg_bearing(count).stiffness=0.0670680e7*0.5;                     %[N/m]
-cnfg.cnfg_bearing(count).damping = 299.275;
+cnfg.cnfg_bearing(count).damping = 0;%299.275;
 
 count = count + 1;
 cnfg.cnfg_bearing(count).name = 'Isotropes Lager 2';
 cnfg.cnfg_bearing(count).position=590e-3;                        %[m]
 cnfg.cnfg_bearing(count).type='SimpleBearing';
 cnfg.cnfg_bearing(count).stiffness=0.0670680e7*0.5;                     %[N/m]
-cnfg.cnfg_bearing(count).damping = 299.275;
+cnfg.cnfg_bearing(count).damping = 0;%299.275;
 
 
 %% ========================================================================

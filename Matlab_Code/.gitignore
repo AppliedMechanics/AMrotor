@@ -5,7 +5,7 @@
 
 *.asv
 *.pdf
-*.mat
+**/results/**/*.mat
 *.DS_Store
 *.fig
 

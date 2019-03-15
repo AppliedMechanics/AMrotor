@@ -38,10 +38,6 @@ r.show;
 % g.show();
 
  r.rotor.assemble_fem;
-%  r.rotor.matrices.D = importdata('D_damping_modal_expansion.mat');% Daempfung aus estimate_damping_modal_expansion.m, setze dann d_bearing=0;
-%  for bearing=r.bearings
-%      bearing.cnfg.damping=0;
-%  end
   
 u_trans_rigid_body = r.compute_translational_rigid_body_modes;overall_mass = r.check_overall_translational_mass(u_trans_rigid_body)
 nEle = length(r.rotor.mesh.elements)
@@ -50,13 +46,6 @@ nEle = length(r.rotor.mesh.elements)
 % return
 
 % save r
-% % finde M, K fuer Optimierung der Daempfung mit script estimate_damping_modal_expansion.m
-% [rotor_with_bearing_only.M,~,~,rotor_with_bearing_only.K] = r.assemble_system_matrices_bearing_only(0);
-% save rotor_with_bearing_only rotor_with_bearing_only
-
-% fuer FRFfromMDK
-[M,D,~,K] = r.assemble_system_matrices(0);
-save MDKr_symm M D K r, clear M D K
 
 %% Running system analyses
 % 
@@ -110,7 +99,7 @@ St_Lsg.compute_ode15s_ss_variant
 
 d = Dataoutput.TimeDataOutput(St_Lsg);
 dataset_modalanalysis = d.compose_data();
-d.save_data(dataset_modalanalysis,'10e_noise1kHz250Hz_MIMOx_lowDamp_10s_1kHz');%'sweepx_0-300Hz_dm_AnregungLager2_4s-1kHz');
+d.save_data(dataset_modalanalysis,'noise250HzML1x_10s_1kHz');%'sweepx_0-300Hz_dm_AnregungLager2_4s-1kHz');
 % 
 % 
 % %------------- Erzeuge Grafiken aus Lösung -------------------

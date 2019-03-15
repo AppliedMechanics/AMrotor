@@ -1,0 +1,10 @@
+aus Betrachten der FRFs wurden folgende Eigenfrequenzen identifiziert:
+(nur durch "Hinschaeuen")
+
+16 Hz -> auch in JM SIRM2019
+51 Hz
+59 Hz
+100 Hz -> auch in JM SIRM2019
+162 Hz -> auch in JM SIRM2019
+204 Hz
+212 Hz

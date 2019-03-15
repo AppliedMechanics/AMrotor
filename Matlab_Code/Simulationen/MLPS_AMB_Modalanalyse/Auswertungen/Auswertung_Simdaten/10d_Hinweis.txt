@@ -1,0 +1,9 @@
+List of Undamped frequencies and damping 
+Natural Freq. [Hz]    Damping [%]
+---------------------------------
+    14.390 		        4.234
+    56.341 		       10.926
+    57.575 		       10.877
+
+nur die ersten drei Moden erkennbar, man erkennt auch keine Überhöhungen in der FRF oberhalb von 60 Hz
+wahrscheinlich ist die Daempfung zu hoch
