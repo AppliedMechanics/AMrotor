@@ -21,6 +21,6 @@ for k=1:nEle
     x = [x, z1, z1, z2, z2, z1, z2];
     y = [y, ri, ro, ro, ri, ri, ri];
 end
-plot(x,y,'k')
-legend('Elements')
+plot(x,y,'k','DisplayName','Elements')
+legend('show')
 end

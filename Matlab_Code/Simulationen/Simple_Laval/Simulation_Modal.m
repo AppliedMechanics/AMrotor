@@ -25,6 +25,7 @@ r.rotor.show_2D(); % compare discretisation and user input
 % r.rotor.geometry.show_3D(); % funktioniert nicht richtig
 
 % r.rotor.mesh.show_2D(); 
+% r.rotor.mesh.show_2D_nodes(); 
 %r.rotor.mesh.show_3D();
 
 g=Graphs.Visu_Rotorsystem(r);
