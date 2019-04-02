@@ -15,7 +15,7 @@ Janitor.setLayout(2,3);
 
 Config_Sim_Modal
 
-r=Rotorsystem(cnfg,'Lavasl-System');
+r=Rotorsystem(cnfg,'Laval-System');
 r.assemble; %fuehrt Funktion assemble.m mit Eingabe Objekt r aus Klasse Rotorsystem aus
 r.show; % Funktion AMrotor\Matlab_Code\+AMrotorSIM\+Rotor\+FEMRotor\@FeModel\print.m
 
