@@ -1,4 +1,6 @@
 %% ======================================================================
+% Abgestimmt mit Daten aus dem CAD, siehe Masterarbeit Ausarbeitung
+
 % Rotor
 
 cnfg.cnfg_rotor.name = 'MLPS - Rotor';
@@ -10,68 +12,38 @@ cnfg.cnfg_rotor.material.poisson  = 0.3;    %steel 0.27...0.3 [-]
 cnfg.cnfg_rotor.material.damping.rayleigh_alpha1= 6.1090e-06;%0.1*2.6763e-07;%6.1090e-05;%3.5834e-07;%0;%0.001;    %D=alpha1*K + alpha2*M
 cnfg.cnfg_rotor.material.damping.rayleigh_alpha2= 0.14707;%0.1*1.8334;%1.4707;%30;%1e7;%0.001;
 
-% % Rotor Config
-% cnfg.cnfg_rotor.geo_nodes = {[0 0 0], [0 0.004 0], [0.3495 0.004 0], [0.3495 0.069 0], [0.3605 0.069 0], [0.3605 0.004 0], [0.695 0.004 0], [0.695 0 0]};
+% Rotor Config
+% Geometrie wie in der Masterarbeit tab:MLPSGeometrie
+% Abschnitte A,B,C,D,E,F als 1,2,3,4,5,6
+A = [4.70228E-05, 0.000386307, 0.002318817, 0.000412598, 0.002858119, 0.014949];
+I = [1.76117E-10, 1.22902E-07, 4.71982E-07, 6.92336E-08, 3.26612E-06, 1.84085E-05];
+[ra,ri] = calculate_radii_from_IA(A,I);
+z = [0, 64, 94, 132, 162, 335, 350, 360, 366, 376, 391, 574, 604, 642, 672, 702]*1e-3;%Geometrieknoten z-Positionen
 
-% Rotor Config inkl. Lagerhuelsen
-% Lagerhuelsen
-%   mL = 0.940 kg aus MA Maierhofer
-%   rL = 32.5 mm aus Berechnung mit Masse
-%   lL = 38 mm aus CAD
-%   Lagerhuelse 1: Mittelpunkt bei 110 mm (aus Config_file unten), zleft=91mm, zright=129mm 
-%   Lagerhuelse 2: Mittelpunkt bei 630 mm, zleft=611mm, zright=649mm
-% cnfg.cnfg_rotor.geo_nodes = {[0 0 0], [0 0.004 0], [0.091 0.004 0], ... % Welle
-%     [0.091 0.0325 0], [0.129 0.0325 0], [0.129 0.004 0], ... % Lagerhuelse 1
-%     [0.3495 0.004 0], [0.3495 0.069 0], [0.3605 0.069 0], [0.3605 0.004 0],... % Rotorscheibe
-%     [0.611 0.004 0], [0.611 0.0325 0], [0.649 0.0325 0], ... % Lagerhuelse 2
-%     [0.649 0.004 0], [0.695 0.004 0], [0.695 0 0]}; % Welle
-
-% Rotor Config inkl. Lagerhuelsen SYMMETRISCH
-% Lagerhuelsen
-%   mL = 0.940 kg aus MA Maierhofer
-%   rL = 32.5 mm aus Berechnung mit Masse
-%   lL = 38 mm aus CAD
-%   Lagerhuelse 1: Mittelpunkt bei 110 mm 
-%   Lagerhuelse 2: Mittelpunkt bei 590 mm
-% cnfg.cnfg_rotor.geo_nodes = {[0 0 0], [0 0.004 0], [0.091 0.004 0], ... % Welle
-%     [0.091 0.0325 0], [0.129 0.0325 0], [0.129 0.004 0], ... % Lagerhuelse 1
-%     [0.3445 0.004 0], [0.3445 0.069 0], [0.3555 0.069 0], [0.3555 0.004 0],... % Rotorscheibe
-%     [0.571 0.004 0], [0.571 0.0325 0], [0.609 0.0325 0], ... % Lagerhuelse 2
-%     [0.609 0.004 0], [0.7 0.004 0], [0.7 0 0]}; % Welle
-
-% getuefftelt 24.01.2019 Radius der Scheiben geringer und dafür zusätzliche
-% Massescheiben, damit k geringer aber m gleich, andere Idee wäre Vorgabe
-% des E-Moduls für jeden Abschnitt(elementweise)
-% EF ABGESTIMMT MIT EXPERIMENTELL ERMITTELTEN, MAIERHOFER SIRM2019
-% Lagerhuelsen
-%   mL = 0.940 kg aus MA Maierhofer
-%   rL = 32.5 mm aus Berechnung mit Masse
-%   lL = 38 mm aus CAD
-%   Lagerhuelse 1: Mittelpunkt bei 110 mm 
-%   Lagerhuelse 2: Mittelpunkt bei 590 mm
-cnfg.cnfg_rotor.geo_nodes = {[0 0 0], [0 0.004 0], [0.091 0.004 0], ... % Welle
-    [0.091 0.0325*1.6 0], [0.129 0.0325*1.6 0], [0.129 0.004 0], ... % Lagerhuelse 1
-    [0.3445 0.004 0], [0.3445 0.069*1.3 0], [0.3555 0.069*1.3 0], [0.3555 0.004 0],... % Rotorscheibe
-    [0.571 0.004 0], [0.571 0.0325*1.6 0], [0.609 0.0325*1.6 0], ... % Lagerhuelse 2
-    [0.609 0.004 0], [0.7 0.004 0], [0.7 0 0]}; % Welle
-
-% % rumgetuefftelt:
-% raL = 0.04
-% riL = sqrt(raL^2-0.940/7446/pi/0.038)
-% raR = 0.09
-% riR = sqrt(raR^2-1.235/7446/pi/0.011)
-% cnfg.cnfg_rotor.geo_nodes = {[0 0 0], [0 0.004 0], [0.091 0.004 0], ... % Welle
-%     [0.091 0.04 0.01], [0.129 0.04 0.01], [0.129 0.004 0], ... % Lagerhuelse 1
-%     [0.3495 0.004 0], [0.3495 0.09 0.06], [0.3605 0.09 0.06], [0.3605 0.004 0],... % Rotorscheibe
-%     [0.611 0.004 0], [0.611 0.04 0.01], [0.649 0.04 0.01], ... % Lagerhuelse 2
-%     [0.649 0.004 0], [0.695 0.004 0], [0.695 0 0]}; % Welle
+cnfg.cnfg_rotor.geo_nodes = {[z(1) ra(1) ri(1)], [z(2) ra(1) ri(1)], ... % Abschnitt A
+    [z(2) ra(2) ri(2)], [z(3) ra(2) ri(2)], ... % Abschnitt B
+    [z(3) ra(3) ri(3)], [z(4) ra(3) ri(3)], ... % Abschnitt C
+    [z(4) ra(2) ri(2)], [z(5) ra(2) ri(2)], ... % Abschnitt B
+    [z(5) ra(1) ri(1)], [z(6) ra(1) ri(1)], ... % Abschnitt A
+    [z(6) ra(4) ri(4)], [z(7) ra(4) ri(4)], ... % Abschnitt D
+    [z(7) ra(5) ri(5)], [z(8) ra(5) ri(5)], ... % Abschnitt E
+    [z(8) ra(6) ri(6)], [z(9) ra(6) ri(6)], ... % Abschnitt F
+    [z(9) ra(5) ri(5)], [z(10) ra(5) ri(5)], ... % Abschnitt E
+    [z(10) ra(4) ri(4)], [z(11) ra(4) ri(4)], ... % Abschnitt D
+    [z(11) ra(1) ri(1)], [z(12) ra(1) ri(1)], ... % Abschnitt A
+    [z(12) ra(2) ri(2)], [z(13) ra(2) ri(2)], ... % Abschnitt B
+    [z(13) ra(3) ri(3)], [z(14) ra(3) ri(3)], ... % Abschnitt C
+    [z(14) ra(2) ri(2)], [z(15) ra(2) ri(2)], ... % Abschnitt B
+    [z(15) ra(1) ri(1)], [z(16) ra(1) ri(1)], ... % Abschnitt A
+    }; % Endknoten
+clear A I ra ri z
 
 
 % FEM Config
 cnfg.cnfg_rotor.mesh_opt.name = 'Mesh 1';
 cnfg.cnfg_rotor.mesh_opt.n_refinement = 10; %number of refinement steps between d_min and d_max 
-cnfg.cnfg_rotor.mesh_opt.d_min= 0.002;
-cnfg.cnfg_rotor.mesh_opt.d_max = 0.01;
+cnfg.cnfg_rotor.mesh_opt.d_min= 0.001;
+cnfg.cnfg_rotor.mesh_opt.d_max = 0.005; % sehr kleiner Wert, damit auch der kleinste Abschnitt noch abgebildet wird
 cnfg.cnfg_rotor.mesh_opt.approx = 'symmetric';   %Approximation for linear functions with gradient 1=0;
                                 % Insert: upper sum, lower sum, mean, symmetric.
 
@@ -110,70 +82,70 @@ count = 0;
 
 %% ========================================================================
 % Sensors
-% cnfg.cnfg_sensor=[];
-% count = 0; 
-% 
-% count = count + 1;
-% cnfg.cnfg_sensor(count).name = 'WegLager1links';
-% cnfg.cnfg_sensor(count).position=0.110-0.085/2;
-% cnfg.cnfg_sensor(count).type='Displacementsensor';
-% 
-% count = count + 1;
-% cnfg.cnfg_sensor(count).name = 'WegLager1';
-% cnfg.cnfg_sensor(count).position=0.110;
-% cnfg.cnfg_sensor(count).type='Displacementsensor';
-% 
-% count = count + 1;
-% cnfg.cnfg_sensor(count).name = 'WegLager1rechts';
-% cnfg.cnfg_sensor(count).position=0.110+0.085/2;
-% cnfg.cnfg_sensor(count).type='Displacementsensor';
-% 
-% 
-% count = count + 1;
-% cnfg.cnfg_sensor(count).name='WegScheibe';
-% cnfg.cnfg_sensor(count).position=0.350;
-% cnfg.cnfg_sensor(count).type='Displacementsensor';
-% 
-% count = count + 1;
-% cnfg.cnfg_sensor(count).name = 'WegLager2links';
-% cnfg.cnfg_sensor(count).position=0.590-0.085/2;
-% cnfg.cnfg_sensor(count).type='Displacementsensor';
-% 
-% count = count + 1;
-% cnfg.cnfg_sensor(count).name='WegLager2';
-% cnfg.cnfg_sensor(count).position=0.590;
-% cnfg.cnfg_sensor(count).type='Displacementsensor';
-% 
-% count = count + 1;
-% cnfg.cnfg_sensor(count).name = 'WegLager2rechts';
-% cnfg.cnfg_sensor(count).position=0.590+0.085/2;
-% cnfg.cnfg_sensor(count).type='Displacementsensor';
-% 
-% count = count + 1;
-% cnfg.cnfg_sensor(count).name='KraftLager1';
-% cnfg.cnfg_sensor(count).position=0.110;
-% cnfg.cnfg_sensor(count).type='ForceLoadPostSensor';
-% % 
-% % count = count + 1;
-% % cnfg.cnfg_sensor(count).name='KraftScheibe';
-% % cnfg.cnfg_sensor(count).position=0.350;
-% % cnfg.cnfg_sensor(count).type='ForceLoadPostSensor';
-% % 
-% count = count + 1;
-% cnfg.cnfg_sensor(count).name='KraftLager2';
-% cnfg.cnfg_sensor(count).position=0.590;
-% cnfg.cnfg_sensor(count).type='ForceLoadPostSensor';
-
-%% sensoren fuer free-free-MAC
 cnfg.cnfg_sensor=[];
 count = 0; 
-SensPos = [5, 17, 24, 31, 38, 46, 53, 69]*1e-2
 
-for count = 1:length(SensPos)
-cnfg.cnfg_sensor(count).name = ['Weg',num2str(count)];
-cnfg.cnfg_sensor(count).position=SensPos(count);
+count = count + 1;
+cnfg.cnfg_sensor(count).name = 'EddyL1';
+cnfg.cnfg_sensor(count).position=0.71;
 cnfg.cnfg_sensor(count).type='Displacementsensor';
-end
+
+count = count + 1;
+cnfg.cnfg_sensor(count).name = 'WegMLL';
+cnfg.cnfg_sensor(count).position=0.113;
+cnfg.cnfg_sensor(count).type='Displacementsensor';
+
+count = count + 1;
+cnfg.cnfg_sensor(count).name = 'EddyL2';
+cnfg.cnfg_sensor(count).position=0.155;
+cnfg.cnfg_sensor(count).type='Displacementsensor';
+
+count = count + 1;
+cnfg.cnfg_sensor(count).name='Laser';
+cnfg.cnfg_sensor(count).position=0.363;
+cnfg.cnfg_sensor(count).type='Displacementsensor';
+
+count = count + 1;
+cnfg.cnfg_sensor(count).name = 'EddyR1';
+cnfg.cnfg_sensor(count).position=0.581;
+cnfg.cnfg_sensor(count).type='Displacementsensor';
+
+count = count + 1;
+cnfg.cnfg_sensor(count).name='WegMLR';
+cnfg.cnfg_sensor(count).position=0.623;
+cnfg.cnfg_sensor(count).type='Displacementsensor';
+
+count = count + 1;
+cnfg.cnfg_sensor(count).name = 'EddyR2';
+cnfg.cnfg_sensor(count).position=0.665;
+cnfg.cnfg_sensor(count).type='Displacementsensor';
+
+
+count = count + 1;
+cnfg.cnfg_sensor(count).name='KraftMLL';
+cnfg.cnfg_sensor(count).position=0.113;
+cnfg.cnfg_sensor(count).type='ForceLoadPostSensor';
+
+count = count + 1;
+cnfg.cnfg_sensor(count).name='KraftLaser';
+cnfg.cnfg_sensor(count).position=0.363;
+cnfg.cnfg_sensor(count).type='ForceLoadPostSensor';
+
+count = count + 1;
+cnfg.cnfg_sensor(count).name='KraftMLR';
+cnfg.cnfg_sensor(count).position=0.623;
+cnfg.cnfg_sensor(count).type='ForceLoadPostSensor';
+
+%% sensoren fuer free-free-MAC
+% cnfg.cnfg_sensor=[];
+% count = 0; 
+% SensPos = []*1e-2
+% 
+% for count = 1:length(SensPos)
+% cnfg.cnfg_sensor(count).name = ['Weg',num2str(count)];
+% cnfg.cnfg_sensor(count).position=SensPos(count);
+% cnfg.cnfg_sensor(count).type='Displacementsensor';
+% end
 
 
 %% ========================================================================

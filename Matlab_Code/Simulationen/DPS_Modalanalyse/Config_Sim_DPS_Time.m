@@ -12,28 +12,51 @@ cnfg.cnfg_rotor.material.damping.rayleigh_alpha1= 0.001;    %D=alpha1*K + alpha2
 cnfg.cnfg_rotor.material.damping.rayleigh_alpha2= 0.001;
 
 % Rotor Config
-pos.Lag1 = 9e-3;
-pos.ML1 = 138e-3;
-pos.Dic1 = 227.5e-3;
-pos.DicMitte = 280e-3;
-pos.Dic2 = 332.5e-3;
-pos.ML2 = 422e-3;
-pos.Lag2 = 551e-3;
-pos.Mitte = pos.Lag1 + (pos.Lag2-pos.Lag1)/2;
-r_Welle = 7.5e-3; % Radius der Welle
-r_Laeufer_D = 23e-3; %neu 23mm
-r_Laeufer_ML = 23e-3; % Radius Laeufer des Magnetlagers 
-r_Laeufer_D_innen = 11e-3; % Innenradius D Laeufer, sodass I und m wie in Realitaet
-r_Laeufer_ML_innen = 1e-3; % Innenradius ML Laeufer, sodass I und m wie in Realitaet
-cnfg.cnfg_rotor.geo_nodes = {[0 r_Welle 0], [0.118 r_Welle 0], ...
-    [0.118 r_Laeufer_ML r_Laeufer_ML_innen],...
-    [0.158 r_Laeufer_ML r_Laeufer_ML_innen], [0.158 r_Welle 0], ...
-    [0.205 r_Welle 0], [0.205 r_Laeufer_D r_Laeufer_D_innen],...
-    [0.355 r_Laeufer_D r_Laeufer_D_innen], [0.355 r_Welle 0],...
-    [0.402 r_Welle 0], [0.402 r_Laeufer_ML r_Laeufer_ML_innen],...
-    [0.442 r_Laeufer_ML r_Laeufer_ML_innen], [0.442 r_Welle 0],...
-    [0.600 r_Welle 0]}; % Format {[z, r_aussen, r_innen], ...} % ohne Anfangs und Endknoten
-clear r_Welle r_Laeufer_D r_Laeufer_ML r_Laeufer_D_innen r_Laeufer_ML_innen
+% pos.Lag1 = 9e-3;
+% pos.ML1 = 138e-3;
+% pos.Dic1 = 227.5e-3;
+% pos.DicMitte = 280e-3;
+% pos.Dic2 = 332.5e-3;
+% pos.ML2 = 422e-3;
+% pos.Lag2 = 551e-3;
+% pos.Mitte = pos.Lag1 + (pos.Lag2-pos.Lag1)/2;
+% r_Welle = 7.5e-3; % Radius der Welle
+% r_Laeufer_D = 23e-3; %neu 23mm
+% r_Laeufer_ML = 23e-3; % Radius Laeufer des Magnetlagers 
+% r_Laeufer_D_innen = 11e-3; % Innenradius D Laeufer, sodass I und m wie in Realitaet
+% r_Laeufer_ML_innen = 1e-3; % Innenradius ML Laeufer, sodass I und m wie in Realitaet
+% cnfg.cnfg_rotor.geo_nodes = {[0 r_Welle 0], [0.118 r_Welle 0], ...
+%     [0.118 r_Laeufer_ML r_Laeufer_ML_innen],...
+%     [0.158 r_Laeufer_ML r_Laeufer_ML_innen], [0.158 r_Welle 0], ...
+%     [0.205 r_Welle 0], [0.205 r_Laeufer_D r_Laeufer_D_innen],...
+%     [0.355 r_Laeufer_D r_Laeufer_D_innen], [0.355 r_Welle 0],...
+%     [0.402 r_Welle 0], [0.402 r_Laeufer_ML r_Laeufer_ML_innen],...
+%     [0.442 r_Laeufer_ML r_Laeufer_ML_innen], [0.442 r_Welle 0],...
+%     [0.600 r_Welle 0]}; % Format {[z, r_aussen, r_innen], ...} % ohne Anfangs und Endknoten
+% clear r_Welle r_Laeufer_D r_Laeufer_ML r_Laeufer_D_innen r_Laeufer_ML_innen
+
+% Geometrie wie in der Masterarbeit tab:DPSGeometrie
+% Abschnitte A,B,C,D,E,F als 1,2,3,4,5,6
+A = [0.000170842, 0.001230754, 0.001631406, 0.001563023, 0.001139769, 0.001208152];
+I = [2.32316E-09, 1.21911E-07, 2.13906E-07, 2.0211E-07, 1.76151E-07, 1.87946E-07];
+[ra,ri] = calculate_radii_from_IA(A,I);
+
+cnfg.cnfg_rotor.geo_nodes = {[0 ra(2) ri(2)], [.018 ra(2) ri(2)], ... % Abschnitt B
+    [.018 ra(1) ri(1)], [.118 ra(1) ri(1)], ... % Abschnitt A
+    [.118 ra(3) ri(3)], [.158 ra(3) ri(3)], ... % Abschnitt C
+    [.158 ra(3) ri(3)], [.215 ra(1) ri(1)], ... % Abschnitt A
+    [.215 ra(4) ri(4)], [.233 ra(4) ri(4)], ... % Abschnitt D
+    [.233 ra(5) ri(5)], [.258 ra(5) ri(5)], ... % Abschnitt E
+    [.258 ra(6) ri(6)], [.302 ra(6) ri(6)], ... % Abschnitt F
+    [.302 ra(5) ri(5)], [.327 ra(5) ri(5)], ... % Abschnitt E
+    [.327 ra(4) ri(4)], [.345 ra(4) ri(4)], ... % Abschnitt D
+    [.345 ra(1) ri(1)], [.402 ra(1) ri(1)], ... % Abschnitt A
+    [.402 ra(3) ri(3)], [.442 ra(3) ri(3)], ... % Abschnitt C
+    [.442 ra(1) ri(1)], [.542 ra(1) ri(1)], ... % Abschnitt A
+    [.542 ra(2) ri(2)], [.560 ra(2) ri(2)], ... % Abschnitt B
+    [.560 ra(1) ri(1)], [.580 ra(1) ri(1)], ... % Abschnitt A
+    }; % Endknoten
+clear A I ra ri
 
 
 % FEM Config
