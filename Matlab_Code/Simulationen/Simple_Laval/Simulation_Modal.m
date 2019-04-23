@@ -49,7 +49,7 @@ esf.print_frequencies();
 esf.plot_displacements();
 % esf.set_plots('half') % 'all', 'half' or desired mode number
 %esf.set_plots('half','overlay')
-% esf.set_plots(10,'Overlay','Skip',5,'tangentialPoints',30,'scale',3) %specify additional options, first input is index of mode
+esf.set_plots(10,'Overlay','Skip',5,'tangentialPoints',30,'scale',3) %specify additional options, first input is index of mode
 Janitor.cleanFigures();
 
 
@@ -65,6 +65,3 @@ cmpDiagramm.set_plots('all');
 % cmpDiagramm.set_plots('forward');
 Janitor.cleanFigures();
 
-% % to plot the Campbell-Diagram from the simulation into the waterfalldiagram from the experiment
-% plot_Campbell_stem3(cmpDiagramm,1e-3)
-% plot_Campbell_plot(cmpDiagramm)
