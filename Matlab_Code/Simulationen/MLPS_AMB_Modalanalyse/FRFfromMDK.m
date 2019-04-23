@@ -28,7 +28,7 @@ for k = 1:length(outposition)
 end
 
 f=(0:1:400)';
-H = mck2frf(f,M,D,K,indof,outdof,'d');
+H = mck2frf(f,M,D,K,indof,outdof,'d'); %mck2frf liefert konjugiert komplexen Wert der FRF
 
 clear M D K r
 

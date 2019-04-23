@@ -1,4 +1,4 @@
-%% Geradin, Rixen 2015: Mechanical Vibrations kap. 3.1.3
+%% Geradin, Rixen 2015: Mechanical Vibrations Kap. 3.1.3
 % proportinal damping for unknown mode-damping
 % spectral expansion for known mode-damping
 %
@@ -13,13 +13,25 @@
 % a: Steigung der modalen Daempfung
 clear
 
+%% Eingabe der Daten aus der Messung
+% free-free-Messung vom 29.03.2019 mit LMS-System und AMimpact 2
+Experiment.f = [22.6470261719311,106.131311936756,175.617964736083,215.302199549077]; %Eigenfrequenzen aus dem Experiment
+Experiment.D = [0.00254850010437037,0.00144873146290767,0.00430302424400921,0.00231240233924187]; %Lehrsche Daempfungsmasze aus dem Experiment
+figure
+plot(Experiment.f,Experiment.D,'bx')
+xlabel('Eigenfrequenz [Hz]')
+ylabel('Daempfung [%]')
+title('Experimentell ermittelt')
+
+
 %% Lade die Daten
-load('rotor_with_bearing_only.mat')
+% load('rotor_with_bearing_only.mat')
+load('rotor_free_free.mat')
 % K = r.rotor.matrices.K;
 % M = r.rotor.matrices.M;
-% eigentlich muss eingespanntes System betrachtet werden, da es im Exp. ja auch eingespannt ist
-K = rotor_with_bearing_only.K;
-M = rotor_with_bearing_only.M;
+% % eigentlich muss eingespanntes System betrachtet werden, da es im Exp. ja auch eingespannt ist
+% K = rotor_with_bearing_only.K;
+% M = rotor_with_bearing_only.M;
 
 [EV,EW]=eig(K,M); %Loese volles EW-Problem, X ist bereits mass normalized
 omega = real(sqrt(diag(EW))); 
@@ -38,7 +50,7 @@ f_0 = omega_0/2/pi;
 mu = diag(X.'*M*X);
 
 % waehle a, z.B. sodass die Mode mit der hoechsten Eigenfreq die Lehrsche Daempfung 1 hat
-a = 1e-7;
+a = 5e-7;%1e-7;
 
 % proportional damping
 C_p = a*K;
@@ -46,15 +58,14 @@ C_p = a*K;
 % setze die bekannten Daempfungen
 % VORGEHEN: Betrachte zunaechts f_0 und vergliche mit f aus Experiment,
 % ordne dann passende Daempfungen zu
-epsilon = NaN(1,13);
-% epsilon(1) = 0.01301; % 14.6 Hz in Sim %16.7 Hz in Exp %TORSION
-epsilon(2:3) = 0.01301; % 14.7 Hz in Sim %16.7 Hz in Exp
-% epsilon(4) = 0.02548;%41.3 Hz in Sim, 52.6Hz in Exp %TORSION
-% epsilon(5:6) = 0.02548;%58.1 Hz in Sim, 52.6Hz in Exp %KEIN SICHERER WERT
-% epsilon(7:8) = 0.02548;%58.8 Hz in Sim, 52.6Hz in Exp %KEIN SICHERER WERT
-% epsilon(9) = 0.02548;%64.4 Hz in Sim, 52.6Hz in Exp %KEIN SICHERER WERT %TORSION
-epsilon(10:11) = 0.005362; % 102.5 Hz in Sim %103.1 Hz in Exp
-epsilon(12:13) = 0.005379; % 159.0 Hz in Sim %166.8 Hz in Exp
+%Zuordnung von Simulationsmoden zu Experimentmoden
+iSim = [7,8;11,12;13,14;15,16]; % Biegemoden; Moden 9,10 wahrscheinlich Torsion bzw. Axialmoden (dazu liegen mir keine Daempfungswerte vor)
+epsilon = NaN(1,16);
+epsilon(1:6) = 0; % Starrkoerpermoden ohne Daempfung
+for i = 1:size(iSim,1)
+    epsilon(iSim(i,:)) = Experiment.D(i);
+end
+
 
 
 % spectral expansion
@@ -64,7 +75,7 @@ for s = find(~isnan(epsilon))
 end
 
 
-% gesamte Daempfugnsmatrix
+% gesamte Daempfungsmatrix
 C = C_p + C_se;
 
 %% Teste System mit Daempfung:
@@ -84,4 +95,4 @@ ylabel('Lehr damping [percent]')
 % ylim([0 100])
 grid on
 
-% save D_damping_modal_expansion C % wenn Ergebnis zufriedenstellend -> abspeichern
+save D_damping_modal_expansion C % wenn Ergebnis zufriedenstellend -> abspeichern

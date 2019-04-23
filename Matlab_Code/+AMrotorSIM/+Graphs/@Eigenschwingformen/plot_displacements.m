@@ -1,4 +1,4 @@
-function plot_displacements(obj)
+function [x,EVmain] = plot_displacements(obj)
 
   n_ew=obj.modalsystem.n_ew;
   ColorHandler = AMrotorTools.PlotColors();
@@ -54,7 +54,8 @@ function plot_displacements(obj)
         ax = axes;
         title('Eigenschwingformen in Hauptachsen')
         hold on;
-
+        
+        EVmain = zeros(size(EVx));
         for s=1:n_ew
             angle = atan2(EVy(:,s),EVx(:,s));
             angle = wrapTo2Pi(angle);
@@ -66,7 +67,7 @@ function plot_displacements(obj)
             end
             angle = mean(angle);
             
-            EVmain = EVx(:,s)*cos(angle) + EVy(:,s)*sin(angle);
+            EVmain(:,s) = EVx(:,s)*cos(angle) + EVy(:,s)*sin(angle);
             plotMode(ax,x,EVmain,EW(s),...
                 ColorHandler.getColor(s))
         end
