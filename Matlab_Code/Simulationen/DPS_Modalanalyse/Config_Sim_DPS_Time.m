@@ -6,20 +6,20 @@ cnfg.cnfg_rotor.name = 'DPS - Rotor fuer Zeitintegration mit Dichtung';
 
 cnfg.cnfg_rotor.material.name = 'steel';
 cnfg.cnfg_rotor.material.e_module = 211e9;  %[N/m^2]
-cnfg.cnfg_rotor.material.density  = 7446;   %[kg/m^3] %%SI EINHEITEN!!
+cnfg.cnfg_rotor.material.density  = 7860;   %[kg/m^3] %%SI EINHEITEN!!
 cnfg.cnfg_rotor.material.poisson  = 0.3;    %steel 0.27...0.3 [-]
 cnfg.cnfg_rotor.material.damping.rayleigh_alpha1= 0.001;    %D=alpha1*K + alpha2*M
 cnfg.cnfg_rotor.material.damping.rayleigh_alpha2= 0.001;
 
 % Rotor Config
-% pos.Lag1 = 9e-3;
-% pos.ML1 = 138e-3;
-% pos.Dic1 = 227.5e-3;
-% pos.DicMitte = 280e-3;
-% pos.Dic2 = 332.5e-3;
-% pos.ML2 = 422e-3;
-% pos.Lag2 = 551e-3;
-% pos.Mitte = pos.Lag1 + (pos.Lag2-pos.Lag1)/2;
+pos.Lag1 = 9e-3;
+pos.ML1 = 138e-3;
+pos.Dic1 = 227.5e-3;
+pos.DicMitte = 280e-3;
+pos.Dic2 = 332.5e-3;
+pos.ML2 = 422e-3;
+pos.Lag2 = 551e-3;
+pos.Mitte = pos.Lag1 + (pos.Lag2-pos.Lag1)/2;
 % r_Welle = 7.5e-3; % Radius der Welle
 % r_Laeufer_D = 23e-3; %neu 23mm
 % r_Laeufer_ML = 23e-3; % Radius Laeufer des Magnetlagers 
@@ -315,11 +315,11 @@ cnfg.cnfg_load(count).t_end= 1.0;%2; % Zeitdauer des Chirps, hier wird f erreich
 cnfg.cnfg_load(count).type='Force_timevariant_whirl_bwd_sweep';
 
 % Muszynska-Seal laminar
-count = count + 1;
-cnfg.cnfg_load(count).name = 'MuszynskaSealMittig';
-cnfg.cnfg_load(count).position=pos.DicMitte;                        %[m]
-cnfg.cnfg_load(count).type='MuszynskaLaminarSeal';
-cnfg.cnfg_load(count).sealModel = load_seal_model('Inputfiles/TestRigNeu1.m');
+% count = count + 1;
+% cnfg.cnfg_load(count).name = 'MuszynskaSealMittig';
+% cnfg.cnfg_load(count).position=pos.DicMitte;                        %[m]
+% cnfg.cnfg_load(count).type='MuszynskaLaminarSeal';
+% cnfg.cnfg_load(count).sealModel = load_seal_model('Inputfiles/TestRigNeu1.m');
 
 % Lim-Singh-bearing
 count = count + 1;
@@ -340,11 +340,11 @@ cnfg.cnfg_load(count).par = load_bearing_LimSingh('Inputfiles/parametersGupta20m
 count = 0;
 cnfg.cnfg_seal = [];
 
-% count = count+1;
-% cnfg.cnfg_seal(count).name = 'Dichtung LookUpTable';
-% cnfg.cnfg_seal(count).position=300e-3;                        %[m]
-% cnfg.cnfg_seal(count).type='LookUpTableSeal';
-% cnfg.cnfg_seal(count).sealModel.Table = load_seal_table('Inputfiles/TestRig1.mat'); 
+count = count+1;
+cnfg.cnfg_seal(count).name = 'Dichtung LookUpTable';
+cnfg.cnfg_seal(count).position=300e-3;                        %[m]
+cnfg.cnfg_seal(count).type='LookUpTableSeal';
+cnfg.cnfg_seal(count).sealModel.Table = load_seal_table('Inputfiles/SealTestRigNew1.mat'); 
 % 
 % count = count+1;
 % cnfg.cnfg_seal(count).name = 'Dichtung LookUpTable';
