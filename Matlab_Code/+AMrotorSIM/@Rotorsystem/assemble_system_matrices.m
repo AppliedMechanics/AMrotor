@@ -1,7 +1,9 @@
-function [M,C,G,K]= assemble_system_matrices(self,rpm)
+function [M,C,G,K]= assemble_system_matrices(self,rpm,varargin)
 
          if nargin == 1
              rpm=0;
+         elseif nargin==3
+             Z=varargin{1};
          end
 
 %% Rotormatrizen aus FEM erstellen
@@ -77,6 +79,26 @@ function [M,C,G,K]= assemble_system_matrices(self,rpm)
                 M_seal = M_seal+L_ele'*seal.mass_matrix*L_ele;
                 K_seal = K_seal+L_ele'*seal.stiffness_matrix*L_ele;
                 D_seal = D_seal+L_ele'*seal.damping_matrix*L_ele;        
+            end
+        
+%% Add nonlinear seal matrices
+
+            for sealNonLinear = self.sealsNonLinear 
+                seal_node = self.rotor.find_node_nr(sealNonLinear.position);
+                sealNonLinear.create_ele_loc_matrix;
+                L_ele = sparse(6,6*n_nodes);
+                L_ele(1:6,(seal_node-1)*6+1:(seal_node-1)*6+6)=sealNonLinear.localisation_matrix;
+                
+                dof_u_x = self.rotor.get_gdof('u_x',seal_node);
+                dof_psi_z = self.rotor.get_gdof('psi_z',seal_node);
+                node.q = Z(dof_u_x:dof_psi_z);
+                node.qd = Z(6*n_nodes+(dof_u_x:dof_psi_z));
+                
+                sealNonLinear.get_loc_system_matrices(node);
+
+                M_seal = M_seal+L_ele'*sealNonLinear.mass_matrix*L_ele;
+                K_seal = K_seal+L_ele'*sealNonLinear.stiffness_matrix*L_ele;
+                D_seal = D_seal+L_ele'*sealNonLinear.damping_matrix*L_ele;        
            end
         
 %% Add to global matrices

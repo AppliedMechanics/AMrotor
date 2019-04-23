@@ -29,4 +29,9 @@ function assemble(obj)
     for i=obj.cnfg.cnfg_seal
     obj.seals(end+1) = AMrotorSIM.Seals.(i.type)(i);
     end
+    
+    % Adding NonLinear-Seals to System
+    for i=obj.cnfg.cnfg_sealNonLinear
+    obj.sealsNonLinear(end+1) = AMrotorSIM.SealsNonLinear.(i.type)(i);
+    end
 end

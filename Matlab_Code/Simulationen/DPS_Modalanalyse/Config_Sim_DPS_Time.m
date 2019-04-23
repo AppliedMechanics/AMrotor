@@ -148,6 +148,11 @@ cnfg.cnfg_sensor(count).name='Kraft_DichtungMitte';
 cnfg.cnfg_sensor(count).position=pos.DicMitte;
 cnfg.cnfg_sensor(count).type='ForceLoadPostSensor';
 
+count = count + 1;
+cnfg.cnfg_sensor(count).name='Kraft_DichtungMitteNonLinear';
+cnfg.cnfg_sensor(count).position=pos.DicMitte;
+cnfg.cnfg_sensor(count).type='ForceSealsNonLinearPostSensor';
+
 % count = count + 1;
 % cnfg.cnfg_sensor(count).name='Kraft_Dichtung2';
 % cnfg.cnfg_sensor(count).position=pos.Dic2;
@@ -192,19 +197,19 @@ cnfg.cnfg_bearing(count).damping = 100;
 % cnfg.cnfg_bearing(count).stiffness=1e10;                     %[N/m]
 % cnfg.cnfg_bearing(count).damping = 100;
 % 
-% count = count + 1;
-% cnfg.cnfg_bearing(count).name = 'Isotropes Lager 1';
-% cnfg.cnfg_bearing(count).position=pos.Lag1                        %[m]
-% cnfg.cnfg_bearing(count).type='SimpleBearing';
-% cnfg.cnfg_bearing(count).stiffness=0.0670680e7; % ???                    %[N/m]
-% cnfg.cnfg_bearing(count).damping = 299.275; % ???
-% 
-% count = count + 1;
-% cnfg.cnfg_bearing(count).name = 'Isotropes Lager 2';
-% cnfg.cnfg_bearing(count).position=pos.Lag2;                        %[m]
-% cnfg.cnfg_bearing(count).type='SimpleBearing';
-% cnfg.cnfg_bearing(count).stiffness=0.0670680e7; % ???                    %[N/m]
-% cnfg.cnfg_bearing(count).damping = 299.275; % ???
+count = count + 1;
+cnfg.cnfg_bearing(count).name = 'Isotropes Lager 1';
+cnfg.cnfg_bearing(count).position=pos.Lag1    ;                    %[m]
+cnfg.cnfg_bearing(count).type='SimpleBearing';
+cnfg.cnfg_bearing(count).stiffness=0.0670680e7; % ???                    %[N/m]
+cnfg.cnfg_bearing(count).damping = 0; % ???
+
+count = count + 1;
+cnfg.cnfg_bearing(count).name = 'Isotropes Lager 2';
+cnfg.cnfg_bearing(count).position=pos.Lag2;                        %[m]
+cnfg.cnfg_bearing(count).type='SimpleBearing';
+cnfg.cnfg_bearing(count).stiffness=0.0670680e7; % ???                    %[N/m]
+cnfg.cnfg_bearing(count).damping = 0; % ???
 
 
 %% ========================================================================
@@ -314,37 +319,30 @@ cnfg.cnfg_load(count).t_start= 0.5;
 cnfg.cnfg_load(count).t_end= 1.0;%2; % Zeitdauer des Chirps, hier wird f erreicht
 cnfg.cnfg_load(count).type='Force_timevariant_whirl_bwd_sweep';
 
-% Muszynska-Seal laminar
+% % Lim-Singh-bearing
 % count = count + 1;
-% cnfg.cnfg_load(count).name = 'MuszynskaSealMittig';
-% cnfg.cnfg_load(count).position=pos.DicMitte;                        %[m]
-% cnfg.cnfg_load(count).type='MuszynskaLaminarSeal';
-% cnfg.cnfg_load(count).sealModel = load_seal_model('Inputfiles/TestRigNeu1.m');
-
-% Lim-Singh-bearing
-count = count + 1;
-cnfg.cnfg_load(count).name = 'LimSingh1';
-cnfg.cnfg_load(count).position=pos.Lag1;                        %[m]
-cnfg.cnfg_load(count).type='LimSinghBearing';
-cnfg.cnfg_load(count).par = load_bearing_LimSingh('Inputfiles/parametersGupta20mm.m'); 
-
-% Lim-Singh-bearing
-count = count + 1;
-cnfg.cnfg_load(count).name = 'LimSingh2';
-cnfg.cnfg_load(count).position=pos.Lag2;                        %[m]
-cnfg.cnfg_load(count).type='LimSinghBearing';
-cnfg.cnfg_load(count).par = load_bearing_LimSingh('Inputfiles/parametersGupta20mm.m'); 
+% cnfg.cnfg_load(count).name = 'LimSingh1';
+% cnfg.cnfg_load(count).position=pos.Lag1;                        %[m]
+% cnfg.cnfg_load(count).type='LimSinghBearing';
+% cnfg.cnfg_load(count).par = load_bearing_LimSingh('Inputfiles/parametersGupta20mm.m'); 
+% 
+% % Lim-Singh-bearing
+% count = count + 1;
+% cnfg.cnfg_load(count).name = 'LimSingh2';
+% cnfg.cnfg_load(count).position=pos.Lag2;                        %[m]
+% cnfg.cnfg_load(count).type='LimSinghBearing';
+% cnfg.cnfg_load(count).par = load_bearing_LimSingh('Inputfiles/parametersGupta20mm.m'); 
 
 %% ========================================================================
 % Dichtungen
 count = 0;
 cnfg.cnfg_seal = [];
 
-count = count+1;
-cnfg.cnfg_seal(count).name = 'Dichtung LookUpTable';
-cnfg.cnfg_seal(count).position=300e-3;                        %[m]
-cnfg.cnfg_seal(count).type='LookUpTableSeal';
-cnfg.cnfg_seal(count).sealModel.Table = load_seal_table('Inputfiles/SealTestRigNew1.mat'); 
+% count = count+1;
+% cnfg.cnfg_seal(count).name = 'Dichtung LookUpTable';
+% cnfg.cnfg_seal(count).position=300e-3;                        %[m]
+% cnfg.cnfg_seal(count).type='LookUpTableSeal';
+% cnfg.cnfg_seal(count).sealModel.Table = load_seal_table('Inputfiles/SealTestRigNew1.mat'); 
 % 
 % count = count+1;
 % cnfg.cnfg_seal(count).name = 'Dichtung LookUpTable';
@@ -352,3 +350,15 @@ cnfg.cnfg_seal(count).sealModel.Table = load_seal_table('Inputfiles/SealTestRigN
 % cnfg.cnfg_seal(count).type='LookUpTableSeal';
 % cnfg.cnfg_seal(count).sealModel.Table = load_seal_table('Inputfiles/TestRig2.mat'); 
 % cnfg.cnfg_seal(count).integrationProblemFlag = false;
+
+%% ========================================================================
+% Nonlinear-Seals
+% Muszynska-Seal laminar
+count = 0;
+cnfg.cnfg_sealNonLinear = [];
+
+count = count + 1;
+cnfg.cnfg_sealNonLinear(count).name = 'MuszynskaSealMittig';
+cnfg.cnfg_sealNonLinear(count).position=pos.DicMitte;                        %[m]
+cnfg.cnfg_sealNonLinear(count).type='MuszynskaLaminarSeal';
+cnfg.cnfg_sealNonLinear(count).sealModel = load_seal_model('Inputfiles/TestRigNeu1.m');
