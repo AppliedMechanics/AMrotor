@@ -26,6 +26,7 @@ D_tmp = imag(D);
  V = tmp2;
  
  V = obj.get_position_entries(V,mat);
+ V = V*sqrt(2); % Skaliere Moden, sodass Moden Massen-normeirt (d.h. modale Massen = 1)
  V_real = real(V);
         
     %% Aussortierung der x werte aus dem EV mithilfe der get_dof Implementierung
@@ -46,7 +47,7 @@ D_tmp = imag(D);
     obj.eigenVectors.lateral_x=Ev_lat_x;
     obj.eigenVectors.lateral_y=Ev_lat_y;
     obj.eigenValues.lateral =D;
-%     obj.eigenValues.full = V;
+%    obj.eigenValues.full = V;
     
 %     %% Aussortierung der Torsionswerte aus dem EV mithilfe der get_dof Implementierung
 %     Ev_tor = zeros(length(nNodes),size(V_real,2));
