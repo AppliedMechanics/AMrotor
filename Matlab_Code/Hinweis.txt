@@ -1,0 +1,12 @@
+Es sind folgende Toolboxen nötig, um AMrotor zu nutzen:
+Modalanalyse:
+- Symbolic Math Toolbox
+- Image Processing Toolbox
+
+- Curve Fitting Toolbox fuer Fourierorbitdarstellung der Sensorsignale
+
+
+Probleme:
+Problem mit bearings, seals, ... bei Matlab R2018b (bei Matlab R2017b tritt hier kein Problem auf)
+z.b. Einbinden des RestrictAllDofsBearing:
+Fehlermeldung 

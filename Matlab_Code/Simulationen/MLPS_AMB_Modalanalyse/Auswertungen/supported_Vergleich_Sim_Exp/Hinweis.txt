@@ -1,0 +1,2 @@
+Experiment P=5000: W:\Rotordynamik\MLPS-Magnetlagerpruefstand\90_ExpModalAnalyse_2019_Kreutz\Betriebsmessung_v17\nach_Zerlegen_2019-04-03\03-Apr-2019 17_31_52c1_BurstRand_MIMOx_47mA_200s_P=5000
+Experiment P=3000: W:\Rotordynamik\MLPS-Magnetlagerpruefstand\90_ExpModalAnalyse_2019_Kreutz\Betriebsmessung_v17\nach_Zerlegen_2019-04-03\03-Apr-2019 17_26_58d1_BurstRand_MIMOx_47mA_200s_P=3000

@@ -6049,7 +6049,7 @@ function c = prettyPrint(m2t, strings, interpreter)
                 % degree symbol following "^" or "_" needs to be escaped
                 string = regexprep(string, '([\^\_])Â°', '$1{{}^\\circ}');
                 string = strrep(string, 'Â°', '^\circ');
-                string = strrep(string, 'âˆž', '\infty');
+                string = strrep(string, 'âÿÿ', '\infty');
 
                 % Parse string piece-wise in a separate function.
                 string = parseTexString(m2t, string);
