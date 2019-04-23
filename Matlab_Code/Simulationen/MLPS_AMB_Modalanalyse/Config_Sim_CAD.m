@@ -6,11 +6,11 @@
 cnfg.cnfg_rotor.name = 'MLPS - Rotor';
 
 cnfg.cnfg_rotor.material.name = 'steel';
-cnfg.cnfg_rotor.material.e_module = 211e9;  %[N/m^2]
-cnfg.cnfg_rotor.material.density  = 7446;   %[kg/m^3] %%SI EINHEITEN!!
+% cnfg.cnfg_rotor.material.e_module = 211e9;  %[N/m^2]
+% cnfg.cnfg_rotor.material.density  = 7446;   %[kg/m^3] %%SI EINHEITEN!!
 cnfg.cnfg_rotor.material.poisson  = 0.3;    %steel 0.27...0.3 [-]
-cnfg.cnfg_rotor.material.damping.rayleigh_alpha1= 6.1090e-06;%0.1*2.6763e-07;%6.1090e-05;%3.5834e-07;%0;%0.001;    %D=alpha1*K + alpha2*M
-cnfg.cnfg_rotor.material.damping.rayleigh_alpha2= 0.14707;%0.1*1.8334;%1.4707;%30;%1e7;%0.001;
+cnfg.cnfg_rotor.material.damping.rayleigh_alpha1= 0;%6.1090e-06;%0.1*2.6763e-07;%6.1090e-05;%3.5834e-07;%0;%0.001;    %D=alpha1*K + alpha2*M
+cnfg.cnfg_rotor.material.damping.rayleigh_alpha2= 0;%0.14707;%0.1*1.8334;%1.4707;%30;%1e7;%0.001;
 
 % Rotor Config
 % Geometrie wie in der Masterarbeit tab:MLPSGeometrie
@@ -58,8 +58,8 @@ count = 0;
 % cnfg.cnfg_disc(count).position = 110e-3;                 %disc position [m]
 % cnfg.cnfg_disc(count).radius = 32.5e-3;  
 % cnfg.cnfg_disc(count).m = 0.1784;                             %disc mass [kg]
-% cnfg.cnfg_disc(count).Jx = 0;%1e-4;                         %disc mom. of inertia [kg*m^4]
-% cnfg.cnfg_disc(count).Jz = 0;%1e-4;                          %disc mom. of inertia [kg*m^4]
+% cnfg.cnfg_disc(count).Jx = 0;%1e-4;                         %disc mom. of inertia [kg*m^2]
+% cnfg.cnfg_disc(count).Jz = 0;%1e-4;                          %disc mom. of inertia [kg*m^2]
 % cnfg.cnfg_disc(count).Jp = 0;%1/2*1e-4;  
 % 
 % count = count+1;
@@ -67,8 +67,8 @@ count = 0;
 % cnfg.cnfg_disc(count).position = 590e-3;                 %disc position [m]
 % cnfg.cnfg_disc(count).radius = 32.5e-3;  
 % cnfg.cnfg_disc(count).m = 0.1784;                             %disc mass [kg]
-% cnfg.cnfg_disc(count).Jx = 0;%1e-4;                         %disc mom. of inertia [kg*m^4]
-% cnfg.cnfg_disc(count).Jz = 0;%1e-4;                          %disc mom. of inertia [kg*m^4]
+% cnfg.cnfg_disc(count).Jx = 0;%1e-4;                         %disc mom. of inertia [kg*m^2]
+% cnfg.cnfg_disc(count).Jz = 0;%1e-4;                          %disc mom. of inertia [kg*m^2]
 % cnfg.cnfg_disc(count).Jp = 0;%1/2*1e-4;  
 % 
 % count = count+1;
@@ -76,8 +76,8 @@ count = 0;
 % cnfg.cnfg_disc(count).position = 350e-3;                 %disc position [m]
 % cnfg.cnfg_disc(count).radius = 69e-3;  
 % cnfg.cnfg_disc(count).m = 0.8041;                             %disc mass [kg]
-% cnfg.cnfg_disc(count).Jx = 0;%1e-4;                         %disc mom. of inertia [kg*m^4]
-% cnfg.cnfg_disc(count).Jz = 0;%1e-4;                          %disc mom. of inertia [kg*m^4]
+% cnfg.cnfg_disc(count).Jx = 0;%1e-4;                         %disc mom. of inertia [kg*m^2]
+% cnfg.cnfg_disc(count).Jz = 0;%1e-4;                          %disc mom. of inertia [kg*m^2]
 % cnfg.cnfg_disc(count).Jp = 0;%1/2*1e-4;  
 
 %% ========================================================================
@@ -87,7 +87,7 @@ count = 0;
 
 count = count + 1;
 cnfg.cnfg_sensor(count).name = 'EddyL1';
-cnfg.cnfg_sensor(count).position=0.71;
+cnfg.cnfg_sensor(count).position=0.071;
 cnfg.cnfg_sensor(count).type='Displacementsensor';
 
 count = count + 1;
@@ -168,17 +168,17 @@ cnfg.cnfg_bearing(count).damping = 100;
 
 count = count + 1;
 cnfg.cnfg_bearing(count).name = 'Isotropes Lager 1';
-cnfg.cnfg_bearing(count).position=110e-3;                        %[m]
+cnfg.cnfg_bearing(count).position=113e-3;                        %[m]
 cnfg.cnfg_bearing(count).type='SimpleBearing';
 cnfg.cnfg_bearing(count).stiffness=0.0670680e7*0.5;                     %[N/m]
-cnfg.cnfg_bearing(count).damping = 299.275;
+cnfg.cnfg_bearing(count).damping = 0;%299.275;
 
 count = count + 1;
 cnfg.cnfg_bearing(count).name = 'Isotropes Lager 2';
-cnfg.cnfg_bearing(count).position=590e-3;                        %[m]
+cnfg.cnfg_bearing(count).position=623e-3;                        %[m]
 cnfg.cnfg_bearing(count).type='SimpleBearing';
 cnfg.cnfg_bearing(count).stiffness=0.0670680e7*0.5;                     %[N/m]
-cnfg.cnfg_bearing(count).damping = 299.275;
+cnfg.cnfg_bearing(count).damping = 0;%299.275;
 
 % % fuer free-free-Test
 % count = count + 1;

@@ -49,8 +49,8 @@ cnfg.cnfg_disc(count).name = 'Lagerhuelse1';
 cnfg.cnfg_disc(count).position = 110e-3;                 %disc position [m]
 cnfg.cnfg_disc(count).radius = 32.5e-3;  
 cnfg.cnfg_disc(count).m = 0.940;                             %disc mass [kg]
-cnfg.cnfg_disc(count).Jx = 1e-4;                         %disc mom. of inertia [kg*m^4]
-cnfg.cnfg_disc(count).Jz = 1e-4;                          %disc mom. of inertia [kg*m^4]
+cnfg.cnfg_disc(count).Jx = 1e-4;                         %disc mom. of inertia [kg*m^2]
+cnfg.cnfg_disc(count).Jz = 1e-4;                          %disc mom. of inertia [kg*m^2]
 cnfg.cnfg_disc(count).Jp = 1/2*1e-4;  
 % E = 2111e9;
 % G = 8.1154e+10;
@@ -63,18 +63,18 @@ cnfg.cnfg_disc(count).Jp = 1/2*1e-4;
 % Ip = 2*Iy;
 % A = pi*(ro^2-ri^2);
 % phi = 12*E*Iy/(G*A*l^2*0.9);
-% cnfg.cnfg_disc(count).Jx = l^2*(4+7*phi+3.5*l^2);                         %disc mom. of inertia [kg*m^4]
-% cnfg.cnfg_disc(count).Jz = 2*rho*l/6*Ip;                          %disc mom. of inertia [kg*m^4]
-% cnfg.cnfg_disc(count).Jp = 1/2*cnfg.cnfg_disc(count).Jz;                         %disc polar mom. of inertia [kg*m^4]
+% cnfg.cnfg_disc(count).Jx = l^2*(4+7*phi+3.5*l^2);                         %disc mom. of inertia [kg*m^2]
+% cnfg.cnfg_disc(count).Jz = 2*rho*l/6*Ip;                          %disc mom. of inertia [kg*m^2]
+% cnfg.cnfg_disc(count).Jp = 1/2*cnfg.cnfg_disc(count).Jz;                         %disc polar mom. of inertia [kg*m^2]
 
 count = count+1;
 cnfg.cnfg_disc(count).name = 'Lagerhuelse2';
 cnfg.cnfg_disc(count).position = 590e-3;                 %disc position [m]
 cnfg.cnfg_disc(count).radius = 32.5e-3;  
 cnfg.cnfg_disc(count).m = 0.940;                             %disc mass [kg]
-cnfg.cnfg_disc(count).Jx = 1e-4;                         %disc mom. of inertia [kg*m^4]
-cnfg.cnfg_disc(count).Jz = 1e-4;                          %disc mom. of inertia [kg*m^4]
-cnfg.cnfg_disc(count).Jp = 1/2*1e-4;                         %disc polar mom. of inertia [kg*m^4]
+cnfg.cnfg_disc(count).Jx = 1e-4;                         %disc mom. of inertia [kg*m^2]
+cnfg.cnfg_disc(count).Jz = 1e-4;                          %disc mom. of inertia [kg*m^2]
+cnfg.cnfg_disc(count).Jp = 1/2*1e-4;                         %disc polar mom. of inertia [kg*m^2]
 
 
 count = count+1;
@@ -90,9 +90,9 @@ cnfg.cnfg_disc(count).m = 1.235;                             %disc mass [kg]
 % Ip = 2*Iy;
 % A = pi*(ro^2-ri^2);
 % phi = 12*E*Iy/(G*A*l^2*0.9);
-cnfg.cnfg_disc(count).Jx = 5e-3;                         %disc mom. of inertia [kg*m^4]
-cnfg.cnfg_disc(count).Jz = 1e-3;                          %disc mom. of inertia [kg*m^4]
-cnfg.cnfg_disc(count).Jp = 1/2*1e-4;                         %disc polar mom. of inertia [kg*m^4]
+cnfg.cnfg_disc(count).Jx = 5e-3;                         %disc mom. of inertia [kg*m^2]
+cnfg.cnfg_disc(count).Jz = 1e-3;                          %disc mom. of inertia [kg*m^2]
+cnfg.cnfg_disc(count).Jp = 1/2*1e-4;                         %disc polar mom. of inertia [kg*m^2]
 
 %% ========================================================================
 % Sensors

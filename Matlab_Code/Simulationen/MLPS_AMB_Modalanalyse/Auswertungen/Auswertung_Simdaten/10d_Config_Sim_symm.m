@@ -86,8 +86,8 @@ count = 0;
 % cnfg.cnfg_disc(count).position = 110e-3;                 %disc position [m]
 % cnfg.cnfg_disc(count).radius = 32.5e-3;  
 % cnfg.cnfg_disc(count).m = 0.1784;                             %disc mass [kg]
-% cnfg.cnfg_disc(count).Jx = 0;%1e-4;                         %disc mom. of inertia [kg*m^4]
-% cnfg.cnfg_disc(count).Jz = 0;%1e-4;                          %disc mom. of inertia [kg*m^4]
+% cnfg.cnfg_disc(count).Jx = 0;%1e-4;                         %disc mom. of inertia [kg*m^2]
+% cnfg.cnfg_disc(count).Jz = 0;%1e-4;                          %disc mom. of inertia [kg*m^2]
 % cnfg.cnfg_disc(count).Jp = 0;%1/2*1e-4;  
 % 
 % count = count+1;
@@ -95,8 +95,8 @@ count = 0;
 % cnfg.cnfg_disc(count).position = 590e-3;                 %disc position [m]
 % cnfg.cnfg_disc(count).radius = 32.5e-3;  
 % cnfg.cnfg_disc(count).m = 0.1784;                             %disc mass [kg]
-% cnfg.cnfg_disc(count).Jx = 0;%1e-4;                         %disc mom. of inertia [kg*m^4]
-% cnfg.cnfg_disc(count).Jz = 0;%1e-4;                          %disc mom. of inertia [kg*m^4]
+% cnfg.cnfg_disc(count).Jx = 0;%1e-4;                         %disc mom. of inertia [kg*m^2]
+% cnfg.cnfg_disc(count).Jz = 0;%1e-4;                          %disc mom. of inertia [kg*m^2]
 % cnfg.cnfg_disc(count).Jp = 0;%1/2*1e-4;  
 % 
 % count = count+1;
@@ -104,8 +104,8 @@ count = 0;
 % cnfg.cnfg_disc(count).position = 350e-3;                 %disc position [m]
 % cnfg.cnfg_disc(count).radius = 69e-3;  
 % cnfg.cnfg_disc(count).m = 0.8041;                             %disc mass [kg]
-% cnfg.cnfg_disc(count).Jx = 0;%1e-4;                         %disc mom. of inertia [kg*m^4]
-% cnfg.cnfg_disc(count).Jz = 0;%1e-4;                          %disc mom. of inertia [kg*m^4]
+% cnfg.cnfg_disc(count).Jx = 0;%1e-4;                         %disc mom. of inertia [kg*m^2]
+% cnfg.cnfg_disc(count).Jz = 0;%1e-4;                          %disc mom. of inertia [kg*m^2]
 % cnfg.cnfg_disc(count).Jp = 0;%1/2*1e-4;  
 
 %% ========================================================================
