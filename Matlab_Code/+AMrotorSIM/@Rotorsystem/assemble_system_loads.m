@@ -1,4 +1,4 @@
-function h = assemble_system_loads(self,time,Z,qdotdot)
+function h = assemble_system_loads(self,time,Z)
 
 n_nodes=length(self.rotor.mesh.nodes);
 h = sparse(6*n_nodes,1);
@@ -6,7 +6,7 @@ h = sparse(6*n_nodes,1);
 for load = self.loads
     
     load_node = self.rotor.find_node_nr(load.position);
-    [node.q, node.qd, node.qdd] = self.find_state_vector(load.position,Z,qdotdot);
+    [node.q, node.qd] = self.find_state_vector(load.position,Z);
     node.omega = node.qd(6);
     
     load.create_ele_loc_matrix
