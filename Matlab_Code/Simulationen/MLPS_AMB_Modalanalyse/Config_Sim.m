@@ -5,7 +5,7 @@ cnfg.cnfg_rotor.name = 'MLPS - Rotor';
 
 cnfg.cnfg_rotor.material.name = 'steel';
 cnfg.cnfg_rotor.material.e_module = 211e9;  %[N/m^2]
-cnfg.cnfg_rotor.material.density  = 7446;   %[kg/m^3] %%SI EINHEITEN!!
+cnfg.cnfg_rotor.material.density  = 7860;   %[kg/m^3] %%SI EINHEITEN!!
 cnfg.cnfg_rotor.material.poisson  = 0.3;    %steel 0.27...0.3 [-]
 cnfg.cnfg_rotor.material.damping.rayleigh_alpha1= 0.001;    %D=alpha1*K + alpha2*M
 cnfg.cnfg_rotor.material.damping.rayleigh_alpha2= 0.001;
@@ -29,9 +29,9 @@ cnfg.cnfg_disc=[];
 % cnfg.cnfg_disc(1).position = 300e-3;                 %disc position [m]
 % cnfg.cnfg_disc(1).radius = 200e-3;  
 % cnfg.cnfg_disc(1).m = 5;                             %disc mass [kg]
-% cnfg.cnfg_disc(1).Jx = 1;                         %disc mom. of inertia [kg*m^4]
-% cnfg.cnfg_disc(1).Jz = 1;                         %disc mom. of inertia [kg*m^4]
-% cnfg.cnfg_disc(1).Jp = 1;                         %disc polar mom. of inertia [kg*m^4]
+% cnfg.cnfg_disc(1).Jx = 1;                         %disc mom. of inertia [kg*m^2]
+% cnfg.cnfg_disc(1).Jz = 1;                         %disc mom. of inertia [kg*m^2]
+% cnfg.cnfg_disc(1).Jp = 1;                         %disc polar mom. of inertia [kg*m^2]
 
 %% ========================================================================
 % Sensors
