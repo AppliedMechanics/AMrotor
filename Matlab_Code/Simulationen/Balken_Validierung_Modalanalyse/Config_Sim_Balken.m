@@ -40,9 +40,9 @@ count = 0;
 % cnfg.cnfg_disc(1).position = 250e-3;                 %disc position [m]
 % cnfg.cnfg_disc(1).radius = 60e-3;  
 % cnfg.cnfg_disc(1).m = 5;                             %disc mass [kg]
-% cnfg.cnfg_disc(1).Jx = 1;                         %disc mom. of inertia [kg*m^4]
-% cnfg.cnfg_disc(1).Jz = 1;                         %disc mom. of inertia [kg*m^4]
-% cnfg.cnfg_disc(1).Jp = 1;                         %disc polar mom. of inertia [kg*m^4]
+% cnfg.cnfg_disc(1).Jx = 1;                         %disc mom. of inertia [kg*m^2]
+% cnfg.cnfg_disc(1).Jz = 1;                         %disc mom. of inertia [kg*m^2]
+% cnfg.cnfg_disc(1).Jp = 1;                         %disc polar mom. of inertia [kg*m^2]
 
 %% ========================================================================
 % Sensors
