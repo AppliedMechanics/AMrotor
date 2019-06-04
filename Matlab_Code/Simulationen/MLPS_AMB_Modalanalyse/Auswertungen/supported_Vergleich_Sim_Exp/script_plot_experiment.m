@@ -17,7 +17,10 @@ TUMcolors
 TUMblue=TUMcolor(1,:);
 TUMorange=TUMcolor(2,:);
 TUMgreen=TUMcolor(3,:);
+LineWidth=1.5;
 FontSize=12;
+FontSizeLeg=10;
+FontSizeTicks=9;
 FontName='Helvetica';
 
 disp([Pstr,' ',TitleStr])
@@ -65,28 +68,27 @@ angExp(angExp>0)=angExp(angExp>0)-2*pi;
 
 % Bode mit Kohaerenz
 figBodeAmpKoh=figure;
-set(figBodeAmpKoh,'defaultAxesColorOrder',[[0,0,0]; TUMorange]);
+set(figBodeAmpKoh,'defaultAxesColorOrder',[[0,0,0]; [0,0,0]]);
 % title([Pstr,' Vergleich, ',TitleStr]);
 yyaxis left
-semilogy(fExp,abs(HExp),'DisplayName','Exp','LineWidth',1.5);%plot(fExp,abs(HExp),'DisplayName','Experiment');
+semilogy(fExp,abs(HExp),'k','DisplayName','Betrag$ $','LineWidth',1.5);%plot(fExp,abs(HExp),'DisplayName','Experiment');
 axBodeKohAmp = gca;
 % ax=gca;
 % ax.Units = 'normalized';
 % ax.Position = [0.1300 0.4100 0.7750 0.5150];
 % set(ax,'FontName',FontName)%,'FontSize',FontSize)
 grid on
-ylabel('$|H|$/(m/s$^2$/N)','Interpreter','Latex','FontSize',FontSize,'FontName',FontName)%ylabel('Akzeleranz $|H|$/(m/s$^2$/N)','Interpreter','Latex')%ylabel('Akzeleranz $|H|/\frac{m/s^2}{N}$','Interpreter','Latex')
+ylabel('$|H|=\frac{X}{F}\big/\big(\mathrm{\frac{m}{N}}\big)$','Interpreter','Latex','FontSize',FontSize,'FontName',FontName)
 hold on
 yyaxis right
-plot(fExp,CohExp,'-','DisplayName','Koh','LineWidth',1.5)
-ylabel('$\gamma_{xy}^2$','Interpreter','Latex','FontSize',FontSize,'FontName',FontName)
+plot(fExp,CohExp,'-','DisplayName','Koh\"arenz$ $','LineWidth',1.5,'Color',TUMorange)
+ylabel('Koh\"arenz $\gamma_{yx}^2$','Interpreter','Latex','FontSize',FontSize,'FontName',FontName)
 % leg=legend('show','Position',[0.7421 0.7548 0.1460 0.1715]);
-leg=legend('show');
+leg=legend('show','Interpreter','Latex','FontSize',FontSizeLeg,'FontName',FontName);
 % leg.Position=[0.7421 0.7548 0.1460 0.1715];
 xlabel('$f$/Hz','Interpreter','Latex','FontSize',FontSize,'FontName',FontName)
 xlim([0 1]*300)
-figBodeAmpKoh.Units='Centimeters';
-figBodeAmpKoh.Position = [22.6473 10.3985 10 6];
+    
 
 
 %% figure speichern
@@ -100,8 +102,11 @@ figure(currFig.Number)
 % axBodeKohAmp.Position = [0.1300 0.4100 0.7750 0.5150];
 set(axBodeKohAmp,'FontName',FontName)%,'FontSize',FontSize)
 
+
 figBodeAmpKoh.Units='Centimeters';
-pos = get(figBodeAmpKoh,'Position');
-set(figBodeAmpKoh,'PaperPositionMode','Auto','PaperUnits','centimeters','PaperSize',[pos(3), pos(4)])
-% set(figBodeAmpKoh,'PaperPositionMode','Auto','PaperUnits','centimeters','PaperSize',[10, 8])
-print(figBodeAmpKoh,regexprep(filenameTikzKohAmp,'.tikz',''),'-dpdf','-painters')
+figBodeAmpKoh.Position=[54, 5, 14, 5];
+export_fig(regexprep(filenameTikzKohAmp,'.tikz',''),'-pdf','-transparent')
+% pos = get(figBodeAmpKoh,'Position');
+% set(figBodeAmpKoh,'PaperPositionMode','Auto','PaperUnits','centimeters','PaperSize',[pos(3), pos(4)])
+% % set(figBodeAmpKoh,'PaperPositionMode','Auto','PaperUnits','centimeters','PaperSize',[10, 8])
+% print(figBodeAmpKoh,regexprep(filenameTikzKohAmp,'.tikz',''),'-dpdf','-painters')

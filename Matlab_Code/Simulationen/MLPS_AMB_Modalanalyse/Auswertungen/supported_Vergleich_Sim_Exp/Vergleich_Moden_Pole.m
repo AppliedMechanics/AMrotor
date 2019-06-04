@@ -1,6 +1,10 @@
 
 clear, close all
 
+FontSize=12;
+FontSizeAx=10;
+FontName='Helvetica';
+
 Janitor = AMrotorTools.PlotJanitor();
 Janitor.setLayout(2,3);
 
@@ -132,22 +136,23 @@ figMAC5000=figure;
 MAC=amac(Exp5000.Vx,Sensor5000.Vx);
 plotmac(MAC,Exp5000.p,Sensor5000.p')
 title('Cross-MAC P=5000')
-xlabel('Simulation $f$/Hz','Interpreter','Latex');
-ylabel('Experiment $f$/Hz','Interpreter','Latex');
+xlabel('Simulation $f$/Hz','Interpreter','Latex','FontSize',FontSize,'FontName',FontName)
+ylabel('Experiment $f$/Hz','Interpreter','Latex','FontSize',FontSize,'FontName',FontName)
 
 figMAC5000autoSim=figure;
 MAC=amac(Sim5000.Vx);
 plotmac(MAC,Sim5000.p)
 title('Auto-MAC P=5000 Sim')
-xlabel('Simulation $f$/Hz','Interpreter','Latex');
-ylabel('Simulation $f$/Hz','Interpreter','Latex');
+xlabel('Simulation $f$/Hz','Interpreter','Latex','FontSize',FontSize,'FontName',FontName)
+ylabel('Simulation $f$/Hz','Interpreter','Latex','FontSize',FontSize,'FontName',FontName)
+
 
 figMAC5000autoExp=figure;
 MAC=amac(Exp5000.Vx);
 plotmac(MAC,Exp5000.p)
 title('Auto-MAC P=5000 Exp')
-xlabel('Experiment $f$/Hz','Interpreter','Latex');
-ylabel('Experiment $f$/Hz','Interpreter','Latex');
+xlabel('Experiment $f$/Hz','Interpreter','Latex','FontSize',FontSize,'FontName',FontName)
+ylabel('Experiment $f$/Hz','Interpreter','Latex','FontSize',FontSize,'FontName',FontName)
 
 
 %plot der Modenformen in ein Bild:
@@ -183,22 +188,22 @@ figMAC3000=figure;
 MAC=amac(Exp3000.Vx(:,[1,2,4,5]),Sensor3000.Vx);
 plotmac(MAC,Exp3000.p([1,2,4,5]),Sensor3000.p')
 title('Cross-MAC P=3000')
-xlabel('Simulation $f$/Hz','Interpreter','Latex');
-ylabel('Experiment $f$/Hz','Interpreter','Latex');
+xlabel('Simulation $f$/Hz','Interpreter','Latex','FontSize',FontSize,'FontName',FontName)
+ylabel('Experiment $f$/Hz','Interpreter','Latex','FontSize',FontSize,'FontName',FontName)
 
 figMAC3000autoSim=figure;
 MAC=amac(Sim3000.Vx);
 plotmac(MAC,Sim3000.p)
 title('Auto-MAC P=3000 Sim')
-xlabel('Simulation $f$/Hz','Interpreter','Latex');
-ylabel('Simulation $f$/Hz','Interpreter','Latex');
+xlabel('Simulation $f$/Hz','Interpreter','Latex','FontSize',FontSize,'FontName',FontName)
+ylabel('Simulation $f$/Hz','Interpreter','Latex','FontSize',FontSize,'FontName',FontName)
 
 figMAC3000autoExp=figure;
 MAC=amac(Exp3000.Vx(:,[1,2,4,5]));
 plotmac(MAC,Exp3000.p([1,2,4,5]))
 title('Auto-MAC P=3000 Exp')
-xlabel('Experiment $f$/Hz','Interpreter','Latex');
-ylabel('Experiment $f$/Hz','Interpreter','Latex');
+xlabel('Experiment $f$/Hz','Interpreter','Latex','FontSize',FontSize,'FontName',FontName)
+ylabel('Experiment $f$/Hz','Interpreter','Latex','FontSize',FontSize,'FontName',FontName)
 
 Janitor.cleanFigures();
 
@@ -303,11 +308,17 @@ set(0, 'currentfigure', figMAC5000);
 zlim([0 1])
 view(3)
 % export 2 pdf
-FontSize=12;
-FontName='Helvetica';
 ax = gca;
 ax.Title.String='';
-set(ax,'FontName',FontName,'FontSize',FontSize)
+ax.DataAspectRatio = [1 1 0.5];
+XLabelPosition = ax.XLabel.Position;
+YLabelPosition = ax.YLabel.Position;
+view(-135,45)
+ax.XLabel.Position=[2.4795 0.4269 -0.4247];
+ax.YLabel.Position=[0.5247 2.2102 -0.5298];
+set(ax,'FontName',FontName,'FontSize',FontSizeAx)
+% figMAC5000.Units='centimeters';
+% figMAC5000.Position(3:4) = [figMAC5000.Position(3:4)]*9/figMAC5000.Position(3);%[0.2 0.2];
 figMAC5000.Units='normalized';
 figMAC5000.Position(3:4) = [0.32, 0.35];%[0.2 0.2];
 ax.Units = 'Centimeters';
@@ -317,7 +328,11 @@ ax.Position(3:4) = [10,8];
 % set(fig(k),'PaperPositionMode','Auto','PaperUnits','centimeters','PaperSize',[pos(3), pos(4)])
 % print(fig(k),'GeomRotor3D','-dpdf','-painters') %sieht nicht so gut aus, mit '-opengl' ist es eine bitmap in einem pdf (auch schlecht)
 print(figMAC5000,regexprep(filenameTikzMAC5000,'.tikz',''),'-dpng','-r400');
+figure(figMAC5000.Number)
+% export_fig(regexprep(filenameTikzMAC5000,'.tikz',''),'-png','-transparent')
 set(0, 'currentfigure', figMAC5000);
+ax.XLabel.Position = XLabelPosition;
+ax.YLabel.Position = YLabelPosition;
 view(-30,70) % Ansicht von weiter oben
 filenameTikzMAC5000hoch = [regexprep(filenameTikzMAC5000,'.tikz',''),'hoch.tikz'];
 % export 2 pdf
@@ -326,10 +341,13 @@ filenameTikzMAC5000hoch = [regexprep(filenameTikzMAC5000,'.tikz',''),'hoch.tikz'
 % set(fig(k),'PaperPositionMode','Auto','PaperUnits','centimeters','PaperSize',[pos(3), pos(4)])
 % print(fig(k),'GeomRotor3D','-dpdf','-painters') %sieht nicht so gut aus, mit '-opengl' ist es eine bitmap in einem pdf (auch schlecht)
 print(figMAC5000,regexprep(filenameTikzMAC5000hoch,'.tikz',''),'-dpng','-r400');
+figure(figMAC5000.Number)
+% export_fig(regexprep(filenameTikzMAC5000,'.tikz',''),'-png','-transparent')
 
 
 filenameTikzMAC3000 = 'tikz/MAC3000.tikz';
 set(0, 'currentfigure', figMAC3000);
+figure(figMAC3000.Number)
 zlim([0 1])
 view(3)
 % export 2 pdf
@@ -337,7 +355,13 @@ FontSize=12;
 FontName='Helvetica';
 ax = gca;
 ax.Title.String='';
-set(ax,'FontName',FontName,'FontSize',FontSize)
+ax.DataAspectRatio = [1 1 0.5];
+XLabelPosition = ax.XLabel.Position;
+YLabelPosition = ax.YLabel.Position;
+view(-135,45)
+ax.XLabel.Position=[2.4795 0.4269 -0.4247];
+ax.YLabel.Position=[0.5247 2.2102 -0.5298];
+set(ax,'FontName',FontName,'FontSize',FontSizeAx)
 figMAC3000.Units='normalized';
 figMAC3000.Position(3:4) = [0.32, 0.35];%[0.2 0.2];
 ax.Units = 'Centimeters';
@@ -349,6 +373,9 @@ ax.Position(3:4) = [10,8];
 print(figMAC3000,regexprep(filenameTikzMAC3000,'.tikz',''),'-dpng','-r400');
 
 set(0, 'currentfigure', figMAC3000);
+figure(figMAC3000.Number)
+ax.XLabel.Position = XLabelPosition;
+ax.YLabel.Position = YLabelPosition;
 view(-30,70) % Ansicht von weiter oben
 filenameTikzMAC3000hoch = [regexprep(filenameTikzMAC3000,'.tikz',''),'hoch.tikz'];
 % export 2 pdf

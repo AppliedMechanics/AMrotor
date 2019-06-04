@@ -11,7 +11,7 @@ newx=linspace(f(1),f(end),ceil(L/2)+1);
 %Interpolate Gxx onto the new x-axis
 P = interp1(f,Gxx,newx,'linear','extrap');
 P=P(:);
-%Next we will compute the amplitudes of the spectrum as the square root of the PSD. We then add a random phase betweenn ? ? and ? , and produce the negative frequencies with the Fourier transform symmetry properties (even amplitude, and odd phase, in this case). Then we compute the IFFT, and scale the RMS to our variable R above. This final part is done by the following code. Note that the command rand creates uniformly distributed values between zero and unity, so we make a trick to get values between –0.5 and 0.5.
+%Next we will compute the amplitudes of the spectrum as the square root of the PSD. We then add a random phase betweenn ? ? and ? , and produce the negative frequencies with the Fourier transform symmetry properties (even amplitude, and odd phase, in this case). Then we compute the IFFT, and scale the RMS to our variable R above. This final part is done by the following code. Note that the command rand creates uniformly distributed values between zero and unity, so we make a trick to get values between ÿ0.5 and 0.5.
 A=sqrt(P);
 phi=2*pi*(rand(ceil(L/2)+1,1)-0.5);
 %Create negative freq in upper half of the block(as FFT/IFFT wants it)

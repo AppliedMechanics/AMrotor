@@ -9,6 +9,11 @@ TUMgreen=TUMcolor(3,:);
 LineWidth = 1;%1.5;
 LineStyle = '-';
 
+LineWidth=1.5;
+FontSize=10;
+FontName='Helvetica';
+
+
 for i=1:length(kMLvec)
     ModenNummern = 1:length(EF{i});
     clear boolBiegung
@@ -37,8 +42,8 @@ for n = 1:length(ModenNummern)
 end
 grid on
 title('Biegemoden')
-xlabel('$k_{ML}$ [N/m]','Interpreter','Latex')
-ylabel('$f$ [Hz]','Interpreter','Latex')
+xlabel('Magnetlagersteifigkeit $k_{ML}/\frac{N}{m}$','Interpreter','Latex','FontSize',FontSize,'FontName',FontName)
+ylabel('Eigenfrequenz $f/$Hz','Interpreter','Latex','FontSize',FontSize,'FontName',FontName)
 % print('EF_ueber_kML_log','-dpng','-r400');
 ylimits=ylim;
 plot([1 1]*3.5e4,ylimits,'Color',grau,'LineWidth',LineWidth,'LineStyle',LineStyle)
@@ -52,8 +57,8 @@ for n = 1:length(ModenNummern)
 end
 grid on
 title('Biegemoden')
-xlabel('k_{ML} [N/m]')
-ylabel('EF [Hz]')
+xlabel('Magnetlagersteifigkeit $k_{ML}/\frac{N}{m}$','Interpreter','Latex','FontSize',FontSize,'FontName',FontName)
+ylabel('Eigenfrequenz $f/$Hz','Interpreter','Latex','FontSize',FontSize,'FontName',FontName)
 
 
 %save as pdf
@@ -69,6 +74,6 @@ set(ax,'FontName',FontName,'FontSize',FontSize)
 fig.Units = 'Centimeters';
 fig.Position(3:4) = [14,10];
 pos = get(fig,'Position');
-set(fig,'PaperPositionMode','Auto','PaperUnits','centimeters','PaperSize',[pos(3), pos(4)])
+set(fig,'PaperPositionMode','Auto','PaperUnits','centimeters','PaperSize',[pos(3), pos(4)*1.05])
 print(fig,['pdf/','EF_ueber_kML_log'],'-dpdf','-painters' )
 % export_fig pdf/EF_ueber_kML_log -svg -transparent

@@ -163,6 +163,9 @@ FontName='Helvetica';
 
 ax = gca;
 ax.Title.String='';
+ax.DataAspectRatio = [1 1 0.5];
+view(-135,45)
+ax.YLabel.Position = [0.5513 1.9888 -0.3429];
 figMAC.Units='normalized';
 figMAC.Position(3:4) = [0.32, 0.35];%[0.2 0.2];
 ax.Units = 'Centimeters';
@@ -177,6 +180,7 @@ print(figMAC,regexprep(filenameTikzMAC,'.tikz',''),'-dpng','-r400');
 
 set(0, 'currentfigure', figMAC);
 view(-30,70) % Ansicht von weiter oben
+ax.YLabel.Position = [0.0279 2.8219 -0.5218];
 filenameTikzMAChoch = [regexprep(filenameTikzMAC,'.tikz',''),'hoch.tikz'];
 % Exportiere zu tikz
 % matlab2tikz(filenameTikzMAChoch, 'height', '\fheight', 'width', '\fwidth' )

@@ -17,9 +17,12 @@ TUMcolors
 TUMblue=TUMcolor(1,:);
 TUMorange=TUMcolor(2,:);
 TUMgreen=TUMcolor(3,:);
+
+LineWidth=1.5;
 FontSize=12;
+FontSizeLeg=10;
+FontSizeTicks=9;
 FontName='Helvetica';
-LineWidth = 1.5;
 
 disp([Pstr,' ',TitleStr])
 % fExp=fExp;
@@ -80,7 +83,9 @@ end
 
 fFEM=(0:0.2:250)';
 % HFEM = conj(mck2frf(fFEM,M,D,K,indof,outdof,'d'));
-HFEM = (mck2frf(fFEM,M,D,K,indof,outdof,'d'));
+HFEM = (mck2frf(fFEM,M,D,K,indof,outdof,'d')); % eigentlich richtig
+
+% HFEM = (mck2frf(fFEM,M,D,K,indof,outdof,'d'))*10; % zum Ausprobieren, damit sieht alles cool aus
 
 % Winkel zwischen -2pi und pi
 angFEM=angle(HFEM);
@@ -98,7 +103,7 @@ title(['MDK ',Pstr,' ',TitleStr])
 DisplayName = ['Output',num2str(i)];
 semilogy(fFEM(:),abs(HFEM(:,i,j)),'DisplayName',DisplayName);
 grid on
-ylabel('Akzeleranz $|H|/\frac{m/s^2}{N}$','Interpreter','Latex')
+ylabel('dyn. Nachgiebigkeit $|H|\big/\big(\mathrm{\frac{m}{N}}\big)$','Interpreter','Latex')
 hold on
 %legend('show')
 subplot(2,1,2)
@@ -108,7 +113,7 @@ hold on
 yticks(-360:90:360)
 % ylim([0 1]*pi)
 grid on
-ylabel('$\angle{H}$/$°$','Interpreter','Latex')
+ylabel('$\angle{H}$/Grad','Interpreter','Latex')
 
 
 %% kombinierter plot
@@ -116,7 +121,7 @@ figBodeKombiniert=figure;
 subplot(2,1,1)
 title([Pstr,' Vergleich, ',TitleStr]);
 semilogy(fFEM,abs(HFEM),'k-','DisplayName','Simulation','LineWidth',1.5);%plot(fFEM,abs(HFEM),'DisplayName','FEM');
-ylabel('Akzeleranz $|H|$/m/s^2/N','Interpreter','Latex')%ylabel('Akzeleranz $|H|/\frac{m/s^2}{N}$','Interpreter','Latex')
+ylabel('dyn. Nachgiebigkeit $|H|\big/\big(\mathrm{\frac{m}{N}}\big)$','Interpreter','Latex')
 hold on
 grid on
 semilogy(fExp,abs(HExp),':','DisplayName','Experiment','Color',TUMblue,'LineWidth',3);
@@ -141,7 +146,7 @@ xlim([0 1]*250)
 figBodeKombiniertAmp=figure;
 % title([Pstr,' Vergleich, ',FRF.Input,'->',FRF.Output]);
 semilogy(fFEM,abs(HFEM),'k-','DisplayName','Simulation','LineWidth',1.5);%plot(fFEM,abs(HFEM),'DisplayName','FEM');
-ylabel('Akzeleranz $|H|$/m/s$^2$/N','Interpreter','Latex')%ylabel('Akzeleranz $|H|/\frac{m/s^2}{N}$','Interpreter','Latex')
+ylabel('dyn. Nachgiebigkeit $|H|\big/\big(\mathrm{\frac{m}{N}}\big)$','Interpreter','Latex')
 xlabel('$f$/Hz','Interpreter','Latex')
 hold on
 grid on
@@ -178,14 +183,14 @@ semilogy(fExp,abs(HExp),'DisplayName','Exp','LineWidth',LineWidth);%plot(fExp,ab
 % ax.Position = [0.1300 0.4100 0.7750 0.5150];
 % set(ax,'FontName',FontName)%,'FontSize',FontSize)
 grid on
-ylabel('$|H|$/(m/s$^2$/N)','Interpreter','Latex','FontSize',FontSize,'FontName',FontName)%ylabel('Akzeleranz $|H|$/(m/s$^2$/N)','Interpreter','Latex')%ylabel('Akzeleranz $|H|/\frac{m/s^2}{N}$','Interpreter','Latex')
+ylabel('$|H|=\frac{X}{F}\big/\big(\mathrm{\frac{m}{N}}\big)$','Interpreter','Latex','FontSize',FontSize,'FontName',FontName)
 hold on
 semilogy(fFEM,abs(HFEM),'-','Color',TUMblue,'DisplayName','Sim','LineWidth',LineWidth);%plot(fFEM,abs(HFEM),'DisplayName','FEM');
 yyaxis right
 plot(fExp,CohExp,'--','DisplayName','Koh','LineWidth',LineWidth)
-ylabel('$\gamma_{xy}^2$','Interpreter','Latex','FontSize',FontSize,'FontName',FontName)
+ylabel('Koh\"arenz $\gamma_{yx}^2$','Interpreter','Latex','FontSize',FontSize,'FontName',FontName)
 % leg=legend('show','Position',[0.7421 0.7548 0.1460 0.1715]);
-leg=legend('show');
+leg=legend('show','Interpreter','Latex','FontSize',FontSizeLeg,'FontName',FontName,'Position',[0.7421 0.7548 0.1460 0.1715]);
 % leg.Position=[0.7421 0.7548 0.1460 0.1715];
 xlim([0 1]*250)
 figBodeKohSub2=subplot(2,1,2);
@@ -205,14 +210,19 @@ grid on
 ylabel('$\angle{H}$/Grad','Interpreter','Latex','FontSize',FontSize,'FontName',FontName)
 xlabel('$f$/Hz','Interpreter','Latex','FontSize',FontSize,'FontName',FontName)
 xlim([0 1]*250)
-ylim([-360,0])
+ylim([-360-10,0+10])
+figBodeKoh.Units='Centimeters';
+    figBodeKoh.Position=[54, 5, 14, 8];
+    figBodeKohSub1.Position=[0.1300    0.4102    0.7750    0.5148];
+    figBodeKohSub2.Position=[0.1300    0.1100    0.7750    0.2109];
+
 
 % nur Amplitude
 figBodeOnlyAmp=figure;
 % set(figBodeOnlyAmp,'defaultAxesColorOrder',[[0,0,0]; TUMblue]);
 % title(['Vergleich, ',HExpeader.Title]);%['Impact ',HExpeader.Title])
 semilogy(fFEM,abs(HFEM),'black','DisplayName','Simulation','LineWidth',1.5);%plot(fFEM,abs(HFEM),'DisplayName','FEM');
-ylabel('Akzeleranz $|H|/\frac{m/s^2}{N}$','Interpreter','Latex')
+ylabel('Akzeleranz $|H|/\frac{m}{N}$','Interpreter','Latex')
 hold on
 semilogy(fExp,abs(HExp),'DisplayName','Experiment','Color',TUMblue,'LineWidth',1.5);%plot(fExp,abs(HExp),'DisplayName','Experiment');
 grid on
@@ -235,7 +245,7 @@ ylabel('imag')
 zlabel('f/Hz')
 legend('show')
 view(2)
-
+% return
 %% figure speichern
 filenameTikzOnlyAmp = ['plots/BodeOnlyAmp',Pstr,TitleFilename,'.tikz'];
 
@@ -306,21 +316,23 @@ figure(currFig.Number)
 % to_replace = '\%\\addlegendentry{Winkel';
 % find_and_replace(filenameTikzKombiniertKoh, to_find, to_replace)
 % export 2 pdf
-figBodeKohSub1.Units = 'normalized';
-figBodeKohSub1.Position = [0.1300 0.4100 0.760 0.5150];
-set(figBodeKohSub1,'FontName',FontName)%,'FontSize',FontSize)
-if (indexInput==2) && (indexOutput==7)
-    leg.Position=[0.212974598684565,0.433242672844795,0.182539681120524,0.19383259399872];
-end
+% figBodeKohSub1.Units = 'normalized';
+% figBodeKohSub1.Position = [0.1300 0.4100 0.760 0.5150];
+% set(figBodeKohSub1,'FontName',FontName)%,'FontSize',FontSize)
+% if (indexInput==2) && (indexOutput==7)
+%     leg.Position=[0.212974598684565,0.433242672844795,0.182539681120524,0.19383259399872];
+% end
 
-figBodeKohSub2.Units = 'normalized';
-figBodeKohSub2.Position = [0.1300 0.1100 0.76 0.2074];
-set(figBodeKohSub2,'FontName',FontName)%),'FontSize',FontSize)
-figBodeKoh.Units='Centimeters';
-pos = get(figBodeKoh,'Position');
-set(figBodeKoh,'PaperPositionMode','Auto','PaperUnits','centimeters','PaperSize',[pos(3), pos(4)*1.2])
-% set(figBodeKoh,'PaperPositionMode','Auto','PaperUnits','centimeters','PaperSize',[10, 8])
-print(figBodeKoh,regexprep(filenameTikzKombiniertKoh,'.tikz',''),'-dpdf','-painters')
+% figBodeKohSub2.Units = 'normalized';
+% figBodeKohSub2.Position = [0.1300 0.1100 0.76 0.2074];
+% set(figBodeKohSub2,'FontName',FontName)%),'FontSize',FontSize)
+% figBodeKoh.Units='Centimeters';
+leg.Position = [0.2318 0.4684 0.1460 0.1755];
+export_fig(regexprep(filenameTikzKombiniertKoh,'.tikz',''),'-pdf','-transparent')
+% pos = get(figBodeKoh,'Position');
+% set(figBodeKoh,'PaperPositionMode','Auto','PaperUnits','centimeters','PaperSize',[pos(3), pos(4)*1.2])
+% % set(figBodeKoh,'PaperPositionMode','Auto','PaperUnits','centimeters','PaperSize',[10, 8])
+% print(figBodeKoh,regexprep(filenameTikzKombiniertKoh,'.tikz',''),'-dpdf','-painters')
 
 
 

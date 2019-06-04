@@ -1,10 +1,17 @@
 clearvars -except SensorM, close all
-% SensorM = 2; % 2,4 oder 6-> Ausgangssensor
+for SensorM = [2,4,6];
+%SensorM = 2; % 2,4 oder 6-> Ausgangssensor
 % lade TUM-Farben
 TUMcolors
 TUMblue=TUMcolor(1,:);
 TUMorange=TUMcolor(2,:);
 TUMgreen=TUMcolor(3,:);
+
+LineWidth=1.5;
+FontSize=12;
+FontSizeLeg=10;
+FontSizeTicks=9;
+FontName='Helvetica';
 
 %% Vergleiche FRF aus Run 3 (W:\Rotordynamik\MLPS-Magnetlagerpruefstand\90_ModalAnalyse_2019_Impact_Kreutz)
 % Anregung bei 46cm in X-
@@ -33,7 +40,7 @@ title(['Impact ',FRF.Header.Title])
 yyaxis left
 semilogy(fExp,abs(HExp));
 grid on
-ylabel('Akzeleranz $|H|$/$\frac{m/s^2}{N}$','Interpreter','Latex')
+ylabel('Akzeleranz $|H|$/$\mathrm{\frac{m/s^2}{N}}$','Interpreter','Latex')
 hold on
 
 yyaxis right
@@ -104,7 +111,7 @@ title(['MDK ','Input ',InputString{j},', Output ',OutputString{i}])
 DisplayName = ['Output',num2str(i)];
 semilogy(fFEM(:),abs(HFEM(:,i,j)),'DisplayName',DisplayName);
 grid on
-ylabel('Akzeleranz $|H|/\frac{m/s^2}{N}$','Interpreter','Latex')
+ylabel('Akzeleranz $|H|/\mathrm{\frac{m/s^2}{N}}$','Interpreter','Latex')
 hold on
 %legend('show')
 subplot(2,1,2)
@@ -119,35 +126,45 @@ ylabel('$\angle{H}$/$°$','Interpreter','Latex')
 
 %% kombinierter plot
 figBodeKombiniert=figure;
-subplot(2,1,1)
+sub1ax=subplot(2,1,1)
 title(['Vergleich, ',FRF.Header.Title]);%['Impact ',FRF.Header.Title])
-semilogy(fFEM,abs(HFEM),'k-','DisplayName','Simulation','LineWidth',1.5);%plot(fFEM,abs(HFEM),'DisplayName','FEM');
-ylabel('Akzeleranz $|H|$/m/s^2/N','Interpreter','Latex')%ylabel('Akzeleranz $|H|/\frac{m/s^2}{N}$','Interpreter','Latex')
+semilogy(fFEM,abs(HFEM),'k-','DisplayName','Simulation$ $','LineWidth',1.5);%plot(fFEM,abs(HFEM),'DisplayName','FEM');
+ylabel('$|H_a|=\frac{A}{F}\big/ \big(\mathrm{ \frac{m/s^2}{N} } \big)$','Interpreter','Latex','FontSize',FontSize,'FontName',FontName)
+%ylabel('Akzeleranz $|H|/\frac{m/s^2}{N}$','Interpreter','Latex')
 hold on
 grid on
-semilogy(fExp,abs(HExp),':','DisplayName','Experiment','Color',TUMblue,'LineWidth',3);
-leg=legend('show');
+semilogy(fExp,abs(HExp),':','DisplayName','Experiment$ $','Color',TUMblue,'LineWidth',3);
+leg=legend('show','Interpreter','Latex','FontSize',FontSizeLeg,'FontName',FontName);
 leg.Location='northwest';
 xlim([0 1]*250)
-subplot(2,1,2)
+sub2ax=subplot(2,1,2)
 plot(fFEM,angle(HFEM)/2/pi*360,'k-','DisplayName','Winkel Simulation','LineWidth',1.5);
 hold on
 plot(fExp,angle(HExp)/pi*180,':','DisplayName','Winkel Experiment','Color',TUMblue,'LineWidth',3);
 % yticks(-2*pi:pi/2:2*pi)
-yticks(-180:90:180)
+yticks(-180:180:180)
 % yticklabels('-360'
 % ylim([0 1]*pi)
 grid on
 legend('off')
-ylabel('$\angle{H}$/$°$','Interpreter','Latex')
-xlabel('$f$/Hz','Interpreter','Latex')
+ylabel('$\angle{H_a}$/Grad','Interpreter','Latex','FontSize',FontSize,'FontName',FontName)
+xlabel('$f$/Hz','Interpreter','Latex','FontSize',FontSize,'FontName',FontName)
 xlim([0 1]*250)
+
+figBodeKombiniert.Units='Centimeters';
+figBodeKombiniert.Position=[54, 5, 14, 8];
+sub1ax.Position=[0.1300    0.4102    0.7750    0.5148];
+sub2ax.Position=[0.1300    0.1100    0.7750    0.2109];
+
+%% exprotiere als pdf
+set(0, 'currentfigure', figBodeKombiniert);
+export_fig(['tikz/BodeKombiniert',num2str(SensorM)],'-pdf','-transparent')
 
 %% kombinierter plot% doch aufgeteilt in Amp und Angle, da tikz mit subfigures nicht bzw. nicht gut funktioniert
 figBodeKombiniertAmp=figure;
 % title(['Vergleich, ',FRF.Header.Title]);%['Impact ',FRF.Header.Title])
 semilogy(fFEM,abs(HFEM),'k-','DisplayName','Simulation','LineWidth',1.5);%plot(fFEM,abs(HFEM),'DisplayName','FEM');
-ylabel('Akzeleranz $|H|$/m/s$^2$/N','Interpreter','Latex')%ylabel('Akzeleranz $|H|/\frac{m/s^2}{N}$','Interpreter','Latex')
+ylabel('Akzeleranz $|H|$/(m/s$^2$/N)','Interpreter','Latex')%ylabel('Akzeleranz $|H|/\frac{m/s^2}{N}$','Interpreter','Latex')
 xlabel('$f$/Hz','Interpreter','Latex')
 hold on
 grid on
@@ -161,12 +178,12 @@ plot(fFEM,angle(HFEM)/2/pi*360,'k-','DisplayName','Winkel Simulation','LineWidth
 hold on
 plot(fExp,angle(HExp)/pi*180,':','DisplayName','Winkel Experiment','Color',TUMblue,'LineWidth',3);
 % yticks(-2*pi:pi/2:2*pi)
-yticks(-180:90:180)
+yticks(-180:180:180)
 % yticklabels('-360'
 % ylim([0 1]*pi)
 grid on
 legend('off')
-ylabel('$\angle{H}$/$^\circ$','Interpreter','Latex')
+ylabel('$\angle{H}$/Grad','Interpreter','Latex')
 xlabel('$f$/Hz','Interpreter','Latex')
 xlim([0 1]*250)
 
@@ -178,7 +195,7 @@ title(['Vergleich, ',FRF.Header.Title]);%['Impact ',FRF.Header.Title])
 yyaxis left
 semilogy(fExp,abs(HExp),'DisplayName','Impact');%plot(fExp,abs(HExp),'DisplayName','Impact');
 grid on
-ylabel('Akzeleranz $|H|/\frac{m/s^2}{N}$','Interpreter','Latex')
+ylabel('Akzeleranz $|H_a|/\frac{m/s^2}{N}$','Interpreter','Latex')
 hold on
 semilogy(fFEM,abs(HFEM),'DisplayName','FEM');%plot(fFEM,abs(HFEM),'DisplayName','FEM');
 yyaxis right
@@ -292,3 +309,4 @@ find_and_replace(filenameTikzKombiniertAngle, to_find, to_replace)
 % ax.Units = 'Centimeters';
 % ax.Position(3:4) = [5,3];
 % set(ax,'FontName',FontName,'FontSize',FontSize)
+end

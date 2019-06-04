@@ -5,7 +5,7 @@ cnfg.cnfg_rotor.name = 'MLPS - Rotor';
 
 cnfg.cnfg_rotor.material.name = 'steel';
 cnfg.cnfg_rotor.material.e_module = 211e9;  %[N/m^2]
-cnfg.cnfg_rotor.material.density  = 7446;   %[kg/m^3] %%SI EINHEITEN!!
+cnfg.cnfg_rotor.material.density  = 7860;   %[kg/m^3] %%SI EINHEITEN!!
 cnfg.cnfg_rotor.material.poisson  = 0.3;    %steel 0.27...0.3 [-]
 cnfg.cnfg_rotor.material.damping.rayleigh_alpha1= 6.1090e-06;%6.1090e-05;%3.5834e-07;%0;%0.001;    %D=alpha1*K + alpha2*M
 cnfg.cnfg_rotor.material.damping.rayleigh_alpha2= 0.14707;%1.4707;%30;%1e7;%0.001;
