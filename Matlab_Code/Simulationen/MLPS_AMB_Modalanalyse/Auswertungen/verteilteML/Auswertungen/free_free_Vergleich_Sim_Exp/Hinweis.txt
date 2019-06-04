@@ -1,0 +1,2 @@
+Daten des Experiments: "W:\Rotordynamik\MLPS-Magnetlagerpruefstand\90_ModalAnalyse_2019_Impact_Kreutz\Mode_Shapes\get_mat_for_comparison_with_simulation.m"
+Daten der Simuulation: "C:\Users\Michael\Documents\GitLabProjekte\AMrotor\Matlab_Code\Simulationen\MLPS_AMB_Modalanalyse\get_sensor_eigenmodes.m"
