@@ -53,7 +53,7 @@ classdef Campbell < handle
         set_all_plots(obj);
     end
     methods (Access = public)
-        print_damping_zero_crossing(obj);
+        [rpmZeroCrossingForward, rpmZeroCrossingBackward]=print_damping_zero_crossing(obj);
         print_critical_speeds(obj)
     end
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
