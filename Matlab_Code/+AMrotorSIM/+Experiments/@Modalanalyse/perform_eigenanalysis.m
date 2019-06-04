@@ -4,8 +4,9 @@ function [V,D] = perform_eigenanalysis(obj,mat)
     num.eigenVectors = 4*(obj.n_ew);
     while criteria
         [V,tmp.lambda]=eigs(-mat.B,mat.A,num.eigenVectors,'sm',opts);
-        % sortiert lambdas aus, deren imaginaerteil kleiner al 1e-2 ist
-        indicesLambda = abs(imag(diag(tmp.lambda))) > 1e-2; 
+        % sortiert lambdas aus, deren imaginaerteil kleiner als 0 ist, 
+        % d.h. sortiere keine lambdas aus
+        indicesLambda = abs(imag(diag(tmp.lambda))) > 1e-9; 
         % schoenheitskur fuer lambdas
         tmp.lambda = diag(tmp.lambda);
         tmp.lambda = tmp.lambda(indicesLambda);
