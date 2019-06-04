@@ -68,7 +68,7 @@ function [x,EVmain] = plot_displacements(obj)
             angle = mean(angle);
             
             EVmain(:,s) = EVx(:,s)*cos(angle) + EVy(:,s)*sin(angle);
-            plotMode(ax,x,EVmain,EW(s),...
+            plotMode(ax,x,EVmain(:,s),EW(s),...
                 ColorHandler.getColor(s))
         end
 
