@@ -14,9 +14,9 @@ Janitor.setLayout(2,3);
 
 %% Compute Rotor
 
-% Config_Sim_KonRAT
+Config_Sim_KonRAT
 % Config_Sim_KonRAT_bearing_only
-Config_Sim_KonRAT_free_free
+% Config_Sim_KonRAT_free_free
 
 r=Rotorsystem(cnfg,'KonRAT');
 r.assemble; %fuehrt Funktion assemble.m mit Eingabe Objekt r aus Klasse Rotorsystem aus

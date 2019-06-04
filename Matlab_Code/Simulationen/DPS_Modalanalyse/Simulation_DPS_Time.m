@@ -34,10 +34,10 @@ r.rotor.assemble_fem;
 %% Running Time Simulation
 
 % St_Lsg = Experiments.Stationaere_Lsg( r , 0e3:5e2:1e3 , (0:0.001:0.01) );%St_Lsg = Experiments.Stationaere_Lsg(r,[0:50:10e3],[0:0.001:2]); %obj = Stationaere_Lsg(a,drehzahlvektor,time)
-St_Lsg = Experiments.Stationaere_Lsg_nonlinear(r,100,0:0.001:0.1);
+St_Lsg = Experiments.Stationaere_Lsg_nonlinear(r,1000,0:0.001:1);
 St_Lsg.compute_ode15s_ss_variant
 
-% St_Lsg.save_data('St_Lsg_DPS_U_fwd_bwd_sweep_0_12krpm');
+St_Lsg.save_data('St_Lsg_DPS_1krpm');
 
 % Hochlauf = Experiments.Hochlaufanalyse( r , [0, 80e3] , (0:0.01:10) ); % input: (rotorsystem, [rpm_start, rpm_end], time_vector)
 % Hochlauf.compute_ode15s_ss_variant
@@ -71,7 +71,7 @@ w2 = Graphs.WaterfalldiagrammTwoSided(r, St_Lsg);
           t.plot(sensor);
 %          t.plot_Orbit(sensor);
 %          o.plot(sensor);
-%          f.plot(sensor);
+         f.plot(sensor);
 %          fo.plot(sensor,1); % Error Curve Fitting Toolbox muss installiert sein
 %          fo.plot(sensor,2);
 %          w.plot(sensor); % Wasserfall

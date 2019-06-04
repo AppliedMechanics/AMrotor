@@ -143,14 +143,14 @@ kML = kSchaetzung;
 dML = dSchaetzung;%dSchaetzung;
 count = 1;
 cnfg.cnfg_bearing(count).name = 'Axiales Lager Links';
-cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
+cnfg.cnfg_bearing(count).position=113e-3;                        %[m]
 cnfg.cnfg_bearing(count).type='SimpleAxialBearing';
 cnfg.cnfg_bearing(count).stiffness=1e10;                     %[N/m]
 cnfg.cnfg_bearing(count).damping = 0;
 
 count = count + 1;
 cnfg.cnfg_bearing(count).name = 'Torque Lager Links';
-cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
+cnfg.cnfg_bearing(count).position=113e-3;                        %[m]
 cnfg.cnfg_bearing(count).type='SimpleTorqueBearing';
 cnfg.cnfg_bearing(count).stiffness=1e10;                     %[N/m]
 cnfg.cnfg_bearing(count).damping = 0;
@@ -236,3 +236,5 @@ cnfg.cnfg_load(count).type='Force_timevariant_whirl_fwd_sweep';
 %% ========================================================================
 % Dichtungen
 cnfg.cnfg_seal = [];
+
+cnfg.cnfg_sealNonLinear = [];

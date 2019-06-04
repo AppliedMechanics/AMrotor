@@ -283,3 +283,6 @@ cnfg.cnfg_seal(count).name = 'Turbine Seal';
 cnfg.cnfg_seal(count).position=pos.seal(4);                        %[m]
 cnfg.cnfg_seal(count).type='LookUpTableSeal';
 cnfg.cnfg_seal(count).sealModel.Table = load_seal_table(strSeal4); 
+
+%% NonLinear
+cnfg.cnfg_sealNonLinear=[];
