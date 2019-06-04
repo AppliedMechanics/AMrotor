@@ -232,20 +232,14 @@ cnfg.cnfg_seal = [];
 count = count+1;
 cnfg.cnfg_seal(count).name = 'Dichtung LookUpTable';
 cnfg.cnfg_seal(count).position=250e-3;                        %[m]
-cnfg.cnfg_seal(count).type='LookUpTableSeal';
-cnfg.cnfg_seal(count).sealModel.Table = load_seal_table('Inputfiles/TestRigLam1Ecc0.mat'); 
-% cnfg.cnfg_seal(count).sealModel.Table = load_seal_table('Inputfiles/SealTestRigNeu1Laminar.mat'); 
-% cnfg.cnfg_seal(count).sealModel.Table = load_seal_table('Inputfiles/SealTestRigLam1.mat'); 
-%cnfg.cnfg_seal(count).sealModel.Table = load_seal_table('Inputfiles/SealTestRigNew1.mat'); 
+cnfg.cnfg_seal(count).type='LookUpTableSeal'; 
+cnfg.cnfg_seal(count).sealModel.Table = load_seal_table('Inputfiles/SealTestRigNew1.mat'); 
 
 count = count+1;
 cnfg.cnfg_seal(count).name = 'Dichtung LookUpTable';
 cnfg.cnfg_seal(count).position=310e-3;                        %[m]
 cnfg.cnfg_seal(count).type='LookUpTableSeal';
-cnfg.cnfg_seal(count).sealModel.Table = load_seal_table('Inputfiles/TestRigLam2Ecc0.mat');
-% cnfg.cnfg_seal(count).sealModel.Table = load_seal_table('Inputfiles/SealTestRigNeu2Laminar.mat'); 
-% cnfg.cnfg_seal(count).sealModel.Table = load_seal_table('Inputfiles/SealTestRigLam2.mat'); 
-%cnfg.cnfg_seal(count).sealModel.Table = load_seal_table('Inputfiles/SealTestRigNew2.mat'); 
+cnfg.cnfg_seal(count).sealModel.Table = load_seal_table('Inputfiles/SealTestRigNew2.mat'); 
 
 %% ========================================================================
 % Nonlinear-Seals
