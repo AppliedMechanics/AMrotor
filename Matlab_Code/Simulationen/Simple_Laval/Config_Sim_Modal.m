@@ -123,3 +123,8 @@ cnfg.cnfg_load=[];
 % Dichtungen
 count = 0;
 cnfg.cnfg_seal = [];
+
+%% ========================================================================
+% Dichtungen, Zeitbereich
+count = 0;
+cnfg.cnfg_sealNonLinear = [];

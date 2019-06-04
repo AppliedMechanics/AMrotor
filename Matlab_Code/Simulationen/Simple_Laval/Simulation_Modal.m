@@ -47,7 +47,7 @@ m.calculate_rotorsystem(10,0e3);
 esf= Graphs.Eigenschwingformen(m);
 esf.print_frequencies();
 esf.plot_displacements();
-% esf.set_plots('half') % 'all', 'half' or desired mode number
+esf.set_plots('half') % 'all', 'half' or desired mode number
 %esf.set_plots('half','overlay')
 % esf.set_plots(10,'Overlay','Skip',5,'tangentialPoints',30,'scale',3) %specify additional options, first input is index of mode
 Janitor.cleanFigures();
@@ -58,7 +58,7 @@ cmp = Experiments.Campbell(r);
 cmp.set_up(1e2:1e2:10e3,8); 
 cmp.calculate();% input of set_up is (1/min, Number of Modes)
 cmpDiagramm = Graphs.Campbell(cmp);
-cmpDiagramm.print_damping_zero_crossing()
+cmpDiagramm.print_damping_zero_crossing();
 cmpDiagramm.print_critical_speeds()
 cmpDiagramm.set_plots('all');
 % cmpDiagramm.set_plots('backward');

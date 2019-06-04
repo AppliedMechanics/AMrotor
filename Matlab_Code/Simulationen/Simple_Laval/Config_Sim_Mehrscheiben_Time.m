@@ -275,3 +275,8 @@ cnfg.cnfg_load(count).type='Force_timevariant_chirp';
 % Dichtungen
 count = 0;
 cnfg.cnfg_seal = [];
+
+%% ========================================================================
+% Dichtungen, Zeitbereich
+count = 0;
+cnfg.cnfg_sealNonLinear = [];

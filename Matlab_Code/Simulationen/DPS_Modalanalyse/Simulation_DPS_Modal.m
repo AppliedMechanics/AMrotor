@@ -96,7 +96,7 @@ cmp = Experiments.Campbell(r);
 cmp.set_up(20e2:1e2:10e3,8); 
 cmp.calculate();% input of set_up is (1/min, Number of Modes)
 cmpDiagramm = Graphs.Campbell(cmp);
-cmpDiagramm.print_damping_zero_crossing()
+cmpDiagramm.print_damping_zero_crossing();
 cmpDiagramm.print_critical_speeds()
 cmpDiagramm.set_plots('all');
 % cmpDiagramm.set_plots('backward');

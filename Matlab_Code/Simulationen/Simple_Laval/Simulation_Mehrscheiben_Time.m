@@ -26,8 +26,8 @@ r.rotor.show_2D(); % compare discretisation and user input
 % r.rotor.mesh.show_2D(); 
 %r.rotor.mesh.show_3D();
 
-% g=Graphs.Visu_Rotorsystem(r);
-% g.show();
+g=Graphs.Visu_Rotorsystem(r);
+g.show();
 
 
 r.rotor.assemble_fem;
