@@ -1,0 +1,18 @@
+#####################################################
+# Files to ignore
+#####################################################
+# Files generated
+
+*.asv
+*.pdf
+*.mat
+*.DS_Store
+
+
+pfad
+
+# Example folder
+# Examples/
+
+# Build folder (includes only compiled files)
+build/
