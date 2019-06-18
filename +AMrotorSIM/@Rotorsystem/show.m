@@ -12,6 +12,10 @@ function show(obj)
         for i=obj.bearings
             i.print();
         end
+        
+        for i=obj.seals
+            i.print();
+        end
             disp('----------------------------------------------')
             disp('--------------- Sensors ------------------------')
         for i=obj.sensors

@@ -1,7 +1,9 @@
-function [M,C,G,K]= assemble_system_matrices(self,rpm)
+function [M,C,G,K]= assemble_system_matrices(self,rpm,varargin)
 
          if nargin == 1
              rpm=0;
+         elseif nargin==3
+             Z=varargin{1};
          end
 
 %% Rotormatrizen aus FEM erstellen
@@ -59,12 +61,31 @@ function [M,C,G,K]= assemble_system_matrices(self,rpm)
                 K_disc = K_disc+L_ele'*disc.stiffness_matrix*L_ele;
                 G_disc = G_disc+L_ele'*disc.gyroscopic_matrix*L_ele;
             end
+            
+%% Add seal matrices
+
+            M_seal=sparse(6*n_nodes,6*n_nodes);
+            K_seal=sparse(6*n_nodes,6*n_nodes);
+            D_seal=sparse(6*n_nodes,6*n_nodes);
+                 
+            for seal = self.seals 
+                seal.create_ele_loc_matrix;
+                seal.get_loc_system_matrices(rpm);
+
+                seal_node = self.rotor.find_node_nr(seal.position);
+                L_ele = sparse(6,6*n_nodes);
+                L_ele(1:6,(seal_node-1)*6+1:(seal_node-1)*6+6)=seal.localisation_matrix;
+
+                M_seal = M_seal+L_ele'*seal.mass_matrix*L_ele;
+                K_seal = K_seal+L_ele'*seal.stiffness_matrix*L_ele;
+                D_seal = D_seal+L_ele'*seal.damping_matrix*L_ele;        
+            end
         
 %% Add to global matrices
-        M = self.rotor.matrices.M + M_bearing + M_disc;
-        C = self.rotor.matrices.D + C_bearing;
+        M = self.rotor.matrices.M + M_bearing + M_disc + M_seal;
+        C = self.rotor.matrices.D + C_bearing + D_seal;
         G = self.rotor.matrices.G + G_bearing + G_disc;
-        K = self.rotor.matrices.K + K_bearing + K_disc;
+        K = self.rotor.matrices.K + K_bearing + K_disc + K_seal;
 
         
       
