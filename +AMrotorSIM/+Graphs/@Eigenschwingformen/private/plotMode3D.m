@@ -31,6 +31,8 @@ end
 plot3(axFigure,rx,ry,rz,...
             'DisplayName',sprintf('%1.2f Hz',D/(2*pi)),...
             'Color',color)
+hold on
+plot3(axFigure,x,V_x,V_y,'Color',color,'LineWidth',4)
         
 xlabel('z')
 ylabel('x')

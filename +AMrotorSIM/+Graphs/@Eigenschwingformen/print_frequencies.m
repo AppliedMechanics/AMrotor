@@ -6,7 +6,8 @@ function print_frequencies(obj)
         for s=1:n_ew
             disp(' ')
             disp([num2str(s),'. Eigenfrequenz'])
-            displayFrequencies('lateral',imag(obj.modalsystem.eigenValues.lateral),s)
+            display_frequencies('lateral',obj.modalsystem.eigenValues.lateral(s))
+            display_damping('lateral',obj.modalsystem.eigenValues.lateral(s))
         end
         
 end
