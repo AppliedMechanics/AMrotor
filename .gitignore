@@ -1,2 +1,19 @@
-.PowerFolder
-*.ini
+#####################################################
+# Files to ignore
+#####################################################
+# Files generated
+
+*.asv
+*.pdf
+**/results/**/*.mat
+*.DS_Store
+*.fig
+
+
+pfad
+
+# Example folder
+# Examples/
+
+# Build folder (includes only compiled files)
+build/
