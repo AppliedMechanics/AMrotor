@@ -1,12 +1,12 @@
-%% KonRAT
-% Zur Berechnung des Campbell-Diagramms
+%% Balken
+% Zur Validierung des Modells, zum Vergleich mit der analytischen Loesung
 
 %% Import
 
 import AMrotorSIM.*
 
 %% Clean up
-% close all
+close all
 clear all
 % clc
 Janitor = AMrotorTools.PlotJanitor();
@@ -20,14 +20,16 @@ r=Rotorsystem(cnfg,'Balken');
 r.assemble; %fuehrt Funktion assemble.m mit Eingabe Objekt r aus Klasse Rotorsystem aus
 r.show; % Funktion AMrotor\Matlab_Code\+AMrotorSIM\+Rotor\+FEMRotor\@FeModel\print.m
 
-%r.rotor.geometry.show_2D(); % Darstellung des Innenradius hinzufuegen
-%r.rotor.geometry.show_3D();
+r.rotor.show_2D(); % compare discretisation and user input
+r.rotor.geometry.show_2D(); 
+r.rotor.geometry.show_3D(); % funktioniert nicht richtig
 
-% r.rotor.mesh.show_2D(); 
-%r.rotor.mesh.show_3D();
+r.rotor.mesh.show_2D(); % show elements
+r.rotor.mesh.show_2D_nodes(); % show geo_nodes
+r.rotor.mesh.show_3D();
 
-% g=Graphs.Visu_Rotorsystem(r);
-% g.show();
+g=Graphs.Visu_Rotorsystem(r);
+g.show();
 
 
 r.rotor.assemble_fem;
