@@ -18,8 +18,9 @@ end
         geo_node_xi(k) = obj.nodes(k).xi;
     end
     hold on
-    plot(geo_node_z, geo_node_x, 'b--o');
-    plot(geo_node_z, geo_node_xi, 'r--o');
+    plot(geo_node_z, geo_node_x, 'b--o','DisplayName','input outer');
+    plot(geo_node_z, geo_node_xi, 'r--o','DisplayName','input inner');
     hold off
    axis([min(geo_node_z)*0.9 max(geo_node_z)*1.1 min(geo_node_x)*0.9 max(geo_node_x)*1.1])
+   legend('show')
 end

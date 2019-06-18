@@ -1,7 +1,13 @@
 function [ax]=show_3D(self)
-    ele = self.elements;
+   ele = self.elements;
    nEle = length(self.elements);
-
+   
+   FaceColorCap = 'blue'; %rgb or color string, "cap"->Deckel
+   EdgeColorCap = 'none'; 
+   FaceColorCyl = FaceColorCap;
+   EdgeColorCyl = EdgeColorCap; 
+   LineWidthCap=0.5; 
+   
    f2=figure;
 
    ax = axes('xlim', [-10 10], 'ylim', [-10 10], 'zlim',[-10 10]);
@@ -40,13 +46,19 @@ function [ax]=show_3D(self)
         %% Plote Deckel
         hs_left(n)=surf(z+zLeft,y,x);
         hs_right(n)=surf(z+zRight,y,x);
-        set(hs_left(n), 'facecolor','b')
-        set(hs_right(n), 'facecolor','b')
-
+        set(hs_left(n), 'facecolor',FaceColorCap,'edgecolor',EdgeColorCap)
+        set(hs_right(n), 'facecolor',FaceColorCap,'edgecolor',EdgeColorCap)
+        %set(hs_left(n), 'facecolor','b')
+        %set(hs_right(n), 'facecolor','b')
+        
+        %% Plotte Umrandung der Deckel
+        plot3(z(2,:)+zLeft,y(2,:),x(2,:),'k','LineWidth',LineWidthCap);
+        plot3(z(2,:)+zRight,y(2,:),x(2,:),'k','LineWidth',LineWidthCap)
         %% plote Zylinder
         hz(n) = surf(zzyl,yzyl, xzyl);
-        set(hz(n), 'edgecolor','none')
-        set(hz(n), 'facecolor','b')
+        set(hz(n), 'edgecolor',EdgeColorCyl)
+        %set(hz(n), 'facecolor','b')
+        set(hz(n), 'facecolor',FaceColorCyl)
 
 %% Ausblenden der Kanten der sichtbaren Deckel
 %         if r(n) > r(n-1) || n == 2

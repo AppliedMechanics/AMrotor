@@ -32,6 +32,7 @@ function mesh = create_mesh(self,mesh_opt,Geometry,material)
                 end
 
             end
+            n_mesh_el =round(n_mesh_el,10); % wegen numerischer Genauigkeit, z.B. wenn n_mesh_el=1+1e-15 wegen num. Genauigkeit, soll n_mesh_el=1 sein
             z = linspace(geo_node_z(k-1), geo_node_z(k), ceil(n_mesh_el)+1); %"+1" fuer n_Knoten
 
             [m,b] = linegradient(geo_node_z(k-1),...
@@ -60,7 +61,7 @@ function mesh = create_mesh(self,mesh_opt,Geometry,material)
                       %Wenn die z Koordinaten vom vorherigem Knoten
                       %mit dem jetzigen möglichen Knoten übereinstimmt, Knoten nicht
                       %doppelt erstellen
-                      % immer den kleinsten Wert abspeichern
+                      % immer den groessten Wert abspeichern
                       mesh.nodes(node_number-1).radius_outer = max(mesh.nodes(node_number-1).radius_outer, r(a));
                       mesh.nodes(node_number-1).radius_inner = max(mesh.nodes(node_number-1).radius_inner, ri(a));
                   else

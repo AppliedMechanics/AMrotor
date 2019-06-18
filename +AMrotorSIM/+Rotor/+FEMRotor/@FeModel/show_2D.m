@@ -8,8 +8,9 @@ elseif nargin ==2
 end
 
 self.mesh.show_2D(fig); 
+self.mesh.show_2D_nodes(fig);
 self.geometry.show_2D(fig); 
 
-legend('Elements','input outer','input inner')
+legend('show')
 
 end
