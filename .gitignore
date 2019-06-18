@@ -7,5 +7,6 @@
 *.pdf
 *.mat
 *.DS_Store
+*.db
 
 pfad
