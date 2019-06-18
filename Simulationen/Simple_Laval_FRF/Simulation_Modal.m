@@ -21,29 +21,29 @@ r.show; % Funktion AMrotor\Matlab_Code\+AMrotorSIM\+Rotor\+FEMRotor\@FeModel\pri
 
 
 r.rotor.show_2D(); % compare discretisation and user input
-% r.rotor.geometry.show_2D(); % show user input
-% r.rotor.geometry.show_3D(); % show user input 3D, does not show last section
+% r.rotor.geometry.show_2D(); 
+% r.rotor.geometry.show_3D(); % funktioniert nicht richtig
 
-% r.rotor.mesh.show_2D(); % show generated elements
-% r.rotor.mesh.show_2D_nodes(); % show nodes and corresponding inner/outer radius
-% r.rotor.mesh.show_3D(); % show 3D rotor with mesh
-
+% r.rotor.mesh.show_2D(); 
+% r.rotor.mesh.show_2D_nodes(); 
+%r.rotor.mesh.show_3D();
 
 g=Graphs.Visu_Rotorsystem(r);
-g.show(); % 3D rotor system with components
+g.show();
 
 
-r.rotor.assemble_fem; % assemble structure matrices
+r.rotor.assemble_fem;
 
 % u_trans_rigid_body = r.compute_translational_rigid_body_modes;overall_mass = r.check_overall_translational_mass(u_trans_rigid_body)
 
 
 %% Running system analyses
 
-% Modalanalyse
+
+%% Modalanalyse
 m=Experiments.Modalanalyse(r);
 
-m.calculate_rotorsystem(10,3e3); %(#modes,rpm)
+m.calculate_rotorsystem(8,0e3);
 
 esf= Graphs.Eigenschwingformen(m);
 esf.print_frequencies();
@@ -54,7 +54,7 @@ esf.set_plots('half') % 'all', 'half' or desired mode number
 Janitor.cleanFigures();
 
 
-% Campbell-Diagramm
+%% Campbell-Diagramm
 cmp = Experiments.Campbell(r);
 cmp.set_up(1e2:1e2:10e3,8); 
 cmp.calculate();% input of set_up is (1/min, Number of Modes)
@@ -65,18 +65,3 @@ cmpDiagramm.set_plots('all');
 % cmpDiagramm.set_plots('backward');
 % cmpDiagramm.set_plots('forward');
 Janitor.cleanFigures();
-
-
-%% Berechne die Frequenzgangfunktion
-rpm=1000;
-f=0:2:1000;
-omega=rpm/60*2*pi;
-[M,C,G,K] = r.assemble_system_matrices(rpm);
-D = C+omega*G;
-%Funktion findet die nächstgelegenen Knoten zu den angegebenen inputs und
-%outputs und setzt die Freiheitsgradnumer der dazugehörigen x-Richtung in
-%die Funtion mck2frf von Abravibe ein, 
-% siehe dazu auch die Hilfe von mck2frf
-tic,input=280e-3;output=333e-3;H = get_FRF_from_MDK(r,f,M,D,K,input,output,'d');toc %'d' fuer displacement; 
-figure,subplot(2,1,1),semilogy(f,abs(H),'DisplayName','FEM');ylabel('FRF magnitude'),subplot(2,1,2),plot(f,angle(H)*180/pi,'DisplayName','FEM');xlabel('f//Hz'),ylabel('angle')
-clear M D K C G

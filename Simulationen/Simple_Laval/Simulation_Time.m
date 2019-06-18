@@ -19,13 +19,13 @@ r=Rotorsystem(cnfg,'Laval-Rotor');
 r.assemble; %fuehrt Funktion assemble.m mit Eingabe Objekt r aus Klasse Rotorsystem aus
 r.show; % Funktion AMrotor\Matlab_Code\+AMrotorSIM\+Rotor\+FEMRotor\@FeModel\print.m
 
-% r.rotor.show_2D(); % compare discretisation and user input
+r.rotor.show_2D(); % compare discretisation and user input
 % r.rotor.geometry.show_2D(); 
 % r.rotor.geometry.show_3D(); % funktioniert nicht richtig
 
-% r.rotor.mesh.show_2D(); % show elements
-% r.rotor.mesh.show_2D_nodes(); % show geo_nodes
-% r.rotor.mesh.show_3D();
+% r.rotor.mesh.show_2D(); 
+% r.rotor.mesh.show_2D_nodes(); 
+%r.rotor.mesh.show_3D();
 
 % g=Graphs.Visu_Rotorsystem(r);
 % g.show();
@@ -35,11 +35,11 @@ r.rotor.assemble_fem;
 
 %% Running Time Simulation
 
-St_Lsg = Experiments.Stationaere_Lsg( r , 3000 , (0:0.001:0.1) );%St_Lsg = Experiments.Stationaere_Lsg(r,[0:50:10e3],[0:0.001:2]); %obj = Stationaere_Lsg(a,drehzahlvektor,time)
+St_Lsg = Experiments.Stationaere_Lsg( r , 3000 , (0:0.001:1) );%St_Lsg = Experiments.Stationaere_Lsg(r,[0:50:10e3],[0:0.001:2]); %obj = Stationaere_Lsg(a,drehzahlvektor,time)
 %St_Lsg.compute_ode15s_ss           %laeuft leider immer noch nicht!
 St_Lsg.compute_ode15s_ss_variant
 %St_Lsg.compute_euler_ss
-% St_Lsg.compute_newmark % Instabil, wenn LimSinghBearing als Load eingebunden ist und keine sehr feine Zeitdiskretisierung gewaehlt wurde.
+% St_Lsg.compute_newmark 
 %St_Lsg.compute_sys_ss_variant
 % St_Lsg.save_data('St_Lsg_Laval_U_fwd_bwd_sweep_0_2krpm');
 
