@@ -1,7 +1,10 @@
-function print_damping_zero_crossing(obj)
+function [ZeroCrossingForward, ZeroCrossingBackward] = print_damping_zero_crossing(obj)
 
 omega = obj.experimentCampbell.get_omega();
 EW = obj.experimentCampbell.get_eigenvalues();
+
+ZeroCrossingForward = [];
+ZeroCrossingBackward = [];
 
 for i = 1:size(EW.forward,1)
     zeroCrossings.forward(i) = obj.get_zero_crossing(omega,-real(EW.forward(i,:)));
@@ -15,9 +18,13 @@ if ~all(isnan(zeroCrossings.forward))
     disp('Moden mit forward-whirl')
 end
 n_moden=length(zeroCrossings.forward);
+i=1;
 for s=1:n_moden
     if ~isnan(zeroCrossings.forward(s)) %remove NaN values
-        disp([num2str(s),'. Mode (forward): bei ', num2str(zeroCrossings.forward(s)*60/2/pi), ' 1/min'])
+        ZeroCrossingForward.rpm(i) = zeroCrossings.forward(s)*60/2/pi;
+        ZeroCrossingForward.modeNumber(i) = s;
+        disp([num2str(ZeroCrossingForward.modeNumber(i)),'. Mode (forward): bei ', num2str(ZeroCrossingForward.rpm(i)), ' 1/min'])
+        i=i+1;
     end
 end
 % disp(' ')
@@ -26,9 +33,13 @@ if ~all(isnan(zeroCrossings.backward))
     disp('Moden mit backward-whirl')
 end
 n_moden=length(zeroCrossings.backward);
+i=1;
 for s=1:n_moden
     if ~isnan(zeroCrossings.backward(s))
-        disp([num2str(s),'. Mode (backward): bei ', num2str(zeroCrossings.backward(s)*60/2/pi), ' 1/min'])
+        ZeroCrossingBackward.rpm(i) = zeroCrossings.backward(s)*60/2/pi;
+        ZeroCrossingBackward.modeNumber(i) = s;
+        disp([ZeroCrossingBackward.modeNumber(i),'. Mode (backward): bei ', num2str(ZeroCrossingBackward.rpm(i)), ' 1/min'])
+        i=i+1;
     end
 end
 
