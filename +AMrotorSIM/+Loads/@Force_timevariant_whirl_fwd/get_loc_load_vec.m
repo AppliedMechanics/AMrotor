@@ -1,4 +1,4 @@
-function get_loc_load_vec(obj,time,varargin)
+function h = get_loc_load_vec(obj,time,varargin)
 
     obj.h = sparse(6,1);
     
@@ -7,8 +7,14 @@ function get_loc_load_vec(obj,time,varargin)
     Fx = obj.cnfg.betrag_x;
     Fy = obj.cnfg.betrag_y;
     f = obj.cnfg.frequency;
+    tStart = obj.cnfg.t_start;
+    tEnd = obj.cnfg.t_end;
     
-    obj.h(1) =  cos(2*pi*f*time)*Fx;
-    obj.h(2) =  sin(2*pi*f*time)*Fy;
+    timeDelta = time - tStart;
     
+    if (timeDelta > 0 && time<tEnd)
+    obj.h(1) =  cos(2*pi*f*timeDelta)*Fx;
+    obj.h(2) =  -sin(2*pi*f*timeDelta)*Fy;
+    end
+    h = obj.h;
 end
