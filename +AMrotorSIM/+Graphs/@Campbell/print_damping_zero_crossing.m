@@ -38,7 +38,7 @@ for s=1:n_moden
     if ~isnan(zeroCrossings.backward(s))
         ZeroCrossingBackward.rpm(i) = zeroCrossings.backward(s)*60/2/pi;
         ZeroCrossingBackward.modeNumber(i) = s;
-        disp([ZeroCrossingBackward.modeNumber(i),'. Mode (backward): bei ', num2str(ZeroCrossingBackward.rpm(i)), ' 1/min'])
+        disp([num2str(ZeroCrossingBackward.modeNumber(i)),'. Mode (backward): bei ', num2str(ZeroCrossingBackward.rpm(i)), ' 1/min'])
         i=i+1;
     end
 end
