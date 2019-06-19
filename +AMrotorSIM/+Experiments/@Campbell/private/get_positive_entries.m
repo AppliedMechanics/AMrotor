@@ -1,6 +1,7 @@
-function D = get_positive_entries( input )
+function [Vout, Dout] = get_positive_entries( Vin, Din )
 %GETPOSITIVEENTRIES Summary of this function goes here
 %   Detailed explanation goes here
-D = input(imag(input)>0);
+Dout = Din(imag(Din)>0);
+Vout = Vin(:,imag(Din)>0);
 end
 

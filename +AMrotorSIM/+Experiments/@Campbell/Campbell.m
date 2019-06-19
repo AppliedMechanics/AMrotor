@@ -34,19 +34,22 @@ classdef Campbell < handle
         function calculate(obj)
             for w = obj.omega
                 [mat.A,mat.B] = obj.get_state_space_matrices(w);
-                [V,tmp] = obj.perform_eigenanalysis(mat);
-                Vpos = obj.get_position_entries(V);
-                D = get_positive_entries(tmp);
+                [V,D] = obj.perform_eigenanalysis(mat);
+                Vpos = obj.get_position_entries(V);  
                 if w == 0
+                    [Vpos,D]= get_positive_entries(Vpos,D);
                     EW_for = D(1:2:end);
+                    EV_for = Vpos(:,1:2:obj.num.modes);
                     EW_back = D(2:2:end);
+                    EV_back = Vpos(:,2:2:obj.num.modes);
+                    EW_for = EW_for(1:obj.num.modes/2);
+                    EW_back = EW_back(1:obj.num.modes/2);
                 else
-                    [ ~,EW_for,~,EW_back, ~, ~, ~, ~ ] = ...
+                    [ EV_for, EW_for, EV_back, EW_back, ~, ~, ~, ~ ] = ...
                         obj.get_separation_eigenvectors(Vpos,D);
                 end
                 obj.EWf(:,end+1) = EW_for;
                 obj.EWb(:,end+1) = EW_back;
-
             end
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
