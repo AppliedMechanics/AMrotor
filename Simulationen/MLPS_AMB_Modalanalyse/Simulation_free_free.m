@@ -16,7 +16,7 @@ Janitor.setLayout(2,3);
 
 %% Compute Rotor
 
-Config_Sim_eingebaut
+Config_Sim_freefree
 
 r=Rotorsystem(cnfg,'MLPS-System');
 r.assemble;
@@ -30,13 +30,14 @@ r.rotor.show_2D(); % compare discretisation and user input
 % r.rotor.mesh.show_2D_nodes(); % show geo_nodes
 % r.rotor.mesh.show_3D();
 
-g=Graphs.Visu_Rotorsystem(r);
-g.show();
+% g=Graphs.Visu_Rotorsystem(r);
+% g.show();
 
-r.rotor.assemble_fem;
+ r.rotor.assemble_fem;
+  
+u_trans_rigid_body = r.compute_translational_rigid_body_modes;overall_mass = r.check_overall_translational_mass(u_trans_rigid_body)
+nEle = length(r.rotor.mesh.elements)
 
-u_trans_rigid_body = r.compute_translational_rigid_body_modes;overall_mass = r.check_overall_translational_mass(u_trans_rigid_body);disp(['m=',num2str(overall_mass.m_x,3),'kg']);
-nEle = length(r.rotor.mesh.elements);
 
 %% Running system analyses
 
@@ -47,8 +48,7 @@ m=Experiments.Modalanalyse(r);
 
 % m.calculate_rotorsystem_without_damping(7);
 rpmModalAnalysis=0;
-m.calculate_rotorsystem(16,rpmModalAnalysis);
-% return
+m.calculate_rotorsystem(20,rpmModalAnalysis);
 
 esf= Graphs.Eigenschwingformen(m);
 esf.print_frequencies();
@@ -56,7 +56,7 @@ esf.plot_displacements();
 Janitor.cleanFigures();
 
 cmp = Experiments.Campbell(r);
-cmp.set_up(0:2e2:2e3,20); % input is 1/min, Number of Modes
+cmp.set_up(0:2e2:2e3,10); % input is 1/min, Number of Modes
 cmp.calculate();
 cmpDiagramm = Graphs.Campbell(cmp);
 cmpDiagramm.print_critical_speeds()
