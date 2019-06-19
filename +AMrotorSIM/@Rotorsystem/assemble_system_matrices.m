@@ -80,12 +80,31 @@ function [M,C,G,K]= assemble_system_matrices(self,rpm,varargin)
                 K_seal = K_seal+L_ele'*seal.stiffness_matrix*L_ele;
                 D_seal = D_seal+L_ele'*seal.damping_matrix*L_ele;        
             end
+            
+%% Add LookUpTable-component matrices
+
+            M_CompLUTMCK =sparse(6*n_nodes,6*n_nodes);
+            K_CompLUTMCK =sparse(6*n_nodes,6*n_nodes);
+            D_CompLUTMCK =sparse(6*n_nodes,6*n_nodes);
+                 
+            for ComponentLookUpTableMCK = self.compLUTMCK 
+                ComponentLookUpTableMCK.create_ele_loc_matrix;
+                ComponentLookUpTableMCK.get_loc_system_matrices(rpm);
+
+                component_node = self.rotor.find_node_nr(ComponentLookUpTableMCK.position);
+                L_ele = sparse(6,6*n_nodes);
+                L_ele(1:6,(component_node-1)*6+1:(component_node-1)*6+6)=ComponentLookUpTableMCK.localisation_matrix;
+
+                M_CompLUTMCK  = M_CompLUTMCK +L_ele'*ComponentLookUpTableMCK.mass_matrix*L_ele;
+                K_CompLUTMCK  = K_CompLUTMCK +L_ele'*ComponentLookUpTableMCK.stiffness_matrix*L_ele;
+                D_CompLUTMCK  = D_CompLUTMCK +L_ele'*ComponentLookUpTableMCK.damping_matrix*L_ele;        
+            end            
         
 %% Add to global matrices
-        M = self.rotor.matrices.M + M_bearing + M_disc + M_seal;
-        C = self.rotor.matrices.D + C_bearing + D_seal;
+        M = self.rotor.matrices.M + M_bearing + M_disc + M_seal + M_CompLUTMCK ;
+        C = self.rotor.matrices.D + C_bearing + D_seal + D_CompLUTMCK ;
         G = self.rotor.matrices.G + G_bearing + G_disc;
-        K = self.rotor.matrices.K + K_bearing + K_disc + K_seal;
+        K = self.rotor.matrices.K + K_bearing + K_disc + K_seal + K_CompLUTMCK ;
 
         
       

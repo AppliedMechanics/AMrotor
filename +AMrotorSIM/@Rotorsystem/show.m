@@ -16,6 +16,11 @@ function show(obj)
         for i=obj.seals
             i.print();
         end
+        
+        for i=obj.compLUTMCK
+            i.print();
+        end
+        
             disp('----------------------------------------------')
             disp('--------------- Sensors ------------------------')
         for i=obj.sensors

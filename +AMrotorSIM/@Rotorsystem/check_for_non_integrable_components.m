@@ -52,5 +52,13 @@ for comp = self.seals
     end
 end
 
+for comp = self.CompLUTMCK
+    if isprop(comp,flag)
+        if comp.(flag)
+            comp.warn_for_non_integrable_component;
+        end
+    end
+end
+
 end
 

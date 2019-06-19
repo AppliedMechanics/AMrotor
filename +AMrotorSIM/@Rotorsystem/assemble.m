@@ -29,4 +29,9 @@ function assemble(obj)
     for i=obj.cnfg.cnfg_seal
     obj.seals(end+1) = AMrotorSIM.Seals.(i.type)(i);
     end
+    
+    % Adding Components with Look Up Table for M,C,K
+    for i=obj.cnfg.cnfg_compLUTMCK
+    obj.compLUTMCK(end+1) = AMrotorSIM.CompLUTMCK(i);
+    end
 end

@@ -17,6 +17,7 @@ classdef Rotorsystem < handle
       bearings@AMrotorSIM.Bearings.Bearing vector
       loads@AMrotorSIM.Loads.Load vector
       seals@AMrotorSIM.Seals.Seal vector
+      compLUTMCK@AMrotorSIM.CompLUTMCK vector
 
    end
    %%
