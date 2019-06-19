@@ -29,15 +29,15 @@ EW=EW_raw(I_p);
 EV=EV_raw(:,I_p);
 
 % Initiate variables
-[Phase_x,Phase_y,Phase_a, Phase_b]=deal(NaN(n_DOF/4,n_EW));
+[Phase_x,Phase_y,Phase_a, Phase_b]=deal(NaN(n_DOF/6,n_EW));
 [Phase_xy_mean, Phase_ab_mean]=deal(NaN(1,n_EW));
 
 % Fill the phases for every EW
-for k=1:n_EW % order of dof in EV-vector: EV=[x1, y1, phi_x1, phi_y1, ...]'
-    Phase_x(:,k)=angle(EV(1:4:n_DOF,k));
-    Phase_y(:,k)=angle(EV(2:4:n_DOF,k));
-    Phase_a(:,k)=angle(EV(3:4:n_DOF,k));
-    Phase_b(:,k)=angle(EV(4:4:n_DOF,k));
+for k=1:n_EW % order of dof in EV-vector: EV=[x1, y1, z1, phi_x1, phi_y1, phi_z1, ...]'
+    Phase_x(:,k)=angle(EV(1:6:n_DOF,k));
+    Phase_y(:,k)=angle(EV(2:6:n_DOF,k));
+    Phase_a(:,k)=angle(EV(4:6:n_DOF,k));
+    Phase_b(:,k)=angle(EV(5:6:n_DOF,k));
 end
 
 %Calculate the relative phases between the directions

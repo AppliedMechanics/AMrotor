@@ -2,7 +2,7 @@ function [V,D] = perform_eigenanalysis(obj,mat)
     opts.tol = 1e-16;
     criteria = true;
     minEigenFreq = 1e-2;%0;
-    num.eigenVectors = 4*(obj.num.modes);
+    num.eigenVectors = 6*(obj.num.modes);
     num.modes_local = obj.num.modes + 4; % +4 damit bei stark gedaempften EW immer noch genug EW berechnet werden sodass eine Mindestanzhal an forward und backward-Moden gefunden werden kann
     while criteria
         [V,tmp.lambda]=eigs(-mat.B,mat.A,num.eigenVectors,'sm',opts);        

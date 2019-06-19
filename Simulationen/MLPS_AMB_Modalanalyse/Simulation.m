@@ -56,7 +56,7 @@ esf.plot_displacements();
 Janitor.cleanFigures();
 
 cmp = Experiments.Campbell(r);
-cmp.set_up(0:2e2:2e3,20); % input is 1/min, Number of Modes
+cmp.set_up(0:2e2:2e3,10); % input is 1/min, Number of Modes
 cmp.calculate();
 cmpDiagramm = Graphs.Campbell(cmp);
 cmpDiagramm.print_critical_speeds()
