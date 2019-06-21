@@ -1,4 +1,4 @@
-function [M] = get_loc_mass_matrix(self)
+function [M] = get_loc_mass_matrix(self,varargin)
 
     M = sparse(6,6);
     M(1,1)=self.cnfg.m;

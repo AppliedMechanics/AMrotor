@@ -12,7 +12,6 @@ classdef Rotorsystem < handle
       cnfg=struct([])
       
       rotor@AMrotorSIM.Rotor.FEMRotor.FeModel
-      discs@AMrotorSIM.Disc vector
       sensors@AMrotorSIM.Sensors.Sensor vector
       loads@AMrotorSIM.Loads.Load vector
       seals@AMrotorSIM.Seals.Seal vector

@@ -13,29 +13,6 @@ function [M,C,G,K]= assemble_system_matrices(self,rpm,varargin)
             %Lokalisierungsmatrix hat 6x6n 0 Einträge
             %Element L wird dann an der Stelle (i-1)*6 drauf addiert.
 
-
-%% Add disc matrices
-
-            M_disc=sparse(6*n_nodes,6*n_nodes);
-            K_disc=sparse(6*n_nodes,6*n_nodes);
-            G_disc=sparse(6*n_nodes,6*n_nodes);
-            
-            
-            for disc = self.discs
-                
-                disc.create_ele_loc_matrix;
-                disc.get_loc_gyroscopic_matrix;
-                disc.get_loc_mass_matrix;
-                disc.get_loc_stiffness_matrix;
-                
-                disc_node = self.rotor.find_node_nr(disc.position);
-                L_ele = sparse(6,6*n_nodes);
-                L_ele(1:6,(disc_node-1)*6+1:(disc_node-1)*6+6)=disc.localisation_matrix;
-
-                M_disc = M_disc+L_ele'*disc.mass_matrix*L_ele;
-                K_disc = K_disc+L_ele'*disc.stiffness_matrix*L_ele;
-                G_disc = G_disc+L_ele'*disc.gyroscopic_matrix*L_ele;
-            end
             
             
 %% Add component matrices
@@ -63,10 +40,10 @@ function [M,C,G,K]= assemble_system_matrices(self,rpm,varargin)
             end            
         
 %% Add to global matrices
-        M = self.rotor.matrices.M + M_disc + M_Comp;
+        M = self.rotor.matrices.M + M_Comp;
         C = self.rotor.matrices.D + D_Comp ;
-        G = self.rotor.matrices.G + G_disc + G_Comp;
-        K = self.rotor.matrices.K + K_disc + K_Comp ;
+        G = self.rotor.matrices.G + G_Comp;
+        K = self.rotor.matrices.K + K_Comp ;
 
         
       

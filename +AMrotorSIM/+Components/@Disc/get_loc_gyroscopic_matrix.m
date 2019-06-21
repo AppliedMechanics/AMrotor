@@ -1,4 +1,4 @@
-function [G] = get_loc_gyroscopic_matrix(self)
+function [G] = get_loc_gyroscopic_matrix(self,varargin)
     
     G = sparse(6,6);
     G(4,5)=+self.cnfg.Jp;

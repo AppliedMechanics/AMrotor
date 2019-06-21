@@ -5,11 +5,6 @@ for i=obj.cnfg.cnfg_rotor
     obj.rotor = AMrotorSIM.Rotor.FEMRotor.FeModel(i);
 end
 
-% Adding discs
-for i=obj.cnfg.cnfg_disc
-    obj.discs(end+1) = AMrotorSIM.Disc(i);
-end
-
 % Adding Sensors to Rotor
 for i=obj.cnfg.cnfg_sensor
     obj.sensors(end+1) = AMrotorSIM.Sensors.(i.type)(i);

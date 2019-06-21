@@ -1,6 +1,6 @@
-function plot_components(ax,component,obj)
+function plot_components(ax,components,obj)
 
-for i=component
+for i=components
     switch i.type
         case {'Seal','CompLUTMCK'}
             plot_CompLUTMCK(ax,i,obj);
@@ -8,7 +8,7 @@ for i=component
         case 'Bearings'
             plot_bearings(ax,i,obj);
             
-        case 'Discs'
+        case 'Disc'
             plot_discs(ax,i);
     
     end

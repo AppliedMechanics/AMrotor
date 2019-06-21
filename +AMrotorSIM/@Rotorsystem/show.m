@@ -4,10 +4,6 @@ function show(obj)
         for i=obj.rotor
             i.print();
         end
-         
-        for i=obj.discs
-            i.print();
-        end
 
             disp('----------------------------------------------')
             disp('--------------- Components -------------------')
