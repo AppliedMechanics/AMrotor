@@ -21,7 +21,7 @@ classdef Visu_Rotorsystem < handle
          plot_sensors(figurehandle,obj.rotorsystem.sensors);
          plot_loads(figurehandle,obj.rotorsystem.loads,obj.rotorsystem.rotor);
          plot_seals(figurehandle,obj.rotorsystem.seals,obj.rotorsystem.rotor);
-         plot_compLUTMCK(figurehandle,obj.rotorsystem.compLUTMCK,obj.rotorsystem.rotor);
+         plot_components(figurehandle,obj.rotorsystem.components,obj.rotorsystem.rotor);
          
          view(3)%view(126,35)
          

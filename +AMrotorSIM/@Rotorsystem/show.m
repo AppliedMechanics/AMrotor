@@ -17,7 +17,7 @@ function show(obj)
             i.print();
         end
         
-        for i=obj.compLUTMCK
+        for i=obj.components
             i.print();
         end
         

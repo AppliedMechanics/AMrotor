@@ -1,4 +1,4 @@
-function plot_compLUTMCK(ax,seal,obj)
+function plot_components(ax,seal,obj)
 
 for i=seal
     zp=i.cnfg.position;

@@ -1,13 +1,5 @@
-classdef CompLUTMCK < handle
+classdef CompLUTMCK < AMrotorSIM.Components.Component
     properties
-        cnfg
-        name
-        position
-        localisation_matrix
-        mass_matrix
-        stiffness_matrix
-        damping_matrix
-        color = 'red';
     end
     methods
         function self=CompLUTMCK(arg)
@@ -16,8 +8,8 @@ classdef CompLUTMCK < handle
             else
                 self.cnfg = arg;
                 self.position = arg.position;
-                self.color = 'red';
             end
+            self.color = 'red';
             if isfield(arg,'integrationProblemFlag')
                 self.integrationProblemFlag = arg.integrationProblemFlag;
             end

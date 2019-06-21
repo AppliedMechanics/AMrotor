@@ -40,9 +40,9 @@ end
 M_seal = sparse(M_seal);
 % dof-order: ux,uy,uz,psix,psiy,psiz
 
-self.stiffness_matrix = K_seal;
-self.damping_matrix = D_seal;
-self.damping_matrix = M_seal; 
+% self.stiffness_matrix = K_seal;
+% self.damping_matrix = D_seal;
+% self.damping_matrix = M_seal; 
 
 if rpm_current > max(Table.rpm)
     warning(['Extrapolation of Component-Coefficients from Look-Up-Table ',... 

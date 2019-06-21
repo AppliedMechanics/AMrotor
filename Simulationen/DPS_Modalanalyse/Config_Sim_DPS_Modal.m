@@ -264,6 +264,13 @@ cnfg.cnfg_compLUTMCK (count).name = 'CompLUTMCK Seal 1';
 cnfg.cnfg_compLUTMCK (count).position=250e-3;                        %[m]
 cnfg.cnfg_compLUTMCK (count).type='CompLUTMCK'; 
 cnfg.cnfg_compLUTMCK (count).Table = load('Inputfiles/SealTestRigEcc/TestRigLam1Ecc0.mat'); 
+% zu ladende Datei muss folgende Variablen enthalten (siehe auch Beispiel):
+% rpm = 1 x Nrpm array
+% mass_matrix = 6 x 6 cell
+% damping_matrix = 6 x 6 cell
+% stiffness_matrix = 6 x 6 cell
+% eine einzelne Zelle besteht aus einem array mit Nrpm Eintraegen fuer jede
+% Drehzahlstufe, z.B. mass_matrix{1,2} = Nrpm x 1 array
 
 count = count+1;
 cnfg.cnfg_compLUTMCK (count).name = 'CompLUTMCK Seal 2';
