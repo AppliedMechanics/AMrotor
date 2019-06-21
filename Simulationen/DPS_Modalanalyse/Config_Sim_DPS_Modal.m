@@ -1,5 +1,4 @@
-%% ========================================================================
-% Rotor
+%% ================Rotor===================================================
 % Aufbau eines Structs mit den Rotordaten
 
 cnfg.cnfg_rotor.name = 'DPS - Rotor fuer Modalanalyse bzw. Campbell';
@@ -44,8 +43,7 @@ cnfg.cnfg_rotor.mesh_opt.approx = 'lower sum';   %Approximation for linear funct
 %                                 % Insert: upper sum, lower sum, mean, symmetric.
     
 
-%% ========================================================================
-% Sensors
+%% ====================Sensoren============================================
 cnfg.cnfg_sensor=[];
 
 count = 1;
@@ -73,47 +71,11 @@ cnfg.cnfg_sensor(count).name='Wirbelstrom Lager2';
 cnfg.cnfg_sensor(count).position=551e-3;
 cnfg.cnfg_sensor(count).type='Displacementsensor';
 
-%% ========================================================================
-% % Lager
-% cnfg.cnfg_bearing=[];
-
-
-%% ========================================================================
+%% =========================Lasten=========================================
 cnfg.cnfg_load=[];
 
 
-%% ========================================================================
-% Dichtungen
-count = 0;
-cnfg.cnfg_seal = [];
-
-% count = count+1;
-% cnfg.cnfg_seal(count).name = 'Dichtung Black';
-% cnfg.cnfg_seal(count).position=100e-3;                        %[m]
-% cnfg.cnfg_seal(count).type='BlackSeal';
-% cnfg.cnfg_seal(count).sealModel = load_seal_model('Inputfiles/ChildsBlackModelParameters.m');
-% 
-% count = count+1;
-% cnfg.cnfg_seal(count).name = 'Dichtung Childs';
-% cnfg.cnfg_seal(count).position=150e-3;                        %[m]
-% cnfg.cnfg_seal(count).type='ChildsSeal';
-% cnfg.cnfg_seal(count).sealModel = load_seal_model('Inputfiles/ChildsBlackModelParameters.m');
-
-% count = count+1;
-% cnfg.cnfg_seal(count).name = 'Dichtung LookUpTable';
-% cnfg.cnfg_seal(count).position=250e-3;                        %[m]
-% cnfg.cnfg_seal(count).type='LookUpTableSeal'; 
-% cnfg.cnfg_seal(count).sealModel.Table = load_seal_table('Inputfiles/SealTestRigEcc/TestRigLam1Ecc0_sparse.mat'); 
-
-% count = count+1;
-% cnfg.cnfg_seal(count).name = 'Dichtung LookUpTable';
-% cnfg.cnfg_seal(count).position=310e-3;                        %[m]
-% cnfg.cnfg_seal(count).type='LookUpTableSeal';
-% cnfg.cnfg_seal(count).sealModel.Table = load_seal_table('Inputfiles/SealTestRigEcc/TestRigLam2Ecc0.mat'); 
-
-%% ========================================================================
-% Komponenten
-
+%% =========================Komponenten====================================
 count = 0;
 cnfg.cnfg_component = []; 
 
@@ -268,7 +230,8 @@ cnfg.cnfg_component(count).position=551e-3;                        %[m]
 cnfg.cnfg_component(count).stiffness=2e8; %von Wagner (bearingTPFax10000Full.mat) %wahrscheinlich zu hoch                %[N/m]
 cnfg.cnfg_component(count).damping = 0; 
 
-%% Seals
+%% LookUpTable Component
+% Seals
 count = count+1;
 cnfg.cnfg_component (count).name = 'CompLUTMCK Seal 1';
 cnfg.cnfg_component (count).type='CompLUTMCK'; 
@@ -288,8 +251,17 @@ cnfg.cnfg_component (count).type='CompLUTMCK';
 cnfg.cnfg_component (count).position=310e-3;                        %[m]
 cnfg.cnfg_component (count).Table = load('Inputfiles/SealTestRigEcc/TestRigLam2Ecc0.mat'); 
 
-%% ========================================================================
-% Nonlinear-Seals
-% Muszynska-Seal laminar
-count = 0;
-cnfg.cnfg_sealNonLinear = [];
+%% Seals
+% count = count+1;
+% cnfg.cnfg_component(count).name = 'Dichtung Black';
+% cnfg.cnfg_component(count).type='Seals';
+% cnfg.cnfg_component(count).subtype='BlackSeal';
+% cnfg.cnfg_component(count).position=100e-3;                        %[m]
+% cnfg.cnfg_component(count).sealModel = load_seal_model('Inputfiles/ChildsBlackModelParameters.m');
+% 
+% count = count+1;
+% cnfg.cnfg_component(count).name = 'Dichtung Childs';
+% cnfg.cnfg_component (count).type='Seals';
+% cnfg.cnfg_component(count).subtype='ChildsSeal';
+% cnfg.cnfg_component(count).position=150e-3;                        %[m]
+% cnfg.cnfg_component(count).sealModel = load_seal_model('Inputfiles/ChildsBlackModelParameters.m');

@@ -14,7 +14,6 @@ classdef Rotorsystem < handle
       rotor@AMrotorSIM.Rotor.FEMRotor.FeModel
       sensors@AMrotorSIM.Sensors.Sensor vector
       loads@AMrotorSIM.Loads.Load vector
-      seals@AMrotorSIM.Seals.Seal vector
       components@AMrotorSIM.Components.Component vector
 
    end

@@ -15,11 +15,6 @@ for i=obj.cnfg.cnfg_load
     obj.loads(end+1) = AMrotorSIM.Loads.(i.type)(i);
 end
 
-% Adding Seals to System
-for i=obj.cnfg.cnfg_seal
-    obj.seals(end+1) = AMrotorSIM.Seals.(i.type)(i);
-end
-
 % Adding Components
 for i=obj.cnfg.cnfg_component
     if isfield(i,'subtype')
@@ -39,4 +34,5 @@ for i=obj.cnfg.cnfg_component
     end
     
 end
+
 end

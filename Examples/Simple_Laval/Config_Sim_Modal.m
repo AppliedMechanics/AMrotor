@@ -1,7 +1,5 @@
-%% ========================================================================
-% Rotor
+%% ================Rotor===================================================
 % Aufbau eines Structs mit den Rotordaten
-
 cnfg.cnfg_rotor.name = 'Einfaches Beispiel: Laval-Rotor';
 
 cnfg.cnfg_rotor.material.name = 'steel';
@@ -28,63 +26,56 @@ cnfg.cnfg_rotor.mesh_opt.d_max = 0.009; % [m]
 cnfg.cnfg_rotor.mesh_opt.approx = 'symmetric';   %Approximation for linear functions with gradient 1=0;
                                 % Insert: upper sum, lower sum, mean, symmetric.
     
-%% ========================================================================
-% Massescheiben
-cnfg.cnfg_disc=[];
-
-
-%% ========================================================================
-% Sensors
+%% ====================Sensoren============================================
 cnfg.cnfg_sensor=[];
 count = 0;
 
-%% ========================================================================
-% Lager
-cnfg.cnfg_bearing=[];
-count = 0; 
+%% =========================Komponenten====================================
+count = 0;
+cnfg.cnfg_component = []; 
+
+%% Lager
 
 count = count + 1;
-cnfg.cnfg_bearing(count).name = 'Axiales Lager Links';
-cnfg.cnfg_bearing(count).position=0e-3; % [m]
-cnfg.cnfg_bearing(count).type='SimpleAxialBearing';
-cnfg.cnfg_bearing(count).stiffness=1;                     %[N/m]
-cnfg.cnfg_bearing(count).damping = 0;
+cnfg.cnfg_component(count).name = 'Axiales Lager Links';
+cnfg.cnfg_component(count).type='Bearings';
+cnfg.cnfg_component(count).subtype='SimpleAxialBearing';
+cnfg.cnfg_component(count).position=0e-3; % [m]
+cnfg.cnfg_component(count).stiffness=1;                     %[N/m]
+cnfg.cnfg_component(count).damping = 0;
 
 count = count + 1;
-cnfg.cnfg_bearing(count).name = 'Torque Lager Links';
-cnfg.cnfg_bearing(count).position=0e-3; % [m]
-cnfg.cnfg_bearing(count).type='SimpleTorqueBearing';
-cnfg.cnfg_bearing(count).stiffness=1;                     %[N/m]
-cnfg.cnfg_bearing(count).damping = 0;
+cnfg.cnfg_component(count).name = 'Torque Lager Links';
+cnfg.cnfg_component(count).type='Bearings';
+cnfg.cnfg_component(count).subtype='SimpleTorqueBearing';
+cnfg.cnfg_component(count).position=0e-3; % [m]
+cnfg.cnfg_component(count).stiffness=1;                     %[N/m]
+cnfg.cnfg_component(count).damping = 0;
 
 count = count + 1;
-cnfg.cnfg_bearing(count).name = 'Isotropes Lager 1';
-cnfg.cnfg_bearing(count).position=0e-3; % [m]
-cnfg.cnfg_bearing(count).type='SimpleBearing';
-cnfg.cnfg_bearing(count).stiffness=1e6;                    %[N/m]
-cnfg.cnfg_bearing(count).damping = 0; % [Ns/m]
+cnfg.cnfg_component(count).name = 'Isotropes Lager 1';
+cnfg.cnfg_component(count).type='Bearings';
+cnfg.cnfg_component(count).subtype='SimpleBearing';
+cnfg.cnfg_component(count).position=0e-3; % [m]
+cnfg.cnfg_component(count).stiffness=1e6;                    %[N/m]
+cnfg.cnfg_component(count).damping = 0; % [Ns/m]
 
 count = count + 1;
-cnfg.cnfg_bearing(count).name = 'Isotropes Lager 2';
-cnfg.cnfg_bearing(count).position=500e-3; % [m]
-cnfg.cnfg_bearing(count).type='SimpleBearing';
-cnfg.cnfg_bearing(count).stiffness=1e6;                   %[N/m]
-cnfg.cnfg_bearing(count).damping = 0; % [Ns/m]
+cnfg.cnfg_component(count).name = 'Isotropes Lager 2';
+cnfg.cnfg_component(count).type='Bearings';
+cnfg.cnfg_component(count).subtype='SimpleBearing';
+cnfg.cnfg_component(count).position=500e-3; % [m]
+cnfg.cnfg_component(count).stiffness=1e6;                   %[N/m]
+cnfg.cnfg_component(count).damping = 0; % [Ns/m]
 
 % count = count+1;
-% cnfg.cnfg_bearing(count).name = 'Feste Einspannung';
-% cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
-% cnfg.cnfg_bearing(count).type='RestrictAllDofsBearing';
-% cnfg.cnfg_bearing(count).stiffness=1e10;                     %[N/m]
-% cnfg.cnfg_bearing(count).damping = 0;
+% cnfg.cnfg_component(count).name = 'Feste Einspannung';
+% cnfg.cnfg_component(count).position=0e-3;                        %[m]
+% cnfg.cnfg_component(count).type='RestrictAllDofsBearing';
+% cnfg.cnfg_component(count).stiffness=1e10;                     %[N/m]
+% cnfg.cnfg_component(count).damping = 0;
 
 
-%% ========================================================================
+%% =========================Lasten=========================================
 cnfg.cnfg_load=[];
-count = 0;
-
-
-%% ========================================================================
-% Dichtungen
-cnfg.cnfg_seal = [];
 count = 0;

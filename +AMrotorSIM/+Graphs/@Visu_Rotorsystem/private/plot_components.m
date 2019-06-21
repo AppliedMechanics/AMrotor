@@ -2,7 +2,7 @@ function plot_components(ax,components,obj)
 
 for i=components
     switch i.type
-        case {'Seal','CompLUTMCK'}
+        case {'Seals','CompLUTMCK'}
             plot_CompLUTMCK(ax,i,obj);
     
         case 'Bearings'

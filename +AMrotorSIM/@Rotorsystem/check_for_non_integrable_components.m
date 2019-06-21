@@ -12,7 +12,7 @@ for comp = self.rotor
     end
 end
 
-for comp = self.discs
+for comp = self.components
     if isprop(comp,flag)
         if comp.(flag)
             comp.warn_for_non_integrable_component;
@@ -28,31 +28,7 @@ for comp = self.sensors
     end
 end
 
-for comp = self.bearings
-    if isprop(comp,flag)
-        if comp.(flag)
-            comp.warn_for_non_integrable_component;
-        end
-    end
-end
-
 for comp = self.loads
-    if isprop(comp,flag)
-        if comp.(flag)
-            comp.warn_for_non_integrable_component;
-        end
-    end
-end
-
-for comp = self.seals
-    if isprop(comp,flag)
-        if comp.(flag)
-            comp.warn_for_non_integrable_component;
-        end
-    end
-end
-
-for comp = self.CompLUTMCK
     if isprop(comp,flag)
         if comp.(flag)
             comp.warn_for_non_integrable_component;

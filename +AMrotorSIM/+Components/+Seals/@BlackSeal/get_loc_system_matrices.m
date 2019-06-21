@@ -1,4 +1,4 @@
-function [M_s,D_s,K_s] = get_loc_system_matrices(self,rpm)
+function [M,D,K] = get_loc_system_matrices(self,rpm)
 % dof-order: ux,uy,uz,psix,psiy,psiz
 
 M = sparse(6,6);
@@ -24,9 +24,5 @@ init.omega0IR = [rpm*pi/30;0;0];       % Einheit: rad/s !
  M(1:2,1:2) = M_s;
  D(1:2,1:2) = D_s;
  K(1:2,1:2) = K_s;
- 
-self.mass_matrix = M;
-self.damping_matrix = D;
-self.stiffness_matrix = K;
 
 end

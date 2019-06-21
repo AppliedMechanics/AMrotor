@@ -1,6 +1,6 @@
 classdef CompLUTMCK < AMrotorSIM.Components.Component
     properties
-        integrationProblemFlag
+        integrationProblemFlag = true
     end
     methods
         function self=CompLUTMCK(arg)
