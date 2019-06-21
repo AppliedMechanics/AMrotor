@@ -21,7 +21,9 @@ classdef (Abstract) Component < matlab.mixin.Heterogeneous & handle
                 self.name = arg.name;
                 self.position=arg.position;
                 self.type = arg.type;
+                self.cnfg = arg;
             end
+            
         end
         
     end

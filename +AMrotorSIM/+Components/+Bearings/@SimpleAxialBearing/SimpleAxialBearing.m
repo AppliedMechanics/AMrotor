@@ -1,10 +1,9 @@
-classdef SimpleAxialBearing < AMrotorSIM.Bearings.Bearing
+classdef SimpleAxialBearing < AMrotorSIM.Components.Bearings.Bearing
    properties
-       cnfg
    end
    methods
         function self=SimpleAxialBearing(arg)
-            self = self@AMrotorSIM.Bearings.Bearing(arg);
+            self = self@AMrotorSIM.Components.Bearings.Bearing(arg);
             if nargin == 0
             self.name = 'Empty Bearing';
             else

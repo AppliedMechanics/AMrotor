@@ -1,21 +1,16 @@
-function plot_components(ax,seal,obj)
+function plot_components(ax,component,obj)
 
-for i=seal
-    zp=i.cnfg.position;
+for i=component
+    switch i.type
+        case {'Seal','CompLUTMCK'}
+            plot_CompLUTMCK(ax,i,obj);
     
-    comp_pos = i.position; 
-    node_at_pos = obj.find_node_nr(comp_pos);
-    diameter = obj.mesh.nodes(node_at_pos).radius_outer*2;
-
-
+        case 'Bearings'
+            plot_bearings(ax,i,obj);
+            
+        case 'Discs'
+            plot_discs(ax,i);
     
-    % Zylinderfläche;
-    [x,y,z] = cylinder(diameter*1.1/2);
-
-    %h = surf(ax, x, y, z*0.01+zp);
-    h = surf(ax,z*0.01+zp-0.005, y, x);
-
-    set(h, 'edgecolor','none')
-    set(h, 'facecolor',i.color)
+    end
 
 end

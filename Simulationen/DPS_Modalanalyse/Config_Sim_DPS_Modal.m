@@ -188,36 +188,8 @@ cnfg.cnfg_sensor(count).position=551e-3;
 cnfg.cnfg_sensor(count).type='Displacementsensor';
 
 %% ========================================================================
-% Lager
-cnfg.cnfg_bearing=[];
-
-count = 1;
-cnfg.cnfg_bearing(count).name = 'Axiales Lager Links';
-cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
-cnfg.cnfg_bearing(count).type='SimpleAxialBearing';
-cnfg.cnfg_bearing(count).stiffness=1e10;                     %[N/m]
-cnfg.cnfg_bearing(count).damping = 0;
-
-count = count + 1;
-cnfg.cnfg_bearing(count).name = 'Torque Lager Links'; % Was macht das Torque Lager?
-cnfg.cnfg_bearing(count).position=9e-3;                        %[m]
-cnfg.cnfg_bearing(count).type='SimpleTorqueBearing';
-cnfg.cnfg_bearing(count).stiffness=1e10;                     %[N/m]
-cnfg.cnfg_bearing(count).damping = 0;
-
-count = count + 1;
-cnfg.cnfg_bearing(count).name = 'Isotropes Lager 1';
-cnfg.cnfg_bearing(count).position=9e-3;                        %[m]
-cnfg.cnfg_bearing(count).type='SimpleBearing';
-cnfg.cnfg_bearing(count).stiffness=2e8; %von Wagner (bearingTPFax10000Full.mat) %wahrscheinlich zu hoch                %[N/m]
-cnfg.cnfg_bearing(count).damping = 0; 
-
-count = count + 1;
-cnfg.cnfg_bearing(count).name = 'Isotropes Lager 2';
-cnfg.cnfg_bearing(count).position=551e-3;                        %[m]
-cnfg.cnfg_bearing(count).type='SimpleBearing';
-cnfg.cnfg_bearing(count).stiffness=2e8; %von Wagner (bearingTPFax10000Full.mat) %wahrscheinlich zu hoch                %[N/m]
-cnfg.cnfg_bearing(count).damping = 0; 
+% % Lager
+% cnfg.cnfg_bearing=[];
 
 
 %% ========================================================================
@@ -254,16 +226,50 @@ cnfg.cnfg_seal = [];
 % cnfg.cnfg_seal(count).sealModel.Table = load_seal_table('Inputfiles/SealTestRigEcc/TestRigLam2Ecc0.mat'); 
 
 %% ========================================================================
-% Komponente mit Look Up Table fuer MCK
+% Komponenten
 
 count = 0;
-cnfg.cnfg_compLUTMCK = []; 
+cnfg.cnfg_component = []; 
 
+%% Lager
+count = count + 1;
+cnfg.cnfg_component(count).name = 'Axiales Lager Links';
+cnfg.cnfg_component(count).position=0e-3;                        %[m]
+cnfg.cnfg_component(count).type='Bearings';
+cnfg.cnfg_component(count).subtype='SimpleAxialBearing';
+cnfg.cnfg_component(count).stiffness=1e10;                     %[N/m]
+cnfg.cnfg_component(count).damping = 0;
+
+count = count + 1;
+cnfg.cnfg_component(count).name = 'Torque Lager Links'; % Was macht das Torque Lager?
+cnfg.cnfg_component(count).position=9e-3;                        %[m]
+cnfg.cnfg_component(count).type='Bearings';
+cnfg.cnfg_component(count).subtype='SimpleTorqueBearing';
+cnfg.cnfg_component(count).stiffness=1e10;                     %[N/m]
+cnfg.cnfg_component(count).damping = 0;
+
+count = count + 1;
+cnfg.cnfg_component(count).name = 'Isotropes Lager 1';
+cnfg.cnfg_component(count).position=9e-3;                        %[m]
+cnfg.cnfg_component(count).type='Bearings';
+cnfg.cnfg_component(count).subtype='SimpleBearing';
+cnfg.cnfg_component(count).stiffness=2e8; %von Wagner (bearingTPFax10000Full.mat) %wahrscheinlich zu hoch                %[N/m]
+cnfg.cnfg_component(count).damping = 0; 
+
+count = count + 1;
+cnfg.cnfg_component(count).name = 'Isotropes Lager 2';
+cnfg.cnfg_component(count).position=551e-3;                        %[m]
+cnfg.cnfg_component(count).type='Bearings';
+cnfg.cnfg_component(count).subtype='SimpleBearing';
+cnfg.cnfg_component(count).stiffness=2e8; %von Wagner (bearingTPFax10000Full.mat) %wahrscheinlich zu hoch                %[N/m]
+cnfg.cnfg_component(count).damping = 0; 
+
+%% Seals
 count = count+1;
-cnfg.cnfg_compLUTMCK (count).name = 'CompLUTMCK Seal 1';
-cnfg.cnfg_compLUTMCK (count).position=250e-3;                        %[m]
-cnfg.cnfg_compLUTMCK (count).type='CompLUTMCK'; 
-cnfg.cnfg_compLUTMCK (count).Table = load('Inputfiles/SealTestRigEcc/TestRigLam1Ecc0.mat'); 
+cnfg.cnfg_component (count).name = 'CompLUTMCK Seal 1';
+cnfg.cnfg_component (count).position=250e-3;                        %[m]
+cnfg.cnfg_component (count).type='CompLUTMCK'; 
+cnfg.cnfg_component (count).Table = load('Inputfiles/SealTestRigEcc/TestRigLam1Ecc0.mat'); 
 % zu ladende Datei muss folgende Variablen enthalten (siehe auch Beispiel):
 % rpm = 1 x Nrpm array
 % mass_matrix = 6 x 6 cell
@@ -273,10 +279,10 @@ cnfg.cnfg_compLUTMCK (count).Table = load('Inputfiles/SealTestRigEcc/TestRigLam1
 % Drehzahlstufe, z.B. mass_matrix{1,2} = Nrpm x 1 array
 
 count = count+1;
-cnfg.cnfg_compLUTMCK (count).name = 'CompLUTMCK Seal 2';
-cnfg.cnfg_compLUTMCK (count).position=310e-3;                        %[m]
-cnfg.cnfg_compLUTMCK (count).type='CompLUTMCK'; 
-cnfg.cnfg_compLUTMCK (count).Table = load('Inputfiles/SealTestRigEcc/TestRigLam2Ecc0.mat'); 
+cnfg.cnfg_component (count).name = 'CompLUTMCK Seal 2';
+cnfg.cnfg_component (count).position=310e-3;                        %[m]
+cnfg.cnfg_component (count).type='CompLUTMCK'; 
+cnfg.cnfg_component (count).Table = load('Inputfiles/SealTestRigEcc/TestRigLam2Ecc0.mat'); 
 
 %% ========================================================================
 % Nonlinear-Seals

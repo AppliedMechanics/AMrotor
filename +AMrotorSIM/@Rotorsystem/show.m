@@ -9,20 +9,14 @@ function show(obj)
             i.print();
         end
 
-        for i=obj.bearings
-            i.print();
-        end
-        
-        for i=obj.seals
-            i.print();
-        end
-        
+            disp('----------------------------------------------')
+            disp('--------------- Components -------------------')
         for i=obj.components
             i.print();
         end
         
             disp('----------------------------------------------')
-            disp('--------------- Sensors ------------------------')
+            disp('--------------- Sensors ----------------------')
         for i=obj.sensors
             i.print();
         end

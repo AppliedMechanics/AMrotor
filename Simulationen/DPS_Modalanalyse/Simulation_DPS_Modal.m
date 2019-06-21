@@ -17,6 +17,7 @@ Config_Sim_DPS_Modal
 % Config_Sim_DPS_Modal_ohne_Dichtung
 
 r=Rotorsystem(cnfg,'DPS-System');
+
 r.assemble;
 r.show;
 
@@ -28,8 +29,8 @@ r.show;
 % r.rotor.mesh.show_2D_nodes(); % show geo_nodes
 % r.rotor.mesh.show_3D();
 
-% g=Graphs.Visu_Rotorsystem(r);
-% g.show();
+g=Graphs.Visu_Rotorsystem(r);
+g.show();
 
 
 

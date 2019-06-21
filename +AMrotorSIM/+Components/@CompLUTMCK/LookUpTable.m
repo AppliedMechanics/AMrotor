@@ -1,4 +1,13 @@
 function [ outputMatrix ] = LookUpTable( self, rpmTable, inputCell, rpmCurrent )     
+% structure of inputs and outputs
+%
+% rpmTable = 1 x Nrpm array
+% inputCell = 6 x 6 cell
+% a single cell of inputCell is an array with Nrpm entries for every
+% rpm-step: inputCell{i,j} = Nrpm x 1 array
+% rpmCurrent = 1x1 current rpm-step
+%
+% outputMatrix = 6 x 6 matrix for rpmCurrent
 
 outputMatrix = zeros(6,6);
 for i = 1:6
