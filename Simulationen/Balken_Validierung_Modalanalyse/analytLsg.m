@@ -5,9 +5,9 @@ clear, %close all
 
 Config_Sim_Balken
 
-% boundaryCondition = 'free-free';
+boundaryCondition = 'free-free';
 % boundaryCondition = 'supported-free';
-boundaryCondition = 'clamped-free';
+% boundaryCondition = 'clamped-free';
 % boundaryCondition = 'supported-supported';
 % boundaryCondition = 'supported-clamped';
 % boundaryCondition = 'clamped-clamped';

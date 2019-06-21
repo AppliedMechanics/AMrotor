@@ -1,5 +1,4 @@
-%% ======================================================================
-% Rotor
+%% ================Rotor===================================================
 
 cnfg.cnfg_rotor.name = 'MLPS - Rotor';
 
@@ -65,40 +64,123 @@ cnfg.cnfg_rotor.mesh_opt.approx = 'symmetric';   %Approximation for linear funct
                                 % Insert: upper sum, lower sum, mean, symmetric.
 
     
-%% ========================================================================
-% Massescheiben
-cnfg.cnfg_disc=[];
-count =0;
+%% =========================Komponenten====================================
+count = 0;
+cnfg.cnfg_component = []; 
+
+%% Massescheiben
 
 count = count+1;
-cnfg.cnfg_disc(count).name = 'ML_Lauefer_L'; % inkl. Spannhuelsen
-cnfg.cnfg_disc(count).position = 113e-3;                 %disc position [m]
-cnfg.cnfg_disc(count).radius = 46e-3;  
-cnfg.cnfg_disc(count).m = 0.85074;                       %disc mass [kg]
-cnfg.cnfg_disc(count).Jx = 4.840066e-4;                  %disc mom. of inertia [kg*m^2]
-cnfg.cnfg_disc(count).Jz = 4.036839e-4;                  %disc mom. of inertia [kg*m^2]
-cnfg.cnfg_disc(count).Jp = cnfg.cnfg_disc(count).Jz;     %disc polar mom. of inertia [kg*m^2]
+cnfg.cnfg_component(count).name = 'ML_Lauefer_L'; % inkl. Spannhuelsen
+cnfg.cnfg_component(count).type = 'Disc';
+cnfg.cnfg_component(count).position = 113e-3;                 %disc position [m]
+cnfg.cnfg_component(count).radius = 46e-3;  
+cnfg.cnfg_component(count).m = 0.85074;                       %disc mass [kg]
+cnfg.cnfg_component(count).Jx = 4.840066e-4;                  %disc mom. of inertia [kg*m^2]
+cnfg.cnfg_component(count).Jz = 4.036839e-4;                  %disc mom. of inertia [kg*m^2]
+cnfg.cnfg_component(count).Jp = cnfg.cnfg_component(count).Jz;     %disc polar mom. of inertia [kg*m^2]
 
 count = count+1;
-cnfg.cnfg_disc(count).name = 'Massescheibe'; % inkl. Spannhuelsen+Fanglagerhuelsen+SChrauben+Muttern
-cnfg.cnfg_disc(count).position = 363e-3;                 %disc position [m]
-cnfg.cnfg_disc(count).radius = 96e-3;  
-cnfg.cnfg_disc(count).m = 1.276499;                       %disc mass [kg]
-cnfg.cnfg_disc(count).Jx = 1.487212e-3;                  %disc mom. of inertia [kg*m^2]
-cnfg.cnfg_disc(count).Jz = 2.832751e-3;                  %disc mom. of inertia [kg*m^2]
-cnfg.cnfg_disc(count).Jp = cnfg.cnfg_disc(count).Jz;     %disc polar mom. of inertia [kg*m^2]
+cnfg.cnfg_component(count).name = 'Massescheibe'; % inkl. Spannhuelsen+Fanglagerhuelsen+SChrauben+Muttern
+cnfg.cnfg_component(count).type = 'Disc';
+cnfg.cnfg_component(count).position = 363e-3;                 %disc position [m]
+cnfg.cnfg_component(count).radius = 96e-3;  
+cnfg.cnfg_component(count).m = 1.276499;                       %disc mass [kg]
+cnfg.cnfg_component(count).Jx = 1.487212e-3;                  %disc mom. of inertia [kg*m^2]
+cnfg.cnfg_component(count).Jz = 2.832751e-3;                  %disc mom. of inertia [kg*m^2]
+cnfg.cnfg_component(count).Jp = cnfg.cnfg_component(count).Jz;     %disc polar mom. of inertia [kg*m^2]
 
 count = count+1;
-cnfg.cnfg_disc(count).name = 'ML_Lauefer_R'; % inkl. Spannhuelsen
-cnfg.cnfg_disc(count).position = 623e-3;                 %disc position [m]
-cnfg.cnfg_disc(count).radius = 46e-3;  
-cnfg.cnfg_disc(count).m = 0.85074;                       %disc mass [kg]
-cnfg.cnfg_disc(count).Jx = 4.840066e-4;                  %disc mom. of inertia [kg*m^2]
-cnfg.cnfg_disc(count).Jz = 4.036839e-4;                  %disc mom. of inertia [kg*m^2]
-cnfg.cnfg_disc(count).Jp = cnfg.cnfg_disc(count).Jz;     %disc polar mom. of inertia [kg*m^2]
+cnfg.cnfg_component(count).name = 'ML_Lauefer_R'; % inkl. Spannhuelsen
+cnfg.cnfg_component(count).type = 'Disc';
+cnfg.cnfg_component(count).position = 623e-3;                 %disc position [m]
+cnfg.cnfg_component(count).radius = 46e-3;  
+cnfg.cnfg_component(count).m = 0.85074;                       %disc mass [kg]
+cnfg.cnfg_component(count).Jx = 4.840066e-4;                  %disc mom. of inertia [kg*m^2]
+cnfg.cnfg_component(count).Jz = 4.036839e-4;                  %disc mom. of inertia [kg*m^2]
+cnfg.cnfg_component(count).Jp = cnfg.cnfg_component(count).Jz;     %disc polar mom. of inertia [kg*m^2]
 
-%% ========================================================================
-% Sensors
+%% Lager
+% cnfg.cnfg_component(count).name = 'Axiales Lager Links';
+% cnfg.cnfg_component(count).type='Bearings';
+% cnfg.cnfg_component(count).subtype='SimpleAxialBearing';
+% cnfg.cnfg_component(count).position=0e-3;                        %[m]
+% cnfg.cnfg_component(count).stiffness=1e10;                     %[N/m]
+% cnfg.cnfg_component(count).damping = 0;
+% 
+% count = count + 1;
+% cnfg.cnfg_component(count).name = 'Torque Lager Links';
+% cnfg.cnfg_component(count).type='Bearings';
+% cnfg.cnfg_component(count).subtype='SimpleTorqueBearing';
+% cnfg.cnfg_component(count).position=0e-3;                        %[m]
+% cnfg.cnfg_component(count).stiffness=1e10;                     %[N/m]
+% cnfg.cnfg_component(count).damping = 0;
+% 
+% count = count + 1;
+% cnfg.cnfg_component(count).name = 'Isotropes Lager 1';
+% cnfg.cnfg_component(count).type='Bearings';
+% cnfg.cnfg_component(count).subtype='SimpleBearing';
+% cnfg.cnfg_component(count).position=113e-3;                        %[m]
+% cnfg.cnfg_component(count).stiffness=0.0670680e7*0.5;                     %[N/m]
+% cnfg.cnfg_component(count).damping = 0;%299.275;
+% 
+% count = count + 1;
+% cnfg.cnfg_component(count).name = 'Isotropes Lager 2';
+% cnfg.cnfg_component(count).type='Bearings';
+% cnfg.cnfg_component(count).subtype='SimpleBearing';
+% cnfg.cnfg_component(count).position=623e-3;                        %[m]
+% cnfg.cnfg_component(count).stiffness=0.0670680e7*0.5;                     %[N/m]
+% cnfg.cnfg_component(count).damping = 0;%299.275;
+
+%fuer free-free-Test:
+count = count+1;
+cnfg.cnfg_component(count).name = 'Axiales Lager Links';
+cnfg.cnfg_component(count).type='Bearings';
+cnfg.cnfg_component(count).subtype='SimpleAxialBearing';
+cnfg.cnfg_component(count).position=0e-3;                        %[m]
+cnfg.cnfg_component(count).stiffness=1;                     %[N/m]
+cnfg.cnfg_component(count).damping = 0;
+
+count = count + 1;
+cnfg.cnfg_component(count).name = 'Torque Lager Links';
+cnfg.cnfg_component(count).type='Bearings';
+cnfg.cnfg_component(count).subtype='SimpleTorqueBearing';
+cnfg.cnfg_component(count).position=0e-3;                        %[m]
+cnfg.cnfg_component(count).stiffness=1;                     %[N/m]
+cnfg.cnfg_component(count).damping = 0;
+
+count = count + 1;
+cnfg.cnfg_component(count).name = 'Isotropes Lager 1';
+cnfg.cnfg_component(count).type='Bearings';
+cnfg.cnfg_component(count).subtype='SimpleBearing';
+cnfg.cnfg_component(count).position=113e-3;                        %[m]
+cnfg.cnfg_component(count).stiffness=1;                     %[N/m]
+cnfg.cnfg_component(count).damping = 0;
+
+count = count + 1;
+cnfg.cnfg_component(count).name = 'Isotropes Lager 2';
+cnfg.cnfg_component(count).type='Bearings';
+cnfg.cnfg_component(count).subtype='SimpleBearing';
+cnfg.cnfg_component(count).position=623e-3;                        %[m]
+cnfg.cnfg_component(count).stiffness=1;                     %[N/m]
+cnfg.cnfg_component(count).damping =0;
+
+count = count+1;
+cnfg.cnfg_component(count).name = 'Feste Einspannung';
+cnfg.cnfg_component(count).type='Bearings';
+cnfg.cnfg_component(count).subtype='SimpleBearing';%'RestrictAllDofsBearing';
+cnfg.cnfg_component(count).position=0e-3;                        %[m]
+cnfg.cnfg_component(count).stiffness=1;                     %[N/m]
+cnfg.cnfg_component(count).damping = 0;
+% 
+% cnfg.cnfg_component(count).name = 'Feste Einspannung';
+% cnfg.cnfg_component(count).type='Bearings';
+% cnfg.cnfg_component(count).subtype='RestrictAllDofsBearing';
+% cnfg.cnfg_component(count).position=10e-3;                        %[m]
+% cnfg.cnfg_component(count).stiffness=1;                     %[N/m]
+% cnfg.cnfg_component(count).damping = 0;
+
+%% ====================Sensoren============================================
 cnfg.cnfg_sensor=[];
 count = 0; 
 
@@ -166,82 +248,7 @@ cnfg.cnfg_sensor(count).type='Displacementsensor';
 end
 
 
-%% ========================================================================
-% % Lager
-cnfg.cnfg_bearing=[];
-count = 0;
-
-% count = 1;
-% cnfg.cnfg_bearing(count).name = 'Axiales Lager Links';
-% cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
-% cnfg.cnfg_bearing(count).type='SimpleAxialBearing';
-% cnfg.cnfg_bearing(count).stiffness=1e10;                     %[N/m]
-% cnfg.cnfg_bearing(count).damping = 0;
-% 
-% count = count + 1;
-% cnfg.cnfg_bearing(count).name = 'Torque Lager Links';
-% cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
-% cnfg.cnfg_bearing(count).type='SimpleTorqueBearing';
-% cnfg.cnfg_bearing(count).stiffness=1e10;                     %[N/m]
-% cnfg.cnfg_bearing(count).damping = 0;
-% 
-% count = count + 1;
-% cnfg.cnfg_bearing(count).name = 'Isotropes Lager 1';
-% cnfg.cnfg_bearing(count).position=113e-3;                        %[m]
-% cnfg.cnfg_bearing(count).type='SimpleBearing';
-% cnfg.cnfg_bearing(count).stiffness=0.0670680e7*0.5;                     %[N/m]
-% cnfg.cnfg_bearing(count).damping = 0;%299.275;
-% 
-% count = count + 1;
-% cnfg.cnfg_bearing(count).name = 'Isotropes Lager 2';
-% cnfg.cnfg_bearing(count).position=623e-3;                        %[m]
-% cnfg.cnfg_bearing(count).type='SimpleBearing';
-% cnfg.cnfg_bearing(count).stiffness=0.0670680e7*0.5;                     %[N/m]
-% cnfg.cnfg_bearing(count).damping = 0;%299.275;
-
-%fuer free-free-Test:
-count = count+1;
-cnfg.cnfg_bearing(count).name = 'Axiales Lager Links';
-cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
-cnfg.cnfg_bearing(count).type='SimpleAxialBearing';
-cnfg.cnfg_bearing(count).stiffness=1;                     %[N/m]
-cnfg.cnfg_bearing(count).damping = 0;
-
-count = count + 1;
-cnfg.cnfg_bearing(count).name = 'Torque Lager Links';
-cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
-cnfg.cnfg_bearing(count).type='SimpleTorqueBearing';
-cnfg.cnfg_bearing(count).stiffness=1;                     %[N/m]
-cnfg.cnfg_bearing(count).damping = 0;
-
-count = count + 1;
-cnfg.cnfg_bearing(count).name = 'Isotropes Lager 1';
-cnfg.cnfg_bearing(count).position=113e-3;                        %[m]
-cnfg.cnfg_bearing(count).type='SimpleBearing';
-cnfg.cnfg_bearing(count).stiffness=1;                     %[N/m]
-cnfg.cnfg_bearing(count).damping = 0;
-
-count = count + 1;
-cnfg.cnfg_bearing(count).name = 'Isotropes Lager 2';
-cnfg.cnfg_bearing(count).position=623e-3;                        %[m]
-cnfg.cnfg_bearing(count).type='SimpleBearing';
-cnfg.cnfg_bearing(count).stiffness=1;                     %[N/m]
-cnfg.cnfg_bearing(count).damping =0;
-
-count = count+1;
-cnfg.cnfg_bearing(count).name = 'Feste Einspannung';
-cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
-cnfg.cnfg_bearing(count).type='SimpleBearing';%'RestrictAllDofsBearing';
-cnfg.cnfg_bearing(count).stiffness=1;                     %[N/m]
-cnfg.cnfg_bearing(count).damping = 0;
-% 
-% cnfg.cnfg_bearing(count).name = 'Feste Einspannung';
-% cnfg.cnfg_bearing(count).position=10e-3;                        %[m]
-% cnfg.cnfg_bearing(count).type='RestrictAllDofsBearing';
-% cnfg.cnfg_bearing(count).stiffness=1;                     %[N/m]
-% cnfg.cnfg_bearing(count).damping = 0;
-
-%% ========================================================================
+%% =========================Lasten=========================================
 cnfg.cnfg_load=[];
 count = 0;
 
@@ -303,7 +310,3 @@ cnfg.cnfg_load(count).frequency_0 = 0; % Startfrequenz
 cnfg.cnfg_load(count).frequency= 1000;  %in Hz, Endfrequenz
 cnfg.cnfg_load(count).t_end= 0.6;%2; % Zeitdauer des Chirps, hier wird f erreicht
 cnfg.cnfg_load(count).type='Force_timevariant_whirl_fwd_sweep';
-
-%% ========================================================================
-% Dichtungen
-cnfg.cnfg_seal = [];

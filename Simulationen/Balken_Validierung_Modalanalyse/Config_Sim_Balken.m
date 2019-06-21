@@ -1,5 +1,4 @@
-%% ========================================================================
-% Rotor
+%% ================Rotor===================================================
 % Aufbau eines Structs mit den Rotordaten
 
 cnfg.cnfg_rotor.name = 'Einfacher Balken';
@@ -23,38 +22,31 @@ cnfg.cnfg_rotor.geo_nodes = {[0 0 0], [0 radius 0], [beamLength radius 0]};
 % cnfg.cnfg_rotor.mesh_opt.approx = 'mean';   %Approximation for linear functions with gradient 1=0;
 %                                 % Insert: upper sum, lower sum, mean, symmetric.
 cnfg.cnfg_rotor.mesh_opt.name = 'grobes Netz';
+cnfg.cnfg_rotor.mesh_opt.n_refinement = 10;
 cnfg.cnfg_rotor.mesh_opt.d_min= 0.02;
 cnfg.cnfg_rotor.mesh_opt.d_max = 0.05;
 cnfg.cnfg_rotor.mesh_opt.approx = 'mean';
     
-%% ========================================================================
-% Massescheiben
-cnfg.cnfg_disc=[];
+%% =========================Komponenten====================================
 count = 0;
+cnfg.cnfg_component = []; 
 
-%% ========================================================================
-% Sensors
+count = count +1;
+cnfg.cnfg_component(count).name = 'Feste Einspannung';
+cnfg.cnfg_component(count).type='Bearings';
+cnfg.cnfg_component(count).subtype='RestrictAllDofsBearing';
+cnfg.cnfg_component(count).position=0e-3;                        %[m]
+cnfg.cnfg_component(count).stiffness= 0;                     %[N/m]
+cnfg.cnfg_component(count).damping = 0;
+
+
+
+%% ====================Sensoren============================================
 cnfg.cnfg_sensor=[];
 count = 0;
 
-%% ========================================================================
-% Lager
-cnfg.cnfg_bearing=[];
 
-count = 1;
-cnfg.cnfg_bearing(count).name = 'Feste Einspannung';
-cnfg.cnfg_bearing(count).position=0e-3;                        %[m]
-cnfg.cnfg_bearing(count).type='RestrictAllDofsBearing';
-cnfg.cnfg_bearing(count).stiffness=0;                     %[N/m]
-cnfg.cnfg_bearing(count).damping = 0;
-
-
-
-%% ========================================================================
+%% =========================Lasten=========================================
 cnfg.cnfg_load=[];
 count = 0;
 
-%% ========================================================================
-% Dichtungen
-count = 0;
-cnfg.cnfg_seal = [];

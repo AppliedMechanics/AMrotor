@@ -45,7 +45,7 @@ m=Experiments.Modalanalyse(r);
 % m.calculate_rotor_only(15,100);
 % 
 % m.calculate_rotorsystem_without_damping(15);
-m.calculate_rotorsystem(10,0);
+m.calculate_rotorsystem(20,0);
 % 
 esf= Graphs.Eigenschwingformen(m);
 esf.print_frequencies();
