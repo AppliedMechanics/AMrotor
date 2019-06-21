@@ -7,7 +7,7 @@ for k = 1:length(inposition)
     node_nr = r.rotor.find_node_nr(position);
     inposition_soll = position;
     indof_real_position=r.rotor.mesh.nodes(node_nr).z;
-    delta_in(k) = inposition_soll-indof_real_position;
+    delta_in(k) = inposition_soll-indof_real_position; % shows the distance between the desired inputPosition and the closest node
     indof(k) = (node_nr-1)*6+1;
 end
 for k = 1:length(outposition)

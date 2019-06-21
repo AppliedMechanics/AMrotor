@@ -40,6 +40,16 @@ u_trans_rigid_body = r.compute_translational_rigid_body_modes;overall_mass = r.c
 
 %% Running system analyses
 
+% Frequenzgangfunktion
+frf=Experiments.Frequenzgangfunktion(r,'Test-FRF');
+type = 'd'; %type:'d','v','a'
+inPos = [100,110]*1e-3;
+outPos = [100,110]*1e-3;
+f = 1:1:200;
+rpm = 0;
+[f,H]=frf.calculate(f,inPos,outPos,type,rpm);
+[deltaIn,deltaOut]=frf.print_distance_delta;
+
 % Modalanalyse
 m=Experiments.Modalanalyse(r);
 
