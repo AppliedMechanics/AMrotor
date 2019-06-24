@@ -43,9 +43,9 @@ u_trans_rigid_body = r.compute_translational_rigid_body_modes;overall_mass = r.c
 % Frequenzgangfunktion
 frf=Experiments.Frequenzgangfunktion(r,'Test-FRF');
 type = 'd'; %type:'d','v','a'
-inPos = [100,110]*1e-3;
-outPos = [100,110]*1e-3;
-f = 1:1:200;
+inPos = 100e-3;%[100:100:500]*1e-3;%
+outPos = 100e-3;%[100,250]*1e-3;%
+f = 1:1:1000;
 rpm = 0;
 [f,H]=frf.calculate(f,inPos,outPos,type,rpm);
 [deltaIn,deltaOut]=frf.print_distance_delta;
