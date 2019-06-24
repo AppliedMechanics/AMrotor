@@ -50,6 +50,13 @@ rpm = 0;
 [f,H]=frf.calculate(f,inPos,outPos,type,rpm);
 [deltaIn,deltaOut]=frf.print_distance_delta;
 
+visufrf = Graphs.Frequenzgangfunktion(frf);
+visufrf.set_plots('amplitude',1,1,'db')
+visufrf.set_plots('phase',{'u_x','u_y'},'u_x','db')
+visufrf.set_plots('bode',[1,4],[1,2,3],'log','deg')
+visufrf.set_plots('nyquist','u_y','u_y')
+Janitor.cleanFigures();
+
 % Modalanalyse
 m=Experiments.Modalanalyse(r);
 
