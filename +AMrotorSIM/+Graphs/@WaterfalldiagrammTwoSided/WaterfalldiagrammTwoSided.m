@@ -1,5 +1,7 @@
 classdef WaterfalldiagrammTwoSided < handle
-   properties
+% WaterfalldiagrammTwoSided Class for visualisation of the results of the
+% time integration as a two sided waterfall diagram
+    properties
     unit
     rotorsystem
     name=' ---  Wasserfalldiagramm-darstellung Two Sided  --- '

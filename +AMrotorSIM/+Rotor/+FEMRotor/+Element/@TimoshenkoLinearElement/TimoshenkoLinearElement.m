@@ -1,5 +1,9 @@
 classdef TimoshenkoLinearElement < AMrotorSIM.Rotor.FEMRotor.Element.Element
-    
+% TimoshenkoLinearElement Class with the element formulation for Timoshenko
+% elements
+%   Timoshenko elements describe beam elements
+%   they consist of 2 nodes with 6 degrees of freedom each, so that 1
+%   element has 12 degrees of freedom
     properties
     end
     

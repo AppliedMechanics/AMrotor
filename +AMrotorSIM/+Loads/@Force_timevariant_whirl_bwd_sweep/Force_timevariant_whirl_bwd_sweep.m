@@ -1,4 +1,6 @@
 classdef Force_timevariant_whirl_bwd_sweep < AMrotorSIM.Loads.Load
+% Force_timevariant_whirl_bwd_sweep Class of backward whirl with freq-sweep
+%   backward whirl with linearly increasing or decreasing frequency
    properties
    end
    methods

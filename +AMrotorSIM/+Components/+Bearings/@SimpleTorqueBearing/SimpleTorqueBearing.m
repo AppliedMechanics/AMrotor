@@ -1,4 +1,8 @@
 classdef SimpleTorqueBearing < AMrotorSIM.Components.Bearings.Bearing
+% SimpleTorqueBearing acts on torsional direction of the corresponding node
+%   Add stiffness and damping on the torsional degree of freedom (psi_z) of
+%   the closest node of the rotor, the stiffness and damping cause a torque
+%   around the z-axis of the system
     properties
     end
     methods

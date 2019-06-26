@@ -1,4 +1,6 @@
 classdef CompLUTMCK < AMrotorSIM.Components.Component
+% CompLUTMCK class for component with Look Up Table to determine mass, damping,
+% stiffness matrix
     properties
         integrationProblemFlag = true
     end

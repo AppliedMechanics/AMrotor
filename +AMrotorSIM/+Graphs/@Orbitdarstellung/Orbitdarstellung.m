@@ -1,4 +1,6 @@
 classdef Orbitdarstellung < handle
+% Orbitdarstellung Class for visualisation of the orbit as result of the
+% time integration
    properties
     unit
     rotorsystem

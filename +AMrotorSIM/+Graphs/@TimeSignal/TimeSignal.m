@@ -1,4 +1,6 @@
 classdef TimeSignal < handle
+% TimeSignal Class for visualisation of the signal over time as result of
+% the time integration
    properties
     unit
     rotorsystem

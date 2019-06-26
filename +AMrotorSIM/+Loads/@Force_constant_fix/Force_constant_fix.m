@@ -1,4 +1,5 @@
 classdef Force_constant_fix < AMrotorSIM.Loads.Load
+% Force_constant_fix Class of force with constant amplitude and direction
    properties
    end
    methods

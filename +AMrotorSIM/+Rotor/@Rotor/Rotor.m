@@ -1,4 +1,5 @@
 classdef Rotor < handle
+% Rotor Class of the rotor
    properties
       cnfg=struct([])
       

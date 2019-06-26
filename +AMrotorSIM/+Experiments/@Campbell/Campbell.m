@@ -1,9 +1,8 @@
 classdef Campbell < handle
-    %CAMPELL Summary of this class goes here
-    % This class calculates the needed matrices for the calculation of the
-    % campell diagramm and does also the sorting regarding forward/backward
-    % whirl
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CAMPELL Class for calculation of eigenvalues over rotational speed
+%     This class calculates thre eigenvalues, which include the
+%     eigenfrequencies and modal damping values for the campell diagramm
+%     and does also the sorting regarding forward/backward whirl
     properties (Access = private)
         name = 'Campell Analysis';
         rotorsystem;

@@ -1,4 +1,8 @@
 classdef Stationaere_Lsg < handle
+% Stationaere_Lsg Class for time integration with constant roation speed
+%   Does the time intergation of the system for steps of constant
+%   rotational speed. Run-up with steps of constant rotation speeds is
+%   possible.
    properties
       name='Stationäre Lösung'
       rotorsystem

@@ -1,8 +1,8 @@
 classdef Frequenzgangfunktion < handle
-    %FREQUENZGANGFUNKTION Summary of this class goes here
-    % This class calculates the frequency response function between
-    % specified points, for a specidifed frequency vector using the
-    % AbraVibe toolbox
+% FREQUENZGANGFUNKTION Class for calculation of frequency response fúnctions
+%     This class calculates the frequency response function between
+%     specified points, for a specidifed frequency vector using the
+%     AbraVibe toolbox
     properties
         name
         rotorsystem

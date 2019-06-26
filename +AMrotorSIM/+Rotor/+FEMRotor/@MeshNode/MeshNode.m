@@ -1,5 +1,5 @@
 classdef MeshNode < handle
-   
+% MeshNode Class of the nodes for the finite element mesh
     properties
         name 
         radius_outer

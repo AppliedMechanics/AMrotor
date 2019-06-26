@@ -1,4 +1,6 @@
 classdef GeoNode < handle
+% GeoNode Class of the geometric nodes which are used to build the
+% discretisation
     properties
         name 
         x

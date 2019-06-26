@@ -1,4 +1,6 @@
 classdef Waterfalldiagramm < handle
+% Waterfalldiagramm Class for visualisation of the results of the time
+% integration as waterfall diagram
    properties
     unit
     rotorsystem

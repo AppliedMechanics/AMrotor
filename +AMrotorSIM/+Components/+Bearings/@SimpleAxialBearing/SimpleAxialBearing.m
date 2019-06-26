@@ -1,4 +1,7 @@
 classdef SimpleAxialBearing < AMrotorSIM.Components.Bearings.Bearing
+% SimpleAxialBearing acts on axial direction of the corresponding node
+%   Add stiffness and damping on the axial degree of freedom (z-direction)
+%   of the closest node of the rotor
    properties
    end
    methods

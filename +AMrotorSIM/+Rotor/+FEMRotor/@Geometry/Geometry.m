@@ -1,4 +1,5 @@
 classdef Geometry < handle
+% Geometry Class that includes the geometric nodes
     properties
         name
         nodes@AMrotorSIM.Rotor.FEMRotor.GeoNode vector

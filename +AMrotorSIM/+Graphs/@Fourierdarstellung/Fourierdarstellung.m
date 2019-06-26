@@ -1,4 +1,6 @@
 classdef Fourierdarstellung < handle
+% Fourierdarstellung Class for visualisation of the results of the time
+% integration as fouier transform
    properties
     unit
     rotorsystem

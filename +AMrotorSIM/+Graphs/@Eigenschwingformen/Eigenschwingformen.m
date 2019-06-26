@@ -1,4 +1,5 @@
 classdef Eigenschwingformen < handle
+% Eigenschwingformen Class for visualisation of the eigen modes
    properties %(Access = private)
       name='Rotor Eigenschwingformen'
       modalsystem

@@ -1,5 +1,5 @@
 classdef Material < handle
-    
+% Material Class of material properties
     properties 
         name
         e_module

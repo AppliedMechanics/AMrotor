@@ -1,4 +1,7 @@
 classdef RestrictAllDofsBearing < AMrotorSIM.Components.Bearings.Bearing
+% RestrictAllDofsBearing acts on all dofs of the corresponding node
+%   Add stiffness and damping on every degree of freedom of the closest
+%   node of the rotor
     properties
     end
     methods

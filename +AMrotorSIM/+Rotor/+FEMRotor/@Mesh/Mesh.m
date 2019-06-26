@@ -1,5 +1,5 @@
 classdef Mesh < handle
-    
+% Mesh  Class of the mesh, which includes the nodes and elements
     properties
         name
         d_min

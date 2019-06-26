@@ -1,4 +1,5 @@
 classdef Sensor < matlab.mixin.Heterogeneous & handle
+% Sensor Class for sensors which read values after rime integration
    properties
       cnfg=struct([])  
       name

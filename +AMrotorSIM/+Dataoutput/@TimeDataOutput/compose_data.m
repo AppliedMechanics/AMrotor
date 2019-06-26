@@ -1,5 +1,9 @@
 function dataset = compose_data(self)
-
+% COMPOSE_DATA creates a container that includes the data of the sensors
+% AMrotorSIM.Dataoutput.TimeDataOutput/compose_data 
+%   dataset = compose_data(self)
+% 
+%   See also TIMEDATAOUTPUT, SAVE_DATA.
     disp(' --- Compose Dataset Timesignal  --- ')
 
     dataset = containers.Map('KeyType','double','ValueType','any');

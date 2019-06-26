@@ -1,4 +1,5 @@
 classdef Force_timevariant_whirl_bwd < AMrotorSIM.Loads.Load
+% Force_timevariant_whirl_bwd Class of backward whirl with const frequnency
    properties
    end
    methods

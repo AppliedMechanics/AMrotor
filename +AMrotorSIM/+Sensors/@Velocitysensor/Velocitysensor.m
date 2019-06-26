@@ -1,4 +1,6 @@
 classdef Velocitysensor < AMrotorSIM.Sensors.Sensor
+% Velocitysensor Class of sensors for reading the velocity values after
+% time integration
    properties
        unit = 'm/s'
        Position

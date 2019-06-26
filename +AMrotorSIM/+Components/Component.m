@@ -1,4 +1,5 @@
 classdef (Abstract) Component < matlab.mixin.Heterogeneous & handle
+    % Component Superclass for components that are added to the rotor
     properties
         name
         cnfg
@@ -15,6 +16,7 @@ classdef (Abstract) Component < matlab.mixin.Heterogeneous & handle
     methods
         %Konstruktor
         function self = Component(arg)
+            % create the component and initialize with the cnfg-struct
             if nargin == 0
                 self.name = 'Empty Component';
             else
@@ -30,7 +32,7 @@ classdef (Abstract) Component < matlab.mixin.Heterogeneous & handle
     
     methods(Abstract)
         
-        print(self)
+        print(self) 
         
         create_ele_loc_matrix(self)
         

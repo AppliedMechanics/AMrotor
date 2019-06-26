@@ -1,4 +1,6 @@
 classdef Modalanalyse < handle
+% Modalanalyse Class for modal analysis
+%   Calculates the eigenvalues and eigenmodes 
    properties
       name='Modalanalyse'
       rotorsystem

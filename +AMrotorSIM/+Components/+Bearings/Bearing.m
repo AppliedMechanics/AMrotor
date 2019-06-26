@@ -1,4 +1,5 @@
 classdef (Abstract) Bearing < AMrotorSIM.Components.Component
+% Bearing superclass for different bearing types with stiffness and damping
     properties
         stiffness
         damping

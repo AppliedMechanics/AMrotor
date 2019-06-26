@@ -1,5 +1,8 @@
 classdef Campbell < handle
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Campbell Class for the visualisation of a Campbell diagram
+%   Can plot the classic Campbell diagram, which shows the eigenfrequncies
+%   over the rotational speed.
+%   Can also plot the damping over rotational speed.
     properties %(Access = private)
         Name = 'Campbell-Diagramm';
         experimentCampbell;

@@ -1,4 +1,7 @@
 classdef Hochlaufanalyse < handle
+% Hochlaufanalyse Class for time integration of run-up
+%   Does time integration for the system with a linearly rising rotational
+%   speed
    properties
       name='Hochlaufanalyse'
       rotorsystem

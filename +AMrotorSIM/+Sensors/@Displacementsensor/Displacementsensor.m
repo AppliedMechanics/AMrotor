@@ -1,4 +1,6 @@
 classdef Displacementsensor < AMrotorSIM.Sensors.Sensor
+% Displacementsensor Class of sensors for reading the displacement values
+% after time integration
    properties
        unit = 'm'
        Position

@@ -1,5 +1,6 @@
 classdef Force_timevariant_fix < AMrotorSIM.Loads.Load
-   properties
+% Force_timevariant_fix Class for sine-force with constant frequency
+properties
    end
    methods
        %Konstruktor

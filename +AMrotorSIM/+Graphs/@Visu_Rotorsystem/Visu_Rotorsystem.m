@@ -1,4 +1,5 @@
 classdef Visu_Rotorsystem < handle
+% Visu_Rotorgeometrie Class for visualisation of the rotor system
    properties
       name='Rotor Gesamtsystem'
       rotorsystem

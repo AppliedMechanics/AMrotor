@@ -1,4 +1,6 @@
 classdef Frequenzgangfunktion < handle
+% Frequenzgangfunktion Class for visualisation of the frequency response
+% function
     properties
         Name = 'Visualisierung Frequenzgangfunktion';
         experimentFRF;

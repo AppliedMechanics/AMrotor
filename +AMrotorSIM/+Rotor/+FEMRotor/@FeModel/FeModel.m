@@ -1,5 +1,5 @@
 classdef FeModel < handle
-    
+% FeModel Class which included the finite element model
     properties
         name
         cnfg

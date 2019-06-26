@@ -1,4 +1,5 @@
 classdef (Abstract) Element < handle
+% Element Superclass for different element formulations for the fea
     properties
         name
         node1
