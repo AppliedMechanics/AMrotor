@@ -1,17 +1,20 @@
 ## Notwendige Software
 
-- getestet mit *Matlab R2018b*, sollte aber auch mit anderen *Matlab*-Versionen kompatibel sein
+- getestet mit *Matlab R2018b*, sollte aber auch mit anderen *Matlab*-Versionen kompatibel sein, bei früheren Versionen kann es Probleme aufgrund der Benutzung von privaten Methoden geben (z.B. bei der Klasse AMrotorSIM.Graphs.Frequenzgangfunktion)
 - notwendige *Matlab*-Toolboxen
   - Symbolic Math Toolbox
   - Image Processing Toolbox
   - Curve Fitting Toolbox (nur für Fourierorbitdarstellung der Sensorsignale bei Zeitintegration)
+
+## Dokumentation des Codes
+Startpunkt ist Eingabe des Befehls `doc AMrotor`. Von dort aus kann die Struktur des Codes und wichtige Klassen durch Nutzung der Links nachvollzogen werden.
 
 ## Ordnerstruktur
 
 - *+AMrotorMONI* enthält Funktionen für das Monitoring von Rotorsystemen, diese teile werden aktuell nicht im Simulationsprogramm genutzt
 - *+AMrotorSIM* enthält den eigentlichen Simualtionscode. Das Rotorsimualtionsprogramm ist Objekt-orientiert aufgebaut. 
 - *+AMrotorTools* enthält Tools, um plots ü+bersichichtlich darzustellen oder einen Timer
-- *Abravibe_Toolbox* enthält die Abravibe-Toolbox von Anders Brandt, die unter GNU GPL Licence, siehe die Lizenz-Datei in diesem Ordner, sowie eine Funktionalität zur Animation von Eigenmoden; nützliche Funktionen zur (u.a. experimentellen) Modalanalyse
+- *+Abravibe_Toolbox* enthält die Abravibe-Toolbox von Anders Brandt, die unter GNU GPL Licence, siehe die Lizenz-Datei in diesem Ordner, sowie eine Funktionalität zur Animation von Eigenmoden; nützliche Funktionen zur (u.a. experimentellen) Modalanalyse
 - *doc* enthält ein sehr kurzes *Getting Started*
 - *Examples* enthält Beispiele zur Benutzung des Simulationscodes und kann als Ausgangspunkt für eigene Simulationen genutzt werden, soll die Funktionalität des Codes demonstrieren
 - *Simulationen* enthält konkrete Simulationen von Prüfständen und anderen Anwendungsfällen. Dieser Ordner soll für eigene Anwendungsfälle von AMrotor genutzt werden
