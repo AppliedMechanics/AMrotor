@@ -30,7 +30,7 @@ for component = self.components
     end
 end
 
-M = self.rotor.matrices.M + M_disc;
+M = self.rotor.mass_matrix + M_disc;
 
 
 U_x = U(:,1);

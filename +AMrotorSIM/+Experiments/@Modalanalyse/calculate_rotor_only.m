@@ -5,12 +5,12 @@ function calculate_rotor_only(obj,nModes,drehzahl)
     obj.n_ew = nModes;
     omega=drehzahl/60*2*pi;
 
-    K=obj.rotorsystem.rotor.matrices.K;
-    D=obj.rotorsystem.rotor.matrices.D;
-    G=obj.rotorsystem.rotor.matrices.G;
-    M=obj.rotorsystem.rotor.matrices.M;
+    K=obj.rotorsystem.rotor.stiffness_matrix;
+    C=obj.rotorsystem.rotor.damping_matrix;
+    G=obj.rotorsystem.rotor.gyroscopic_matrix;
+    M=obj.rotorsystem.rotor.mass_matrix;
 
-    ss_A = [D,M;M,sparse(size(M,1),size(M,2))];
+    ss_A = [C,M;M,sparse(size(M,1),size(M,2))];
     ss_B =[K,sparse(size(K,1),size(K,2));sparse(size(M,1),size(M,2)),-M];
     ss_AG =[G,sparse(size(G,1),size(G,2));...
         sparse(size(G,1),size(G,2)),sparse(size(G,1),size(G,2))];
@@ -19,11 +19,11 @@ function calculate_rotor_only(obj,nModes,drehzahl)
 
     [V,D_tmp] = eigs(ss_B,ss_A,2*nModes,'sm');
 
-     D = imag(diag(D_tmp));
+     C = imag(diag(D_tmp));
 
     %negative D / V Einträge wegwerfen --> nModes=nModes
 
-     tmp = find(D >=0);
+     tmp = find(C >=0);
      tmp2 = sparse(size(V,1),length(tmp));
      for i = 1:length(tmp)
          EV_nr = tmp(i,1)
@@ -48,6 +48,6 @@ function calculate_rotor_only(obj,nModes,drehzahl)
         end
     end   
     obj.eigenVectors.lateral=Ev_lat;
-    obj.eigenValues.lateral =D;
+    obj.eigenValues.lateral =C;
 
 end

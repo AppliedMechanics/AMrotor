@@ -4,8 +4,8 @@ function calculate_rotor_only_without_damping(obj,nModes)
 
   obj.n_ew = nModes;
 
-  K=obj.rotorsystem.rotor.matrices.K;
-  M=obj.rotorsystem.rotor.matrices.M;
+  K=obj.rotorsystem.rotor.stiffness_matrix;
+  M=obj.rotorsystem.rotor.mass_matrix;
 
 
  [V,D_tmp] = eigs(-K,M,nModes,'sm');

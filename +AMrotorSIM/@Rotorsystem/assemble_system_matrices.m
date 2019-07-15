@@ -40,10 +40,10 @@ function [M,C,G,K]= assemble_system_matrices(self,rpm,varargin)
             end            
         
 %% Add to global matrices
-        M = self.rotor.matrices.M + M_Comp;
-        C = self.rotor.matrices.D + D_Comp ;
-        G = self.rotor.matrices.G + G_Comp;
-        K = self.rotor.matrices.K + K_Comp ;
+        M = self.rotor.mass_matrix + M_Comp;
+        C = self.rotor.damping_matrix + D_Comp ;
+        G = self.rotor.gyroscopic_matrix + G_Comp;
+        K = self.rotor.stiffness_matrix + K_Comp ;
 
         
       

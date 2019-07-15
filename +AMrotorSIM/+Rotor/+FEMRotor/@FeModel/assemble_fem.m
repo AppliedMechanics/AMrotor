@@ -12,9 +12,9 @@ for ele = self.mesh.elements
     L_ele = sparse(12,6*n_nodes);
     L_ele(1:12,(i-1)*6+1:(i-1)*6+12)=ele.localisation_matrix;
 
-    M=M+L_ele'*ele.mass_matrix*L_ele;
+    M=M+L_ele'*sparse(ele.mass_matrix)*L_ele;
 end
-self.matrices.M = M;
+self.mass_matrix = M;
 
 K=sparse(6*n_nodes,6*n_nodes);
 i=0;
@@ -23,9 +23,9 @@ for ele = self.mesh.elements
     L_ele = sparse(12,6*n_nodes);
     L_ele(1:12,(i-1)*6+1:(i-1)*6+12)=ele.localisation_matrix;
 
-    K=K+L_ele'*ele.stiffness_matrix*L_ele;
+    K=K+L_ele'*sparse(ele.stiffness_matrix)*L_ele;
 end
-self.matrices.K = K;
+self.stiffness_matrix = K;
 
 
 G=sparse(6*n_nodes,6*n_nodes);
@@ -35,16 +35,16 @@ for ele = self.mesh.elements
     L_ele = sparse(12,6*n_nodes);
     L_ele(1:12,(i-1)*6+1:(i-1)*6+12)=ele.localisation_matrix;
 
-    G=G+L_ele'*ele.gyroscopic_matrix*L_ele;
+    G=G+L_ele'*sparse(ele.gyroscopic_matrix)*L_ele;
 end
-self.matrices.G = G;
+self.gyroscopic_matrix = G;
 
 %% Rayleigh-Damping
 
 alpha1=self.material.rayleigh_alpha1;
 alpha2=self.material.rayleigh_alpha2;
 
-self.matrices.D = alpha1*K + alpha2*M;
+self.damping_matrix = alpha1*K + alpha2*M;
 
 
 end
