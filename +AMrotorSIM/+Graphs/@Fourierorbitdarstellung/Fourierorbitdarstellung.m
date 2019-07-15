@@ -7,7 +7,9 @@ classdef Fourierorbitdarstellung < handle
     rotorsystem
     name=' ---  Fourierorbitdarstellung  --- '
     time
+    % See also AMrotorSIM.Experiments.Stationaere_Lsg AMrotorSIM.Experiments.Hochlaufanalyse
     experiment
+    % See also AMrotorTools.PlotColors
     ColorHandler
  end
    

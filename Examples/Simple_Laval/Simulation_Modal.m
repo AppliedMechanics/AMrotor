@@ -82,18 +82,3 @@ cmpDiagramm.set_plots('all');
 % cmpDiagramm.set_plots('backward');
 % cmpDiagramm.set_plots('forward');
 Janitor.cleanFigures();
-
-
-%% Berechne die Frequenzgangfunktion
-rpm=1000;
-f=0:2:1000;
-omega=rpm/60*2*pi;
-[M,C,G,K] = r.assemble_system_matrices(rpm);
-D = C+omega*G;
-%Funktion findet die nächstgelegenen Knoten zu den angegebenen inputs und
-%outputs und setzt die Freiheitsgradnumer der dazugehörigen x-Richtung in
-%die Funtion mck2frf von Abravibe ein, 
-% siehe dazu auch die Hilfe von mck2frf
-tic,input=280e-3;output=333e-3;H = get_FRF_from_MDK(r,f,M,D,K,input,output,'d');toc %'d' fuer displacement; 
-figure,subplot(2,1,1),semilogy(f,abs(H),'DisplayName','FEM');ylabel('FRF magnitude'),subplot(2,1,2),plot(f,angle(H)*180/pi,'DisplayName','FEM');xlabel('f//Hz'),ylabel('angle')
-clear M D K C G

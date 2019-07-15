@@ -2,11 +2,18 @@ classdef Mesh < handle
 % Mesh  Class of the mesh, which includes the nodes and elements
     properties
         name
-        d_min
-        d_max
-        n_refinement
-        approximation
+        d_min               % minimum allowed element length
+        d_max               % maximum allowed element length
+        n_refinement        % no of refinement steps, when looking for the optimal element length
+        
+        % Methods for linear approximation of the element properties
+        % allowed: upper sum, lower sum, mean, symmetric
+        approximation      
+        
+        % See also AMrotorSIM.Rotor.FEMRotor.MeshNode
         nodes@AMrotorSIM.Rotor.FEMRotor.MeshNode vector
+        
+        % See also AMrotorSIM.Rotor.FEMRotor.Element.TimoshenkoLinearElement
         elements@AMrotorSIM.Rotor.FEMRotor.Element.TimoshenkoLinearElement vector
     end
     

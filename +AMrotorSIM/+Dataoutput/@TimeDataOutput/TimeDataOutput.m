@@ -1,13 +1,16 @@
 classdef TimeDataOutput < handle
 % TimeDataOutput Class for writing results of time integration in file
-%   Writes the result data from the time integration of nodes, that
-%   correspond to Sensor positions in a container and can save it to a file
-%   on the hard drive
+%   Extracts the result data from the time integration of particular nodes;
+%   These nodes correspond to Sensor positions 
+%   Results are written in the form of a container and saved to a file on
+%   the hard drive
 %
 %   See also SAVE_DATA, COMPOSE_DATA.
     properties
+        % See also AMrotorSIM.Rotorsystem
         rotorsystem
         experiment_result
+        % See also AMrotorSIM.Experiment
         experiment
         dataset
     end

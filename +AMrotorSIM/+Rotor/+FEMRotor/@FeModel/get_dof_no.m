@@ -1,9 +1,10 @@
 function dofNo= get_dof_no(rotor,nodeNo)
-%GET_DOF_NO
-% Get the numbers of all degrees of freedom, that corresponds to the node
-% number.
+%GET_DOF_NO - get the dofs of selected nodes
+% dofNo= get_dof_no(rotor,nodeNo)
+% Get the numbers of all degrees of freedom, that correspond to the node
+% numbers.
 
-dofPerNode = length(rotor.matrices.M)/length(rotor.mesh.nodes);
+dofPerNode = length(rotor.mass_matrix)/length(rotor.mesh.nodes);
 
 dofNo = NaN(length(nodeNo)*dofPerNode,1);
 

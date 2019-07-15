@@ -1,4 +1,5 @@
 function [ZeroCrossingForward, ZeroCrossingBackward] = print_damping_zero_crossing(obj)
+% prints the zero crossings of the damping, which indicates instability
 
 omega = obj.experimentCampbell.get_omega();
 EW = obj.experimentCampbell.get_eigenvalues();

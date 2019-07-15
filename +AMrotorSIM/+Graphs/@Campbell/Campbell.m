@@ -5,7 +5,9 @@ classdef Campbell < handle
 %   Can also plot the damping over rotational speed.
     properties %(Access = private)
         Name = 'Campbell-Diagramm';
+        % See also AMrotorSIM.Experiments.Campbell
         experimentCampbell;
+        % See also AMrotorTools.PlotColors
         ColorHandler;
     end
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -23,6 +25,9 @@ classdef Campbell < handle
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         function set_plots(obj,Selection)
+        % main method to call by the user
+        %   set_plots(obj,Selection)
+        %   Selection: 'all','forward','backward'
             obj.set_color_number();
             switch Selection
                 case {'Forward','forward','f','F'}

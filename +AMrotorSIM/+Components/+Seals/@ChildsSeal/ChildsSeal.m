@@ -1,5 +1,5 @@
 classdef ChildsSeal < AMrotorSIM.Components.Seals.Seal
-    % calculation of the seal-coefficients according to Black
+% calculation of the seal-coefficients according to Childs
    properties
    end
    methods

@@ -1,4 +1,7 @@
-     function plot(self,sensors,Ordnung)
+ function plot(self,sensors,Ordnung)
+ % main method for the user
+% plot(self,sensors,Ordnung)
+% Ordnung = order of FourierFit
       disp(self.name)
       
           for sensor = sensors

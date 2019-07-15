@@ -1,12 +1,21 @@
 classdef FeModel < handle
 % FeModel Class which included the finite element model
+%
+% See also AMrotorSIM.Rotor AMrotorSIM.Rotor.FEMRotor.Element
     properties
         name
-        cnfg
+        cnfg % Config-struct
+        % See also AMrotorSIM.Rotor.FEMRotor.Geometry
         geometry@AMrotorSIM.Rotor.FEMRotor.Geometry
+        % See also AMrotorSIM.Rotor.FEMRotor.Material
         material@AMrotorSIM.Rotor.FEMRotor.Material
+        % See also AMrotorSIM.Rotor.FEMRotor.Mesh
         mesh@AMrotorSIM.Rotor.FEMRotor.Mesh
-        matrices
+        
+        mass_matrix         % mass
+        damping_matrix      % damping
+        gyroscopic_matrix   % gyroscopic, must be weighted with the rotational speed Omega, M*xdd+(C+Omega*G)*xd+K*x=f
+        stiffness_matrix    % stiffness
     end
     
     methods

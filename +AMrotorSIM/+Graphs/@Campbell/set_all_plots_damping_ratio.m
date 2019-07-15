@@ -1,4 +1,5 @@
 function set_all_plots_damping_ratio( obj )
+% plot the damping ratio over rpm for fwd and bwd whirl
 
 figure('Name','Campbell-Diagramm (All)','NumberTitle','off');
             axAll = subplot(2,2,[1,3]);

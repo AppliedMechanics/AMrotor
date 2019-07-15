@@ -3,7 +3,9 @@ classdef Frequenzgangfunktion < handle
 % function
     properties
         Name = 'Visualisierung Frequenzgangfunktion';
+        % See also AMrotorSIM.Experiments.Frequenzgangfunktion
         experimentFRF;
+        % See also AMrotorTools.PlotColors
         ColorHandler
     end
     
@@ -19,6 +21,13 @@ classdef Frequenzgangfunktion < handle
         end
         
         function set_plots(obj,Selection,inputDirection,outputDirection,varargin)
+        % main method for user
+        % set_plots(obj,Selection,inputDirection,outputDirection,varargin)
+        % examples of usage:
+        %    visufrf.set_plots('amplitude',1,1,'db')
+        %    visufrf.set_plots('phase',{'u_x','u_y'},'u_x','db')
+        %    visufrf.set_plots('bode',[1,4],[1,2,3],'log','deg')
+        %    visufrf.set_plots('nyquist','u_y','u_y')
             obj.set_color_number();
             paramPlot.angleMeasure = obj.set_angle_measure(varargin);
             paramPlot.amplitudeMeasure = obj.set_amplitude_measure(varargin);

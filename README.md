@@ -6,6 +6,10 @@
   - Image Processing Toolbox
   - Curve Fitting Toolbox (nur für Fourierorbitdarstellung der Sensorsignale bei Zeitintegration)
 
+## Dokumentation des Codes
+
+Startpunkt ist Eingabe des Befehls `doc AMrotor` bzw. `doc AMrotorSIM.Rotorsystem`. Von dort aus kann die Struktur des Codes und wichtige Klassen durch Nutzung der Links nachvollzogen werden.
+
 ## Ordnerstruktur
 
 - *+AMrotorMONI* enthält Funktionen für das Monitoring von Rotorsystemen, diese teile werden aktuell nicht im Simulationsprogramm genutzt
@@ -18,7 +22,8 @@
 - *Tools* enthält nützliche Werkzeuge
 - *InstallChecker.m* wird zur Einrichtung des Programms in *Matlab* ausgeführt. Es legt den Pfad fest.
 
-
+## interessante Links
+- zur Dokumentation https://de.mathworks.com/matlabcentral/answers/100534-is-it-possible-to-include-package-and-class-directories-in-contents-report-created-programmatically
 ## ToDos
 
 ToDo: **Christian Looschen** (christian_looschen@hotmail.com)

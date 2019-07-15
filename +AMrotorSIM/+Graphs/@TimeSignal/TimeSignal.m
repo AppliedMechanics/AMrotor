@@ -6,7 +6,9 @@ classdef TimeSignal < handle
     rotorsystem
     name=' --- Graphobject Zeitsignale  --- '
     time
+    % See also AMrotorSIM.Experiments.Stationaere_Lsg AMrotorSIM.Experiments.Hochlaufanalyse
     experiment
+    % See also AMrotorTools.PlotColors
     ColorHandler
    end
   methods

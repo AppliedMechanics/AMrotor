@@ -8,6 +8,7 @@ classdef Waterfalldiagramm < handle
     abtastrate
     drehzahl
     timeresults
+    % See also AMrotorSIM.Experiments.Stationaere_Lsg AMrotorSIM.Experiments.Hochlaufanalyse
     experiment
    end
   methods

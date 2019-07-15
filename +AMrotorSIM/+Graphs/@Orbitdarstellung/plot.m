@@ -1,4 +1,5 @@
 function plot(self,sensors)
+% main method for the user
   disp(self.name)
 
       for sensor = sensors

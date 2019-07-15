@@ -1,4 +1,5 @@
 function set_backward_plots_damping_ratio( obj )
+% plot the damping ratio over rpm for bwd whirl
 
 figure('Name','Campbell-Diagramm (Backward)','NumberTitle','off');
             axBackward = subplot(1,1,1);

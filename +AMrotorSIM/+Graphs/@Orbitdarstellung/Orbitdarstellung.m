@@ -5,7 +5,9 @@ classdef Orbitdarstellung < handle
     unit
     rotorsystem
     name=' ---  Orbitdarstellung  --- '
+    % See also AMrotorSIM.Experiments.Stationaere_Lsg AMrotorSIM.Experiments.Hochlaufanalyse
     experiment
+    % See also AMrotorTools.PlotColors
     ColorHandler
    end
   methods

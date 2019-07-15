@@ -5,12 +5,13 @@ classdef Frequenzgangfunktion < handle
 %     AbraVibe toolbox
     properties
         name
-        rotorsystem
-        f
-        H
-        type
-        inputPosition
-        outputPosition
+        % See also AMrotorSIM.Rotorsystem
+        rotorsystem@AMrotorSIM.Rotorsystem
+        f % frequency array: nFreq x 1
+        H % matrix of frfs: nFreq x nResponses x nInputForces
+        type % type of frf: acceleration 'a', velocity 'v', displacement 'd'
+        inputPosition   % position of the inputs/InputForces
+        outputPosition  % position of the outputs
     end
     methods
         % Konstruktor

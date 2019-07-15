@@ -1,9 +1,13 @@
 classdef Sensor < matlab.mixin.Heterogeneous & handle
-% Sensor Class for sensors which read values after rime integration
+% Sensor Superclass for sensors which read values after time integration
+% See also AMrotorSIM.Sensors
    properties
       cnfg=struct([])  
       name
-      type
+      
+      % type of the Sensor
+      % must be name of any Sensor-subclass 
+      type 
       
    end
    methods

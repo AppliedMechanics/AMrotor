@@ -1,4 +1,5 @@
 function print_critical_speeds(obj)
+% prints the crossing of the first harmonic with eigenfrequencies
 
 omega = obj.experimentCampbell.get_omega();
 EW = obj.experimentCampbell.get_eigenvalues();

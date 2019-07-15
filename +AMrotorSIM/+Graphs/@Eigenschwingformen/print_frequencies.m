@@ -1,4 +1,5 @@
 function print_frequencies(obj)
+% prints the eigenfrequencies with their corresponding modal damping
 
      n_ew=obj.modalsystem.n_ew;
       %

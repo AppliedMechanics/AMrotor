@@ -3,9 +3,9 @@ classdef Modalanalyse < handle
 %   Calculates the eigenvalues and eigenmodes 
    properties
       name='Modalanalyse'
-      rotorsystem
-      eigenmatrizen
-      n_ew
+      % See also AMrotorSIM.Rotorsystem
+      rotorsystem@AMrotorSIM.Rotorsystem
+      n_ew          % number of desired eigenvalues
       eigenVectors
       eigenValues
    end

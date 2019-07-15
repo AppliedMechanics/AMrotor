@@ -1,11 +1,12 @@
 classdef Campbell < handle
-% CAMPELL Class for calculation of eigenvalues over rotational speed
-%     This class calculates thre eigenvalues, which include the
-%     eigenfrequencies and modal damping values for the campell diagramm
-%     and does also the sorting regarding forward/backward whirl
+%CAMPBELL Calculates the eigenvalues needed for a Campbell diagram
+% This class calculates the needed matrices for the calculation of the
+% campell diagramm and does also the sorting regarding forward/backward
+% whirl
+
     properties (Access = private)
         name = 'Campell Analysis';
-        rotorsystem;
+        rotorsystem@AMrotorSIM.Rotorsystem;
         omega;
         num; % struct which will gather all kind of numbers
         EVf; EVb; % eigenvectors forward&backward

@@ -1,11 +1,11 @@
 classdef (Abstract) Bearing < AMrotorSIM.Components.Component
 % Bearing superclass for different bearing types with stiffness and damping
+% See also AMrotorSIM.Components.Bearings
     properties
         stiffness
         damping
     end
     methods
-        %Konstruktor
         function self = Bearing(arg)
             self = self@AMrotorSIM.Components.Component(arg);
             if nargin == 0

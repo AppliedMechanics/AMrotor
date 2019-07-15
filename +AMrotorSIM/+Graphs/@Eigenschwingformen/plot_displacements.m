@@ -1,4 +1,5 @@
 function [x,EVmain] = plot_displacements(obj)
+ % plots the eigenshapes in 2D
 
   n_ew=obj.modalsystem.n_ew;
   ColorHandler = AMrotorTools.PlotColors();

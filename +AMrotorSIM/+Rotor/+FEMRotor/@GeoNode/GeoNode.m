@@ -3,9 +3,9 @@ classdef GeoNode < handle
 % discretisation
     properties
         name 
-        x
-        xi
-        z 
+        x   % outer radius
+        xi  % inner radius
+        z   % axial position on the rotor
     end
     
     methods

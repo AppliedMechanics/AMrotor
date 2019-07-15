@@ -1,5 +1,11 @@
 function x0 = get_zero_crossing(self,x,y)
-%GET_ZERO_CROSSING
+%GET_ZERO_CROSSING get the smallest zero crossing of x,y
+% finds all zero crossings, but only returns the smallest value
+% 
+% Predominantly used for the damping ration over rpm to detremine the zero
+% crossing of the damping to find the stability limit of the system
+% 
+% x0 = get_zero_crossing(self,x,y)
 
 x0=[];
 i=find(diff(sign(y))<0); % Uebergang von positiv zu negativen Werten

@@ -1,5 +1,6 @@
 classdef (Abstract) Element < handle
 % Element Superclass for different element formulations for the fea
+% See also AMrotorSIM.Rotor.FEMRotor.Element.TimoshenkoLinearElement
     properties
         name
         node1

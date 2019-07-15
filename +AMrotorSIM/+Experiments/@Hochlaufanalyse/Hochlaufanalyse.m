@@ -4,13 +4,13 @@ classdef Hochlaufanalyse < handle
 %   speed
    properties
       name='Hochlaufanalyse'
-      rotorsystem
-      drehzahlen
-      time
-      result
+      % See also AMrotorSIM.Rotorsystem
+      rotorsystem@AMrotorSIM.Rotorsystem 
+      drehzahlen    % rpm steps
+      time          % time steps e.g. 0:tStep:tEnd
+      result        % results-struct: result.X, result.X_d, result.X_dd
    end
    methods
-       %Konstruktor
        function obj = Hochlaufanalyse(a,rpm_span,time)
          if nargin == 0
            disp('Keine Hoclaufanalyse möglich ohne Rotorsystem')

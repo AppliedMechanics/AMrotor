@@ -2,6 +2,7 @@ classdef Visu_Rotorgeometrie < handle
 % Visu_Rotorgeometrie Class for visualisation of the rotor geomety
    properties
       name='Rotor Geometrie'
+      %See also AMrotorSIM.Rotor
       rotor = AMrotorSIM.Rotor().empty
    end
    methods

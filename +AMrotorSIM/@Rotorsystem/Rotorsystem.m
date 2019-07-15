@@ -1,19 +1,27 @@
 classdef Rotorsystem < handle
-% ROTORSYSTEM - Grundklasse für ein Physikalisches Rotorsystem.
-%  R=ROTORSYSTEM(cnfg,'System');
+% Rotorsystem Basis class for a rotor system.
+%   R=ROTORSYSTEM(cnfg,'System');
 %
-%   See also ROTOR.
+%   See also AMrotorSIM.Experiments, AMrotorSIM.Graphs, AMrotorSIM.Dataoutput, AMrotorTools.
 
    properties
-      name
+      name % name of the rotorsystem
       
-      systemmatrices % wieder hinzugefuegt, damit die Zeitintegration erst einmal funktioniert. fuer speichern der systemloads
+      % systemmatrices - save the system matrices
+      systemmatrices % in ursprünglicher Form obsolet, wieder hinzugefuegt, damit die Zeitintegration erst einmal funktioniert. fuer speichern der systemloads
       
-      cnfg=struct([])
+      cnfg=struct([]) % configure struct, typically created in seperate Config_ script
       
-      rotor@AMrotorSIM.Rotor.FEMRotor.FeModel
+      % See also AMrotorSIM.Rotor.FEMRotor.FeModel
+      %
+      % rotor - includes the rotor with its fe model
+      rotor@AMrotorSIM.Rotor.FEMRotor.FeModel 
+      
+      % See also AMrotorSIM.Sensors
       sensors@AMrotorSIM.Sensors.Sensor vector
+      % See also AMrotorSIM.Loads
       loads@AMrotorSIM.Loads.Load vector
+      % See also AMrotorSIM.Components.Component
       components@AMrotorSIM.Components.Component vector
 
    end

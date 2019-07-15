@@ -1,4 +1,8 @@
 function set_plots(obj,Selection,varargin)
+% 3D visualisation of the eigenshapes of the rotorsystem
+%   esf.set_plots('half') % 'all', 'half' or desired mode number
+%   esf.set_plots('half','overlay')
+%   esf.set_plots(10,'Overlay','Skip',5,'tangentialPoints',30,'scale',3) specify additional options, first input is index of mode
     obj.set_color_number();
     num = obj.modalsystem.get_number_of_eigenvalues();
     

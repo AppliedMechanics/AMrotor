@@ -6,7 +6,9 @@ classdef Fourierdarstellung < handle
     rotorsystem
     name=' ---  Fourierdarstellung  --- '
     abtastrate
+    % See also AMrotorSIM.Experiments.Stationaere_Lsg AMrotorSIM.Experiments.Hochlaufanalyse
     experiment
+    % See also AMrotorTools.PlotColors
     ColorHandler
    end
   methods
@@ -19,6 +21,8 @@ classdef Fourierdarstellung < handle
   end
   
   function plot(self,sensors)
+% main method for the user
+% plot(self,sensors)
       disp(self.name)
       
           for sensor = sensors

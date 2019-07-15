@@ -1,4 +1,5 @@
 function get_EW(obj)
+% get_EW print the zero crossing of the damping ratio as stability limit
 
 omega = obj.experimentCampbell.get_omega();
 EW = obj.experimentCampbell.get_eigenvalues();

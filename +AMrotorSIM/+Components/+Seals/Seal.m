@@ -1,4 +1,7 @@
 classdef (Abstract) Seal < AMrotorSIM.Components.Component
+% Seal - superclass for Seals, which are components
+% seals that are characterised by mass, damping and stiffness seal
+% coefficients
     properties
     end
     methods

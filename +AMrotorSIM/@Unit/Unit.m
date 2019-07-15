@@ -1,4 +1,5 @@
 classdef Unit < handle
+% Unit Class for units and dimensions
     
     properties
         BaseDimensions

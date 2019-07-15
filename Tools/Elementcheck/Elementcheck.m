@@ -1,6 +1,6 @@
  r=load('C:\Users\Christian Looschen\Documents\HiWi\AMrotor\Matlab_Code\Tools\Elementcheck\M_Matrix_1_Element.mat');
  
- K_new = r.r.rotor.matrices.K (7:12,7:12);
+ K_new = r.r.rotor.stiffness_matrix (7:12,7:12);
  
  f = zeros(6,1);
  f(1,1) = 1;

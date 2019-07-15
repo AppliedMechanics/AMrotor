@@ -1,4 +1,5 @@
 function glob_dof = get_gdof(self,direction,Node,varargin)
+% get_gdof - get global degree of freedom
 
     % falls weniger als 6 dof benutzt werden
     n.nodes = length(self.mesh.nodes);    

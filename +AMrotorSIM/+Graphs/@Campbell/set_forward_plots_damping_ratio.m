@@ -1,4 +1,5 @@
 function set_forward_plots_damping_ratio( obj )
+% plot the damping ratio over rpm for fwd whirl
 
 figure('Name','Campbell-Diagramm (Forward)','NumberTitle','off');
             axForward = subplot(1,1,1);

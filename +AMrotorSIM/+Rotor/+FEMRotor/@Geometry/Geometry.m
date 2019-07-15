@@ -2,6 +2,10 @@ classdef Geometry < handle
 % Geometry Class that includes the geometric nodes
     properties
         name
+        
+        % See also AMrotorSIM.Rotor.FEMRotor.GeoNode
+        % 
+        % Objects containing the nodes, type: AMrotorSIM.Rotor.FEMRotor.GeoNode
         nodes@AMrotorSIM.Rotor.FEMRotor.GeoNode vector
     end
     
