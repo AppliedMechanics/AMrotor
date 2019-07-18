@@ -16,6 +16,7 @@ classdef Frequenzgangfunktion < handle
     methods
         % Konstruktor
         function self = Frequenzgangfunktion(rotorsystem,name)
+        % self = Frequenzgangfunktion(rotorsystem,name)
             if nargin == 0
                 self.name = 'Empty FRF';
                 warning('rotorsystem is needed for calculation of frequency response function')

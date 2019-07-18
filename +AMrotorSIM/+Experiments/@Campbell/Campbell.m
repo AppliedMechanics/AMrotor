@@ -18,6 +18,7 @@ classdef Campbell < handle
         % Konstruktor
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         function obj = Campbell(rotorsystem)
+        % obj = Campbell(rotorsystem)
             if nargin == 0
                 disp('Without a rotor-system a Campell analaysis is not possible')
             else

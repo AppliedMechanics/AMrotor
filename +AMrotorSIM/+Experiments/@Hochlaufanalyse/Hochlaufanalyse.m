@@ -12,6 +12,7 @@ classdef Hochlaufanalyse < handle
    end
    methods
        function obj = Hochlaufanalyse(a,rpm_span,time)
+       % obj = Hochlaufanalyse(rotorsystem,rpm_span,time)
          if nargin == 0
            disp('Keine Hoclaufanalyse möglich ohne Rotorsystem')
          else

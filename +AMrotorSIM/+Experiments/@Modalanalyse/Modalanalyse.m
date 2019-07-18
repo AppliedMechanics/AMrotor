@@ -12,6 +12,7 @@ classdef Modalanalyse < handle
    methods
        %Konstruktor
        function obj = Modalanalyse(a)
+       % obj = Modalanalyse(rotorsystem)
          if nargin == 0
            disp('Keine Modalanalyse möglich ohne Rotorsystem')
          else

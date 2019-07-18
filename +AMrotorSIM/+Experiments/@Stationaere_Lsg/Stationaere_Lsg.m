@@ -14,6 +14,7 @@ classdef Stationaere_Lsg < handle
    methods
        %Konstruktor
        function obj = Stationaere_Lsg(a,drehzahlvektor,time)
+       % obj = Stationaere_Lsg(rotorsystem,drehzahlvektor,time)
          if nargin == 0
            disp('Keine Lösung möglich ohne Rotorsystem')
          else
