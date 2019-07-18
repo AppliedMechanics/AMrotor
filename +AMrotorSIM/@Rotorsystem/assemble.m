@@ -1,24 +1,29 @@
 function assemble(obj)
 
 % Adding rotor
-for i=obj.cnfg.cnfg_rotor
-    obj.rotor = AMrotorSIM.Rotor.FEMRotor.FeModel(i);
+for cnfg=obj.cnfg.cnfg_rotor
+    obj.rotor = AMrotorSIM.Rotor.FEMRotor.FeModel(cnfg);
 end
 
 % Adding Sensors to Rotor
-for i=obj.cnfg.cnfg_sensor
-    obj.sensors(end+1) = AMrotorSIM.Sensors.(i.type)(i);
+for cnfg=obj.cnfg.cnfg_sensor
+    obj.sensors(end+1) = AMrotorSIM.Sensors.(cnfg.type)(cnfg);
 end
 
 % Adding Loads to System
-for i=obj.cnfg.cnfg_load
-    obj.loads(end+1) = AMrotorSIM.Loads.(i.type)(i);
+for cnfg=obj.cnfg.cnfg_load
+    obj.loads(end+1) = AMrotorSIM.Loads.(cnfg.type)(cnfg);
+end
+
+% Adding PID-Controller to System
+for cnfg=obj.cnfg.cnfg_pid_controller
+    obj.pidControllers(end+1) = AMrotorSIM.pidController(cnfg);
 end
 
 % Adding Components
-for i=obj.cnfg.cnfg_component
-    if isfield(i,'subtype')
-        if ~isempty(i.subtype)
+for cnfg=obj.cnfg.cnfg_component
+    if isfield(cnfg,'subtype')
+        if ~isempty(cnfg.subtype)
             subtype = true;
         else
             subtype = false;
