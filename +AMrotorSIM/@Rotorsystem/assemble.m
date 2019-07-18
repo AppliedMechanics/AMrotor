@@ -15,6 +15,11 @@ for cnfg=obj.cnfg.cnfg_load
     obj.loads(end+1) = AMrotorSIM.Loads.(cnfg.type)(cnfg);
 end
 
+% Adding PID-Controller to System
+for cnfg=obj.cnfg.cnfg_pid_controller
+    obj.pidControllers(end+1) = AMrotorSIM.pidController(cnfg);
+end
+
 % Adding Components
 for cnfg=obj.cnfg.cnfg_component
     if isfield(cnfg,'subtype')

@@ -20,7 +20,7 @@ classdef Visu_Rotorsystem < handle
          plot_components(figurehandle,obj.rotorsystem.components,obj.rotorsystem.rotor);
          plot_sensors(figurehandle,obj.rotorsystem.sensors);
          plot_loads(figurehandle,obj.rotorsystem.loads,obj.rotorsystem.rotor);
-         
+         plot_pidController(figurehandle,obj.rotorsystem.pidControllers,obj.rotorsystem.rotor);
          view(3)
          
       end
