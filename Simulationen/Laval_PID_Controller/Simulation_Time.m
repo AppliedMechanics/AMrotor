@@ -35,7 +35,7 @@ r.rotor.assemble_fem;
 
 %% Running Time Simulation
 
-St_Lsg = Experiments.Stationaere_Lsg( r , 0 , (0:0.001:0.1) );% only works for userFreq>=controllerFreq
+St_Lsg = Experiments.Stationaere_Lsg( r , 0 , (0:0.002:0.1) );
 St_Lsg.compute_ode15s_ss_variant
 
 % Hochlauf = Experiments.Hochlaufanalyse( r , [0, 80e3] , (0:0.01:10) ); % input: (rotorsystem, [rpm_start, rpm_end], time_vector)

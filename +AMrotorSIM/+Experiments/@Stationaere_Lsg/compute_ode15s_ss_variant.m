@@ -69,10 +69,12 @@
                 % deval the solution after every controller-step
                 tspanCurr = [tVecController(iTStep), tVecController(iTStep+1)];
                 indexTime = find( (obj.time>=tspanCurr(1)) .* (obj.time<tspanCurr(end)) );
-                timeTmp = obj.time(indexTime);
-                [ZTmp,ZpTmp] = deval(sol(iTStep),timeTmp);
-                Z(:,indexTime) = ZTmp;
-                Zp(:,indexTime) = ZpTmp;
+                if ~isempty(indexTime) % tspanCurr relevant for output, else no value
+                    timeTmp = obj.time(indexTime);
+                    [ZTmp,ZpTmp] = deval(sol(iTStep),timeTmp);
+                    Z(:,indexTime) = ZTmp;
+                    Zp(:,indexTime) = ZpTmp;
+                end
             end
             %letzter Schritt
             [ZTmp,ZpTmp] = deval(sol(end),obj.time(end));
