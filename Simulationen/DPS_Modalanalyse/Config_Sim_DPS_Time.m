@@ -455,3 +455,8 @@ cnfg.cnfg_component(count).damping = 0;
 % cnfg.cnfg_component(count).subtype='ChildsSeal';
 % cnfg.cnfg_component(count).position=150e-3;                        %[m]
 % cnfg.cnfg_component(count).sealModel = load_seal_model('Inputfiles/ChildsBlackModelParameters.m');
+
+
+%% ========================PID-Regler======================================
+cnfg.cnfg_pid_controller=[];
+count = 0;

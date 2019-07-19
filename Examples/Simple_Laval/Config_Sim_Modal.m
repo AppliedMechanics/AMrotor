@@ -79,3 +79,7 @@ cnfg.cnfg_component(count).damping = 0; % [Ns/m]
 %% =========================Lasten=========================================
 cnfg.cnfg_load=[];
 count = 0;
+
+%% ========================PID-Regler======================================
+cnfg.cnfg_pid_controller=[];
+count = 0;

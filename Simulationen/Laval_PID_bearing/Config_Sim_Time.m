@@ -37,36 +37,37 @@ cnfg.cnfg_rotor.mesh_opt.approx = 'symmetric';%'mean';   %Approximation for line
 %% ====================Sensoren============================================
 % Sensors
 cnfg.cnfg_sensor=[];
+count = 0;
 
-count = 1;
-cnfg.cnfg_sensor(count).name = 'WegLager1';
-cnfg.cnfg_sensor(count).position=0e-3;
-cnfg.cnfg_sensor(count).type='Displacementsensor';
+% count = count + 1;
+% cnfg.cnfg_sensor(count).name = 'WegLager1';
+% cnfg.cnfg_sensor(count).position=0e-3;
+% cnfg.cnfg_sensor(count).type='Displacementsensor';
 
 count = count + 1;
 cnfg.cnfg_sensor(count).name='WegScheibeMitte';
 cnfg.cnfg_sensor(count).position=250e-3;
 cnfg.cnfg_sensor(count).type='Displacementsensor';
 
-count = count + 1;
-cnfg.cnfg_sensor(count).name='WegLager2';
-cnfg.cnfg_sensor(count).position=500e-3;
-cnfg.cnfg_sensor(count).type='Displacementsensor';
-
-count = count + 1;
-cnfg.cnfg_sensor(count).name='GeschwindigkeitScheibeMitte';
-cnfg.cnfg_sensor(count).position=250e-3;
-cnfg.cnfg_sensor(count).type='Velocitysensor';
-
-count = count + 1;
-cnfg.cnfg_sensor(count).name='BeschleunigungScheibeMitte';
-cnfg.cnfg_sensor(count).position=250e-3;
-cnfg.cnfg_sensor(count).type='Accelerationsensor';
-
-count = count + 1;
-cnfg.cnfg_sensor(count).name='KraftScheibeMitte';
-cnfg.cnfg_sensor(count).position=250e-3;
-cnfg.cnfg_sensor(count).type='ForceLoadPostSensor';
+% count = count + 1;
+% cnfg.cnfg_sensor(count).name='WegLager2';
+% cnfg.cnfg_sensor(count).position=500e-3;
+% cnfg.cnfg_sensor(count).type='Displacementsensor';
+% 
+% count = count + 1;
+% cnfg.cnfg_sensor(count).name='GeschwindigkeitScheibeMitte';
+% cnfg.cnfg_sensor(count).position=250e-3;
+% cnfg.cnfg_sensor(count).type='Velocitysensor';
+% 
+% count = count + 1;
+% cnfg.cnfg_sensor(count).name='BeschleunigungScheibeMitte';
+% cnfg.cnfg_sensor(count).position=250e-3;
+% cnfg.cnfg_sensor(count).type='Accelerationsensor';
+% 
+% count = count + 1;
+% cnfg.cnfg_sensor(count).name='KraftScheibeMitte';
+% cnfg.cnfg_sensor(count).position=250e-3;
+% cnfg.cnfg_sensor(count).type='ForceLoadPostSensor';
 
 
 %% =========================Komponenten====================================
@@ -91,21 +92,21 @@ cnfg.cnfg_component(count).position=0e-3; % [m]
 cnfg.cnfg_component(count).stiffness=1;                     %[N/m]
 cnfg.cnfg_component(count).damping = 0;
 
-count = count + 1;
-cnfg.cnfg_component(count).name = 'Isotropes Lager 1';
-cnfg.cnfg_component(count).type='Bearings';
-cnfg.cnfg_component(count).subtype='SimpleBearing';
-cnfg.cnfg_component(count).position=0e-3; % [m]
-cnfg.cnfg_component(count).stiffness=1e6;                    %[N/m]
-cnfg.cnfg_component(count).damping = 0; % [Ns/m]
-
-count = count + 1;
-cnfg.cnfg_component(count).name = 'Isotropes Lager 2';
-cnfg.cnfg_component(count).type='Bearings';
-cnfg.cnfg_component(count).subtype='SimpleBearing';
-cnfg.cnfg_component(count).position=500e-3; % [m]
-cnfg.cnfg_component(count).stiffness=1e6;                   %[N/m]
-cnfg.cnfg_component(count).damping = 0; % [Ns/m]
+% count = count + 1;
+% cnfg.cnfg_component(count).name = 'Isotropes Lager 1';
+% cnfg.cnfg_component(count).type='Bearings';
+% cnfg.cnfg_component(count).subtype='SimpleBearing';
+% cnfg.cnfg_component(count).position=0e-3; % [m]
+% cnfg.cnfg_component(count).stiffness=1e6;                    %[N/m]
+% cnfg.cnfg_component(count).damping = 0; % [Ns/m]
+% 
+% count = count + 1;
+% cnfg.cnfg_component(count).name = 'Isotropes Lager 2';
+% cnfg.cnfg_component(count).type='Bearings';
+% cnfg.cnfg_component(count).subtype='SimpleBearing';
+% cnfg.cnfg_component(count).position=500e-3; % [m]
+% cnfg.cnfg_component(count).stiffness=1e6;                   %[N/m]
+% cnfg.cnfg_component(count).damping = 0; % [Ns/m]
 
 % count = count+1;
 % cnfg.cnfg_component(count).name = 'Feste Einspannung';
@@ -118,12 +119,12 @@ cnfg.cnfg_component(count).damping = 0; % [Ns/m]
 cnfg.cnfg_load=[];
 count = 0;
 
-% Kraft in feste Richtung
+% Kraft in feste Richtung, Sprung
 % count = count + 1;
-% cnfg.cnfg_load(count).name='Const. Kraft';
+% cnfg.cnfg_load(count).name='Const. Kraft'; 
 % cnfg.cnfg_load(count).position=250e-3;
-% cnfg.cnfg_load(count).betrag_x= 0;
-% cnfg.cnfg_load(count).betrag_y= -10;
+% cnfg.cnfg_load(count).betrag_x= 1;
+% cnfg.cnfg_load(count).betrag_y= 0;
 % cnfg.cnfg_load(count).type='Force_constant_fix';
 
 % Unwuchten
@@ -163,7 +164,7 @@ cnfg.cnfg_load(count).frequency_x= 200;  %in Hz, Endfrequenz
 cnfg.cnfg_load(count).betrag_y= 0;
 cnfg.cnfg_load(count).frequency_y_0 = 0;
 cnfg.cnfg_load(count).frequency_y= 0;
-cnfg.cnfg_load(count).t_end= 1; % Zeitdauer des Chirps, hier wird f erreicht
+cnfg.cnfg_load(count).t_end= 0.1; % Zeitdauer des Chirps, hier wird f erreicht
 cnfg.cnfg_load(count).type='Force_timevariant_chirp';
 
 % % fwd-whirl-sweep-Kraft
@@ -215,3 +216,52 @@ cnfg.cnfg_load(count).type='Force_timevariant_chirp';
 %% ========================PID-Regler======================================
 cnfg.cnfg_pid_controller=[];
 count = 0;
+
+ki = 40; %N/A
+%kx=-1e5N/m, noch als Zusatzfeder anbringen, fuer ML-Kraft aus Vormagnetisierung
+
+P=1e3; % 1e3 ok
+I=1e3; % 1e3 ok
+D=1e2; % 1e3 macht System instabil
+
+
+count = count + 1;
+cnfg.cnfg_pid_controller(count).name = 'Test-Regler x';
+cnfg.cnfg_pid_controller(count).position = 0e-3;
+cnfg.cnfg_pid_controller(count).direction = 'u_x';
+cnfg.cnfg_pid_controller(count).targetDisplacement = 0; % m
+cnfg.cnfg_pid_controller(count).P = P; % A/m * N/A
+cnfg.cnfg_pid_controller(count).I = I; % A/(ms) * N/A
+cnfg.cnfg_pid_controller(count).D = D; % As/m * N/A
+cnfg.cnfg_pid_controller(count).controllerFrequency = 1e3; % Hz
+
+count = count + 1;
+cnfg.cnfg_pid_controller(count).name = 'Test-Regler y';
+cnfg.cnfg_pid_controller(count).position = 0e-3;
+cnfg.cnfg_pid_controller(count).direction = 'u_y';
+cnfg.cnfg_pid_controller(count).targetDisplacement = 0; % m
+cnfg.cnfg_pid_controller(count).P = P; % A/m * N/A
+cnfg.cnfg_pid_controller(count).I = I; % A/(ms) * N/A
+cnfg.cnfg_pid_controller(count).D = D; % As/m * N/A
+cnfg.cnfg_pid_controller(count).controllerFrequency = 1e3; % Hz
+
+count = count + 1;
+cnfg.cnfg_pid_controller(count).name = 'Test-Regler x';
+cnfg.cnfg_pid_controller(count).position = 500e-3;
+cnfg.cnfg_pid_controller(count).direction = 'u_x';
+cnfg.cnfg_pid_controller(count).targetDisplacement = 0; % m
+cnfg.cnfg_pid_controller(count).P = P; % A/m * N/A
+cnfg.cnfg_pid_controller(count).I = I; % A/(ms) * N/A
+cnfg.cnfg_pid_controller(count).D = D; % As/m * N/A
+cnfg.cnfg_pid_controller(count).controllerFrequency = 1e3; % Hz
+
+count = count + 1;
+cnfg.cnfg_pid_controller(count).name = 'Test-Regler y';
+cnfg.cnfg_pid_controller(count).position = 500e-3;
+cnfg.cnfg_pid_controller(count).direction = 'u_y';
+cnfg.cnfg_pid_controller(count).targetDisplacement = 0; % m
+cnfg.cnfg_pid_controller(count).P = P; % A/m * N/A
+cnfg.cnfg_pid_controller(count).I = I; % A/(ms) * N/A
+cnfg.cnfg_pid_controller(count).D = D; % As/m * N/A
+cnfg.cnfg_pid_controller(count).controllerFrequency = 1e3; % Hz
+

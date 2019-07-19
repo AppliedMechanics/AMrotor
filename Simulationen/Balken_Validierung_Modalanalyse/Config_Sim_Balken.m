@@ -50,3 +50,14 @@ count = 0;
 cnfg.cnfg_load=[];
 count = 0;
 
+% Kraft in feste Richtung
+count = count + 1;
+cnfg.cnfg_load(count).name='Const. Kraft';
+cnfg.cnfg_load(count).position=250e-3;
+cnfg.cnfg_load(count).betrag_x= 0;
+cnfg.cnfg_load(count).betrag_y= -10;
+cnfg.cnfg_load(count).type='Force_constant_fix';
+
+%% ========================PID-Regler======================================
+cnfg.cnfg_pid_controller=[];
+count = 0;

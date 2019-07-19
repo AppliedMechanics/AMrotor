@@ -35,7 +35,7 @@ r.rotor.assemble_fem;
 
 %% Running Time Simulation
 
-St_Lsg = Experiments.Stationaere_Lsg( r , 3000 , (0:0.001:1) );%St_Lsg = Experiments.Stationaere_Lsg(r,[0:50:10e3],[0:0.001:2]); %obj = Stationaere_Lsg(a,drehzahlvektor,time)
+St_Lsg = Experiments.Stationaere_Lsg( r , 0 , (0:0.001:0.1) );%St_Lsg = Experiments.Stationaere_Lsg(r,[0:50:10e3],[0:0.001:2]); %obj = Stationaere_Lsg(a,drehzahlvektor,time)
 %St_Lsg.compute_ode15s_ss           %laeuft leider immer noch nicht!
 St_Lsg.compute_ode15s_ss_variant
 %St_Lsg.compute_euler_ss
