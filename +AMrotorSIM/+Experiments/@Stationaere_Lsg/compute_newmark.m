@@ -1,71 +1,75 @@
 function compute_newmark(obj)
+% See for example lecture script: Rixen, Structural Dynamics
 obj.rotorsystem.check_for_non_integrable_components;
 tic
 
-        obj.clear_time_result()
-        obj.result = containers.Map('KeyType','double','ValueType','any');
+obj.clear_time_result()
+obj.result = containers.Map('KeyType','double','ValueType','any');
 
-for drehzahl = obj.drehzahlen 
-%         M=obj.rotorsystem.systemmatrices.M;
-%         C=obj.rotorsystem.systemmatrices.D;
-%         K=obj.rotorsystem.systemmatrices.K;
-        omega = drehzahl /60 *2*pi;
-        [M,C,G,K] = obj.rotorsystem.assemble_system_matrices(drehzahl);
-        D = C + omega*G;
-        
-        x0 = zeros(length(M),1);
-        dotx0=zeros(length(M),1);
-        t=obj.time;
-        
-%         h_ges=sparse(length(M),1);
-%         h_ges(1)=10;
-        
-        
-%         F=h_ges;
-        
-%NEWMARK Newmark scheme (beta = 1/4, gamma = 1/2)
-%   Mass M, damping C, stiffness K , excitation F (vector), time vector t, initial condition x0
-h = t(2)-t(1);      % time step size
-
-beta = 1/4;         % integration parameters
-gamma = 1/2;    
-
-S = M + h*gamma*D + h^2*beta*K;
-
-R = chol(S);
-
-x(:,1) = x0;
-xtemp = x0;
-dotxtemp = dotx0;
-Z = [x; dotxtemp]; F = obj.rotorsystem.assemble_system_loads(t(1),Z,omega); 
-ddotxtemp = M\(-D*dotxtemp - K*xtemp + F);
-
-for iter = 2:length(t)
-    Z = [xtemp; dotxtemp];
-    F = obj.rotorsystem.assemble_system_loads(t(iter),Z,omega); 
+for drehzahl = obj.drehzahlen
+    omega = drehzahl /60 *2*pi;
+    [M,C,G,K] = obj.rotorsystem.assemble_system_matrices(drehzahl);
+    D = C + omega*G;
     
-    % prediction
-    xtemp     = xtemp + h*dotxtemp + (1/2-beta)*h^2*ddotxtemp;
-    dotxtemp  = dotxtemp + (1-gamma)*h*ddotxtemp;
+    x0 = zeros(length(M),1);
+    dotx0=zeros(length(M),1);
+    t=obj.time;
     
-    % acceleration computing
-    ddotxtemp = R\(R'\(-D*dotxtemp - K*xtemp + F));
+    %NEWMARK Newmark scheme (beta = 1/4, gamma = 1/2)
+    %   Mass M, damping C, stiffness K , excitation F (vector), time vector t, initial condition x0
+    h = t(2)-t(1);      % time step size
     
-    % correction
-    dotxtemp = dotxtemp + h*gamma*ddotxtemp;
-    xtemp    = xtemp + h^2*beta*ddotxtemp;
+    % integration parameters
+    % here: Average constant acceleration scheme -> unconditionally stable
+    beta = 1/4;
+    gamma = 1/2;
     
-    x(:,iter) = xtemp;
+    S = M + h*gamma*D + h^2*beta*K;
+    
+    R = chol(S);
+    
+    x(:,1) = x0;
+    xtemp = x0;
+    xd(:,1) = dotx0;
+    dotxtemp = dotx0;
+    Z = [x; dotxtemp];
+    F = obj.rotorsystem.assemble_system_loads(t(1),Z);
+    ddotxtemp = M\(-D*dotxtemp - K*xtemp + F);
+    xdd(:,1) = ddotxtemp;
+    
+    for iter = 2:length(t)
+        Z = [xtemp; dotxtemp];
+        F = obj.rotorsystem.assemble_system_loads(t(iter),Z);
+        
+        % prediction
+        xtemp     = xtemp + h*dotxtemp + (1/2-beta)*h^2*ddotxtemp;
+        dotxtemp  = dotxtemp + (1-gamma)*h*ddotxtemp;
+        
+        % acceleration computing
+        ddotxtemp = R\(R'\(-D*dotxtemp - K*xtemp + F));
+        
+        % correction
+        dotxtemp = dotxtemp + h*gamma*ddotxtemp;
+        xtemp    = xtemp + h^2*beta*ddotxtemp;
+        
+        x(:,iter) = xtemp;
+        xd(:,iter) = dotxtemp;
+        xdd(:,iter) = ddotxtemp;
+        
+        plot(x(1:6:end,iter))
+        drawnow
+        
+        disp(['t_current = ',num2str(t(iter))])
 
-    plot(x(1:6:end/2,iter))
-    drawnow
-    
+    end
     res.X = x(1:end,:);
-    disp(['t_current = ',num2str(t(iter))])
-
+    res.X_d = xd(1:end,:);
+    res.X_dd = xdd(1:end,:);
+    res.F = obj.calculate_force_load_post_sensor(res.X,res.X_d);
+    
     obj.result(drehzahl)=res;
+    
+    toc
 end
 
-toc
 end
-

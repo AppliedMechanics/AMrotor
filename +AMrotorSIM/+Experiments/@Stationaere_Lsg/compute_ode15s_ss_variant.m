@@ -90,15 +90,7 @@
         res.X = Z(1:6*n_nodes,:);
         res.X_d = Z(6*n_nodes+1:2*6*n_nodes,:);
         res.X_dd= Zp(6*n_nodes+1:2*6*n_nodes,:);
-        
-        % Kraftberechnung
-        h_ges = zeros(2*size(res.X,1),size(res.X,2));
-        if any(strcmp({obj.rotorsystem.sensors.type},'ForceLoadPostSensor'))
-            for k = 1:length(obj.time)
-                h_ges(:,k) = obj.rotorsystem.compute_system_load_variant(obj.time(k), [res.X(:,k); res.X_d(:,k)]);
-            end
-            res.F = h_ges(end/2+1:end,:);
-        end
+        res.F = obj.calculate_force_load_post_sensor(res.X,res.X_d);
         
         obj.result(rpm)=res;
         

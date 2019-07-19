@@ -79,8 +79,8 @@ count = count + 1;
 cnfg.cnfg_component(count).name = 'Axiales Lager Links';
 cnfg.cnfg_component(count).type='Bearings';
 cnfg.cnfg_component(count).subtype='SimpleAxialBearing';
-cnfg.cnfg_component(count).position=0e-3; % [m]
-cnfg.cnfg_component(count).stiffness=1;                     %[N/m]
+cnfg.cnfg_component(count).position=500e-3; % [m]
+cnfg.cnfg_component(count).stiffness=1e6;                     %[N/m]
 cnfg.cnfg_component(count).damping = 0;
 
 count = count + 1;
@@ -88,7 +88,7 @@ cnfg.cnfg_component(count).name = 'Torque Lager Links';
 cnfg.cnfg_component(count).type='Bearings';
 cnfg.cnfg_component(count).subtype='SimpleTorqueBearing';
 cnfg.cnfg_component(count).position=0e-3; % [m]
-cnfg.cnfg_component(count).stiffness=1;                     %[N/m]
+cnfg.cnfg_component(count).stiffness=1e6;                     %[N/m]
 cnfg.cnfg_component(count).damping = 0;
 
 count = count + 1;
@@ -122,8 +122,8 @@ count = 0;
 % count = count + 1;
 % cnfg.cnfg_load(count).name='Const. Kraft';
 % cnfg.cnfg_load(count).position=250e-3;
-% cnfg.cnfg_load(count).betrag_x= 0;
-% cnfg.cnfg_load(count).betrag_y= -10;
+% cnfg.cnfg_load(count).betrag_x= 10;
+% cnfg.cnfg_load(count).betrag_y= 0;
 % cnfg.cnfg_load(count).type='Force_constant_fix';
 
 % Unwuchten
