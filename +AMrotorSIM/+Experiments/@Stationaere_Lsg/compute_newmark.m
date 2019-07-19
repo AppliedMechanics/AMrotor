@@ -2,9 +2,16 @@ function compute_newmark(obj)
 % See for example lecture script: Rixen, Structural Dynamics
 obj.rotorsystem.check_for_non_integrable_components;
 tic
-
+figure
 obj.clear_time_result()
 obj.result = containers.Map('KeyType','double','ValueType','any');
+
+if ~isempty(obj.rotorsystem.pidControllers)
+    warning(['Using Newmark integration with controller: Controller ', ...
+        'time step size is the integration step size. The controller ',...
+        'frequency specified in the controller-object does not get ',...
+        'used in the Newmark integration method so far.'])
+end
 
 for drehzahl = obj.drehzahlen
     omega = drehzahl /60 *2*pi;
@@ -39,7 +46,16 @@ for drehzahl = obj.drehzahlen
     
     for iter = 2:length(t)
         Z = [xtemp; dotxtemp];
-        F = obj.rotorsystem.assemble_system_loads(t(iter),Z);
+        
+        % controller-specific, set the new controller force
+        for cntr = obj.rotorsystem.pidControllers
+            [displacementCntrNode, ~] = obj.rotorsystem.find_state_vector(cntr.position, Z);
+            cntr.get_controller_force(t(iter),displacementCntrNode);
+        end
+        
+        F_loads = obj.rotorsystem.assemble_system_loads(t(iter),Z);
+        F_controllers = obj.rotorsystem.assemble_system_controller_forces();
+        F = F_loads + F_controllers;
         
         % prediction
         xtemp     = xtemp + h*dotxtemp + (1/2-beta)*h^2*ddotxtemp;
