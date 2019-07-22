@@ -37,6 +37,7 @@ r.rotor.assemble_fem;
 
 St_Lsg = Experiments.Stationaere_Lsg( r , 0 , (0:0.001:0.2) );
 St_Lsg.compute_ode15s_ss_variant
+% St_Lsg.compute_newmark
 
 % Hochlauf = Experiments.Hochlaufanalyse( r , [0, 80e3] , (0:0.01:10) ); % input: (rotorsystem, [rpm_start, rpm_end], time_vector)
 % Hochlauf.compute_ode15s_ss_variant
@@ -47,8 +48,6 @@ St_Lsg.compute_ode15s_ss_variant
 d = Dataoutput.TimeDataOutput(St_Lsg);
 dataset_modalanalysis = d.compose_data();
 d.save_data(dataset_modalanalysis,'Hochlauf_Laval_U_x_sweep0_200Hz_3000rpm');
-%Methode um die Daten einfach laden zu koennen? -> data=read_dataset(dataset);
-% save('workspace_temp.mat');
 % 
 % 
 % %------------- Erzeuge Grafiken aus Loesung -------------------

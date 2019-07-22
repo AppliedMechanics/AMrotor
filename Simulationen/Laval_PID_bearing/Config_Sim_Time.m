@@ -233,7 +233,6 @@ cnfg.cnfg_pid_controller(count).targetDisplacement = 0; % m
 cnfg.cnfg_pid_controller(count).P = P; % A/m * N/A
 cnfg.cnfg_pid_controller(count).I = I; % A/(ms) * N/A
 cnfg.cnfg_pid_controller(count).D = D; % As/m * N/A
-cnfg.cnfg_pid_controller(count).controllerFrequency = 1e3; % Hz
 
 count = count + 1;
 cnfg.cnfg_pid_controller(count).name = 'Test-Regler y';
@@ -243,7 +242,6 @@ cnfg.cnfg_pid_controller(count).targetDisplacement = 0; % m
 cnfg.cnfg_pid_controller(count).P = P; % A/m * N/A
 cnfg.cnfg_pid_controller(count).I = I; % A/(ms) * N/A
 cnfg.cnfg_pid_controller(count).D = D; % As/m * N/A
-cnfg.cnfg_pid_controller(count).controllerFrequency = 1e3; % Hz
 
 count = count + 1;
 cnfg.cnfg_pid_controller(count).name = 'Test-Regler x';
@@ -253,7 +251,6 @@ cnfg.cnfg_pid_controller(count).targetDisplacement = 0; % m
 cnfg.cnfg_pid_controller(count).P = P; % A/m * N/A
 cnfg.cnfg_pid_controller(count).I = I; % A/(ms) * N/A
 cnfg.cnfg_pid_controller(count).D = D; % As/m * N/A
-cnfg.cnfg_pid_controller(count).controllerFrequency = 1e3; % Hz
 
 count = count + 1;
 cnfg.cnfg_pid_controller(count).name = 'Test-Regler y';
@@ -263,5 +260,4 @@ cnfg.cnfg_pid_controller(count).targetDisplacement = 0; % m
 cnfg.cnfg_pid_controller(count).P = P; % A/m * N/A
 cnfg.cnfg_pid_controller(count).I = I; % A/(ms) * N/A
 cnfg.cnfg_pid_controller(count).D = D; % As/m * N/A
-cnfg.cnfg_pid_controller(count).controllerFrequency = 1e3; % Hz
 

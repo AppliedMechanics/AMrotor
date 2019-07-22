@@ -25,63 +25,13 @@
         
         
         % solver parameters
-        options = odeset('AbsTol', 1e-5, 'RelTol', 1e-5,'OutputFcn',@odeOutputFcn_plotBeam,'MaxStep',obj.time(2)-obj.time(1));
-        %options = odeset('AbsTol', 1e-5, 'RelTol', 1e-5); % ohne live-plot
+        options = odeset('AbsTol', 1e-5, 'RelTol', 1e-5,'OutputFcn',@odeOutputFcnController,'MaxStep',obj.time(2)-obj.time(1));
 
         Timer.restart();
         disp('... integration started...')
-       
-        if isempty(obj.rotorsystem.pidControllers)
-            sol = ode15s(@integrate_function_variant,obj.time,Z0, options, Omega, obj.rotorsystem, mat);
-            [Z,Zp] = deval(sol,obj.time);
-            
-        else
-            % check controller frequency
-            controllerFrequency = [obj.rotorsystem.pidControllers.controllerFrequency];
-            if ~all((controllerFrequency-controllerFrequency(1))==0)
-                error('all controllers must have the same frequency')
-            end
-            controllerFrequency = controllerFrequency(1); % all controller have the same freq
-            
-            tVecController = obj.time(1):1/controllerFrequency:obj.time(end);
-            % obj.time(end) must be included in tVecController:
-            if mod(obj.time(end),1/controllerFrequency)
-                tVecController(end+1) = tVecController(end) + 1/controllerFrequency;
-            end
-            
-            Z = zeros(length(obj.rotorsystem.rotor.mass_matrix)*2, length(obj.time)); % initialize
-            Zp = Z;
-            for iTStep = 1:(length(tVecController)-1)
-                
-                tspanCurr = [tVecController(iTStep), tVecController(iTStep+1)];
-                %sol(iTStep) = ode45(@integrate_function_variant,tspanCurr,Z0,options, Omega, obj.rotorsystem, mat);
-                sol(iTStep) = ode15s(@integrate_function_variant,tspanCurr,Z0,options, Omega, obj.rotorsystem, mat);
-                
-                Z0 = sol(iTStep).y(:,end); % last value of the current integration is start value for next integration
-                
-                for cntr = obj.rotorsystem.pidControllers
-                    [displacementCntrNode, ~] = obj.rotorsystem.find_state_vector(cntr.position, Z0);
-                    cntr.get_controller_force(sol(iTStep).x(end),displacementCntrNode); % set the new controller force
-                end
-            end
-            
-            for iTStep = 1:(length(tVecController)-1)
-                % deval the solution after every controller-step
-                tspanCurr = [tVecController(iTStep), tVecController(iTStep+1)];
-                indexTime = find( (obj.time>=tspanCurr(1)) .* (obj.time<tspanCurr(end)) );
-                if ~isempty(indexTime) % tspanCurr relevant for output, else no value
-                    timeTmp = obj.time(indexTime);
-                    [ZTmp,ZpTmp] = deval(sol(iTStep),timeTmp);
-                    Z(:,indexTime) = ZTmp;
-                    Zp(:,indexTime) = ZpTmp;
-                end
-            end
-            %letzter Schritt
-            [ZTmp,ZpTmp] = deval(sol(end),obj.time(end));
-            Z(:,end) = ZTmp;
-            Zp(:,end) = ZpTmp;
-            
-        end
+        
+        sol = ode15s(@integrate_function_variant,obj.time,Z0, options, Omega, obj.rotorsystem, mat);
+        [Z,Zp] = deval(sol,obj.time);
         
         
         disp(['... spent time for integration: ',num2str(Timer.getWallTime()),' s'])
