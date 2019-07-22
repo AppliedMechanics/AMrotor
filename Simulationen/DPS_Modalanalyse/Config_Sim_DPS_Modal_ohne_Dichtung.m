@@ -283,3 +283,8 @@ cnfg.cnfg_seal = [];
 % Muszynska-Seal laminar
 count = 0;
 cnfg.cnfg_sealNonLinear = [];
+
+
+%% ========================PID-Regler======================================
+cnfg.cnfg_pid_controller=[];
+count = 0;

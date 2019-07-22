@@ -22,26 +22,26 @@
         ndof = length(mat.A)/2;
         Z0 = zeros(2*ndof,1);     % Mit null belegen:
         Z0(1*ndof+6:6:2*ndof)=Omega;        % Drehzahl fuer psi_z
-         
-         
+        
+        
         % solver parameters
-        options = odeset('AbsTol', 1e-5, 'RelTol', 1e-5,'OutputFcn',@odeOutputFcn_plotBeam,'MaxStep',obj.time(2)-obj.time(1));
-%         options = odeset('AbsTol', 1e-5, 'RelTol', 1e-5); % ohne live-plot
+        options = odeset('AbsTol', 1e-5, 'RelTol', 1e-5,'OutputFcn',@odeOutputFcnController,'MaxStep',obj.time(2)-obj.time(1));
 
         Timer.restart();
         disp('... integration started...')
-       
         
         sol = ode15s(@integrate_function_variant,obj.time,Z0, options, Omega, obj.rotorsystem, mat);
+        [Z,Zp] = deval(sol,obj.time);
+        
         
         disp(['... spent time for integration: ',num2str(Timer.getWallTime()),' s'])
 
-        [Z,Zp] = deval(sol,obj.time);
         
         res.X = Z(1:6*n_nodes,:);
         res.X_d = Z(6*n_nodes+1:2*6*n_nodes,:);
         res.X_dd= Zp(6*n_nodes+1:2*6*n_nodes,:);
         res.F = obj.calculate_force_load_post_sensor(res.X,res.X_d);
+        res.Fcontroller = obj.calculate_controller_force(res.X,res.X_d);
         
         obj.result(rpm)=res;
         

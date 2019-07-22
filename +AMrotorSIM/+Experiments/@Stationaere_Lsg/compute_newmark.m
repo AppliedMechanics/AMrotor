@@ -2,7 +2,7 @@ function compute_newmark(obj)
 % See for example lecture script: Rixen, Structural Dynamics
 obj.rotorsystem.check_for_non_integrable_components;
 tic
-
+figure
 obj.clear_time_result()
 obj.result = containers.Map('KeyType','double','ValueType','any');
 
@@ -39,7 +39,16 @@ for drehzahl = obj.drehzahlen
     
     for iter = 2:length(t)
         Z = [xtemp; dotxtemp];
-        F = obj.rotorsystem.assemble_system_loads(t(iter),Z);
+        
+        % controller-specific, set the new controller force
+        for cntr = obj.rotorsystem.pidControllers
+            [displacementCntrNode, ~] = obj.rotorsystem.find_state_vector(cntr.position, Z);
+            cntr.get_controller_force(t(iter),displacementCntrNode);
+        end
+        
+        F_loads = obj.rotorsystem.assemble_system_loads(t(iter),Z);
+        F_controllers = obj.rotorsystem.assemble_system_controller_forces();
+        F = F_loads + F_controllers;
         
         % prediction
         xtemp     = xtemp + h*dotxtemp + (1/2-beta)*h^2*ddotxtemp;
@@ -66,6 +75,7 @@ for drehzahl = obj.drehzahlen
     res.X_d = xd(1:end,:);
     res.X_dd = xdd(1:end,:);
     res.F = obj.calculate_force_load_post_sensor(res.X,res.X_d);
+    res.Fcontroller = obj.calculate_controller_force(res.X,res.X_d);
     
     obj.result(drehzahl)=res;
     

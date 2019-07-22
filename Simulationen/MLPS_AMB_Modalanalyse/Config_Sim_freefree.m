@@ -310,3 +310,8 @@ cnfg.cnfg_load(count).frequency_0 = 0; % Startfrequenz
 cnfg.cnfg_load(count).frequency= 1000;  %in Hz, Endfrequenz
 cnfg.cnfg_load(count).t_end= 0.6;%2; % Zeitdauer des Chirps, hier wird f erreicht
 cnfg.cnfg_load(count).type='Force_timevariant_whirl_fwd_sweep';
+
+
+%% ========================PID-Regler======================================
+cnfg.cnfg_pid_controller=[];
+count = 0;

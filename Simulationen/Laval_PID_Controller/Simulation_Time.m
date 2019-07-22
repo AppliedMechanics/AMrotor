@@ -27,21 +27,17 @@ r.rotor.show_2D(); % compare discretisation and user input
 % r.rotor.mesh.show_2D_nodes(); 
 %r.rotor.mesh.show_3D();
 
-% g=Graphs.Visu_Rotorsystem(r);
-% g.show();
+g=Graphs.Visu_Rotorsystem(r);
+g.show();
 
 
 r.rotor.assemble_fem;
 
 %% Running Time Simulation
 
-St_Lsg = Experiments.Stationaere_Lsg( r , 0 , (0:0.001:1) );%St_Lsg = Experiments.Stationaere_Lsg(r,[0:50:10e3],[0:0.001:2]); %obj = Stationaere_Lsg(a,drehzahlvektor,time)
-%St_Lsg.compute_ode15s_ss           %laeuft leider immer noch nicht!
-% St_Lsg.compute_ode15s_ss_variant;
-%St_Lsg.compute_euler_ss
-St_Lsg.compute_newmark 
-%St_Lsg.compute_sys_ss_variant
-% St_Lsg.save_data('St_Lsg_Laval_U_fwd_bwd_sweep_0_2krpm');
+St_Lsg = Experiments.Stationaere_Lsg( r , 0 , (0:0.001:0.2) );
+St_Lsg.compute_ode15s_ss_variant
+% St_Lsg.compute_newmark
 
 % Hochlauf = Experiments.Hochlaufanalyse( r , [0, 80e3] , (0:0.01:10) ); % input: (rotorsystem, [rpm_start, rpm_end], time_vector)
 % Hochlauf.compute_ode15s_ss_variant
@@ -52,8 +48,6 @@ St_Lsg.compute_newmark
 d = Dataoutput.TimeDataOutput(St_Lsg);
 dataset_modalanalysis = d.compose_data();
 d.save_data(dataset_modalanalysis,'Hochlauf_Laval_U_x_sweep0_200Hz_3000rpm');
-%Methode um die Daten einfach laden zu koennen? -> data=read_dataset(dataset);
-% save('workspace_temp.mat');
 % 
 % 
 % %------------- Erzeuge Grafiken aus Loesung -------------------
@@ -79,6 +73,6 @@ w2 = Graphs.WaterfalldiagrammTwoSided(r, St_Lsg);
 %          fo.plot(sensor,1); % Error Curve Fitting Toolbox muss installiert sein
 %          fo.plot(sensor,2);
 %          w.plot(sensor); % Wasserfall
-         w2.plot(sensor); % Wasserfall 2 Sided
+%          w2.plot(sensor); % Wasserfall 2 Sided
           Janitor.cleanFigures();
  end

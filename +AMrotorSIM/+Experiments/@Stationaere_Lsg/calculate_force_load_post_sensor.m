@@ -5,11 +5,11 @@ function F = calculate_force_load_post_sensor(obj,displacement,velocity)
 F = zeros(size(displacement,1),size(displacement,2));
 % Kraftberechnung
 if any(strcmp({obj.rotorsystem.sensors.type},'ForceLoadPostSensor'))
-    h_ges = zeros(2*size(displacement,1),size(displacement,2));
+    h_ges = zeros(size(displacement,1),size(displacement,2));
     for k = 1:length(obj.time)
-        h_ges(:,k) = obj.rotorsystem.compute_system_load_variant(obj.time(k), [displacement(:,k); velocity(:,k)]);
+        h_ges(:,k) = obj.rotorsystem.assemble_system_loads(obj.time(k), [displacement(:,k); velocity(:,k)]);
     end
-    F = h_ges(end/2+1:end,:);
+    F = h_ges;
 end
 
 end

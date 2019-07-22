@@ -18,9 +18,7 @@ for i=load
     
     set(h, 'edgecolor','none')
 %    set(h, 'facecolor',i.cnfg.color)
-    end
-
-    if isa(i,'AMrotorSIM.Loads.Force_constant_fix')
+    elseif isa(i,'AMrotorSIM.Loads.Force_constant_fix')
     zp=i.cnfg.position;
     lx = i.cnfg.betrag_x;
     ly = i.cnfg.betrag_y;
@@ -31,7 +29,7 @@ for i=load
     
     h.Color='blue';
     h.LineWidth = 5;
-    end
+    else
     
     zp=i.cnfg.position;
     
@@ -46,4 +44,5 @@ for i=load
 
     set(h, 'edgecolor','none')
     set(h, 'facecolor','cyan')
+    end
 end
