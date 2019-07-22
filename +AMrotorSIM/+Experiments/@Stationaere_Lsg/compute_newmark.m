@@ -6,13 +6,6 @@ figure
 obj.clear_time_result()
 obj.result = containers.Map('KeyType','double','ValueType','any');
 
-if ~isempty(obj.rotorsystem.pidControllers)
-    warning(['Using Newmark integration with controller: Controller ', ...
-        'time step size is the integration step size. The controller ',...
-        'frequency specified in the controller-object does not get ',...
-        'used in the Newmark integration method so far.'])
-end
-
 for drehzahl = obj.drehzahlen
     omega = drehzahl /60 *2*pi;
     [M,C,G,K] = obj.rotorsystem.assemble_system_matrices(drehzahl);
@@ -82,6 +75,7 @@ for drehzahl = obj.drehzahlen
     res.X_d = xd(1:end,:);
     res.X_dd = xdd(1:end,:);
     res.F = obj.calculate_force_load_post_sensor(res.X,res.X_d);
+    res.Fcontroller = obj.calculate_controller_force(res.X,res.X_d);
     
     obj.result(drehzahl)=res;
     

@@ -28,7 +28,7 @@ switch flag
         % set the new controller force
         for cntr = rotorsystem.pidControllers
             [displacementCntrNode, ~] = rotorsystem.find_state_vector(cntr.position, y);
-            cntr.get_controller_force(t,displacementCntrNode); 
+            cntr.get_controller_force(t(end),displacementCntrNode); 
         end
         
 end

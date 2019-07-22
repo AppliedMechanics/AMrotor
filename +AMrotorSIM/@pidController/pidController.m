@@ -14,8 +14,6 @@ classdef pidController < handle
         I % N/(m*s)
         D % Ns/m
         
-        controllerFrequency
-        
         cumError = 0 % cummulated error
         prevError = 0 % error in the previus step
         prevTime = 0 % time of the previous step
@@ -39,7 +37,6 @@ classdef pidController < handle
             obj.P = cnfg.P;
             obj.I = cnfg.I;
             obj.D = cnfg.D;
-            obj.controllerFrequency = cnfg.controllerFrequency;
             end
         end
         

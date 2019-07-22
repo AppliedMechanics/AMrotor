@@ -1,5 +1,5 @@
 classdef ForceLoadPostSensor < AMrotorSIM.Sensors.Sensor
-% Velocitysensor Class of sensors for the forces of objects of the
+% ForceLoadPostSensor Class of sensors for the forces of objects of the
 % LOADS-class
 %   only givess the forces of the loads that are defined as objects of teh
 %   Loads-superclass
