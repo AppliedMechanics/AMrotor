@@ -16,3 +16,4 @@ Getrennte Beispiele für Modalanalyse und für Zeitintegration: *Simulation\_Mod
 
 Funktionalität des Simulationscodes ist in Kommentaren in den beiden angegebenen Dateien gegeben. Diese Dateien eignen sich gut als Ausgangspunkt für eigene Analysen mit dem Simulationsprogramm. Dazu können die getrennten Config-files angepasst werden, die in den beiden Dateien aufgerufen werden.
 
+Eigene Simulationen sollten in einen eigenen Ordner in *./Simulationen/eigeneSimulation/* abgespeichert werden. Der Ordner *./Simulationen* enthält außerdem weitere Beispiele, die weitere Funktionen des Codes demonstrieren, die nicht im allgemeinen Beispiel verwende werden. 
