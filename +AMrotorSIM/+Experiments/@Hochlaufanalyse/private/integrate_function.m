@@ -8,7 +8,7 @@ ss_AG = rotorsystem.systemmatrices.ss_AG;
 
 %% Load Vector
 
-h_ges = rotorsystem.compute_system_load(t,Z);
+h_ges = rotorsystem.compute_system_load_ss(t,Z);
 
 %% DGL
 t %Zeit ausgeben um Fortschritt zu kontrollieren!

@@ -36,7 +36,7 @@ r.rotor.assemble_fem;
 
 St_Lsg = Experiments.Stationaere_Lsg( r , 1e3 , (0:0.001:0.01) );%St_Lsg = Experiments.Stationaere_Lsg(r,[0:50:10e3],[0:0.001:2]); %obj = Stationaere_Lsg(a,drehzahlvektor,time)
 % St_Lsg = Experiments.Stationaere_Lsg_nonlinear(r,1000,0:0.001:1);
-St_Lsg.compute_ode15s_ss_variant
+St_Lsg.compute_ode15s_ss
 
 St_Lsg.save_data('St_Lsg_DPS_1krpm');
 

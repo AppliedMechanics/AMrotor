@@ -40,13 +40,9 @@ r.rotor.assemble_fem;
 %% Running system analyses
 % 
 m=Experiments.Modalanalyse(r);
-% 
-% m.calculate_rotor_only_without_damping(15);
-% m.calculate_rotor_only(15,100);
-% 
-% m.calculate_rotorsystem_without_damping(15);
+
 m.calculate_rotorsystem(20,0);
-% 
+
 esf= Graphs.Eigenschwingformen(m);
 esf.print_frequencies();
 esf.plot_displacements();
@@ -77,8 +73,7 @@ return %stop execution -> Time integration is not yet functional
 %% Running Time Simulation
 
 St_Lsg = Experiments.Stationaere_Lsg( r , (0:500:10e3) , (0:0.001:1) );%St_Lsg = Experiments.Stationaere_Lsg(r,[0:50:10e3],[0:0.001:2]); %obj = Stationaere_Lsg(a,drehzahlvektor,time)
-%St_Lsg.compute_ode15s_ss           %laeuft leider immer noch nicht!
-St_Lsg.compute_ode15s_ss_variant
+St_Lsg.compute_ode15s_ss
 %St_Lsg.compute_euler_ss
 %St_Lsg.compute_newmark
 %St_Lsg.compute_sys_ss_variant

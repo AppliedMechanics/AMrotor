@@ -116,9 +116,6 @@ cnfg.cnfg_load(count).type='Force_constant_fix';
 cnfg.cnfg_pid_controller=[];
 count = 0;
 
-ki = 40; %N/A
-%kx=-1e5N/m, noch als Zusatzfeder anbringen, fuer ML-Kraft aus Vormagnetisierung
-
 P=2e5;
 I=2e5;
 D=1e3;

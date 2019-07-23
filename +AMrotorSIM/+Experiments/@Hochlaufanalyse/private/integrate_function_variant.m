@@ -11,7 +11,7 @@ Z(2*ndof) = Omega_curr; % node on the right is driven with current oemga
 qdotdot = Z(ndof*2+1:end);
 
 %% Loadvector
-h_ges = rotorsystem.compute_system_load_variant(t,Z(1:2*ndof),qdotdot); 
+h_ges = rotorsystem.compute_system_load_ss(t,Z(1:2*ndof),qdotdot); 
 
 %% DGL 
 % sollte schneller sein als alte Berechnung mit Vorabberechnung der

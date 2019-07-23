@@ -84,7 +84,7 @@ kSchaetzung = 3.5e4; % geschaetzt fuer P=3000
 dSchaetzung = 90; % fuer P=3000, da d=200 viel zu hohe Daempfungen liefert
 kML = kSchaetzung;
 dML = dSchaetzung;%dSchaetzung;
-count = 1;
+count = count +1;
 cnfg.cnfg_component(count).name = 'Axiales Lager Links';
 cnfg.cnfg_component(count).position=113e-3;                        %[m]
 cnfg.cnfg_component(count).type='Bearings';
@@ -233,7 +233,8 @@ cnfg.cnfg_load(count).betrag_x= 1;
 cnfg.cnfg_load(count).betrag_y= cnfg.cnfg_load(count).betrag_x;
 cnfg.cnfg_load(count).frequency_0 = 0; % Startfrequenz
 cnfg.cnfg_load(count).frequency= 1000;  %in Hz, Endfrequenz
-cnfg.cnfg_load(count).t_end= 0.6;%2; % Zeitdauer des Chirps, hier wird f erreicht
+cnfg.cnfg_load(count).t_start = 0.1;%2; % Startzeitpunkt
+cnfg.cnfg_load(count).t_end= 0.6;%endzeitpunkt des Chirps, hier wird f erreicht
 cnfg.cnfg_load(count).type='Force_timevariant_whirl_fwd_sweep';
 
 

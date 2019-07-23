@@ -14,7 +14,7 @@ ss_B = obj.rotorsystem.systemmatrices.ss_B;
 time=obj.time;
 Z0 = zeros(length(ss_A),1);
 
-h_ges = obj.rotorsystem.compute_system_load(0,Z0);
+h_ges = obj.rotorsystem.compute_system_load(0,Z0); % check if this is still ok with the current state space formulation for time integration
 
 x=zeros(length(Z0),length(time));
 x(:,1)=0;

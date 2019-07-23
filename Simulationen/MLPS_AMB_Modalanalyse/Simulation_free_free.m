@@ -71,8 +71,7 @@ return
 %% Running Time Simulation
 
 St_Lsg = Experiments.Stationaere_Lsg(r,00,[0:0.001:1]);
-%St_Lsg.compute_ode15s_ss           %läuft leider immer noch nicht!
-St_Lsg.compute_ode15s_ss_variant
+St_Lsg.compute_ode15s_ss
 %St_Lsg.compute_euler_ss
 %St_Lsg.compute_newmark
 %St_Lsg.compute_sys_ss_variant

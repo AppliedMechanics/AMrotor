@@ -1,18 +1,16 @@
-function dZ = integrate_function(t,Z,omega, rotorsystem)
+function dZ = integrate_function(t,Z,Omega, rotorsystem, mat)
 
-ss_A = rotorsystem.systemmatrices.ss_A;
-ss_B = rotorsystem.systemmatrices.ss_B;
-ss_AG = rotorsystem.systemmatrices.ss_AG;
+A=mat.A;
+B=mat.B;
+ndof = length(A)/2;
 
-%ss_A=ss_A+ss_AG*omega;
+Z(2*ndof)=Omega; % node on the right is driven with constant omega
 
-%% Load Vector
-
-h_ges = rotorsystem.compute_system_load(t,Z);
+%% Loadvector
+h_ges = rotorsystem.compute_system_load_ss(t,Z(1:2*ndof));
 
 %% DGL
-t %Zeit ausgeben um Fortschritt zu kontrollieren!
+dZ = A*Z+B*h_ges; 
 
-dZ = -ss_A\ss_B*Z+ss_A\h_ges;
 end
 
