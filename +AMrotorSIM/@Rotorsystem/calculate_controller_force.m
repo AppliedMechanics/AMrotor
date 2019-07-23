@@ -8,7 +8,7 @@ if any(strcmp({rotorsystem.sensors.type},'ControllerForceSensor'))
     h_ges = zeros(size(displacement,1),size(displacement,2));
     for k = 1:length(time)
         % set the new controller force
-        for cntr = obj.rotorsystem.pidControllers
+        for cntr = rotorsystem.pidControllers
             [displacementCntrNode, ~] = rotorsystem.find_state_vector(cntr.position, [displacement(:,k); velocity(:,k)]);
             cntr.get_controller_force(time(k),displacementCntrNode); 
         end
