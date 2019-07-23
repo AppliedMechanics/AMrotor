@@ -40,8 +40,8 @@
         res.X = Z(1:6*n_nodes,:);
         res.X_d = Z(6*n_nodes+1:2*6*n_nodes,:);
         res.X_dd= Zp(6*n_nodes+1:2*6*n_nodes,:);
-        res.F = obj.calculate_force_load_post_sensor(res.X,res.X_d);
-        res.Fcontroller = obj.calculate_controller_force(res.X,res.X_d);
+        res.F = obj.rotorsystem.calculate_force_load_post_sensor(obj.time,res.X,res.X_d);
+        res.Fcontroller = obj.rotorsystem.calculate_controller_force(obj.time,res.X,res.X_d);
         
         obj.result(rpm)=res;
         
