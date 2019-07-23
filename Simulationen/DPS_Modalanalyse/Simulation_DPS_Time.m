@@ -41,7 +41,7 @@ St_Lsg.compute_ode15s_ss
 St_Lsg.save_data('St_Lsg_DPS_1krpm');
 
 % Hochlauf = Experiments.Hochlaufanalyse( r , [0, 80e3] , (0:0.01:10) ); % input: (rotorsystem, [rpm_start, rpm_end], time_vector)
-% Hochlauf.compute_ode15s_ss_variant
+% Hochlauf.compute_ode15s_ss
 
 %% Plot results 
 %------------- Erzeuge Ausgabeformat der Loesung ---------------

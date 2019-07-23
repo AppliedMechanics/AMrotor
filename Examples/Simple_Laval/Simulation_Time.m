@@ -35,42 +35,36 @@ r.rotor.assemble_fem;
 
 %% Running Time Simulation
 
-St_Lsg = Experiments.Stationaere_Lsg( r , 0 , (0:0.001:1) );%St_Lsg = Experiments.Stationaere_Lsg(r,[0:50:10e3],[0:0.001:2]); %obj = Stationaere_Lsg(a,drehzahlvektor,time)
-%St_Lsg.compute_ode15s_ss           %laeuft leider immer noch nicht!
+St_Lsg = Experiments.Stationaere_Lsg( r , 0 , (0:0.001:1) );%obj = Stationaere_Lsg(a,drehzahlvektor,time)
 St_Lsg.compute_ode15s_ss;
 %St_Lsg.compute_euler_ss
 % St_Lsg.compute_newmark 
 %St_Lsg.compute_sys_ss_variant
 % St_Lsg.save_data('St_Lsg_Laval_U_fwd_bwd_sweep_0_2krpm');
 
-% Hochlauf = Experiments.Hochlaufanalyse( r , [0, 80e3] , (0:0.01:10) ); % input: (rotorsystem, [rpm_start, rpm_end], time_vector)
-% Hochlauf.compute_ode15s_ss_variant
+% Hochlauf = Experiments.Hochlaufanalyse( r , [0, 1e3] , (0:0.001:0.5) ); % input: (rotorsystem, [rpm_start, rpm_end], time_vector)
+% Hochlauf.compute_ode15s_ss
 
 %% Plot results 
 %------------- Erzeuge Ausgabeformat der Loesung ---------------
 
 d = Dataoutput.TimeDataOutput(St_Lsg);
+% d = Dataoutput.TimeDataOutput(Hochlauf);
 dataset_modalanalysis = d.compose_data();
 d.save_data(dataset_modalanalysis,'Hochlauf_Laval_U_x_sweep0_200Hz_3000rpm');
-%Methode um die Daten einfach laden zu koennen? -> data=read_dataset(dataset);
-% save('workspace_temp.mat');
-% 
-% 
-% %------------- Erzeuge Grafiken aus Loesung -------------------
-% 
-t = Graphs.TimeSignal(r, St_Lsg);
-o = Graphs.Orbitdarstellung(r, St_Lsg);
-f = Graphs.Fourierdarstellung(r, St_Lsg);
-fo = Graphs.Fourierorbitdarstellung(r, St_Lsg);
-w = Graphs.Waterfalldiagramm(r, St_Lsg);
-w2 = Graphs.WaterfalldiagrammTwoSided(r, St_Lsg);
 
-% t = Graphs.TimeSignal(r, Hochlauf);
-% o = Graphs.Orbitdarstellung(r, Hochlauf);
-% f = Graphs.Fourierdarstellung(r, Hochlauf);
-% fo = Graphs.Fourierorbitdarstellung(r, Hochlauf);
-% w = Graphs.Waterfalldiagramm(r, Hochlauf);
-% 
+
+%------------- Erzeuge Grafiken aus Loesung -------------------
+
+Lsg = St_Lsg; % Lsg = Hochlauf;
+
+t = Graphs.TimeSignal(r, Lsg);
+o = Graphs.Orbitdarstellung(r, Lsg);
+f = Graphs.Fourierdarstellung(r, Lsg);
+fo = Graphs.Fourierorbitdarstellung(r, Lsg);
+w = Graphs.Waterfalldiagramm(r, Lsg);
+w2 = Graphs.WaterfalldiagrammTwoSided(r, Lsg);
+
  for sensor = r.sensors
           t.plot(sensor);
 %          t.plot_Orbit(sensor);
