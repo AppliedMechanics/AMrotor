@@ -1,5 +1,5 @@
 function show(obj)
-          disp('--------------- Rotorsystem --------------')
+            disp('--------------- Rotorsystem ------------------')
          disp(obj.name);
         for i=obj.rotor
             i.print();
@@ -19,6 +19,11 @@ function show(obj)
             disp('----------------------------------------------')
             disp('--------------- Loads ------------------------')
          for i=obj.loads
+             i.print();
+         end
+            disp('----------------------------------------------')
+            disp('--------------- PID Controllers --------------')
+         for i=obj.pidControllers
              i.print();
          end
             disp('----------------------------------------------')

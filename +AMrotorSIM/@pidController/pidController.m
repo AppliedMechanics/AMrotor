@@ -1,5 +1,5 @@
 classdef pidController < handle
-    % PID_Controller Class for pid controller for force
+    % pidController Class for pid controller for force
     %   Outputs a force to a certain node, that is closest to position, to
     %   maintain the desired displacement at that node
     %   F = Kp*e(t) + Ki*int(e(tau),t) + Kd*de(t)/dt
@@ -18,14 +18,14 @@ classdef pidController < handle
         prevError = 0 % error in the previus step
         prevTime = 0 % time of the previous step
         
-        force = 0
+        force = 0 % current controller force
     end
     methods
         %Konstruktor
         function obj=pidController(cnfg)
             if nargin == 0
                 obj.name = 'Empty PID-Controller';
-                obj.position = 1;
+                obj.position = 0;
                 obj.P = 0;
                 obj.I = 0;
                 obj.D = 0;
