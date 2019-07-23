@@ -40,4 +40,11 @@ for cnfg=obj.cnfg.cnfg_component
     
 end
 
+% Adding automatic magnetic bearings
+for cnfg=obj.cnfg.cnfg_automaticMagneticBearing
+    obj.automaticMagneticBearings(end+1) = AMrotorSIM.automaticMagneticBearing(cnfg);
+    obj.automaticMagneticBearings(end).assemble(obj); % add bearings and controllers to rotorsystem
+end
+    
+
 end
