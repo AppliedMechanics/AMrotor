@@ -1,5 +1,8 @@
-function status = odeOutputFcn_plotBeam(t,y,flag,varargin)
+function status = odeOutputFcnController(t,y,flag,varargin)
 
+%rpm_span = varargin{1};
+%t_span = varargin{2};
+rotorsystem = varargin{3};
 switch flag 
     case 'init'
         disp('odeFcn init ->           ')
@@ -12,7 +15,7 @@ switch flag
     case ''
         plot(y(1:6:end/2,end)); % plot Auslenkung in x
         ylim([-1.1 1.1]*(max(abs(y(1:6:end/2,end)))+1e-12));
-%         plot(sqrt(y(1:6:end/2,end).^2+y(2:6:end/2,end).^2)); %plot den Betrag der Auslenkung
+%         plot(sqrt(y(1:6:end/2,end).^2+y(2:6:end/20,end).^2)); %plot den Betrag der Auslenkung
 %         ylim([-1 1]*5e-5);
         drawnow
         status=0;
@@ -22,6 +25,11 @@ switch flag
         fprintf('t = %04.0f',t(end)*1000)
         fprintf(' ms')
 
+        % set the new controller force
+        for cntr = rotorsystem.pidControllers
+            [displacementCntrNode, ~] = rotorsystem.find_state_vector(cntr.position, y);
+            cntr.get_controller_force(t(end),displacementCntrNode); 
+        end
         
 end
 

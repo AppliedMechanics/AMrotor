@@ -32,13 +32,16 @@ St_Lsg = Experiments.Stationaere_Lsg( r , 0 , (0:0.001:0.2) );
 St_Lsg.compute_ode15s_ss
 % St_Lsg.compute_newmark
 
+% Hochlauf = Experiments.Hochlaufanalyse( r , [0, 1e3] , (0:0.001:0.2) );
+% Hochlauf.compute_ode15s_ss
 
 %% Plot results 
-d = Dataoutput.TimeDataOutput(St_Lsg);
+Lsg = St_Lsg; % Lsg = Hochlauf;
+d = Dataoutput.TimeDataOutput(Lsg);
 dataset_modalanalysis = d.compose_data();
-d.save_data(dataset_modalanalysis,'Hochlauf_Laval_U_x_sweep0_200Hz_3000rpm');
+d.save_data(dataset_modalanalysis,'Hochlauf_Regelung');
 
-t = Graphs.TimeSignal(r, St_Lsg);
+t = Graphs.TimeSignal(r, Lsg);
  for sensor = r.sensors
           t.plot(sensor);
           Janitor.cleanFigures();

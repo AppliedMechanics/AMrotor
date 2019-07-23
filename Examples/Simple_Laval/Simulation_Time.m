@@ -48,15 +48,15 @@ St_Lsg.compute_ode15s_ss;
 %% Plot results 
 %------------- Erzeuge Ausgabeformat der Loesung ---------------
 
-d = Dataoutput.TimeDataOutput(St_Lsg);
+Lsg = St_Lsg; % Lsg = Hochlauf;
+
+d = Dataoutput.TimeDataOutput(Lsg);
 % d = Dataoutput.TimeDataOutput(Hochlauf);
 dataset_modalanalysis = d.compose_data();
 d.save_data(dataset_modalanalysis,'Hochlauf_Laval_U_x_sweep0_200Hz_3000rpm');
 
 
 %------------- Erzeuge Grafiken aus Loesung -------------------
-
-Lsg = St_Lsg; % Lsg = Hochlauf;
 
 t = Graphs.TimeSignal(r, Lsg);
 o = Graphs.Orbitdarstellung(r, Lsg);

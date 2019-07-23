@@ -17,8 +17,7 @@ Z0 = zeros(2*ndof,1);     % Mit null belegen:
 Z0(1*ndof+6:6:2*ndof)=rpm_span(1)/60*2*pi;        % Drehzahl fuer psi_z
 
 % solver parameters
-options = odeset('AbsTol', 1e-5, 'RelTol', 1e-5,'OutputFcn',@odeOutputFcn_plotBeam);
-% options = odeset('AbsTol', 1e-5, 'RelTol', 1e-5); % ohne live-plot
+options = odeset('AbsTol', 1e-5, 'RelTol', 1e-5,'OutputFcn',@odeOutputFcnController,'MaxStep',obj.time(2)-obj.time(1));
 
 Timer.restart();
 disp('... integration started...')
