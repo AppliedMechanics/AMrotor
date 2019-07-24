@@ -139,6 +139,6 @@ cnfg.cnfg_pid_controller(count).I = I; % A/(ms) * N/A
 cnfg.cnfg_pid_controller(count).D = D; % As/m * N/A
 
 
-%% ======================Automatic Magnetic Bearing========================
-cnfg.cnfg_automaticMagneticBearing = [];
+%% ======================Active Magnetic Bearing========================
+cnfg.cnfg_activeMagneticBearing = [];
 count = 0;

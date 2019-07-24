@@ -1,7 +1,7 @@
 function assemble(AMB,r)
 % creates SimpleBearing and pidController-objects for
-% automaticMagneticBearing and adds it to the rotorsystem
-%   AMB: object of the class automaticMagneticBearing
+% activeMagneticBearing and adds it to the rotorsystem
+%   AMB: object of the class activeMagneticBearing
 %   r: object of the class Rotorsystem
 
 % Bearing

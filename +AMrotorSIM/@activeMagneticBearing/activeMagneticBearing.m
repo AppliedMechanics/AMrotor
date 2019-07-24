@@ -1,5 +1,5 @@
-classdef automaticMagneticBearing < handle
-% automaticMagneticBearing Class for AMB
+classdef activeMagneticBearing < handle
+% activeMagneticBearing Class for AMB
 %   Creates other objects of the type SimpleBearing and pidController
     properties
         name
@@ -34,9 +34,9 @@ classdef automaticMagneticBearing < handle
     end
     methods
         %Konstruktor
-        function obj=automaticMagneticBearing(cnfg)
+        function obj=activeMagneticBearing(cnfg)
             if nargin == 0
-                obj.name = 'Empty automatic magnetic bearing';
+                obj.name = 'Empty active magnetic bearing';
                 obj.position = 0;
                 %obj.simpleBearing = AMrotorSIM.Components.Bearings.SimpleBearing();
                 %obj.pidController(1) = AMrotorSIM.pidController();

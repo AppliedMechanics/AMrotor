@@ -139,18 +139,18 @@ count = 0;
 % cnfg.cnfg_pid_controller(count).D = D; % As/m * N/A
 
 
-%% ======================Automatic Magnetic Bearing========================
-cnfg.cnfg_automaticMagneticBearing = [];
+%% ======================Active Magnetic Bearing========================
+cnfg.cnfg_activeMagneticBearing = [];
 count = 0;
 
 count = count + 1;
-cnfg.cnfg_automaticMagneticBearing.name = 'Test-AMB';
-cnfg.cnfg_automaticMagneticBearing.position = 250e-3;
+cnfg.cnfg_activeMagneticBearing.name = 'Test-AMB';
+cnfg.cnfg_activeMagneticBearing.position = 250e-3;
 %kx und ki aus Messung Dietz
-cnfg.cnfg_automaticMagneticBearing.kx = -1e5; %N/m, typically negative value
-cnfg.cnfg_automaticMagneticBearing.ki = 50; %A/N
-cnfg.cnfg_automaticMagneticBearing.targetDisplacementX = 0;
-cnfg.cnfg_automaticMagneticBearing.targetDisplacementY = 0;
-cnfg.cnfg_automaticMagneticBearing.electricalP = 5000;%5000; %A/m
-cnfg.cnfg_automaticMagneticBearing.electricalI = 5000;%1500; %A/ms
-cnfg.cnfg_automaticMagneticBearing.electricalD = 20;%5; %As/m
+cnfg.cnfg_activeMagneticBearing.kx = -1e5; %N/m, typically negative value
+cnfg.cnfg_activeMagneticBearing.ki = 50; %A/N
+cnfg.cnfg_activeMagneticBearing.targetDisplacementX = 0;
+cnfg.cnfg_activeMagneticBearing.targetDisplacementY = 0;
+cnfg.cnfg_activeMagneticBearing.electricalP = 5000;%5000; %A/m
+cnfg.cnfg_activeMagneticBearing.electricalI = 5000;%1500; %A/ms
+cnfg.cnfg_activeMagneticBearing.electricalD = 20;%5; %As/m

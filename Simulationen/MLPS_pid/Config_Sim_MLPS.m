@@ -257,8 +257,8 @@ cnfg.cnfg_load(count).type='Force_timevariant_chirp';
 cnfg.cnfg_pid_controller=[];
 count = 0;
 
-%% ======================Automatic Magnetic Bearing========================
-cnfg.cnfg_automaticMagneticBearing = [];
+%% ======================Active Magnetic Bearing========================
+cnfg.cnfg_activeMagneticBearing = [];
 count = 0;
 
 electricalP = 5000;%5000; %A/m
@@ -266,24 +266,24 @@ electricalI = 1500;%1500; %A/ms
 electricalD = 5;%5; %As/m
 
 count = count + 1;
-cnfg.cnfg_automaticMagneticBearing(count).name = 'AMB1';
-cnfg.cnfg_automaticMagneticBearing(count).position = 113e-3;
-cnfg.cnfg_automaticMagneticBearing(count).kx = -1e5; %N/m, kx und ki aus Messung Dietz
-cnfg.cnfg_automaticMagneticBearing(count).ki = 50; %A/N
-cnfg.cnfg_automaticMagneticBearing(count).targetDisplacementX = 0;
-cnfg.cnfg_automaticMagneticBearing(count).targetDisplacementY = 0;
-cnfg.cnfg_automaticMagneticBearing(count).electricalP = electricalP; %A/m
-cnfg.cnfg_automaticMagneticBearing(count).electricalI = electricalI; %A/ms
-cnfg.cnfg_automaticMagneticBearing(count).electricalD = electricalD; %As/m
+cnfg.cnfg_activeMagneticBearing(count).name = 'AMB1';
+cnfg.cnfg_activeMagneticBearing(count).position = 113e-3;
+cnfg.cnfg_activeMagneticBearing(count).kx = -1e5; %N/m, kx und ki aus Messung Dietz
+cnfg.cnfg_activeMagneticBearing(count).ki = 50; %A/N
+cnfg.cnfg_activeMagneticBearing(count).targetDisplacementX = 0;
+cnfg.cnfg_activeMagneticBearing(count).targetDisplacementY = 0;
+cnfg.cnfg_activeMagneticBearing(count).electricalP = electricalP; %A/m
+cnfg.cnfg_activeMagneticBearing(count).electricalI = electricalI; %A/ms
+cnfg.cnfg_activeMagneticBearing(count).electricalD = electricalD; %As/m
 
 count = count + 1;
-cnfg.cnfg_automaticMagneticBearing(count).name = 'AMB2';
-cnfg.cnfg_automaticMagneticBearing(count).position = 623e-3;
+cnfg.cnfg_activeMagneticBearing(count).name = 'AMB2';
+cnfg.cnfg_activeMagneticBearing(count).position = 623e-3;
 %kx und ki aus Messung Dietz
-cnfg.cnfg_automaticMagneticBearing(count).kx = -1e5; %N/m
-cnfg.cnfg_automaticMagneticBearing(count).ki = 50; %A/N
-cnfg.cnfg_automaticMagneticBearing(count).targetDisplacementX = 0;
-cnfg.cnfg_automaticMagneticBearing(count).targetDisplacementY = 0;
-cnfg.cnfg_automaticMagneticBearing(count).electricalP = electricalP; %A/m
-cnfg.cnfg_automaticMagneticBearing(count).electricalI = electricalI; %A/ms
-cnfg.cnfg_automaticMagneticBearing(count).electricalD = electricalD; %As/m
+cnfg.cnfg_activeMagneticBearing(count).kx = -1e5; %N/m
+cnfg.cnfg_activeMagneticBearing(count).ki = 50; %A/N
+cnfg.cnfg_activeMagneticBearing(count).targetDisplacementX = 0;
+cnfg.cnfg_activeMagneticBearing(count).targetDisplacementY = 0;
+cnfg.cnfg_activeMagneticBearing(count).electricalP = electricalP; %A/m
+cnfg.cnfg_activeMagneticBearing(count).electricalI = electricalI; %A/ms
+cnfg.cnfg_activeMagneticBearing(count).electricalD = electricalD; %As/m
