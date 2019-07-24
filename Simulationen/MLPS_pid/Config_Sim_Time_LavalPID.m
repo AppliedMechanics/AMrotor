@@ -116,29 +116,41 @@ cnfg.cnfg_load(count).type='Force_constant_fix';
 cnfg.cnfg_pid_controller=[];
 count = 0;
 
-P=2e5;
-I=2e5;
-D=1e3;
-
-count = count + 1;
-cnfg.cnfg_pid_controller(count).name = 'Test-Regler x';
-cnfg.cnfg_pid_controller(count).position = 250e-3;
-cnfg.cnfg_pid_controller(count).direction = 'u_x';
-cnfg.cnfg_pid_controller(count).targetDisplacement = 0; % m
-cnfg.cnfg_pid_controller(count).P = P; % A/m * N/A
-cnfg.cnfg_pid_controller(count).I = I; % A/(ms) * N/A
-cnfg.cnfg_pid_controller(count).D = D; % As/m * N/A
-
-count = count + 1;
-cnfg.cnfg_pid_controller(count).name = 'Test-Regler y';
-cnfg.cnfg_pid_controller(count).position = 250e-3;
-cnfg.cnfg_pid_controller(count).direction = 'u_y';
-cnfg.cnfg_pid_controller(count).targetDisplacement = 0; % m
-cnfg.cnfg_pid_controller(count).P = P; % A/m * N/A
-cnfg.cnfg_pid_controller(count).I = I; % A/(ms) * N/A
-cnfg.cnfg_pid_controller(count).D = D; % As/m * N/A
+% P=2e5;
+% I=2e5;
+% D=1e3;
+% 
+% count = count + 1;
+% cnfg.cnfg_pid_controller(count).name = 'Test-Regler x';
+% cnfg.cnfg_pid_controller(count).position = 250e-3;
+% cnfg.cnfg_pid_controller(count).direction = 'u_x';
+% cnfg.cnfg_pid_controller(count).targetDisplacement = 0; % m
+% cnfg.cnfg_pid_controller(count).P = P; % A/m * N/A
+% cnfg.cnfg_pid_controller(count).I = I; % A/(ms) * N/A
+% cnfg.cnfg_pid_controller(count).D = D; % As/m * N/A
+% 
+% count = count + 1;
+% cnfg.cnfg_pid_controller(count).name = 'Test-Regler y';
+% cnfg.cnfg_pid_controller(count).position = 250e-3;
+% cnfg.cnfg_pid_controller(count).direction = 'u_y';
+% cnfg.cnfg_pid_controller(count).targetDisplacement = 0; % m
+% cnfg.cnfg_pid_controller(count).P = P; % A/m * N/A
+% cnfg.cnfg_pid_controller(count).I = I; % A/(ms) * N/A
+% cnfg.cnfg_pid_controller(count).D = D; % As/m * N/A
 
 
 %% ======================Automatic Magnetic Bearing========================
 cnfg.cnfg_automaticMagneticBearing = [];
 count = 0;
+
+count = count + 1;
+cnfg.cnfg_automaticMagneticBearing.name = 'Test-AMB';
+cnfg.cnfg_automaticMagneticBearing.position = 250e-3;
+%kx und ki aus Messung Dietz
+cnfg.cnfg_automaticMagneticBearing.kx = -1e5; %N/m, typically negative value
+cnfg.cnfg_automaticMagneticBearing.ki = 50; %A/N
+cnfg.cnfg_automaticMagneticBearing.targetDisplacementX = 0;
+cnfg.cnfg_automaticMagneticBearing.targetDisplacementY = 0;
+cnfg.cnfg_automaticMagneticBearing.electricalP = 5000;%5000; %A/m
+cnfg.cnfg_automaticMagneticBearing.electricalI = 5000;%1500; %A/ms
+cnfg.cnfg_automaticMagneticBearing.electricalD = 20;%5; %As/m
