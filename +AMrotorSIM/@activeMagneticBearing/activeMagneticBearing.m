@@ -10,8 +10,8 @@ classdef activeMagneticBearing < handle
         simpleBearing@AMrotorSIM.Components.Bearings.SimpleBearing
         
         % pidController-objects that get created by AMB-object
-        % See also AMrotorSIM.pidController
-        pidController@AMrotorSIM.pidController
+        % See also AMrotorSIM.pidControllers.pidController
+        pidController@AMrotorSIM.pidControllers.pidController
         
         % evtl. naechsten Teil der Eigenschaften weglassen und nur in
         % config-stuct abspeichern (das als propertiy uebergeben wird), die

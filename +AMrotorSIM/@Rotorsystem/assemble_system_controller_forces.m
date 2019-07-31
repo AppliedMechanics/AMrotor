@@ -1,4 +1,4 @@
-function h = assemble_system_controller_forces(self)
+function h = assemble_system_controller_forces(self,t,Z)
 
 n_nodes=length(self.rotor.mesh.nodes);
 h = sparse(6*n_nodes,1);
@@ -13,7 +13,10 @@ for cntr = self.pidControllers
     L_glob = sparse(1,6*n_nodes);
     L_glob(glob_dof) = 1;
     
-    h = h + L_glob' * cntr.force;
+    [displacementCntrNode, ~] = self.find_state_vector(cntr.position, Z);
+    force = cntr.get_controller_force(displacementCntrNode);
+    
+    h = h + L_glob' * force;
     
 end
 

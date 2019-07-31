@@ -124,19 +124,23 @@ count = count + 1;
 cnfg.cnfg_pid_controller(count).name = 'Test-Regler x';
 cnfg.cnfg_pid_controller(count).position = 250e-3;
 cnfg.cnfg_pid_controller(count).direction = 'u_x';
+cnfg.cnfg_pid_controller(count).type = 'pidControllerLinear';
+cnfg.cnfg_pid_controller(count).param.ki = 1; % N/A
 cnfg.cnfg_pid_controller(count).targetDisplacement = 0; % m
-cnfg.cnfg_pid_controller(count).P = P; % A/m * N/A
-cnfg.cnfg_pid_controller(count).I = I; % A/(ms) * N/A
-cnfg.cnfg_pid_controller(count).D = D; % As/m * N/A
+cnfg.cnfg_pid_controller(count).electricalP = P; % A/m
+cnfg.cnfg_pid_controller(count).electricalI = I; % A/(ms)
+cnfg.cnfg_pid_controller(count).electricalD = D; % As/m
 
 count = count + 1;
 cnfg.cnfg_pid_controller(count).name = 'Test-Regler y';
 cnfg.cnfg_pid_controller(count).position = 250e-3;
 cnfg.cnfg_pid_controller(count).direction = 'u_y';
+cnfg.cnfg_pid_controller(count).type = 'pidControllerLinear';
+cnfg.cnfg_pid_controller(count).param.ki = 1; % N/A, specific for pidControllerLinear
 cnfg.cnfg_pid_controller(count).targetDisplacement = 0; % m
-cnfg.cnfg_pid_controller(count).P = P; % A/m * N/A
-cnfg.cnfg_pid_controller(count).I = I; % A/(ms) * N/A
-cnfg.cnfg_pid_controller(count).D = D; % As/m * N/A
+cnfg.cnfg_pid_controller(count).electricalP = P; % A/m
+cnfg.cnfg_pid_controller(count).electricalI = I; % A/(ms)
+cnfg.cnfg_pid_controller(count).electricalD = D; % As/m
 
 
 %% ======================Active Magnetic Bearing========================

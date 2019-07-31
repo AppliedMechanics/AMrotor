@@ -17,7 +17,7 @@ end
 
 % Adding PID-Controller to System
 for cnfg=obj.cnfg.cnfg_pid_controller
-    obj.pidControllers(end+1) = AMrotorSIM.pidController(cnfg);
+    obj.pidControllers(end+1) = AMrotorSIM.pidControllers.(cnfg.type)(cnfg);
 end
 
 % Adding Components

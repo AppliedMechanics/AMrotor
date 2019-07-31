@@ -23,8 +23,8 @@ classdef Rotorsystem < handle
       loads@AMrotorSIM.Loads.Load vector
       % See also AMrotorSIM.Components.Component
       components@AMrotorSIM.Components.Component vector
-      % See also AMrotorSIM.pidController
-      pidControllers@AMrotorSIM.pidController vector
+      % See also AMrotorSIM.pidControllers.pidController
+      pidControllers@AMrotorSIM.pidControllers.pidController vector
       % See also AMrotorSIM.activeMagneticBearing
       activeMagneticBearings@AMrotorSIM.activeMagneticBearing vector
 
