@@ -14,7 +14,7 @@ for cntr = self.pidControllers
     L_glob(glob_dof) = 1;
     
     [displacementCntrNode, ~] = self.find_state_vector(cntr.position, Z);
-    force = cntr.get_controller_force(displacementCntrNode);
+    force = cntr.get_controller_force(t,displacementCntrNode);
     
     h = h + L_glob' * force;
     

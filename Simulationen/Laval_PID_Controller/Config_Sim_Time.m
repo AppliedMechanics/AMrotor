@@ -116,31 +116,70 @@ cnfg.cnfg_load(count).type='Force_constant_fix';
 cnfg.cnfg_pid_controller=[];
 count = 0;
 
-P=2e5;
-I=2e5;
-D=1e3;
+%% linear force-calculation
+electricalP=2e5/70;%15e4;
+electricalI=2e5/70;%15e4;
+electricalD=1e3/70;%7e2;
 
+% ki = 70;%50;% % A/N
+% 
+% count = count + 1;
+% cnfg.cnfg_pid_controller(count).name = 'Test-Regler x';
+% cnfg.cnfg_pid_controller(count).position = 250e-3;
+% cnfg.cnfg_pid_controller(count).direction = 'u_x';
+% cnfg.cnfg_pid_controller(count).type = 'pidControllerLinear';
+% cnfg.cnfg_pid_controller(count).ki = ki; % N/A
+% cnfg.cnfg_pid_controller(count).targetDisplacement = 0; % m
+% cnfg.cnfg_pid_controller(count).electricalP = electricalP; % A/m
+% cnfg.cnfg_pid_controller(count).electricalI = electricalI; % A/(ms)
+% cnfg.cnfg_pid_controller(count).electricalD = electricalD; % As/m
+% 
+% count = count + 1;
+% cnfg.cnfg_pid_controller(count).name = 'Test-Regler y';
+% cnfg.cnfg_pid_controller(count).position = 250e-3;
+% cnfg.cnfg_pid_controller(count).direction = 'u_y';
+% cnfg.cnfg_pid_controller(count).type = 'pidControllerLinear';
+% cnfg.cnfg_pid_controller(count).ki = ki; % N/A, specific for pidControllerLinear
+% cnfg.cnfg_pid_controller(count).targetDisplacement = 0; % m
+% cnfg.cnfg_pid_controller(count).electricalP = electricalP; % A/m
+% cnfg.cnfg_pid_controller(count).electricalI = electricalI; % A/(ms)
+% cnfg.cnfg_pid_controller(count).electricalD = electricalD; % As/m
+
+%% Polynommodell 2. Ordnung nach Dietz 2018 S. 58, Simulationsmodell
+% electricalP = 5000; %A/m
+% electricalI = 1500; %A/ms
+% electricalD = 5; %As/m
+A = [0, 103.04e6; 6e3, 0];
+B = [-0.01, 0; 0, -0.26e6];
+cT = [68.45, 209.28e3];
+d = -0.02; 
 count = count + 1;
 cnfg.cnfg_pid_controller(count).name = 'Test-Regler x';
 cnfg.cnfg_pid_controller(count).position = 250e-3;
 cnfg.cnfg_pid_controller(count).direction = 'u_x';
-cnfg.cnfg_pid_controller(count).type = 'pidControllerLinear';
-cnfg.cnfg_pid_controller(count).param.ki = 1; % N/A
+cnfg.cnfg_pid_controller(count).type = 'pidControllerPolynomial2';
+cnfg.cnfg_pid_controller(count).A = A;
+cnfg.cnfg_pid_controller(count).B = B;
+cnfg.cnfg_pid_controller(count).cT = cT;
+cnfg.cnfg_pid_controller(count).d = d;
 cnfg.cnfg_pid_controller(count).targetDisplacement = 0; % m
-cnfg.cnfg_pid_controller(count).electricalP = P; % A/m
-cnfg.cnfg_pid_controller(count).electricalI = I; % A/(ms)
-cnfg.cnfg_pid_controller(count).electricalD = D; % As/m
+cnfg.cnfg_pid_controller(count).electricalP = electricalP; % A/m
+cnfg.cnfg_pid_controller(count).electricalI = electricalI; % A/(ms)
+cnfg.cnfg_pid_controller(count).electricalD = electricalD; % As/m
 
 count = count + 1;
 cnfg.cnfg_pid_controller(count).name = 'Test-Regler y';
 cnfg.cnfg_pid_controller(count).position = 250e-3;
 cnfg.cnfg_pid_controller(count).direction = 'u_y';
-cnfg.cnfg_pid_controller(count).type = 'pidControllerLinear';
-cnfg.cnfg_pid_controller(count).param.ki = 1; % N/A, specific for pidControllerLinear
+cnfg.cnfg_pid_controller(count).type = 'pidControllerPolynomial2';
+cnfg.cnfg_pid_controller(count).A = A;
+cnfg.cnfg_pid_controller(count).B = B;
+cnfg.cnfg_pid_controller(count).cT = cT;
+cnfg.cnfg_pid_controller(count).d = d;
 cnfg.cnfg_pid_controller(count).targetDisplacement = 0; % m
-cnfg.cnfg_pid_controller(count).electricalP = P; % A/m
-cnfg.cnfg_pid_controller(count).electricalI = I; % A/(ms)
-cnfg.cnfg_pid_controller(count).electricalD = D; % As/m
+cnfg.cnfg_pid_controller(count).electricalP = electricalP; % A/m
+cnfg.cnfg_pid_controller(count).electricalI = electricalI; % A/(ms)
+cnfg.cnfg_pid_controller(count).electricalD = electricalD; % As/m
 
 
 %% ======================Active Magnetic Bearing========================
