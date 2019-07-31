@@ -268,6 +268,7 @@ electricalD = 5;%5; %As/m
 count = count + 1;
 cnfg.cnfg_activeMagneticBearing(count).name = 'AMB1';
 cnfg.cnfg_activeMagneticBearing(count).position = 113e-3;
+cnfg.cnfg_activeMagneticBearing(count).pidType = 'pidControllerLinear'; % type of the created pidController-object
 cnfg.cnfg_activeMagneticBearing(count).kx = -1e5; %N/m, kx und ki aus Messung Dietz
 cnfg.cnfg_activeMagneticBearing(count).ki = 50; %A/N
 cnfg.cnfg_activeMagneticBearing(count).targetDisplacementX = 0;
@@ -279,6 +280,7 @@ cnfg.cnfg_activeMagneticBearing(count).electricalD = electricalD; %As/m
 count = count + 1;
 cnfg.cnfg_activeMagneticBearing(count).name = 'AMB2';
 cnfg.cnfg_activeMagneticBearing(count).position = 623e-3;
+cnfg.cnfg_activeMagneticBearing(count).pidType = 'pidControllerLinear'; % type of the created controller-object
 %kx und ki aus Messung Dietz
 cnfg.cnfg_activeMagneticBearing(count).kx = -1e5; %N/m
 cnfg.cnfg_activeMagneticBearing(count).ki = 50; %A/N

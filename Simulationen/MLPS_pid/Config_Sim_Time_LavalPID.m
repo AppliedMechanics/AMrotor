@@ -116,27 +116,6 @@ cnfg.cnfg_load(count).type='Force_constant_fix';
 cnfg.cnfg_pid_controller=[];
 count = 0;
 
-% P=2e5;
-% I=2e5;
-% D=1e3;
-% 
-% count = count + 1;
-% cnfg.cnfg_pid_controller(count).name = 'Test-Regler x';
-% cnfg.cnfg_pid_controller(count).position = 250e-3;
-% cnfg.cnfg_pid_controller(count).direction = 'u_x';
-% cnfg.cnfg_pid_controller(count).targetDisplacement = 0; % m
-% cnfg.cnfg_pid_controller(count).P = P; % A/m * N/A
-% cnfg.cnfg_pid_controller(count).I = I; % A/(ms) * N/A
-% cnfg.cnfg_pid_controller(count).D = D; % As/m * N/A
-% 
-% count = count + 1;
-% cnfg.cnfg_pid_controller(count).name = 'Test-Regler y';
-% cnfg.cnfg_pid_controller(count).position = 250e-3;
-% cnfg.cnfg_pid_controller(count).direction = 'u_y';
-% cnfg.cnfg_pid_controller(count).targetDisplacement = 0; % m
-% cnfg.cnfg_pid_controller(count).P = P; % A/m * N/A
-% cnfg.cnfg_pid_controller(count).I = I; % A/(ms) * N/A
-% cnfg.cnfg_pid_controller(count).D = D; % As/m * N/A
 
 
 %% ======================Active Magnetic Bearing========================
@@ -144,13 +123,14 @@ cnfg.cnfg_activeMagneticBearing = [];
 count = 0;
 
 count = count + 1;
-cnfg.cnfg_activeMagneticBearing.name = 'Test-AMB';
-cnfg.cnfg_activeMagneticBearing.position = 250e-3;
+cnfg.cnfg_activeMagneticBearing(count).name = 'Test-AMB';
+cnfg.cnfg_activeMagneticBearing(count).position = 250e-3;
+cnfg.cnfg_activeMagneticBearing(count).pidType = 'pidControllerLinear'; % type of the created controller-object
 %kx und ki aus Messung Dietz
-cnfg.cnfg_activeMagneticBearing.kx = -1e5; %N/m, typically negative value
-cnfg.cnfg_activeMagneticBearing.ki = 50; %A/N
-cnfg.cnfg_activeMagneticBearing.targetDisplacementX = 0;
-cnfg.cnfg_activeMagneticBearing.targetDisplacementY = 0;
-cnfg.cnfg_activeMagneticBearing.electricalP = 5000;%5000; %A/m
-cnfg.cnfg_activeMagneticBearing.electricalI = 5000;%1500; %A/ms
-cnfg.cnfg_activeMagneticBearing.electricalD = 20;%5; %As/m
+cnfg.cnfg_activeMagneticBearing(count).kx = -1e5; %N/m, typically negative value
+cnfg.cnfg_activeMagneticBearing(count).ki = 50; %A/N
+cnfg.cnfg_activeMagneticBearing(count).targetDisplacementX = 0;
+cnfg.cnfg_activeMagneticBearing(count).targetDisplacementY = 0;
+cnfg.cnfg_activeMagneticBearing(count).electricalP = 5000;%5000; %A/m
+cnfg.cnfg_activeMagneticBearing(count).electricalI = 5000;%1500; %A/ms
+cnfg.cnfg_activeMagneticBearing(count).electricalD = 20;%5; %As/m

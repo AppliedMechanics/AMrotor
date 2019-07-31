@@ -460,3 +460,7 @@ cnfg.cnfg_component(count).damping = 0;
 %% ========================PID-Regler======================================
 cnfg.cnfg_pid_controller=[];
 count = 0;
+
+%% ======================Active Magnetic Bearing===========================
+cnfg.cnfg_activeMagneticBearing = [];
+count = 0;

@@ -2,6 +2,7 @@ classdef activeMagneticBearing < handle
 % activeMagneticBearing Class for AMB
 %   Creates other objects of the type SimpleBearing and pidController
     properties
+        cnfg
         name
         position
         
@@ -13,20 +14,12 @@ classdef activeMagneticBearing < handle
         % See also AMrotorSIM.pidControllers.pidController
         pidController@AMrotorSIM.pidControllers.pidController
         
-        % evtl. naechsten Teil der Eigenschaften weglassen und nur in
-        % config-stuct abspeichern (das als propertiy uebergeben wird), die
-        % folgenden Eigenschaften werden ja dazu genutzt, um die Bearing
-        % und Controller-Objekte zu bauen. Die geasmte Information ist dann
-        % in diesen Bearing und Controller-Objekten enthalten
-        
-        %cnfg
-        
         kx % N/m, stiffness because of the magnetic field, typically negative value
         
         targetDisplacementX
         targetDisplacementY
         
-        ki % N/A, proportionality of magnetic force to electric current
+        pidType
         
         electricalP % A/m
         electricalI % A/(m*s)
@@ -42,19 +35,16 @@ classdef activeMagneticBearing < handle
                 %obj.pidController(1) = AMrotorSIM.pidController();
                 %obj.pidController(2) = AMrotorSIM.pidController();
             else
-            obj.name = cnfg.name;
-            obj.position = cnfg.position;
-            obj.kx = cnfg.kx;
-            obj.targetDisplacementX = cnfg.targetDisplacementX;
-            obj.targetDisplacementY = cnfg.targetDisplacementY;
-            obj.ki = cnfg.ki;
-            obj.electricalP = cnfg.electricalP;
-            obj.electricalI = cnfg.electricalI;
-            obj.electricalD = cnfg.electricalD;
-            % in Konstruktor bereits die controller und bearing objects
-            % erstellen ODER in extra Funtkion erstellen, die dann in
-            % assemble aufgerufen wird und der dann auch die ertsellten
-            % Objekte an das rotorsystem uebergibt
+                obj.cnfg = cnfg;
+                obj.name = cnfg.name;
+                obj.position = cnfg.position;
+                obj.kx = cnfg.kx;
+                obj.targetDisplacementX = cnfg.targetDisplacementX;
+                obj.targetDisplacementY = cnfg.targetDisplacementY;
+                obj.pidType = cnfg.pidType;
+                obj.electricalP = cnfg.electricalP;
+                obj.electricalI = cnfg.electricalI;
+                obj.electricalD = cnfg.electricalD;
             end
         end
         

@@ -241,3 +241,7 @@ cnfg.cnfg_load(count).type='Force_timevariant_whirl_fwd_sweep';
 %% ========================PID-Regler======================================
 cnfg.cnfg_pid_controller=[];
 count = 0;
+
+%% ======================Active Magnetic Bearing===========================
+cnfg.cnfg_activeMagneticBearing = [];
+count = 0;

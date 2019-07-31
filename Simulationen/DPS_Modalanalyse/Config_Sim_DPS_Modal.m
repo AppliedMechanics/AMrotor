@@ -269,3 +269,7 @@ cnfg.cnfg_component (count).Table = load('Inputfiles/SealTestRigEcc/TestRigLam2E
 %% ========================PID-Regler======================================
 cnfg.cnfg_pid_controller=[];
 count = 0;
+
+%% ======================Active Magnetic Bearing===========================
+cnfg.cnfg_activeMagneticBearing = [];
+count = 0;
