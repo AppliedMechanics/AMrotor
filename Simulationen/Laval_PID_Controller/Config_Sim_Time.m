@@ -116,15 +116,15 @@ cnfg.cnfg_load(count).type='Force_constant_fix';
 cnfg.cnfg_pid_controller=[];
 count = 0;
 
-%% linear force-calculation
 electricalP=2e5/70;%15e4;
 electricalI=2e5/70;%15e4;
 electricalD=1e3/70;%7e2;
 
+%% linear force-calculation
 % ki = 70;%50;% % A/N
 % 
 % count = count + 1;
-% cnfg.cnfg_pid_controller(count).name = 'Test-Regler x';
+% cnfg.cnfg_pid_controller(count).name = 'Test-Regler x lin';
 % cnfg.cnfg_pid_controller(count).position = 250e-3;
 % cnfg.cnfg_pid_controller(count).direction = 'u_x';
 % cnfg.cnfg_pid_controller(count).type = 'pidControllerLinear';
@@ -135,7 +135,7 @@ electricalD=1e3/70;%7e2;
 % cnfg.cnfg_pid_controller(count).electricalD = electricalD; % As/m
 % 
 % count = count + 1;
-% cnfg.cnfg_pid_controller(count).name = 'Test-Regler y';
+% cnfg.cnfg_pid_controller(count).name = 'Test-Regler y lin';
 % cnfg.cnfg_pid_controller(count).position = 250e-3;
 % cnfg.cnfg_pid_controller(count).direction = 'u_y';
 % cnfg.cnfg_pid_controller(count).type = 'pidControllerLinear';
@@ -146,40 +146,70 @@ electricalD=1e3/70;%7e2;
 % cnfg.cnfg_pid_controller(count).electricalD = electricalD; % As/m
 
 %% Polynommodell 2. Ordnung nach Dietz 2018 S. 58, Simulationsmodell
-% electricalP = 5000; %A/m
-% electricalI = 1500; %A/ms
-% electricalD = 5; %As/m
-A = [0, 103.04e6; 6e3, 0];
-B = [-0.01, 0; 0, -0.26e6];
-cT = [68.45, 209.28e3];
-d = -0.02; 
+% A = [0, 103.04e6; 6e3, 0];
+% B = [-0.01, 0; 0, -0.26e6];
+% cT = [68.45, 209.28e3];
+% d = -0.02; 
+% 
+% count = count + 1;
+% cnfg.cnfg_pid_controller(count).name = 'Test-Regler x poly2';
+% cnfg.cnfg_pid_controller(count).position = 250e-3;
+% cnfg.cnfg_pid_controller(count).direction = 'u_x';
+% cnfg.cnfg_pid_controller(count).type = 'pidControllerPolynomial2';
+% cnfg.cnfg_pid_controller(count).A = A;
+% cnfg.cnfg_pid_controller(count).B = B;
+% cnfg.cnfg_pid_controller(count).cT = cT;
+% cnfg.cnfg_pid_controller(count).d = d;
+% cnfg.cnfg_pid_controller(count).targetDisplacement = 0; % m
+% cnfg.cnfg_pid_controller(count).electricalP = electricalP; % A/m
+% cnfg.cnfg_pid_controller(count).electricalI = electricalI; % A/(ms)
+% cnfg.cnfg_pid_controller(count).electricalD = electricalD; % As/m
+% 
+% count = count + 1;
+% cnfg.cnfg_pid_controller(count).name = 'Test-Regler y poly2';
+% cnfg.cnfg_pid_controller(count).position = 250e-3;
+% cnfg.cnfg_pid_controller(count).direction = 'u_y';
+% cnfg.cnfg_pid_controller(count).type = 'pidControllerPolynomial2';
+% cnfg.cnfg_pid_controller(count).A = A;
+% cnfg.cnfg_pid_controller(count).B = B;
+% cnfg.cnfg_pid_controller(count).cT = cT;
+% cnfg.cnfg_pid_controller(count).d = d;
+% cnfg.cnfg_pid_controller(count).targetDisplacement = 0; % m
+% cnfg.cnfg_pid_controller(count).electricalP = electricalP; % A/m
+% cnfg.cnfg_pid_controller(count).electricalI = electricalI; % A/(ms)
+% cnfg.cnfg_pid_controller(count).electricalD = electricalD; % As/m
+
+
+%% Look Up Table
 count = count + 1;
-cnfg.cnfg_pid_controller(count).name = 'Test-Regler x';
+cnfg.cnfg_pid_controller(count).name = 'Test-Regler x LUT';
 cnfg.cnfg_pid_controller(count).position = 250e-3;
 cnfg.cnfg_pid_controller(count).direction = 'u_x';
-cnfg.cnfg_pid_controller(count).type = 'pidControllerPolynomial2';
-cnfg.cnfg_pid_controller(count).A = A;
-cnfg.cnfg_pid_controller(count).B = B;
-cnfg.cnfg_pid_controller(count).cT = cT;
-cnfg.cnfg_pid_controller(count).d = d;
+cnfg.cnfg_pid_controller(count).type = 'pidControllerLUT';
 cnfg.cnfg_pid_controller(count).targetDisplacement = 0; % m
 cnfg.cnfg_pid_controller(count).electricalP = electricalP; % A/m
 cnfg.cnfg_pid_controller(count).electricalI = electricalI; % A/(ms)
 cnfg.cnfg_pid_controller(count).electricalD = electricalD; % As/m
+cnfg.cnfg_pid_controller(count).table = load('Inputfiles/pidTestLUT.mat'); 
+% zu ladende Datei muss folgende Variablen enthalten (siehe auch Beispiel):
+% displacement = 1 x Ndisplacment array
+% current = 1 x Ncurrent array
+% force = Ncurrent x Ndisplacement
 
 count = count + 1;
-cnfg.cnfg_pid_controller(count).name = 'Test-Regler y';
+cnfg.cnfg_pid_controller(count).name = 'Test-Regler y LUT';
 cnfg.cnfg_pid_controller(count).position = 250e-3;
 cnfg.cnfg_pid_controller(count).direction = 'u_y';
-cnfg.cnfg_pid_controller(count).type = 'pidControllerPolynomial2';
-cnfg.cnfg_pid_controller(count).A = A;
-cnfg.cnfg_pid_controller(count).B = B;
-cnfg.cnfg_pid_controller(count).cT = cT;
-cnfg.cnfg_pid_controller(count).d = d;
+cnfg.cnfg_pid_controller(count).type = 'pidControllerLUT';
 cnfg.cnfg_pid_controller(count).targetDisplacement = 0; % m
 cnfg.cnfg_pid_controller(count).electricalP = electricalP; % A/m
 cnfg.cnfg_pid_controller(count).electricalI = electricalI; % A/(ms)
 cnfg.cnfg_pid_controller(count).electricalD = electricalD; % As/m
+cnfg.cnfg_pid_controller(count).table = load('Inputfiles/pidTestLUT.mat'); 
+% zu ladende Datei muss folgende Variablen enthalten (siehe auch Beispiel):
+% displacement = 1 x Ndisplacment array
+% current = 1 x Ncurrent array
+% force = Ncurrent x Ndisplacement
 
 
 %% ======================Active Magnetic Bearing========================

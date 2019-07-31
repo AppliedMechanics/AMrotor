@@ -1,23 +1,25 @@
-function [ output ] = LookUpTable( self, rpmTable, inputCell, rpmCurrent )     
+function [ outputMatrix ] = LookUpTable( self, rpmTable, inputCell, rpmCurrent )     
 % structure of inputs and outputs
 %
-% displacement = 1 x Ndisplacment array
-% current = 1 x Ncurrent array
-% force = Ndisplacemet x Ncurrent
+% rpmTable = 1 x Nrpm array
+% inputCell = 6 x 6 cell
+% a single cell of inputCell is an array with Nrpm entries for every
+% rpm-step: inputCell{i,j} = Nrpm x 1 array
+% rpmCurrent = 1x1 current rpm-step
 %
 % outputMatrix = 6 x 6 matrix for rpmCurrent
 
-output = zeros(6,6);
+outputMatrix = zeros(6,6);
 for i = 1:6
     for j = 1:6
         if isempty(inputCell{i,j}) %allows slim tables, only interesting coefficiens are stored
-            output(i,j)=0;
+            outputMatrix(i,j)=0;
         else
-            output(i,j) = interp1(rpmTable, inputCell{i,j}, rpmCurrent, 'linear');
+            outputMatrix(i,j) = interp1(rpmTable, inputCell{i,j}, rpmCurrent, 'linear');
         end
     end
 end
-output = sparse(output);
+outputMatrix = sparse(outputMatrix);
 % dof-order: ux,uy,uz,psix,psiy,psiz
 
 
