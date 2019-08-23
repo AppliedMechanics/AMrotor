@@ -13,6 +13,7 @@ for drehzahl = obj.drehzahlen
     
     x0 = zeros(length(M),1);
     dotx0=zeros(length(M),1);
+    dotx0(6:6:end) = omega;
     t=obj.time;
     
     %NEWMARK Newmark scheme (beta = 1/4, gamma = 1/2)
@@ -43,11 +44,11 @@ for drehzahl = obj.drehzahlen
         % controller-specific, set the new controller force
         for cntr = obj.rotorsystem.pidControllers
             [displacementCntrNode, ~] = obj.rotorsystem.find_state_vector(cntr.position, Z);
-            cntr.get_controller_force(t(iter),displacementCntrNode);
+            cntr.get_controller_current(t(iter),displacementCntrNode);
         end
         
         F_loads = obj.rotorsystem.assemble_system_loads(t(iter),Z);
-        F_controllers = obj.rotorsystem.assemble_system_controller_forces();
+        F_controllers = obj.rotorsystem.assemble_system_controller_forces(t(iter),Z);
         F = F_loads + F_controllers;
         
         % prediction
@@ -74,8 +75,8 @@ for drehzahl = obj.drehzahlen
     res.X = x(1:end,:);
     res.X_d = xd(1:end,:);
     res.X_dd = xdd(1:end,:);
-    res.F = obj.calculate_force_load_post_sensor(res.X,res.X_d);
-    res.Fcontroller = obj.calculate_controller_force(res.X,res.X_d);
+    res.F = obj.rotorsystem.calculate_force_load_post_sensor(obj.time,res.X,res.X_d);
+        res.Fcontroller = obj.rotorsystem.calculate_controller_force(obj.time,res.X,res.X_d);
     
     obj.result(drehzahl)=res;
     

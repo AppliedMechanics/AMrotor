@@ -201,13 +201,13 @@ count = 0;
 % cnfg.cnfg_load(count).betrag_y= 0;
 % cnfg.cnfg_load(count).type='Force_constant_fix';
 
-% % Unwuchten
-% count = count + 1;
-% cnfg.cnfg_load(count).name = 'Kleine Unwucht';
-% cnfg.cnfg_load(count).position = 280e-3;
-% cnfg.cnfg_load(count).betrag = 1e-6;%5e-6;
-% cnfg.cnfg_load(count).winkellage = 0;
-% cnfg.cnfg_load(count).type='Unbalance_static';
+% Unwuchten
+count = count + 1;
+cnfg.cnfg_load(count).name = 'Kleine Unwucht';
+cnfg.cnfg_load(count).position = 363e-3;
+cnfg.cnfg_load(count).betrag = 10e-3;%5e-6;
+cnfg.cnfg_load(count).winkellage = 0;
+cnfg.cnfg_load(count).type='Unbalance_static';
 
 % Sinusförmige Anregungskraft
 % count = count + 1;
@@ -229,17 +229,17 @@ count = 0;
 % cnfg.cnfg_load(count).type='Force_timevariant_whirl_fwd';
 
 % Chirp, Sinus-sweep-Kraft
-count = count + 1;
-cnfg.cnfg_load(count).name='Chirp Kraft';
-cnfg.cnfg_load(count).position=363e-3; 
-cnfg.cnfg_load(count).betrag_x= 1;
-cnfg.cnfg_load(count).frequency_x_0 = 0; % Startfrequenz
-cnfg.cnfg_load(count).frequency_x= 0;  %in Hz, Endfrequenz
-cnfg.cnfg_load(count).betrag_y= 0;
-cnfg.cnfg_load(count).frequency_y_0 = 0;
-cnfg.cnfg_load(count).frequency_y= 0;
-cnfg.cnfg_load(count).t_end= 0.01; % Zeitdauer des Chirps, hier wird f erreicht
-cnfg.cnfg_load(count).type='Force_timevariant_chirp';
+% count = count + 1;
+% cnfg.cnfg_load(count).name='Chirp Kraft';
+% cnfg.cnfg_load(count).position=363e-3; 
+% cnfg.cnfg_load(count).betrag_x= 1;
+% cnfg.cnfg_load(count).frequency_x_0 = 0; % Startfrequenz
+% cnfg.cnfg_load(count).frequency_x= 0;  %in Hz, Endfrequenz
+% cnfg.cnfg_load(count).betrag_y= 0;
+% cnfg.cnfg_load(count).frequency_y_0 = 0;
+% cnfg.cnfg_load(count).frequency_y= 0;
+% cnfg.cnfg_load(count).t_end= 0.01; % Zeitdauer des Chirps, hier wird f erreicht
+% cnfg.cnfg_load(count).type='Force_timevariant_chirp';
 
 % whirl-sweep-Kraft
 % count = count + 1;
