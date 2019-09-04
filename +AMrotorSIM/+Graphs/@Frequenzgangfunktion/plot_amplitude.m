@@ -19,7 +19,7 @@ for i=1:length(paramPlot.inLocDof)
             case 'lin'
                 plot(f,absFRF,'LineWidth',LineWidth,'DisplayName',DisplayName,'Color',Color,'LineStyle',LineStyle)
             case 'log'
-                plot(f,log(absFRF),'LineWidth',LineWidth,'DisplayName',DisplayName,'Color',Color,'LineStyle',LineStyle)
+                plot(f,absFRF,'LineWidth',LineWidth,'DisplayName',DisplayName,'Color',Color,'LineStyle',LineStyle)
                 ax=gca;
                 ax.YScale = 'log';
             case 'dB'

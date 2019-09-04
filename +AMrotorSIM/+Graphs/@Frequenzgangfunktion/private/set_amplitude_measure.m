@@ -20,10 +20,10 @@ if nnz([linBool,logBool,dbBool]) > 1 % mehr als 1 true
     error(['Select ''lin'', ''log'' or ''dB'' for the measure of the '...
         'amplitude in the visualisation of the frequency response function'])
 elseif logBool
-    amplitudeMeasure = 'log';
+    amplitudeMeasure = logStr;
 elseif dbBool
-    amplitudeMeasure = 'dB';
+    amplitudeMeasure = dbStr;
 else
-    amplitudeMeasure = 'lin'; %default
+    amplitudeMeasure = linStr; %default
 end
 end
