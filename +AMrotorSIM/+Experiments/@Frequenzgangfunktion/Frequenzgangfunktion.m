@@ -3,6 +3,7 @@ classdef Frequenzgangfunktion < handle
 %     This class calculates the frequency response function between
 %     specified points, for a specidifed frequency vector using the
 %     AbraVibe toolbox
+% See also AMrotorSIM.Graphs.Frequenzgangfunktion
     properties
         name
         % See also AMrotorSIM.Rotorsystem

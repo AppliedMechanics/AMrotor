@@ -1,6 +1,7 @@
 classdef Modalanalyse < handle
 % Modalanalyse Class for modal analysis
 %   Calculates the eigenvalues and eigenmodes 
+% See also AMrotorSIM.Graphs.Eigenschwingformen
    properties
       name='Modalanalyse'
       % See also AMrotorSIM.Rotorsystem

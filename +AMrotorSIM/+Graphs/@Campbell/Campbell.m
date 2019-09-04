@@ -3,6 +3,7 @@ classdef Campbell < handle
 %   Can plot the classic Campbell diagram, which shows the eigenfrequncies
 %   over the rotational speed.
 %   Can also plot the damping over rotational speed.
+% See also AMrotorSIM.Experiments.Campbell
     properties %(Access = private)
         Name = 'Campbell-Diagramm';
         % See also AMrotorSIM.Experiments.Campbell

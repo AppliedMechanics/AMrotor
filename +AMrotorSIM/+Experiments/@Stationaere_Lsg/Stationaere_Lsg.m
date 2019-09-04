@@ -3,6 +3,7 @@ classdef Stationaere_Lsg < handle
 %   Does the time intergation of the system for steps of constant
 %   rotational speed. Run-up with steps of constant rotation speeds is
 %   possible.
+% See also AMrotorSIM.Graphs
    properties
       name='Stationäre Lösung'
       % See also AMrotorSIM.Rotorsystem

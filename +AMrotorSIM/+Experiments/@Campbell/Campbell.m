@@ -3,7 +3,7 @@ classdef Campbell < handle
 % This class calculates the needed matrices for the calculation of the
 % campell diagramm and does also the sorting regarding forward/backward
 % whirl
-
+% See also AMrotorSIM.Graphs.Campbell
     properties (Access = private)
         name = 'Campell Analysis';
         rotorsystem@AMrotorSIM.Rotorsystem;

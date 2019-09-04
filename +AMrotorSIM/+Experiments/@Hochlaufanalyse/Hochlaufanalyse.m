@@ -2,6 +2,7 @@ classdef Hochlaufanalyse < handle
 % Hochlaufanalyse Class for time integration of run-up
 %   Does time integration for the system with a linearly rising rotational
 %   speed
+% See also AMrotorSIM.Graphs
    properties
       name='Hochlaufanalyse'
       % See also AMrotorSIM.Rotorsystem

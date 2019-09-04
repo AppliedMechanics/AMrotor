@@ -1,5 +1,6 @@
 classdef Eigenschwingformen < handle
-% Eigenschwingformen Class for visualisation of the eigen modes
+% Eigenschwingformen Class for visualisation of the eigenmodes
+% See also AMrotorSIM.Experiments.Modalanalyse 
    properties %(Access = private)
       name='Rotor Eigenschwingformen'
       % See also AMrotorSIM.Experiments.Modalanalyse

@@ -1,6 +1,7 @@
 classdef Frequenzgangfunktion < handle
 % Frequenzgangfunktion Class for visualisation of the frequency response
 % function
+% See also AMrotorSIM.Experiments.Frequenzgangfunktion
     properties
         Name = 'Visualisierung Frequenzgangfunktion';
         % See also AMrotorSIM.Experiments.Frequenzgangfunktion
@@ -23,11 +24,26 @@ classdef Frequenzgangfunktion < handle
         function set_plots(obj,Selection,inputDirection,outputDirection,varargin)
         % main method for user
         % set_plots(obj,Selection,inputDirection,outputDirection,varargin)
-        % examples of usage:
+        % 
+        % INPUTS
+        % Selection: 'nyquist', 'Bode', 'Amplitude', 'Phase'
+        % inputDirection: 
+        %   string: 'u_x', 'u_y', 'u_z', 'psi_x', 'psi_y', 'psi_z'
+        %   cell array including strings, for example {'u_x','psi_x'}
+        %   number 1,2,3,4,5,6 for u_x, u_y, ..., psi_z
+        %   vector of numbers
+        % outputDirection: similar to inputDirection
+        % 
+        % OPTIONAL ADDITIONAL INPUTS (in arbitrary order)
+        % amplitudeMeasure: 'lin', 'log', 'dB'
+        % angleMeasure: 'rad', 'deg'
+        % 
+        % examples of use:
         %    visufrf.set_plots('amplitude',1,1,'db')
         %    visufrf.set_plots('phase',{'u_x','u_y'},'u_x','db')
         %    visufrf.set_plots('bode',[1,4],[1,2,3],'log','deg')
         %    visufrf.set_plots('nyquist','u_y','u_y')
+        
             obj.set_color_number();
             paramPlot.angleMeasure = obj.set_angle_measure(varargin);
             paramPlot.amplitudeMeasure = obj.set_amplitude_measure(varargin);
