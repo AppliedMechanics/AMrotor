@@ -10,7 +10,7 @@ function FuncType = functype(FuncType)
 % Uppercase/lowercase is not checked when matching string format.
 % See inside file for documentation
 % 
-
+%
 % Copyright (c) 2009-2011 by Anders Brandt
 % Email: abra@iti.sdu.dk
 % Version: 1.0 2011-06-23   
@@ -18,7 +18,7 @@ function FuncType = functype(FuncType)
 %                          defined
 %          1.2 2013-11-16  Added type 30 for Transient spectrum
 % This file is part of ABRAVIBE Toolbox for NVA
-
+%
 %------------------------------------------------------------------------
 % Universal file format 58 definitions:
 %         0 - General or Unknown

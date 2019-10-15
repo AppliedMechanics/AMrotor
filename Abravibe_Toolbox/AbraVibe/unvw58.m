@@ -1,6 +1,6 @@
 function unvw58(fid,XData,Data,UnvHead); 
-% function [XData,Data,UnvHead] = unvw58(fid); 
-%
+% function unvw58(fid,XData,Data,UnvHead);
+% 
 % This function writes one SDRC Universal File dataset, type 58 (Test Data).
 % 
 % Input:	fid	handle to Universal file
