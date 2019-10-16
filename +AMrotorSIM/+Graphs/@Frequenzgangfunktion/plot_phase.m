@@ -2,17 +2,18 @@ function plot_phase(obj,f,frf,paramPlot)
 
 angleMeasure = paramPlot.angleMeasure;
 type = obj.experimentFRF.type;
+unit = obj.experimentFRF.unit;
 figure
 k=0;
 
-for i=1:length(paramPlot.inLocDof)
-    for j = 1:length(paramPlot.outLocDof)
+for i=1:size(frf,3)
+    for j = 1:size(frf,2)
         k=k+1;
         phaseFRF = angle(frf(:,j,i));
         Color = obj.ColorHandler.getColor(k);
         LineStyle = '-';
         LineWidth = 0.5;
-        DisplayName = obj.make_display_name(paramPlot.inLocDof(i),paramPlot.outLocDof(j));
+        DisplayName = obj.experimentFRF.descriptionsH{j,i};
         hold on
         
         %switch type % unterscheide nach interssierendem Bereich: z.B. 'd'

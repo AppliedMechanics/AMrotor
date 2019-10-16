@@ -2,17 +2,18 @@ function plot_amplitude(obj,f,frf,paramPlot)
 
 amplitudeMeasure = paramPlot.amplitudeMeasure;
 type = obj.experimentFRF.type;
+unit = obj.experimentFRF.unit;
 figure
 k=0;
 
-for i=1:length(paramPlot.inLocDof)
-    for j = 1:length(paramPlot.outLocDof)
+for i=1:size(frf,3)
+    for j = 1:size(frf,2)
         k=k+1;
         absFRF = abs(frf(:,j,i));
         Color = obj.ColorHandler.getColor(k);
         LineStyle = '-';
         LineWidth = 0.5;
-        DisplayName = obj.make_display_name(paramPlot.inLocDof(i),paramPlot.outLocDof(j));
+        DisplayName = obj.experimentFRF.descriptionsH{j,i};
         hold on
         
         switch amplitudeMeasure
@@ -30,7 +31,7 @@ for i=1:length(paramPlot.inLocDof)
 end
 
 obj.make_figure_title();
-obj.make_amplitude_label(type,amplitudeMeasure);
+obj.make_amplitude_label(type,unit,amplitudeMeasure);
 xlabel('$f$/Hz','Interpreter','latex')
 legend('show')
 

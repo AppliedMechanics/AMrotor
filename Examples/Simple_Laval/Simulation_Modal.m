@@ -43,18 +43,18 @@ u_trans_rigid_body = r.compute_translational_rigid_body_modes;overall_mass = r.c
 % Frequenzgangfunktion
 frf=Experiments.Frequenzgangfunktion(r,'Test-FRF');
 type = 'd'; %type:'d','v','a'
-inPos = 100e-3;%[100:100:500]*1e-3;%
+inPos = [0,100,200]*1e-3;%[100:100:500]*1e-3;%
 outPos = 100e-3;%[100,250]*1e-3;%
 f = 1:1:1000;
 rpm = 0;
-[f,H]=frf.calculate(f,inPos,outPos,type,rpm);
+[f,H]=frf.calculate(f,inPos,outPos,type,rpm,{'u_x','u_y','psi_x'},{'u_x','psi_x'});
 [deltaIn,deltaOut]=frf.print_distance_delta;
 
 visufrf = Graphs.Frequenzgangfunktion(frf);
-visufrf.set_plots('amplitude',1,1,'db')
-visufrf.set_plots('phase',{'u_x','u_y'},'u_x','db')
-visufrf.set_plots('bode',[1,4],[1,2,3],'log','deg')
-visufrf.set_plots('nyquist','u_y','u_y')
+visufrf.set_plots('amplitude','db')
+visufrf.set_plots('phase','db')
+visufrf.set_plots('bode','log','deg')
+visufrf.set_plots('nyquist')
 Janitor.cleanFigures();
 
 % Modalanalyse

@@ -10,7 +10,9 @@ classdef Frequenzgangfunktion < handle
         rotorsystem@AMrotorSIM.Rotorsystem
         f % frequency array: nFreq x 1
         H % matrix of frfs: nFreq x nResponses x nInputForces
+        descriptionsH % description of entries in H for plot, cells
         type % type of frf: acceleration 'a', velocity 'v', displacement 'd'
+        unit
         inputPosition   % position of the inputs/InputForces
         outputPosition  % position of the outputs
     end
@@ -28,5 +30,6 @@ classdef Frequenzgangfunktion < handle
         end
         
     end
+
     
 end

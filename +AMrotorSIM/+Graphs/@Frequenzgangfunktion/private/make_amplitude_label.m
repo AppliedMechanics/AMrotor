@@ -1,11 +1,7 @@
-function label = make_amplitude_label(obj,type,amplitudeMeasure)
+function label = make_amplitude_label(obj,type,unit,amplitudeMeasure)
 HStr = ['G_',type];
 
-% unit aus container
-unitStrContainer = {'\frac{m}{N}','\frac{m}{Ns}','\frac{m}{Ns^2}'};
-types = {'d','v','a'};
-unitContainer = containers.Map(types,unitStrContainer);
-unitStr = unitContainer(type);
+unitStr = unit;
 
 switch amplitudeMeasure
     case 'dB'

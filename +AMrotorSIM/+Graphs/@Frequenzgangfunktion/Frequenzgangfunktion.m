@@ -8,6 +8,7 @@ classdef Frequenzgangfunktion < handle
         experimentFRF;
         % See also AMrotorTools.PlotColors
         ColorHandler
+        paramPlot % parameters for the visualisation
     end
     
     methods (Access = public)
@@ -21,7 +22,7 @@ classdef Frequenzgangfunktion < handle
             end
         end
         
-        function set_plots(obj,Selection,inputDirection,outputDirection,varargin)
+        function set_plots(obj,Selection,varargin)
         % main method for user
         % set_plots(obj,Selection,inputDirection,outputDirection,varargin)
         % 
@@ -48,10 +49,10 @@ classdef Frequenzgangfunktion < handle
             paramPlot.angleMeasure = obj.set_angle_measure(varargin);
             paramPlot.amplitudeMeasure = obj.set_amplitude_measure(varargin);
             % inputDirection, outputDirection: 'u_x','u_y','u_z','psi_x','psi_y','psi_z'
-            paramPlot.inputDirection = obj.set_dof_number(inputDirection);
-            paramPlot.outputDirection = obj.set_dof_number(outputDirection);
+%             paramPlot.inputDirection = obj.set_dof_number(inputDirection);
+%             paramPlot.outputDirection = obj.set_dof_number(outputDirection);
             
-            [f,frf,paramPlot.inLocDof,paramPlot.outLocDof] = obj.get_frf(paramPlot);% get f, frf for selected in out directions
+            [f,frf] = obj.experimentFRF.get_frf();% get f, frf
             switch Selection
                 case {'Nyquist','nyquist','N','n'}
                     obj.plot_nyquist(f,frf,paramPlot);
