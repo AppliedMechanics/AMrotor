@@ -3,8 +3,6 @@ function [f,frf,C,Cx] = get_frf(obj)
 % displayed
 f=obj.f;
 frf=obj.H;
-C=[];
-Cx=[];
 
 % Abfrage, ob Coherence und Cx existiert und dann opional auslesen
 if isprop(obj,'C')

@@ -68,6 +68,11 @@ cnfg.cnfg_sensor(count).name='KraftScheibeMitte';
 cnfg.cnfg_sensor(count).position=250e-3;
 cnfg.cnfg_sensor(count).type='ForceLoadPostSensor';
 
+count = count + 1;
+cnfg.cnfg_sensor(count).name='KraftStoerung';
+cnfg.cnfg_sensor(count).position=100e-3;
+cnfg.cnfg_sensor(count).type='ForceLoadPostSensor';
+
 
 %% =========================Komponenten====================================
 count = 0;
@@ -137,7 +142,7 @@ count = 0;
 % Sinusfoermige Anregungskraft
 % count = count + 1;
 % cnfg.cnfg_load(count).name='Sinus Kraft';
-% cnfg.cnfg_load(count).position=250e-3; % Position ML 1
+% cnfg.cnfg_load(count).position=250e-3; 
 % cnfg.cnfg_load(count).betrag_x= 100;
 % cnfg.cnfg_load(count).frequency_x= 50;  %in Hz
 % cnfg.cnfg_load(count).betrag_y= 0;
@@ -147,7 +152,7 @@ count = 0;
 % Whirl, Anregungskraft beschreibt Ellipse
 % count = count + 1;
 % cnfg.cnfg_load(count).name='Whirl Kraft';
-% cnfg.cnfg_load(count).position=pos.ML1; % Position ML 1
+% cnfg.cnfg_load(count).position=pos.ML1; 
 % cnfg.cnfg_load(count).betrag_x= 10;
 % cnfg.cnfg_load(count).betrag_y= 10;
 % cnfg.cnfg_load(count).frequency= 500;  %in Hz
@@ -156,32 +161,61 @@ count = 0;
 % Chirp, Sinus-sweep-Kraft
 count = count + 1;
 cnfg.cnfg_load(count).name='Chirp Kraft';
-cnfg.cnfg_load(count).position=250e-3; % Position ML 1
+cnfg.cnfg_load(count).position=250e-3; 
 cnfg.cnfg_load(count).betrag_x= 1;
 cnfg.cnfg_load(count).frequency_x_0 = 0; % Startfrequenz
 cnfg.cnfg_load(count).frequency_x= 200;  %in Hz, Endfrequenz
 cnfg.cnfg_load(count).betrag_y= 0;
 cnfg.cnfg_load(count).frequency_y_0 = 0;
 cnfg.cnfg_load(count).frequency_y= 0;
-cnfg.cnfg_load(count).t_end= 1; % Zeitdauer des Chirps, hier wird f erreicht
+cnfg.cnfg_load(count).t_start= 0;
+cnfg.cnfg_load(count).t_end= 0.5; % Zeitdauer des Chirps, hier wird f erreicht
 cnfg.cnfg_load(count).type='Force_timevariant_chirp';
 
+% % Chirp, Sinus-sweep-Kraft
+% count = count + 1;
+% cnfg.cnfg_load(count).name='Chirp Kraft';
+% cnfg.cnfg_load(count).position=250e-3; 
+% cnfg.cnfg_load(count).betrag_x= 1;
+% cnfg.cnfg_load(count).frequency_x_0 = 0; % Startfrequenz
+% cnfg.cnfg_load(count).frequency_x= 200;  %in Hz, Endfrequenz
+% cnfg.cnfg_load(count).betrag_y= 0;
+% cnfg.cnfg_load(count).frequency_y_0 = 0;
+% cnfg.cnfg_load(count).frequency_y= 0;
+% cnfg.cnfg_load(count).t_start= 0.5;
+% cnfg.cnfg_load(count).t_end= 1; % Zeitdauer des Chirps, hier wird f erreicht
+% cnfg.cnfg_load(count).type='Force_timevariant_chirp';
+% 
+% % Chirp, Sinus-sweep-Kraft
+% count = count + 1;
+% cnfg.cnfg_load(count).name='Chirp Kraft';
+% cnfg.cnfg_load(count).position=0e-3; 
+% cnfg.cnfg_load(count).betrag_x= 0.1;
+% cnfg.cnfg_load(count).frequency_x_0 = 400; % Startfrequenz
+% cnfg.cnfg_load(count).frequency_x= 500;  %in Hz, Endfrequenz
+% cnfg.cnfg_load(count).betrag_y= 0;
+% cnfg.cnfg_load(count).frequency_y_0 = 0;
+% cnfg.cnfg_load(count).frequency_y= 0;
+% cnfg.cnfg_load(count).t_start= 0;
+% cnfg.cnfg_load(count).t_end= 1; % Zeitdauer des Chirps, hier wird f erreicht
+% cnfg.cnfg_load(count).type='Force_timevariant_chirp';
+% 
 % % fwd-whirl-sweep-Kraft
 % count = count + 1;
 % cnfg.cnfg_load(count).name='Fwd Whirl Sweep Kraft';
-% cnfg.cnfg_load(count).position=pos.ML1; % Position ML 1
-% cnfg.cnfg_load(count).betrag_x= 10;
+% cnfg.cnfg_load(count).position=100e-3; 
+% cnfg.cnfg_load(count).betrag_x= 0.2;
 % cnfg.cnfg_load(count).betrag_y= cnfg.cnfg_load(count).betrag_x;
 % cnfg.cnfg_load(count).frequency_0 = 0; % Startfrequenz
 % cnfg.cnfg_load(count).frequency= 200;  %in Hz, Endfrequenz
-% cnfg.cnfg_load(count).t_start= 0; %Zeitpkt an dem Startfrequenz anliegt
+% cnfg.cnfg_load(count).t_start= 0.45; %Zeitpkt an dem Startfrequenz anliegt
 % cnfg.cnfg_load(count).t_end= 0.5; % Zeitpkt des Ende des Chirps, hier wird f erreicht
 % cnfg.cnfg_load(count).type='Force_timevariant_whirl_fwd_sweep';
 % 
 % % bwd-whirl-sweep-Kraft
 % count = count + 1;
 % cnfg.cnfg_load(count).name='Bwd Whirl Sweep Kraft';
-% cnfg.cnfg_load(count).position=pos.ML1; % Position ML 1
+% cnfg.cnfg_load(count).position=pos.ML1; 
 % cnfg.cnfg_load(count).betrag_x= 10;
 % cnfg.cnfg_load(count).betrag_y= cnfg.cnfg_load(count).betrag_x;
 % cnfg.cnfg_load(count).frequency_0 = 0; % Startfrequenz

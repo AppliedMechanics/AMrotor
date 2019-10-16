@@ -1,4 +1,4 @@
-function descriptionH = make_descriptions_for_FRF(obj,inputNode,outputNode,inputDirection,outputDirection)
+function descriptionsH = make_descriptions_for_FRF(obj,inputNode,outputNode,inputDirection,outputDirection)
 
 dof_name = {'X','Y','Z','PSIX','PSIY','PSIZ'};
 dof_loc = [1,2,3,4,5,6];

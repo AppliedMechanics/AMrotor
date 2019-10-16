@@ -38,6 +38,7 @@ classdef Frequenzgangfunktion < handle
         % OPTIONAL ADDITIONAL INPUTS (in arbitrary order)
         % amplitudeMeasure: 'lin', 'log', 'dB'
         % angleMeasure: 'rad', 'deg'
+        % coherence-selection: 'coh'
         % 
         % examples of use:
         %    visufrf.set_plots('amplitude',1,1,'db')
@@ -48,11 +49,9 @@ classdef Frequenzgangfunktion < handle
             obj.set_color_number();
             paramPlot.angleMeasure = obj.set_angle_measure(varargin);
             paramPlot.amplitudeMeasure = obj.set_amplitude_measure(varargin);
-            % inputDirection, outputDirection: 'u_x','u_y','u_z','psi_x','psi_y','psi_z'
-%             paramPlot.inputDirection = obj.set_dof_number(inputDirection);
-%             paramPlot.outputDirection = obj.set_dof_number(outputDirection);
+            paramPlot.flagCoh = obj.get_coherence_selection(varargin);
             
-            [f,frf] = obj.experimentFRF.get_frf();% get f, frf
+            [f,frf,C] = obj.experimentFRF.get_frf();% get f, frf
             switch Selection
                 case {'Nyquist','nyquist','N','n'}
                     obj.plot_nyquist(f,frf,paramPlot);
@@ -67,6 +66,10 @@ classdef Frequenzgangfunktion < handle
                         'response function is not implemented. Valid '...
                         'selections: ''Nyquist'', ''Bode'', '...
                         '''amplitude'', ''phase''']);
+            end
+            
+            if paramPlot.flagCoh
+                obj.plot_coherence(f,C)
             end
         end
         
