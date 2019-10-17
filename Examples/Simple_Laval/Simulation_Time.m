@@ -66,7 +66,7 @@ w = Graphs.Waterfalldiagramm(r, Lsg);
 w2 = Graphs.WaterfalldiagrammTwoSided(r, Lsg);
 
 frf = Experiments.FrequenzgangfunktionTime(St_Lsg);
-frf.calculate(r.sensors(6),r.sensors(5),0,'u_x','u_x',4);
+frf.calculate(r.sensors(6),r.sensors(5),0,'u_x','u_x',4,'boxcar');
 visufrf = Graphs.Frequenzgangfunktion(frf);
 visufrf.set_plots('bode','log','deg','coh')
 

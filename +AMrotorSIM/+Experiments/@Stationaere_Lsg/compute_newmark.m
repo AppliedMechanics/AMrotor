@@ -76,7 +76,8 @@ for drehzahl = obj.drehzahlen
     res.X_d = xd(1:end,:);
     res.X_dd = xdd(1:end,:);
     res.F = obj.rotorsystem.calculate_force_load_post_sensor(obj.time,res.X,res.X_d);
-        res.Fcontroller = obj.rotorsystem.calculate_controller_force(obj.time,res.X,res.X_d);
+    res.FBearing = obj.rotorsystem.calculate_bearing_force(obj.time,res.X,res.X_d);
+    res.Fcontroller = obj.rotorsystem.calculate_controller_force(obj.time,res.X,res.X_d);
     
     obj.result(drehzahl)=res;
     

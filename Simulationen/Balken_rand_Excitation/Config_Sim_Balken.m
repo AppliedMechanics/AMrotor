@@ -30,6 +30,14 @@ cnfg.cnfg_rotor.mesh_opt.approx = 'mean';
 %% =========================Komponenten====================================
 count = 0;
 cnfg.cnfg_component = []; 
+% 
+% count = count +1;
+% cnfg.cnfg_component(count).name = 'Regularisierung der Steifigkeit';
+% cnfg.cnfg_component(count).type='Bearings';
+% cnfg.cnfg_component(count).subtype='RestrictAllDofsBearing';
+% cnfg.cnfg_component(count).position=0e-3;                        %[m]
+% cnfg.cnfg_component(count).stiffness= 1;                     %[N/m]
+% cnfg.cnfg_component(count).damping = 0;
 
 count = count +1;
 cnfg.cnfg_component(count).name = 'Feste Einspannung';
@@ -46,8 +54,8 @@ cnfg.cnfg_component(count).name = 'Feder am Ende';
 cnfg.cnfg_component(count).type='Bearings';
 cnfg.cnfg_component(count).subtype='SimpleBearing';
 cnfg.cnfg_component(count).position=beamLength;                        %[m]
-cnfg.cnfg_component(count).stiffness=1e4; %[N/m]
-cnfg.cnfg_component(count).damping = 0; 
+cnfg.cnfg_component(count).stiffness=1e3; %[N/m]
+cnfg.cnfg_component(count).damping = 100; 
 
 %% ====================Sensoren============================================
 cnfg.cnfg_sensor=[];
@@ -73,6 +81,11 @@ cnfg.cnfg_sensor(count).name='Weg_Ende';
 cnfg.cnfg_sensor(count).position=beamLength;
 cnfg.cnfg_sensor(count).type='Displacementsensor';
 
+count = count + 1;
+cnfg.cnfg_sensor(count).name='Kraft_Lager_Ende';
+cnfg.cnfg_sensor(count).position=beamLength;
+cnfg.cnfg_sensor(count).type='BearingForceSensor';
+
 
 %% =========================Lasten=========================================
 cnfg.cnfg_load=[];
@@ -84,13 +97,55 @@ cnfg.cnfg_load(count).name='Chirp Kraft';
 cnfg.cnfg_load(count).position=beamLength/2; % mittig auf Balken
 cnfg.cnfg_load(count).betrag_x= 1;
 cnfg.cnfg_load(count).frequency_x_0 = 0; % Startfrequenz
-cnfg.cnfg_load(count).frequency_x= 250;  %in Hz, Endfrequenz
+cnfg.cnfg_load(count).frequency_x= 300;  %in Hz, Endfrequenz
 cnfg.cnfg_load(count).betrag_y= 0;
 cnfg.cnfg_load(count).frequency_y_0 = 0;
 cnfg.cnfg_load(count).frequency_y= 0;
 cnfg.cnfg_load(count).t_start= 0;
 cnfg.cnfg_load(count).t_end= 2; % Zeitdauer des Chirps, hier wird f erreicht
 cnfg.cnfg_load(count).type='Force_timevariant_chirp';
+
+% % Chirp, Sinus-sweep-Kraft
+% count = count + 1;
+% cnfg.cnfg_load(count).name='Chirp Kraft';
+% cnfg.cnfg_load(count).position=beamLength/2; % mittig auf Balken
+% cnfg.cnfg_load(count).betrag_x= 1;
+% cnfg.cnfg_load(count).frequency_x_0 = 0; % Startfrequenz
+% cnfg.cnfg_load(count).frequency_x= 300;  %in Hz, Endfrequenz
+% cnfg.cnfg_load(count).betrag_y= 0;
+% cnfg.cnfg_load(count).frequency_y_0 = 0;
+% cnfg.cnfg_load(count).frequency_y= 0;
+% cnfg.cnfg_load(count).t_start= 0.5;
+% cnfg.cnfg_load(count).t_end= 1; % Zeitdauer des Chirps, hier wird f erreicht
+% cnfg.cnfg_load(count).type='Force_timevariant_chirp';
+% 
+% % Chirp, Sinus-sweep-Kraft
+% count = count + 1;
+% cnfg.cnfg_load(count).name='Chirp Kraft';
+% cnfg.cnfg_load(count).position=beamLength/2; % mittig auf Balken
+% cnfg.cnfg_load(count).betrag_x= 1;
+% cnfg.cnfg_load(count).frequency_x_0 = 0; % Startfrequenz
+% cnfg.cnfg_load(count).frequency_x= 300;  %in Hz, Endfrequenz
+% cnfg.cnfg_load(count).betrag_y= 0;
+% cnfg.cnfg_load(count).frequency_y_0 = 0;
+% cnfg.cnfg_load(count).frequency_y= 0;
+% cnfg.cnfg_load(count).t_start= 1;
+% cnfg.cnfg_load(count).t_end= 1.5; % Zeitdauer des Chirps, hier wird f erreicht
+% cnfg.cnfg_load(count).type='Force_timevariant_chirp';
+% 
+% % Chirp, Sinus-sweep-Kraft
+% count = count + 1;
+% cnfg.cnfg_load(count).name='Chirp Kraft';
+% cnfg.cnfg_load(count).position=beamLength/2; % mittig auf Balken
+% cnfg.cnfg_load(count).betrag_x= 1;
+% cnfg.cnfg_load(count).frequency_x_0 = 0; % Startfrequenz
+% cnfg.cnfg_load(count).frequency_x= 300;  %in Hz, Endfrequenz
+% cnfg.cnfg_load(count).betrag_y= 0;
+% cnfg.cnfg_load(count).frequency_y_0 = 0;
+% cnfg.cnfg_load(count).frequency_y= 0;
+% cnfg.cnfg_load(count).t_start= 1.5;
+% cnfg.cnfg_load(count).t_end= 2; % Zeitdauer des Chirps, hier wird f erreicht
+% cnfg.cnfg_load(count).type='Force_timevariant_chirp';
 
 %% ========================PID-Regler======================================
 cnfg.cnfg_pid_controller=[];

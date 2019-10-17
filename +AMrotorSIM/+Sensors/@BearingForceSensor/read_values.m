@@ -18,10 +18,10 @@ function [Fx_val,My_val,Fy_val,Mx_val] = read_values(self,experiment)
         dof_psix= rotor.get_gdof('psi_x',node_nr);
         dof_psiy= rotor.get_gdof('psi_y',node_nr);
         
-        Fx_val(drehzahl)=res(drehzahl).F(dof_x,:);
-        Fy_val(drehzahl)=res(drehzahl).F(dof_y,:);
-        Mx_val(drehzahl)=res(drehzahl).F(dof_psix,:);
-        My_val(drehzahl)=res(drehzahl).F(dof_psiy,:);
+        Fx_val(drehzahl)=res(drehzahl).FBearing(dof_x,:);
+        Fy_val(drehzahl)=res(drehzahl).FBearing(dof_y,:);
+        Mx_val(drehzahl)=res(drehzahl).FBearing(dof_psix,:);
+        My_val(drehzahl)=res(drehzahl).FBearing(dof_psiy,:);
 
         end
 

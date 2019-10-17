@@ -1,12 +1,11 @@
-function [f,H,C] = calculate(obj,sensorIn,sensorOut,rpm,inputDirection,outputDirection,numberOfBlocks)
+function [f,H,C] = calculate(obj,sensorIn,sensorOut,rpm,inputDirection,outputDirection,numberOfBlocks,windowShape)
 % CALCULATE calculate the frequency response function from time data
 % (Stationaere Lsg)
 %   calculates frf from a time data experiment using sensor-data
 %   settings for frf-calculation:
-%       window: halfsine
 %       overlap: 67 percent
 %
-% [f,H,C] = calculate(obj,f,inPos,outPos,type,rpm,inputDirection,outputDirection)
+% [f,H,C] = calculate(obj,sensorIn,sensorOut,rpm,inputDirection,outputDirection,numberOfBlocks,windowShape)
 %
 % See also time2xmtrx, xmtrx2frf
 
@@ -48,7 +47,7 @@ obj.make_descriptions_for_FRF();
 N = floor(length(time)/numberOfBlocks/2)*2;
 obj.check_for_uniform_sampling(time);
 fs = 1/(time(2)-time(1));
-window = hsinew(N);
+window = eval([windowShape,'(N)']);%hsinew(N);%boxcar(N);%ahann(N);%
 POverlap = 67;
 
 

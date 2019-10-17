@@ -73,6 +73,10 @@ cnfg.cnfg_sensor(count).name='KraftStoerung';
 cnfg.cnfg_sensor(count).position=100e-3;
 cnfg.cnfg_sensor(count).type='ForceLoadPostSensor';
 
+count = count + 1;
+cnfg.cnfg_sensor(count).name='KraftLager1';
+cnfg.cnfg_sensor(count).position=0e-3;
+cnfg.cnfg_sensor(count).type='BearingForceSensor';
 
 %% =========================Komponenten====================================
 count = 0;

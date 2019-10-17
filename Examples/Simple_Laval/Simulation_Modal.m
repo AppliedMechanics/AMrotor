@@ -22,7 +22,7 @@ r.show; % Funktion AMrotor\Matlab_Code\+AMrotorSIM\+Rotor\+FEMRotor\@FeModel\pri
 
 r.rotor.show_2D(); % compare discretisation and user input
 % r.rotor.geometry.show_2D(); % show user input
-% r.rotor.geometry.show_3D(); % show user input 3D, does not show last section
+r.rotor.geometry.show_3D(); % show user input 3D, does not show last section
 
 % r.rotor.mesh.show_2D(); % show generated elements
 % r.rotor.mesh.show_2D_nodes(); % show nodes and corresponding inner/outer radius
