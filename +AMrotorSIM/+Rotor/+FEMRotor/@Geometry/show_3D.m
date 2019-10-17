@@ -9,15 +9,13 @@ function show_3D(obj)
 
     f2=figure;
     % erzeuge Vektor r mit Radien der Abschnitte
-    %==========================================================================
-    for k=1:n_nodes
-
+    %======================================================================
 
     for k=1:n_nodes
         geo_node_z(k) = obj.nodes(k).z;
         geo_node_x(k) = obj.nodes(k).x;
     end
-    while n <n_nodes
+    while n <=n_nodes
 
         r(n,1)=geo_node_x(n);
 
@@ -29,9 +27,7 @@ function show_3D(obj)
         a=a+1;
     end
 
-    end
-
-    %==========================================================================
+    %======================================================================
     myaxes = axes('xlim', [-10 10], 'ylim', [-10 10], 'zlim',[-10 10]);
 
     view(3);
@@ -67,7 +63,7 @@ function show_3D(obj)
     for n=2:dim_r(1)
 
     %Berechnen der Zylinderelemente   
-        [xzyl, yzyl, zzyl] = cylinder([r(n) r(n)]);
+        [xzyl, yzyl, zzyl] = cylinder([r(n-1) r(n)]);
 
         %[xZ1, yz1, zZ1] = cylinder([r(n) r(n)]);
 
@@ -116,4 +112,5 @@ function show_3D(obj)
 
     zz=1:50;
 
+    title('User Input Geometry')
 end
