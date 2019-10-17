@@ -88,7 +88,8 @@ cnfg.cnfg_load(count).frequency_x= 250;  %in Hz, Endfrequenz
 cnfg.cnfg_load(count).betrag_y= 0;
 cnfg.cnfg_load(count).frequency_y_0 = 0;
 cnfg.cnfg_load(count).frequency_y= 0;
-cnfg.cnfg_load(count).t_end= 0.5; % Zeitdauer des Chirps, hier wird f erreicht
+cnfg.cnfg_load(count).t_start= 0;
+cnfg.cnfg_load(count).t_end= 2; % Zeitdauer des Chirps, hier wird f erreicht
 cnfg.cnfg_load(count).type='Force_timevariant_chirp';
 
 %% ========================PID-Regler======================================
