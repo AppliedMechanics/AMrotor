@@ -1,5 +1,5 @@
 function label = make_imag_label(obj,type,unit)
-HStr = ['Im(G_',type];
+HStr = ['Im(G_{',type,'})'];
 
 unitStr = unit;
     

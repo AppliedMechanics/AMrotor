@@ -1,5 +1,5 @@
 function label = make_amplitude_label(obj,type,unit,amplitudeMeasure)
-HStr = ['G_',type];
+HStr = ['G_{',type,'}'];
 
 unitStr = unit;
 

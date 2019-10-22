@@ -15,7 +15,8 @@ function write_data_to_unv(self, postfix)
     OutFileName = [Savepath '\Simulation-' date '-' postfix '-v' num2str(iter) '.unv'];
 
     for drehzahl = self.experiment.drehzahlen 
-        fid=fopen(OutFileName,'w');        
+        fid=fopen(OutFileName,'w');   
+        fclose(fid);
 
         for sensor = self.rotorsystem.sensors
             [x_val,~,y_val,~]=...

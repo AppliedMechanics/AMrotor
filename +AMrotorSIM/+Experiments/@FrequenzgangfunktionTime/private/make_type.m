@@ -5,7 +5,7 @@ typeOut = obj.sensorOut.measurementType;
 type = '';
 if strcmp(typeIn,'Force')
     switch typeOut
-        case 'Displacement'
+        case 'Distance'
             type = 'd';
         case 'Velocity'
             type = 'v';

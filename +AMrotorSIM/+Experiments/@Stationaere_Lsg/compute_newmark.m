@@ -67,6 +67,7 @@ for drehzahl = obj.drehzahlen
         xdd(:,iter) = ddotxtemp;
         
         plot(x(1:6:end,iter))
+        ylim([-1 1]*max(max(abs(x(1:6:end,iter)))+[-1e-10 +1e-10]))
         drawnow
         
         disp(['t_current = ',num2str(t(iter))])

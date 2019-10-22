@@ -1,5 +1,5 @@
 function label = make_phase_label(obj,type,angleMeasure)
-HStr = ['G_',type];
+HStr = ['G_{',type,'}'];
 
 % unit aus container
 unitStrContainer = {'{}^\circ','rad'};
