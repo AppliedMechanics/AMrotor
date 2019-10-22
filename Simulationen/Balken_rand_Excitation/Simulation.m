@@ -43,9 +43,9 @@ r.rotor.assemble_fem;
 
 % Frequenzgangfunktion
 frf=Experiments.Frequenzgangfunktion(r,'rechtes Ende');
-type = 'a'; %type:'d','v','a'
+type = 'd'; %type:'d','v','a'
 inPos = 500*1e-3;%[100:100:500]*1e-3;%
-outPos = 450e-3;%[100,250]*1e-3;%
+outPos = 500e-3;%[100,250]*1e-3;%
 f = 1:1:1000;
 rpm = 0;
 [f,H]=frf.calculate(f,inPos,outPos,type,rpm,{'u_x'},{'u_x'});
@@ -89,9 +89,9 @@ Janitor.cleanFigures();
 %% Running Time Simulation
 
 St_Lsg = Experiments.Stationaere_Lsg( r , 0 , (0.001:0.001:2) );%St_Lsg = Experiments.Stationaere_Lsg(r,[0:50:10e3],[0:0.001:2]); %obj = Stationaere_Lsg(a,drehzahlvektor,time)
-% St_Lsg.compute_ode15s_ss
+St_Lsg.compute_ode15s_ss
 %St_Lsg.compute_euler_ss
-St_Lsg.compute_newmark
+% St_Lsg.compute_newmark
 %St_Lsg.compute_sys_ss_variant
 
 % 
@@ -100,10 +100,11 @@ St_Lsg.compute_newmark
 d = Dataoutput.TimeDataOutput(St_Lsg);
 % dataset_modalanalysis = d.compose_data();
 dataset_modalanalysis = d.compose_data_sensor_wise();
-d.save_data(dataset_modalanalysis,'Balken_AnreungMitte_MessungEnde');
+datasetName = 'Balken_AnreungEnde_MessungEnde_Feder1e5';
+d.save_data(dataset_modalanalysis,datasetName);
 struct = d.convert_data_to_struct_sensor_wise(dataset_modalanalysis);
-d.save_data(struct,'Balken_AnreungMitte_MessungEnde');
-d.write_data_to_unv('Balken_AnreungMitte_MessungEnde')
+d.save_data(struct,datasetName);
+d.write_data_to_unv(datasetName)
 % save('workspace_temp.mat');
 % 
 % 
@@ -115,13 +116,13 @@ f = Graphs.Fourierdarstellung(r, St_Lsg);
 fo = Graphs.Fourierorbitdarstellung(r, St_Lsg);
 w = Graphs.Waterfalldiagramm(r, St_Lsg);
 
-frf = Experiments.FrequenzgangfunktionTime(St_Lsg,'Shaker turned off');
+frf = Experiments.FrequenzgangfunktionTime(St_Lsg,'Ende Balken, Lager');
 frf.calculate(r.sensors(5),r.sensors(3),0,'u_x','u_x',1,'boxcar');
 visufrf = Graphs.Frequenzgangfunktion(frf);
 visufrf.set_plots('bode','log','deg','coh')
 
-frf = Experiments.FrequenzgangfunktionTime(St_Lsg,'Mitte Balken, Anregung');
-frf.calculate(r.sensors(2),r.sensors(1),0,'u_x','u_x',1,'boxcar');
+frf = Experiments.FrequenzgangfunktionTime(St_Lsg,'Ende Balken, Anregung');
+frf.calculate(r.sensors(2),r.sensors(3),0,'u_x','u_x',1,'boxcar');
 visufrf = Graphs.Frequenzgangfunktion(frf);
 visufrf.set_plots('bode','log','deg','coh')
 % 

@@ -168,10 +168,10 @@ cnfg.cnfg_sensor(count).type='Displacementsensor';
 % cnfg.cnfg_sensor(count).position=0.113;
 % cnfg.cnfg_sensor(count).type='ForceLoadPostSensor';
 
-count = count + 1;
-cnfg.cnfg_sensor(count).name='KraftLaser';
-cnfg.cnfg_sensor(count).position=0.363;
-cnfg.cnfg_sensor(count).type='ForceLoadPostSensor';
+% count = count + 1;
+% cnfg.cnfg_sensor(count).name='KraftLaser';
+% cnfg.cnfg_sensor(count).position=0.363;
+% cnfg.cnfg_sensor(count).type='ForceLoadPostSensor';
 
 % count = count + 1;
 % cnfg.cnfg_sensor(count).name='KraftMLR';
@@ -188,6 +188,16 @@ cnfg.cnfg_sensor(count).name='ReglerKraftMLR';
 cnfg.cnfg_sensor(count).position=623e-3;
 cnfg.cnfg_sensor(count).type='ControllerForceSensor';
 
+count = count + 1;
+cnfg.cnfg_sensor(count).name='AnregungsKraftMLL';
+cnfg.cnfg_sensor(count).position=113e-3;
+cnfg.cnfg_sensor(count).type='ForceLoadPostSensor';
+
+count = count + 1;
+cnfg.cnfg_sensor(count).name='AnregungKraftMLR';
+cnfg.cnfg_sensor(count).position=623e-3;
+cnfg.cnfg_sensor(count).type='ForceLoadPostSensor';
+
 
 %% =========================Lasten=========================================
 cnfg.cnfg_load=[];
@@ -202,12 +212,12 @@ count = 0;
 % cnfg.cnfg_load(count).type='Force_constant_fix';
 
 % Unwuchten
-count = count + 1;
-cnfg.cnfg_load(count).name = 'Kleine Unwucht';
-cnfg.cnfg_load(count).position = 363e-3;
-cnfg.cnfg_load(count).betrag = 10e-3;%5e-6;
-cnfg.cnfg_load(count).winkellage = 0;
-cnfg.cnfg_load(count).type='Unbalance_static';
+% count = count + 1;
+% cnfg.cnfg_load(count).name = 'Kleine Unwucht';
+% cnfg.cnfg_load(count).position = 363e-3;
+% cnfg.cnfg_load(count).betrag = 10e-3;%5e-6;
+% cnfg.cnfg_load(count).winkellage = 0;
+% cnfg.cnfg_load(count).type='Unbalance_static';
 
 % Sinusförmige Anregungskraft
 % count = count + 1;
@@ -230,16 +240,30 @@ cnfg.cnfg_load(count).type='Unbalance_static';
 
 % Chirp, Sinus-sweep-Kraft
 % count = count + 1;
-% cnfg.cnfg_load(count).name='Chirp Kraft';
-% cnfg.cnfg_load(count).position=363e-3; 
+% cnfg.cnfg_load(count).name='Chirp Kraft MLL';
+% cnfg.cnfg_load(count).position=113e-3; 
 % cnfg.cnfg_load(count).betrag_x= 1;
 % cnfg.cnfg_load(count).frequency_x_0 = 0; % Startfrequenz
+% cnfg.cnfg_load(count).frequency_x= 200;  %in Hz, Endfrequenz
+% cnfg.cnfg_load(count).betrag_y= 0;
+% cnfg.cnfg_load(count).frequency_y_0 = 0;
+% cnfg.cnfg_load(count).frequency_y= 0;
+% cnfg.cnfg_load(count).t_start= 0;
+% cnfg.cnfg_load(count).t_end= 1; % Zeitdauer des Chirps, hier wird f erreicht
+% cnfg.cnfg_load(count).type='Force_timevariant_chirp';
+
+% Chirp, Sinus-sweep-Kraft
+% count = count + 1;
+% cnfg.cnfg_load(count).name='Chirp Kraft MLR';
+% cnfg.cnfg_load(count).position=623e-3; 
+% cnfg.cnfg_load(count).betrag_x= 1;
+% cnfg.cnfg_load(count).frequency_x_0 = 200; % Startfrequenz
 % cnfg.cnfg_load(count).frequency_x= 0;  %in Hz, Endfrequenz
 % cnfg.cnfg_load(count).betrag_y= 0;
 % cnfg.cnfg_load(count).frequency_y_0 = 0;
 % cnfg.cnfg_load(count).frequency_y= 0;
 % cnfg.cnfg_load(count).t_start= 0;
-% cnfg.cnfg_load(count).t_end= 0.01; % Zeitdauer des Chirps, hier wird f erreicht
+% cnfg.cnfg_load(count).t_end= 1; % Zeitdauer des Chirps, hier wird f erreicht
 % cnfg.cnfg_load(count).type='Force_timevariant_chirp';
 
 % whirl-sweep-Kraft
@@ -254,6 +278,31 @@ cnfg.cnfg_load(count).type='Unbalance_static';
 % cnfg.cnfg_load(count).t_end= 0.6;%endzeitpunkt des Chirps, hier wird f erreicht
 % cnfg.cnfg_load(count).type='Force_timevariant_whirl_fwd_sweep';
 
+% Look Up table Kraft
+count = count + 1;
+cnfg.cnfg_load(count).name='Chirp Kraft MLL';
+cnfg.cnfg_load(count).position=113e-3; 
+cnfg.cnfg_load(count).LUT.time = 0:1e-3:5;
+cnfg.cnfg_load(count).LUT.Fx = rand(length(cnfg.cnfg_load(count).LUT.time),1);
+cnfg.cnfg_load(count).LUT.Fy = zeros(length(cnfg.cnfg_load(count).LUT.time),1);
+cnfg.cnfg_load(count).LUT.Fz = zeros(length(cnfg.cnfg_load(count).LUT.time),1);
+cnfg.cnfg_load(count).LUT.Mx = zeros(length(cnfg.cnfg_load(count).LUT.time),1);
+cnfg.cnfg_load(count).LUT.My = zeros(length(cnfg.cnfg_load(count).LUT.time),1);
+cnfg.cnfg_load(count).LUT.Mz = zeros(length(cnfg.cnfg_load(count).LUT.time),1);
+cnfg.cnfg_load(count).type='Force_timevariant_LUT';
+
+% Look Up table Kraft
+count = count + 1;
+cnfg.cnfg_load(count).name='Chirp Kraft MLR';
+cnfg.cnfg_load(count).position=623e-3; 
+cnfg.cnfg_load(count).LUT.time = 0:1e-3:5;
+cnfg.cnfg_load(count).LUT.Fx = rand(length(cnfg.cnfg_load(count).LUT.time),1);
+cnfg.cnfg_load(count).LUT.Fy = zeros(length(cnfg.cnfg_load(count).LUT.time),1);
+cnfg.cnfg_load(count).LUT.Fz = zeros(length(cnfg.cnfg_load(count).LUT.time),1);
+cnfg.cnfg_load(count).LUT.Mx = zeros(length(cnfg.cnfg_load(count).LUT.time),1);
+cnfg.cnfg_load(count).LUT.My = zeros(length(cnfg.cnfg_load(count).LUT.time),1);
+cnfg.cnfg_load(count).LUT.Mz = zeros(length(cnfg.cnfg_load(count).LUT.time),1);
+cnfg.cnfg_load(count).type='Force_timevariant_LUT';
 %% ========================PID-Regler======================================
 cnfg.cnfg_pid_controller=[];
 count = 0;

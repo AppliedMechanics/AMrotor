@@ -54,8 +54,8 @@ cnfg.cnfg_component(count).name = 'Feder am Ende';
 cnfg.cnfg_component(count).type='Bearings';
 cnfg.cnfg_component(count).subtype='SimpleBearing';
 cnfg.cnfg_component(count).position=beamLength;                        %[m]
-cnfg.cnfg_component(count).stiffness=1e3; %[N/m]
-cnfg.cnfg_component(count).damping = 100; 
+cnfg.cnfg_component(count).stiffness=0;%1e5; %[N/m]
+cnfg.cnfg_component(count).damping = 0; 
 
 %% ====================Sensoren============================================
 cnfg.cnfg_sensor=[];
@@ -67,8 +67,8 @@ cnfg.cnfg_sensor(count).position=beamLength/2;
 cnfg.cnfg_sensor(count).type='Accelerationsensor';
 
 count = count + 1;
-cnfg.cnfg_sensor(count).name='Kraft_Mitte';
-cnfg.cnfg_sensor(count).position=beamLength/2;
+cnfg.cnfg_sensor(count).name='Kraft_Ende_Anregung';
+cnfg.cnfg_sensor(count).position=beamLength;
 cnfg.cnfg_sensor(count).type='ForceLoadPostSensor';
 
 count = count + 1;
@@ -94,7 +94,7 @@ count = 0;
 % Chirp, Sinus-sweep-Kraft
 count = count + 1;
 cnfg.cnfg_load(count).name='Chirp Kraft';
-cnfg.cnfg_load(count).position=beamLength/2; % mittig auf Balken
+cnfg.cnfg_load(count).position=beamLength; % am Ende des Balkens
 cnfg.cnfg_load(count).betrag_x= 1;
 cnfg.cnfg_load(count).frequency_x_0 = 0; % Startfrequenz
 cnfg.cnfg_load(count).frequency_x= 300;  %in Hz, Endfrequenz
