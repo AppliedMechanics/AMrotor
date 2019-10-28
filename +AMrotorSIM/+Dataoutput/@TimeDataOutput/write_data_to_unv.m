@@ -13,16 +13,12 @@ function write_data_to_unv(self, postfix)
         iter=iter+1;
     end
     OutFileName = [Savepath '\Simulation-' date '-' postfix '-v' num2str(iter) '.unv'];
-
-    for drehzahl = self.experiment.drehzahlen 
-        fid=fopen(OutFileName,'w');   
-        fclose(fid);
+	fid=fopen(OutFileName,'w'); 
+    for drehzahl = self.experiment.drehzahlen   
 
         for sensor = self.rotorsystem.sensors
             [x_val,~,y_val,~]=...
             sensor.read_values(self.experiment);
-            
-            fid=fopen(OutFileName,'a');
             
             % x direction
             dx = self.experiment.time;
@@ -40,18 +36,13 @@ function write_data_to_unv(self, postfix)
             
             unvw58(fid,0,Data,Header);
             
-            fclose(fid);
-            fid=fopen(OutFileName,'a'); 
-            
             % y direction
             Data = y_val(drehzahl);
             Header.Dir = 'Y+';
             Header.Title2 = [sensor.name,'_y'];
             
             unvw58(fid,0,Data,Header);
-            
-            fclose(fid);
-            fid=fopen(OutFileName,'a');
+
 
         end
 
