@@ -1,8 +1,9 @@
 classdef BearingForceSensor < AMrotorSIM.Sensors.Sensor
-% ForceLoadPostSensor Class of sensors for the forces of objects of the
-% LOADS-class
-%   only givess the forces of the loads that are defined as objects of the
-%   Loads-superclass
+% BearingForceSensor Class of sensors for the forces of objects of the
+% Bearing-class
+%   reads the force acting ON the rotor:
+%   F = - (k*x +d*x_dot)
+% See also AMrotorSIM.Components.Bearings
    properties
        unit = 'N'
        Position
