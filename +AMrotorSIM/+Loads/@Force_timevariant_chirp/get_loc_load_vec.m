@@ -16,7 +16,7 @@ function h = get_loc_load_vec(obj,time,varargin)
     timeDelta = time - tStart;
     tEndDelta = tEnd - tStart;
     
-    if (timeDelta > 0 && time<tEnd)
+    if (timeDelta >= 0 && time<tEnd)
         obj.h(1) =  chirp(timeDelta,fx0,tEndDelta,fx)*Fx;
         obj.h(2) =  chirp(timeDelta,fy0,tEnd,fy)*Fy;
     end
