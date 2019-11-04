@@ -58,6 +58,9 @@ F = forceFunction(obj,t0,x,dotx);
 ddotx0 = M\(-C*dotx0 - K*x0 + F);
 ddotx(:,1) = ddotx0;
 
+set(0, 'CurrentFigure',figOutput)
+odeOutputFcnController(t0,[x0;dotx0],'init',[],obj.rotorsystem);
+close
 
 while t0 < tspan(end) % check integration interval
     
@@ -129,7 +132,7 @@ while t0 < tspan(end) % check integration interval
     plot(t1,h,'g.')
     
     if flagNextStep
-        % check whether or not to call the output function, only at tspan
+        % ToDo: check whether or not to call the output function, only at tspan
         set(0, 'CurrentFigure',figOutput)
         odeOutputFcnController(t1,[x1;dotx1],'',[],obj.rotorsystem);
         
@@ -147,6 +150,9 @@ while t0 < tspan(end) % check integration interval
     
 end
 
+set(0, 'CurrentFigure',figOutput)
+odeOutputFcnController(t1,[x1;dotx1],'done',[],obj.rotorsystem);
+        
 set(0, 'CurrentFigure',figh)
 xlabel('t/s')
 ylabel('time step size h/s')

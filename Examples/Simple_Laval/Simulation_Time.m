@@ -36,9 +36,11 @@ r.rotor.assemble_fem;
 %% Running Time Simulation
 
 St_Lsg = Experiments.Stationaere_Lsg( r , 0 , (0:0.001:1) );%obj = Stationaere_Lsg(a,drehzahlvektor,time)
-St_Lsg.compute_ode15s_ss;
+% St_Lsg.compute_ode15s_ss;
 %St_Lsg.compute_euler_ss
 % St_Lsg.compute_newmark 
+options.adapt=true; options.locTolUpper=1e-3; options.locTolLower=1e-4; options.globTol=1;
+St_Lsg.compute_newmark(options)
 %St_Lsg.compute_sys_ss_variant
 % St_Lsg.save_data('St_Lsg_Laval_U_fwd_bwd_sweep_0_2krpm');
 
