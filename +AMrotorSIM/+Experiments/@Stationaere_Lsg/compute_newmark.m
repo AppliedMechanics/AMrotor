@@ -1,10 +1,51 @@
-function compute_newmark(obj)
+function compute_newmark(obj,options)
+% compute_newmark Time integration by newmark scheme
+% using constant average acceleration (beta = 1/4, gamma = 1/2)
 % See for example lecture script: Rixen, Structural Dynamics
+% See Schweitzerhof 2004 for adaptive time stepping
+%
+% compute_newmark(obj,options)
+%   options.adapt = [ true | false ] chose adaptive step size control
+%   options.locTolUpper Upper tol for local error, required for adapt
+%   options.locTolLower Lower tol for local error, required for adapt
+%   options.globTol Global tol, required for adapt, can restart the whole
+%       integration process
+%
+%   notes:
+%     - changing the step size requires a factorization of the problem
+%       -> do not change the step size too often
+%       locTolLower = locTolUpper/2...10
+%     - do not chose globTol too small, as the time integration is
+%       restarted with new local tolerances if globError>GlobTol
+%
 obj.rotorsystem.check_for_non_integrable_components;
 tic
-figure
 obj.clear_time_result()
 obj.result = containers.Map('KeyType','double','ValueType','any');
+
+% check the options struct
+if ~exist('options','var')
+    flagAdapt = false;
+elseif isstruct(options)
+    if ~isfield(options,'adapt')
+        flagAdapt = false;
+    else
+        flagAdapt = options.adapt;
+    end
+end
+
+if flagAdapt
+    if ~isfield(options,'locTolUpper')
+        error('options-struct must contain field ''locTolUpper''!')
+    end
+    if ~isfield(options,'locTolLower')
+        error('options-struct must contain field ''locTolLower''!')
+    end
+    if ~isfield(options,'globTol')
+        error('options-struct must contain field ''globTol''!')
+    end
+end
+
 
 for drehzahl = obj.drehzahlen
     omega = drehzahl /60 *2*pi;
@@ -16,66 +57,34 @@ for drehzahl = obj.drehzahlen
     dotx0(6:6:end) = omega;
     t=obj.time;
     
-    %NEWMARK Newmark scheme (beta = 1/4, gamma = 1/2)
-    %   Mass M, damping C, stiffness K , excitation F (vector), time vector t, initial condition x0
-    h = t(2)-t(1);      % time step size
-    
-    % integration parameters
-    % here: Average constant acceleration scheme -> unconditionally stable
-    beta = 1/4;
-    gamma = 1/2;
-    
-    S = M + h*gamma*D + h^2*beta*K;
-    
-    R = chol(S);
-    
-    x(:,1) = x0;
-    xtemp = x0;
-    xd(:,1) = dotx0;
-    dotxtemp = dotx0;
-    Z = [x; dotxtemp];
-    F = obj.rotorsystem.assemble_system_loads(t(1),Z);
-    ddotxtemp = M\(-D*dotxtemp - K*xtemp + F);
-    xdd(:,1) = ddotxtemp;
-    
-    for iter = 2:length(t)
-        Z = [xtemp; dotxtemp];
-        
-        % controller-specific, set the new controller force
-        for cntr = obj.rotorsystem.pidControllers
-            [displacementCntrNode, ~] = obj.rotorsystem.find_state_vector(cntr.position, Z);
-            cntr.get_controller_current(t(iter),displacementCntrNode);
+    if flagAdapt
+        [t,x,dotx,ddotx] = obj.newmark_integration_with_adaptive_step_size(M,D,K,@get_force_newmark,t,x0,dotx0,options);
+        % resample results
+        if length(t)>2
+            %interp1
+            % no: respampling in the function, call odeOutputFcnController
+            % inside the integration at the time steps specified in obj.time
+            xResampled = zeros(size(x,1),length(obj.time));
+            dotxResampled = xResampled;
+            ddotxResampled = xResampled;
+            for i=1:size(x,1)
+                xResampled(i,:) = interp1(t,x(i,:),obj.time);
+                dotxResampled(i,:) = interp1(t,dotx(i,:),obj.time);
+                ddotxResampled(i,:) = interp1(t,ddotx(i,:),obj.time);
+            end
+            x = xResampled;
+            dotx = dotxResampled;
+            ddotx = ddotxResampled;
         end
-        
-        F_loads = obj.rotorsystem.assemble_system_loads(t(iter),Z);
-        F_controllers = obj.rotorsystem.assemble_system_controller_forces(t(iter),Z);
-        F = F_loads + F_controllers;
-        
-        % prediction
-        xtemp     = xtemp + h*dotxtemp + (1/2-beta)*h^2*ddotxtemp;
-        dotxtemp  = dotxtemp + (1-gamma)*h*ddotxtemp;
-        
-        % acceleration computing
-        ddotxtemp = R\(R'\(-D*dotxtemp - K*xtemp + F));
-        
-        % correction
-        dotxtemp = dotxtemp + h*gamma*ddotxtemp;
-        xtemp    = xtemp + h^2*beta*ddotxtemp;
-        
-        x(:,iter) = xtemp;
-        xd(:,iter) = dotxtemp;
-        xdd(:,iter) = ddotxtemp;
-        
-        plot(x(1:6:end,iter))
-        ylim([-1 1]*max(max(abs(x(1:6:end,iter)))+[-1e-10 +1e-10]))
-        drawnow
-        
-        disp(['t_current = ',num2str(t(iter))])
-
+    else
+        [t,x,dotx,ddotx] = obj.newmark_integration_without_adaptive_step_size(M,D,K,@get_force_newmark,t,x0,dotx0);
     end
+    
+    
+    
     res.X = x(1:end,:);
-    res.X_d = xd(1:end,:);
-    res.X_dd = xdd(1:end,:);
+    res.X_d = dotx(1:end,:);
+    res.X_dd = ddotx(1:end,:);
     res.F = obj.rotorsystem.calculate_force_load_post_sensor(obj.time,res.X,res.X_d);
     res.FBearing = obj.rotorsystem.calculate_bearing_force(obj.time,res.X,res.X_d);
     res.Fcontroller = obj.rotorsystem.calculate_controller_force(obj.time,res.X,res.X_d);
