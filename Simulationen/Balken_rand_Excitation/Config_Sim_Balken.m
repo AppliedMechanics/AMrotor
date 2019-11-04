@@ -54,7 +54,7 @@ cnfg.cnfg_component(count).name = 'Feder am Ende';
 cnfg.cnfg_component(count).type='Bearings';
 cnfg.cnfg_component(count).subtype='SimpleBearing';
 cnfg.cnfg_component(count).position=beamLength;                        %[m]
-cnfg.cnfg_component(count).stiffness=0;%1e5; %[N/m]
+cnfg.cnfg_component(count).stiffness=1e5; %[N/m]
 cnfg.cnfg_component(count).damping = 0; 
 
 %% ====================Sensoren============================================
@@ -91,19 +91,19 @@ cnfg.cnfg_sensor(count).type='BearingForceSensor';
 cnfg.cnfg_load=[];
 count = 0;
 
-% Chirp, Sinus-sweep-Kraft
-count = count + 1;
-cnfg.cnfg_load(count).name='Chirp Kraft';
-cnfg.cnfg_load(count).position=beamLength; % am Ende des Balkens
-cnfg.cnfg_load(count).betrag_x= 1;
-cnfg.cnfg_load(count).frequency_x_0 = 0; % Startfrequenz
-cnfg.cnfg_load(count).frequency_x= 300;  %in Hz, Endfrequenz
-cnfg.cnfg_load(count).betrag_y= 0;
-cnfg.cnfg_load(count).frequency_y_0 = 0;
-cnfg.cnfg_load(count).frequency_y= 0;
-cnfg.cnfg_load(count).t_start= 0;
-cnfg.cnfg_load(count).t_end= 2; % Zeitdauer des Chirps, hier wird f erreicht
-cnfg.cnfg_load(count).type='Force_timevariant_chirp';
+% % Chirp, Sinus-sweep-Kraft
+% count = count + 1;
+% cnfg.cnfg_load(count).name='Chirp Kraft';
+% cnfg.cnfg_load(count).position=beamLength; % am Ende des Balkens
+% cnfg.cnfg_load(count).betrag_x= 1;
+% cnfg.cnfg_load(count).frequency_x_0 = 0; % Startfrequenz
+% cnfg.cnfg_load(count).frequency_x= 300;  %in Hz, Endfrequenz
+% cnfg.cnfg_load(count).betrag_y= 0;
+% cnfg.cnfg_load(count).frequency_y_0 = 0;
+% cnfg.cnfg_load(count).frequency_y= 0;
+% cnfg.cnfg_load(count).t_start= 0;
+% cnfg.cnfg_load(count).t_end= 2; % Zeitdauer des Chirps, hier wird f erreicht
+% cnfg.cnfg_load(count).type='Force_timevariant_chirp';
 
 % % Chirp, Sinus-sweep-Kraft
 % count = count + 1;
@@ -146,6 +146,19 @@ cnfg.cnfg_load(count).type='Force_timevariant_chirp';
 % cnfg.cnfg_load(count).t_start= 1.5;
 % cnfg.cnfg_load(count).t_end= 2; % Zeitdauer des Chirps, hier wird f erreicht
 % cnfg.cnfg_load(count).type='Force_timevariant_chirp';
+
+% Look Up table Kraft
+count = count + 1;
+cnfg.cnfg_load(count).name='Random Kraft MLL';
+cnfg.cnfg_load(count).position=beamLength; 
+cnfg.cnfg_load(count).LUT.time = 0:1e-3:5;
+cnfg.cnfg_load(count).LUT.Fx = rand(length(cnfg.cnfg_load(count).LUT.time),1);
+cnfg.cnfg_load(count).LUT.Fy = zeros(length(cnfg.cnfg_load(count).LUT.time),1);
+cnfg.cnfg_load(count).LUT.Fz = zeros(length(cnfg.cnfg_load(count).LUT.time),1);
+cnfg.cnfg_load(count).LUT.Mx = zeros(length(cnfg.cnfg_load(count).LUT.time),1);
+cnfg.cnfg_load(count).LUT.My = zeros(length(cnfg.cnfg_load(count).LUT.time),1);
+cnfg.cnfg_load(count).LUT.Mz = zeros(length(cnfg.cnfg_load(count).LUT.time),1);
+cnfg.cnfg_load(count).type='Force_timevariant_LUT';
 
 %% ========================PID-Regler======================================
 cnfg.cnfg_pid_controller=[];

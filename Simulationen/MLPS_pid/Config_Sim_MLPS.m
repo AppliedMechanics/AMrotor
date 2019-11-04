@@ -10,6 +10,10 @@ cnfg.cnfg_rotor.material.damping.rayleigh_alpha1= 1e-5;%D=alpha1*K + alpha2*M
 cnfg.cnfg_rotor.material.damping.rayleigh_alpha2= 10;
 
 % Rotor Config
+pos.MLL = 113e-3;
+pos.MLR = 623e-3;
+pos.EddyR2 = 665e-3;
+
 % nur Welle, Komponenten als disc-Objekte
 raW = 0.004;
 cnfg.cnfg_rotor.geo_nodes = {[0 0 0], [0 raW 0], [0.702 raW 0]};
@@ -53,7 +57,7 @@ cnfg.cnfg_component = [];
 count = count+1;
 cnfg.cnfg_component(count).name = 'ML_Lauefer_L'; % inkl. Spannhuelsen
 cnfg.cnfg_component(count).type = 'Disc';
-cnfg.cnfg_component(count).position = 113e-3;                 %disc position [m]
+cnfg.cnfg_component(count).position = pos.MLL;                 %disc position [m]
 cnfg.cnfg_component(count).radius = 46e-3;  
 cnfg.cnfg_component(count).m = 0.85074;                       %disc mass [kg]
 cnfg.cnfg_component(count).Jx = 4.840066e-4;                  %disc mom. of inertia [kg*m^2]
@@ -73,7 +77,7 @@ cnfg.cnfg_component(count).Jp = cnfg.cnfg_component(count).Jz;     %disc polar m
 count = count+1;
 cnfg.cnfg_component(count).name = 'ML_Lauefer_R'; % inkl. Spannhuelsen
 cnfg.cnfg_component(count).type = 'Disc';
-cnfg.cnfg_component(count).position = 623e-3;                 %disc position [m]
+cnfg.cnfg_component(count).position = pos.MLR;                 %disc position [m]
 cnfg.cnfg_component(count).radius = 46e-3;  
 cnfg.cnfg_component(count).m = 0.85074;                       %disc mass [kg]
 cnfg.cnfg_component(count).Jx = 4.840066e-4;                  %disc mom. of inertia [kg*m^2]
@@ -92,7 +96,7 @@ kML = kSchaetzung;
 dML = dSchaetzung;%dSchaetzung;
 count = count +1;
 cnfg.cnfg_component(count).name = 'Axiales Lager Links';
-cnfg.cnfg_component(count).position=113e-3;                        %[m]
+cnfg.cnfg_component(count).position=pos.MLL;                        %[m]
 cnfg.cnfg_component(count).type='Bearings';
 cnfg.cnfg_component(count).subtype='SimpleAxialBearing';
 cnfg.cnfg_component(count).stiffness=1e10;                     %[N/m]
@@ -100,7 +104,7 @@ cnfg.cnfg_component(count).damping = 0;
 
 count = count + 1;
 cnfg.cnfg_component(count).name = 'Torque Lager Links';
-cnfg.cnfg_component(count).position=113e-3;                        %[m]
+cnfg.cnfg_component(count).position=pos.MLL;                        %[m]
 cnfg.cnfg_component(count).type='Bearings';
 cnfg.cnfg_component(count).subtype='SimpleTorqueBearing';
 cnfg.cnfg_component(count).stiffness=1e10;                     %[N/m]
@@ -108,7 +112,7 @@ cnfg.cnfg_component(count).damping = 0;
 
 % count = count + 1;
 % cnfg.cnfg_component(count).name = 'Isotropes Lager 1';
-% cnfg.cnfg_component(count).position=113e-3;                        %[m]
+% cnfg.cnfg_component(count).position=pos.MLL;                        %[m]
 % cnfg.cnfg_component(count).type='Bearings';
 % cnfg.cnfg_component(count).subtype='SimpleBearing';
 % cnfg.cnfg_component(count).stiffness=kML;%0.0670680e7*0.5;         %[N/m]
@@ -116,7 +120,7 @@ cnfg.cnfg_component(count).damping = 0;
 % 
 % count = count + 1;
 % cnfg.cnfg_component(count).name = 'Isotropes Lager 2';
-% cnfg.cnfg_component(count).position=623e-3;                        %[m]
+% cnfg.cnfg_component(count).position=pos.MLR;                        %[m]
 % cnfg.cnfg_component(count).type='Bearings';
 % cnfg.cnfg_component(count).subtype='SimpleBearing';
 % cnfg.cnfg_component(count).stiffness=kML;%0.0670680e7*0.5;         %[N/m]
@@ -159,7 +163,7 @@ cnfg.cnfg_sensor(count).type='Displacementsensor';
 
 count = count + 1;
 cnfg.cnfg_sensor(count).name = 'EddyR2';
-cnfg.cnfg_sensor(count).position=0.665;
+cnfg.cnfg_sensor(count).position=pos.EddyR2;
 cnfg.cnfg_sensor(count).type='Displacementsensor';
 
 
@@ -180,22 +184,22 @@ cnfg.cnfg_sensor(count).type='Displacementsensor';
 
 count = count + 1;
 cnfg.cnfg_sensor(count).name='ReglerKraftMLL';
-cnfg.cnfg_sensor(count).position=113e-3;
+cnfg.cnfg_sensor(count).position=pos.MLL;
 cnfg.cnfg_sensor(count).type='ControllerForceSensor';
 
 count = count + 1;
 cnfg.cnfg_sensor(count).name='ReglerKraftMLR';
-cnfg.cnfg_sensor(count).position=623e-3;
+cnfg.cnfg_sensor(count).position=pos.MLR;
 cnfg.cnfg_sensor(count).type='ControllerForceSensor';
 
 count = count + 1;
 cnfg.cnfg_sensor(count).name='AnregungsKraftMLL';
-cnfg.cnfg_sensor(count).position=113e-3;
+cnfg.cnfg_sensor(count).position=pos.MLL;
 cnfg.cnfg_sensor(count).type='ForceLoadPostSensor';
 
 count = count + 1;
 cnfg.cnfg_sensor(count).name='AnregungKraftMLR';
-cnfg.cnfg_sensor(count).position=623e-3;
+cnfg.cnfg_sensor(count).position=pos.MLR;
 cnfg.cnfg_sensor(count).type='ForceLoadPostSensor';
 
 
@@ -241,7 +245,7 @@ count = 0;
 % Chirp, Sinus-sweep-Kraft
 % count = count + 1;
 % cnfg.cnfg_load(count).name='Chirp Kraft MLL';
-% cnfg.cnfg_load(count).position=113e-3; 
+% cnfg.cnfg_load(count).position=pos.MLL; 
 % cnfg.cnfg_load(count).betrag_x= 1;
 % cnfg.cnfg_load(count).frequency_x_0 = 0; % Startfrequenz
 % cnfg.cnfg_load(count).frequency_x= 200;  %in Hz, Endfrequenz
@@ -255,7 +259,7 @@ count = 0;
 % Chirp, Sinus-sweep-Kraft
 % count = count + 1;
 % cnfg.cnfg_load(count).name='Chirp Kraft MLR';
-% cnfg.cnfg_load(count).position=623e-3; 
+% cnfg.cnfg_load(count).position=pos.MLR; 
 % cnfg.cnfg_load(count).betrag_x= 1;
 % cnfg.cnfg_load(count).frequency_x_0 = 200; % Startfrequenz
 % cnfg.cnfg_load(count).frequency_x= 0;  %in Hz, Endfrequenz
@@ -280,8 +284,8 @@ count = 0;
 
 % Look Up table Kraft
 count = count + 1;
-cnfg.cnfg_load(count).name='Chirp Kraft MLL';
-cnfg.cnfg_load(count).position=113e-3; 
+cnfg.cnfg_load(count).name='Random Kraft MLL';
+cnfg.cnfg_load(count).position=pos.MLL; 
 cnfg.cnfg_load(count).LUT.time = 0:1e-3:5;
 cnfg.cnfg_load(count).LUT.Fx = rand(length(cnfg.cnfg_load(count).LUT.time),1);
 cnfg.cnfg_load(count).LUT.Fy = zeros(length(cnfg.cnfg_load(count).LUT.time),1);
@@ -293,8 +297,8 @@ cnfg.cnfg_load(count).type='Force_timevariant_LUT';
 
 % Look Up table Kraft
 count = count + 1;
-cnfg.cnfg_load(count).name='Chirp Kraft MLR';
-cnfg.cnfg_load(count).position=623e-3; 
+cnfg.cnfg_load(count).name='Random Kraft MLR';
+cnfg.cnfg_load(count).position=pos.MLR; 
 cnfg.cnfg_load(count).LUT.time = 0:1e-3:5;
 cnfg.cnfg_load(count).LUT.Fx = rand(length(cnfg.cnfg_load(count).LUT.time),1);
 cnfg.cnfg_load(count).LUT.Fy = zeros(length(cnfg.cnfg_load(count).LUT.time),1);
@@ -317,7 +321,7 @@ electricalD = 5;%5; %As/m
 
 count = count + 1;
 cnfg.cnfg_activeMagneticBearing(count).name = 'AMB1';
-cnfg.cnfg_activeMagneticBearing(count).position = 113e-3;
+cnfg.cnfg_activeMagneticBearing(count).position = pos.MLL;
 cnfg.cnfg_activeMagneticBearing(count).pidType = 'pidControllerLinear'; % type of the created pidController-object
 cnfg.cnfg_activeMagneticBearing(count).kx = -1e5; %N/m, kx und ki aus Messung Dietz
 cnfg.cnfg_activeMagneticBearing(count).ki = 50; %A/N
@@ -329,7 +333,7 @@ cnfg.cnfg_activeMagneticBearing(count).electricalD = electricalD; %As/m
 
 count = count + 1;
 cnfg.cnfg_activeMagneticBearing(count).name = 'AMB2';
-cnfg.cnfg_activeMagneticBearing(count).position = 623e-3;
+cnfg.cnfg_activeMagneticBearing(count).position = pos.MLR;
 cnfg.cnfg_activeMagneticBearing(count).pidType = 'pidControllerLinear'; % type of the created controller-object
 %kx und ki aus Messung Dietz
 cnfg.cnfg_activeMagneticBearing(count).kx = -1e5; %N/m
