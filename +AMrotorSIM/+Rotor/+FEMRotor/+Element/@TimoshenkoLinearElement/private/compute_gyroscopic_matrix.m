@@ -82,8 +82,8 @@ function [G_ele] = compute_gyroscopic_matrix(Element)
     G1(8,2) = 5*E.length^2;
     G1(2,8) = -G1(8,2);
     
-    G1(4,3) = -15*E.length;
-    G1(3,4) = -G1(4,3);
+    G1(8,3) = -15*E.length;
+    G1(3,8) = -G1(8,3);
     
     G1(4,7) = 5*E.length^2;
     G1(7,4) = -G1(4,7);
