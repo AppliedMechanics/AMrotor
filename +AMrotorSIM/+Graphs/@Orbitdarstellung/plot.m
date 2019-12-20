@@ -1,10 +1,11 @@
 function plot(self,sensors)
 % main method for the user
+% plot(self,sensors,direction)
   disp(self.name)
 
       for sensor = sensors
-
-        [x_val,~,y_val,~]=sensor.read_values(self.experiment);
+          
+        [x_val,y_val,~]=sensor.read_values(self.experiment);
 
 
         figure('name',[sensor.name, ' at position ',num2str(sensor.Position),'; Orbit'],...

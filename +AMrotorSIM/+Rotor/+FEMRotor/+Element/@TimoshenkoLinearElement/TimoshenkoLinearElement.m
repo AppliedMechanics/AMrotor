@@ -19,6 +19,10 @@ classdef TimoshenkoLinearElement < AMrotorSIM.Rotor.FEMRotor.Element.Element
           self = self@AMrotorSIM.Rotor.FEMRotor.Element.Element(name,node1,node2,material);
           
         end   
+        
+        function num = set_dof_number(obj,direction)
+            num = set_dof_number@AMrotorSIM.Rotor.FEMRotor.Element.Element(obj,direction);
+        end
     end
     
 end

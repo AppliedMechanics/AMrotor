@@ -6,7 +6,7 @@
       
           for sensor = sensors
             
-            [x_val,~,y_val,~]=sensor.read_values(self.experiment);
+            [x_val,y_val,~]=sensor.read_values(self.experiment);
             tmp.count = 1;
             figure('name',[sensor.name, ' at position ',num2str(sensor.Position),'; Fourierorbit'], 'NumberTitle', 'off');
             for rpm = self.experiment.drehzahlen

@@ -20,26 +20,43 @@ classdef Fourierdarstellung < handle
       self.ColorHandler.set_up(length(experiment.drehzahlen));
   end
   
-  function plot(self,sensors)
+  function plot(self,sensors,direction)
 % main method for the user
-% plot(self,sensors)
+% plot(self,sensors,direction)
       disp(self.name)
+      if ~exist('direction','var')
+          direction = [1,2]; % default x and y-direction
+          warning('no direction specified, using default direction x')
+      end
       
           for sensor = sensors
+       direction = self.rotorsystem.rotor.mesh.elements.set_dof_number(direction);
+       nDir = length(direction);
             
-            [x_val,~,y_val,~]=sensor.read_values(self.experiment);
+            [x_val,y_val,z_val]=sensor.read_values(self.experiment);
             fs = self.abtastrate;
             
             
             figure('name',[sensor.name, ' at position ',num2str(sensor.Position),'; Fourier'], 'NumberTitle', 'off');
             tmp.count = 1;
             for rpm = self.experiment.drehzahlen
-                value = {[x_val(rpm)], [y_val(rpm)]};
-                j = 1;
-                for val = value 
-                    v = cell2mat(val);
+                val = cell(size(direction));
+            for iDir=1:nDir
+                currDirection = direction(iDir);
+                switch currDirection
+                    case {1,4}
+                        val{iDir} = x_val(rpm);
+                        strDir = 'x';
+                    case {2,5}
+                        val{iDir} = y_val(rpm);
+                        strDir = 'y';
+                    case {3,6}
+                        val{iDir} = z_val(rpm);
+                        strDir = 'z';
+                end
+                    v = val{iDir};
                     [f,~,ampl] = FFT_Data_Gesamt (v,fs);            
-                    subplot (2,1,j);
+                    subplot(nDir,1,iDir);
                         hold on
                         plot(f, ampl,...
                              'Color',self.ColorHandler.getColor(tmp.count),...
@@ -47,13 +64,8 @@ classdef Fourierdarstellung < handle
                          hold off
                     legend('show')
                     xlabel('Frequency [Hz]');
-                    ylabel('Amplitude');
-                    if j == 1
-                        title ('Fourierrepresentation of the values in x');
-                    else
-                        title ('Fourierrepresentation of the values in y');
-                    end
-                    j = j+ 1;
+                    ylabel(['Amplitude',sensor.unit]);
+                    title(['FFT ',sensor.measurementType, ' in ',strDir]);
                 end
                 tmp.count = tmp.count + 1;
             end

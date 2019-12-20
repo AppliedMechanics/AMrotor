@@ -8,7 +8,9 @@ function h = get_loc_load_vec(obj,time,node,varargin)
     unwucht = obj.cnfg.betrag;
     phase = obj.cnfg.winkellage;
     omega = node.qd(6);
-    
+%     fig=gcf;
+%     figure(10); plot(omega,'.');ylim([-150 150])
+%     figure(fig.Number);
     % due to centripetal force
     FCentripetalForce(1) = unwucht * omega^2 * cos(omega*time + phase);
     FCentripetalForce(2) = unwucht * omega^2 * sin(omega*time + phase);

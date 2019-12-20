@@ -12,8 +12,8 @@ function [f,H] = calculate(obj,f,inPos,outPos,type,rpm,inputDirection,outputDire
     inputDofNode = obj.rotorsystem.rotor.get_dof_no(inputNode);
     outputDofNode = obj.rotorsystem.rotor.get_dof_no(outputNode);
     
-    inputDirection = obj.set_dof_number(inputDirection);
-    outputDirection = obj.set_dof_number(outputDirection);
+    inputDirection = obj.rotorsystem.rotor.mesh.elements.set_dof_number(inputDirection);
+    outputDirection = obj.rotorsystem.rotor.mesh.elements.set_dof_number(outputDirection);
     
     nNodesOut = length(outputNode);
     nNodesIn = length(inputNode);
@@ -44,6 +44,6 @@ function [f,H] = calculate(obj,f,inPos,outPos,type,rpm,inputDirection,outputDire
 
     
     obj.make_unit_from_type;
-    obj.make_descriptions_for_FRF(inputNode,outputNode,inputDirection,outputDirection)
+    obj.make_descriptions_for_FRF(inputNode,outputNode,inputDirection,outputDirection);
     
 end

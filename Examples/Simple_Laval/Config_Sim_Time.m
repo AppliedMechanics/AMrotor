@@ -37,11 +37,12 @@ cnfg.cnfg_rotor.mesh_opt.approx = 'symmetric';%'mean';   %Approximation for line
 %% ====================Sensoren============================================
 % Sensors
 cnfg.cnfg_sensor=[];
+count = 0;
 
-count = 1;
-cnfg.cnfg_sensor(count).name = 'WegLager1';
-cnfg.cnfg_sensor(count).position=0e-3;
-cnfg.cnfg_sensor(count).type='Displacementsensor';
+% count = count + 1;
+% cnfg.cnfg_sensor(count).name = 'WegLager1';
+% cnfg.cnfg_sensor(count).position=0e-3;
+% cnfg.cnfg_sensor(count).type='Displacementsensor';
 
 count = count + 1;
 cnfg.cnfg_sensor(count).name='WegScheibeMitte';
@@ -49,9 +50,19 @@ cnfg.cnfg_sensor(count).position=250e-3;
 cnfg.cnfg_sensor(count).type='Displacementsensor';
 
 count = count + 1;
-cnfg.cnfg_sensor(count).name='WegLager2';
-cnfg.cnfg_sensor(count).position=500e-3;
-cnfg.cnfg_sensor(count).type='Displacementsensor';
+cnfg.cnfg_sensor(count).name='WinkelScheibeMitte';
+cnfg.cnfg_sensor(count).position=250e-3;
+cnfg.cnfg_sensor(count).type='Anglesensor';
+
+count = count + 1;
+cnfg.cnfg_sensor(count).name='WinkelGeschwScheibeMitte';
+cnfg.cnfg_sensor(count).position=250e-3;
+cnfg.cnfg_sensor(count).type='AngularVelocitysensor';
+
+% count = count + 1;
+% cnfg.cnfg_sensor(count).name='WegLager2';
+% cnfg.cnfg_sensor(count).position=500e-3;
+% cnfg.cnfg_sensor(count).type='Displacementsensor';
 
 count = count + 1;
 cnfg.cnfg_sensor(count).name='GeschwindigkeitScheibeMitte';
@@ -68,15 +79,15 @@ cnfg.cnfg_sensor(count).name='KraftScheibeMitte';
 cnfg.cnfg_sensor(count).position=250e-3;
 cnfg.cnfg_sensor(count).type='ForceLoadPostSensor';
 
-count = count + 1;
-cnfg.cnfg_sensor(count).name='KraftStoerung';
-cnfg.cnfg_sensor(count).position=100e-3;
-cnfg.cnfg_sensor(count).type='ForceLoadPostSensor';
-
-count = count + 1;
-cnfg.cnfg_sensor(count).name='KraftLager1';
-cnfg.cnfg_sensor(count).position=0e-3;
-cnfg.cnfg_sensor(count).type='BearingForceSensor';
+% count = count + 1;
+% cnfg.cnfg_sensor(count).name='KraftStoerung';
+% cnfg.cnfg_sensor(count).position=100e-3;
+% cnfg.cnfg_sensor(count).type='ForceLoadPostSensor';
+% 
+% count = count + 1;
+% cnfg.cnfg_sensor(count).name='KraftLager1';
+% cnfg.cnfg_sensor(count).position=0e-3;
+% cnfg.cnfg_sensor(count).type='BearingForceSensor';
 
 %% =========================Komponenten====================================
 count = 0;
@@ -136,12 +147,12 @@ count = 0;
 % cnfg.cnfg_load(count).type='Force_constant_fix';
 
 % Unwuchten
-% count = count + 1;
-% cnfg.cnfg_load(count).name = 'Kleine Unwucht';
-% cnfg.cnfg_load(count).position = 250e-3;
-% cnfg.cnfg_load(count).betrag = 5e-6;
-% cnfg.cnfg_load(count).winkellage = 0;
-% cnfg.cnfg_load(count).type='Unbalance_static';
+count = count + 1;
+cnfg.cnfg_load(count).name = 'Kleine Unwucht';
+cnfg.cnfg_load(count).position = 250e-3;
+cnfg.cnfg_load(count).betrag = 1;%5e-6;
+cnfg.cnfg_load(count).winkellage = 0;
+cnfg.cnfg_load(count).type='Unbalance_static';
 
 % Sinusfoermige Anregungskraft
 % count = count + 1;
@@ -156,25 +167,27 @@ count = 0;
 % Whirl, Anregungskraft beschreibt Ellipse
 % count = count + 1;
 % cnfg.cnfg_load(count).name='Whirl Kraft';
-% cnfg.cnfg_load(count).position=pos.ML1; 
+% cnfg.cnfg_load(count).position=250e-3; 
+% cnfg.cnfg_load(count).t_start = 0;
+% cnfg.cnfg_load(count).t_end = 10;
 % cnfg.cnfg_load(count).betrag_x= 10;
 % cnfg.cnfg_load(count).betrag_y= 10;
-% cnfg.cnfg_load(count).frequency= 500;  %in Hz
+% cnfg.cnfg_load(count).frequency= 20;  %in Hz
 % cnfg.cnfg_load(count).type='Force_timevariant_whirl_fwd';
 
 % Chirp, Sinus-sweep-Kraft
-count = count + 1;
-cnfg.cnfg_load(count).name='Chirp Kraft';
-cnfg.cnfg_load(count).position=250e-3; 
-cnfg.cnfg_load(count).betrag_x= 1;
-cnfg.cnfg_load(count).frequency_x_0 = 0; % Startfrequenz
-cnfg.cnfg_load(count).frequency_x= 200;  %in Hz, Endfrequenz
-cnfg.cnfg_load(count).betrag_y= 0;
-cnfg.cnfg_load(count).frequency_y_0 = 0;
-cnfg.cnfg_load(count).frequency_y= 0;
-cnfg.cnfg_load(count).t_start= 0;
-cnfg.cnfg_load(count).t_end= 0.5; % Zeitdauer des Chirps, hier wird f erreicht
-cnfg.cnfg_load(count).type='Force_timevariant_chirp';
+% count = count + 1;
+% cnfg.cnfg_load(count).name='Chirp Kraft';
+% cnfg.cnfg_load(count).position=250e-3; 
+% cnfg.cnfg_load(count).betrag_x= 1;
+% cnfg.cnfg_load(count).frequency_x_0 = 0; % Startfrequenz
+% cnfg.cnfg_load(count).frequency_x= 200;  %in Hz, Endfrequenz
+% cnfg.cnfg_load(count).betrag_y= 0;
+% cnfg.cnfg_load(count).frequency_y_0 = 0;
+% cnfg.cnfg_load(count).frequency_y= 0;
+% cnfg.cnfg_load(count).t_start= 0;
+% cnfg.cnfg_load(count).t_end= 0.5; % Zeitdauer des Chirps, hier wird f erreicht
+% cnfg.cnfg_load(count).type='Force_timevariant_chirp';
 
 % % Chirp, Sinus-sweep-Kraft
 % count = count + 1;

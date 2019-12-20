@@ -35,12 +35,12 @@ r.rotor.assemble_fem;
 
 %% Running Time Simulation
 
-St_Lsg = Experiments.Stationaere_Lsg( r , 0 , (0:0.001:1) );%obj = Stationaere_Lsg(a,drehzahlvektor,time)
+St_Lsg = Experiments.Stationaere_Lsg( r , [1000,1200] , (0:0.001:0.02) );%obj = Stationaere_Lsg(a,drehzahlvektor,time)
 % St_Lsg.compute_ode15s_ss;
 %St_Lsg.compute_euler_ss
-% St_Lsg.compute_newmark 
-options.adapt=true; options.locTolUpper=1e-3; options.locTolLower=1e-4; options.globTol=1;
-St_Lsg.compute_newmark(options)
+St_Lsg.compute_newmark 
+% options.adapt=true; options.locTolUpper=1e-3; options.locTolLower=1e-4; options.globTol=1;
+% St_Lsg.compute_newmark(options)
 %St_Lsg.compute_sys_ss_variant
 % St_Lsg.save_data('St_Lsg_Laval_U_fwd_bwd_sweep_0_2krpm');
 
@@ -51,11 +51,11 @@ St_Lsg.compute_newmark(options)
 %------------- Erzeuge Ausgabeformat der Loesung ---------------
 
 Lsg = St_Lsg; % Lsg = Hochlauf;
-
-d = Dataoutput.TimeDataOutput(Lsg);
-% d = Dataoutput.TimeDataOutput(Hochlauf);
-dataset_modalanalysis = d.compose_data();
-d.save_data(dataset_modalanalysis,'Hochlauf_Laval_U_x_sweep0_200Hz_3000rpm');
+% 
+% d = Dataoutput.TimeDataOutput(Lsg);
+% % d = Dataoutput.TimeDataOutput(Hochlauf);
+% dataset_modalanalysis = d.compose_data();
+% d.save_data(dataset_modalanalysis,'Hochlauf_Laval_U_x_sweep0_200Hz_3000rpm');
 
 
 %------------- Erzeuge Grafiken aus Loesung -------------------
@@ -67,19 +67,18 @@ fo = Graphs.Fourierorbitdarstellung(r, Lsg);
 w = Graphs.Waterfalldiagramm(r, Lsg);
 w2 = Graphs.WaterfalldiagrammTwoSided(r, Lsg);
 
-frf = Experiments.FrequenzgangfunktionTime(St_Lsg);
-frf.calculate(r.sensors(6),r.sensors(5),0,'u_x','u_x',4,'boxcar');
-visufrf = Graphs.Frequenzgangfunktion(frf);
-visufrf.set_plots('bode','log','deg','coh')
+% frf = Experiments.FrequenzgangfunktionTime(St_Lsg);
+% frf.calculate(r.sensors(6),r.sensors(5),0,'u_x','u_x',4,'boxcar');
+% visufrf = Graphs.Frequenzgangfunktion(frf);
+% visufrf.set_plots('bode','log','deg','coh')
 
  for sensor = r.sensors
-          t.plot(sensor);
-%          t.plot_Orbit(sensor);
-%          o.plot(sensor);
-%          f.plot(sensor);
-%          fo.plot(sensor,1); % Error Curve Fitting Toolbox muss installiert sein
-%          fo.plot(sensor,2);
-%          w.plot(sensor); % Wasserfall
-         w2.plot(sensor); % Wasserfall 2 Sided
+          t.plot(sensor,[1,2,3]);
+          o.plot(sensor);
+          f.plot(sensor);
+          fo.plot(sensor,1); % Error Curve Fitting Toolbox muss installiert sein
+          fo.plot(sensor,2);
+          w.plot(sensor); % Wasserfall
+          w2.plot(sensor); % Wasserfall 2 Sided
           Janitor.cleanFigures();
  end

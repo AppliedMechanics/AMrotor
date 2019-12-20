@@ -4,7 +4,7 @@ j = 1;
 
 for sensor = sensors
     
-    [x_val,~,y_val,~]=sensor.read_values(self.experiment);
+    [x_val,y_val,~]=sensor.read_values(self.experiment);
     for rpm = self.experiment.drehzahlen
         t = self.experiment.time;
         input_datax=x_val(rpm);
