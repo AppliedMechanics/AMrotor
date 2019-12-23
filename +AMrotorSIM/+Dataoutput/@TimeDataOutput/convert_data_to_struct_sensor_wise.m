@@ -37,6 +37,7 @@ function struct = convert_data_to_struct_sensor_wise(self,dataset)
             struct(i).data(j).time = sensorSubset('time');
             struct(i).data(j).x = sensorSubset('x');
             struct(i).data(j).y = sensorSubset('y');
+            struct(i).data(j).z = sensorSubset('z');
 
         end
 

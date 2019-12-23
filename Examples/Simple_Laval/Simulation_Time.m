@@ -52,10 +52,13 @@ St_Lsg.compute_newmark
 
 Lsg = St_Lsg; % Lsg = Hochlauf;
 % 
-% d = Dataoutput.TimeDataOutput(Lsg);
+d = Dataoutput.TimeDataOutput(Lsg);
 % % d = Dataoutput.TimeDataOutput(Hochlauf);
-% dataset_modalanalysis = d.compose_data();
-% d.save_data(dataset_modalanalysis,'Hochlauf_Laval_U_x_sweep0_200Hz_3000rpm');
+dataset_modalanalysis = d.compose_data(); % container: rpm -> (n,t,allsensorsxy)
+d.save_data(dataset_modalanalysis,'Hochlauf_Laval_U_x_sweep0_200Hz_3000rpm'); 
+dataset_modalanalysis = d.compose_data_sensor_wise(); % container: rpm -> (sensor1,sensor2,...)
+struct = d.convert_data_to_struct_sensor_wise(dataset_modalanalysis); % to get results as struct
+d.save_data(struct,'Hochlauf_Laval_U_x_sweep0_200Hz_3000rpm');
 
 
 %------------- Erzeuge Grafiken aus Loesung -------------------

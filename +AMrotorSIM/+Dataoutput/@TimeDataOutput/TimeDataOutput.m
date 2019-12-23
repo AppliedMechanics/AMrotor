@@ -5,7 +5,7 @@ classdef TimeDataOutput < handle
 %   Results are written in the form of a container and saved to a file on
 %   the hard drive
 %
-%   See also SAVE_DATA, COMPOSE_DATA, COMPOSE_DATA_SENSOR_WISE, CONVERT_DATASET_TO_STRUCT_SENSORWISE.
+%   See also SAVE_DATA, COMPOSE_DATA, COMPOSE_DATA_SENSOR_WISE, CONVERT_DATASET_TO_STRUCT_SENSOR_WISE.
     properties
         % See also AMrotorSIM.Rotorsystem
         rotorsystem

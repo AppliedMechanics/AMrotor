@@ -17,11 +17,12 @@ function dataset = compose_data(self)
         tmp('time') = self.experiment.time;
 
         for sensor = self.rotorsystem.sensors
-            [x_val,~,y_val,~]=...
+            [x_val,y_val,z_val]=...
             sensor.read_values(self.experiment);
 
             tmp(['x-dir (',sensor.name,')']) = x_val(drehzahl);
             tmp(['y-dir (',sensor.name,')']) = y_val(drehzahl);
+            tmp(['z-dir (',sensor.name,')']) = z_val(drehzahl);
 
         end
 

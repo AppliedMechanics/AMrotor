@@ -24,12 +24,13 @@ function dataset = compose_data_sensor_wise(self)
         for sensor = self.rotorsystem.sensors
             tmp(sensor.name) = containers.Map;
             tmp2 = tmp(sensor.name);
-            [x_val,~,y_val,~]=...
+            [x_val,y_val,z_val]=...
             sensor.read_values(self.experiment);
             tmp2('sensor') = sensor;
             tmp2('time') = self.experiment.time;
             tmp2('x') = x_val(drehzahl);
             tmp2('y') = y_val(drehzahl); 
+            tmp2('z') = z_val(drehzahl); 
 
         end
 
