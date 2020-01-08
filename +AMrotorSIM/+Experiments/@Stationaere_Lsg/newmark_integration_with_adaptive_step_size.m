@@ -57,6 +57,8 @@ t0 = tspan(1);
 F = forceFunction(obj,t0,x,dotx);
 ddotx0 = M\(-C*dotx0 - K*x0 + F);
 ddotx(:,1) = ddotx0;
+ddotx0(6:6:end,1) = 0; % angular acceleration = 0 -> constant angular velocity -> STATIONARY
+ddotx(6:6:end,1) = 0; % angular acceleration = 0 -> constant angular velocity -> STATIONARY
 
 set(0, 'CurrentFigure',figOutput)
 odeOutputFcnController(t0,[x0;dotx0],'init',[],obj.rotorsystem);
@@ -74,6 +76,7 @@ while t0 < tspan(end) % check integration interval
     
     % acceleration computing
     ddotx1 = R\(R'\(-C*dotx1 - K*x1 + F));
+    ddotx1(6:6:end) = 0; % angular acceleration = 0 -> constant angular velocity -> STATIONARY
     
     % correction
     dotx1 = dotx1 + h*gamma*ddotx1;

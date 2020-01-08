@@ -26,6 +26,7 @@ dotxtemp = dotx0;
 tCurr = t(1);
 F = forceFunction(obj,tCurr,x,dotx);
 ddotxtemp = M\(-C*dotxtemp - K*xtemp + F);
+ddotxtemp(6:6:end) = 0; % angular acceleration = 0 -> constant angular velocity -> STATIONARY
 ddotx(:,1) = ddotxtemp;
 
 eLoc = zeros(size(t));
@@ -39,14 +40,13 @@ for iter = 2:length(t)
     % prediction
     xtemp     = xtemp + h*dotxtemp + (1/2-beta)*h^2*ddotxtemp;
     dotxtemp  = dotxtemp + (1-gamma)*h*ddotxtemp;
-    dotxtemp(end) = dotx0(end); % node on the righ is driven with constant Omega
     
     % acceleration computing
     ddotxtemp = R\(R'\(-C*dotxtemp - K*xtemp + F));
+    ddotxtemp(6:6:end) = 0; % angular acceleration = 0 -> constant angular velocity -> STATIONARY
     
     % correction
     dotxtemp = dotxtemp + h*gamma*ddotxtemp;
-    dotxtemp(end) = dotx0(end); % node on the righ is driven with constant Omega
     xtemp    = xtemp + h^2*beta*ddotxtemp;
     
     x(:,iter) = xtemp;
