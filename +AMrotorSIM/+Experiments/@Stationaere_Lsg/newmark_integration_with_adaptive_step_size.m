@@ -5,7 +5,7 @@ function [t,x,dotx,ddotx] = newmark_integration_with_adaptive_step_size(obj,M,C,
 %   step size too often
 
 if ~isempty(obj.rotorsystem.pidControllers)
-    warning('nemawrk with adaptive step size does not consider controller forces (yet)')
+    warning('newmark with adaptive step size does not consider controller forces (yet)')
     prompt = 'Do you want to continue the time integration anyway? [y/n]   ';
     selection = input(prompt,'s');
     if ~strcmp(selection,'y')
@@ -68,7 +68,7 @@ while t0 < tspan(end) % check integration interval
     
     t1 = t0 + h;
     
-    F = forceFunction(obj,t1,x,dotx);
+    F = forceFunction(obj,t1,x0,dotx0);
     
     % prediction
     x1     = x0 + h*dotx0 + (1/2-beta)*h^2*ddotx0;

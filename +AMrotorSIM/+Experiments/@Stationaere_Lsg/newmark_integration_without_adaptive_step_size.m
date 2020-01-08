@@ -35,7 +35,7 @@ odeOutputFcnController(tCurr,[x0;dotx0],'init',[],obj.rotorsystem);
 for iter = 2:length(t)
     tCurr = t(iter);
     
-    F = forceFunction(obj,tCurr,x,dotx);
+    F = forceFunction(obj,tCurr,xtemp,dotxtemp);
     
     % prediction
     xtemp     = xtemp + h*dotxtemp + (1/2-beta)*h^2*ddotxtemp;

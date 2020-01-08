@@ -27,7 +27,7 @@ function h = get_loc_load_vec(obj,time,node,varargin)
     
     h = obj.h;
     
-    % possible next steps: moment because of FAngularAcceleration
+    % possible next steps: moment and force because of FAngularAcceleration
     
     
 end
