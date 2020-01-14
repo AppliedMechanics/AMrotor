@@ -23,8 +23,8 @@ cnfg.cnfg_rotor.geo_nodes = {[0 0 0], [0 radius 0], [beamLength radius 0]};
 %                                 % Insert: upper sum, lower sum, mean, symmetric.
 cnfg.cnfg_rotor.mesh_opt.name = 'grobes Netz';
 cnfg.cnfg_rotor.mesh_opt.n_refinement = 10;
-cnfg.cnfg_rotor.mesh_opt.d_min= 0.02;
-cnfg.cnfg_rotor.mesh_opt.d_max = 0.05;
+cnfg.cnfg_rotor.mesh_opt.d_min= 0.01;
+cnfg.cnfg_rotor.mesh_opt.d_max = 0.02;
 cnfg.cnfg_rotor.mesh_opt.approx = 'mean';
     
 %% =========================Komponenten====================================
@@ -36,7 +36,7 @@ cnfg.cnfg_component(count).name = 'Feste Einspannung';
 cnfg.cnfg_component(count).type='Bearings';
 cnfg.cnfg_component(count).subtype='RestrictAllDofsBearing';
 cnfg.cnfg_component(count).position=0e-3;                        %[m]
-cnfg.cnfg_component(count).stiffness= 0;                     %[N/m]
+cnfg.cnfg_component(count).stiffness= 1;                     %[N/m]
 cnfg.cnfg_component(count).damping = 0;
 
 
@@ -51,12 +51,12 @@ cnfg.cnfg_load=[];
 count = 0;
 
 % Kraft in feste Richtung
-count = count + 1;
-cnfg.cnfg_load(count).name='Const. Kraft';
-cnfg.cnfg_load(count).position=250e-3;
-cnfg.cnfg_load(count).betrag_x= 0;
-cnfg.cnfg_load(count).betrag_y= -10;
-cnfg.cnfg_load(count).type='Force_constant_fix';
+% count = count + 1;
+% cnfg.cnfg_load(count).name='Const. Kraft';
+% cnfg.cnfg_load(count).position=250e-3;
+% cnfg.cnfg_load(count).betrag_x= 0;
+% cnfg.cnfg_load(count).betrag_y= -10;
+% cnfg.cnfg_load(count).type='Force_constant_fix';
 
 %% ========================PID-Regler======================================
 cnfg.cnfg_pid_controller=[];

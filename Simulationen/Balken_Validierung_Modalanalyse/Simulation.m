@@ -51,7 +51,21 @@ esf.plot_displacements();
 % esf.set_plots(10,'Overlay','Skip',5,'tangentialPoints',30,'scale',3) %specify additional options, first input is index of mode
 Janitor.cleanFigures();
 
+% Frequenzgangfunktion
+frf=Experiments.Frequenzgangfunktion(r,'Balken-FRF x->x');
+type = 'd'; %type:'d','v','a'
+inPos = 150e-3;%[100:100:500]*1e-3;%
+outPos = 150e-3;%[100,250]*1e-3;%
+f = 1:2:10000;
+rpm = 0;
+[f,H]=frf.calculate(f,inPos,outPos,type,rpm,{'u_x'},{'u_x'});
+[deltaIn,deltaOut]=frf.print_distance_delta;
+
+visufrf = Graphs.Frequenzgangfunktion(frf);
+visufrf.set_plots('bode','log','deg')
+Janitor.cleanFigures();
 return
+
 
 
 % r.reduce_modal(10);
