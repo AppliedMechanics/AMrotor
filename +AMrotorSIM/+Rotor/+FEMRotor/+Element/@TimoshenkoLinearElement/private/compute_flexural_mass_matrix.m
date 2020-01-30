@@ -36,7 +36,7 @@ function [M_F1, M_F2] = compute_flexural_mass_matrix(Element)
     M_F1(3,1) = M_F1(1,3);
     M_F1(3,2) = M_F1(2,3);
     M_F1(3,3) = a*m1+b*m7;
-    M_F1(3,4) = a*E.length*-m2+b*E.length-m8;%ausgebessert siehe Genta S.163
+    M_F1(3,4) = a*E.length*-m2+b*E.length*-m8;%ausgebessert siehe Genta S.163
     
     M_F1(4,1) = M_F1(1,4);
     M_F1(4,2) = M_F1(2,4);
