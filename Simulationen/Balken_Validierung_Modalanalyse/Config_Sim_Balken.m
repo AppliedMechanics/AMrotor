@@ -16,16 +16,17 @@ radius = 10e-3; % 20 Millimeter
 cnfg.cnfg_rotor.geo_nodes = {[0 0 0], [0 radius 0], [beamLength radius 0]};
 
 % FEM Config
-% cnfg.cnfg_rotor.mesh_opt.name = 'Mesh 1';
-% cnfg.cnfg_rotor.mesh_opt.d_min= 0.002;
-% cnfg.cnfg_rotor.mesh_opt.d_max = 0.005;
-% cnfg.cnfg_rotor.mesh_opt.approx = 'mean';   %Approximation for linear functions with gradient 1=0;
-%                                 % Insert: upper sum, lower sum, mean, symmetric.
-cnfg.cnfg_rotor.mesh_opt.name = 'grobes Netz';
+cnfg.cnfg_rotor.mesh_opt.name = 'Mesh 1';
 cnfg.cnfg_rotor.mesh_opt.n_refinement = 10;
-cnfg.cnfg_rotor.mesh_opt.d_min= 0.01;
-cnfg.cnfg_rotor.mesh_opt.d_max = 0.02;
-cnfg.cnfg_rotor.mesh_opt.approx = 'mean';
+cnfg.cnfg_rotor.mesh_opt.d_min= 0.002;
+cnfg.cnfg_rotor.mesh_opt.d_max = 0.01;
+cnfg.cnfg_rotor.mesh_opt.approx = 'mean';   %Approximation for linear functions with gradient 1=0;
+                                % Insert: upper sum, lower sum, mean, symmetric.
+% cnfg.cnfg_rotor.mesh_opt.name = 'grobes Netz';
+% cnfg.cnfg_rotor.mesh_opt.n_refinement = 10;
+% cnfg.cnfg_rotor.mesh_opt.d_min= 0.02;
+% cnfg.cnfg_rotor.mesh_opt.d_max = 0.05;
+% cnfg.cnfg_rotor.mesh_opt.approx = 'mean';
     
 %% =========================Komponenten====================================
 count = 0;
@@ -51,12 +52,12 @@ cnfg.cnfg_load=[];
 count = 0;
 
 % Kraft in feste Richtung
-% count = count + 1;
-% cnfg.cnfg_load(count).name='Const. Kraft';
-% cnfg.cnfg_load(count).position=250e-3;
-% cnfg.cnfg_load(count).betrag_x= 0;
-% cnfg.cnfg_load(count).betrag_y= -10;
-% cnfg.cnfg_load(count).type='Force_constant_fix';
+count = count + 1;
+cnfg.cnfg_load(count).name='Const. Kraft';
+cnfg.cnfg_load(count).position=250e-3;
+cnfg.cnfg_load(count).betrag_x= 0;
+cnfg.cnfg_load(count).betrag_y= -10;
+cnfg.cnfg_load(count).type='Force_constant_fix';
 
 %% ========================PID-Regler======================================
 cnfg.cnfg_pid_controller=[];

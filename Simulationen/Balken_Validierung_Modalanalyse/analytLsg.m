@@ -1,6 +1,10 @@
 % Vibration of Euler-Bernoulli-Beam - modal analysis
 % analytical solution according to Genta Vibration Dynamics and Control p.
 % 286, 2008
+% Note that the analytic solution is given for Euler-Bernoulli beams.
+% However, the simulation is based on Timoshenko's beam theory. For
+% Timoshenko, the beam is softer, which means lower EF than in the
+% Euler-Bernoulli theory.
 clear, %close all
 
 Config_Sim_Balken
@@ -90,8 +94,10 @@ hold on
 disp('Eigenfrequenzen des Balkens');
 disp(['Lagerung: ', boundaryCondition]);
 for i = 1:numberEigenfrequencies
-    plot(z,q(:,i));
-    disp([num2str(i),'. EF: ',num2str(omega(i)/2/pi),' Hz']);
+    EF_Hz_string_coarse = [num2str(omega(i)/2/pi,'%0.f'),' Hz'];
+    EF_Hz_string_fine = [num2str(omega(i)/2/pi),' Hz'];
+    plot(z,q(:,i),'DisplayName',EF_Hz_string_coarse);
+    disp([num2str(i),'. EF: ',EF_Hz_string_fine]);
 end
 grid on
 legend
