@@ -63,7 +63,7 @@ m.calculate_rotorsystem(10,3e3); %(#modes,rpm)
 
 esf= Graphs.Eigenschwingformen(m);
 esf.print_frequencies();
-esf.plot_displacements();
+esf.plot_displacements();%esf.plot_displacements('complex');% to also check imaginary part
 esf.set_plots('half') % 'all', 'half' or desired mode number
 %esf.set_plots('half','overlay')
 % esf.set_plots(10,'Overlay','Skip',5,'tangentialPoints',30,'scale',3) %specify additional options, first input is index of mode

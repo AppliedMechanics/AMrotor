@@ -34,6 +34,12 @@ D_tmp = imag(D);
     
     Ev_lat_x = zeros(length(nNodes),size(V_real,2));
     Ev_lat_y = Ev_lat_x;
+    Ev_lat_z = Ev_lat_x;
+    Ev_tor_psi_z = Ev_lat_x;
+    CEv_lat_x = Ev_lat_x;
+    CEv_lat_y = Ev_lat_x;
+    CEv_lat_z = Ev_lat_x;
+    CEv_tor_psi_z = Ev_lat_x;
 
     for mode = 1:nModes
         for node = 1:length(nNodes)
@@ -60,14 +66,11 @@ D_tmp = imag(D);
     obj.eigenValues.lateral =D;
 %     obj.eigenValues.full = V;
     
-%     %% Aussortierung der Torsionswerte aus dem EV mithilfe der get_dof Implementierung
-%     Ev_tor = zeros(length(nNodes),size(V_real,2));
-%     for node = 1:length(nNodes)
-%         dof_xi_z = obj.rotorsystem.rotor.get_gdof('psi_z',node);
-%         Ev_tor(node,:)= V_real(dof_xi_z,:);
-%     end
-%     obj.eigenVectors.torsional=Ev_tor;
-
+    obj.eigenVectors.lat_complex.x=CEv_lat_x;
+    obj.eigenVectors.lat_complex.y=CEv_lat_y;
+    obj.eigenVectors.lat_complex.z=CEv_lat_z;
+    obj.eigenVectors.lat_complex.psi_z=CEv_tor_psi_z;
+    
 obj.eigenVectors.complex = V;
 
 end 
