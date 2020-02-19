@@ -13,8 +13,8 @@ function [x,EVmain] = plot_displacements(obj)
 
     x = [obj.modalsystem.rotorsystem.rotor.mesh.nodes.z];
     EVx = obj.modalsystem.eigenVectors.lateral_x;
-    EVy = obj.modalsystem.eigenVectors.lateral_y;
     EW = imag(obj.modalsystem.eigenValues.lateral);
+    
     for s=1:n_ew
         plotMode(ax,x,EVx(:,s),...
                        EW(s),...
@@ -25,6 +25,10 @@ function [x,EVmain] = plot_displacements(obj)
     grid('on')
 
     if isfield(obj.modalsystem.eigenVectors,'lateral_y')
+        EVy = obj.modalsystem.eigenVectors.lateral_y;
+        EVz = obj.modalsystem.eigenVectors.lateral_z;
+        EVpsiz = obj.modalsystem.eigenVectors.torsional_psi_z;
+    
         figure('Name','Eigenschwingformen y','NumberTitle','off');
         ax = axes;
         title('Eigenmoden Lateral-Richtung y')
@@ -32,6 +36,32 @@ function [x,EVmain] = plot_displacements(obj)
 
         for s=1:n_ew
             plotMode(ax,x,EVy(:,s),EW(s),ColorHandler.getColor(s))
+        end
+
+        legend('show')
+        grid('on')
+        
+        
+        figure('Name','Eigenschwingformen z','NumberTitle','off');
+        ax = axes;
+        title('Eigenmoden Lateral-Richtung z')
+        hold on;
+
+        for s=1:n_ew
+            plotMode(ax,x,EVz(:,s),EW(s),ColorHandler.getColor(s))
+        end
+
+        legend('show')
+        grid('on')
+        
+        
+        figure('Name','Eigenschwingformen psi z','NumberTitle','off');
+        ax = axes;
+        title('Eigenmoden Torsions-Richtung psi z')
+        hold on;
+
+        for s=1:n_ew
+            plotMode(ax,x,EVpsiz(:,s),EW(s),ColorHandler.getColor(s))
         end
 
         legend('show')

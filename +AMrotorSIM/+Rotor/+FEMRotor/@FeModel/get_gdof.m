@@ -1,5 +1,9 @@
 function glob_dof = get_gdof(self,direction,Node,varargin)
 % get_gdof - get global degree of freedom
+% glob_dof = get_gdof(self,direction,Node,varargin)
+%  direction: 'u_x','u_y','u_z','psi_x','psi_y','psi_z'
+%  node: number of desired node
+%  varargin: A -> system matrix in state space
 
     % falls weniger als 6 dof benutzt werden
     n.nodes = length(self.mesh.nodes);    

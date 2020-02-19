@@ -2,6 +2,9 @@ function [V,D] = perform_eigenanalysis(obj,mat)
     opts.tol = 1e-16;
     criteria = true;
     num.eigenVectors = 4*(obj.n_ew);
+    if num.eigenVectors > length(mat.A)
+        num.eigenVectors = length(mat.A);
+    end
     while criteria
         [V,tmp.lambda]=eigs(-mat.B,mat.A,num.eigenVectors,'sm',opts);
         % sortiert lambdas aus, deren imaginaerteil kleiner al 1e-2 ist
