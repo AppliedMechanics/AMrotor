@@ -25,6 +25,8 @@ D_tmp = imag(D);
  V = tmp2;
  
  V = obj.get_position_entries(V,mat);
+ [M,~,~,~]= obj.rotorsystem.assemble_system_matrices(omega*60/2/pi);
+ V = obj.do_mass_normalization(V,M);
  V_real = real(V);
         
     %% Aussortierung der x werte aus dem EV mithilfe der get_dof Implementierung
@@ -53,6 +55,8 @@ D_tmp = imag(D);
     end   
     obj.eigenVectors.lateral_x=Ev_lat_x;
     obj.eigenVectors.lateral_y=Ev_lat_y;
+    obj.eigenVectors.lateral_z=Ev_lat_z;
+    obj.eigenVectors.torsional_psi_z=Ev_tor_psi_z;
     obj.eigenValues.lateral =D;
 %     obj.eigenValues.full = V;
     
