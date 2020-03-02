@@ -17,7 +17,7 @@ function write_data_to_unv(self, postfix)
     for drehzahl = self.experiment.drehzahlen   
 
         for sensor = self.rotorsystem.sensors
-            [x_val,~,y_val,~]=...
+            [x_val,y_val,z_val]=...
             sensor.read_values(self.experiment);
             
             % x direction
@@ -40,6 +40,11 @@ function write_data_to_unv(self, postfix)
             Data = y_val(drehzahl);
             Header.Dir = 'Y+';
             Header.Title2 = [sensor.name,'_y'];
+            
+            % z direction
+            Data = z_val(drehzahl);
+            Header.Dir = 'Z+';
+            Header.Title2 = [sensor.name,'_Z'];
             
             unvw58(fid,0,Data,Header);
 
