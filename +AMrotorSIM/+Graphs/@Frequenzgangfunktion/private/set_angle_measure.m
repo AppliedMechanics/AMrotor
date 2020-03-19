@@ -5,10 +5,10 @@ degStr = 'deg';
 radBool = false;
 degBool = false;
 
-if strcmpi(userInputCell,degStr)
+if any(strcmpi(userInputCell,degStr))
     degBool = true;
 end
-if strcmpi(userInputCell,radStr)
+if any(strcmpi(userInputCell,radStr))
     radBool = true;
 end
 if radBool && degBool
