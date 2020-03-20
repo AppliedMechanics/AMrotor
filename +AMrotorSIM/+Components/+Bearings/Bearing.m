@@ -10,7 +10,6 @@ classdef (Abstract) Bearing < AMrotorSIM.Components.Component
             if nargin == 0
                 self.name = 'Empty Bearing';
             end
-            self.color = 'green';
         end
         
     end

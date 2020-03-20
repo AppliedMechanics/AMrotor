@@ -16,12 +16,23 @@ classdef Visu_Rotorsystem < handle
       
       function [figurehandle] = show(obj)
          disp(obj.name);
-         figurehandle=obj.rotorsystem.rotor.mesh.show_3D;
+         %======================================================================
+        figure;
+        figurehandle = axes('xlim', [-10 10], 'ylim', [-10 10], 'zlim',[-10 10]);
+        view(3);
+        grid on;
+        axis equal;
+        hold on
+        xlabel('z')
+        ylabel('y')
+        zlabel('x')
+    
+         plot_rotor(figurehandle,obj.rotorsystem.rotor);
          plot_components(figurehandle,obj.rotorsystem.components,obj.rotorsystem.rotor);
          plot_sensors(figurehandle,obj.rotorsystem.sensors);
          plot_loads(figurehandle,obj.rotorsystem.loads,obj.rotorsystem.rotor);
          plot_pidController(figurehandle,obj.rotorsystem.pidControllers,obj.rotorsystem.rotor);
-         view(3)
+         %view(3);
          
       end
  

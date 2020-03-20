@@ -1,21 +1,35 @@
-function plot_bearings(ax,bearing,obj)
+function plot_bearings(ax,bearings,obj)
 
-for i=bearing
-    zp=i.cnfg.position;
+for bearing=bearings
     
-    bearing_pos = i.position; 
+    if isempty(bearing.cnfg.color)
+        bearing.cnfg.color='green';
+    end
+    
+    zp=bearing.cnfg.position;
+        
+    bearing_pos = bearing.position; 
     node_at_pos = obj.find_node_nr(bearing_pos);
-    diameter = obj.mesh.nodes(node_at_pos).radius_outer*2;
 
-
+    % Visualization parameters setting -----------------------------
+    if xor(~isfield(bearing.cnfg,'width'),isempty(bearing.cnfg.width))
+        width = 10e-3;
+    else 
+        width = bearing.cnfg.width;
+    end
     
-    % Zylinderfläche;
-    [x,y,z] = cylinder(diameter*1.4);
+    if ~isfield(bearing.cnfg,'vradius')
+        radius = obj.mesh.nodes(node_at_pos).radius_outer*1.4;
+    elseif isempty(bearing.cnfg.vradius)
+        radius = bearing.cnfg.vradius;
+    end
+    % -------------------------------------------------------------
+    
+    % Drawing the graph -------------------------------------------
+    [x,y,z] = cylinder(radius);
 
-    %h = surf(ax, x, y, z*0.01+zp);
-    h = surf(ax,z*0.01+zp-0.005, y, x);
-
+    h = surf(ax,z*width+zp-width/2, y, x);
     set(h, 'edgecolor','none')
-    set(h, 'facecolor',i.color)
+    set(h, 'facecolor',bearing.cnfg.color)
 
 end

@@ -11,7 +11,6 @@ classdef SimpleBearing < AMrotorSIM.Components.Bearings.Bearing
             self.name = 'Empty Bearing';
             else
             self.cnfg = arg;
-            self.color = 'green'; 
             end
 
         end 
