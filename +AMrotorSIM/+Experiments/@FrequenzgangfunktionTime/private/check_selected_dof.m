@@ -1,5 +1,5 @@
 function check_selected_dof(obj,inputDirection,outputDirection)
-allowedInputDofs = [1,2];
+allowedInputDofs = [1,2,3];
 allowedOutputDofs = allowedInputDofs;
 flagDimInput = length(inputDirection)~=1;
 flagDimOutput = length(outputDirection)~=1;
