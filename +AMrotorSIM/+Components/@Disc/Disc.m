@@ -3,6 +3,7 @@ classdef Disc < AMrotorSIM.Components.Component
 %   discs only act on the mass matrix
     properties
         radius
+        width
     end
     methods
         %Konstruktor
@@ -12,6 +13,7 @@ classdef Disc < AMrotorSIM.Components.Component
                 self.name = 'Empty Disc';
             else
                 self.radius = arg.radius;
+                self.width = arg.width;
             end
             self.color='yellow';
         end
