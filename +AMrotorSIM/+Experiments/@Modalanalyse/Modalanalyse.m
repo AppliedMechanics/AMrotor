@@ -5,8 +5,8 @@ classdef Modalanalyse < handle
    properties
       name='Modalanalyse'
       % See also AMrotorSIM.Rotorsystem
-      rotorsystem@AMrotorSIM.Rotorsystem
-      n_ew          % number of desired eigenvalues
+      rotorsystem (1,1) AMrotorSIM.Rotorsystem
+      n_ew (1,1) int16 {mustBeNonnegative} = 1% number of desired eigenvalues
       eigenVectors
       eigenValues
    end

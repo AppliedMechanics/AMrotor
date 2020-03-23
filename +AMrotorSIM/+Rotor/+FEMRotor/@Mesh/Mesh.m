@@ -11,10 +11,10 @@ classdef Mesh < handle
         approximation      
         
         % See also AMrotorSIM.Rotor.FEMRotor.MeshNode
-        nodes@AMrotorSIM.Rotor.FEMRotor.MeshNode vector
+        nodes (1,:) AMrotorSIM.Rotor.FEMRotor.MeshNode
         
         % See also AMrotorSIM.Rotor.FEMRotor.Element.TimoshenkoLinearElement
-        elements@AMrotorSIM.Rotor.FEMRotor.Element.TimoshenkoLinearElement vector
+        elements (1,:) AMrotorSIM.Rotor.FEMRotor.Element.TimoshenkoLinearElement
     end
     
     methods

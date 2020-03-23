@@ -6,11 +6,11 @@ classdef FeModel < handle
         name
         cnfg % Config-struct
         % See also AMrotorSIM.Rotor.FEMRotor.Geometry
-        geometry@AMrotorSIM.Rotor.FEMRotor.Geometry
+        geometry (1,1) AMrotorSIM.Rotor.FEMRotor.Geometry
         % See also AMrotorSIM.Rotor.FEMRotor.Material
-        material@AMrotorSIM.Rotor.FEMRotor.Material
+        material (1,1) AMrotorSIM.Rotor.FEMRotor.Material
         % See also AMrotorSIM.Rotor.FEMRotor.Mesh
-        mesh@AMrotorSIM.Rotor.FEMRotor.Mesh
+        mesh (1,1) AMrotorSIM.Rotor.FEMRotor.Mesh
         
         mass_matrix         % mass
         damping_matrix      % damping

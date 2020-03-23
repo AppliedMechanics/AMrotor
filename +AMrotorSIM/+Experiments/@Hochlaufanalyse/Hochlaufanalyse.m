@@ -6,7 +6,7 @@ classdef Hochlaufanalyse < handle
    properties
       name='Hochlaufanalyse'
       % See also AMrotorSIM.Rotorsystem
-      rotorsystem@AMrotorSIM.Rotorsystem 
+      rotorsystem (1,1) AMrotorSIM.Rotorsystem 
       drehzahlen    % rpm steps
       time          % time steps e.g. 0:tStep:tEnd
       result        % results-struct: result.X, result.X_d, result.X_dd

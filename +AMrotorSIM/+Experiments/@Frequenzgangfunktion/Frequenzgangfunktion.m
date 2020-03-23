@@ -8,7 +8,7 @@ classdef Frequenzgangfunktion < handle
     properties
         name
         % See also AMrotorSIM.Rotorsystem
-        rotorsystem@AMrotorSIM.Rotorsystem
+        rotorsystem (1,1) AMrotorSIM.Rotorsystem
         f % frequency array: nFreq x 1
         H % matrix of frfs: nFreq x nResponses x nInputForces
         descriptionsH % description of entries in H for plot, cells

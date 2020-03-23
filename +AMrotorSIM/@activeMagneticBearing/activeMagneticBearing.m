@@ -1,4 +1,4 @@
-classdef activeMagneticBearing < handle
+classdef ActiveMagneticBearing < handle
 % activeMagneticBearing Class for AMB
 %   Creates other objects of the type SimpleBearing and pidController
     properties
@@ -8,11 +8,11 @@ classdef activeMagneticBearing < handle
         
         % Bearing-object that gets created by this object (AMB)
         % See also AMrotorSIM.Components.Bearings.SimpleBearing
-        simpleBearing@AMrotorSIM.Components.Bearings.SimpleBearing
+        simpleBearing (1,1) AMrotorSIM.Components.Bearings.SimpleBearing
         
         % pidController-objects that get created by AMB-object
         % See also AMrotorSIM.pidControllers.pidController
-        pidController@AMrotorSIM.pidControllers.pidController
+        pidController (1,1) AMrotorSIM.pidControllers.pidController
         
         kx % N/m, stiffness because of the magnetic field, typically negative value
         

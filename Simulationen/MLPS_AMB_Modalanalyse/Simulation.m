@@ -10,7 +10,8 @@ import AMrotorSIM.*
 %% Clean up
 close all
 clear all
-% clc
+clc
+
 Janitor = AMrotorTools.PlotJanitor();
 Janitor.setLayout(2,3);
 

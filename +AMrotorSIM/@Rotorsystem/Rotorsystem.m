@@ -15,18 +15,18 @@ classdef Rotorsystem < handle
       % See also AMrotorSIM.Rotor.FEMRotor.FeModel
       %
       % rotor - includes the rotor with its fe model
-      rotor@AMrotorSIM.Rotor.FEMRotor.FeModel 
+      rotor (1,1) AMrotorSIM.Rotor.FEMRotor.FeModel 
       
       % See also AMrotorSIM.Sensors
-      sensors@AMrotorSIM.Sensors.Sensor vector
+      sensors (1,:) AMrotorSIM.Sensors.Sensor
       % See also AMrotorSIM.Loads
-      loads@AMrotorSIM.Loads.Load vector
+      loads (1,:) AMrotorSIM.Loads.Load
       % See also AMrotorSIM.Components.Component
-      components@AMrotorSIM.Components.Component vector
+      components (1,:) AMrotorSIM.Components.Component
       % See also AMrotorSIM.pidControllers.pidController
-      pidControllers@AMrotorSIM.pidControllers.pidController vector
+      pidControllers (1,:) AMrotorSIM.pidControllers.pidController
       % See also AMrotorSIM.activeMagneticBearing
-      activeMagneticBearings@AMrotorSIM.activeMagneticBearing vector
+      activeMagneticBearings (1,:) AMrotorSIM.activeMagneticBearing
 
    end
    %%

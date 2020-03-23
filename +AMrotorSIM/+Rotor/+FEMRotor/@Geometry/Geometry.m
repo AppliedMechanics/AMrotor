@@ -6,7 +6,7 @@ classdef Geometry < handle
         % See also AMrotorSIM.Rotor.FEMRotor.GeoNode
         % 
         % Objects containing the nodes, type: AMrotorSIM.Rotor.FEMRotor.GeoNode
-        nodes@AMrotorSIM.Rotor.FEMRotor.GeoNode vector
+        nodes (1,:) AMrotorSIM.Rotor.FEMRotor.GeoNode
     end
     
     methods

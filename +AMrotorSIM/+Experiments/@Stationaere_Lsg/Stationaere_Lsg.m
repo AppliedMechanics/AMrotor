@@ -7,7 +7,7 @@ classdef Stationaere_Lsg < handle
    properties
       name='Stationäre Lösung'
       % See also AMrotorSIM.Rotorsystem
-      rotorsystem
+      rotorsystem (1,1) AMrotorSIM.Rotorsystem
       drehzahlen    % rpm steps
       time        	% time steps e.g. 0:tStep:tEnd
       result        % results-struct: result.X, result.X_d, result.X_dd

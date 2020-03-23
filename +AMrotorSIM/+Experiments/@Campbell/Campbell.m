@@ -6,7 +6,7 @@ classdef Campbell < handle
 % See also AMrotorSIM.Graphs.Campbell
     properties (Access = private)
         name = 'Campell Analysis';
-        rotorsystem@AMrotorSIM.Rotorsystem;
+        rotorsystem (1,1) AMrotorSIM.Rotorsystem;
         omega;
         num; % struct which will gather all kind of numbers
         EVf; EVb; % eigenvectors forward&backward
