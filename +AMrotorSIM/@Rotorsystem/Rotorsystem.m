@@ -26,7 +26,7 @@ classdef Rotorsystem < handle
       % See also AMrotorSIM.pidControllers.pidController
       pidControllers (1,:) AMrotorSIM.pidControllers.pidController
       % See also AMrotorSIM.activeMagneticBearing
-      activeMagneticBearings (1,:) AMrotorSIM.activeMagneticBearing
+      activeMagneticBearings (1,:) AMrotorSIM.ActiveMagneticBearing
 
    end
    %%
