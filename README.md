@@ -1,9 +1,8 @@
 ## Notwendige Software
 
-- getestet mit *Matlab R2018b*, sollte aber auch mit anderen *Matlab*-Versionen kompatibel sein
+- getestet mit *Matlab R2020a*, sollte aber auch mit anderen *Matlab*-Versionen kompatibel sein
 - notwendige *Matlab*-Toolboxen
   - Symbolic Math Toolbox
-  - Image Processing Toolbox
   - Curve Fitting Toolbox (nur für Fourierorbitdarstellung der Sensorsignale bei Zeitintegration)
 
 ## Dokumentation des Codes
@@ -24,43 +23,3 @@ Startpunkt ist Eingabe des Befehls `doc AMrotor` bzw. `doc AMrotorSIM.Rotorsyste
 
 ## interessante Links
 - zur Dokumentation https://de.mathworks.com/matlabcentral/answers/100534-is-it-possible-to-include-package-and-class-directories-in-contents-report-created-programmatically
-## ToDos
-
-ToDo: **Christian Looschen** (christian_looschen@hotmail.com)
-
-- Rotorgeometrie Methode: get_diameter(at position z = ...)
-- Visualisierung Lagerringe
-- Drehung der Visualisierung
-- Farbe der Lagerringe je nach Lagertyp ?ndern - Magnetlager (typ3) orange, Gleitlager (typ1)=blau
-- Klasse Kraftsensor generieren
-- Geschwindigkeitssensor 
-- Beschleunigungssensor
-- TimeSignal - OrbitSignal Darstellung vereinheitlichen
-
------------------------------------------------------------------------------
-
-- Fourierdarstellung der Signale
-- Stromsensor+Kraftsensor Magnetlager erstellen
-- 
-- Anregungskräfte (Chirp/Step/Sine)
-- Ausgabe der "Messwerte"
-
------------------------
-
-
-
-- Torsions-DGL einpflegen/erstellen
-  - Trägheit je Element assemblieren
-  - Steifigkeitsmatrix assemblieren
-  - Klasse Motor einf?hren --> konstante Drehzahl / konstantes Drehmoment
-  - State-Space-formulierung & Zeitintegration
-  - Berechnung Torsionseigenmoden --> Darstellung
-
-
-
-- Dokumentation
-
-ToDo: **Johannes Maierhofer**
-
-- Transferfunction Auswertung
-- Transferfunction Einkopplung
