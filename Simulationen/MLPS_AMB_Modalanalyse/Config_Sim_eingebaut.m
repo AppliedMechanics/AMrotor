@@ -1,16 +1,7 @@
-%% Color Constants
-TUMBlue = [0 101 189]/255;
-TUMOrange = [227 114 34]/255;
-TUMGreen = [162 173 0]/255;
-TUMIvory = [218 215 203]/255;
-TUMGray1 = [88 88 90]/255;
-TUMGray2 = [156 157 159]/255;
-TUMGray3 = [217 218 219]/255;
-
 %% ================Rotor===================================================
 
 cnfg.cnfg_rotor.name = 'MLPS - Rotor';
-cnfg.cnfg_rotor.color = TUMGray2;
+cnfg.cnfg_rotor.color = AMrotorTools.TUMColors.TUMGray2;
 
 cnfg.cnfg_rotor.material.name = 'steel';
 cnfg.cnfg_rotor.material.e_module = 211e9;  %[N/m^2]
@@ -60,7 +51,7 @@ cnfg.cnfg_component(count).type = 'Disc';
 cnfg.cnfg_component(count).position = 113e-3;                 %disc position [m]
 cnfg.cnfg_component(count).radius = 46e-3;  
 cnfg.cnfg_component(count).width = 0e-3;               %only for visualization
-cnfg.cnfg_component(count).color = TUMBlue;               %only for visualization
+cnfg.cnfg_component(count).color = AMrotorTools.TUMColors.TUMBlue;               %only for visualization
 cnfg.cnfg_component(count).m = 0.85074;                       %disc mass [kg]
 cnfg.cnfg_component(count).Jx = 4.840066e-4;                  %disc mom. of inertia [kg*m^2]
 cnfg.cnfg_component(count).Jz = 4.036839e-4;                  %disc mom. of inertia [kg*m^2]
@@ -72,7 +63,7 @@ cnfg.cnfg_component(count).type = 'Disc';
 cnfg.cnfg_component(count).position = 363e-3;                 %disc position [m]
 cnfg.cnfg_component(count).radius = 96e-3;              %only for visualization
 cnfg.cnfg_component(count).width = 10e-3;               %only for visualization
-cnfg.cnfg_component(count).color = TUMBlue;               %only for visualization
+cnfg.cnfg_component(count).color = AMrotorTools.TUMColors.TUMBlue;               %only for visualization
 cnfg.cnfg_component(count).m = 1.276499;                       %disc mass [kg]
 cnfg.cnfg_component(count).Jx = 1.487212e-3;                  %disc mom. of inertia [kg*m^2]
 cnfg.cnfg_component(count).Jz = 2.832751e-3;                  %disc mom. of inertia [kg*m^2]
@@ -84,7 +75,7 @@ cnfg.cnfg_component(count).type = 'Disc';
 cnfg.cnfg_component(count).position = 623e-3;                 %disc position [m]
 cnfg.cnfg_component(count).radius = 46e-3;  
 cnfg.cnfg_component(count).width = 0e-3;               %only for visualization
-cnfg.cnfg_component(count).color = TUMBlue;               %only for visualization
+cnfg.cnfg_component(count).color = AMrotorTools.TUMColors.TUMBlue;               %only for visualization
 cnfg.cnfg_component(count).m = 0.85074;                       %disc mass [kg]
 cnfg.cnfg_component(count).Jx = 4.840066e-4;                  %disc mom. of inertia [kg*m^2]
 cnfg.cnfg_component(count).Jz = 4.036839e-4;                  %disc mom. of inertia [kg*m^2]
@@ -123,7 +114,7 @@ cnfg.cnfg_component(count).type='Bearings';
 cnfg.cnfg_component(count).subtype='SimpleBearing';
 cnfg.cnfg_component(count).stiffness=kML;%0.0670680e7*0.5;         %[N/m]
 cnfg.cnfg_component(count).damping = dML;%299.275;
-cnfg.cnfg_component(count).color = TUMOrange;
+cnfg.cnfg_component(count).color = AMrotorTools.TUMColors.TUMOrange;
 
 count = count + 1;
 cnfg.cnfg_component(count).name = 'Isotropes Lager 2';
@@ -132,7 +123,7 @@ cnfg.cnfg_component(count).type='Bearings';
 cnfg.cnfg_component(count).subtype='SimpleBearing';
 cnfg.cnfg_component(count).stiffness=kML;%0.0670680e7*0.5;         %[N/m]
 cnfg.cnfg_component(count).damping = dML;%299.275;
-cnfg.cnfg_component(count).color = TUMOrange;
+cnfg.cnfg_component(count).color = AMrotorTools.TUMColors.TUMOrange;
 
 %% ====================Sensoren============================================
 cnfg.cnfg_sensor=[];
