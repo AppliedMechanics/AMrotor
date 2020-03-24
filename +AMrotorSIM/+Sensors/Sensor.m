@@ -4,7 +4,8 @@ classdef Sensor < matlab.mixin.Heterogeneous & handle
    properties
       cnfg=struct([])  
       name
-      
+      position % desired Position by the user from config
+      positionMesh % real position, nearest mesh node
       % type of the Sensor
       % must be name of any Sensor-subclass 
       type 
@@ -20,6 +21,7 @@ classdef Sensor < matlab.mixin.Heterogeneous & handle
            self.cnfg = config;
            self.name = self.cnfg.name;
            self.type = self.cnfg.type;
+           self.position = self.cnfg.position;
          end
        end
    end

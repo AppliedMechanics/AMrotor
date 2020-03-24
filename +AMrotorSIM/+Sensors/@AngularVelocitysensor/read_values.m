@@ -11,7 +11,7 @@ function [psixd_val,psiyd_val,psizd_val] = read_values(self,experiment)
         drehzahlvektor = cell2mat(keys(res));
         for drehzahl = drehzahlvektor
 
-        node_nr = rotor.find_node_nr(self.Position);
+        node_nr = rotor.find_node_nr(self.position);
         dof_psix = rotor.get_gdof('psi_x',node_nr);
         dof_psiy = rotor.get_gdof('psi_y',node_nr);
         dof_psiz = rotor.get_gdof('psi_z',node_nr);

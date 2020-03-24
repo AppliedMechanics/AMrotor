@@ -5,13 +5,11 @@ classdef ControllerForceSensor < AMrotorSIM.Sensors.Sensor
 %   Loads-superclass
    properties
        unit = 'N'
-       Position
        measurementType = 'Force'
    end
    methods
         function self=ControllerForceSensor(cnfg) 
            self = self@AMrotorSIM.Sensors.Sensor(cnfg); 
-           self.Position = cnfg.position;
         end 
    end
 end

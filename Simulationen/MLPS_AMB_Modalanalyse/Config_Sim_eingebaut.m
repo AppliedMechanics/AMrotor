@@ -107,6 +107,7 @@ cnfg.cnfg_component(count).type='Bearings';
 cnfg.cnfg_component(count).subtype='SimpleAxialBearing';
 cnfg.cnfg_component(count).stiffness=1e10;                     %[N/m]
 cnfg.cnfg_component(count).damping = 0;
+cnfg.cnfg_component(count).color = [];
 
 count = count + 1;
 cnfg.cnfg_component(count).name = 'Torque Lager Links';
@@ -115,6 +116,7 @@ cnfg.cnfg_component(count).type='Bearings';
 cnfg.cnfg_component(count).subtype='SimpleTorqueBearing';
 cnfg.cnfg_component(count).stiffness=1e10;                     %[N/m]
 cnfg.cnfg_component(count).damping = 0;
+cnfg.cnfg_component(count).color = [];
 
 count = count + 1;
 cnfg.cnfg_component(count).name = 'Isotropes Lager 1';
@@ -123,7 +125,7 @@ cnfg.cnfg_component(count).type='Bearings';
 cnfg.cnfg_component(count).subtype='SimpleBearing';
 cnfg.cnfg_component(count).stiffness=kML;%0.0670680e7*0.5;         %[N/m]
 cnfg.cnfg_component(count).damping = dML;%299.275;
-cnfg.cnfg_component(count).color = TUMOrange;
+cnfg.cnfg_component(count).color = [];
 
 count = count + 1;
 cnfg.cnfg_component(count).name = 'Isotropes Lager 2';

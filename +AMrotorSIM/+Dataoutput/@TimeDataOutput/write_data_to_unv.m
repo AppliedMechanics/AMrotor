@@ -32,7 +32,7 @@ function write_data_to_unv(self, postfix)
             Header.Title3 = ['rpm',num2str(drehzahl)];
             Header.xUnit = 's';
             Header.Label = Header.Unit;
-            Header.RespId = [num2str(sensor.Position),' m'];
+            Header.RespId = [num2str(sensor.position),' m (MeshNode: ',num2str(sensor.position),' m)'];
             
             unvw58(fid,0,Data,Header);
             

@@ -2,6 +2,7 @@
 % Aufbau eines Structs mit den Rotordaten
 
 cnfg.cnfg_rotor.name = 'Einfacher Balken';
+cnfg.cnfg_rotor.color='magenta';
 
 cnfg.cnfg_rotor.material.name = 'steel';
 cnfg.cnfg_rotor.material.e_module = 211e9;  %[N/m^2]
@@ -38,6 +39,8 @@ cnfg.cnfg_component = [];
 % cnfg.cnfg_component(count).position=0e-3;                        %[m]
 % cnfg.cnfg_component(count).stiffness= 1;                     %[N/m]
 % cnfg.cnfg_component(count).damping = 0;
+% cnfg.cnfg_component(count).color = [];
+% cnfg.cnfg_component(count).width = 20e-3;
 
 count = count +1;
 cnfg.cnfg_component(count).name = 'Feste Einspannung';
@@ -46,6 +49,8 @@ cnfg.cnfg_component(count).subtype='RestrictAllDofsBearing';
 cnfg.cnfg_component(count).position=0e-3;                        %[m]
 cnfg.cnfg_component(count).stiffness= 1e8;                     %[N/m]
 cnfg.cnfg_component(count).damping = 0;
+cnfg.cnfg_component(count).color = [];
+cnfg.cnfg_component(count).width = 20e-3;
 
 
 % Feder auf der rechten Seite
@@ -56,6 +61,8 @@ cnfg.cnfg_component(count).subtype='SimpleBearing';
 cnfg.cnfg_component(count).position=beamLength;                        %[m]
 cnfg.cnfg_component(count).stiffness=1e5; %[N/m]
 cnfg.cnfg_component(count).damping = 0; 
+cnfg.cnfg_component(count).color = [];
+cnfg.cnfg_component(count).width = 20e-3;
 
 %% ====================Sensoren============================================
 cnfg.cnfg_sensor=[];
@@ -85,6 +92,11 @@ count = count + 1;
 cnfg.cnfg_sensor(count).name='Kraft_Lager_Ende';
 cnfg.cnfg_sensor(count).position=beamLength;
 cnfg.cnfg_sensor(count).type='BearingForceSensor';
+
+count = count + 1;
+cnfg.cnfg_sensor(count).name='Weg_fast_Ende';
+cnfg.cnfg_sensor(count).position=0.47;
+cnfg.cnfg_sensor(count).type='Displacementsensor';
 
 
 %% =========================Lasten=========================================
