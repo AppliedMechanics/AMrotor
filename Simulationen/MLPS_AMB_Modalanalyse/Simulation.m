@@ -34,6 +34,7 @@ r.assemble;
 g=Graphs.Visu_Rotorsystem(r);
 g.show();
 
+return
 r.rotor.assemble_fem;
 
 u_trans_rigid_body = r.compute_translational_rigid_body_modes;overall_mass = r.check_overall_translational_mass(u_trans_rigid_body);disp(['m=',num2str(overall_mass.m_x,3),'kg']);
