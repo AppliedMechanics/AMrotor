@@ -122,7 +122,7 @@ visufrf = Graphs.Frequenzgangfunktion(frf);
 visufrf.set_plots('bode','log','deg','coh')
 
 frf = Experiments.FrequenzgangfunktionTime(St_Lsg,'Ende Balken, Anregung');
-frf.calculate(r.sensors(2),r.sensors(3),0,'u_x','u_x',1,'boxcar');
+frf.calculate(r.sensors(2),r.sensors(4),0,'u_x','u_x',4,'hann');
 visufrf = Graphs.Frequenzgangfunktion(frf);
 visufrf.set_plots('bode','log','deg','coh')
 % 

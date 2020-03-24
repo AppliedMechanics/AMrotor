@@ -48,7 +48,7 @@ obj.make_unit();
 obj.make_descriptions_for_FRF();
 
 % inform user of delta between desired and real sensor position
-disp([obj.descriptionsH{1:end},':'])
+disp([obj.name, obj.descriptionsH{1:end},':'])
 fprintf('INPUT\n')
 obj.print_table(sensorIn.position, sensorIn.positionMesh, sensorIn.position-sensorIn.positionMesh)
 fprintf('OUTPUT\n')
@@ -60,7 +60,7 @@ N = floor(length(time)/numberOfBlocks/2)*2;
 obj.check_for_uniform_sampling(time);
 fs = 1/(time(2)-time(1));
 window = eval([windowShape,'(N)']);%hsinew(N);%boxcar(N);%ahann(N);%
-POverlap = 0;%67;
+POverlap =67;% 0;%
 
 
 %% calculation
