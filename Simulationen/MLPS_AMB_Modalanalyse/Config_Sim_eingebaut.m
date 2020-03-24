@@ -197,10 +197,12 @@ count = 0;
 % Unwuchten
 count = count + 1;
 cnfg.cnfg_load(count).name = 'Kleine Unwucht';
-cnfg.cnfg_load(count).position = 280e-3;
-cnfg.cnfg_load(count).betrag = 1e-6;%5e-6;
-cnfg.cnfg_load(count).winkellage = 0;
+cnfg.cnfg_load(count).position = 363e-3;
+cnfg.cnfg_load(count).betrag = 1e-6;
+cnfg.cnfg_load(count).winkellage = pi/4;
 cnfg.cnfg_load(count).type='Unbalance_static';
+cnfg.cnfg_load(count).width=0.01;
+cnfg.cnfg_load(count).length=0.1;
 
 % Sinusförmige Anregungskraft
 % count = count + 1;

@@ -3,21 +3,23 @@ classdef Load < matlab.mixin.Heterogeneous & handle
 %   loads are computed on the right-hand side of the system's equations:
 %   M*xdd+D*xd+K*x=Loads
    properties
-      cnfg=struct([])    
-      name
-      h
-      localisation_matrix
-      position
+    name
+    cnfg=struct([]) 
+    position
+    type
+    h
+    localisation_matrix
    end
    methods
        %Konstruktor
-       function obj = Load(a)
+       function self = Load(arg)
          if nargin == 0
-           obj.name = 'Empty Load';
+           self.name = 'Empty Load';
          else
-           obj.cnfg = a;
-           obj.name = obj.cnfg.name;
-           obj.position=obj.cnfg.position;
+           self.cnfg = arg;
+           self.name = self.cnfg.name;
+           self.position=self.cnfg.position;
+           self.type = self.cnfg.type;
          end            
        end
         

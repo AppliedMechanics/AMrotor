@@ -1,6 +1,6 @@
 function plot_unbalance(ax,load)
  % Visualization parameters setting -----------------------------
-    color = AMrotorTools.TUMColors.TUMDiag13;
+    color = AMrotorTools.TUMColors.TUMDiag1;
     
     if ~isfield(load.cnfg,'color')
     elseif isempty(load.cnfg.color)
@@ -8,36 +8,34 @@ function plot_unbalance(ax,load)
         color = load.cnfg.color;
     end
     
-    width = 2;
+    width = load.cnfg.betrag*1000;
     if ~isfield(load.cnfg,'width')
     elseif isempty(load.cnfg.width)
     else
         width=load.cnfg.width;
     end
     
-    length= 0.1;
+    length= 0.15;
     if ~isfield(load.cnfg,'length')
     elseif isempty(load.cnfg.length)
     else
-        width=load.cnfg.length;
+        length=load.cnfg.length;
     end
     
     zp=load.cnfg.position;
-    r = load.cnfg.betrag*0.01;
     phi = load.cnfg.winkellage;
     
-    R = 0.15;
-    xp = R*cos(phi);
-    yp = R*sin(phi);
+    r = width;
+    xp = length*cos(phi);
+    yp = length*sin(phi);
     % Kugel;
     [x,y,z] = sphere();
     h = surf(ax, z*r+zp, y*r+yp, x*r+xp);
-
-    % Linie;
-    line(ax, [zp,zp], [0,yp],[0,xp]);
-    
     set(h, 'edgecolor','none')
     set(h, 'facecolor',color)
-    %h.Color=color;
-    %h.LineWidth = width;
+    
+    % Linie;
+    h=line(ax, [zp,zp], [0,yp],[0,xp]);
+    h.Color=color;
+    h.LineWidth = 1;
 end
