@@ -8,15 +8,13 @@ outPos = obj.outputPosition;
 [deltaOut,nodePosOut]=rotor.get_distance_node_desired_position(outPos);
 
 % Input
-fprintf('INPUT \t | \t desired \t | \t closest node \t | delta\n')
-fprintf('--------------------------------------------------------\n')
+fprintf('INPUT\n')
 obj.print_table(inPos, nodePosIn, deltaIn)
 
 disp(' ') % skip line
 
 % Output
-fprintf('OUTPUT \t | \t desired \t | \t closest node \t | delta\n')
-fprintf('--------------------------------------------------------\n')
+fprintf('OUTPUT\n')
 obj.print_table(outPos, nodePosOut, deltaOut)
 
 end

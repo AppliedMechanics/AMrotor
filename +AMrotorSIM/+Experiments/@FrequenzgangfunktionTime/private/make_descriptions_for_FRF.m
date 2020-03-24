@@ -26,10 +26,10 @@ for iOutDir = 1 : length(outputDirection)
         currInputDirection = inputDirection(iInDir);
         currOutputDirection = outputDirection(iOutDir);
         
-        inPosStr = num2str( sensorIn.Position*1e3 , '%3.0f' );
+        inPosStr = num2str( sensorIn.position*1e3 , '%3.0f' );
         inDirStr = ldof(currInputDirection);
         
-        outPosStr = num2str( sensorOut.Position*1e3 , '%3.0f' );
+        outPosStr = num2str( sensorOut.position*1e3 , '%3.0f' );
         outDirStr = ldof(currOutputDirection);
         
         descriptionsH{iOut,iIn} = ['in',inPosStr,inDirStr,' out',outPosStr,outDirStr];

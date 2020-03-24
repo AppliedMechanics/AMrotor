@@ -13,7 +13,9 @@ function plot(self,sensors,direction)
         [x_val,y_val,z_val]=sensor.read_values(self.experiment);
 
 
-        figure('name',[sensor.name, ' at position ',num2str(sensor.Position), '; Timesignal'], 'NumberTitle', 'off');
+        figure('name',[sensor.name, ' at position ',num2str(sensor.position),...
+            '(mesh node ', num2str(sensor.positionMesh) '); Timesignal'],...
+            'NumberTitle', 'off');
 
         tmp.count = 1;
         for rpm = self.experiment.drehzahlen

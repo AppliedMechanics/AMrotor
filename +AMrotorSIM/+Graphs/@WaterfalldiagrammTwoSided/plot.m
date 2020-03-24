@@ -22,7 +22,9 @@ for sensor = sensors
     amp_Rminus=abs(Rminus(:,2:end));%*1000;
     f=f(2:end);
     % Plot
-    figure('name',[sensor.name, ' at position ',num2str(sensor.Position), '; Waterfall'], 'NumberTitle', 'off');
+    figure('name',[sensor.name, ' at position ',num2str(sensor.position),... 
+        '(mesh node ', num2str(sensor.positionMesh),'); Waterfall'],...
+        'NumberTitle', 'off');
     ffull=[flip(-f(:,1:end)) f(:,1:end)];
     ampfull=[flip(amp_Rminus(:,1:1:end),2) amp_Rplus(:,1:1:end)];
     waterfall(ffull,rpm_vec./60,ampfull)

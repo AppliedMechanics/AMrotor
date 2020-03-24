@@ -88,7 +88,7 @@ Janitor.cleanFigures();
 
 %% Running Time Simulation
 
-St_Lsg = Experiments.Stationaere_Lsg( r , 0 , (0.001:0.001:2) );%St_Lsg = Experiments.Stationaere_Lsg(r,[0:50:10e3],[0:0.001:2]); %obj = Stationaere_Lsg(a,drehzahlvektor,time)
+St_Lsg = Experiments.Stationaere_Lsg( r , 0 , (0.001:0.001:0.1) );%St_Lsg = Experiments.Stationaere_Lsg(r,[0:50:10e3],[0:0.001:2]); %obj = Stationaere_Lsg(a,drehzahlvektor,time)
 St_Lsg.compute_ode15s_ss
 %St_Lsg.compute_euler_ss
 % St_Lsg.compute_newmark

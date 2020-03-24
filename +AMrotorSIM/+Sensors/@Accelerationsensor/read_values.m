@@ -11,7 +11,7 @@ function [xdd_val,ydd_val,zdd_val] = read_values(self,experiment)
         drehzahlvektor = cell2mat(keys(res));
         for drehzahl = drehzahlvektor
 
-        node_nr = rotor.find_node_nr(self.Position);
+        node_nr = rotor.find_node_nr(self.position);
         dof_x = rotor.get_gdof('u_x',node_nr);
         dof_y = rotor.get_gdof('u_y',node_nr);
         dof_z = rotor.get_gdof('u_z',node_nr);

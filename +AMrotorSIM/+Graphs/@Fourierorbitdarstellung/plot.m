@@ -8,7 +8,9 @@
             
             [x_val,y_val,~]=sensor.read_values(self.experiment);
             tmp.count = 1;
-            figure('name',[sensor.name, ' at position ',num2str(sensor.Position),'; Fourierorbit'], 'NumberTitle', 'off');
+            figure('name',[sensor.name, ' at position ',num2str(sensor.position),... 
+                '(mesh node ', num2str(sensor.positionMesh),') Fourierorbit'],...
+                'NumberTitle', 'off');
             for rpm = self.experiment.drehzahlen
                 [x_four] = FourierFit(self.time,x_val(rpm),rpm, Ordnung);
                 [y_four] = FourierFit(self.time,y_val(rpm),rpm, Ordnung);

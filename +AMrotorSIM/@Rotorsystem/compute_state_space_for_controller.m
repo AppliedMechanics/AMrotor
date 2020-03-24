@@ -42,7 +42,7 @@ B = B1*B2;
 C = [];
 for sensor = self.sensors
     if strcmp(sensor.type,'Displacementsensor')
-        sensNode = self.rotor.find_node_nr(sensor.Position);
+        sensNode = self.rotor.find_node_nr(sensor.position);
         % which direction ? -> simply chose the x-direction
         dof_x = self.rotor.get_gdof('u_x',sensNode);
         L = zeros(1,nDof);

@@ -10,7 +10,9 @@ F_x={}; Y_x={}; AMPL_x={};
 Drehzahl = {}; DZ = [];
 
 for sensor = sensors
-    figure('name',[sensor.name, ' at position ',num2str(sensor.Position), '; Waterfall'], 'NumberTitle', 'off');
+    figure('name',[sensor.name, ' at position ',num2str(sensor.position),... 
+        '(mesh node ', num2str(sensor.positionMesh),'); Waterfall'],...
+        'NumberTitle', 'off');
     direction = self.rotorsystem.rotor.mesh.elements.set_dof_number(direction);
     nDir = length(direction);
     

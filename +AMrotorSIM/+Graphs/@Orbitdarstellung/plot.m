@@ -8,7 +8,8 @@ function plot(self,sensors)
         [x_val,y_val,~]=sensor.read_values(self.experiment);
 
 
-        figure('name',[sensor.name, ' at position ',num2str(sensor.Position),'; Orbit'],...
+        figure('name',[sensor.name, ' at position ',num2str(sensor.position),...
+            '(mesh node ', num2str(sensor.positionMesh),'); Orbit'],...
                 'NumberTitle', 'off');
 
         tmp.count = 1;

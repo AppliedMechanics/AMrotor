@@ -37,7 +37,9 @@ classdef Fourierdarstellung < handle
             fs = self.abtastrate;
             
             
-            figure('name',[sensor.name, ' at position ',num2str(sensor.Position),'; Fourier'], 'NumberTitle', 'off');
+            figure('name',[sensor.name, ' at position ',num2str(sensor.position),... 
+                '(mesh node ', num2str(sensor.positionMesh),') Fourier'],...
+                'NumberTitle', 'off');
             tmp.count = 1;
             for rpm = self.experiment.drehzahlen
                 val = cell(size(direction));

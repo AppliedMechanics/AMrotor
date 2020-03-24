@@ -9,6 +9,7 @@ end
 for cnfg=obj.cnfg.cnfg_sensor
     obj.sensors(end+1) = AMrotorSIM.Sensors.(cnfg.type)(cnfg);
 end
+obj.get_sensor_mesh_position;
 
 % Adding Loads to System
 for cnfg=obj.cnfg.cnfg_load
