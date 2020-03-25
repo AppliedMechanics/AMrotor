@@ -198,7 +198,7 @@ count = 0;
 count = count + 1;
 cnfg.cnfg_load(count).name = 'Kleine Unwucht';
 cnfg.cnfg_load(count).position = 363e-3;
-cnfg.cnfg_load(count).betrag = 1e-6;
+cnfg.cnfg_load(count).betrag = 1e-4;
 cnfg.cnfg_load(count).winkellage = pi/4;
 cnfg.cnfg_load(count).type='Unbalance_static';
 cnfg.cnfg_load(count).width=0.01;
@@ -240,13 +240,13 @@ cnfg.cnfg_load(count).length=0.1;
 % whirl-sweep-Kraft
 count = count + 1;
 cnfg.cnfg_load(count).name='Whirl Sweep Kraft';
-cnfg.cnfg_load(count).position=138e-3; % Position ML 1
+cnfg.cnfg_load(count).position=113e-3; % Position ML 1
 cnfg.cnfg_load(count).betrag_x= 1;
 cnfg.cnfg_load(count).betrag_y= cnfg.cnfg_load(count).betrag_x;
 cnfg.cnfg_load(count).frequency_0 = 0; % Startfrequenz
-cnfg.cnfg_load(count).frequency= 1000;  %in Hz, Endfrequenz
-cnfg.cnfg_load(count).t_start = 0.1;%2; % Startzeitpunkt
-cnfg.cnfg_load(count).t_end= 0.6;%endzeitpunkt des Chirps, hier wird f erreicht
+cnfg.cnfg_load(count).frequency= 250;  %in Hz, Endfrequenz
+cnfg.cnfg_load(count).t_start = 0;%2; % Startzeitpunkt
+cnfg.cnfg_load(count).t_end= 0.8;%endzeitpunkt des Chirps, hier wird f erreicht
 cnfg.cnfg_load(count).type='Force_timevariant_whirl_fwd_sweep';
 
 

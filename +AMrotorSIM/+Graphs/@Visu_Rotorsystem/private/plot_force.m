@@ -1,27 +1,55 @@
 function plot_force(ax,load)
 
+% Visualization parameters setting -----------------------------
+    color = AMrotorTools.TUMColors.TUMDiag13;
+    
+    if ~isfield(load.cnfg,'color')
+    elseif isempty(load.cnfg.color)
+    else
+        color = load.cnfg.color;
+    end
+    
+    width = 2;
+    if ~isfield(load.cnfg,'width')
+    elseif isempty(load.cnfg.width)
+    else
+        width=load.cnfg.width;
+    end
+    
+    xlength= 0.075;
+    if ~isfield(load.cnfg,'xlength')
+    elseif isempty(load.cnfg.xlength)
+    else
+        xlength=load.cnfg.xlength;
+    end
+    
+    ylength= 0.075;
+    if ~isfield(load.cnfg,'ylength')
+    elseif isempty(load.cnfg.ylength)
+    else
+        ylength=load.cnfg.ylength;
+    end
+    
+    radius = 0.005;
+    if ~isfield(load.cnfg,'radius')
+    elseif isempty(load.cnfg.radius)
+    else
+        ylength=load.cnfg.radius;
+    end    
+
     zp=load.cnfg.position;
-    lx = load.cnfg.betrag_x;
-    ly = load.cnfg.betrag_y;
     
     %Vektoren;
-    h=quiver3(ax,zp,0,0,0,ly*0.004,lx*0.004);
-    % Linie;
+    h=quiver3(ax,zp,-radius-ylength,-radius-xlength,0,ylength,xlength);
+    h.Color = color;
+    h.LineWidth = width;
+    h.MaxHeadSize = 0.6;
     
-    h.Color='blue';
-    h.LineWidth = 5;
-    
-    zp=load.cnfg.position;
-    
-    pos = load.position; 
-    node_at_pos = obj.find_node_nr(pos);
-    diameter = obj.mesh.nodes(node_at_pos).radius_outer*2;
     % Zylinderfläche;
-    [x,y,z] = cylinder(diameter*1.2);
+    [x,y,z] = cylinder(radius);
 
-    %h = surf(ax, x, y, z*0.01+zp);
     h = surf(ax,z*0.01+zp-0.005, y, x);
 
     set(h, 'edgecolor','none')
-    set(h, 'facecolor','cyan')
+    set(h, 'facecolor',color)
 end
