@@ -110,5 +110,5 @@ function [G_ele] = compute_gyroscopic_matrix(Element)
     G2 = a*G2;
     
     %Gyroscopic Matrix for Element
-    G_ele = -(G0+phi*G1+phi^2*G2); %Eintraege vertauscht, damit forward und backward whirl stimmen
+    G_ele = -(G0+phi*G1+phi^2*G2);
 end
