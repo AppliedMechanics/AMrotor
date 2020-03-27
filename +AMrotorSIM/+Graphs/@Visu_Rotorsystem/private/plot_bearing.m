@@ -1,26 +1,29 @@
-function plot_bearings(ax,bearings,obj)
-
-for bearing=bearings
-    
-    if isempty(bearing.cnfg.color)
-        bearing.cnfg.color='green';
-    end
-    
-    zp=bearing.cnfg.position;
-        
+function plot_bearing(ax,bearing,obj)
+      
+    zp=bearing.cnfg.position;    
     bearing_pos = bearing.position; 
     node_at_pos = obj.find_node_nr(bearing_pos);
 
     % Visualization parameters setting -----------------------------
-    if xor(~isfield(bearing.cnfg,'width'),isempty(bearing.cnfg.width))
-        width = 10e-3;
-    else 
+    color = AMrotorTools.TUMColors.TUMOrange;
+    
+    if ~isfield(bearing.cnfg,'color')
+    elseif isempty(bearing.cnfg.color)
+    else
+        color = bearing.cnfg.color;
+    end
+    
+    width = 10e-3;
+    if ~isfield(bearing.cnfg,'width')
+    elseif isempty(bearing.cnfg.width)
+    else
         width = bearing.cnfg.width;
     end
     
+    radius = obj.mesh.nodes(node_at_pos).radius_outer*1.4;
     if ~isfield(bearing.cnfg,'vradius')
-        radius = obj.mesh.nodes(node_at_pos).radius_outer*1.4;
     elseif isempty(bearing.cnfg.vradius)
+    else
         radius = bearing.cnfg.vradius;
     end
     % -------------------------------------------------------------
@@ -30,6 +33,6 @@ for bearing=bearings
 
     h = surf(ax,z*width+zp-width/2, y, x);
     set(h, 'edgecolor','none')
-    set(h, 'facecolor',bearing.cnfg.color)
+    set(h, 'facecolor',color)
 
 end

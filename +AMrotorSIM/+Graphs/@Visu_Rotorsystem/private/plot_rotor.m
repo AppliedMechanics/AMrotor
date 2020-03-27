@@ -7,6 +7,15 @@ function plot_rotor(ax, rotor)
     geo_node_z=zeros(1,n_nodes);
     geo_node_x=zeros(1,n_nodes);
 
+
+    color = AMrotorTools.TUMColors.TUMGray2;
+    
+    if ~isfield(rotor.cnfg,'color')
+    elseif isempty(rotor.cnfg.color)
+    else
+        color = rotor.cnfg.color;
+    end
+    
     % erzeuge Vektor r mit Radien der Abschnitte
     %======================================================================
 
@@ -42,7 +51,7 @@ function plot_rotor(ax, rotor)
 
     hs(1)=surf(ax,z+geo_node_z(1),y,x);
     set(hs(1), 'edgecolor','none')
-    set(hs(1), 'facecolor',rotor.cnfg.color)
+    set(hs(1), 'facecolor',color)
 
     for n=2:dim_r(1)
 
@@ -64,10 +73,10 @@ function plot_rotor(ax, rotor)
         %plote Zylinder
         hz(n) = surf(ax,zzyl,yzyl, xzyl);
         set(hz(n), 'edgecolor','none')
-        set(hz(n), 'facecolor',rotor.cnfg.color)
+        set(hz(n), 'facecolor',color)
         %Plote Deckel
         hs(n)=surf(ax,z+geo_node_z(n),y,x);
-        set(hs(n), 'facecolor',rotor.cnfg.color)
+        set(hs(n), 'facecolor',color)
 
         if r(n) > r(n-1) 
             set(hs(n), 'edgecolor','none') %sichtbare deckel ohne edges
@@ -82,17 +91,10 @@ function plot_rotor(ax, rotor)
     end
 
     set(hs(n), 'edgecolor','none')
-    set(hs(n), 'facecolor',rotor.cnfg.color)
+    set(hs(n), 'facecolor',color)
 
     title('User Input Geometry')
 end
-
- 
-% shows axis system for reference
-% quiver3(zeros(3,1),zeros(3,1),zeros(3,1),[0.1;0;0],[0;0.1;0],[0;0;0.1],'k')
-% text(0.1,0.0,0.0,'z')
-% text(0.0,0.1,0.0,'x')
-% text(0.0,0.0,0.1,'y')
 
 
 

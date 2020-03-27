@@ -1,16 +1,15 @@
 function plot_components(ax,components,obj)
 
-for i=components
-    switch i.type
+for component=components
+    switch component.type
         case {'Seals','CompLUTMCK'}
-            plot_CompLUTMCK(ax,i,obj);
+            plot_CompLUTMCK(ax,component,obj);
     
         case 'Bearings'
-            plot_bearings(ax,i,obj);
+            plot_bearing(ax,component,obj);
             
         case 'Disc'
-            plot_discs(ax,i);
-    
+            plot_disc(ax,component);
     end
 
 end
