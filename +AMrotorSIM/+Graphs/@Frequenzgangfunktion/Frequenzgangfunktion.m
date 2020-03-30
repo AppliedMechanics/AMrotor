@@ -80,7 +80,7 @@ classdef Frequenzgangfunktion < handle
         
         function set_color_number(obj)
             obj.ColorHandler = AMrotorTools.PlotColors();
-            num = length(obj.experimentFRF.H);
+            num = size(obj.experimentFRF.H,2)*size(obj.experimentFRF.H,3);
             obj.ColorHandler.set_up(num);
         end
         
