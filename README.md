@@ -11,10 +11,10 @@ Startpunkt ist Eingabe des Befehls `doc AMrotor` bzw. `doc AMrotorSIM.Rotorsyste
 
 ## Ordnerstruktur
 
-- *+AMrotorMONI* enthält Funktionen für das Monitoring von Rotorsystemen, diese teile werden aktuell nicht im Simulationsprogramm genutzt
+- *+AMrotorMONI* enthält Funktionen für das Monitoring von Rotorsystemen, diese Teile werden aktuell nicht im Simulationsprogramm genutzt
 - *+AMrotorSIM* enthält den eigentlichen Simualtionscode. Das Rotorsimualtionsprogramm ist Objekt-orientiert aufgebaut. 
-- *+AMrotorTools* enthält Tools, um plots ü+bersichichtlich darzustellen oder einen Timer
-- *Abravibe_Toolbox* enthält die Abravibe-Toolbox von Anders Brandt, die unter GNU GPL Licence, siehe die Lizenz-Datei in diesem Ordner, sowie eine Funktionalität zur Animation von Eigenmoden; nützliche Funktionen zur (u.a. experimentellen) Modalanalyse
+- *+AMrotorTools* enthält Tools, um beispielsweise plots übersichichtlich darzustellen oder einen Timer
+- *Abravibe_Toolbox* enthält die Abravibe-Toolbox von Anders Brandt, die unter der GNU GPL Licence steht (siehe die Lizenz-Datei in diesem Ordner), sowie eine Funktionalität zur Animation von Eigenmoden; nützliche Funktionen zur (u.a. experimentellen) Modalanalyse
 - *doc* enthält ein sehr kurzes *Getting Started*
 - *Examples* enthält Beispiele zur Benutzung des Simulationscodes und kann als Ausgangspunkt für eigene Simulationen genutzt werden, soll die Funktionalität des Codes demonstrieren
 - *Simulationen* enthält konkrete Simulationen von Prüfständen und anderen Anwendungsfällen. Dieser Ordner soll für eigene Anwendungsfälle von AMrotor genutzt werden
