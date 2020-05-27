@@ -1,7 +1,7 @@
 function plot_sensors(ax,sensors)
 
 for sensor=sensors
-    if isa(sensor,'AMrotorSIM.Sensors.Displacementsensor')
+    %if isa(sensor,'AMrotorSIM.Sensors.Displacementsensor')
     zp=sensor.cnfg.position;
     
     % Visualization parameters setting -----------------------------
@@ -31,5 +31,5 @@ for sensor=sensors
     h=quiver3(ax,[zp,zp],[0,0],[0,0],[0,0],[0,length],[length,0]);
     h.Color=color;
     h.LineWidth = width;
-    end
+    %end
 end

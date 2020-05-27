@@ -151,7 +151,9 @@ count = count + 1;
 cnfg.cnfg_load(count).name = 'Kleine Unwucht';
 cnfg.cnfg_load(count).position = 250e-3;
 cnfg.cnfg_load(count).betrag = 1;%5e-6;
-cnfg.cnfg_load(count).winkellage = 0;
+cnfg.cnfg_load(count).winkellage = 30/180*pi;
+cnfg.cnfg_load(count).width = 10e-3;
+cnfg.cnfg_load(count).length = 70e-3;
 cnfg.cnfg_load(count).type='Unbalance_static';
 
 % Sinusfoermige Anregungskraft

@@ -56,7 +56,7 @@ function show_3D(obj)
 
     hs(1)=surf(z+geo_node_z(1),y,x);
     set(hs(1), 'edgecolor','none')
-    set(hs(1), 'facecolor','b')
+    set(hs(1), 'facecolor',AMrotorTools.TUMColors.TUMGray2)
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -86,11 +86,11 @@ function show_3D(obj)
         %hz(n) = surf(zzyl,yzyl, xzyl);
         hz(n) = surf(zzyl,yzyl, xzyl);
         set(hz(n), 'edgecolor','none')
-        set(hz(n), 'facecolor','b')
+        set(hz(n), 'facecolor',AMrotorTools.TUMColors.TUMGray2)
         %Plote Deckel
         %hs(n)=surf(z+geo_node_x(n),y,x);
         hs(n)=surf(z+geo_node_z(n),y,x);
-        set(hs(n), 'facecolor','b')
+        set(hs(n), 'facecolor',AMrotorTools.TUMColors.TUMGray2)
 
         if r(n) > r(n-1) 
 
@@ -107,7 +107,7 @@ function show_3D(obj)
     end
 
     set(hs(n), 'edgecolor','none')
-    set(hs(n), 'facecolor','b')
+    set(hs(n), 'facecolor',AMrotorTools.TUMColors.TUMGray2)
 
 
     zz=1:50;

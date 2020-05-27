@@ -2,7 +2,7 @@ function [ax]=show_3D(self)
    ele = self.elements;
    nEle = length(self.elements);
    
-   FaceColorCap = 'blue'; %rgb or color string, "cap"->Deckel
+   FaceColorCap = AMrotorTools.TUMColors.TUMGray2; %rgb or color string, "cap"->Deckel
    EdgeColorCap = 'none'; 
    FaceColorCyl = FaceColorCap;
    EdgeColorCyl = EdgeColorCap; 
