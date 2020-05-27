@@ -237,6 +237,7 @@ cnfg.cnfg_component (count).name = 'CompLUTMCK Seal 1';
 cnfg.cnfg_component (count).type='CompLUTMCK'; 
 cnfg.cnfg_component (count).position=250e-3;                        %[m]
 cnfg.cnfg_component (count).Table = load('Inputfiles/SealTestRigEcc/TestRigLam1Ecc0.mat'); 
+cnfg.cnfg_component (count).vradius = Komp.r*1.3;
 % zu ladende Datei muss folgende Variablen enthalten (siehe auch Beispiel):
 % rpm = 1 x Nrpm array
 % mass_matrix = 6 x 6 cell
@@ -250,6 +251,7 @@ cnfg.cnfg_component (count).name = 'CompLUTMCK Seal 2';
 cnfg.cnfg_component (count).type='CompLUTMCK'; 
 cnfg.cnfg_component (count).position=310e-3;                        %[m]
 cnfg.cnfg_component (count).Table = load('Inputfiles/SealTestRigEcc/TestRigLam2Ecc0.mat'); 
+cnfg.cnfg_component (count).vradius = Komp.r*1.3;
 
 %% Seals
 % count = count+1;
