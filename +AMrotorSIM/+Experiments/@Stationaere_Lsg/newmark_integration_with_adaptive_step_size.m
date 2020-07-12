@@ -48,7 +48,8 @@ end
 
 S = M + h*gamma*C + h^2*beta*K;
 
-R = chol(S);
+% R = chol(S);
+[L,U,P]=lu(S);
 
 t(1) = tspan(1);
 x(:,1) = x0;
@@ -75,7 +76,9 @@ while t0 < tspan(end) % check integration interval
     dotx1  = dotx0 + (1-gamma)*h*ddotx0;
     
     % acceleration computing
-    ddotx1 = R\(R'\(-C*dotx1 - K*x1 + F));
+    %ddotx1 = R\(R'\(-C*dotx1 - K*x1 + F));
+    LUtemp = L\(P*(-C*dotxtemp - K*xtemp + F));
+    ddotxtemp = U\LUtemp;
     ddotx1(6:6:end) = 0; % angular acceleration = 0 -> constant angular velocity -> STATIONARY
     
     % correction

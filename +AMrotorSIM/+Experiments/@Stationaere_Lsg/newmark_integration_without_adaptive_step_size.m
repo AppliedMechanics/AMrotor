@@ -1,5 +1,7 @@
 function [t,x,dotx,ddotx,localError,globalError] = newmark_integration_without_adaptive_step_size(obj,M,C,K,forceFunction,t,x0,dotx0)
 % See for example lecture script: Rixen, Structural Dynamics
+% but here use LU-factorization instad of Cholesky, because here S is not
+% symmetric (because of G)
 
 %NEWMARK Newmark scheme (beta = 1/4, gamma = 1/2)
 %   Mass M, damping C, stiffness K , excitation F (vector), time vector t, initial condition x0
@@ -17,7 +19,7 @@ end
 
 S = M + h*gamma*C + h^2*beta*K;
 
-R = chol(S);
+[L,U,P]=lu(S);
 
 x(:,1) = x0;
 xtemp = x0;
@@ -42,7 +44,8 @@ for iter = 2:length(t)
     dotxtemp  = dotxtemp + (1-gamma)*h*ddotxtemp;
     
     % acceleration computing
-    ddotxtemp = R\(R'\(-C*dotxtemp - K*xtemp + F));
+    LUtemp = L\(P*(-C*dotxtemp - K*xtemp + F));
+    ddotxtemp = U\LUtemp;
     ddotxtemp(6:6:end) = 0; % angular acceleration = 0 -> constant angular velocity -> STATIONARY
     
     % correction
