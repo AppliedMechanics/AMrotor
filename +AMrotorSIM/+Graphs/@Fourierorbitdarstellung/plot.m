@@ -2,6 +2,7 @@
  % main method for the user
 % plot(self,sensors,Ordnung)
 % Ordnung = order of FourierFit
+% This function requires the Matlab curve fitting toolbox.
       disp(self.name)
       
           for sensor = sensors
