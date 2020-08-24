@@ -77,8 +77,8 @@ while t0 < tspan(end) % check integration interval
     
     % acceleration computing
     %ddotx1 = R\(R'\(-C*dotx1 - K*x1 + F));
-    LUtemp = L\(P*(-C*dotxtemp - K*xtemp + F));
-    ddotxtemp = U\LUtemp;
+    LUtemp = L\(P*(-C*dotx1 - K*x1 + F));
+    ddotx1 = U\LUtemp;
     ddotx1(6:6:end) = 0; % angular acceleration = 0 -> constant angular velocity -> STATIONARY
     
     % correction
@@ -136,6 +136,8 @@ while t0 < tspan(end) % check integration interval
     set(0, 'CurrentFigure',figh)
     hold on
     plot(t1,h,'g.')
+    xlabel('t/s')
+    ylabel('h/s')
     
     if flagNextStep
         % ToDo: check whether or not to call the output function, only at tspan
