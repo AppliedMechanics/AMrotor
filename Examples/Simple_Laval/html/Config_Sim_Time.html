@@ -1,0 +1,602 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Config_Sim_Time</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-09-13"><meta name="DC.source" content="Config_Sim_Time.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">================Rotor===================================================</a></li><li><a href="#2">====================Sensoren============================================</a></li><li><a href="#3">=========================Komponenten====================================</a></li><li><a href="#4">Lager</a></li><li><a href="#5">=========================Lasten=========================================</a></li><li><a href="#6">========================PID-Regler======================================</a></li><li><a href="#7">======================Active Magnetic Bearing===========================</a></li></ul></div><h2 id="1">================Rotor===================================================</h2><p>Aufbau eines Structs mit den Rotordaten</p><pre class="codeinput">cnfg.cnfg_rotor.name = <span class="string">'Einfaches Beispiel: Laval-Rotor'</span>;
+
+cnfg.cnfg_rotor.material.name = <span class="string">'steel'</span>;
+cnfg.cnfg_rotor.material.e_module = 211e9;  <span class="comment">%[N/m^2]</span>
+cnfg.cnfg_rotor.material.density  = 7860;   <span class="comment">%[kg/m^3] %%SI EINHEITEN!!</span>
+cnfg.cnfg_rotor.material.poisson  = 0.3;    <span class="comment">%steel 0.27...0.3 [-]</span>
+cnfg.cnfg_rotor.material.damping.rayleigh_alpha1= 1e-5;    <span class="comment">%D=alpha1*K + alpha2*M</span>
+cnfg.cnfg_rotor.material.damping.rayleigh_alpha2= 10;
+
+<span class="comment">% Rotor Config</span>
+rW = 10e-3; <span class="comment">% Radius der Welle</span>
+rS = 50e-3; <span class="comment">% Radius der Scheibe</span>
+
+cnfg.cnfg_rotor.geo_nodes = {[0 rW 0], [0.220 rW 0], [0.220 rS 0], <span class="keyword">...</span>
+    [0.280 rS 0], [0.280 rW 0], [0.500 rW 0]}; <span class="comment">% Format {[z, r_aussen, r_innen], ...} % ohne Anfangs und Endknoten</span>
+clear <span class="string">rW</span> <span class="string">rS</span>
+
+
+<span class="comment">% FEM Config</span>
+<span class="comment">% cnfg.cnfg_rotor.mesh_opt.name = 'Mesh 1';</span>
+<span class="comment">% cnfg.cnfg_rotor.mesh_opt.n_refinement = 10; %number of refinement steps between d_min and d_max</span>
+<span class="comment">% cnfg.cnfg_rotor.mesh_opt.d_min= 0.001;</span>
+<span class="comment">% cnfg.cnfg_rotor.mesh_opt.d_max = 0.02;</span>
+<span class="comment">% cnfg.cnfg_rotor.mesh_opt.approx = 'symmetric';%'mean';   %Approximation for linear functions with gradient 1=0;</span>
+<span class="comment">%                                 % Insert: upper sum, lower sum, mean, symmetric.</span>
+cnfg.cnfg_rotor.mesh_opt.name = <span class="string">'Mesh 2'</span>;
+cnfg.cnfg_rotor.mesh_opt.n_refinement = 10; <span class="comment">%number of refinement steps between d_min and d_max</span>
+cnfg.cnfg_rotor.mesh_opt.d_min = 0.001;
+cnfg.cnfg_rotor.mesh_opt.d_max = 0.05;
+cnfg.cnfg_rotor.mesh_opt.approx = <span class="string">'symmetric'</span>;<span class="comment">%'mean';   %Approximation for linear functions with gradient 1=0;</span>
+                                <span class="comment">% Insert: upper sum, lower sum, mean, symmetric.</span>
+</pre><h2 id="2">====================Sensoren============================================</h2><p>Sensors</p><pre class="codeinput">cnfg.cnfg_sensor=[];
+count = 0;
+
+<span class="comment">% count = count + 1;</span>
+<span class="comment">% cnfg.cnfg_sensor(count).name = 'WegLager1';</span>
+<span class="comment">% cnfg.cnfg_sensor(count).position=0e-3;</span>
+<span class="comment">% cnfg.cnfg_sensor(count).type='Displacementsensor';</span>
+
+count = count + 1;
+cnfg.cnfg_sensor(count).name=<span class="string">'WegScheibeMitte'</span>;
+cnfg.cnfg_sensor(count).position=250e-3;
+cnfg.cnfg_sensor(count).type=<span class="string">'Displacementsensor'</span>;
+
+count = count + 1;
+cnfg.cnfg_sensor(count).name=<span class="string">'WinkelScheibeMitte'</span>;
+cnfg.cnfg_sensor(count).position=250e-3;
+cnfg.cnfg_sensor(count).type=<span class="string">'Anglesensor'</span>;
+
+count = count + 1;
+cnfg.cnfg_sensor(count).name=<span class="string">'WinkelGeschwScheibeMitte'</span>;
+cnfg.cnfg_sensor(count).position=250e-3;
+cnfg.cnfg_sensor(count).type=<span class="string">'AngularVelocitysensor'</span>;
+
+<span class="comment">% count = count + 1;</span>
+<span class="comment">% cnfg.cnfg_sensor(count).name='WegLager2';</span>
+<span class="comment">% cnfg.cnfg_sensor(count).position=500e-3;</span>
+<span class="comment">% cnfg.cnfg_sensor(count).type='Displacementsensor';</span>
+
+count = count + 1;
+cnfg.cnfg_sensor(count).name=<span class="string">'GeschwindigkeitScheibeMitte'</span>;
+cnfg.cnfg_sensor(count).position=250e-3;
+cnfg.cnfg_sensor(count).type=<span class="string">'Velocitysensor'</span>;
+
+count = count + 1;
+cnfg.cnfg_sensor(count).name=<span class="string">'BeschleunigungScheibeMitte'</span>;
+cnfg.cnfg_sensor(count).position=250e-3;
+cnfg.cnfg_sensor(count).type=<span class="string">'Accelerationsensor'</span>;
+
+count = count + 1;
+cnfg.cnfg_sensor(count).name=<span class="string">'KraftScheibeMitte'</span>;
+cnfg.cnfg_sensor(count).position=250e-3;
+cnfg.cnfg_sensor(count).type=<span class="string">'ForceLoadPostSensor'</span>;
+
+<span class="comment">% count = count + 1;</span>
+<span class="comment">% cnfg.cnfg_sensor(count).name='KraftStoerung';</span>
+<span class="comment">% cnfg.cnfg_sensor(count).position=100e-3;</span>
+<span class="comment">% cnfg.cnfg_sensor(count).type='ForceLoadPostSensor';</span>
+<span class="comment">%</span>
+<span class="comment">% count = count + 1;</span>
+<span class="comment">% cnfg.cnfg_sensor(count).name='KraftLager1';</span>
+<span class="comment">% cnfg.cnfg_sensor(count).position=0e-3;</span>
+<span class="comment">% cnfg.cnfg_sensor(count).type='BearingForceSensor';</span>
+</pre><h2 id="3">=========================Komponenten====================================</h2><pre class="codeinput">count = 0;
+cnfg.cnfg_component = [];
+</pre><h2 id="4">Lager</h2><pre class="codeinput">count = count + 1;
+cnfg.cnfg_component(count).name = <span class="string">'Axiales Lager Links'</span>;
+cnfg.cnfg_component(count).type=<span class="string">'Bearings'</span>;
+cnfg.cnfg_component(count).subtype=<span class="string">'SimpleAxialBearing'</span>;
+cnfg.cnfg_component(count).position=500e-3; <span class="comment">% [m]</span>
+cnfg.cnfg_component(count).stiffness=1e6;                     <span class="comment">%[N/m]</span>
+cnfg.cnfg_component(count).damping = 0;
+
+count = count + 1;
+cnfg.cnfg_component(count).name = <span class="string">'Torque Lager Links'</span>;
+cnfg.cnfg_component(count).type=<span class="string">'Bearings'</span>;
+cnfg.cnfg_component(count).subtype=<span class="string">'SimpleTorqueBearing'</span>;
+cnfg.cnfg_component(count).position=0e-3; <span class="comment">% [m]</span>
+cnfg.cnfg_component(count).stiffness=1e6;                     <span class="comment">%[N/m]</span>
+cnfg.cnfg_component(count).damping = 0;
+
+count = count + 1;
+cnfg.cnfg_component(count).name = <span class="string">'Isotropes Lager 1'</span>;
+cnfg.cnfg_component(count).type=<span class="string">'Bearings'</span>;
+cnfg.cnfg_component(count).subtype=<span class="string">'SimpleBearing'</span>;
+cnfg.cnfg_component(count).position=0e-3; <span class="comment">% [m]</span>
+cnfg.cnfg_component(count).stiffness=1e6;                    <span class="comment">%[N/m]</span>
+cnfg.cnfg_component(count).damping = 0; <span class="comment">% [Ns/m]</span>
+
+count = count + 1;
+cnfg.cnfg_component(count).name = <span class="string">'Isotropes Lager 2'</span>;
+cnfg.cnfg_component(count).type=<span class="string">'Bearings'</span>;
+cnfg.cnfg_component(count).subtype=<span class="string">'SimpleBearing'</span>;
+cnfg.cnfg_component(count).position=500e-3; <span class="comment">% [m]</span>
+cnfg.cnfg_component(count).stiffness=1e6;                   <span class="comment">%[N/m]</span>
+cnfg.cnfg_component(count).damping = 0; <span class="comment">% [Ns/m]</span>
+
+<span class="comment">% count = count+1;</span>
+<span class="comment">% cnfg.cnfg_component(count).name = 'Feste Einspannung';</span>
+<span class="comment">% cnfg.cnfg_component(count).position=0e-3;                        %[m]</span>
+<span class="comment">% cnfg.cnfg_component(count).type='RestrictAllDofsBearing';</span>
+<span class="comment">% cnfg.cnfg_component(count).stiffness=1e10;                     %[N/m]</span>
+<span class="comment">% cnfg.cnfg_component(count).damping = 0;</span>
+</pre><h2 id="5">=========================Lasten=========================================</h2><pre class="codeinput">cnfg.cnfg_load=[];
+count = 0;
+
+<span class="comment">% Kraft in feste Richtung</span>
+<span class="comment">% count = count + 1;</span>
+<span class="comment">% cnfg.cnfg_load(count).name='Const. Kraft';</span>
+<span class="comment">% cnfg.cnfg_load(count).position=250e-3;</span>
+<span class="comment">% cnfg.cnfg_load(count).betrag_x= 10;</span>
+<span class="comment">% cnfg.cnfg_load(count).betrag_y= 0;</span>
+<span class="comment">% cnfg.cnfg_load(count).type='Force_constant_fix';</span>
+
+<span class="comment">% Unwuchten</span>
+count = count + 1;
+cnfg.cnfg_load(count).name = <span class="string">'Kleine Unwucht'</span>;
+cnfg.cnfg_load(count).position = 250e-3;
+cnfg.cnfg_load(count).betrag = 1;<span class="comment">%5e-6;</span>
+cnfg.cnfg_load(count).winkellage = 30/180*pi;
+cnfg.cnfg_load(count).width = 10e-3;
+cnfg.cnfg_load(count).length = 70e-3;
+cnfg.cnfg_load(count).type=<span class="string">'Unbalance_static'</span>;
+
+<span class="comment">% Sinusfoermige Anregungskraft</span>
+<span class="comment">% count = count + 1;</span>
+<span class="comment">% cnfg.cnfg_load(count).name='Sinus Kraft';</span>
+<span class="comment">% cnfg.cnfg_load(count).position=250e-3;</span>
+<span class="comment">% cnfg.cnfg_load(count).betrag_x= 100;</span>
+<span class="comment">% cnfg.cnfg_load(count).frequency_x= 50;  %in Hz</span>
+<span class="comment">% cnfg.cnfg_load(count).betrag_y= 0;</span>
+<span class="comment">% cnfg.cnfg_load(count).frequency_y= 50;</span>
+<span class="comment">% cnfg.cnfg_load(count).type='Force_timevariant_fix';</span>
+
+<span class="comment">% Whirl, Anregungskraft beschreibt Ellipse</span>
+<span class="comment">% count = count + 1;</span>
+<span class="comment">% cnfg.cnfg_load(count).name='Whirl Kraft';</span>
+<span class="comment">% cnfg.cnfg_load(count).position=250e-3;</span>
+<span class="comment">% cnfg.cnfg_load(count).t_start = 0;</span>
+<span class="comment">% cnfg.cnfg_load(count).t_end = 10;</span>
+<span class="comment">% cnfg.cnfg_load(count).betrag_x= 10;</span>
+<span class="comment">% cnfg.cnfg_load(count).betrag_y= 10;</span>
+<span class="comment">% cnfg.cnfg_load(count).frequency= 20;  %in Hz</span>
+<span class="comment">% cnfg.cnfg_load(count).type='Force_timevariant_whirl_fwd';</span>
+
+<span class="comment">% Chirp, Sinus-sweep-Kraft</span>
+<span class="comment">% count = count + 1;</span>
+<span class="comment">% cnfg.cnfg_load(count).name='Chirp Kraft';</span>
+<span class="comment">% cnfg.cnfg_load(count).position=250e-3;</span>
+<span class="comment">% cnfg.cnfg_load(count).betrag_x= 1;</span>
+<span class="comment">% cnfg.cnfg_load(count).frequency_x_0 = 0; % Startfrequenz</span>
+<span class="comment">% cnfg.cnfg_load(count).frequency_x= 200;  %in Hz, Endfrequenz</span>
+<span class="comment">% cnfg.cnfg_load(count).betrag_y= 0;</span>
+<span class="comment">% cnfg.cnfg_load(count).frequency_y_0 = 0;</span>
+<span class="comment">% cnfg.cnfg_load(count).frequency_y= 0;</span>
+<span class="comment">% cnfg.cnfg_load(count).t_start= 0;</span>
+<span class="comment">% cnfg.cnfg_load(count).t_end= 0.5; % Zeitdauer des Chirps, hier wird f erreicht</span>
+<span class="comment">% cnfg.cnfg_load(count).type='Force_timevariant_chirp';</span>
+
+<span class="comment">% % Chirp, Sinus-sweep-Kraft</span>
+<span class="comment">% count = count + 1;</span>
+<span class="comment">% cnfg.cnfg_load(count).name='Chirp Kraft';</span>
+<span class="comment">% cnfg.cnfg_load(count).position=250e-3;</span>
+<span class="comment">% cnfg.cnfg_load(count).betrag_x= 1;</span>
+<span class="comment">% cnfg.cnfg_load(count).frequency_x_0 = 0; % Startfrequenz</span>
+<span class="comment">% cnfg.cnfg_load(count).frequency_x= 200;  %in Hz, Endfrequenz</span>
+<span class="comment">% cnfg.cnfg_load(count).betrag_y= 0;</span>
+<span class="comment">% cnfg.cnfg_load(count).frequency_y_0 = 0;</span>
+<span class="comment">% cnfg.cnfg_load(count).frequency_y= 0;</span>
+<span class="comment">% cnfg.cnfg_load(count).t_start= 0.5;</span>
+<span class="comment">% cnfg.cnfg_load(count).t_end= 1; % Zeitdauer des Chirps, hier wird f erreicht</span>
+<span class="comment">% cnfg.cnfg_load(count).type='Force_timevariant_chirp';</span>
+<span class="comment">%</span>
+<span class="comment">% % Chirp, Sinus-sweep-Kraft</span>
+<span class="comment">% count = count + 1;</span>
+<span class="comment">% cnfg.cnfg_load(count).name='Chirp Kraft';</span>
+<span class="comment">% cnfg.cnfg_load(count).position=0e-3;</span>
+<span class="comment">% cnfg.cnfg_load(count).betrag_x= 0.1;</span>
+<span class="comment">% cnfg.cnfg_load(count).frequency_x_0 = 400; % Startfrequenz</span>
+<span class="comment">% cnfg.cnfg_load(count).frequency_x= 500;  %in Hz, Endfrequenz</span>
+<span class="comment">% cnfg.cnfg_load(count).betrag_y= 0;</span>
+<span class="comment">% cnfg.cnfg_load(count).frequency_y_0 = 0;</span>
+<span class="comment">% cnfg.cnfg_load(count).frequency_y= 0;</span>
+<span class="comment">% cnfg.cnfg_load(count).t_start= 0;</span>
+<span class="comment">% cnfg.cnfg_load(count).t_end= 1; % Zeitdauer des Chirps, hier wird f erreicht</span>
+<span class="comment">% cnfg.cnfg_load(count).type='Force_timevariant_chirp';</span>
+<span class="comment">%</span>
+<span class="comment">% % fwd-whirl-sweep-Kraft</span>
+<span class="comment">% count = count + 1;</span>
+<span class="comment">% cnfg.cnfg_load(count).name='Fwd Whirl Sweep Kraft';</span>
+<span class="comment">% cnfg.cnfg_load(count).position=100e-3;</span>
+<span class="comment">% cnfg.cnfg_load(count).betrag_x= 0.2;</span>
+<span class="comment">% cnfg.cnfg_load(count).betrag_y= cnfg.cnfg_load(count).betrag_x;</span>
+<span class="comment">% cnfg.cnfg_load(count).frequency_0 = 0; % Startfrequenz</span>
+<span class="comment">% cnfg.cnfg_load(count).frequency= 200;  %in Hz, Endfrequenz</span>
+<span class="comment">% cnfg.cnfg_load(count).t_start= 0.45; %Zeitpkt an dem Startfrequenz anliegt</span>
+<span class="comment">% cnfg.cnfg_load(count).t_end= 0.5; % Zeitpkt des Ende des Chirps, hier wird f erreicht</span>
+<span class="comment">% cnfg.cnfg_load(count).type='Force_timevariant_whirl_fwd_sweep';</span>
+<span class="comment">%</span>
+<span class="comment">% % bwd-whirl-sweep-Kraft</span>
+<span class="comment">% count = count + 1;</span>
+<span class="comment">% cnfg.cnfg_load(count).name='Bwd Whirl Sweep Kraft';</span>
+<span class="comment">% cnfg.cnfg_load(count).position=pos.ML1;</span>
+<span class="comment">% cnfg.cnfg_load(count).betrag_x= 10;</span>
+<span class="comment">% cnfg.cnfg_load(count).betrag_y= cnfg.cnfg_load(count).betrag_x;</span>
+<span class="comment">% cnfg.cnfg_load(count).frequency_0 = 0; % Startfrequenz</span>
+<span class="comment">% cnfg.cnfg_load(count).frequency= 200;  %in Hz, Endfrequenz</span>
+<span class="comment">% cnfg.cnfg_load(count).t_start= 0.5;</span>
+<span class="comment">% cnfg.cnfg_load(count).t_end= 1.0;%2; % Zeitdauer des Chirps, hier wird f erreicht</span>
+<span class="comment">% cnfg.cnfg_load(count).type='Force_timevariant_whirl_bwd_sweep';</span>
+<span class="comment">%</span>
+<span class="comment">%</span>
+<span class="comment">% % Muszynska-Seal laminar</span>
+<span class="comment">% count = count + 1;</span>
+<span class="comment">% cnfg.cnfg_load(count).name = 'MuszynskaSealMittig';</span>
+<span class="comment">% cnfg.cnfg_load(count).position=pos.DicMitte;                        %[m]</span>
+<span class="comment">% cnfg.cnfg_load(count).type='MuszynskaLaminarSeal';</span>
+<span class="comment">% cnfg.cnfg_load(count).sealModel = load_seal_model('Inputfiles/TestRigNeu1.m');</span>
+<span class="comment">%</span>
+<span class="comment">% % Lim-Singh-bearing</span>
+<span class="comment">% count = count + 1;</span>
+<span class="comment">% cnfg.cnfg_load(count).name = 'LimSingh1';</span>
+<span class="comment">% cnfg.cnfg_load(count).position=pos.Lag1;                        %[m]</span>
+<span class="comment">% cnfg.cnfg_load(count).type='LimSinghBearing';</span>
+<span class="comment">% cnfg.cnfg_load(count).par = load_bearing_LimSingh('Inputfiles/parametersGupta20mm.m');</span>
+<span class="comment">%</span>
+<span class="comment">% % Lim-Singh-bearing</span>
+<span class="comment">% count = count + 1;</span>
+<span class="comment">% cnfg.cnfg_load(count).name = 'LimSingh2';</span>
+<span class="comment">% cnfg.cnfg_load(count).position=pos.Lag2;                        %[m]</span>
+<span class="comment">% cnfg.cnfg_load(count).type='LimSinghBearing';</span>
+<span class="comment">% cnfg.cnfg_load(count).par = load_bearing_LimSingh('Inputfiles/parametersGupta20mm.m');</span>
+</pre><h2 id="6">========================PID-Regler======================================</h2><pre class="codeinput">cnfg.cnfg_pid_controller=[];
+count = 0;
+</pre><h2 id="7">======================Active Magnetic Bearing===========================</h2><pre class="codeinput">cnfg.cnfg_activeMagneticBearing = [];
+count = 0;
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% ================Rotor===================================================
+% Aufbau eines Structs mit den Rotordaten
+
+cnfg.cnfg_rotor.name = 'Einfaches Beispiel: Laval-Rotor';
+
+cnfg.cnfg_rotor.material.name = 'steel';
+cnfg.cnfg_rotor.material.e_module = 211e9;  %[N/m^2]
+cnfg.cnfg_rotor.material.density  = 7860;   %[kg/m^3] %%SI EINHEITEN!!
+cnfg.cnfg_rotor.material.poisson  = 0.3;    %steel 0.27...0.3 [-]
+cnfg.cnfg_rotor.material.damping.rayleigh_alpha1= 1e-5;    %D=alpha1*K + alpha2*M
+cnfg.cnfg_rotor.material.damping.rayleigh_alpha2= 10;
+
+% Rotor Config
+rW = 10e-3; % Radius der Welle
+rS = 50e-3; % Radius der Scheibe
+
+cnfg.cnfg_rotor.geo_nodes = {[0 rW 0], [0.220 rW 0], [0.220 rS 0], ...
+    [0.280 rS 0], [0.280 rW 0], [0.500 rW 0]}; % Format {[z, r_aussen, r_innen], ...} % ohne Anfangs und Endknoten
+clear rW rS
+
+
+% FEM Config
+% cnfg.cnfg_rotor.mesh_opt.name = 'Mesh 1';
+% cnfg.cnfg_rotor.mesh_opt.n_refinement = 10; %number of refinement steps between d_min and d_max 
+% cnfg.cnfg_rotor.mesh_opt.d_min= 0.001;
+% cnfg.cnfg_rotor.mesh_opt.d_max = 0.02;
+% cnfg.cnfg_rotor.mesh_opt.approx = 'symmetric';%'mean';   %Approximation for linear functions with gradient 1=0;
+%                                 % Insert: upper sum, lower sum, mean, symmetric.
+cnfg.cnfg_rotor.mesh_opt.name = 'Mesh 2';
+cnfg.cnfg_rotor.mesh_opt.n_refinement = 10; %number of refinement steps between d_min and d_max 
+cnfg.cnfg_rotor.mesh_opt.d_min = 0.001;
+cnfg.cnfg_rotor.mesh_opt.d_max = 0.05;
+cnfg.cnfg_rotor.mesh_opt.approx = 'symmetric';%'mean';   %Approximation for linear functions with gradient 1=0;
+                                % Insert: upper sum, lower sum, mean, symmetric.
+    
+    
+%% ====================Sensoren============================================
+% Sensors
+cnfg.cnfg_sensor=[];
+count = 0;
+
+% count = count + 1;
+% cnfg.cnfg_sensor(count).name = 'WegLager1';
+% cnfg.cnfg_sensor(count).position=0e-3;
+% cnfg.cnfg_sensor(count).type='Displacementsensor';
+
+count = count + 1;
+cnfg.cnfg_sensor(count).name='WegScheibeMitte';
+cnfg.cnfg_sensor(count).position=250e-3;
+cnfg.cnfg_sensor(count).type='Displacementsensor';
+
+count = count + 1;
+cnfg.cnfg_sensor(count).name='WinkelScheibeMitte';
+cnfg.cnfg_sensor(count).position=250e-3;
+cnfg.cnfg_sensor(count).type='Anglesensor';
+
+count = count + 1;
+cnfg.cnfg_sensor(count).name='WinkelGeschwScheibeMitte';
+cnfg.cnfg_sensor(count).position=250e-3;
+cnfg.cnfg_sensor(count).type='AngularVelocitysensor';
+
+% count = count + 1;
+% cnfg.cnfg_sensor(count).name='WegLager2';
+% cnfg.cnfg_sensor(count).position=500e-3;
+% cnfg.cnfg_sensor(count).type='Displacementsensor';
+
+count = count + 1;
+cnfg.cnfg_sensor(count).name='GeschwindigkeitScheibeMitte';
+cnfg.cnfg_sensor(count).position=250e-3;
+cnfg.cnfg_sensor(count).type='Velocitysensor';
+
+count = count + 1;
+cnfg.cnfg_sensor(count).name='BeschleunigungScheibeMitte';
+cnfg.cnfg_sensor(count).position=250e-3;
+cnfg.cnfg_sensor(count).type='Accelerationsensor';
+
+count = count + 1;
+cnfg.cnfg_sensor(count).name='KraftScheibeMitte';
+cnfg.cnfg_sensor(count).position=250e-3;
+cnfg.cnfg_sensor(count).type='ForceLoadPostSensor';
+
+% count = count + 1;
+% cnfg.cnfg_sensor(count).name='KraftStoerung';
+% cnfg.cnfg_sensor(count).position=100e-3;
+% cnfg.cnfg_sensor(count).type='ForceLoadPostSensor';
+% 
+% count = count + 1;
+% cnfg.cnfg_sensor(count).name='KraftLager1';
+% cnfg.cnfg_sensor(count).position=0e-3;
+% cnfg.cnfg_sensor(count).type='BearingForceSensor';
+
+%% =========================Komponenten====================================
+count = 0;
+cnfg.cnfg_component = []; 
+
+%% Lager
+
+count = count + 1;
+cnfg.cnfg_component(count).name = 'Axiales Lager Links';
+cnfg.cnfg_component(count).type='Bearings';
+cnfg.cnfg_component(count).subtype='SimpleAxialBearing';
+cnfg.cnfg_component(count).position=500e-3; % [m]
+cnfg.cnfg_component(count).stiffness=1e6;                     %[N/m]
+cnfg.cnfg_component(count).damping = 0;
+
+count = count + 1;
+cnfg.cnfg_component(count).name = 'Torque Lager Links';
+cnfg.cnfg_component(count).type='Bearings';
+cnfg.cnfg_component(count).subtype='SimpleTorqueBearing';
+cnfg.cnfg_component(count).position=0e-3; % [m]
+cnfg.cnfg_component(count).stiffness=1e6;                     %[N/m]
+cnfg.cnfg_component(count).damping = 0;
+
+count = count + 1;
+cnfg.cnfg_component(count).name = 'Isotropes Lager 1';
+cnfg.cnfg_component(count).type='Bearings';
+cnfg.cnfg_component(count).subtype='SimpleBearing';
+cnfg.cnfg_component(count).position=0e-3; % [m]
+cnfg.cnfg_component(count).stiffness=1e6;                    %[N/m]
+cnfg.cnfg_component(count).damping = 0; % [Ns/m]
+
+count = count + 1;
+cnfg.cnfg_component(count).name = 'Isotropes Lager 2';
+cnfg.cnfg_component(count).type='Bearings';
+cnfg.cnfg_component(count).subtype='SimpleBearing';
+cnfg.cnfg_component(count).position=500e-3; % [m]
+cnfg.cnfg_component(count).stiffness=1e6;                   %[N/m]
+cnfg.cnfg_component(count).damping = 0; % [Ns/m]
+
+% count = count+1;
+% cnfg.cnfg_component(count).name = 'Feste Einspannung';
+% cnfg.cnfg_component(count).position=0e-3;                        %[m]
+% cnfg.cnfg_component(count).type='RestrictAllDofsBearing';
+% cnfg.cnfg_component(count).stiffness=1e10;                     %[N/m]
+% cnfg.cnfg_component(count).damping = 0;
+
+%% =========================Lasten=========================================
+cnfg.cnfg_load=[];
+count = 0;
+
+% Kraft in feste Richtung
+% count = count + 1;
+% cnfg.cnfg_load(count).name='Const. Kraft';
+% cnfg.cnfg_load(count).position=250e-3;
+% cnfg.cnfg_load(count).betrag_x= 10;
+% cnfg.cnfg_load(count).betrag_y= 0;
+% cnfg.cnfg_load(count).type='Force_constant_fix';
+
+% Unwuchten
+count = count + 1;
+cnfg.cnfg_load(count).name = 'Kleine Unwucht';
+cnfg.cnfg_load(count).position = 250e-3;
+cnfg.cnfg_load(count).betrag = 1;%5e-6;
+cnfg.cnfg_load(count).winkellage = 30/180*pi;
+cnfg.cnfg_load(count).width = 10e-3;
+cnfg.cnfg_load(count).length = 70e-3;
+cnfg.cnfg_load(count).type='Unbalance_static';
+
+% Sinusfoermige Anregungskraft
+% count = count + 1;
+% cnfg.cnfg_load(count).name='Sinus Kraft';
+% cnfg.cnfg_load(count).position=250e-3; 
+% cnfg.cnfg_load(count).betrag_x= 100;
+% cnfg.cnfg_load(count).frequency_x= 50;  %in Hz
+% cnfg.cnfg_load(count).betrag_y= 0;
+% cnfg.cnfg_load(count).frequency_y= 50;
+% cnfg.cnfg_load(count).type='Force_timevariant_fix';
+
+% Whirl, Anregungskraft beschreibt Ellipse
+% count = count + 1;
+% cnfg.cnfg_load(count).name='Whirl Kraft';
+% cnfg.cnfg_load(count).position=250e-3; 
+% cnfg.cnfg_load(count).t_start = 0;
+% cnfg.cnfg_load(count).t_end = 10;
+% cnfg.cnfg_load(count).betrag_x= 10;
+% cnfg.cnfg_load(count).betrag_y= 10;
+% cnfg.cnfg_load(count).frequency= 20;  %in Hz
+% cnfg.cnfg_load(count).type='Force_timevariant_whirl_fwd';
+
+% Chirp, Sinus-sweep-Kraft
+% count = count + 1;
+% cnfg.cnfg_load(count).name='Chirp Kraft';
+% cnfg.cnfg_load(count).position=250e-3; 
+% cnfg.cnfg_load(count).betrag_x= 1;
+% cnfg.cnfg_load(count).frequency_x_0 = 0; % Startfrequenz
+% cnfg.cnfg_load(count).frequency_x= 200;  %in Hz, Endfrequenz
+% cnfg.cnfg_load(count).betrag_y= 0;
+% cnfg.cnfg_load(count).frequency_y_0 = 0;
+% cnfg.cnfg_load(count).frequency_y= 0;
+% cnfg.cnfg_load(count).t_start= 0;
+% cnfg.cnfg_load(count).t_end= 0.5; % Zeitdauer des Chirps, hier wird f erreicht
+% cnfg.cnfg_load(count).type='Force_timevariant_chirp';
+
+% % Chirp, Sinus-sweep-Kraft
+% count = count + 1;
+% cnfg.cnfg_load(count).name='Chirp Kraft';
+% cnfg.cnfg_load(count).position=250e-3; 
+% cnfg.cnfg_load(count).betrag_x= 1;
+% cnfg.cnfg_load(count).frequency_x_0 = 0; % Startfrequenz
+% cnfg.cnfg_load(count).frequency_x= 200;  %in Hz, Endfrequenz
+% cnfg.cnfg_load(count).betrag_y= 0;
+% cnfg.cnfg_load(count).frequency_y_0 = 0;
+% cnfg.cnfg_load(count).frequency_y= 0;
+% cnfg.cnfg_load(count).t_start= 0.5;
+% cnfg.cnfg_load(count).t_end= 1; % Zeitdauer des Chirps, hier wird f erreicht
+% cnfg.cnfg_load(count).type='Force_timevariant_chirp';
+% 
+% % Chirp, Sinus-sweep-Kraft
+% count = count + 1;
+% cnfg.cnfg_load(count).name='Chirp Kraft';
+% cnfg.cnfg_load(count).position=0e-3; 
+% cnfg.cnfg_load(count).betrag_x= 0.1;
+% cnfg.cnfg_load(count).frequency_x_0 = 400; % Startfrequenz
+% cnfg.cnfg_load(count).frequency_x= 500;  %in Hz, Endfrequenz
+% cnfg.cnfg_load(count).betrag_y= 0;
+% cnfg.cnfg_load(count).frequency_y_0 = 0;
+% cnfg.cnfg_load(count).frequency_y= 0;
+% cnfg.cnfg_load(count).t_start= 0;
+% cnfg.cnfg_load(count).t_end= 1; % Zeitdauer des Chirps, hier wird f erreicht
+% cnfg.cnfg_load(count).type='Force_timevariant_chirp';
+% 
+% % fwd-whirl-sweep-Kraft
+% count = count + 1;
+% cnfg.cnfg_load(count).name='Fwd Whirl Sweep Kraft';
+% cnfg.cnfg_load(count).position=100e-3; 
+% cnfg.cnfg_load(count).betrag_x= 0.2;
+% cnfg.cnfg_load(count).betrag_y= cnfg.cnfg_load(count).betrag_x;
+% cnfg.cnfg_load(count).frequency_0 = 0; % Startfrequenz
+% cnfg.cnfg_load(count).frequency= 200;  %in Hz, Endfrequenz
+% cnfg.cnfg_load(count).t_start= 0.45; %Zeitpkt an dem Startfrequenz anliegt
+% cnfg.cnfg_load(count).t_end= 0.5; % Zeitpkt des Ende des Chirps, hier wird f erreicht
+% cnfg.cnfg_load(count).type='Force_timevariant_whirl_fwd_sweep';
+% 
+% % bwd-whirl-sweep-Kraft
+% count = count + 1;
+% cnfg.cnfg_load(count).name='Bwd Whirl Sweep Kraft';
+% cnfg.cnfg_load(count).position=pos.ML1; 
+% cnfg.cnfg_load(count).betrag_x= 10;
+% cnfg.cnfg_load(count).betrag_y= cnfg.cnfg_load(count).betrag_x;
+% cnfg.cnfg_load(count).frequency_0 = 0; % Startfrequenz
+% cnfg.cnfg_load(count).frequency= 200;  %in Hz, Endfrequenz
+% cnfg.cnfg_load(count).t_start= 0.5;
+% cnfg.cnfg_load(count).t_end= 1.0;%2; % Zeitdauer des Chirps, hier wird f erreicht
+% cnfg.cnfg_load(count).type='Force_timevariant_whirl_bwd_sweep';
+% 
+% 
+% % Muszynska-Seal laminar
+% count = count + 1;
+% cnfg.cnfg_load(count).name = 'MuszynskaSealMittig';
+% cnfg.cnfg_load(count).position=pos.DicMitte;                        %[m]
+% cnfg.cnfg_load(count).type='MuszynskaLaminarSeal';
+% cnfg.cnfg_load(count).sealModel = load_seal_model('Inputfiles/TestRigNeu1.m');
+% 
+% % Lim-Singh-bearing
+% count = count + 1;
+% cnfg.cnfg_load(count).name = 'LimSingh1';
+% cnfg.cnfg_load(count).position=pos.Lag1;                        %[m]
+% cnfg.cnfg_load(count).type='LimSinghBearing';
+% cnfg.cnfg_load(count).par = load_bearing_LimSingh('Inputfiles/parametersGupta20mm.m'); 
+% 
+% % Lim-Singh-bearing
+% count = count + 1;
+% cnfg.cnfg_load(count).name = 'LimSingh2';
+% cnfg.cnfg_load(count).position=pos.Lag2;                        %[m]
+% cnfg.cnfg_load(count).type='LimSinghBearing';
+% cnfg.cnfg_load(count).par = load_bearing_LimSingh('Inputfiles/parametersGupta20mm.m'); 
+
+%% ========================PID-Regler======================================
+cnfg.cnfg_pid_controller=[];
+count = 0;
+
+%% ======================Active Magnetic Bearing===========================
+cnfg.cnfg_activeMagneticBearing = [];
+count = 0;
+##### SOURCE END #####
+--></body></html>

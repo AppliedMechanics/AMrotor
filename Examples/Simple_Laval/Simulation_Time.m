@@ -1,5 +1,4 @@
-%% Simple Laval - Zeitintegration fuer FRF-Berechnung
-
+% Simple Laval - Zeitintegration fuer FRF-Berechnung
 
 %% Clean up
 close all

@@ -1,0 +1,22 @@
+Rotorsystem_class
+=================
+
+This is the +AMrotorSIM module.
+
+.. automodule:: +AMrotorSIM.@Rotorsystem
+
+:mod:`+AMrotorSIM` is a really cool module.
+
+---------------
+This is the handle class definition.
+
+.. autoclass:: Rotorsystem
+    :show-inheritance:
+    :members:
+
+.. automodule:: +AMrotorSIM.@activeMagneticBearing
+
+.. autoclass:: activeMagneticBearing
+    :show-inheritance:
+    :members:
+
