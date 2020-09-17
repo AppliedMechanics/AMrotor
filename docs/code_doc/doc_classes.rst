@@ -1,8 +1,8 @@
-========
+===========
 doc_classes
-========
+===========
 
 .. toctree::
-	:maxdepth: 2
+	:maxdepth: 3
 
 	AMrotorSIM

@@ -17,7 +17,7 @@ import os
 
 # -- Project information -----------------------------------------------------
 
-project = 'AMrotor_doc'
+project = 'AMrotor'
 copyright = '2020, AMrotor_Team'
 author = 'AMrotor_Team'
 
@@ -43,6 +43,8 @@ templates_path = ['_templates']
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+
+autodoc_member_order = 'bysource'
 
 
 # -- Options for HTML output -------------------------------------------------

@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to AMrotor_doc's documentation!
+Welcome to AMrotor documentation!
 =======================================
 
 .. toctree::
@@ -20,14 +20,14 @@ Welcome to AMrotor_doc's documentation!
    :caption: Getting Started
 
    installation
+   usage
 
 
 .. toctree::
    :maxdepth: 2
    :caption: Examples
    
-   ./examples/Config_file_example
-   ./examples/Simulation_file_example
+   examples
    
 
 

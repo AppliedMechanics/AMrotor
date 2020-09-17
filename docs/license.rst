@@ -1,2 +1,5 @@
-Hello license
-=============
+=======
+License
+=======
+
+.. include:: ../LICENSE
