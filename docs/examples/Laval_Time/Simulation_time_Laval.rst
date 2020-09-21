@@ -2,7 +2,9 @@ Simulation_file_example
 =======================
 This is an example code for a simulation file of a simple Laval rotor for time integration.
 All the code snippets can be copied and pasted together in a Matlab script and executed 
-directly. The hidden (commented out) code parts should show former possibilities.
+directly. The hidden (commented out) code parts should show further possibilities.
+The presented functions often contain options that cannot all be shown in the examples. 
+More options can be found in the detailed documentation or in the source code.
 
 Closing all former figures and cleaning the workspace.
 
@@ -35,16 +37,13 @@ Assembly and visualization of the model
 .. image:: ../Rotor_geometry_3D.png
     :width: 48 %
 
-
-
 .. literalinclude:: /../Examples/Simple_Laval/Simulation_Time.m
     :language: matlab
     :linenos:
     :Start-after: Running Time Simulation
     :End-before: Plot results
 
-Writing of the results into an external file and visualizing of all the results
-with the available methods....
+Writing the results into an external file and visualizing all the results.
 
 .. literalinclude:: /../Examples/Simple_Laval/Simulation_Time.m
     :language: matlab

@@ -187,7 +187,9 @@
 <h1>Simulation_file_example<a class="headerlink" href="#simulation-file-example" title="Permalink to this headline">¶</a></h1>
 <p>This is an example code for a simulation file of a simple Laval rotor for time integration.
 All the code snippets can be copied and pasted together in a Matlab script and executed
-directly. The hidden (commented out) code parts should show former possibilities.</p>
+directly. The hidden (commented out) code parts should show further possibilities.
+The presented functions often contain options that cannot all be shown in the examples.
+More options can be found in the detailed documentation or in the source code.</p>
 <p>Closing all former figures and cleaning the workspace.</p>
 <div class="highlight-matlab notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -237,9 +239,9 @@ directly. The hidden (commented out) code parts should show former possibilities
 22</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">%% Assembly of the rotordynamic model</span>
 
 <span class="n">r</span><span class="p">=</span><span class="n">Rotorsystem</span><span class="p">(</span><span class="n">cnfg</span><span class="p">,</span><span class="s">&#39;Laval-Rotor&#39;</span><span class="p">);</span> <span class="c">% Instantiation of class Rotorsystem</span>
-<span class="n">r</span><span class="p">.</span><span class="n">assemble</span><span class="p">;</span> <span class="c">% assembly of the model parts, considering the ...</span>
+<span class="n">r</span><span class="p">.</span><span class="n">assemble</span><span class="p">;</span> <span class="c">% Assembly of the model parts, considering the ...</span>
             <span class="c">% components (sensors,..) from the cnfg-file</span>
-<span class="n">r</span><span class="p">.</span><span class="n">rotor</span><span class="p">.</span><span class="n">assemble_fem</span><span class="p">;</span> <span class="c">% assembly of the global system matrices: M, D, G, K</span>
+<span class="n">r</span><span class="p">.</span><span class="n">rotor</span><span class="p">.</span><span class="n">assemble_fem</span><span class="p">;</span> <span class="c">% Assembly of the global system matrices: M, D, G, K</span>
 
 <span class="c">%% Visualization of the assembled rotor model</span>
 
@@ -322,8 +324,7 @@ directly. The hidden (commented out) code parts should show former possibilities
 <span class="c">% frf.calculate(r.sensors(6),r.sensors(5),0,&#39;u_x&#39;,&#39;u_x&#39;,4,&#39;boxcar&#39;);??????????</span>
 </pre></div>
 </td></tr></table></div>
-<p>Writing of the results into an external file and visualizing of all the results
-with the available methods….</p>
+<p>Writing the results into an external file and visualizing all the results.</p>
 <div class="highlight-matlab notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3

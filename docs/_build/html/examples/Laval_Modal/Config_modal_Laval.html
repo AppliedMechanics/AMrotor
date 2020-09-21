@@ -185,7 +185,12 @@
             
   <div class="section" id="config-file-example">
 <h1>Config_file_example<a class="headerlink" href="#config-file-example" title="Permalink to this headline">¶</a></h1>
-<p>This is a simple example for the Config_script of a Laval rotor</p>
+<p>This is an example code for a config file of a simple Laval rotor. All the code snippets can
+be copied and pasted together in a Matlab script and executed directly. The hidden (commented out)
+code parts should show former possibilities.</p>
+<p>The first step is the definition of the rotor/shaft. These definition can be devided
+into three parts: definition of the material parameters, the geometry of the rotor and the
+properties of the mesh.</p>
 <div class="highlight-matlab notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -249,6 +254,7 @@
    
 </pre></div>
 </td></tr></table></div>
+<p>Sensors are not necessary for a modal analysis and can therefore be neglected.</p>
 <div class="highlight-matlab notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">%% Initialization of the sensor section in the struct</span>
@@ -256,6 +262,10 @@
 <span class="n">count</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
 </pre></div>
 </td></tr></table></div>
+<p>The inclusion of components (in this case bearings) consists of the initialization of a
+component struct-field and a control variable called “count”. Every additional component (regardless of the type) increases
+the count variable and is defined by a name, the position along the z-axis of the rotor,
+the component type and additional parameters depending on the component.</p>
 <div class="highlight-matlab notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -343,6 +353,7 @@
 <span class="c">% cnfg.cnfg_component(count).damping = 0;</span>
 </pre></div>
 </td></tr></table></div>
+<p>Also loads are not necessary for a modal analysis and can therefore be neglected.</p>
 <div class="highlight-matlab notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">%% Initialization of the load section in the struct</span>
@@ -350,6 +361,8 @@
 <span class="n">count</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
 </pre></div>
 </td></tr></table></div>
+<p>The initialization of the pid-controller struct-field and the corresponding
+control variable called “count” comes here.</p>
 <div class="highlight-matlab notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">%% Initialization of the pid-controller section in the struct</span>
@@ -357,6 +370,8 @@
 <span class="n">count</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
 </pre></div>
 </td></tr></table></div>
+<p>The initialization of the active magnetic bearing struct-field and the corresponding
+control variable called “count” comes here.</p>
 <div class="highlight-matlab notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">%% Initialization of the active magnetic bearing section in the struct</span>

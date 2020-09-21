@@ -9,7 +9,9 @@ cnfg.cnfg_rotor.material.density  = 7860;   %[kg/m^3] %%SI EINHEITEN!!
 cnfg.cnfg_rotor.material.poisson  = 0.3;    %steel 0.27...0.3 [-]
 cnfg.cnfg_rotor.material.damping.rayleigh_alpha1= 5e-7;%D=alpha1*K + alpha2*M
 cnfg.cnfg_rotor.material.damping.rayleigh_alpha2= 0;
-% sehr geringe Dämpfung, die aber immer noch in einer realistischen Größenordnung liegt, Dämpfungsvorgabe über modale Expansion möglich: siehe Geradin,Rixen: Mechanical Vibrations 2015 Kap.3.1.3, auch auch Git-Branch "Kreutz" vorhanden
+% sehr geringe Daempfung, die aber immer noch in einer realistischen 
+%Groessenordnung liegt, Daempfungsvorgabe ueber modale Expansion moeglich: 
+%siehe Geradin,Rixen: Mechanical Vibrations 2015 Kap.3.1.3, auch auch Git-Branch 'Kreutz' vorhanden
 
 
 % Rotor Config
@@ -204,7 +206,7 @@ cnfg.cnfg_load(count).type='Unbalance_static';
 cnfg.cnfg_load(count).width=0.01;
 cnfg.cnfg_load(count).length=0.1;
 
-% Sinusförmige Anregungskraft
+% Sinusfoermige Anregungskraft
 % count = count + 1;
 % cnfg.cnfg_load(count).name='Sinus Kraft';
 % cnfg.cnfg_load(count).position=138e-3; % Position ML 1

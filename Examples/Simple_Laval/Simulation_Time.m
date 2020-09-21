@@ -18,9 +18,9 @@ Janitor.setLayout(2,3); %Setting layout of the figures
 %% Assembly of the rotordynamic model
 
 r=Rotorsystem(cnfg,'Laval-Rotor'); % Instantiation of class Rotorsystem
-r.assemble; % assembly of the model parts, considering the ...
+r.assemble; % Assembly of the model parts, considering the ...
             % components (sensors,..) from the cnfg-file
-r.rotor.assemble_fem; % assembly of the global system matrices: M, D, G, K
+r.rotor.assemble_fem; % Assembly of the global system matrices: M, D, G, K
 
 %% Visualization of the assembled rotor model
 
