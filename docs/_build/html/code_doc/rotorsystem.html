@@ -186,9 +186,27 @@
 <dt id="+AMrotorSIM.&#64;Rotorsystem.Rotorsystem">
 <em class="property">class </em><code class="sig-prename descclassname">+AMrotorSIM.&#64;Rotorsystem.</code><code class="sig-name descname">Rotorsystem</code><span class="sig-paren">(</span><em class="sig-param">c</em>, <em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.Rotorsystem" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref mat mat-class docutils literal notranslate"><span class="pre">handle</span></code></p>
-<p>Rotorsystem Basis class for a rotor system.
+<p>Rotorsystem is the basis class for a rotor system.
 R=ROTORSYSTEM(cnfg,’System’);</p>
-<p>See also AMrotorSIM.Experiments, AMrotorSIM.Graphs, AMrotorSIM.Dataoutput, AMrotorTools.</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">param c</dt>
+<dd class="field-odd"><p>cnfg-struct from seperat Config script</p>
+</dd>
+<dt class="field-even">type c</dt>
+<dd class="field-even"><p>matlab struct</p>
+</dd>
+<dt class="field-odd">param name</dt>
+<dd class="field-odd"><p>project name</p>
+</dd>
+<dt class="field-even">type name</dt>
+<dd class="field-even"><p>string</p>
+</dd>
+<dt class="field-odd">return</dt>
+<dd class="field-odd"><p>rotorsystem object</p>
+</dd>
+</dl>
+</div></blockquote>
 <dl class="mat attribute">
 <dt id="+AMrotorSIM.&#64;Rotorsystem.Rotorsystem.name">
 <code class="sig-name descname">name</code><em class="property"> = None</em><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.Rotorsystem.name" title="Permalink to this definition">¶</a></dt>
@@ -204,7 +222,7 @@ R=ROTORSYSTEM(cnfg,’System’);</p>
 <dl class="mat attribute">
 <dt id="+AMrotorSIM.&#64;Rotorsystem.Rotorsystem.cnfg">
 <code class="sig-name descname">cnfg</code><em class="property"> = 'struct([])'</em><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.Rotorsystem.cnfg" title="Permalink to this definition">¶</a></dt>
-<dd><p>configure struct, typically created in seperate <a href="#id1"><span class="problematic" id="id2">Config_</span></a> script</p>
+<dd><p>configure struct, typically created in seperate Config _ script</p>
 </dd></dl>
 
 <dl class="mat attribute">
@@ -241,14 +259,34 @@ R=ROTORSYSTEM(cnfg,’System’);</p>
 
 <dl class="mat function">
 <dt id="+AMrotorSIM.&#64;Rotorsystem.assemble">
-<code class="sig-prename descclassname">+AMrotorSIM.&#64;Rotorsystem.</code><code class="sig-name descname">assemble</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.assemble" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adding rotor</p>
+<code class="sig-prename descclassname">+AMrotorSIM.&#64;Rotorsystem.</code><code class="sig-name descname">assemble</code><span class="sig-paren">(</span><em class="sig-param">obj</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.assemble" title="Permalink to this definition">¶</a></dt>
+<dd><p>Imports the data (components) from the cnfg-file in the rotorsystem object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>obj</strong> – rotorsystem object</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Filled out rotorsystem object</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="mat function">
 <dt id="+AMrotorSIM.&#64;Rotorsystem.assemble_system_controller_forces">
 <code class="sig-prename descclassname">+AMrotorSIM.&#64;Rotorsystem.</code><code class="sig-name descname">assemble_system_controller_forces</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">t</em>, <em class="sig-param">Z</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.assemble_system_controller_forces" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Adds the controller force to the load vector ????</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t</strong> – time step</p></li>
+<li><p><strong>Z</strong> – state-space vector [x; x_dot]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Load vector h</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="mat function">
 <dt id="+AMrotorSIM.&#64;Rotorsystem.assemble_system_loads">

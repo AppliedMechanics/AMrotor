@@ -1,4 +1,8 @@
 function assemble(obj)
+% Imports the data (components) from the cnfg-file in the rotorsystem object
+%
+%    :parameter obj: rotorsystem object
+%    :return: Filled out rotorsystem object
 
 % Adding rotor
 for cnfg=obj.cnfg.cnfg_rotor

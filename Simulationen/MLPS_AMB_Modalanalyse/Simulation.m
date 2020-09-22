@@ -23,7 +23,7 @@ r=Rotorsystem(cnfg,'MLPS-System');
 r.assemble;
 %r.show;
 %
-%r.rotor.show_2D(); % compare discretisation and user input
+r.rotor.show_2D(); % compare discretisation and user input
 % r.rotor.geometry.show_2D(); 
 % r.rotor.geometry.show_3D(); % funktioniert nicht richtig
 

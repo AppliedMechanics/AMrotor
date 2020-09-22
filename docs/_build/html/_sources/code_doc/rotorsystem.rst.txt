@@ -10,7 +10,7 @@ This is the Rotorsystem class. This is the main class of the toolbox.
     :members:
 
 
-.. autofunction:: assemble()
+.. autofunction:: assemble
 
 .. autofunction:: assemble_system_controller_forces
 

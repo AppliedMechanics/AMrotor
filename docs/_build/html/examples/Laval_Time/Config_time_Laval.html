@@ -85,12 +85,14 @@
               <p class="caption"><span class="caption-text">About</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../intro.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../credits.html">Development Lead</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../credits.html#contributors">Contributors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">First step</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html#source">Source</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Examples</span></p>
@@ -317,52 +319,52 @@ and the sensor type.</p>
 
 <span class="c">% count = count + 1;</span>
 <span class="c">% cnfg.cnfg_sensor(count).name = &#39;DisplBearing1&#39;;</span>
-<span class="c">% cnfg.cnfg_sensor(count).position=0e-3;</span>
+<span class="c">% cnfg.cnfg_sensor(count).position=0e-3; % [m]</span>
 <span class="c">% cnfg.cnfg_sensor(count).type=&#39;Displacementsensor&#39;;</span>
 
 <span class="n">count</span> <span class="p">=</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
 <span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_sensor</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">name</span><span class="p">=</span><span class="s">&#39;DisplDiscCenter&#39;</span><span class="p">;</span>
-<span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_sensor</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">position</span><span class="p">=</span><span class="mf">250e-3</span><span class="p">;</span>
+<span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_sensor</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">position</span><span class="p">=</span><span class="mf">250e-3</span><span class="p">;</span> <span class="c">% [m]</span>
 <span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_sensor</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">type</span><span class="p">=</span><span class="s">&#39;Displacementsensor&#39;</span><span class="p">;</span>
 
 <span class="n">count</span> <span class="p">=</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
 <span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_sensor</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">name</span><span class="p">=</span><span class="s">&#39;AngleDiscSensor&#39;</span><span class="p">;</span>
-<span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_sensor</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">position</span><span class="p">=</span><span class="mf">250e-3</span><span class="p">;</span>
+<span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_sensor</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">position</span><span class="p">=</span><span class="mf">250e-3</span><span class="p">;</span> <span class="c">% [m]</span>
 <span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_sensor</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">type</span><span class="p">=</span><span class="s">&#39;Anglesensor&#39;</span><span class="p">;</span>
 
 <span class="n">count</span> <span class="p">=</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
 <span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_sensor</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">name</span><span class="p">=</span><span class="s">&#39;AngleVelocDiscCenter&#39;</span><span class="p">;</span>
-<span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_sensor</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">position</span><span class="p">=</span><span class="mf">250e-3</span><span class="p">;</span>
+<span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_sensor</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">position</span><span class="p">=</span><span class="mf">250e-3</span><span class="p">;</span> <span class="c">% [m]</span>
 <span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_sensor</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">type</span><span class="p">=</span><span class="s">&#39;AngularVelocitysensor&#39;</span><span class="p">;</span>
 
 <span class="c">% count = count + 1;</span>
 <span class="c">% cnfg.cnfg_sensor(count).name=&#39;DisplBearing2&#39;;</span>
-<span class="c">% cnfg.cnfg_sensor(count).position=500e-3;</span>
+<span class="c">% cnfg.cnfg_sensor(count).position=500e-3; % [m]</span>
 <span class="c">% cnfg.cnfg_sensor(count).type=&#39;Displacementsensor&#39;;</span>
 
 <span class="n">count</span> <span class="p">=</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
 <span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_sensor</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">name</span><span class="p">=</span><span class="s">&#39;VelocDiscCenter&#39;</span><span class="p">;</span>
-<span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_sensor</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">position</span><span class="p">=</span><span class="mf">250e-3</span><span class="p">;</span>
+<span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_sensor</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">position</span><span class="p">=</span><span class="mf">250e-3</span><span class="p">;</span> <span class="c">% [m]</span>
 <span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_sensor</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">type</span><span class="p">=</span><span class="s">&#39;Velocitysensor&#39;</span><span class="p">;</span>
 
 <span class="n">count</span> <span class="p">=</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
 <span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_sensor</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">name</span><span class="p">=</span><span class="s">&#39;AccelDiscCenter&#39;</span><span class="p">;</span>
-<span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_sensor</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">position</span><span class="p">=</span><span class="mf">250e-3</span><span class="p">;</span>
+<span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_sensor</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">position</span><span class="p">=</span><span class="mf">250e-3</span><span class="p">;</span> <span class="c">% [m]</span>
 <span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_sensor</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">type</span><span class="p">=</span><span class="s">&#39;Accelerationsensor&#39;</span><span class="p">;</span>
 
 <span class="n">count</span> <span class="p">=</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
 <span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_sensor</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">name</span><span class="p">=</span><span class="s">&#39;ForceDiscCenter&#39;</span><span class="p">;</span>
-<span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_sensor</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">position</span><span class="p">=</span><span class="mf">250e-3</span><span class="p">;</span>
+<span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_sensor</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">position</span><span class="p">=</span><span class="mf">250e-3</span><span class="p">;</span> <span class="c">% [m]</span>
 <span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_sensor</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">type</span><span class="p">=</span><span class="s">&#39;ForceLoadPostSensor&#39;</span><span class="p">;</span>
 
 <span class="c">% count = count + 1;</span>
 <span class="c">% cnfg.cnfg_sensor(count).name=&#39;ForcePerturb&#39;;</span>
-<span class="c">% cnfg.cnfg_sensor(count).position=100e-3;</span>
+<span class="c">% cnfg.cnfg_sensor(count).position=100e-3; % [m]</span>
 <span class="c">% cnfg.cnfg_sensor(count).type=&#39;ForceLoadPostSensor&#39;;</span>
 <span class="c">% </span>
 <span class="c">% count = count + 1;</span>
 <span class="c">% cnfg.cnfg_sensor(count).name=&#39;ForceBearing1&#39;;</span>
-<span class="c">% cnfg.cnfg_sensor(count).position=0e-3;</span>
+<span class="c">% cnfg.cnfg_sensor(count).position=0e-3; % [m]</span>
 <span class="c">% cnfg.cnfg_sensor(count).type=&#39;BearingForceSensor&#39;;</span>
 </pre></div>
 </td></tr></table></div>
@@ -589,7 +591,11 @@ the load type and additional parameters depending on the type of load.</p>
 126
 127
 128
-129</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">%% Initialization of the load section in the struct</span>
+129
+130
+131
+132
+133</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">%% Initialization of the load section in the struct</span>
 <span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_load</span><span class="p">=[];</span>
 <span class="n">count</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
 
@@ -606,7 +612,7 @@ the load type and additional parameters depending on the type of load.</p>
 <span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_load</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">name</span> <span class="p">=</span> <span class="s">&#39;SmallUnbalance&#39;</span><span class="p">;</span>
 <span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_load</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">position</span> <span class="p">=</span> <span class="mf">250e-3</span><span class="p">;</span>
 <span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_load</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">betrag</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span>
-<span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_load</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">winkellage</span> <span class="p">=</span> <span class="mi">30</span><span class="o">/</span><span class="mi">180</span><span class="o">*</span><span class="nb">pi</span><span class="p">;</span>
+<span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_load</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">winkellage</span> <span class="p">=</span> <span class="mi">30</span><span class="o">/</span><span class="mi">180</span><span class="o">*</span><span class="nb">pi</span><span class="p">;</span> <span class="c">% angle</span>
 <span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_load</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">width</span> <span class="p">=</span> <span class="mf">10e-3</span><span class="p">;</span>
 <span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_load</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="nb">length</span> <span class="p">=</span> <span class="mf">70e-3</span><span class="p">;</span>
 <span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_load</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">type</span><span class="p">=</span><span class="s">&#39;Unbalance_static&#39;</span><span class="p">;</span>
@@ -625,8 +631,8 @@ the load type and additional parameters depending on the type of load.</p>
 <span class="c">% count = count + 1;</span>
 <span class="c">% cnfg.cnfg_load(count).name=&#39;WhirlForce&#39;;</span>
 <span class="c">% cnfg.cnfg_load(count).position=250e-3; </span>
-<span class="c">% cnfg.cnfg_load(count).t_start = 0;</span>
-<span class="c">% cnfg.cnfg_load(count).t_end = 10;</span>
+<span class="c">% cnfg.cnfg_load(count).t_start = 0; % start time [s]</span>
+<span class="c">% cnfg.cnfg_load(count).t_end = 10; % end time [s]</span>
 <span class="c">% cnfg.cnfg_load(count).betrag_x= 10;</span>
 <span class="c">% cnfg.cnfg_load(count).betrag_y= 10;</span>
 <span class="c">% cnfg.cnfg_load(count).frequency= 20; % [Hz]</span>
@@ -636,54 +642,55 @@ the load type and additional parameters depending on the type of load.</p>
 <span class="c">% count = count + 1;</span>
 <span class="c">% cnfg.cnfg_load(count).name=&#39;ChirpForce&#39;;</span>
 <span class="c">% cnfg.cnfg_load(count).position=250e-3; </span>
-<span class="c">% cnfg.cnfg_load(count).betrag_x= 1;</span>
-<span class="c">% cnfg.cnfg_load(count).frequency_x_0 = 0; % start frequency [Hz]</span>
-<span class="c">% cnfg.cnfg_load(count).frequency_x= 200; % end frequency [Hz]</span>
-<span class="c">% cnfg.cnfg_load(count).betrag_y= 0;</span>
-<span class="c">% cnfg.cnfg_load(count).frequency_y_0 = 0;</span>
-<span class="c">% cnfg.cnfg_load(count).frequency_y= 0;</span>
-<span class="c">% cnfg.cnfg_load(count).t_start= 0; [s]</span>
-<span class="c">% cnfg.cnfg_load(count).t_end= 0.5; [s]</span>
+<span class="c">% cnfg.cnfg_load(count).betrag_x= 1; % force amplitude x</span>
+<span class="c">% cnfg.cnfg_load(count).frequency_x_0 = 0; % start frequency x [Hz]</span>
+<span class="c">% cnfg.cnfg_load(count).frequency_x= 200; % end frequency x [Hz]</span>
+<span class="c">% cnfg.cnfg_load(count).betrag_y= 0; % force amplitude y</span>
+<span class="c">% cnfg.cnfg_load(count).frequency_y_0 = 0; % start frequency y [Hz]</span>
+<span class="c">% cnfg.cnfg_load(count).frequency_y= 0; % end frequency y [Hz]</span>
+<span class="c">% cnfg.cnfg_load(count).t_start= 0; % start time [s]</span>
+<span class="c">% cnfg.cnfg_load(count).t_end= 0.5; % end time [s]</span>
 <span class="c">% cnfg.cnfg_load(count).type=&#39;Force_timevariant_chirp&#39;;</span>
 
 <span class="c">% % Chirp, Sinus sweep force</span>
 <span class="c">% count = count + 1;</span>
 <span class="c">% cnfg.cnfg_load(count).name=&#39;ChirpForce&#39;;</span>
 <span class="c">% cnfg.cnfg_load(count).position=250e-3; </span>
-<span class="c">% cnfg.cnfg_load(count).betrag_x= 1;</span>
-<span class="c">% cnfg.cnfg_load(count).frequency_x_0 = 0; % start frequency [Hz]</span>
-<span class="c">% cnfg.cnfg_load(count).frequency_x= 200; % end frequency [Hz]</span>
-<span class="c">% cnfg.cnfg_load(count).betrag_y= 0;</span>
-<span class="c">% cnfg.cnfg_load(count).frequency_y_0 = 0;</span>
-<span class="c">% cnfg.cnfg_load(count).frequency_y= 0;</span>
-<span class="c">% cnfg.cnfg_load(count).t_start= 0.5; [s]</span>
-<span class="c">% cnfg.cnfg_load(count).t_end= 1; [s] </span>
+<span class="c">% cnfg.cnfg_load(count).betrag_x= 1; % force amplitude x</span>
+<span class="c">% cnfg.cnfg_load(count).frequency_x_0 = 0; % start frequency x [Hz]</span>
+<span class="c">% cnfg.cnfg_load(count).frequency_x= 200; % end frequency x [Hz]</span>
+<span class="c">% cnfg.cnfg_load(count).betrag_y= 0; % force amplitude y</span>
+<span class="c">% cnfg.cnfg_load(count).frequency_y_0 = 0; % start frequency y [Hz]</span>
+<span class="c">% cnfg.cnfg_load(count).frequency_y= 0; % end frequency y [Hz]</span>
+<span class="c">% cnfg.cnfg_load(count).t_start= 0.5; % start time [s]</span>
+<span class="c">% cnfg.cnfg_load(count).t_end= 1; % end time [s] </span>
 <span class="c">% cnfg.cnfg_load(count).type=&#39;Force_timevariant_chirp&#39;;</span>
 
 <span class="c">% % Chirp, Sinus sweep force</span>
 <span class="c">% count = count + 1;</span>
 <span class="c">% cnfg.cnfg_load(count).name=&#39;ChirpForce&#39;;</span>
 <span class="c">% cnfg.cnfg_load(count).position=0e-3; </span>
-<span class="c">% cnfg.cnfg_load(count).betrag_x= 0.1;</span>
-<span class="c">% cnfg.cnfg_load(count).frequency_x_0 = 400; % start frequency [Hz]</span>
-<span class="c">% cnfg.cnfg_load(count).frequency_x= 500; % end frequency [Hz]</span>
-<span class="c">% cnfg.cnfg_load(count).betrag_y= 0;</span>
-<span class="c">% cnfg.cnfg_load(count).frequency_y_0 = 0;</span>
-<span class="c">% cnfg.cnfg_load(count).frequency_y= 0;</span>
-<span class="c">% cnfg.cnfg_load(count).t_start= 0; [s]</span>
-<span class="c">% cnfg.cnfg_load(count).t_end= 1; [s]</span>
+<span class="c">% cnfg.cnfg_load(count).betrag_x= 0.1; % force amplitude x</span>
+<span class="c">% cnfg.cnfg_load(count).frequency_x_0 = 400; % start frequency x [Hz]</span>
+<span class="c">% cnfg.cnfg_load(count).frequency_x= 500; % end frequency x [Hz]</span>
+<span class="c">% cnfg.cnfg_load(count).betrag_y= 0; % force amplitude y</span>
+<span class="c">% cnfg.cnfg_load(count).frequency_y_0 = 0; % start frequency y [Hz]</span>
+<span class="c">% cnfg.cnfg_load(count).frequency_y= 0; % end frequency y [Hz]</span>
+<span class="c">% cnfg.cnfg_load(count).t_start= 0; start time [s]</span>
+<span class="c">% cnfg.cnfg_load(count).t_end= 1; end time [s]</span>
 <span class="c">% cnfg.cnfg_load(count).type=&#39;Force_timevariant_chirp&#39;;</span>
 
 <span class="c">% % Forward whirl sweep force</span>
 <span class="c">% count = count + 1;</span>
 <span class="c">% cnfg.cnfg_load(count).name=&#39;FwdWhirlSweepForce&#39;;</span>
 <span class="c">% cnfg.cnfg_load(count).position=100e-3; </span>
-<span class="c">% cnfg.cnfg_load(count).betrag_x= 0.2;</span>
-<span class="c">% cnfg.cnfg_load(count).betrag_y= cnfg.cnfg_load(count).betrag_x;</span>
+<span class="c">% cnfg.cnfg_load(count).betrag_x= 0.2; % force amplitude x</span>
+<span class="c">% cnfg.cnfg_load(count).betrag_y= cnfg.cnfg_load(count).betrag_x;; % force ...</span>
+                                                            <span class="c">% amplitude y</span>
 <span class="c">% cnfg.cnfg_load(count).frequency_0 = 0; % start frequency [Hz]</span>
 <span class="c">% cnfg.cnfg_load(count).frequency= 200; % end frequency [Hz]</span>
-<span class="c">% cnfg.cnfg_load(count).t_start= 0.45; [s]</span>
-<span class="c">% cnfg.cnfg_load(count).t_end= 0.5; [s]</span>
+<span class="c">% cnfg.cnfg_load(count).t_start= 0.45; % start time [s]</span>
+<span class="c">% cnfg.cnfg_load(count).t_end= 0.5; % end time [s]</span>
 <span class="c">% cnfg.cnfg_load(count).type=&#39;Force_timevariant_whirl_fwd_sweep&#39;;</span>
 
 <span class="c">% % Backward whirl sweep force</span>
@@ -694,8 +701,8 @@ the load type and additional parameters depending on the type of load.</p>
 <span class="c">% cnfg.cnfg_load(count).betrag_y= cnfg.cnfg_load(count).betrag_x;</span>
 <span class="c">% cnfg.cnfg_load(count).frequency_0 = 0; % start frequency [Hz]</span>
 <span class="c">% cnfg.cnfg_load(count).frequency= 200; % end frequency [Hz]</span>
-<span class="c">% cnfg.cnfg_load(count).t_start= 0.5; [s]</span>
-<span class="c">% cnfg.cnfg_load(count).t_end= 1.0; [s]</span>
+<span class="c">% cnfg.cnfg_load(count).t_start= 0.5; % start time [s]</span>
+<span class="c">% cnfg.cnfg_load(count).t_end= 1.0; % end time [s]</span>
 <span class="c">% cnfg.cnfg_load(count).type=&#39;Force_timevariant_whirl_bwd_sweep&#39;;</span>
 
 <span class="c">% % Muszynska-Seal laminar</span>
@@ -703,21 +710,24 @@ the load type and additional parameters depending on the type of load.</p>
 <span class="c">% cnfg.cnfg_load(count).name = &#39;MuszynskaSealMittig&#39;;</span>
 <span class="c">% cnfg.cnfg_load(count).position=pos.DicMitte; % [m]</span>
 <span class="c">% cnfg.cnfg_load(count).type=&#39;MuszynskaLaminarSeal&#39;;</span>
-<span class="c">% cnfg.cnfg_load(count).sealModel = load_seal_model(&#39;Inputfiles/TestRigNeu1.m&#39;);</span>
+<span class="c">% cnfg.cnfg_load(count).sealModel = load_seal_model(&#39;Inputfiles/ ...</span>
+<span class="c">%                                               TestRigNeu1.m&#39;);</span>
 
 <span class="c">% % Lim-Singh-bearing</span>
 <span class="c">% count = count + 1;</span>
 <span class="c">% cnfg.cnfg_load(count).name = &#39;LimSingh1&#39;;</span>
 <span class="c">% cnfg.cnfg_load(count).position=pos.Lag1; % [m]</span>
 <span class="c">% cnfg.cnfg_load(count).type=&#39;LimSinghBearing&#39;;</span>
-<span class="c">% cnfg.cnfg_load(count).par = load_bearing_LimSingh(&#39;Inputfiles/parametersGupta20mm.m&#39;); </span>
+<span class="c">% cnfg.cnfg_load(count).par = load_bearing_LimSingh(&#39;Inputfiles/ ... </span>
+<span class="c">%                                               parametersGupta20mm.m&#39;); </span>
 
 <span class="c">% % Lim-Singh-bearing</span>
 <span class="c">% count = count + 1;</span>
 <span class="c">% cnfg.cnfg_load(count).name = &#39;LimSingh2&#39;;</span>
 <span class="c">% cnfg.cnfg_load(count).position=pos.Lag2; % [m]</span>
 <span class="c">% cnfg.cnfg_load(count).type=&#39;LimSinghBearing&#39;;</span>
-<span class="c">% cnfg.cnfg_load(count).par = load_bearing_LimSingh(&#39;Inputfiles/parametersGupta20mm.m&#39;); </span>
+<span class="c">% cnfg.cnfg_load(count).par = load_bearing_LimSingh(&#39;Inputfiles/ ... </span>
+<span class="c">%                                               parametersGupta20mm.m&#39;); </span>
 </pre></div>
 </td></tr></table></div>
 <p>The initialization of the pid-controller struct-field and the corresponding

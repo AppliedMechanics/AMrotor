@@ -85,12 +85,14 @@
               <p class="caption"><span class="caption-text">About</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../intro.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../credits.html">Development Lead</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../credits.html#contributors">Contributors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">First step</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html#source">Source</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Examples</span></p>
@@ -236,7 +238,7 @@ properties of the mesh.</p>
 <span class="n">rW</span> <span class="p">=</span> <span class="mf">10e-3</span><span class="p">;</span> <span class="c">% Radius of the shaft [m]</span>
 <span class="n">rS</span> <span class="p">=</span> <span class="mf">50e-3</span><span class="p">;</span> <span class="c">% Radius of the disc [m]</span>
 <span class="c">% Format of the geometry definition: {[z, r_outer, r_inner], ...} without..</span>
-<span class="c">% start- and end-node</span>
+<span class="c">% start- and end-node:</span>
 <span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_rotor</span><span class="p">.</span><span class="n">geo_nodes</span> <span class="p">=</span> <span class="p">{[</span><span class="mi">0</span> <span class="n">rW</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.220</span> <span class="n">rW</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.220</span> <span class="n">rS</span> <span class="mi">0</span><span class="p">],</span> <span class="c">...</span>
     <span class="p">[</span><span class="mf">0.280</span> <span class="n">rS</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.280</span> <span class="n">rW</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.500</span> <span class="n">rW</span> <span class="mi">0</span><span class="p">]};</span>
 <span class="n">clear</span> <span class="n">rW</span> <span class="n">rS</span>
@@ -244,12 +246,12 @@ properties of the mesh.</p>
 
 <span class="c">%% FEM Config</span>
 <span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_rotor</span><span class="p">.</span><span class="n">mesh_opt</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="s">&#39;Mesh 1&#39;</span><span class="p">;</span>
-<span class="c">% Number of refinement steps between d_min and d_max</span>
+<span class="c">% Number of refinement steps between d_min and d_max:</span>
 <span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_rotor</span><span class="p">.</span><span class="n">mesh_opt</span><span class="p">.</span><span class="n">n_refinement</span> <span class="p">=</span> <span class="mi">10</span><span class="p">;</span>
 <span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_rotor</span><span class="p">.</span><span class="n">mesh_opt</span><span class="p">.</span><span class="n">d_min</span> <span class="p">=</span> <span class="mf">0.001</span><span class="p">;</span>
 <span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_rotor</span><span class="p">.</span><span class="n">mesh_opt</span><span class="p">.</span><span class="n">d_max</span> <span class="p">=</span> <span class="mf">0.05</span><span class="p">;</span>
 <span class="c">% Definition of the element radius, if the geometry radius is not ...</span>
-<span class="c">% constant in this section. Options: symmetric, mean, upper sum, lower sum</span>
+<span class="c">% constant in this section. Options: symmetric, mean, upper sum, lower sum:</span>
 <span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_rotor</span><span class="p">.</span><span class="n">mesh_opt</span><span class="p">.</span><span class="n">approx</span> <span class="p">=</span> <span class="s">&#39;symmetric&#39;</span><span class="p">;</span>
    
 </pre></div>
@@ -319,7 +321,7 @@ the component type and additional parameters depending on the component.</p>
 <span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_component</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">subtype</span><span class="p">=</span><span class="s">&#39;SimpleAxialBearing&#39;</span><span class="p">;</span>
 <span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_component</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">position</span><span class="p">=</span><span class="mf">500e-3</span><span class="p">;</span> <span class="c">% [m]</span>
 <span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_component</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">stiffness</span><span class="p">=</span><span class="mf">1e6</span><span class="p">;</span> <span class="c">% [N/m]</span>
-<span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_component</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">damping</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_component</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">damping</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c">% [Ns/m]</span>
 
 <span class="n">count</span> <span class="p">=</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
 <span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_component</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">name</span> <span class="p">=</span> <span class="s">&#39;TorqueBearingLeft&#39;</span><span class="p">;</span>
@@ -327,7 +329,7 @@ the component type and additional parameters depending on the component.</p>
 <span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_component</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">subtype</span><span class="p">=</span><span class="s">&#39;SimpleTorqueBearing&#39;</span><span class="p">;</span>
 <span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_component</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">position</span><span class="p">=</span><span class="mf">0e-3</span><span class="p">;</span> <span class="c">% [m]</span>
 <span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_component</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">stiffness</span><span class="p">=</span><span class="mf">1e6</span><span class="p">;</span> <span class="c">% [N/m]</span>
-<span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_component</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">damping</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_component</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">damping</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c">% [Ns/m]</span>
 
 <span class="n">count</span> <span class="p">=</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
 <span class="n">cnfg</span><span class="p">.</span><span class="n">cnfg_component</span><span class="p">(</span><span class="n">count</span><span class="p">).</span><span class="n">name</span> <span class="p">=</span> <span class="s">&#39;IsotropBearing1&#39;</span><span class="p">;</span>

@@ -38,52 +38,52 @@ count = 0;
 
 % count = count + 1;
 % cnfg.cnfg_sensor(count).name = 'DisplBearing1';
-% cnfg.cnfg_sensor(count).position=0e-3;
+% cnfg.cnfg_sensor(count).position=0e-3; % [m]
 % cnfg.cnfg_sensor(count).type='Displacementsensor';
 
 count = count + 1;
 cnfg.cnfg_sensor(count).name='DisplDiscCenter';
-cnfg.cnfg_sensor(count).position=250e-3;
+cnfg.cnfg_sensor(count).position=250e-3; % [m]
 cnfg.cnfg_sensor(count).type='Displacementsensor';
 
 count = count + 1;
 cnfg.cnfg_sensor(count).name='AngleDiscSensor';
-cnfg.cnfg_sensor(count).position=250e-3;
+cnfg.cnfg_sensor(count).position=250e-3; % [m]
 cnfg.cnfg_sensor(count).type='Anglesensor';
 
 count = count + 1;
 cnfg.cnfg_sensor(count).name='AngleVelocDiscCenter';
-cnfg.cnfg_sensor(count).position=250e-3;
+cnfg.cnfg_sensor(count).position=250e-3; % [m]
 cnfg.cnfg_sensor(count).type='AngularVelocitysensor';
 
 % count = count + 1;
 % cnfg.cnfg_sensor(count).name='DisplBearing2';
-% cnfg.cnfg_sensor(count).position=500e-3;
+% cnfg.cnfg_sensor(count).position=500e-3; % [m]
 % cnfg.cnfg_sensor(count).type='Displacementsensor';
 
 count = count + 1;
 cnfg.cnfg_sensor(count).name='VelocDiscCenter';
-cnfg.cnfg_sensor(count).position=250e-3;
+cnfg.cnfg_sensor(count).position=250e-3; % [m]
 cnfg.cnfg_sensor(count).type='Velocitysensor';
 
 count = count + 1;
 cnfg.cnfg_sensor(count).name='AccelDiscCenter';
-cnfg.cnfg_sensor(count).position=250e-3;
+cnfg.cnfg_sensor(count).position=250e-3; % [m]
 cnfg.cnfg_sensor(count).type='Accelerationsensor';
 
 count = count + 1;
 cnfg.cnfg_sensor(count).name='ForceDiscCenter';
-cnfg.cnfg_sensor(count).position=250e-3;
+cnfg.cnfg_sensor(count).position=250e-3; % [m]
 cnfg.cnfg_sensor(count).type='ForceLoadPostSensor';
 
 % count = count + 1;
 % cnfg.cnfg_sensor(count).name='ForcePerturb';
-% cnfg.cnfg_sensor(count).position=100e-3;
+% cnfg.cnfg_sensor(count).position=100e-3; % [m]
 % cnfg.cnfg_sensor(count).type='ForceLoadPostSensor';
 % 
 % count = count + 1;
 % cnfg.cnfg_sensor(count).name='ForceBearing1';
-% cnfg.cnfg_sensor(count).position=0e-3;
+% cnfg.cnfg_sensor(count).position=0e-3; % [m]
 % cnfg.cnfg_sensor(count).type='BearingForceSensor';
 
 %% =========================Components====================================
@@ -149,7 +149,7 @@ count = count + 1;
 cnfg.cnfg_load(count).name = 'SmallUnbalance';
 cnfg.cnfg_load(count).position = 250e-3;
 cnfg.cnfg_load(count).betrag = 1;
-cnfg.cnfg_load(count).winkellage = 30/180*pi;
+cnfg.cnfg_load(count).winkellage = 30/180*pi; % angle
 cnfg.cnfg_load(count).width = 10e-3;
 cnfg.cnfg_load(count).length = 70e-3;
 cnfg.cnfg_load(count).type='Unbalance_static';
@@ -168,8 +168,8 @@ cnfg.cnfg_load(count).type='Unbalance_static';
 % count = count + 1;
 % cnfg.cnfg_load(count).name='WhirlForce';
 % cnfg.cnfg_load(count).position=250e-3; 
-% cnfg.cnfg_load(count).t_start = 0;
-% cnfg.cnfg_load(count).t_end = 10;
+% cnfg.cnfg_load(count).t_start = 0; % start time [s]
+% cnfg.cnfg_load(count).t_end = 10; % end time [s]
 % cnfg.cnfg_load(count).betrag_x= 10;
 % cnfg.cnfg_load(count).betrag_y= 10;
 % cnfg.cnfg_load(count).frequency= 20; % [Hz]
@@ -179,54 +179,55 @@ cnfg.cnfg_load(count).type='Unbalance_static';
 % count = count + 1;
 % cnfg.cnfg_load(count).name='ChirpForce';
 % cnfg.cnfg_load(count).position=250e-3; 
-% cnfg.cnfg_load(count).betrag_x= 1;
-% cnfg.cnfg_load(count).frequency_x_0 = 0; % start frequency [Hz]
-% cnfg.cnfg_load(count).frequency_x= 200; % end frequency [Hz]
-% cnfg.cnfg_load(count).betrag_y= 0;
-% cnfg.cnfg_load(count).frequency_y_0 = 0;
-% cnfg.cnfg_load(count).frequency_y= 0;
-% cnfg.cnfg_load(count).t_start= 0; [s]
-% cnfg.cnfg_load(count).t_end= 0.5; [s]
+% cnfg.cnfg_load(count).betrag_x= 1; % force amplitude x
+% cnfg.cnfg_load(count).frequency_x_0 = 0; % start frequency x [Hz]
+% cnfg.cnfg_load(count).frequency_x= 200; % end frequency x [Hz]
+% cnfg.cnfg_load(count).betrag_y= 0; % force amplitude y
+% cnfg.cnfg_load(count).frequency_y_0 = 0; % start frequency y [Hz]
+% cnfg.cnfg_load(count).frequency_y= 0; % end frequency y [Hz]
+% cnfg.cnfg_load(count).t_start= 0; % start time [s]
+% cnfg.cnfg_load(count).t_end= 0.5; % end time [s]
 % cnfg.cnfg_load(count).type='Force_timevariant_chirp';
 
 % % Chirp, Sinus sweep force
 % count = count + 1;
 % cnfg.cnfg_load(count).name='ChirpForce';
 % cnfg.cnfg_load(count).position=250e-3; 
-% cnfg.cnfg_load(count).betrag_x= 1;
-% cnfg.cnfg_load(count).frequency_x_0 = 0; % start frequency [Hz]
-% cnfg.cnfg_load(count).frequency_x= 200; % end frequency [Hz]
-% cnfg.cnfg_load(count).betrag_y= 0;
-% cnfg.cnfg_load(count).frequency_y_0 = 0;
-% cnfg.cnfg_load(count).frequency_y= 0;
-% cnfg.cnfg_load(count).t_start= 0.5; [s]
-% cnfg.cnfg_load(count).t_end= 1; [s] 
+% cnfg.cnfg_load(count).betrag_x= 1; % force amplitude x
+% cnfg.cnfg_load(count).frequency_x_0 = 0; % start frequency x [Hz]
+% cnfg.cnfg_load(count).frequency_x= 200; % end frequency x [Hz]
+% cnfg.cnfg_load(count).betrag_y= 0; % force amplitude y
+% cnfg.cnfg_load(count).frequency_y_0 = 0; % start frequency y [Hz]
+% cnfg.cnfg_load(count).frequency_y= 0; % end frequency y [Hz]
+% cnfg.cnfg_load(count).t_start= 0.5; % start time [s]
+% cnfg.cnfg_load(count).t_end= 1; % end time [s] 
 % cnfg.cnfg_load(count).type='Force_timevariant_chirp';
 
 % % Chirp, Sinus sweep force
 % count = count + 1;
 % cnfg.cnfg_load(count).name='ChirpForce';
 % cnfg.cnfg_load(count).position=0e-3; 
-% cnfg.cnfg_load(count).betrag_x= 0.1;
-% cnfg.cnfg_load(count).frequency_x_0 = 400; % start frequency [Hz]
-% cnfg.cnfg_load(count).frequency_x= 500; % end frequency [Hz]
-% cnfg.cnfg_load(count).betrag_y= 0;
-% cnfg.cnfg_load(count).frequency_y_0 = 0;
-% cnfg.cnfg_load(count).frequency_y= 0;
-% cnfg.cnfg_load(count).t_start= 0; [s]
-% cnfg.cnfg_load(count).t_end= 1; [s]
+% cnfg.cnfg_load(count).betrag_x= 0.1; % force amplitude x
+% cnfg.cnfg_load(count).frequency_x_0 = 400; % start frequency x [Hz]
+% cnfg.cnfg_load(count).frequency_x= 500; % end frequency x [Hz]
+% cnfg.cnfg_load(count).betrag_y= 0; % force amplitude y
+% cnfg.cnfg_load(count).frequency_y_0 = 0; % start frequency y [Hz]
+% cnfg.cnfg_load(count).frequency_y= 0; % end frequency y [Hz]
+% cnfg.cnfg_load(count).t_start= 0; start time [s]
+% cnfg.cnfg_load(count).t_end= 1; end time [s]
 % cnfg.cnfg_load(count).type='Force_timevariant_chirp';
 
 % % Forward whirl sweep force
 % count = count + 1;
 % cnfg.cnfg_load(count).name='FwdWhirlSweepForce';
 % cnfg.cnfg_load(count).position=100e-3; 
-% cnfg.cnfg_load(count).betrag_x= 0.2;
-% cnfg.cnfg_load(count).betrag_y= cnfg.cnfg_load(count).betrag_x;
+% cnfg.cnfg_load(count).betrag_x= 0.2; % force amplitude x
+% cnfg.cnfg_load(count).betrag_y= cnfg.cnfg_load(count).betrag_x;; % force ...
+                                                            % amplitude y
 % cnfg.cnfg_load(count).frequency_0 = 0; % start frequency [Hz]
 % cnfg.cnfg_load(count).frequency= 200; % end frequency [Hz]
-% cnfg.cnfg_load(count).t_start= 0.45; [s]
-% cnfg.cnfg_load(count).t_end= 0.5; [s]
+% cnfg.cnfg_load(count).t_start= 0.45; % start time [s]
+% cnfg.cnfg_load(count).t_end= 0.5; % end time [s]
 % cnfg.cnfg_load(count).type='Force_timevariant_whirl_fwd_sweep';
 
 % % Backward whirl sweep force
@@ -237,8 +238,8 @@ cnfg.cnfg_load(count).type='Unbalance_static';
 % cnfg.cnfg_load(count).betrag_y= cnfg.cnfg_load(count).betrag_x;
 % cnfg.cnfg_load(count).frequency_0 = 0; % start frequency [Hz]
 % cnfg.cnfg_load(count).frequency= 200; % end frequency [Hz]
-% cnfg.cnfg_load(count).t_start= 0.5; [s]
-% cnfg.cnfg_load(count).t_end= 1.0; [s]
+% cnfg.cnfg_load(count).t_start= 0.5; % start time [s]
+% cnfg.cnfg_load(count).t_end= 1.0; % end time [s]
 % cnfg.cnfg_load(count).type='Force_timevariant_whirl_bwd_sweep';
 
 % % Muszynska-Seal laminar
@@ -246,21 +247,24 @@ cnfg.cnfg_load(count).type='Unbalance_static';
 % cnfg.cnfg_load(count).name = 'MuszynskaSealMittig';
 % cnfg.cnfg_load(count).position=pos.DicMitte; % [m]
 % cnfg.cnfg_load(count).type='MuszynskaLaminarSeal';
-% cnfg.cnfg_load(count).sealModel = load_seal_model('Inputfiles/TestRigNeu1.m');
+% cnfg.cnfg_load(count).sealModel = load_seal_model('Inputfiles/ ...
+%                                               TestRigNeu1.m');
 
 % % Lim-Singh-bearing
 % count = count + 1;
 % cnfg.cnfg_load(count).name = 'LimSingh1';
 % cnfg.cnfg_load(count).position=pos.Lag1; % [m]
 % cnfg.cnfg_load(count).type='LimSinghBearing';
-% cnfg.cnfg_load(count).par = load_bearing_LimSingh('Inputfiles/parametersGupta20mm.m'); 
+% cnfg.cnfg_load(count).par = load_bearing_LimSingh('Inputfiles/ ... 
+%                                               parametersGupta20mm.m'); 
 
 % % Lim-Singh-bearing
 % count = count + 1;
 % cnfg.cnfg_load(count).name = 'LimSingh2';
 % cnfg.cnfg_load(count).position=pos.Lag2; % [m]
 % cnfg.cnfg_load(count).type='LimSinghBearing';
-% cnfg.cnfg_load(count).par = load_bearing_LimSingh('Inputfiles/parametersGupta20mm.m'); 
+% cnfg.cnfg_load(count).par = load_bearing_LimSingh('Inputfiles/ ... 
+%                                               parametersGupta20mm.m'); 
 
 %% ========================PID-controller==================================
 %% Initialization of the pid-controller section in the struct
