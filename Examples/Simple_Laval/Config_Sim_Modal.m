@@ -1,89 +1,97 @@
 %% ================Rotor===================================================
-% Aufbau eines Structs mit den Rotordaten
-cnfg.cnfg_rotor.name = 'Einfaches Beispiel: Laval-Rotor';
 
+%% Building of the rotor struct
+cnfg.cnfg_rotor.name = 'Simple example: Laval-Rotor';
+% All units in SI 
 cnfg.cnfg_rotor.material.name = 'steel';
 cnfg.cnfg_rotor.material.e_module = 211e9;  %[N/m^2]
-cnfg.cnfg_rotor.material.density  = 7860;   %[kg/m^3] %%SI EINHEITEN!!
-cnfg.cnfg_rotor.material.poisson  = 0.3;    %steel 0.27...0.3 [-]
-cnfg.cnfg_rotor.material.damping.rayleigh_alpha1= 1e-5;    %D=alpha1*K + alpha2*M
+cnfg.cnfg_rotor.material.density  = 7860;   %[kg/m^3]
+cnfg.cnfg_rotor.material.poisson  = 0.3;    %[-]
+% Rayleigh damping: D=alpha1*K + alpha2*M
+cnfg.cnfg_rotor.material.damping.rayleigh_alpha1= 1e-5;
 cnfg.cnfg_rotor.material.damping.rayleigh_alpha2= 10;
 
-% Rotor Config
-rW = 10e-3; % Radius der Welle [m]
-rS = 50e-3; % Radius der Scheibe [m]
-
+%% Rotor Config
+rW = 10e-3; % Radius of the shaft [m]
+rS = 50e-3; % Radius of the disc [m]
+% Format of the geometry definition: {[z, r_outer, r_inner], ...} without..
+% start- and end-node:
 cnfg.cnfg_rotor.geo_nodes = {[0 rW 0], [0.220 rW 0], [0.220 rS 0], ...
-    [0.280 rS 0], [0.280 rW 0], [0.500 rW 0]}; % Format {[z, r_aussen, r_innen], ...} % ohne Anfangs und Endknoten [m]
+    [0.280 rS 0], [0.280 rW 0], [0.500 rW 0]};
 clear rW rS
 
 
-% FEM Config
+%% FEM Config
 cnfg.cnfg_rotor.mesh_opt.name = 'Mesh 1';
-cnfg.cnfg_rotor.mesh_opt.n_refinement = 10; %number of refinement steps between d_min and d_max 
-cnfg.cnfg_rotor.mesh_opt.d_min= 0.001; %[m]
-cnfg.cnfg_rotor.mesh_opt.d_max = 0.009; % [m]
-cnfg.cnfg_rotor.mesh_opt.approx = 'symmetric';   %Approximation for linear functions with gradient 1=0;
-                                % Insert: upper sum, lower sum, mean, symmetric.
-    
-%% ====================Sensoren============================================
+% Number of refinement steps between d_min and d_max:
+cnfg.cnfg_rotor.mesh_opt.n_refinement = 10;
+cnfg.cnfg_rotor.mesh_opt.d_min = 0.001;
+cnfg.cnfg_rotor.mesh_opt.d_max = 0.05;
+% Definition of the element radius, if the geometry radius is not ...
+% constant in this section. Options: symmetric, mean, upper sum, lower sum:
+cnfg.cnfg_rotor.mesh_opt.approx = 'symmetric';
+   
+%% ====================Sensors============================================
+%% Initialization of the sensor section in the struct
 cnfg.cnfg_sensor=[];
 count = 0;
 
-%% =========================Komponenten====================================
+%% =========================Components====================================
+%% Initiation of the components section in the struct
 count = 0;
 cnfg.cnfg_component = []; 
 
-%% Lager
-
+%% Bearings
 count = count + 1;
-cnfg.cnfg_component(count).name = 'Axiales Lager Links';
+cnfg.cnfg_component(count).name = 'AxBearingLeft';
 cnfg.cnfg_component(count).type='Bearings';
 cnfg.cnfg_component(count).subtype='SimpleAxialBearing';
-cnfg.cnfg_component(count).position=0e-3; % [m]
-cnfg.cnfg_component(count).stiffness=1;                     %[N/m]
-cnfg.cnfg_component(count).damping = 0;
+cnfg.cnfg_component(count).position=500e-3; % [m]
+cnfg.cnfg_component(count).stiffness=1e6; % [N/m]
+cnfg.cnfg_component(count).damping = 0; % [Ns/m]
 
 count = count + 1;
-cnfg.cnfg_component(count).name = 'Torque Lager Links';
+cnfg.cnfg_component(count).name = 'TorqueBearingLeft';
 cnfg.cnfg_component(count).type='Bearings';
 cnfg.cnfg_component(count).subtype='SimpleTorqueBearing';
 cnfg.cnfg_component(count).position=0e-3; % [m]
-cnfg.cnfg_component(count).stiffness=1;                     %[N/m]
-cnfg.cnfg_component(count).damping = 0;
+cnfg.cnfg_component(count).stiffness=1e6; % [N/m]
+cnfg.cnfg_component(count).damping = 0; % [Ns/m]
 
 count = count + 1;
-cnfg.cnfg_component(count).name = 'Isotropes Lager 1';
+cnfg.cnfg_component(count).name = 'IsotropBearing1';
 cnfg.cnfg_component(count).type='Bearings';
 cnfg.cnfg_component(count).subtype='SimpleBearing';
 cnfg.cnfg_component(count).position=0e-3; % [m]
-cnfg.cnfg_component(count).stiffness=1e6;                    %[N/m]
+cnfg.cnfg_component(count).stiffness=1e6; % [N/m]
 cnfg.cnfg_component(count).damping = 0; % [Ns/m]
 
 count = count + 1;
-cnfg.cnfg_component(count).name = 'Isotropes Lager 2';
+cnfg.cnfg_component(count).name = 'IsotropBearing2';
 cnfg.cnfg_component(count).type='Bearings';
 cnfg.cnfg_component(count).subtype='SimpleBearing';
 cnfg.cnfg_component(count).position=500e-3; % [m]
-cnfg.cnfg_component(count).stiffness=1e6;                   %[N/m]
+cnfg.cnfg_component(count).stiffness=1e6; % [N/m]
 cnfg.cnfg_component(count).damping = 0; % [Ns/m]
 
 % count = count+1;
-% cnfg.cnfg_component(count).name = 'Feste Einspannung';
-% cnfg.cnfg_component(count).position=0e-3;                        %[m]
+% cnfg.cnfg_component(count).name = 'Rigid clamping';
+% cnfg.cnfg_component(count).position=0e-3; % [m]
 % cnfg.cnfg_component(count).type='RestrictAllDofsBearing';
-% cnfg.cnfg_component(count).stiffness=1e10;                     %[N/m]
+% cnfg.cnfg_component(count).stiffness=1e10; % [N/m]
 % cnfg.cnfg_component(count).damping = 0;
 
-
-%% =========================Lasten=========================================
+%% =========================Loads=========================================
+%% Initialization of the load section in the struct
 cnfg.cnfg_load=[];
 count = 0;
 
-%% ========================PID-Regler======================================
+%% ========================PID-controller==================================
+%% Initialization of the pid-controller section in the struct
 cnfg.cnfg_pid_controller=[];
 count = 0;
 
 %% ======================Active Magnetic Bearing===========================
+%% Initialization of the active magnetic bearing section in the struct
 cnfg.cnfg_activeMagneticBearing = [];
 count = 0;

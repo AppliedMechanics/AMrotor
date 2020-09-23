@@ -1,87 +1,117 @@
-%% Simple Laval - Zeitintegration fuer FRF-Berechnung
-
+% Simple Laval - Time integration for FRF calculation
 
 %% Clean up
+
 close all
 clear all
 % clc
 %% Import
+%% Import and formating of the figures
 
-import AMrotorSIM.*
-Janitor = AMrotorTools.PlotJanitor();
-Janitor.setLayout(2,3);
+import AMrotorSIM.* % path
+Config_Sim_Time % corresponding cnfg-file
+
+Janitor = AMrotorTools.PlotJanitor(); % Instantiation of class PlotJanitor
+Janitor.setLayout(2,3); %Setting layout of the figures
 
 %% Compute Rotor
+%% Assembly of the rotordynamic model
 
-Config_Sim_Time
+r=Rotorsystem(cnfg,'Laval-Rotor'); % Instantiation of class Rotorsystem
+r.assemble; % Assembly of the model parts, considering the ...
+            % components (sensors,..) from the cnfg-file
+r.rotor.assemble_fem; % Assembly of the global system matrices: M, D, G, K
 
-r=Rotorsystem(cnfg,'Laval-Rotor');
-r.assemble; %fuehrt Funktion assemble.m mit Eingabe Objekt r aus Klasse Rotorsystem aus
-r.show; % Funktion AMrotor\Matlab_Code\+AMrotorSIM\+Rotor\+FEMRotor\@FeModel\print.m
+%% Visualization of the assembled rotor model
 
-r.rotor.show_2D(); % compare discretisation and user input
-% r.rotor.geometry.show_2D(); 
-% r.rotor.geometry.show_3D(); % funktioniert nicht richtig
-
+r.show; % lists the associated components of the model in teh Matlab ...
+        % Command Window
+        
+r.rotor.show_2D(); % Plot of a side view of the rotor elements
+% r.rotor.geometry.show_2D();  % Plot of a side view of the ..
+                               % rotor radii
+% r.rotor.geometry.show_3D(); % Plot of a 3D-isometry of the rotor
 % r.rotor.mesh.show_2D(); 
 % r.rotor.mesh.show_2D_nodes(); 
-%r.rotor.mesh.show_3D();
+% r.rotor.mesh.show_3D();
 
-% g=Graphs.Visu_Rotorsystem(r);
-% g.show();
-
-
-r.rotor.assemble_fem;
+g=Graphs.Visu_Rotorsystem(r); % Instantiation of class Visu_Rotorsystem
+g.show(); % Plot of a 3D-isometry of the rotor with sensors, loads,...
 
 %% Running Time Simulation
+%% Running Time Simulation
+%% Stationary with avaliable calculation methods
 
-St_Lsg = Experiments.Stationaere_Lsg( r , [1000,1200] , (0:0.001:0.02) );%obj = Stationaere_Lsg(a,drehzahlvektor,time)
-% St_Lsg.compute_ode15s_ss;
-%St_Lsg.compute_euler_ss
-St_Lsg.compute_newmark 
-% options.adapt=true; options.locTolUpper=1e-3; options.locTolLower=1e-4; options.globTol=1;
-% St_Lsg.compute_newmark(options)
-%St_Lsg.compute_sys_ss_variant
+St_Lsg = Experiments.Stationaere_Lsg(r,[1000,1200],(0:0.001:0.02)); % In...
+    %stantiation of class Stationaere_Lsg
+    
+% options.adapt=true; options.locTolUpper=1e-3; 
+% options.locTolLower=1e-4; options.globTol=1;
+
+% St_Lsg.compute_ode15s_ss; % ode15s - method
+% St_Lsg.compute_euler_ss; % Forward euler - method (in progress)
+St_Lsg.compute_newmark; % newmark - method
+% St_Lsg.compute_newmark(options) % newmark - method with options
+% St_Lsg.compute_sys_ss_variant (in progress)
+
 % St_Lsg.save_data('St_Lsg_Laval_U_fwd_bwd_sweep_0_2krpm');
 
-% Hochlauf = Experiments.Hochlaufanalyse( r , [0, 1e3] , (0:0.001:0.5) ); % input: (rotorsystem, [rpm_start, rpm_end], time_vector)
-% Hochlauf.compute_ode15s_ss
+%% Run up with avaliable calculation methods
 
-%% Plot results 
-%------------- Erzeuge Ausgabeformat der Loesung ---------------
+% Runup = Experiments.Hochlaufanalyse(r,[0,1e3],(0:0.001:0.5)); % In...
+    %stantiation of class Stationaere_Lsg
+    
+% Runup.compute_ode15s_ss; % ode15s - method
 
-Lsg = St_Lsg; % Lsg = Hochlauf;
-% 
-d = Dataoutput.TimeDataOutput(Lsg);
-% % d = Dataoutput.TimeDataOutput(Hochlauf);
-dataset_modalanalysis = d.compose_data(); % container: rpm -> (n,t,allsensorsxy)
+%% FRF over time
+
+% frf = Experiments.FrequenzgangfunktionTime(St_Lsg); % Instantiation ...
+                                        % of class FrequenzgangfunktionTime
+
+% frf.calculate(r.sensors(6),r.sensors(5),0,'u_x','u_x',4,'boxcar');??????????
+
+%% Plot results
+%% Processing and visualization of the results
+
+d = Dataoutput.TimeDataOutput(St_Lsg); % Instantiation of class ...
+                                       % TimeDataOutput
+% d = Dataoutput.TimeDataOutput(Runup);
+
+%% Processing and saving results
+
+dataset_modalanalysis = d.compose_data(); % container: rpm -> 
+                                          % (n,t,allsensorsxy)
 d.save_data(dataset_modalanalysis,'Hochlauf_Laval_U_x_sweep0_200Hz_3000rpm'); 
-dataset_modalanalysis = d.compose_data_sensor_wise(); % container: rpm -> (sensor1,sensor2,...)
-struct = d.convert_data_to_struct_sensor_wise(dataset_modalanalysis); % to get results as struct
+dataset_modalanalysis = d.compose_data_sensor_wise(); % container: rpm -> 
+                                                      % (sensor1,sensor2,.)
+struct = d.convert_data_to_struct_sensor_wise(dataset_modalanalysis);
 d.save_data(struct,'Hochlauf_Laval_U_x_sweep0_200Hz_3000rpm');
 
+%% Visualizing results
 
-%------------- Erzeuge Grafiken aus Loesung -------------------
+Lsg=St_Lsg;
+t = Graphs.TimeSignal(r, Lsg); % Instantiation of class TimeSignal
+o = Graphs.Orbitdarstellung(r, Lsg); % Instantiation of class ...
+                                     % Orbitdarstellung
+f = Graphs.Fourierdarstellung(r, Lsg); % Instantiation of class ...
+                                       % Fourierdarstellung
+fo = Graphs.Fourierorbitdarstellung(r, Lsg); % Instantiation of class ...
+                                             % Fourierorbitdarstellung
+w = Graphs.Waterfalldiagramm(r, Lsg); % Instantiation of class ...
+                                      % Waterfalldiagramm
+w2 = Graphs.WaterfalldiagrammTwoSided(r, Lsg); % Instantiation of class ...
+                                               % WaterfalldiagrammTwoSided
 
-t = Graphs.TimeSignal(r, Lsg);
-o = Graphs.Orbitdarstellung(r, Lsg);
-f = Graphs.Fourierdarstellung(r, Lsg);
-fo = Graphs.Fourierorbitdarstellung(r, Lsg);
-w = Graphs.Waterfalldiagramm(r, Lsg);
-w2 = Graphs.WaterfalldiagrammTwoSided(r, Lsg);
+% visufrf = Graphs.Frequenzgangfunktion(frf);?????????????????
+% visufrf.set_plots('bode','log','deg','coh');
 
-% frf = Experiments.FrequenzgangfunktionTime(St_Lsg);
-% frf.calculate(r.sensors(6),r.sensors(5),0,'u_x','u_x',4,'boxcar');
-% visufrf = Graphs.Frequenzgangfunktion(frf);
-% visufrf.set_plots('bode','log','deg','coh')
-
- for sensor = r.sensors
-          t.plot(sensor,[1,2,3]);
-          o.plot(sensor);
-          f.plot(sensor);
-          fo.plot(sensor,1); % Error Curve Fitting Toolbox muss installiert sein
-          fo.plot(sensor,2);
-          w.plot(sensor); % Wasserfall
-          w2.plot(sensor); % Wasserfall 2 Sided
+ for sensor = r.sensors % Loop over all sensors for plotting
+          t.plot(sensor,[1,2,3]); % Time signal
+          o.plot(sensor); % Orbits
+          f.plot(sensor); % Fourier
+          fo.plot(sensor,1); % Fourierorbit 1st order
+          fo.plot(sensor,2); % Fourierorbit 2nd order
+          w.plot(sensor); % Waterfall
+          w2.plot(sensor); % Waterfall 2sided
           Janitor.cleanFigures();
  end

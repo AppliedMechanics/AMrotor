@@ -1,83 +1,106 @@
-%% Simple Laval - Modalanalyse
-
+% Simple Laval - System analysis
 
 %% Clean up
+
 close all
 clear all
 % clc
 %% Import
+%% Import and formating of the figures
 
-import AMrotorSIM.*
-Janitor = AMrotorTools.PlotJanitor();
-Janitor.setLayout(2,3);
+import AMrotorSIM.* % path
+Config_Sim_Modal % corresponding cnfg-file
+
+Janitor = AMrotorTools.PlotJanitor(); % Instantiation of class PlotJanitor
+Janitor.setLayout(2,3); %Setting layout of the figures
 
 %% Compute Rotor
+%% Assembly of the rotordynamic model
 
-Config_Sim_Modal
+r=Rotorsystem(cnfg,'Laval-Rotor'); % Instantiation of class Rotorsystem
+r.assemble; % assembly of the model parts, considering the ...
+            % components (sensors,..) from the cnfg-file
+r.rotor.assemble_fem; % assembly of the global system matrices: M, D, G, K
 
-r=Rotorsystem(cnfg,'Laval-System');
-r.assemble; %fuehrt Funktion assemble.m mit Eingabe Objekt r aus Klasse Rotorsystem aus
-r.show; % Funktion AMrotor\Matlab_Code\+AMrotorSIM\+Rotor\+FEMRotor\@FeModel\print.m
+%% Visualization of the assembled rotor model
 
+r.show; % lists the associated components of the model in teh Matlab ...
+        % Command Window
+        
+r.rotor.show_2D(); % Plot of a side view of the rotor elements
+% r.rotor.geometry.show_2D();  % Plot of a side view of the ..
+                               % rotor radii
+% r.rotor.geometry.show_3D(); % Plot of a 3D-isometry of the rotor
+% r.rotor.mesh.show_2D(); 
+% r.rotor.mesh.show_2D_nodes(); 
+% r.rotor.mesh.show_3D();
 
-r.rotor.show_2D(); % compare discretisation and user input
-% r.rotor.geometry.show_2D(); % show user input
-r.rotor.geometry.show_3D(); % show user input 3D, does not show last section
+g=Graphs.Visu_Rotorsystem(r); % Instantiation of class Visu_Rotorsystem
+g.show(); % Plot of a 3D-isometry of the rotor with sensors, loads,...
 
-% r.rotor.mesh.show_2D(); % show generated elements
-% r.rotor.mesh.show_2D_nodes(); % show nodes and corresponding inner/outer radius
-% r.rotor.mesh.show_3D(); % show 3D rotor with mesh
-
-
-g=Graphs.Visu_Rotorsystem(r);
-g.show(); % 3D rotor system with components
-
-
-r.rotor.assemble_fem; % assemble structure matrices
-
-u_trans_rigid_body = r.compute_translational_rigid_body_modes;overall_mass = r.check_overall_translational_mass(u_trans_rigid_body)
-
+u_trans_rigid_body = r.compute_translational_rigid_body_modes; % Locates ..
+                         % the translational DoF's of the rotor in a matrix
+overall_mass = r.check_overall_translational_mass(u_trans_rigid_body) % ...
+                         % Calculates the translational mass
 
 %% Running system analyses
-% Frequenzgangfunktion
-frf=Experiments.Frequenzgangfunktion(r,'Test-FRF');
-type = 'd'; %type:'d','v','a'
-inPos = [0,100,200]*1e-3;%[100:100:500]*1e-3;%
-outPos = 100e-3;%[100,250]*1e-3;%
-f = 1:2:100;
-rpm = 0;
-[f,H]=frf.calculate(f,inPos,outPos,type,rpm,{'u_x','u_y','psi_x'},{'u_x','psi_x'});
-[deltaIn,deltaOut]=frf.print_distance_delta;
+%% Running system analyses
+%% Frequency response function
 
-visufrf = Graphs.Frequenzgangfunktion(frf);
-visufrf.set_plots('amplitude','db')
-visufrf.set_plots('phase','db')
-visufrf.set_plots('bode','log','deg')
-visufrf.set_plots('nyquist')
-Janitor.cleanFigures();
+frf=Experiments.Frequenzgangfunktion(r,'FRF'); % Instantiation of ... 
+                        % class Frequenzgangfunktion
+type = 'd'; % FRF type: displ. 'd', veloc. 'v', accel. 'a'
+inPos = [0,100,200]*1e-3; % Input positions on the rotor axis
+outPos = 100e-3; % Output positions along the rotor axis
+f = 1:2:100; % Frequency resolution of the FRF
+rpm = 0; % Rotational speed
+[f,H]=frf.calculate(f,inPos,outPos,type,rpm,{'u_x','u_y','psi_x'}, ... 
+    {'u_x','psi_x'}); % Calculation of the FRF's from the three input ... 
+                      % directions {'u_x','u_y','psi_x'} to the two ... 
+                      % output directions {'u_x','psi_x'} at the ...
+                      % corresponding positions
+[deltaIn,deltaOut]=frf.print_distance_delta; % Plot of the gap between ...
+                      % the desired positions along the rotor axis and ...
+                      % the closest node position in the Command Window.
 
-% Modalanalyse
-m=Experiments.Modalanalyse(r);
+visufrf = Graphs.Frequenzgangfunktion(frf); % Instantiation of ... 
+                        % class Frequenzgangfunktion for figures
+visufrf.set_plots('amplitude','db') % Amplitude plot of all FRF's
+visufrf.set_plots('phase','db') % Phase plot of all FRF's
+visufrf.set_plots('bode','log','deg') % Bode plot of all FRF's
+visufrf.set_plots('nyquist') % Nyquist plot of all FRF's
+Janitor.cleanFigures(); % Formating of the figures
 
-m.calculate_rotorsystem(10,3e3); %(#modes,rpm)
+%% Modal analysis
 
-esf= Graphs.Eigenschwingformen(m);
-esf.print_frequencies();
-esf.plot_displacements();%esf.plot_displacements('complex');% to also check imaginary part
-esf.set_plots('half') % 'all', 'half' or desired mode number
-%esf.set_plots('half','overlay')
-% esf.set_plots(10,'Overlay','Skip',5,'tangentialPoints',30,'scale',3) %specify additional options, first input is index of mode
-Janitor.cleanFigures();
+m=Experiments.Modalanalyse(r); % Instantiation of ... 
+                        % class Modalanalyse
+m.calculate_rotorsystem(10,3e3); % Calcualtion (#modes,rpm)
+
+esf=Graphs.Eigenschwingformen(m); % Instantiation of ... 
+                        % class Eigenschwingformen
+esf.print_frequencies(); % Print of the eigenfrequencies ...
+                         % with the corresponding modal damping ...
+                         % in the Command Window
+esf.plot_displacements(); % Figures of the eigenmodes ... 
+                          % in specific directions
+esf.set_plots('half','Overlay') % Plots of the odd-numbered eigenmodes ... 
+                                % in overlay with the original rotor
+Janitor.cleanFigures(); % Formating of the figures
 
 
-% Campbell-Diagramm
-cmp = Experiments.Campbell(r);
-cmp.set_up(1e2:1e2:10e3,8); 
-cmp.calculate();% input of set_up is (1/min, Number of Modes)
-cmpDiagramm = Graphs.Campbell(cmp);
-cmpDiagramm.print_damping_zero_crossing();
-cmpDiagramm.print_critical_speeds()
-cmpDiagramm.set_plots('all');
+%% Campbell diagramm
+
+cmp = Experiments.Campbell(r); % Instantiation of ... 
+                        % class Campbell
+cmp.set_up(1e2:1e2:10e3,8); % Set_up (omega range in 1/min, #modes)
+cmp.calculate(); % Calculation
+
+cmpDiagramm = Graphs.Campbell(cmp); % Instantiation of ... 
+                        % class Campbell for figures
+cmpDiagramm.print_damping_zero_crossing(); % Prints in the Command Window
+cmpDiagramm.print_critical_speeds() % Prints in the Command Window
+cmpDiagramm.set_plots('all'); % Figures
 % cmpDiagramm.set_plots('backward');
 % cmpDiagramm.set_plots('forward');
-Janitor.cleanFigures();
+Janitor.cleanFigures(); % Formating of the figures

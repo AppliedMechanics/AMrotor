@@ -1,4 +1,4 @@
-classdef ActiveMagneticBearing < handle
+classdef activeMagneticBearing < handle
 % activeMagneticBearing Class for AMB
 %   Creates other objects of the type SimpleBearing and pidController
     properties

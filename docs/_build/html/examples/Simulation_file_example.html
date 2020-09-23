@@ -1,0 +1,403 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Simulation_file_example &mdash; AMrotor  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="doc_classes" href="../code_doc/doc_classes.html" />
+    <link rel="prev" title="Config_file_example" href="Config_file_example.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> AMrotor
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Hello</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">Hello license</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Hello installation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Config_file_example.html">Config_file_example</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Simulation_file_example</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../code_doc/doc_classes.html">doc_classes</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">AMrotor</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Simulation_file_example</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/examples/Simulation_file_example.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="simulation-file-example">
+<h1>Simulation_file_example<a class="headerlink" href="#simulation-file-example" title="Permalink to this headline">¶</a></h1>
+<p>This is a simple example for the Config_script of a Laval rotor</p>
+<div class="highlight-matlab notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">% Simple Laval - Zeitintegration fuer FRF-Berechnung</span>
+
+<span class="c">%% Clean up</span>
+<span class="n">close</span> <span class="n">all</span>
+<span class="n">clear</span> <span class="n">all</span>
+<span class="c">% clc</span>
+<span class="c">%% Import</span>
+
+<span class="n">import</span> <span class="n">AMrotorSIM</span><span class="o">.*</span>
+<span class="n">Janitor</span> <span class="p">=</span> <span class="n">AMrotorTools</span><span class="p">.</span><span class="n">PlotJanitor</span><span class="p">();</span>
+<span class="n">Janitor</span><span class="p">.</span><span class="n">setLayout</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span>
+
+<span class="c">%% Compute Rotor</span>
+
+<span class="n">Config_Sim_Time</span>
+
+<span class="n">r</span><span class="p">=</span><span class="n">Rotorsystem</span><span class="p">(</span><span class="n">cnfg</span><span class="p">,</span><span class="s">&#39;Laval-Rotor&#39;</span><span class="p">);</span>
+<span class="n">r</span><span class="p">.</span><span class="n">assemble</span><span class="p">;</span> <span class="c">%fuehrt Funktion assemble.m mit Eingabe Objekt r aus Klasse Rotorsystem aus</span>
+<span class="n">r</span><span class="p">.</span><span class="n">show</span><span class="p">;</span> <span class="c">% Funktion AMrotor\Matlab_Code\+AMrotorSIM\+Rotor\+FEMRotor\@FeModel\print.m</span>
+
+<span class="n">r</span><span class="p">.</span><span class="n">rotor</span><span class="p">.</span><span class="n">show_2D</span><span class="p">();</span> <span class="c">% compare discretisation and user input</span>
+<span class="c">% r.rotor.geometry.show_2D(); </span>
+<span class="c">% r.rotor.geometry.show_3D(); % funktioniert nicht richtig</span>
+
+<span class="c">% r.rotor.mesh.show_2D(); </span>
+<span class="c">% r.rotor.mesh.show_2D_nodes(); </span>
+<span class="c">%r.rotor.mesh.show_3D();</span>
+
+<span class="c">% g=Graphs.Visu_Rotorsystem(r);</span>
+<span class="c">% g.show();</span>
+
+
+<span class="n">r</span><span class="p">.</span><span class="n">rotor</span><span class="p">.</span><span class="n">assemble_fem</span><span class="p">;</span>
+
+<span class="c">%% Running Time Simulation</span>
+
+<span class="n">St_Lsg</span> <span class="p">=</span> <span class="n">Experiments</span><span class="p">.</span><span class="n">Stationaere_Lsg</span><span class="p">(</span> <span class="n">r</span> <span class="p">,</span> <span class="p">[</span><span class="mi">1000</span><span class="p">,</span><span class="mi">1200</span><span class="p">]</span> <span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">:</span><span class="mf">0.001</span><span class="p">:</span><span class="mf">0.02</span><span class="p">)</span> <span class="p">);</span><span class="c">%obj = Stationaere_Lsg(a,drehzahlvektor,time)</span>
+<span class="c">% St_Lsg.compute_ode15s_ss;</span>
+<span class="c">%St_Lsg.compute_euler_ss</span>
+<span class="n">St_Lsg</span><span class="p">.</span><span class="n">compute_newmark</span> 
+<span class="c">% options.adapt=true; options.locTolUpper=1e-3; options.locTolLower=1e-4; options.globTol=1;</span>
+<span class="c">% St_Lsg.compute_newmark(options)</span>
+<span class="c">%St_Lsg.compute_sys_ss_variant</span>
+<span class="c">% St_Lsg.save_data(&#39;St_Lsg_Laval_U_fwd_bwd_sweep_0_2krpm&#39;);</span>
+
+<span class="c">% Hochlauf = Experiments.Hochlaufanalyse( r , [0, 1e3] , (0:0.001:0.5) ); % input: (rotorsystem, [rpm_start, rpm_end], time_vector)</span>
+<span class="c">% Hochlauf.compute_ode15s_ss</span>
+
+<span class="c">%% Plot results </span>
+<span class="c">%------------- Erzeuge Ausgabeformat der Loesung ---------------</span>
+
+<span class="n">Lsg</span> <span class="p">=</span> <span class="n">St_Lsg</span><span class="p">;</span> <span class="c">% Lsg = Hochlauf;</span>
+<span class="c">% </span>
+<span class="n">d</span> <span class="p">=</span> <span class="n">Dataoutput</span><span class="p">.</span><span class="n">TimeDataOutput</span><span class="p">(</span><span class="n">Lsg</span><span class="p">);</span>
+<span class="c">% % d = Dataoutput.TimeDataOutput(Hochlauf);</span>
+<span class="n">dataset_modalanalysis</span> <span class="p">=</span> <span class="n">d</span><span class="p">.</span><span class="n">compose_data</span><span class="p">();</span> <span class="c">% container: rpm -&gt; (n,t,allsensorsxy)</span>
+<span class="n">d</span><span class="p">.</span><span class="n">save_data</span><span class="p">(</span><span class="n">dataset_modalanalysis</span><span class="p">,</span><span class="s">&#39;Hochlauf_Laval_U_x_sweep0_200Hz_3000rpm&#39;</span><span class="p">);</span> 
+<span class="n">dataset_modalanalysis</span> <span class="p">=</span> <span class="n">d</span><span class="p">.</span><span class="n">compose_data_sensor_wise</span><span class="p">();</span> <span class="c">% container: rpm -&gt; (sensor1,sensor2,...)</span>
+<span class="n">struct</span> <span class="p">=</span> <span class="n">d</span><span class="p">.</span><span class="n">convert_data_to_struct_sensor_wise</span><span class="p">(</span><span class="n">dataset_modalanalysis</span><span class="p">);</span> <span class="c">% to get results as struct</span>
+<span class="n">d</span><span class="p">.</span><span class="n">save_data</span><span class="p">(</span><span class="n">struct</span><span class="p">,</span><span class="s">&#39;Hochlauf_Laval_U_x_sweep0_200Hz_3000rpm&#39;</span><span class="p">);</span>
+
+
+<span class="c">%------------- Erzeuge Grafiken aus Loesung -------------------</span>
+
+<span class="n">t</span> <span class="p">=</span> <span class="n">Graphs</span><span class="p">.</span><span class="n">TimeSignal</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">Lsg</span><span class="p">);</span>
+<span class="n">o</span> <span class="p">=</span> <span class="n">Graphs</span><span class="p">.</span><span class="n">Orbitdarstellung</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">Lsg</span><span class="p">);</span>
+<span class="n">f</span> <span class="p">=</span> <span class="n">Graphs</span><span class="p">.</span><span class="n">Fourierdarstellung</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">Lsg</span><span class="p">);</span>
+<span class="n">fo</span> <span class="p">=</span> <span class="n">Graphs</span><span class="p">.</span><span class="n">Fourierorbitdarstellung</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">Lsg</span><span class="p">);</span>
+<span class="n">w</span> <span class="p">=</span> <span class="n">Graphs</span><span class="p">.</span><span class="n">Waterfalldiagramm</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">Lsg</span><span class="p">);</span>
+<span class="n">w2</span> <span class="p">=</span> <span class="n">Graphs</span><span class="p">.</span><span class="n">WaterfalldiagrammTwoSided</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">Lsg</span><span class="p">);</span>
+
+<span class="c">% frf = Experiments.FrequenzgangfunktionTime(St_Lsg);</span>
+<span class="c">% frf.calculate(r.sensors(6),r.sensors(5),0,&#39;u_x&#39;,&#39;u_x&#39;,4,&#39;boxcar&#39;);</span>
+<span class="c">% visufrf = Graphs.Frequenzgangfunktion(frf);</span>
+<span class="c">% visufrf.set_plots(&#39;bode&#39;,&#39;log&#39;,&#39;deg&#39;,&#39;coh&#39;)</span>
+
+ <span class="k">for</span> <span class="n">sensor</span> <span class="p">=</span> <span class="n">r</span><span class="p">.</span><span class="n">sensors</span>
+          <span class="n">t</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sensor</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]);</span>
+          <span class="n">o</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sensor</span><span class="p">);</span>
+          <span class="n">f</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sensor</span><span class="p">);</span>
+          <span class="n">fo</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sensor</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span> <span class="c">% Error Curve Fitting Toolbox muss installiert sein</span>
+          <span class="n">fo</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sensor</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+          <span class="n">w</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sensor</span><span class="p">);</span> <span class="c">% Wasserfall</span>
+          <span class="n">w2</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sensor</span><span class="p">);</span> <span class="c">% Wasserfall 2 Sided</span>
+          <span class="n">Janitor</span><span class="p">.</span><span class="n">cleanFigures</span><span class="p">();</span>
+ <span class="k">end</span>
+</pre></div>
+</td></tr></table></div>
+<p><code class="xref mat mat-scpt docutils literal notranslate"><span class="pre">Examples.Simple_Laval.Simulation_Time</span></code> is a very cool script</p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../code_doc/doc_classes.html" class="btn btn-neutral float-right" title="doc_classes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Config_file_example.html" class="btn btn-neutral float-left" title="Config_file_example" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, AMrotor_Team
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

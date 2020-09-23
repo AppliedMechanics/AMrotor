@@ -1,5 +1,5 @@
 %% MLPS - AMB - Modalanalyse
-% Zur Berechnung der Rohdaten für die Modalanalyse
+% Zur Berechnung der Rohdaten fuer die Modalanalyse
 % SIRM2019 Beitrag
 % 20.08.2018
 
@@ -23,7 +23,7 @@ r=Rotorsystem(cnfg,'MLPS-System');
 r.assemble;
 %r.show;
 %
-%r.rotor.show_2D(); % compare discretisation and user input
+r.rotor.show_2D(); % compare discretisation and user input
 % r.rotor.geometry.show_2D(); 
 % r.rotor.geometry.show_3D(); % funktioniert nicht richtig
 
@@ -76,14 +76,14 @@ St_Lsg.compute_ode15s_ss
 %St_Lsg.compute_sys_ss_variant
 
 % 
-%------------- Erzeuge Ausgabeformat der Lösung ---------------
+%------------- Erzeuge Ausgabeformat der Loesung ---------------
 
 d = Dataoutput.TimeDataOutput(St_Lsg);
 dataset_modalanalysis = d.compose_data();
 d.save_data(dataset_modalanalysis,'jm_whirling-chirp_500rpm');%'sweepx_0-300Hz_dm_AnregungLager2_4s-1kHz');
 % 
 % 
-% %------------- Erzeuge Grafiken aus Lösung -------------------
+% %------------- Erzeuge Grafiken aus Loesung -------------------
 % 
  t = Graphs.TimeSignal(r, St_Lsg);
  o = Graphs.Orbitdarstellung(r, St_Lsg);
