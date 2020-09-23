@@ -6,6 +6,4 @@ setup(
    description='Matlab based rotordynamic toolbox',
    author='AMrotorTeam',
    author_email='foomail@foo.com',
-   packages=['AMrotor_doc'],  #same as name
-   install_requires=['bar', 'greek'], #external packages as dependencies
 )
