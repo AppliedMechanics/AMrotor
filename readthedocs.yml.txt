@@ -1,2 +1,1 @@
--e .
-sphinxcontrib-matlabdomain
+requirements_file: rtd-requirements.txt
