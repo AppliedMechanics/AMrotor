@@ -43,7 +43,7 @@ end
 
 % Adding active magnetic bearings
 for cnfg=obj.cnfg.cnfg_activeMagneticBearing
-    obj.activeMagneticBearings(end+1) = AMrotorSIM.activeMagneticBearing(cnfg);
+    obj.activeMagneticBearings(end+1) = AMrotorSIM.ActiveMagneticBearing(cnfg);
     obj.activeMagneticBearings(end).assemble(obj); % add bearings and controllers to rotorsystem
 end
     
