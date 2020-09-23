@@ -28,7 +28,7 @@ author = 'AMrotor_Team'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-'sphinx.ext.viewcode', 'sphinx.ext.autodoc', 'sphinxcontrib.matlab'
+'sphinx.ext.viewcode', 'sphinxcontrib.matlab', 'sphinx.ext.autodoc'
 ]
 
 # matlab source code
