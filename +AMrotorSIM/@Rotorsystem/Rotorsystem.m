@@ -1,8 +1,11 @@
 classdef Rotorsystem < handle
-% Rotorsystem Basis class for a rotor system.
-%   R=ROTORSYSTEM(cnfg,'System');
-%
-%   See also AMrotorSIM.Experiments, AMrotorSIM.Graphs, AMrotorSIM.Dataoutput, AMrotorTools.
+% Rotorsystem is the basis class for a rotor system.
+%  R=ROTORSYSTEM(cnfg,'System');
+%   :param c: cnfg-struct from seperat Config script
+%   :type c: matlab struct
+%   :param name: project name
+%   :type name: string
+%   :return: rotorsystem object
 
    properties
       name % name of the rotorsystem
@@ -10,7 +13,7 @@ classdef Rotorsystem < handle
       % systemmatrices - save the system matrices
       systemmatrices % in ursprünglicher Form obsolet, wieder hinzugefuegt, damit die Zeitintegration erst einmal funktioniert. fuer speichern der systemloads
       
-      cnfg=struct([]) % configure struct, typically created in seperate Config_ script
+      cnfg=struct([]) % configure struct, typically created in seperate Config _ script
       
       % See also AMrotorSIM.Rotor.FEMRotor.FeModel
       %
@@ -34,7 +37,7 @@ classdef Rotorsystem < handle
        %Konstruktor
        function obj = Rotorsystem(c,name)
          if nargin == 0
-           obj.name = 'Netter Rotorsystem Name';
+           obj.name = 'Nice Rotorsystem name';
          else
            obj.cnfg = c;
            obj.name = name;

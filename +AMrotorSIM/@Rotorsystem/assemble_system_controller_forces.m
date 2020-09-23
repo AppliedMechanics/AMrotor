@@ -1,4 +1,10 @@
 function h = assemble_system_controller_forces(self,t,Z)
+% Adds the controller force to the load vector ????
+% 
+%    :parameter t: time step
+%    :parameter Z: state-space vector [x; x_dot]
+%    :return: Load vector h
+
 
 n_nodes=length(self.rotor.mesh.nodes);
 h = sparse(6*n_nodes,1);
