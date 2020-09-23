@@ -1,16 +1,24 @@
-function [ax]=show_3D(self)
+function [ax]=show_3D(self,ax,color)
    ele = self.elements;
    nEle = length(self.elements);
+
+   if nargin == 1
+       f2=figure;
+       ax = axes('xlim', [-10 10], 'ylim', [-10 10], 'zlim',[-10 10]);
+   elseif nargin == 2
+       color = AMrotorTools.TUMColors.TUMGray2;
+   end
    
-   FaceColorCap = AMrotorTools.TUMColors.TUMGray2; %rgb or color string, "cap"->Deckel
+   FaceColorCap = color; %rgb or color string, "cap"->Deckel
    EdgeColorCap = 'none'; 
-   FaceColorCyl = FaceColorCap;
-   EdgeColorCyl = EdgeColorCap; 
+   FaceColorCyl = color;
+   %EdgeColorCyl = color; 
+   EdgeAlphaCyl = 0; %transparent
    LineWidthCap=0.5; 
    
-   f2=figure;
+   
+   
 
-   ax = axes('xlim', [-10 10], 'ylim', [-10 10], 'zlim',[-10 10]);
 
    view(3);
    grid on;
@@ -44,8 +52,8 @@ function [ax]=show_3D(self)
         z = z*0;
         
         %% Plote Deckel
-        hs_left(n)=surf(z+zLeft,y,x);
-        hs_right(n)=surf(z+zRight,y,x);
+        hs_left(n)=surf(ax,z+zLeft,y,x);
+        hs_right(n)=surf(ax,z+zRight,y,x);
         set(hs_left(n), 'facecolor',FaceColorCap,'edgecolor',EdgeColorCap)
         set(hs_right(n), 'facecolor',FaceColorCap,'edgecolor',EdgeColorCap)
         %set(hs_left(n), 'facecolor','b')
@@ -55,8 +63,9 @@ function [ax]=show_3D(self)
         plot3(z(2,:)+zLeft,y(2,:),x(2,:),'k','LineWidth',LineWidthCap);
         plot3(z(2,:)+zRight,y(2,:),x(2,:),'k','LineWidth',LineWidthCap)
         %% plote Zylinder
-        hz(n) = surf(zzyl,yzyl, xzyl);
-        set(hz(n), 'edgecolor',EdgeColorCyl)
+        hz(n) = surf(ax,zzyl,yzyl, xzyl);
+        %set(hz(n), 'EdgeColor',EdgeColorCyl)
+        set(hz(n), 'EdgeAlpha',EdgeAlphaCyl)
         %set(hz(n), 'facecolor','b')
         set(hz(n), 'facecolor',FaceColorCyl)
 
