@@ -28,15 +28,20 @@ riR = 0;
 % Format of the geometry definition: {[z, r_outer, r_inner], ...} without..
 % start- and end-node:
 cnfg.cnfg_rotor.geo_nodes = {[0 0 0], [0 raW riW], [0.094 raW riW], ... 
-                                                        % Shaft
     [0.094 raL riL], [0.132 raL riL], [0.132 raW riW], ... 
-                                                        % bearing bushing 1
     [0.350 raW riW], [0.350 raR riR], [0.376 raR riR], [0.376 raW riW],... 
-                                                        % Rotor disc
     [0.604 raW riW], [0.604 raL riL], [0.642 raL riL], ... 
-                                                        % bearing bushing 2
-    [0.642 raW riW], [0.702 raW riW], [0.702 0 0]}; % Shaft
+    [0.642 raW riW], [0.702 raW riW], [0.702 0 0]}; 
 
+% cnfg.cnfg_rotor.geo_nodes = {[0 0 0], [0 raW riW], [0.094 raW riW], ... 
+%                                                      % Shaft
+%     [0.094 raL riL], [0.132 raL riL], [0.132 raW riW], ... 
+%                                                      % bearing bushing 1
+%     [0.350 raW riW], [0.350 raR riR], [0.376 raR riR], [0.376 raW riW],... 
+%                                                      % Rotor disc
+%     [0.604 raW riW], [0.604 raL riL], [0.642 raL riL], ... 
+%                                                      % bearing bushing 2
+%     [0.642 raW riW], [0.702 raW riW], [0.702 0 0]}; % Shaft
 
 %% FEM Config
 cnfg.cnfg_rotor.mesh_opt.name = 'Mesh 1';
@@ -209,7 +214,6 @@ cnfg.cnfg_load(count).frequency= 250; % end frequency [Hz]
 cnfg.cnfg_load(count).t_start = 0; % start time [s]
 cnfg.cnfg_load(count).t_end= 0.8; % end time [s]
 cnfg.cnfg_load(count).type='Force_timevariant_whirl_fwd_sweep';
-
 
 %% ========================PID-controller==================================
 %% Initialization of the pid-controller section in the struct

@@ -1,5 +1,5 @@
-Simple_Laval
-============
+Simple laval rotor example
+==========================
 
 This is an example code for a simple laval rotor simulation without an active magnetic bearing. The code snippets can be copied and 
 pasted entirely in a Matlab script or can be found in the AMrotor folder under "examples".

@@ -1,5 +1,5 @@
-MLPS_test_rig
-=============
+MBTR test rig with AMB bearings
+===============================
 
 This code example is based on a real magnetic bearing test rig (MBTR).
 In this MBTR a rotor is mounted on active magnetic bearings (AMB's).
@@ -10,5 +10,5 @@ In this MBTR a rotor is mounted on active magnetic bearings (AMB's).
 .. toctree::
    :maxdepth: 2
 
-   ./MBTR/Config_file_MBTR
-   ./MBTR/Simulation_file_MBTR
+   ./MBTR_with_AMB/Config_file_MBTRwithAMB
+   ./MBTR_with_AMB/Simulation_file_MBTRwithAMB

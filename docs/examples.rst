@@ -9,4 +9,5 @@ The following example should guarantee an easy start with AMrotor.
    :maxdepth: 2
 
    /examples/Simple_Laval
-   /examples/MLPS_test_rig
+   /examples/MBTR_test_rig
+   /examples/MBTR_test_rig_with_AMBs

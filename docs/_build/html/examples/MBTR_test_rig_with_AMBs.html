@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>MLPS_test_rig &mdash; AMrotor  documentation</title>
+  <title>MBTR test rig with AMB bearings &mdash; AMrotor  documentation</title>
   
 
   
@@ -35,7 +35,9 @@
 
     
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Config_file_MBTR" href="MBTR_with_AMB/Config_file_MBTRwithAMB.html" />
+    <link rel="prev" title="Simulation_file_MBTR" href="MBTR/Simulation_file_MBTR.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -83,19 +85,26 @@
               <p class="caption"><span class="caption-text">About</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../credits.html">Development Lead</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../credits.html#contributors">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../installation.html">First step</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../installation.html#source">Source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Examples</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Simple_Laval.html">Simple laval rotor example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MBTR_test_rig.html">MBTR test rig with spring damper elements as bearings</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">MBTR test rig with AMB bearings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="MBTR_with_AMB/Config_file_MBTRwithAMB.html">Config_file_MBTR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MBTR_with_AMB/Simulation_file_MBTRwithAMB.html">Simulation_file_MBTR</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <p class="caption"><span class="caption-text">Code Documentation</span></p>
 <ul>
@@ -146,13 +155,15 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>MLPS_test_rig</li>
+          <li><a href="../examples.html">Examples</a> &raquo;</li>
+        
+      <li>MBTR test rig with AMB bearings</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/examples/MLPS test rig.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/examples/MBTR_test_rig_with_AMBs.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -165,15 +176,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="mlps-test-rig">
-<h1>MLPS_test_rig<a class="headerlink" href="#mlps-test-rig" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="mbtr-test-rig-with-amb-bearings">
+<h1>MBTR test rig with AMB bearings<a class="headerlink" href="#mbtr-test-rig-with-amb-bearings" title="Permalink to this headline">¶</a></h1>
 <p>This code example is based on a real magnetic bearing test rig (MBTR).
 In this MBTR a rotor is mounted on active magnetic bearings (AMB’s).</p>
-<img alt="examples\../Schema_MBTR.png" src="examples\../Schema_MBTR.png" />
+<img alt="../_images/Schema_MBTR.png" src="../_images/Schema_MBTR.png" />
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="MBTR/Config_file_MBTR.html">Config_file_MBTR</a></li>
-<li class="toctree-l1"><a class="reference internal" href="MBTR/Simulation_file_MBTR.html">Simulation_file_MBTR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MBTR_with_AMB/Config_file_MBTRwithAMB.html">Config_file_MBTR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MBTR_with_AMB/Simulation_file_MBTRwithAMB.html">Simulation_file_MBTR</a></li>
 </ul>
 </div>
 </div>
@@ -183,6 +194,15 @@ In this MBTR a rotor is mounted on active magnetic bearings (AMB’s).</p>
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="MBTR_with_AMB/Config_file_MBTRwithAMB.html" class="btn btn-neutral float-right" title="Config_file_MBTR" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="MBTR/Simulation_file_MBTR.html" class="btn btn-neutral float-left" title="Simulation_file_MBTR" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
