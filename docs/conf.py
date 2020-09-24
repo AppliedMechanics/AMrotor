@@ -36,6 +36,8 @@ matlab_src_dir = os.path.abspath('../')
 
 primary_domain = 'mat'
 
+master_doc = 'index'
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
