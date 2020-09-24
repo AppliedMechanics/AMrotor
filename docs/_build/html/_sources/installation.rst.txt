@@ -1,6 +1,6 @@
 ============
 Installation
-=============
+============
 :mod:`AMrotor` was tested on Matlab R2020a, but should also work with older Matlab-versions.
 
 Necessary Matlab-toolboxes are:

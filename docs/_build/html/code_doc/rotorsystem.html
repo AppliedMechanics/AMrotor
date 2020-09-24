@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html4" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -26,18 +26,16 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="activeMagneticBearing" href="activeMagneticBearing.html" />
-    <link rel="prev" title="AMrotorSIM" href="AMrotorSIM.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -51,7 +49,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> AMrotor
+            <a href="../contents.html" class="icon icon-home" alt="Documentation Home"> AMrotor
           
 
           
@@ -82,36 +80,11 @@
               
             
             
-              <p class="caption"><span class="caption-text">About</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../credits.html">Development Lead</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../credits.html#contributors">Contributors</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Rotorsystem</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Getting Started</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../installation.html">First step</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../installation.html#source">Source</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Examples</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Code Documentation</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="doc_classes.html">doc_classes</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="AMrotorSIM.html">AMrotorSIM</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Rotorsystem</a></li>
-<li class="toctree-l3"><a class="reference internal" href="activeMagneticBearing.html">activeMagneticBearing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Components/Components.html">Components</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
+</div>
             
           
         </div>
@@ -125,7 +98,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">AMrotor</a>
+          <a href="../contents.html">AMrotor</a>
         
       </nav>
 
@@ -154,11 +127,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="doc_classes.html">doc_classes</a> &raquo;</li>
-        
-          <li><a href="AMrotorSIM.html">AMrotorSIM</a> &raquo;</li>
+      <li><a href="../contents.html" class="icon icon-home"></a> &raquo;</li>
         
       <li>Rotorsystem</li>
     
@@ -182,125 +151,130 @@
   <div class="section" id="rotorsystem">
 <h1>Rotorsystem<a class="headerlink" href="#rotorsystem" title="Permalink to this headline">¶</a></h1>
 <p>This is the Rotorsystem class. This is the main class of the toolbox.</p>
-<span class="target" id="module-+AMrotorSIM.&#64;Rotorsystem"></span><dl class="mat class">
+<span class="target" id="module-+AMrotorSIM.&#64;Rotorsystem"></span><dl class="class">
 <dt id="+AMrotorSIM.&#64;Rotorsystem.Rotorsystem">
-<em class="property">class </em><code class="sig-prename descclassname">+AMrotorSIM.&#64;Rotorsystem.</code><code class="sig-name descname">Rotorsystem</code><span class="sig-paren">(</span><em class="sig-param">c</em>, <em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.Rotorsystem" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">+AMrotorSIM.&#64;Rotorsystem.</code><code class="descname">Rotorsystem</code><span class="sig-paren">(</span><em>c</em>, <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.Rotorsystem" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref mat mat-class docutils literal notranslate"><span class="pre">handle</span></code></p>
 <p>Rotorsystem is the basis class for a rotor system.
 R=ROTORSYSTEM(cnfg,’System’);</p>
 <blockquote>
-<div><dl class="field-list simple">
-<dt class="field-odd">param c</dt>
-<dd class="field-odd"><p>cnfg-struct from seperat Config script</p>
-</dd>
-<dt class="field-even">type c</dt>
-<dd class="field-even"><p>matlab struct</p>
-</dd>
-<dt class="field-odd">param name</dt>
-<dd class="field-odd"><p>project name</p>
-</dd>
-<dt class="field-even">type name</dt>
-<dd class="field-even"><p>string</p>
-</dd>
-<dt class="field-odd">return</dt>
-<dd class="field-odd"><p>rotorsystem object</p>
-</dd>
-</dl>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param c:</th><td class="field-body">cnfg-struct from seperat Config script</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type c:</th><td class="field-body">matlab struct</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">param name:</th><td class="field-body">project name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">type name:</th><td class="field-body">string</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">return:</th><td class="field-body">rotorsystem object</td>
+</tr>
+</tbody>
+</table>
 </div></blockquote>
-<dl class="mat attribute">
+<dl class="attribute">
 <dt id="+AMrotorSIM.&#64;Rotorsystem.Rotorsystem.name">
-<code class="sig-name descname">name</code><em class="property"> = None</em><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.Rotorsystem.name" title="Permalink to this definition">¶</a></dt>
+<code class="descname">name</code><em class="property"> = None</em><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.Rotorsystem.name" title="Permalink to this definition">¶</a></dt>
 <dd><p>name of the rotorsystem</p>
 </dd></dl>
 
-<dl class="mat attribute">
+<dl class="attribute">
 <dt id="+AMrotorSIM.&#64;Rotorsystem.Rotorsystem.systemmatrices">
-<code class="sig-name descname">systemmatrices</code><em class="property"> = None</em><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.Rotorsystem.systemmatrices" title="Permalink to this definition">¶</a></dt>
+<code class="descname">systemmatrices</code><em class="property"> = None</em><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.Rotorsystem.systemmatrices" title="Permalink to this definition">¶</a></dt>
 <dd><p>in urspr�nglicher Form obsolet, wieder hinzugefuegt, damit die Zeitintegration erst einmal funktioniert. fuer speichern der systemloads</p>
 </dd></dl>
 
-<dl class="mat attribute">
+<dl class="attribute">
 <dt id="+AMrotorSIM.&#64;Rotorsystem.Rotorsystem.cnfg">
-<code class="sig-name descname">cnfg</code><em class="property"> = 'struct([])'</em><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.Rotorsystem.cnfg" title="Permalink to this definition">¶</a></dt>
+<code class="descname">cnfg</code><em class="property"> = 'struct([])'</em><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.Rotorsystem.cnfg" title="Permalink to this definition">¶</a></dt>
 <dd><p>configure struct, typically created in seperate Config _ script</p>
 </dd></dl>
 
-<dl class="mat attribute">
+<dl class="attribute">
 <dt id="+AMrotorSIM.&#64;Rotorsystem.Rotorsystem.rotor">
-<code class="sig-name descname">rotor</code><em class="property"> = None</em><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.Rotorsystem.rotor" title="Permalink to this definition">¶</a></dt>
+<code class="descname">rotor</code><em class="property"> = None</em><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.Rotorsystem.rotor" title="Permalink to this definition">¶</a></dt>
 <dd><p>See also AMrotorSIM.Sensors</p>
 </dd></dl>
 
-<dl class="mat attribute">
+<dl class="attribute">
 <dt id="+AMrotorSIM.&#64;Rotorsystem.Rotorsystem.sensors">
-<code class="sig-name descname">sensors</code><em class="property"> = None</em><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.Rotorsystem.sensors" title="Permalink to this definition">¶</a></dt>
+<code class="descname">sensors</code><em class="property"> = None</em><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.Rotorsystem.sensors" title="Permalink to this definition">¶</a></dt>
 <dd><p>See also AMrotorSIM.Loads</p>
 </dd></dl>
 
-<dl class="mat attribute">
+<dl class="attribute">
 <dt id="+AMrotorSIM.&#64;Rotorsystem.Rotorsystem.loads">
-<code class="sig-name descname">loads</code><em class="property"> = None</em><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.Rotorsystem.loads" title="Permalink to this definition">¶</a></dt>
+<code class="descname">loads</code><em class="property"> = None</em><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.Rotorsystem.loads" title="Permalink to this definition">¶</a></dt>
 <dd><p>See also AMrotorSIM.Components.Component</p>
 </dd></dl>
 
-<dl class="mat attribute">
+<dl class="attribute">
 <dt id="+AMrotorSIM.&#64;Rotorsystem.Rotorsystem.components">
-<code class="sig-name descname">components</code><em class="property"> = None</em><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.Rotorsystem.components" title="Permalink to this definition">¶</a></dt>
+<code class="descname">components</code><em class="property"> = None</em><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.Rotorsystem.components" title="Permalink to this definition">¶</a></dt>
 <dd><p>See also AMrotorSIM.pidControllers.pidController</p>
 </dd></dl>
 
-<dl class="mat attribute">
+<dl class="attribute">
 <dt id="+AMrotorSIM.&#64;Rotorsystem.Rotorsystem.pidControllers">
-<code class="sig-name descname">pidControllers</code><em class="property"> = None</em><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.Rotorsystem.pidControllers" title="Permalink to this definition">¶</a></dt>
+<code class="descname">pidControllers</code><em class="property"> = None</em><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.Rotorsystem.pidControllers" title="Permalink to this definition">¶</a></dt>
 <dd><p>See also AMrotorSIM.activeMagneticBearing</p>
 </dd></dl>
 
 </dd></dl>
 
-<dl class="mat function">
+<dl class="function">
 <dt id="+AMrotorSIM.&#64;Rotorsystem.assemble">
-<code class="sig-prename descclassname">+AMrotorSIM.&#64;Rotorsystem.</code><code class="sig-name descname">assemble</code><span class="sig-paren">(</span><em class="sig-param">obj</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.assemble" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">+AMrotorSIM.&#64;Rotorsystem.</code><code class="descname">assemble</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.assemble" title="Permalink to this definition">¶</a></dt>
 <dd><p>Imports the data (components) from the cnfg-file in the rotorsystem object</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>obj</strong> – rotorsystem object</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Filled out rotorsystem object</p>
-</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> – rotorsystem object</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Filled out rotorsystem object</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="mat function">
+<dl class="function">
 <dt id="+AMrotorSIM.&#64;Rotorsystem.assemble_system_controller_forces">
-<code class="sig-prename descclassname">+AMrotorSIM.&#64;Rotorsystem.</code><code class="sig-name descname">assemble_system_controller_forces</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">t</em>, <em class="sig-param">Z</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.assemble_system_controller_forces" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">+AMrotorSIM.&#64;Rotorsystem.</code><code class="descname">assemble_system_controller_forces</code><span class="sig-paren">(</span><em>self</em>, <em>t</em>, <em>Z</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.assemble_system_controller_forces" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds the controller force to the load vector ????</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>t</strong> – time step</p></li>
-<li><p><strong>Z</strong> – state-space vector [x; x_dot]</p></li>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>t</strong> – time step</li>
+<li><strong>Z</strong> – state-space vector [x; x_dot]</li>
 </ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Load vector h</p>
-</dd>
-</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Load vector h</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="mat function">
+<dl class="function">
 <dt id="+AMrotorSIM.&#64;Rotorsystem.assemble_system_loads">
-<code class="sig-prename descclassname">+AMrotorSIM.&#64;Rotorsystem.</code><code class="sig-name descname">assemble_system_loads</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">time</em>, <em class="sig-param">Z</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.assemble_system_loads" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">+AMrotorSIM.&#64;Rotorsystem.</code><code class="descname">assemble_system_loads</code><span class="sig-paren">(</span><em>self</em>, <em>time</em>, <em>Z</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.assemble_system_loads" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="mat function">
+<dl class="function">
 <dt id="+AMrotorSIM.&#64;Rotorsystem.assemble_system_matrices">
-<code class="sig-prename descclassname">+AMrotorSIM.&#64;Rotorsystem.</code><code class="sig-name descname">assemble_system_matrices</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">rpm</em>, <em class="sig-param">varargin</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.assemble_system_matrices" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">+AMrotorSIM.&#64;Rotorsystem.</code><code class="descname">assemble_system_matrices</code><span class="sig-paren">(</span><em>self</em>, <em>rpm</em>, <em>varargin</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.assemble_system_matrices" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="mat function">
+<dl class="function">
 <dt id="+AMrotorSIM.&#64;Rotorsystem.calculate_bearing_force">
-<code class="sig-prename descclassname">+AMrotorSIM.&#64;Rotorsystem.</code><code class="sig-name descname">calculate_bearing_force</code><span class="sig-paren">(</span><em class="sig-param">rotorsystem</em>, <em class="sig-param">time</em>, <em class="sig-param">displacement</em>, <em class="sig-param">velocity</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.calculate_bearing_force" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">+AMrotorSIM.&#64;Rotorsystem.</code><code class="descname">calculate_bearing_force</code><span class="sig-paren">(</span><em>rotorsystem</em>, <em>time</em>, <em>displacement</em>, <em>velocity</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.calculate_bearing_force" title="Permalink to this definition">¶</a></dt>
 <dd><p>calculate the force of the sensor BearingForceSensor
 Uses the displacment and velocity to obtain the force of
 the corresponding bearings; does not use an inertia term
@@ -308,74 +282,74 @@ Calculates the forces of the bearing acting ON the rotor:
 F_bearing = - (k*x + d*x_dot)</p>
 </dd></dl>
 
-<dl class="mat function">
+<dl class="function">
 <dt id="+AMrotorSIM.&#64;Rotorsystem.calculate_controller_force">
-<code class="sig-prename descclassname">+AMrotorSIM.&#64;Rotorsystem.</code><code class="sig-name descname">calculate_controller_force</code><span class="sig-paren">(</span><em class="sig-param">rotorsystem</em>, <em class="sig-param">time</em>, <em class="sig-param">displacement</em>, <em class="sig-param">velocity</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.calculate_controller_force" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">+AMrotorSIM.&#64;Rotorsystem.</code><code class="descname">calculate_controller_force</code><span class="sig-paren">(</span><em>rotorsystem</em>, <em>time</em>, <em>displacement</em>, <em>velocity</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.calculate_controller_force" title="Permalink to this definition">¶</a></dt>
 <dd><p>calculate the force of the sensor ControllerForceSensor
 Uses the displacment and velocity to obtain the force of
 the corresponding pidControllers</p>
 </dd></dl>
 
-<dl class="mat function">
+<dl class="function">
 <dt id="+AMrotorSIM.&#64;Rotorsystem.calculate_force_load_post_sensor">
-<code class="sig-prename descclassname">+AMrotorSIM.&#64;Rotorsystem.</code><code class="sig-name descname">calculate_force_load_post_sensor</code><span class="sig-paren">(</span><em class="sig-param">rotorsystem</em>, <em class="sig-param">time</em>, <em class="sig-param">displacement</em>, <em class="sig-param">velocity</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.calculate_force_load_post_sensor" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">+AMrotorSIM.&#64;Rotorsystem.</code><code class="descname">calculate_force_load_post_sensor</code><span class="sig-paren">(</span><em>rotorsystem</em>, <em>time</em>, <em>displacement</em>, <em>velocity</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.calculate_force_load_post_sensor" title="Permalink to this definition">¶</a></dt>
 <dd><p>calculate the force of the sensor ForceLoadPostSensor
 Uses the displacment and velocity to obtain the force of
 the corresponding load-objects, through their force laws</p>
 </dd></dl>
 
-<dl class="mat function">
+<dl class="function">
 <dt id="+AMrotorSIM.&#64;Rotorsystem.check_for_non_integrable_components">
-<code class="sig-prename descclassname">+AMrotorSIM.&#64;Rotorsystem.</code><code class="sig-name descname">check_for_non_integrable_components</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.check_for_non_integrable_components" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">+AMrotorSIM.&#64;Rotorsystem.</code><code class="descname">check_for_non_integrable_components</code><span class="sig-paren">(</span><em>self</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.check_for_non_integrable_components" title="Permalink to this definition">¶</a></dt>
 <dd><p>CHECK_FOR_NON_INTEGRABLE_COMPNENTS Summary of this function goes here
 Input of class Rotorsystem</p>
 </dd></dl>
 
-<dl class="mat function">
+<dl class="function">
 <dt id="+AMrotorSIM.&#64;Rotorsystem.check_overall_translational_mass">
-<code class="sig-prename descclassname">+AMrotorSIM.&#64;Rotorsystem.</code><code class="sig-name descname">check_overall_translational_mass</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">U</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.check_overall_translational_mass" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">+AMrotorSIM.&#64;Rotorsystem.</code><code class="descname">check_overall_translational_mass</code><span class="sig-paren">(</span><em>self</em>, <em>U</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.check_overall_translational_mass" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="mat function">
+<dl class="function">
 <dt id="+AMrotorSIM.&#64;Rotorsystem.compute_state_space_for_controller">
-<code class="sig-prename descclassname">+AMrotorSIM.&#64;Rotorsystem.</code><code class="sig-name descname">compute_state_space_for_controller</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">Omega</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.compute_state_space_for_controller" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">+AMrotorSIM.&#64;Rotorsystem.</code><code class="descname">compute_state_space_for_controller</code><span class="sig-paren">(</span><em>self</em>, <em>Omega</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.compute_state_space_for_controller" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="mat function">
+<dl class="function">
 <dt id="+AMrotorSIM.&#64;Rotorsystem.compute_system_load_ss">
-<code class="sig-prename descclassname">+AMrotorSIM.&#64;Rotorsystem.</code><code class="sig-name descname">compute_system_load_ss</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">t</em>, <em class="sig-param">Z</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.compute_system_load_ss" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">+AMrotorSIM.&#64;Rotorsystem.</code><code class="descname">compute_system_load_ss</code><span class="sig-paren">(</span><em>self</em>, <em>t</em>, <em>Z</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.compute_system_load_ss" title="Permalink to this definition">¶</a></dt>
 <dd><p>compute the system load in state space form for time integration: h=[0;F]</p>
 </dd></dl>
 
-<dl class="mat function">
+<dl class="function">
 <dt id="+AMrotorSIM.&#64;Rotorsystem.compute_translational_rigid_body_modes">
-<code class="sig-prename descclassname">+AMrotorSIM.&#64;Rotorsystem.</code><code class="sig-name descname">compute_translational_rigid_body_modes</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.compute_translational_rigid_body_modes" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">+AMrotorSIM.&#64;Rotorsystem.</code><code class="descname">compute_translational_rigid_body_modes</code><span class="sig-paren">(</span><em>self</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.compute_translational_rigid_body_modes" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="mat function">
+<dl class="function">
 <dt id="+AMrotorSIM.&#64;Rotorsystem.find_state_vector">
-<code class="sig-prename descclassname">+AMrotorSIM.&#64;Rotorsystem.</code><code class="sig-name descname">find_state_vector</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">position</em>, <em class="sig-param">Z</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.find_state_vector" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">+AMrotorSIM.&#64;Rotorsystem.</code><code class="descname">find_state_vector</code><span class="sig-paren">(</span><em>self</em>, <em>position</em>, <em>Z</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.find_state_vector" title="Permalink to this definition">¶</a></dt>
 <dd><p>only for state-space in the form u = [x; x_dot]</p>
 </dd></dl>
 
-<dl class="mat function">
+<dl class="function">
 <dt id="+AMrotorSIM.&#64;Rotorsystem.generate_sensor_output">
-<code class="sig-prename descclassname">+AMrotorSIM.&#64;Rotorsystem.</code><code class="sig-name descname">generate_sensor_output</code><span class="sig-paren">(</span><em class="sig-param">obj</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.generate_sensor_output" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">+AMrotorSIM.&#64;Rotorsystem.</code><code class="descname">generate_sensor_output</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.generate_sensor_output" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="mat function">
+<dl class="function">
 <dt id="+AMrotorSIM.&#64;Rotorsystem.get_component_matrices">
-<code class="sig-prename descclassname">+AMrotorSIM.&#64;Rotorsystem.</code><code class="sig-name descname">get_component_matrices</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">components</em>, <em class="sig-param">rpm</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.get_component_matrices" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">+AMrotorSIM.&#64;Rotorsystem.</code><code class="descname">get_component_matrices</code><span class="sig-paren">(</span><em>self</em>, <em>components</em>, <em>rpm</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.get_component_matrices" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="mat function">
+<dl class="function">
 <dt id="+AMrotorSIM.&#64;Rotorsystem.get_sensor_mesh_position">
-<code class="sig-prename descclassname">+AMrotorSIM.&#64;Rotorsystem.</code><code class="sig-name descname">get_sensor_mesh_position</code><span class="sig-paren">(</span><em class="sig-param">rotorsystem</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.get_sensor_mesh_position" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">+AMrotorSIM.&#64;Rotorsystem.</code><code class="descname">get_sensor_mesh_position</code><span class="sig-paren">(</span><em>rotorsystem</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.get_sensor_mesh_position" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="mat function">
+<dl class="function">
 <dt id="+AMrotorSIM.&#64;Rotorsystem.show">
-<code class="sig-prename descclassname">+AMrotorSIM.&#64;Rotorsystem.</code><code class="sig-name descname">show</code><span class="sig-paren">(</span><em class="sig-param">obj</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.show" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">+AMrotorSIM.&#64;Rotorsystem.</code><code class="descname">show</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.@Rotorsystem.show" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </div>
@@ -385,15 +359,6 @@ Input of class Rotorsystem</p>
            
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="activeMagneticBearing.html" class="btn btn-neutral float-right" title="activeMagneticBearing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="AMrotorSIM.html" class="btn btn-neutral float-left" title="AMrotorSIM" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>
