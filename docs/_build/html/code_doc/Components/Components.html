@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html4" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -26,18 +26,16 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/language_data.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
     
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Disc" href="Disc.html" />
-    <link rel="prev" title="activeMagneticBearing" href="../activeMagneticBearing.html" /> 
+    <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -51,7 +49,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> AMrotor
+            <a href="../../contents.html" class="icon icon-home" alt="Documentation Home"> AMrotor
           
 
           
@@ -82,39 +80,11 @@
               
             
             
-              <p class="caption"><span class="caption-text">About</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../intro.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../credits.html">Development Lead</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../credits.html#contributors">Contributors</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Components</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Getting Started</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../installation.html">First step</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../installation.html#source">Source</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Examples</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Code Documentation</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../doc_classes.html">doc_classes</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="../AMrotorSIM.html">AMrotorSIM</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="../Rotorsystem.html">Rotorsystem</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../activeMagneticBearing.html">activeMagneticBearing</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Components</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="Disc.html">Disc</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
+</div>
             
           
         </div>
@@ -128,7 +98,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">AMrotor</a>
+          <a href="../../contents.html">AMrotor</a>
         
       </nav>
 
@@ -157,11 +127,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="../doc_classes.html">doc_classes</a> &raquo;</li>
-        
-          <li><a href="../AMrotorSIM.html">AMrotorSIM</a> &raquo;</li>
+      <li><a href="../../contents.html" class="icon icon-home"></a> &raquo;</li>
         
       <li>Components</li>
     
@@ -190,24 +156,24 @@
 </ul>
 </div>
 <p>This is the Rotorsystem class. This is the main class of the toolbox.</p>
-<span class="target" id="module-+AMrotorSIM.+Components"></span><dl class="mat class">
+<span class="target" id="module-+AMrotorSIM.+Components"></span><dl class="class">
 <dt id="+AMrotorSIM.+Components.Component">
-<em class="property">class </em><code class="sig-prename descclassname">+AMrotorSIM.+Components.</code><code class="sig-name descname">Component</code><span class="sig-paren">(</span><em class="sig-param">arg</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.+Components.Component" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">+AMrotorSIM.+Components.</code><code class="descname">Component</code><span class="sig-paren">(</span><em>arg</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.+Components.Component" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref mat mat-class docutils literal notranslate"><span class="pre">matlab.mixin.Heterogeneous</span></code>, <code class="xref mat mat-class docutils literal notranslate"><span class="pre">handle</span></code></p>
-<dl class="simple">
-<dt>Component - Superclass for components that are added to the rotor matrices</dt><dd><p>Component-objects are added to the left-hand side of the system’s
+<dl class="docutils">
+<dt>Component - Superclass for components that are added to the rotor matrices</dt>
+<dd>Component-objects are added to the left-hand side of the system’s
 equations: 
-(M+M_Component)*xdd + (C+C_Component+ Omega*(G+G_Component))*xd + (K+K_Component)*x = f</p>
-</dd>
+(M+M_Component)*xdd + (C+C_Component+ Omega*(G+G_Component))*xd + (K+K_Component)*x = f</dd>
 </dl>
 <p>for objects, that are added to the right-hand side of the equation see
 the Loads-Superclass</p>
 <p>See also AMrotorSIM.Components.Bearings, AMrotorSIM.Components.Seals,
 AMrotorSIM.Components.Disc, AMrotorSIM.Components.CompLUTMCK,
 AMrotorSIM.Loads</p>
-<dl class="mat method">
+<dl class="method">
 <dt id="+AMrotorSIM.+Components.Component.Component">
-<code class="sig-name descname">Component</code><span class="sig-paren">(</span><em class="sig-param">arg</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.+Components.Component.Component" title="Permalink to this definition">¶</a></dt>
+<code class="descname">Component</code><span class="sig-paren">(</span><em>arg</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.+Components.Component.Component" title="Permalink to this definition">¶</a></dt>
 <dd><p>create the component and initialize with the cnfg-struct</p>
 </dd></dl>
 
@@ -220,15 +186,6 @@ AMrotorSIM.Loads</p>
            
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="Disc.html" class="btn btn-neutral float-right" title="Disc" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="../activeMagneticBearing.html" class="btn btn-neutral float-left" title="activeMagneticBearing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>
