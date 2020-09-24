@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -26,16 +26,18 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
     
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" /> 
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="MLPS_test_rig" href="../MLPS_test_rig.html" />
+    <link rel="prev" title="Config_file_example" href="Config_time_Laval.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -49,7 +51,7 @@
           
 
           
-            <a href="../../contents.html" class="icon icon-home" alt="Documentation Home"> AMrotor
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> AMrotor
           
 
           
@@ -80,11 +82,38 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">Simulation_file_example</a></li>
+              <p class="caption"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
 </ul>
-</div>
+<p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../examples.html">Examples</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../Simple_Laval.html">Simple_Laval</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Laval_Modal.html">Laval_Modal</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../Laval_Time.html">Laval_Time</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="Config_time_Laval.html">Config_file_example</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Simulation_file_example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../MLPS_test_rig.html">MLPS_test_rig</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../code_doc/doc_classes.html">doc_classes</a></li>
+</ul>
+
             
           
         </div>
@@ -98,7 +127,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../contents.html">AMrotor</a>
+          <a href="../../index.html">AMrotor</a>
         
       </nav>
 
@@ -127,7 +156,13 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../contents.html" class="icon icon-home"></a> &raquo;</li>
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../Simple_Laval.html">Simple_Laval</a> &raquo;</li>
+        
+          <li><a href="../Laval_Time.html">Laval_Time</a> &raquo;</li>
         
       <li>Simulation_file_example</li>
     
@@ -158,8 +193,8 @@ More options can be found in the detailed documentation or in the source code.</
 <p>Closing all former figures and cleaning the workspace.</p>
 <div class="highlight-matlab notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">close</span> <span class="n">all</span>
-<span class="n">clear</span> <span class="n">all</span>
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">close</span> <span class="s">all</span>
+<span class="n">clear</span> <span class="s">all</span>
 <span class="c">% clc</span>
 </pre></div>
 </td></tr></table></div>
@@ -172,8 +207,8 @@ More options can be found in the detailed documentation or in the source code.</
 6
 7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">%% Import and formating of the figures</span>
 
-<span class="n">import</span> <span class="n">AMrotorSIM</span><span class="o">.*</span> <span class="c">% path</span>
-<span class="n">Config_Sim_Time</span> <span class="c">% corresponding cnfg-file</span>
+<span class="n">import</span> <span class="s">AMrotorSIM.*</span> <span class="s">%</span> <span class="s">path</span>
+<span class="n">Config_Sim_Time</span> <span class="s">%</span> <span class="s">corresponding</span> <span class="s">cnfg-file</span>
 
 <span class="n">Janitor</span> <span class="p">=</span> <span class="n">AMrotorTools</span><span class="p">.</span><span class="n">PlotJanitor</span><span class="p">();</span> <span class="c">% Instantiation of class PlotJanitor</span>
 <span class="n">Janitor</span><span class="p">.</span><span class="n">setLayout</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span> <span class="c">%Setting layout of the figures</span>
@@ -367,7 +402,7 @@ More options can be found in the detailed documentation or in the source code.</
 <span class="c">% visufrf = Graphs.Frequenzgangfunktion(frf);?????????????????</span>
 <span class="c">% visufrf.set_plots(&#39;bode&#39;,&#39;log&#39;,&#39;deg&#39;,&#39;coh&#39;);</span>
 
- <span class="k">for</span> <span class="n">sensor</span> <span class="p">=</span> <span class="n">r</span><span class="p">.</span><span class="n">sensors</span> <span class="c">% Loop over all sensors for plotting</span>
+ <span class="n">for</span> <span class="s">sensor</span> <span class="p">=</span> <span class="n">r</span><span class="p">.</span><span class="n">sensors</span> <span class="c">% Loop over all sensors for plotting</span>
           <span class="n">t</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sensor</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]);</span> <span class="c">% Time signal</span>
           <span class="n">o</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sensor</span><span class="p">);</span> <span class="c">% Orbits</span>
           <span class="n">f</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sensor</span><span class="p">);</span> <span class="c">% Fourier</span>
@@ -376,7 +411,7 @@ More options can be found in the detailed documentation or in the source code.</
           <span class="n">w</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sensor</span><span class="p">);</span> <span class="c">% Waterfall</span>
           <span class="n">w2</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sensor</span><span class="p">);</span> <span class="c">% Waterfall 2sided</span>
           <span class="n">Janitor</span><span class="p">.</span><span class="n">cleanFigures</span><span class="p">();</span>
- <span class="k">end</span>
+ <span class="n">end</span>
 </pre></div>
 </td></tr></table></div>
 </div>
@@ -386,6 +421,15 @@ More options can be found in the detailed documentation or in the source code.</
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../MLPS_test_rig.html" class="btn btn-neutral float-right" title="MLPS_test_rig" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Config_time_Laval.html" class="btn btn-neutral float-left" title="Config_file_example" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

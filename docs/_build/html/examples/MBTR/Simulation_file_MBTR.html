@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -26,16 +26,18 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
     
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" /> 
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="doc_classes" href="../../code_doc/doc_classes.html" />
+    <link rel="prev" title="Config_file_MBTR" href="Config_file_MBTR.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -49,7 +51,7 @@
           
 
           
-            <a href="../../contents.html" class="icon icon-home" alt="Documentation Home"> AMrotor
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> AMrotor
           
 
           
@@ -80,11 +82,34 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">Simulation_file_MBTR</a></li>
+              <p class="caption"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
 </ul>
-</div>
+<p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../Simple_Laval.html">Simple_Laval</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../MLPS_test_rig.html">MLPS_test_rig</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Config_file_MBTR.html">Config_file_MBTR</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Simulation_file_MBTR</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../code_doc/doc_classes.html">doc_classes</a></li>
+</ul>
+
             
           
         </div>
@@ -98,7 +123,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../contents.html">AMrotor</a>
+          <a href="../../index.html">AMrotor</a>
         
       </nav>
 
@@ -127,7 +152,11 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../contents.html" class="icon icon-home"></a> &raquo;</li>
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../examples.html">Examples</a> &raquo;</li>
+        
+          <li><a href="../MLPS_test_rig.html">MLPS_test_rig</a> &raquo;</li>
         
       <li>Simulation_file_MBTR</li>
     
@@ -261,21 +290,21 @@
 
 <span class="c">%% Import</span>
 
-<span class="n">import</span> <span class="n">AMrotorSIM</span><span class="o">.*</span>
+<span class="n">import</span> <span class="s">AMrotorSIM.*</span>
 
 <span class="c">%% Clean up</span>
-<span class="n">close</span> <span class="n">all</span>
-<span class="n">clear</span> <span class="n">all</span>
+<span class="n">close</span> <span class="s">all</span>
+<span class="n">clear</span> <span class="s">all</span>
 <span class="n">clc</span>
 
-<span class="n">Janitor</span> <span class="p">=</span> <span class="n">AMrotorTools</span><span class="p">.</span><span class="n">PlotJanitor</span><span class="p">();</span>
+<span class="s">Janitor</span> <span class="p">=</span> <span class="n">AMrotorTools</span><span class="p">.</span><span class="n">PlotJanitor</span><span class="p">();</span>
 <span class="n">Janitor</span><span class="p">.</span><span class="n">setLayout</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span>
 
 <span class="c">%% Compute Rotor</span>
 
 <span class="n">Config_Sim_eingebaut</span>
 
-<span class="n">r</span><span class="p">=</span><span class="n">Rotorsystem</span><span class="p">(</span><span class="n">cnfg</span><span class="p">,</span><span class="s">&#39;MLPS-System&#39;</span><span class="p">);</span>
+<span class="s">r=Rotorsystem(cnfg,&#39;MLPS-System&#39;)</span><span class="p">;</span>
 <span class="n">r</span><span class="p">.</span><span class="n">assemble</span><span class="p">;</span>
 <span class="c">%r.show;</span>
 <span class="c">%</span>
@@ -348,7 +377,7 @@
  <span class="n">w</span> <span class="p">=</span> <span class="n">Graphs</span><span class="p">.</span><span class="n">Waterfalldiagramm</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">St_Lsg</span><span class="p">);</span>
 <span class="n">w2</span> <span class="p">=</span> <span class="n">Graphs</span><span class="p">.</span><span class="n">WaterfalldiagrammTwoSided</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">St_Lsg</span><span class="p">);</span>
 <span class="c">% </span>
- <span class="k">for</span> <span class="n">sensor</span> <span class="p">=</span> <span class="n">r</span><span class="p">.</span><span class="n">sensors</span>
+ <span class="n">for</span> <span class="s">sensor</span> <span class="p">=</span> <span class="n">r</span><span class="p">.</span><span class="n">sensors</span>
 <span class="c">%          t.plot(sensor);</span>
 <span class="c">%          o.plot(sensor);</span>
           <span class="n">f</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sensor</span><span class="p">);</span>
@@ -357,7 +386,7 @@
 <span class="c">%          w.plot(sensor);</span>
 <span class="c">%           w2.plot(sensor); % Wasserfall 2 Sided</span>
          <span class="n">Janitor</span><span class="p">.</span><span class="n">cleanFigures</span><span class="p">();</span>
- <span class="k">end</span>
+ <span class="n">end</span>
 </pre></div>
 </td></tr></table></div>
 </div>
@@ -367,6 +396,15 @@
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../code_doc/doc_classes.html" class="btn btn-neutral float-right" title="doc_classes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Config_file_MBTR.html" class="btn btn-neutral float-left" title="Config_file_MBTR" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
