@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Simulation_file_MBTR &mdash; AMrotor  documentation</title>
+  <title>Simulation file for the MBTR with AMB and controller &mdash; AMrotor  documentation</title>
   
 
   
@@ -100,7 +100,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../MBTR_test_rig.html">MBTR test rig with spring damper elements as bearings</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../MBTR_test_rig_with_AMBs.html">MBTR test rig with AMB bearings</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="Config_file_MBTRwithAMB.html">Config_file_MBTR</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Simulation_file_MBTR</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Simulation file for the MBTR with AMB and controller</a></li>
 </ul>
 </li>
 </ul>
@@ -159,7 +159,7 @@
         
           <li><a href="../MBTR_test_rig_with_AMBs.html">MBTR test rig with AMB bearings</a> &raquo;</li>
         
-      <li>Simulation_file_MBTR</li>
+      <li>Simulation file for the MBTR with AMB and controller</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -178,9 +178,76 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="simulation-file-mbtr">
-<h1>Simulation_file_MBTR<a class="headerlink" href="#simulation-file-mbtr" title="Permalink to this headline">¶</a></h1>
-<p>Looking for a more meaningful example (AMB’s)</p>
+  <div class="section" id="simulation-file-for-the-mbtr-with-amb-and-controller">
+<h1>Simulation file for the MBTR with AMB and controller<a class="headerlink" href="#simulation-file-for-the-mbtr-with-amb-and-controller" title="Permalink to this headline">¶</a></h1>
+<p>This is a simulation file for an investigation of a real AMB test rig. Of interest is
+the stationary time behaviour (at 0 rpm) resulting from external excitations.</p>
+<p>Closing all former figures and cleaning the workspace.</p>
+<div class="highlight-matlab notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">close</span> <span class="s">all</span>
+<span class="n">clear</span> <span class="s">all</span>
+<span class="c">% clc</span>
+</pre></div>
+</td></tr></table></div>
+<p>Import of the file path and  of the corresponding cnfg-file.</p>
+<div class="highlight-matlab notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">%% Import and formating of the figures</span>
+
+<span class="n">import</span> <span class="s">AMrotorSIM.*</span> <span class="s">%</span> <span class="s">path</span>
+<span class="n">Config_Sim_MLPS</span> <span class="s">%</span> <span class="s">corresponding</span> <span class="s">cnfg-file</span>
+<span class="n">Janitor</span> <span class="p">=</span> <span class="n">AMrotorTools</span><span class="p">.</span><span class="n">PlotJanitor</span><span class="p">();</span> <span class="c">% Instantiation of class PlotJanitor</span>
+<span class="n">Janitor</span><span class="p">.</span><span class="n">setLayout</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span> <span class="c">%Setting layout of the figures</span>
+</pre></div>
+</td></tr></table></div>
+<p>Assembly and visualization of the model</p>
+<div class="highlight-matlab notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">%% Assembly of the rotordynamic model</span>
+
+<span class="n">r</span><span class="p">=</span><span class="n">Rotorsystem</span><span class="p">(</span><span class="n">cnfg</span><span class="p">,</span> <span class="k">...</span><span class="c"> </span>
+<span class="s">&#39;MBTR-Rotor with PID-Controller and negative stiffness for the AMBs&#39;</span><span class="p">);</span>
+        <span class="c">% Instantiation of class Rotorsystem</span>
+<span class="n">r</span><span class="p">.</span><span class="n">assemble</span><span class="p">;</span> <span class="c">% Assembly of the model parts, considering the ...</span>
+            <span class="c">% components (sensors,..) from the cnfg-file</span>
+<span class="n">r</span><span class="p">.</span><span class="n">rotor</span><span class="p">.</span><span class="n">assemble_fem</span><span class="p">;</span> <span class="c">% Assembly of the global system matrices: M, D, G, K</span>
+
+<span class="c">%% Visualization of the assembled rotor model</span>
+
+<span class="n">r</span><span class="p">.</span><span class="n">show</span><span class="p">;</span> <span class="c">% lists the associated components of the model in teh Matlab ...</span>
+        <span class="c">% Command Window</span>
+
+<span class="n">r</span><span class="p">.</span><span class="n">rotor</span><span class="p">.</span><span class="n">show_2D</span><span class="p">();</span> <span class="c">% Plot of a side view of the rotor elements</span>
+
+<span class="n">g</span><span class="p">=</span><span class="n">Graphs</span><span class="p">.</span><span class="n">Visu_Rotorsystem</span><span class="p">(</span><span class="n">r</span><span class="p">);</span> <span class="c">% Instantiation of class Visu_Rotorsystem</span>
+<span class="n">g</span><span class="p">.</span><span class="n">show</span><span class="p">();</span> <span class="c">% Plot of a 3D-isometry of the rotor with sensors, loads,...</span>
+</pre></div>
+</td></tr></table></div>
+<p>2D side view of the rotor (left) and 3D-isometry (right). The steps in the rotor geometry (in the 2D side view)
+represent the reinforcements (check corresponding cnfg-file) of the main rotor and not the disc component as seen in the 3D-isometry.</p>
+<a class="reference internal image-reference" href="../../_images/Rotor_geometry_MBTR1.png"><img alt="../../_images/Rotor_geometry_MBTR1.png" src="../../_images/Rotor_geometry_MBTR1.png" style="width: 48%;" /></a>
+<a class="reference internal image-reference" href="../../_images/Rotor_geometry_3D_MBTRwAMB.png"><img alt="../../_images/Rotor_geometry_3D_MBTRwAMB.png" src="../../_images/Rotor_geometry_3D_MBTRwAMB.png" style="width: 48%;" /></a>
+<p>Running of the time simulation (at 0 rpm for 1 sec) with
+external excitation (random on both AMB’s only in x-direction) with visualization.</p>
 <div class="highlight-matlab notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -220,82 +287,52 @@
 37
 38
 39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">%% Laval_PID_Controller - Zeitintegration</span>
-<span class="c">% Laval rotor from Simple_Laval with pid-controller for the disc to</span>
-<span class="c">% demonstrate the functionality of the pidController-class</span>
+40</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">%% Running Time Simulation</span>
+<span class="c">%% Stationary and runup with avaliable calculation methods and visualization</span>
+<span class="n">St_Lsg</span> <span class="p">=</span> <span class="n">Experiments</span><span class="p">.</span><span class="n">Stationaere_Lsg</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="mi">0</span><span class="p">,(</span><span class="mi">0</span><span class="p">:</span><span class="mf">0.001</span><span class="p">:</span><span class="mi">1</span><span class="p">));</span> <span class="c">% In...</span>
+    <span class="c">%stantiation of class Stationaere_Lsg</span>
+    
+<span class="n">St_Lsg</span><span class="p">.</span><span class="n">compute_ode15s_ss</span><span class="p">;</span> <span class="c">% ode15s - method</span>
+<span class="c">%St_Lsg.compute_newmark; % newmark - method</span>
 
-<span class="c">%% Clean up</span>
-<span class="n">close</span> <span class="s">all</span>
-<span class="n">clear</span> <span class="s">all</span>
-<span class="c">% clc</span>
+<span class="c">% Runup = Experiments.Hochlaufanalyse( r , [0, 1e3] , (0:0.001:0.2) );</span>
+<span class="c">% Runup.compute_ode15s_ss</span>
 
-<span class="c">%% Import</span>
-<span class="n">import</span> <span class="s">AMrotorSIM.*</span>
-<span class="n">Janitor</span> <span class="p">=</span> <span class="n">AMrotorTools</span><span class="p">.</span><span class="n">PlotJanitor</span><span class="p">();</span>
-<span class="n">Janitor</span><span class="p">.</span><span class="n">setLayout</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span>
+<span class="c">%% Processing and visualization of the results</span>
 
-<span class="c">%% Compute Rotor</span>
-<span class="c">% Config_Sim_Time_LavalPID</span>
-<span class="n">Config_Sim_MLPS</span>
+<span class="n">d</span> <span class="p">=</span> <span class="n">Dataoutput</span><span class="p">.</span><span class="n">TimeDataOutput</span><span class="p">(</span><span class="n">St_Lsg</span><span class="p">);</span> <span class="c">% Instantiation of class ...</span>
+                                       <span class="c">% TimeDataOutput</span>
 
+<span class="c">%% Processing and saving results</span>
 
-<span class="s">r=Rotorsystem(cnfg,&#39;MLPS-Rotor mit PID-Regelung und negativer Steifigkeit fuer Magnetlager&#39;)</span><span class="p">;</span>
-<span class="n">r</span><span class="p">.</span><span class="n">assemble</span><span class="p">;</span>
-<span class="n">r</span><span class="p">.</span><span class="n">show</span><span class="p">;</span>
-
-<span class="n">r</span><span class="p">.</span><span class="n">rotor</span><span class="p">.</span><span class="n">show_2D</span><span class="p">();</span>
-
-<span class="n">g</span><span class="p">=</span><span class="n">Graphs</span><span class="p">.</span><span class="n">Visu_Rotorsystem</span><span class="p">(</span><span class="n">r</span><span class="p">);</span>
-<span class="n">g</span><span class="p">.</span><span class="n">show</span><span class="p">();</span>
-
-
-<span class="n">r</span><span class="p">.</span><span class="n">rotor</span><span class="p">.</span><span class="n">assemble_fem</span><span class="p">;</span>
-
-<span class="c">%% Running Time Simulation</span>
-<span class="n">St_Lsg</span> <span class="p">=</span> <span class="n">Experiments</span><span class="p">.</span><span class="n">Stationaere_Lsg</span><span class="p">(</span> <span class="n">r</span> <span class="p">,</span><span class="mi">0</span> <span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">:</span><span class="mf">0.001</span><span class="p">:</span><span class="mi">1</span><span class="p">)</span> <span class="p">);</span>
-<span class="n">St_Lsg</span><span class="p">.</span><span class="n">compute_ode15s_ss</span>
-<span class="c">% St_Lsg.compute_newmark</span>
-
-<span class="c">% Hochlauf = Experiments.Hochlaufanalyse( r , [0, 1e3] , (0:0.001:0.2) );</span>
-<span class="c">% Hochlauf.compute_ode15s_ss</span>
-
-<span class="c">%% Plot results </span>
-<span class="n">Lsg</span> <span class="p">=</span> <span class="n">St_Lsg</span><span class="p">;</span> <span class="c">% Lsg = Hochlauf;</span>
-<span class="n">d</span> <span class="p">=</span> <span class="n">Dataoutput</span><span class="p">.</span><span class="n">TimeDataOutput</span><span class="p">(</span><span class="n">St_Lsg</span><span class="p">);</span>
-<span class="c">% dataset_modalanalysis = d.compose_data();</span>
+<span class="c">% dataset_modalanalysis = d.compose_data(); % container: rpm -&gt; </span>
+                                          <span class="c">% (n,t,allsensorsxy)</span>
 <span class="n">dataset_modalanalysis</span> <span class="p">=</span> <span class="n">d</span><span class="p">.</span><span class="n">compose_data_sensor_wise</span><span class="p">();</span>
 <span class="n">datasetName</span> <span class="p">=</span> <span class="s">&#39;MLPS_pid_5s&#39;</span><span class="p">;</span>
 <span class="n">d</span><span class="p">.</span><span class="n">save_data</span><span class="p">(</span><span class="n">dataset_modalanalysis</span><span class="p">,</span><span class="n">datasetName</span><span class="p">);</span>
 <span class="n">struct</span> <span class="p">=</span> <span class="n">d</span><span class="p">.</span><span class="n">convert_data_to_struct_sensor_wise</span><span class="p">(</span><span class="n">dataset_modalanalysis</span><span class="p">);</span>
 <span class="n">d</span><span class="p">.</span><span class="n">save_data</span><span class="p">(</span><span class="n">struct</span><span class="p">,</span><span class="n">datasetName</span><span class="p">);</span>
-<span class="n">d</span><span class="p">.</span><span class="n">write_data_to_unv</span><span class="p">(</span><span class="n">datasetName</span><span class="p">)</span>
+<span class="n">d</span><span class="p">.</span><span class="n">write_data_to_unv</span><span class="p">(</span><span class="n">datasetName</span><span class="p">);</span>
 
-<span class="n">t</span> <span class="p">=</span> <span class="n">Graphs</span><span class="p">.</span><span class="n">TimeSignal</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">Lsg</span><span class="p">);</span>
-<span class="n">w</span> <span class="p">=</span> <span class="n">Graphs</span><span class="p">.</span><span class="n">WaterfalldiagrammTwoSided</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">Lsg</span><span class="p">);</span>
+<span class="c">%% Visualizing results</span>
+
+<span class="n">Lsg</span> <span class="p">=</span> <span class="n">St_Lsg</span><span class="p">;</span> 
+<span class="c">% Lsg = Hochlauf;</span>
+
+<span class="n">t</span> <span class="p">=</span> <span class="n">Graphs</span><span class="p">.</span><span class="n">TimeSignal</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">Lsg</span><span class="p">);</span> <span class="c">% Instantiation of class TimeSignal</span>
+<span class="n">f</span> <span class="p">=</span> <span class="n">Graphs</span><span class="p">.</span><span class="n">Fourierdarstellung</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">St_Lsg</span><span class="p">);</span> <span class="c">% Instantiation of class ...</span>
+                                       <span class="c">% Fourierdarstellung</span>
  <span class="n">for</span> <span class="s">sensor</span> <span class="p">=</span> <span class="n">r</span><span class="p">.</span><span class="n">sensors</span>
-          <span class="n">t</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sensor</span><span class="p">);</span>
-<span class="c">%           w.plot(sensor);</span>
+          <span class="n">t</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sensor</span><span class="p">);</span> <span class="c">% Time signal</span>
+          <span class="n">f</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sensor</span><span class="p">);</span> <span class="c">% Fourier</span>
           <span class="n">Janitor</span><span class="p">.</span><span class="n">cleanFigures</span><span class="p">();</span>
  <span class="n">end</span>
 </pre></div>
 </td></tr></table></div>
+<p>Time signal (x-direction) of the eddy-current sensor on the left AMB (left)
+and the corresponding Fourier analysis (right)</p>
+<a class="reference internal image-reference" href="../../_images/EddyL1_time_MBTRwAMB.png"><img alt="../../_images/EddyL1_time_MBTRwAMB.png" src="../../_images/EddyL1_time_MBTRwAMB.png" style="width: 48%;" /></a>
+<a class="reference internal image-reference" href="../../_images/EddyL1_fourier_MBTRwAMB.png"><img alt="../../_images/EddyL1_fourier_MBTRwAMB.png" src="../../_images/EddyL1_fourier_MBTRwAMB.png" style="width: 48%;" /></a>
 </div>
 
 

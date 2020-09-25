@@ -68,8 +68,6 @@ control variable called "count" comes here.
 The initialization of the active magnetic bearing struct-field and the corresponding
 control variable called "count" comes here.
 
-Implementation of an AMB
-
 .. literalinclude:: /../Simulationen/MLPS_pid/Config_Sim_MLPS.m
     :language: matlab
     :linenos:

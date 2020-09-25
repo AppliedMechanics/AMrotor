@@ -1,104 +1,123 @@
-%% MLPS - AMB - Modalanalyse
-% Zur Berechnung der Rohdaten fuer die Modalanalyse
-% SIRM2019 Beitrag
-% 20.08.2018
-
-%% Import
-
-import AMrotorSIM.*
+%% MBTR - AMB - Modal analyis
 
 %% Clean up
+
 close all
 clear all
-clc
+%clc
+%% Import
+%% Import and formating of the figures
 
-Janitor = AMrotorTools.PlotJanitor();
-Janitor.setLayout(2,3);
+import AMrotorSIM.* % path
+Config_Sim_eingebaut % corresponding cnfg-file
+
+Janitor = AMrotorTools.PlotJanitor(); % Instantiation of class PlotJanitor
+Janitor.setLayout(2,3); %Setting layout of the figures
 
 %% Compute Rotor
+%% Assembly of the rotordynamic model
 
-Config_Sim_eingebaut
+r=Rotorsystem(cnfg,'MBTR-TestRig'); % Instantiation of class Rotorsystem
+r.assemble; % Assembly of the model parts, considering the ...
+            % components (sensors,..) from the cnfg-file
+r.rotor.assemble_fem; % Assembly of the global system matrices: M, D, G, K
 
-r=Rotorsystem(cnfg,'MLPS-System');
-r.assemble;
-%r.show;
-%
-r.rotor.show_2D(); % compare discretisation and user input
-% r.rotor.geometry.show_2D(); 
-% r.rotor.geometry.show_3D(); % funktioniert nicht richtig
+%% Visualization of the assembled rotor model
 
-% r.rotor.mesh.show_2D(); % show elements
-% r.rotor.mesh.show_2D_nodes(); % show geo_nodes
+r.show; % lists the associated components of the model in teh Matlab ...
+        % Command Window
+
+r.rotor.show_2D(); % Plot of a side view of the rotor elements
+% r.rotor.geometry.show_2D();  % Plot of a side view of the ..
+                               % rotor radii
+% r.rotor.geometry.show_3D(); % Plot of a 3D-isometry of the rotor
+% r.rotor.mesh.show_2D(); 
+% r.rotor.mesh.show_2D_nodes(); 
 % r.rotor.mesh.show_3D();
 
-g=Graphs.Visu_Rotorsystem(r);
-g.show();
+g=Graphs.Visu_Rotorsystem(r); % Instantiation of class Visu_Rotorsystem
+g.show(); % Plot of a 3D-isometry of the rotor with sensors, loads,...
 
-r.rotor.assemble_fem;
-
-% u_trans_rigid_body = r.compute_translational_rigid_body_modes;overall_mass = r.check_overall_translational_mass(u_trans_rigid_body);disp(['m=',num2str(overall_mass.m_x,3),'kg']);
-% nEle = length(r.rotor.mesh.elements);
+u_trans_rigid_body = r.compute_translational_rigid_body_modes; % Locates ..
+                         % the translational DoF's of the rotor in a matrix
+overall_mass = r.check_overall_translational_mass(u_trans_rigid_body) % ...
+                         % Calculates the translational mass
 
 %% Running system analyses
+%% Running system analyses
+%% Modal analysis
 
-%m=Experiments.Modalanalyse(r);
+m=Experiments.Modalanalyse(r); % Instantiation of ... 
+                        % class Modalanalyse
 
-%m.calculate_rotor_only_without_damping(15);
-%m.calculate_rotor_only(15,100);
-
-% m.calculate_rotorsystem_without_damping(7);
-% rpmModalAnalysis=0;
-% m.calculate_rotorsystem(16,rpmModalAnalysis);
+rpmModalAnalysis=0;
+m.calculate_rotorsystem(16,rpmModalAnalysis);
 % 
-% esf= Graphs.Eigenschwingformen(m);
-% esf.print_frequencies();
-% esf.plot_displacements();
-% Janitor.cleanFigures();
-% 
-% cmp = Experiments.Campbell(r);
-% cmp.set_up(0:2e2:2e3,20); % input is 1/min, Number of Modes
-% cmp.calculate();
-% cmpDiagramm = Graphs.Campbell(cmp);
-% cmpDiagramm.print_critical_speeds()
-% cmpDiagramm.set_plots('all');
-% cmpDiagramm.set_plots('backward');
-% cmpDiagramm.set_plots('forward');
-% esf.set_plots('half') % 'all', 'half' or desired mode number
-% esf.set_plots(10,'Overlay','Skip',5,'tangentialPoints',30,'scale',3) %specify additional options, first input is index of mode
+esf= Graphs.Eigenschwingformen(m);
+esf.print_frequencies();
+esf.plot_displacements();
+% esf.set_plots('half','Overlay') % Plots of the odd-numbered eigenmodes .. 
+                                % in overlay with the original rotor
+esf.set_plots(10,'Overlay','Skip',5,'tangentialPoints',30,'scale',3)
+Janitor.cleanFigures();
+
+%% Campbell analysis
+
+cmp = Experiments.Campbell(r); % Instantiation of ... 
+                        % class Campbell
+cmp.set_up(0:2e2:2e3,20); % Set_up (omega range in 1/min, #modes)
+cmp.calculate(); % Calculation
+
+cmpDiagramm = Graphs.Campbell(cmp); % Instantiation of ... 
+                        % class Campbell for figures
+cmpDiagramm.print_damping_zero_crossing(); % Prints in the Command Window
+cmpDiagramm.print_critical_speeds() % Prints in the Command Window
+cmpDiagramm.set_plots('all'); % Figures
 Janitor.cleanFigures();
 
 %% Running Time Simulation
+%% Running Time Simulation
+%% Stationary with avaliable calculation methods
 
-St_Lsg = Experiments.Stationaere_Lsg(r,500,[0:0.001:1]);
-St_Lsg.compute_ode15s_ss
-%St_Lsg.compute_euler_ss
-%St_Lsg.compute_newmark
-%St_Lsg.compute_sys_ss_variant
+St_Lsg = Experiments.Stationaere_Lsg(r,500,[0:0.001:1]); % In...
+    %stantiation of class Stationaere_Lsg
+    
+St_Lsg.compute_ode15s_ss; % ode15s - method
+%St_Lsg.compute_euler_ss; % Forward euler - method (in progress)
+%St_Lsg.compute_newmark; % newmark - method
+%St_Lsg.compute_sys_ss_variant; state space method(in progress) ??????
 
-% 
-%------------- Erzeuge Ausgabeformat der Loesung ---------------
+%% Processing and visualization of the results
 
-d = Dataoutput.TimeDataOutput(St_Lsg);
-dataset_modalanalysis = d.compose_data();
-d.save_data(dataset_modalanalysis,'jm_whirling-chirp_500rpm');%'sweepx_0-300Hz_dm_AnregungLager2_4s-1kHz');
-% 
-% 
-% %------------- Erzeuge Grafiken aus Loesung -------------------
-% 
- t = Graphs.TimeSignal(r, St_Lsg);
- o = Graphs.Orbitdarstellung(r, St_Lsg);
- f = Graphs.Fourierdarstellung(r, St_Lsg);
-% fo = Graphs.Fourierorbitdarstellung(r, St_Lsg);
- w = Graphs.Waterfalldiagramm(r, St_Lsg);
-w2 = Graphs.WaterfalldiagrammTwoSided(r, St_Lsg);
-% 
- for sensor = r.sensors
-%          t.plot(sensor);
-%          o.plot(sensor);
-          f.plot(sensor);
-%          %fo.plot(sensor,1);
-%          %fo.plot(sensor,2);
-%          w.plot(sensor);
-%           w2.plot(sensor); % Wasserfall 2 Sided
+d = Dataoutput.TimeDataOutput(St_Lsg); % Instantiation of class ...
+                                       % TimeDataOutput
+
+%% Processing and saving results
+dataset_modalanalysis = d.compose_data(); % container: rpm -> 
+                                          % (n,t,allsensorsxy)
+d.save_data(dataset_modalanalysis,'jm_whirling-chirp_500rpm');
+
+%% Visualizing results
+
+t = Graphs.TimeSignal(r, St_Lsg); % Instantiation of class TimeSignal
+o = Graphs.Orbitdarstellung(r, St_Lsg); % Instantiation of class ...
+                                     % Orbitdarstellung
+f = Graphs.Fourierdarstellung(r, St_Lsg); % Instantiation of class ...
+                                       % Fourierdarstellung
+fo = Graphs.Fourierorbitdarstellung(r, St_Lsg); % Instantiation of class ..
+                                             % Fourierorbitdarstellung
+w = Graphs.Waterfalldiagramm(r, St_Lsg); % Instantiation of class ...
+                                      % Waterfalldiagramm
+w2 = Graphs.WaterfalldiagrammTwoSided(r, St_Lsg); % Instantiation of ...
+                                       % class WaterfalldiagrammTwoSided
+
+ for sensor = r.sensors % Loop over all sensors for plotting
+          t.plot(sensor); % Time signal
+          o.plot(sensor); % Orbits
+          f.plot(sensor); % Fourier
+          fo.plot(sensor,1); % Fourierorbit 1st order
+          fo.plot(sensor,2); % Fourierorbit 2nd order
+          w.plot(sensor); % Waterfall
+          w2.plot(sensor); % Waterfall 2sided
          Janitor.cleanFigures();
  end

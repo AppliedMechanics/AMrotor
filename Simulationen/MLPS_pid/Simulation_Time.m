@@ -6,52 +6,72 @@
 close all
 clear all
 % clc
-
 %% Import
-import AMrotorSIM.*
-Janitor = AMrotorTools.PlotJanitor();
-Janitor.setLayout(2,3);
+%% Import and formating of the figures
+
+import AMrotorSIM.* % path
+Config_Sim_MLPS % corresponding cnfg-file
+Janitor = AMrotorTools.PlotJanitor(); % Instantiation of class PlotJanitor
+Janitor.setLayout(2,3); %Setting layout of the figures
 
 %% Compute Rotor
-% Config_Sim_Time_LavalPID
-Config_Sim_MLPS
+%% Assembly of the rotordynamic model
 
+r=Rotorsystem(cnfg, ... 
+'MBTR-Rotor with PID-Controller and negative stiffness for the AMBs');
+        % Instantiation of class Rotorsystem
+r.assemble; % Assembly of the model parts, considering the ...
+            % components (sensors,..) from the cnfg-file
+r.rotor.assemble_fem; % Assembly of the global system matrices: M, D, G, K
 
-r=Rotorsystem(cnfg,'MLPS-Rotor mit PID-Regelung und negativer Steifigkeit fuer Magnetlager');
-r.assemble;
-r.show;
+%% Visualization of the assembled rotor model
 
-r.rotor.show_2D();
+r.show; % lists the associated components of the model in teh Matlab ...
+        % Command Window
 
-g=Graphs.Visu_Rotorsystem(r);
-g.show();
+r.rotor.show_2D(); % Plot of a side view of the rotor elements
 
-
-r.rotor.assemble_fem;
+g=Graphs.Visu_Rotorsystem(r); % Instantiation of class Visu_Rotorsystem
+g.show(); % Plot of a 3D-isometry of the rotor with sensors, loads,...
 
 %% Running Time Simulation
-St_Lsg = Experiments.Stationaere_Lsg( r ,0 , (0:0.001:1) );
-St_Lsg.compute_ode15s_ss
-% St_Lsg.compute_newmark
+%% Running Time Simulation
+%% Stationary and runup with avaliable calculation methods and visualization
+St_Lsg = Experiments.Stationaere_Lsg(r,0,(0:0.001:1)); % In...
+    %stantiation of class Stationaere_Lsg
+    
+St_Lsg.compute_ode15s_ss; % ode15s - method
+%St_Lsg.compute_newmark; % newmark - method
 
-% Hochlauf = Experiments.Hochlaufanalyse( r , [0, 1e3] , (0:0.001:0.2) );
-% Hochlauf.compute_ode15s_ss
+% Runup = Experiments.Hochlaufanalyse( r , [0, 1e3] , (0:0.001:0.2) );
+% Runup.compute_ode15s_ss
 
-%% Plot results 
-Lsg = St_Lsg; % Lsg = Hochlauf;
-d = Dataoutput.TimeDataOutput(St_Lsg);
-% dataset_modalanalysis = d.compose_data();
+%% Processing and visualization of the results
+
+d = Dataoutput.TimeDataOutput(St_Lsg); % Instantiation of class ...
+                                       % TimeDataOutput
+
+%% Processing and saving results
+
+% dataset_modalanalysis = d.compose_data(); % container: rpm -> 
+                                          % (n,t,allsensorsxy)
 dataset_modalanalysis = d.compose_data_sensor_wise();
 datasetName = 'MLPS_pid_5s';
 d.save_data(dataset_modalanalysis,datasetName);
 struct = d.convert_data_to_struct_sensor_wise(dataset_modalanalysis);
 d.save_data(struct,datasetName);
-d.write_data_to_unv(datasetName)
+d.write_data_to_unv(datasetName);
 
-t = Graphs.TimeSignal(r, Lsg);
-w = Graphs.WaterfalldiagrammTwoSided(r, Lsg);
+%% Visualizing results
+
+Lsg = St_Lsg; 
+% Lsg = Hochlauf;
+
+t = Graphs.TimeSignal(r, Lsg); % Instantiation of class TimeSignal
+f = Graphs.Fourierdarstellung(r, St_Lsg); % Instantiation of class ...
+                                       % Fourierdarstellung
  for sensor = r.sensors
-          t.plot(sensor);
-%           w.plot(sensor);
+          t.plot(sensor); % Time signal
+          f.plot(sensor); % Fourier
           Janitor.cleanFigures();
  end

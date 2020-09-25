@@ -51,8 +51,8 @@ St_Lsg = Experiments.Stationaere_Lsg(r,[1000,1200],(0:0.001:0.02)); % In...
 % St_Lsg.compute_ode15s_ss; % ode15s - method
 % St_Lsg.compute_euler_ss; % Forward euler - method (in progress)
 % St_Lsg.compute_newmark; % newmark - method
-% St_Lsg.compute_newmark(options) % newmark - method with options
-% St_Lsg.compute_sys_ss_variant (in progress)
+% St_Lsg.compute_newmark(options); % newmark - method with options
+% St_Lsg.compute_sys_ss_variant; (in progress)
 
 % St_Lsg.save_data('St_Lsg_Laval_U_fwd_bwd_sweep_0_2krpm');
 
