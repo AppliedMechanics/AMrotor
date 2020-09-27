@@ -1,9 +1,9 @@
-activeMagneticBearing
+ActiveMagneticBearing
 =====================
 
-.. automodule:: +AMrotorSIM.@activeMagneticBearing
+.. automodule:: +AMrotorSIM.@ActiveMagneticBearing
 
-.. autoclass:: activeMagneticBearing
+.. autoclass:: ActiveMagneticBearing
     :show-inheritance:
     :members:
 

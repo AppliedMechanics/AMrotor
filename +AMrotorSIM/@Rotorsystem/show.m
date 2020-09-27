@@ -1,4 +1,10 @@
 function show(obj)
+% Displays all parts of the system in the command window
+%
+%    :param obj: Object of type rotorsystem
+%    :type obj: object
+%    :return: Output in command window
+
             disp('--------------- Rotorsystem ------------------')
          disp(obj.name);
         for i=obj.rotor

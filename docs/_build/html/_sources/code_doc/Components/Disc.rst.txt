@@ -1,5 +1,5 @@
 Disc
-=====================
+====
 
 .. automodule:: +AMrotorSIM.+Components.@Disc
 

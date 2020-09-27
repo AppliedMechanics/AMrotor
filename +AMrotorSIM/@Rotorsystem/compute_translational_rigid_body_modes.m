@@ -1,7 +1,9 @@
-%Coumpute translational rigid body modes, which can be used to check the
-%overall mass of rhe system using m_trans=u'*M*u
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 function U = compute_translational_rigid_body_modes(self)
+%Computes translational rigid body modes, which can be used to check the overall mass of the system using m_trans=u' x M x u
+%
+%    :return: Eigenvector matrix U (only trans. rigid body)
 
 n = 6*length(self.rotor.mesh.nodes);
 U = zeros(n,3); % U=[U_x,U_y,U_z]

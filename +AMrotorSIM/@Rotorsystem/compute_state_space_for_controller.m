@@ -1,20 +1,27 @@
-function [varargout] = compute_state_space_for_controller(self,Omega);
-% compute the state space of the system, e.g. for controller design in
-% Simulink or otherwise
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
+function [varargout] = compute_state_space_for_controller(self,Omega)
+% Computes the state space of the system, e.g. for controller design
+%
+%    :param Omega: Angular velocity step
+%    :type Omega: double
+%    :return: [A,B,C,D] or sys of Matlab-type ss, check function
+
+%   in Simulink or otherwise
 %   dx/dt = Ax(t) + Bu(t)
 %   y(t) = Cx(t) + Du(t)
 %
-% Uses the positions of the displacement sensors for C and uses the
-% positions of the pidControllers (with the inverse of M) for the matrix B
+%   Uses the positions of the displacement sensors for C and uses the
+%   positions of the pidControllers (with the inverse of M) for the matrix B
 %
-% sys = rotorsystem.compute_state_space_for_controller(Omega)
+%   sys = rotorsystem.compute_state_space_for_controller(Omega)
 %   sys is a system of the Matlab-type State-Space ss
 %
-% [A,B,C,D] = rotorsystem.compute_state_space_for_controller(Omega)
+%   [A,B,C,D] = rotorsystem.compute_state_space_for_controller(Omega)
 %   returns the State-Space matrices directly
 %
-% See also
-% ss
+%   See also
+%   ss
 
 [M,C,G,K]= self.assemble_system_matrices(Omega*60/2/pi);
 D = C + Omega*G;

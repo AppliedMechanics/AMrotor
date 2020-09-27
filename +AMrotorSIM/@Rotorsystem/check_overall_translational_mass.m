@@ -1,7 +1,11 @@
-%Coumpute translational rigid body modes, which can be used to check the
-%overall mass of rhe system using m_trans=u'*M*u
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 function overall_mass = check_overall_translational_mass(self,U)
+% Calculates the overall translational mass based on rigid body modes: m_trans=u' x M x u
+%
+%    :param U: Eigenvector matrix (only trans. rigid body)
+%    :type U: matrix
+%    :return: Overall translational mass
 
 n_nodes=length(self.rotor.mesh.nodes);
 

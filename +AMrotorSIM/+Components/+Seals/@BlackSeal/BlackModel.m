@@ -1,5 +1,6 @@
 function [ M_seal,D_seal ,K_seal ] = BlackModel( self, sys, init )     
 %BLACKMODEL gibt Koeffizienten nach Black zurück
+
 %   nach    Black, Jenssen 1969-70 - Dynamic Hybrid Bearing Characteristics
 %   und     Barrett - Turbulent Flow Annular Pump Seals
 % global verfahrenb

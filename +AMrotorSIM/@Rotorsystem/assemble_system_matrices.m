@@ -1,4 +1,11 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function [M,C,G,K]= assemble_system_matrices(self,rpm,varargin)
+% Assembles the specific component matrices to the global matrices
+%
+%    :param rpm: Rotational speed
+%    :type rpm: double
+%    :return: Global component matrices (M,D,G,K)
 
          if nargin == 1
              rpm=0;

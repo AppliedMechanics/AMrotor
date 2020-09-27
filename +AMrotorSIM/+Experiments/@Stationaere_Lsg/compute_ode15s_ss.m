@@ -1,4 +1,6 @@
-     function compute_ode15s_ss(obj)
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
+function compute_ode15s_ss(obj)
         
         Timer = AMrotorTools.Timer();
          

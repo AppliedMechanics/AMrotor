@@ -1,5 +1,13 @@
-function [ss_h]= compute_system_load_ss(self,t, Z)
-% compute the system load in state space form for time integration: h=[0;F]
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
+function [ss_h]= compute_system_load_ss(self, t, Z)
+% Computes the system load in state space form for time integration: h=[0;F]
+%
+%    :param t: Time step
+%    :type t: double
+%    :parameter Z: State-space vector [x; x_dot]
+%    :type Z: vector(double)
+%    :return: Load vector
 
 h_loads = self.assemble_system_loads(t,Z);
 h_controllers = self.assemble_system_controller_forces(t,Z);

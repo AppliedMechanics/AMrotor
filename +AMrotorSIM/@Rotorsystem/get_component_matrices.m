@@ -1,4 +1,15 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function [M_Comp,D_Comp,G_Comp,K_Comp]= get_component_matrices(self,components,rpm)
+% Extracts the specific component matrices (M,D,G,K)
+%
+%    :param components: Desired component object
+%    :type components: object
+%    :param rpm: Rotational speed
+%    :type rpm: double
+%    :return: Component matrices (M,D,G,K)
+
+
 n_nodes=length(self.rotor.mesh.nodes);
 
 M_Comp =sparse(6*n_nodes,6*n_nodes);

@@ -1,5 +1,6 @@
 function [ M_seal, D_seal ,K_seal ] = ChildsModel( self, sys, init )
 %Massen-, Dämpfungs- und Steifigkeitsmatrizen nach Childs (für EINE Dichtung!!)
+
 %   für den Prüfstand sind 2 (oder auch 3) Dichtungen zu simulieren
 %   init.omega0IR: 3-Dim-Vektor -> Drehung der Welle erfolgt in x-Richtung
 %

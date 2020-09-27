@@ -5,11 +5,13 @@ Components
 .. toctree::
 	:maxdepth: 2
 
+        CompInvariantMCK
+        CompLUTMCK
 	Disc
-        ..activeMagneticBearing
+        ./Bearings/Bearing
+        ./Seals/Seal
 
 
-This is the Rotorsystem class. This is the main class of the toolbox.
 
 .. automodule:: +AMrotorSIM.+Components
 

@@ -6,5 +6,5 @@ AMrotorSIM
 	:maxdepth: 2
 
 	Rotorsystem
-        activeMagneticBearing
+        ActiveMagneticBearing
         ./Components/Components

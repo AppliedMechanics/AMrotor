@@ -1,9 +1,23 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function F = calculate_bearing_force(rotorsystem,time,displacement,velocity)
-% calculate the force of the sensor BearingForceSensor
+% Calculates the force of the sensor BearingForceSensor
+%
+%    :param rotorsystem: Object of type rotorsystem
+%    :type rotorsystem: object
+%    :param time: Time step
+%    :type time: double
+%    :param displacement: Displacement vector
+%    :type displacement: vector(double)
+%    :param velocity: Velocity vector
+%    :type velocity: vector(double)
+%    :return: BearingForceSensor force
+
 %   Uses the displacment and velocity to obtain the force of
 %   the corresponding bearings; does not use an inertia term
 %   Calculates the forces of the bearing acting ON the rotor:
 %   F_bearing = - (k*x + d*x_dot)
+
 F = zeros(size(displacement,1),size(displacement,2));
 
 if any(strcmp({rotorsystem.sensors.type},'BearingForceSensor'))

@@ -1,8 +1,11 @@
 function assemble(AMB,r)
-% creates SimpleBearing and pidController-objects for
-% activeMagneticBearing and adds it to the rotorsystem
-%   AMB: object of the class activeMagneticBearing
-%   r: object of the class Rotorsystem
+% Creates SimpleBearing and pidController-objects for activeMagneticBearing and adds it to the rotorsystem
+%
+%    :param AMB: object of type ActiveMagneticBearing
+%    :type AMB: object
+%    :param r: object of type Rotorsystem
+%    :type r: object
+%    :return: SimpleBearing- and pidController-objects
 
 % Bearing
 cnfg.name = [AMB.name,'Bearing'];
