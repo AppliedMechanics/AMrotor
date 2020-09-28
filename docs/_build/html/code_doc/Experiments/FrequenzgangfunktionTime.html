@@ -1,0 +1,399 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>FrequenzgangfunktionTime &mdash; AMrotor  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Frequenzgangfunktion" href="Hochlaufanalyse.html" />
+    <link rel="prev" title="Frequenzgangfunktion" href="Frequenzgangfunktion.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> AMrotor
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../doc_classes.html">doc_classes</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../AMrotorSIM.html">AMrotorSIM</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Rotorsystem.html">Rotorsystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ActiveMagneticBearing.html">ActiveMagneticBearing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Components/Components.html">Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../TimeDataOutput.html">TimeDataOutput</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="Experiments.html">Experiments</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="Campbell.html">Campbell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Frequenzgangfunktion.html">Frequenzgangfunktion</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">FrequenzgangfunktionTime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Hochlaufanalyse.html">Frequenzgangfunktion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Modalanalyse.html">Modalanalyse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Stationaere_Lsg.html">Stationaere_Lsg</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Graphs/Graphs.html">Graphs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Loads/Load.html">Loads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pidControllers/pidController.html">pidController</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Rotor/Rotor.html">Rotor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Sensors/Sensor.html">Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Solvers/Solver.html">Solver</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AMrotor</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../doc_classes.html">doc_classes</a> &raquo;</li>
+        
+          <li><a href="../AMrotorSIM.html">AMrotorSIM</a> &raquo;</li>
+        
+          <li><a href="Experiments.html">Experiments</a> &raquo;</li>
+        
+      <li>FrequenzgangfunktionTime</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/code_doc/Experiments/FrequenzgangfunktionTime.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-+AMrotorSIM.+Experiments.&#64;FrequenzgangfunktionTime">
+<span id="frequenzgangfunktiontime"></span><h1>FrequenzgangfunktionTime<a class="headerlink" href="#module-+AMrotorSIM.+Experiments.@FrequenzgangfunktionTime" title="Permalink to this headline">¶</a></h1>
+<dl class="mat class">
+<dt id="+AMrotorSIM.+Experiments.&#64;FrequenzgangfunktionTime.FrequenzgangfunktionTime">
+<em class="property">class </em><code class="sig-prename descclassname">+AMrotorSIM.+Experiments.&#64;FrequenzgangfunktionTime.</code><code class="sig-name descname">FrequenzgangfunktionTime</code><span class="sig-paren">(</span><em class="sig-param">experiment</em>, <em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.+Experiments.@FrequenzgangfunktionTime.FrequenzgangfunktionTime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref mat mat-class docutils literal notranslate"><span class="pre">handle</span></code></p>
+<p>FREQUENZGANGFUNKTIONTIME Class for calculation of frequency response
+functions from time signals</p>
+<blockquote>
+<div><p>This class calculates the frequency response function between
+specified sensors using he abravibe toolbox
+Just f�r SISO: First step, maybe later expansion to MIMO</p>
+</div></blockquote>
+<p>See also AMrotorSIM.Graphs.Frequenzgangfunktion
+AMrotorSIM.Experiments.Stationaere_Lsg</p>
+<dl class="mat attribute">
+<dt id="+AMrotorSIM.+Experiments.&#64;FrequenzgangfunktionTime.FrequenzgangfunktionTime.name">
+<code class="sig-name descname">name</code><em class="property"> = None</em><a class="headerlink" href="#+AMrotorSIM.+Experiments.@FrequenzgangfunktionTime.FrequenzgangfunktionTime.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>See also AMrotorSIM.Experiments</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt id="+AMrotorSIM.+Experiments.&#64;FrequenzgangfunktionTime.FrequenzgangfunktionTime.experiment">
+<code class="sig-name descname">experiment</code><em class="property"> = None</em><a class="headerlink" href="#+AMrotorSIM.+Experiments.@FrequenzgangfunktionTime.FrequenzgangfunktionTime.experiment" title="Permalink to this definition">¶</a></dt>
+<dd><p>frequency array: nFreq x 1</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt id="+AMrotorSIM.+Experiments.&#64;FrequenzgangfunktionTime.FrequenzgangfunktionTime.H">
+<code class="sig-name descname">H</code><em class="property"> = None</em><a class="headerlink" href="#+AMrotorSIM.+Experiments.@FrequenzgangfunktionTime.FrequenzgangfunktionTime.H" title="Permalink to this definition">¶</a></dt>
+<dd><p>matrix of frfs: nFreq x nResponses x nInputForces</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt id="+AMrotorSIM.+Experiments.&#64;FrequenzgangfunktionTime.FrequenzgangfunktionTime.C">
+<code class="sig-name descname">C</code><em class="property"> = None</em><a class="headerlink" href="#+AMrotorSIM.+Experiments.@FrequenzgangfunktionTime.FrequenzgangfunktionTime.C" title="Permalink to this definition">¶</a></dt>
+<dd><p>Coherence of frf</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt id="+AMrotorSIM.+Experiments.&#64;FrequenzgangfunktionTime.FrequenzgangfunktionTime.sensorIn">
+<code class="sig-name descname">sensorIn</code><em class="property"> = None</em><a class="headerlink" href="#+AMrotorSIM.+Experiments.@FrequenzgangfunktionTime.FrequenzgangfunktionTime.sensorIn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output sensor</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt id="+AMrotorSIM.+Experiments.&#64;FrequenzgangfunktionTime.FrequenzgangfunktionTime.sensorOut">
+<code class="sig-name descname">sensorOut</code><em class="property"> = None</em><a class="headerlink" href="#+AMrotorSIM.+Experiments.@FrequenzgangfunktionTime.FrequenzgangfunktionTime.sensorOut" title="Permalink to this definition">¶</a></dt>
+<dd><p>description of entries in H for plot, cells</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt id="+AMrotorSIM.+Experiments.&#64;FrequenzgangfunktionTime.FrequenzgangfunktionTime.type">
+<code class="sig-name descname">type</code><em class="property"> = None</em><a class="headerlink" href="#+AMrotorSIM.+Experiments.@FrequenzgangfunktionTime.FrequenzgangfunktionTime.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>type of frf: acceleration ‘a’, velocity ‘v’, displacement ‘d’</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt id="+AMrotorSIM.+Experiments.&#64;FrequenzgangfunktionTime.FrequenzgangfunktionTime.unit">
+<code class="sig-name descname">unit</code><em class="property"> = None</em><a class="headerlink" href="#+AMrotorSIM.+Experiments.@FrequenzgangfunktionTime.FrequenzgangfunktionTime.unit" title="Permalink to this definition">¶</a></dt>
+<dd><p>inputPosition   % position of the inputs/InputForces</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt id="+AMrotorSIM.+Experiments.&#64;FrequenzgangfunktionTime.FrequenzgangfunktionTime.FrequenzgangfunktionTime">
+<code class="sig-name descname">FrequenzgangfunktionTime</code><span class="sig-paren">(</span><em class="sig-param">experiment</em>, <em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.+Experiments.@FrequenzgangfunktionTime.FrequenzgangfunktionTime.FrequenzgangfunktionTime" title="Permalink to this definition">¶</a></dt>
+<dd><p>self = Frequenzgangfunktion(rotorsystem,name)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="mat function">
+<dt id="+AMrotorSIM.+Experiments.&#64;FrequenzgangfunktionTime.calculate">
+<code class="sig-prename descclassname">+AMrotorSIM.+Experiments.&#64;FrequenzgangfunktionTime.</code><code class="sig-name descname">calculate</code><span class="sig-paren">(</span><em class="sig-param">obj</em>, <em class="sig-param">sensorIn</em>, <em class="sig-param">sensorOut</em>, <em class="sig-param">rpm</em>, <em class="sig-param">inputDirection</em>, <em class="sig-param">outputDirection</em>, <em class="sig-param">numberOfBlocks</em>, <em class="sig-param">windowShape</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.+Experiments.@FrequenzgangfunktionTime.calculate" title="Permalink to this definition">¶</a></dt>
+<dd><p>CALCULATE calculate the frequency response function from time data
+(Stationaere Lsg)</p>
+<blockquote>
+<div><p>calculates frf from a time data experiment using sensor-data
+settings for frf-calculation:</p>
+<blockquote>
+<div><p>overlap: 67 percent</p>
+</div></blockquote>
+</div></blockquote>
+<p>[f,H,C] = calculate(obj,sensorIn,sensorOut,rpm,inputDirection,outputDirection,numberOfBlocks,windowShape)</p>
+<p>See also time2xmtrx, xmtrx2frf</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt id="+AMrotorSIM.+Experiments.&#64;FrequenzgangfunktionTime.get_frf">
+<code class="sig-prename descclassname">+AMrotorSIM.+Experiments.&#64;FrequenzgangfunktionTime.</code><code class="sig-name descname">get_frf</code><span class="sig-paren">(</span><em class="sig-param">obj</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.+Experiments.@FrequenzgangfunktionTime.get_frf" title="Permalink to this definition">¶</a></dt>
+<dd><p>just read all the values, because all the calculated frfs will be
+displayed</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt id="+AMrotorSIM.+Experiments.&#64;FrequenzgangfunktionTime.print_table">
+<code class="sig-prename descclassname">+AMrotorSIM.+Experiments.&#64;FrequenzgangfunktionTime.</code><code class="sig-name descname">print_table</code><span class="sig-paren">(</span><em class="sig-param">obj</em>, <em class="sig-param">desiredPosition</em>, <em class="sig-param">nodePosition</em>, <em class="sig-param">deltaPosition</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.+Experiments.@FrequenzgangfunktionTime.print_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>show the distance between the desired axial positions on the rotor and
+the closest nodes of the rotor mesh</p>
+<blockquote>
+<div><p>print_table(obj,desiredPosition, nodePosition, deltaPosition)</p>
+</div></blockquote>
+</dd></dl>
+
+<span class="target" id="module-+AMrotorSIM.+Experiments.&#64;FrequenzgangfunktionTime.private"></span><dl class="mat function">
+<dt id="+AMrotorSIM.+Experiments.&#64;FrequenzgangfunktionTime.private.check_for_uniform_sampling">
+<code class="sig-prename descclassname">+AMrotorSIM.+Experiments.&#64;FrequenzgangfunktionTime.private.</code><code class="sig-name descname">check_for_uniform_sampling</code><span class="sig-paren">(</span><em class="sig-param">obj</em>, <em class="sig-param">time</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.+Experiments.@FrequenzgangfunktionTime.private.check_for_uniform_sampling" title="Permalink to this definition">¶</a></dt>
+<dd><p>CHECK_FOR_UNIFORM_SAMPLING check if the time data is uniformly sampled
+check_for_uniform_sampling(obj,time)</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt id="+AMrotorSIM.+Experiments.&#64;FrequenzgangfunktionTime.private.check_rpm_included_in_results">
+<code class="sig-prename descclassname">+AMrotorSIM.+Experiments.&#64;FrequenzgangfunktionTime.private.</code><code class="sig-name descname">check_rpm_included_in_results</code><span class="sig-paren">(</span><em class="sig-param">obj</em>, <em class="sig-param">rpm</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.+Experiments.@FrequenzgangfunktionTime.private.check_rpm_included_in_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>check if the desired rpm-step exists in the soultion
+check_rpm_included_in_results(obj,rpm)</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt id="+AMrotorSIM.+Experiments.&#64;FrequenzgangfunktionTime.private.check_selected_dof">
+<code class="sig-prename descclassname">+AMrotorSIM.+Experiments.&#64;FrequenzgangfunktionTime.private.</code><code class="sig-name descname">check_selected_dof</code><span class="sig-paren">(</span><em class="sig-param">obj</em>, <em class="sig-param">inputDirection</em>, <em class="sig-param">outputDirection</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.+Experiments.@FrequenzgangfunktionTime.private.check_selected_dof" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="mat function">
+<dt id="+AMrotorSIM.+Experiments.&#64;FrequenzgangfunktionTime.private.make_descriptions_for_FRF">
+<code class="sig-prename descclassname">+AMrotorSIM.+Experiments.&#64;FrequenzgangfunktionTime.private.</code><code class="sig-name descname">make_descriptions_for_FRF</code><span class="sig-paren">(</span><em class="sig-param">obj</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.+Experiments.@FrequenzgangfunktionTime.private.make_descriptions_for_FRF" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="mat function">
+<dt id="+AMrotorSIM.+Experiments.&#64;FrequenzgangfunktionTime.private.make_type">
+<code class="sig-prename descclassname">+AMrotorSIM.+Experiments.&#64;FrequenzgangfunktionTime.private.</code><code class="sig-name descname">make_type</code><span class="sig-paren">(</span><em class="sig-param">obj</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.+Experiments.@FrequenzgangfunktionTime.private.make_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="mat function">
+<dt id="+AMrotorSIM.+Experiments.&#64;FrequenzgangfunktionTime.private.make_unit">
+<code class="sig-prename descclassname">+AMrotorSIM.+Experiments.&#64;FrequenzgangfunktionTime.private.</code><code class="sig-name descname">make_unit</code><span class="sig-paren">(</span><em class="sig-param">obj</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.+Experiments.@FrequenzgangfunktionTime.private.make_unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="mat function">
+<dt id="+AMrotorSIM.+Experiments.&#64;FrequenzgangfunktionTime.private.set_dof_number">
+<code class="sig-prename descclassname">+AMrotorSIM.+Experiments.&#64;FrequenzgangfunktionTime.private.</code><code class="sig-name descname">set_dof_number</code><span class="sig-paren">(</span><em class="sig-param">obj</em>, <em class="sig-param">direction</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.+Experiments.@FrequenzgangfunktionTime.private.set_dof_number" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Hochlaufanalyse.html" class="btn btn-neutral float-right" title="Frequenzgangfunktion" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Frequenzgangfunktion.html" class="btn btn-neutral float-left" title="Frequenzgangfunktion" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, AMrotor_Team
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

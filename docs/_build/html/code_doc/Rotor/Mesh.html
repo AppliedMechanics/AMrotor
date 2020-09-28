@@ -1,0 +1,313 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Mesh &mdash; AMrotor  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="MeshNode" href="MeshNode.html" />
+    <link rel="prev" title="Material" href="Material.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> AMrotor
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../doc_classes.html">doc_classes</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../AMrotorSIM.html">AMrotorSIM</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Rotorsystem.html">Rotorsystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ActiveMagneticBearing.html">ActiveMagneticBearing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Components/Components.html">Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../TimeDataOutput.html">TimeDataOutput</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Experiments/Experiments.html">Experiments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Graphs/Graphs.html">Graphs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Loads/Load.html">Loads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pidControllers/pidController.html">pidController</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="Rotor.html">Rotor</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="FeModel.html">FeModel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Geometry.html">Geometry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="GeoNode.html">GeoNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Material.html">Material</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Mesh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MeshNode.html">MeshNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Element/Element.html">Element</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Sensors/Sensor.html">Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Solvers/Solver.html">Solver</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AMrotor</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../doc_classes.html">doc_classes</a> &raquo;</li>
+        
+          <li><a href="../AMrotorSIM.html">AMrotorSIM</a> &raquo;</li>
+        
+          <li><a href="Rotor.html">Rotor</a> &raquo;</li>
+        
+      <li>Mesh</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/code_doc/Rotor/Mesh.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-+AMrotorSIM.+Rotor.+FEMRotor.&#64;Mesh">
+<span id="mesh"></span><h1>Mesh<a class="headerlink" href="#module-+AMrotorSIM.+Rotor.+FEMRotor.@Mesh" title="Permalink to this headline">¶</a></h1>
+<dl class="mat class">
+<dt id="+AMrotorSIM.+Rotor.+FEMRotor.&#64;Mesh.Mesh">
+<em class="property">class </em><code class="sig-prename descclassname">+AMrotorSIM.+Rotor.+FEMRotor.&#64;Mesh.</code><code class="sig-name descname">Mesh</code><span class="sig-paren">(</span><em class="sig-param">optn</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.+Rotor.+FEMRotor.@Mesh.Mesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref mat mat-class docutils literal notranslate"><span class="pre">sphinxcontrib.mat_types.handle</span></code></p>
+<p>Mesh  Class of the mesh, which includes the nodes and elements</p>
+<dl class="mat attribute">
+<dt id="+AMrotorSIM.+Rotor.+FEMRotor.&#64;Mesh.Mesh.name">
+<code class="sig-name descname">name</code><em class="property"> = None</em><a class="headerlink" href="#+AMrotorSIM.+Rotor.+FEMRotor.@Mesh.Mesh.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>minimum allowed element length</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt id="+AMrotorSIM.+Rotor.+FEMRotor.&#64;Mesh.Mesh.d_max">
+<code class="sig-name descname">d_max</code><em class="property"> = None</em><a class="headerlink" href="#+AMrotorSIM.+Rotor.+FEMRotor.@Mesh.Mesh.d_max" title="Permalink to this definition">¶</a></dt>
+<dd><p>maximum allowed element length</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt id="+AMrotorSIM.+Rotor.+FEMRotor.&#64;Mesh.Mesh.n_refinement">
+<code class="sig-name descname">n_refinement</code><em class="property"> = None</em><a class="headerlink" href="#+AMrotorSIM.+Rotor.+FEMRotor.@Mesh.Mesh.n_refinement" title="Permalink to this definition">¶</a></dt>
+<dd><p>no of refinement steps, when looking for the optimal element length</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt id="+AMrotorSIM.+Rotor.+FEMRotor.&#64;Mesh.Mesh.approximation">
+<code class="sig-name descname">approximation</code><em class="property"> = None</em><a class="headerlink" href="#+AMrotorSIM.+Rotor.+FEMRotor.@Mesh.Mesh.approximation" title="Permalink to this definition">¶</a></dt>
+<dd><p>See also AMrotorSIM.Rotor.FEMRotor.MeshNode</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt id="+AMrotorSIM.+Rotor.+FEMRotor.&#64;Mesh.Mesh.nodes">
+<code class="sig-name descname">nodes</code><em class="property"> = None</em><a class="headerlink" href="#+AMrotorSIM.+Rotor.+FEMRotor.@Mesh.Mesh.nodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>See also AMrotorSIM.Rotor.FEMRotor.Element.TimoshenkoLinearElement</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="mat function">
+<dt id="+AMrotorSIM.+Rotor.+FEMRotor.&#64;Mesh.show_2D">
+<code class="sig-prename descclassname">+AMrotorSIM.+Rotor.+FEMRotor.&#64;Mesh.</code><code class="sig-name descname">show_2D</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">varargin</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.+Rotor.+FEMRotor.@Mesh.show_2D" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot the distribution of elements in 2D</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt id="+AMrotorSIM.+Rotor.+FEMRotor.&#64;Mesh.show_2D_nodes">
+<code class="sig-prename descclassname">+AMrotorSIM.+Rotor.+FEMRotor.&#64;Mesh.</code><code class="sig-name descname">show_2D_nodes</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">varargin</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.+Rotor.+FEMRotor.@Mesh.show_2D_nodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the mesh nodes in 2D</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt id="+AMrotorSIM.+Rotor.+FEMRotor.&#64;Mesh.show_3D">
+<code class="sig-prename descclassname">+AMrotorSIM.+Rotor.+FEMRotor.&#64;Mesh.</code><code class="sig-name descname">show_3D</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">ax</em>, <em class="sig-param">color</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.+Rotor.+FEMRotor.@Mesh.show_3D" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="MeshNode.html" class="btn btn-neutral float-right" title="MeshNode" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Material.html" class="btn btn-neutral float-left" title="Material" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, AMrotor_Team
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,342 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Newmark &mdash; AMrotor  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Ode15s" href="Ode15s.html" />
+    <link rel="prev" title="Solver" href="Solver.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> AMrotor
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../doc_classes.html">doc_classes</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../AMrotorSIM.html">AMrotorSIM</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Rotorsystem.html">Rotorsystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ActiveMagneticBearing.html">ActiveMagneticBearing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Components/Components.html">Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../TimeDataOutput.html">TimeDataOutput</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Experiments/Experiments.html">Experiments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Graphs/Graphs.html">Graphs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Loads/Load.html">Loads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pidControllers/pidController.html">pidController</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Rotor/Rotor.html">Rotor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Sensors/Sensor.html">Sensor</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="Solver.html">Solver</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Newmark</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Ode15s.html">Ode15s</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Ode45_Solver.html">Ode45_Solver</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AMrotor</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../doc_classes.html">doc_classes</a> &raquo;</li>
+        
+          <li><a href="../AMrotorSIM.html">AMrotorSIM</a> &raquo;</li>
+        
+          <li><a href="Solver.html">Solver</a> &raquo;</li>
+        
+      <li>Newmark</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/code_doc/Solvers/Newmark.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-+AMrotorSIM.+Solvers.&#64;Newmark">
+<span id="newmark"></span><h1>Newmark<a class="headerlink" href="#module-+AMrotorSIM.+Solvers.@Newmark" title="Permalink to this headline">¶</a></h1>
+<dl class="mat class">
+<dt id="+AMrotorSIM.+Solvers.&#64;Newmark.Newmark">
+<em class="property">class </em><code class="sig-prename descclassname">+AMrotorSIM.+Solvers.&#64;Newmark.</code><code class="sig-name descname">Newmark</code><span class="sig-paren">(</span><em class="sig-param">varargin</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.+Solvers.@Newmark.Newmark" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref mat mat-class docutils literal notranslate"><span class="pre">AMrotorSIM.Solvers.Solver</span></code></p>
+<p>NEWMARK f�hrt eine Zeitintegration mit dem Newmark-Scheme durch</p>
+<dl class="mat method">
+<dt id="+AMrotorSIM.+Solvers.&#64;Newmark.Newmark.Newmark">
+<code class="sig-name descname">Newmark</code><span class="sig-paren">(</span><em class="sig-param">varargin</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.+Solvers.@Newmark.Newmark.Newmark" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Support name-value pair arguments when constructing the</dt><dd><p>object.</p>
+</dd>
+</dl>
+<p>setProperties(obj,nargin,varargin{:});</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="mat function">
+<dt id="+AMrotorSIM.+Solvers.&#64;Newmark.newmark_integration">
+<code class="sig-prename descclassname">+AMrotorSIM.+Solvers.&#64;Newmark.</code><code class="sig-name descname">newmark_integration</code><span class="sig-paren">(</span><em class="sig-param">obj</em>, <em class="sig-param">beta</em>, <em class="sig-param">gamma</em>, <em class="sig-param">M</em>, <em class="sig-param">D</em>, <em class="sig-param">K</em>, <em class="sig-param">f</em>, <em class="sig-param">t</em>, <em class="sig-param">q_0</em>, <em class="sig-param">qd_0</em>, <em class="sig-param">qdd_0</em>, <em class="sig-param">constant</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.+Solvers.@Newmark.newmark_integration" title="Permalink to this definition">¶</a></dt>
+<dd><p>NEWMARK_INTEGRATION   f�hrt eine Newmark Zeitintegration durch</p>
+<dl>
+<dt>Syntax:</dt><dd><p>[q,qd,qdd] = newmark_integration(beta,gamma,M,D,K,f,t,q_0,qd_0,qdd_0,constant)</p>
+<dl>
+<dt>R�ckgabewerte:  q   = Verschiebungen f�r jeden Zeitschritt (i-te Zeile = i-ter DOF, i-te Spalte = i-ter Zeitschritt)</dt><dd><p>qd  = Geschwindigkeiten f�r jeden Zeitschritt (i-te Zeile = i-ter DOF, i-te Spalte = i-ter Zeitschritt)
+qdd = Beschleunigungen f�r jeden Zeitschritt (i-te Zeile = i-ter DOF, i-te Spalte = i-ter Zeitschritt)</p>
+</dd>
+<dt>Parameter:     beta = Beta (Parameter f�r das Newmark-Verfahren)</dt><dd><blockquote>
+<div><dl>
+<dt>gamma = Gamma (Parameter f�r das Newmark-Verfahren)</dt><dd><blockquote>
+<div><p>M   = Massenmatrix
+D   = D�mpfungsmatrix
+K   = Steifigkeitsmatrix
+f   = Lastvektor f�r jeden Zeitschritt (i-te Zeile = DOF, i-te Spalte = i-ter Zeitschritt)
+t   = Zeitvektor (Zeit nach jedem Zeitschritt, beginnend bei 0)
+q_0 = Vektor mit Anfangsbedingungen f�r die Verschiebung</p>
+</div></blockquote>
+<p>qd_0 = Vekotr mit Anfangsbedingungen f�r die Geschwindigkeit</p>
+</dd>
+</dl>
+<p>qdd_0 = Vektor mit Anfangsbedingungen f�r die Beschleunigung</p>
+</div></blockquote>
+<dl class="simple">
+<dt>constant = 0/1, 1=alle Zeitschrittbreiten sind gleich (beschleunigt den Algorithmus!),</dt><dd><p>0=Zeitschrittbreiten sind verschieden</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt id="+AMrotorSIM.+Solvers.&#64;Newmark.newmark_integration_ss">
+<code class="sig-prename descclassname">+AMrotorSIM.+Solvers.&#64;Newmark.</code><code class="sig-name descname">newmark_integration_ss</code><span class="sig-paren">(</span><em class="sig-param">obj</em>, <em class="sig-param">beta</em>, <em class="sig-param">gamma</em>, <em class="sig-param">ss</em>, <em class="sig-param">f</em>, <em class="sig-param">t</em>, <em class="sig-param">q_0</em>, <em class="sig-param">qd_0</em>, <em class="sig-param">qdd_0</em>, <em class="sig-param">constant</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.+Solvers.@Newmark.newmark_integration_ss" title="Permalink to this definition">¶</a></dt>
+<dd><p>NEWMARK_INTEGRATION   f�hrt eine Newmark Zeitintegration durch</p>
+<dl>
+<dt>Syntax:</dt><dd><p>[q,qd,qdd] = newmark_integration(beta,gamma,M,D,K,f,t,q_0,qd_0,qdd_0,constant)</p>
+<dl>
+<dt>R�ckgabewerte:  q   = Verschiebungen f�r jeden Zeitschritt (i-te Zeile = i-ter DOF, i-te Spalte = i-ter Zeitschritt)</dt><dd><p>qd  = Geschwindigkeiten f�r jeden Zeitschritt (i-te Zeile = i-ter DOF, i-te Spalte = i-ter Zeitschritt)
+qdd = Beschleunigungen f�r jeden Zeitschritt (i-te Zeile = i-ter DOF, i-te Spalte = i-ter Zeitschritt)</p>
+</dd>
+<dt>Parameter:     beta = Beta (Parameter f�r das Newmark-Verfahren)</dt><dd><blockquote>
+<div><dl>
+<dt>gamma = Gamma (Parameter f�r das Newmark-Verfahren)</dt><dd><blockquote>
+<div><p>M   = Massenmatrix
+D   = D�mpfungsmatrix
+K   = Steifigkeitsmatrix
+f   = Lastvektor f�r jeden Zeitschritt (i-te Zeile = DOF, i-te Spalte = i-ter Zeitschritt)
+t   = Zeitvektor (Zeit nach jedem Zeitschritt, beginnend bei 0)
+q_0 = Vektor mit Anfangsbedingungen f�r die Verschiebung</p>
+</div></blockquote>
+<p>qd_0 = Vekotr mit Anfangsbedingungen f�r die Geschwindigkeit</p>
+</dd>
+</dl>
+<p>qdd_0 = Vektor mit Anfangsbedingungen f�r die Beschleunigung</p>
+</div></blockquote>
+<dl class="simple">
+<dt>constant = 0/1, 1=alle Zeitschrittbreiten sind gleich (beschleunigt den Algorithmus!),</dt><dd><p>0=Zeitschrittbreiten sind verschieden</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Ode15s.html" class="btn btn-neutral float-right" title="Ode15s" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Solver.html" class="btn btn-neutral float-left" title="Solver" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, AMrotor_Team
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

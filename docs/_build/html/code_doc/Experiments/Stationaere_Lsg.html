@@ -1,0 +1,385 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Stationaere_Lsg &mdash; AMrotor  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Graphs" href="../Graphs/Graphs.html" />
+    <link rel="prev" title="Modalanalyse" href="Modalanalyse.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> AMrotor
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../doc_classes.html">doc_classes</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../AMrotorSIM.html">AMrotorSIM</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../Rotorsystem.html">Rotorsystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ActiveMagneticBearing.html">ActiveMagneticBearing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Components/Components.html">Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../TimeDataOutput.html">TimeDataOutput</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="Experiments.html">Experiments</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="Campbell.html">Campbell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Frequenzgangfunktion.html">Frequenzgangfunktion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FrequenzgangfunktionTime.html">FrequenzgangfunktionTime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Hochlaufanalyse.html">Frequenzgangfunktion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Modalanalyse.html">Modalanalyse</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Stationaere_Lsg</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Graphs/Graphs.html">Graphs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Loads/Load.html">Loads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pidControllers/pidController.html">pidController</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Rotor/Rotor.html">Rotor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Sensors/Sensor.html">Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Solvers/Solver.html">Solver</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AMrotor</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../doc_classes.html">doc_classes</a> &raquo;</li>
+        
+          <li><a href="../AMrotorSIM.html">AMrotorSIM</a> &raquo;</li>
+        
+          <li><a href="Experiments.html">Experiments</a> &raquo;</li>
+        
+      <li>Stationaere_Lsg</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/code_doc/Experiments/Stationaere_Lsg.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-+AMrotorSIM.+Experiments.&#64;Stationaere_Lsg">
+<span id="stationaere-lsg"></span><h1>Stationaere_Lsg<a class="headerlink" href="#module-+AMrotorSIM.+Experiments.@Stationaere_Lsg" title="Permalink to this headline">¶</a></h1>
+<dl class="mat class">
+<dt id="+AMrotorSIM.+Experiments.&#64;Stationaere_Lsg.Stationaere_Lsg">
+<em class="property">class </em><code class="sig-prename descclassname">+AMrotorSIM.+Experiments.&#64;Stationaere_Lsg.</code><code class="sig-name descname">Stationaere_Lsg</code><span class="sig-paren">(</span><em class="sig-param">a</em>, <em class="sig-param">drehzahlvektor</em>, <em class="sig-param">time</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.+Experiments.@Stationaere_Lsg.Stationaere_Lsg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref mat mat-class docutils literal notranslate"><span class="pre">handle</span></code></p>
+<p>Stationaere_Lsg Class for time integration with constant roation speed</p>
+<dl class="mat attribute">
+<dt id="+AMrotorSIM.+Experiments.&#64;Stationaere_Lsg.Stationaere_Lsg.rotorsystem">
+<code class="sig-name descname">rotorsystem</code><em class="property"> = None</em><a class="headerlink" href="#+AMrotorSIM.+Experiments.@Stationaere_Lsg.Stationaere_Lsg.rotorsystem" title="Permalink to this definition">¶</a></dt>
+<dd><p>rpm steps</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt id="+AMrotorSIM.+Experiments.&#64;Stationaere_Lsg.Stationaere_Lsg.time">
+<code class="sig-name descname">time</code><em class="property"> = None</em><a class="headerlink" href="#+AMrotorSIM.+Experiments.@Stationaere_Lsg.Stationaere_Lsg.time" title="Permalink to this definition">¶</a></dt>
+<dd><p>time steps e.g. 0:tStep:tEnd</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt id="+AMrotorSIM.+Experiments.&#64;Stationaere_Lsg.Stationaere_Lsg.result">
+<code class="sig-name descname">result</code><em class="property"> = None</em><a class="headerlink" href="#+AMrotorSIM.+Experiments.@Stationaere_Lsg.Stationaere_Lsg.result" title="Permalink to this definition">¶</a></dt>
+<dd><p>results-struct: result.X, result.X_d, result.X_dd</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt id="+AMrotorSIM.+Experiments.&#64;Stationaere_Lsg.Stationaere_Lsg.Stationaere_Lsg">
+<code class="sig-name descname">Stationaere_Lsg</code><span class="sig-paren">(</span><em class="sig-param">a</em>, <em class="sig-param">drehzahlvektor</em>, <em class="sig-param">time</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.+Experiments.@Stationaere_Lsg.Stationaere_Lsg.Stationaere_Lsg" title="Permalink to this definition">¶</a></dt>
+<dd><p>obj = Stationaere_Lsg(rotorsystem,drehzahlvektor,time)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="mat function">
+<dt id="+AMrotorSIM.+Experiments.&#64;Stationaere_Lsg.clear_time_result">
+<code class="sig-prename descclassname">+AMrotorSIM.+Experiments.&#64;Stationaere_Lsg.</code><code class="sig-name descname">clear_time_result</code><span class="sig-paren">(</span><em class="sig-param">obj</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.+Experiments.@Stationaere_Lsg.clear_time_result" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="mat function">
+<dt id="+AMrotorSIM.+Experiments.&#64;Stationaere_Lsg.compute_euler_ss">
+<code class="sig-prename descclassname">+AMrotorSIM.+Experiments.&#64;Stationaere_Lsg.</code><code class="sig-name descname">compute_euler_ss</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.+Experiments.@Stationaere_Lsg.compute_euler_ss" title="Permalink to this definition">¶</a></dt>
+<dd><p>—–EULER ——————————————————</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt id="+AMrotorSIM.+Experiments.&#64;Stationaere_Lsg.compute_newmark">
+<code class="sig-prename descclassname">+AMrotorSIM.+Experiments.&#64;Stationaere_Lsg.</code><code class="sig-name descname">compute_newmark</code><span class="sig-paren">(</span><em class="sig-param">obj</em>, <em class="sig-param">options</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.+Experiments.@Stationaere_Lsg.compute_newmark" title="Permalink to this definition">¶</a></dt>
+<dd><p>compute_newmark Time integration by newmark scheme
+using constant average acceleration (beta = 1/4, gamma = 1/2)
+See for example lecture script: Rixen, Structural Dynamics
+See Schweitzerhof 2004 for adaptive time stepping</p>
+<dl>
+<dt>compute_newmark(obj,options)</dt><dd><p>options.adapt = [ true | false ] chose adaptive step size control
+options.locTolUpper Upper tol for local error, required for adapt
+options.locTolLower Lower tol for local error, required for adapt
+options.globTol Global tol, required for adapt, can restart the whole</p>
+<blockquote>
+<div><p>integration process</p>
+</div></blockquote>
+<dl class="simple">
+<dt>notes:</dt><dd><ul class="simple">
+<li><p>changing the step size requires a factorization of the problem
+-&gt; do not change the step size too often
+locTolLower = locTolUpper/2…10</p></li>
+<li><p>do not chose globTol too small, as the time integration is
+restarted with new local tolerances if globError&gt;GlobTol</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt id="+AMrotorSIM.+Experiments.&#64;Stationaere_Lsg.compute_ode15s_ss">
+<code class="sig-prename descclassname">+AMrotorSIM.+Experiments.&#64;Stationaere_Lsg.</code><code class="sig-name descname">compute_ode15s_ss</code><span class="sig-paren">(</span><em class="sig-param">obj</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.+Experiments.@Stationaere_Lsg.compute_ode15s_ss" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="mat function">
+<dt id="+AMrotorSIM.+Experiments.&#64;Stationaere_Lsg.compute_sys_ss_variant">
+<code class="sig-prename descclassname">+AMrotorSIM.+Experiments.&#64;Stationaere_Lsg.</code><code class="sig-name descname">compute_sys_ss_variant</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.+Experiments.@Stationaere_Lsg.compute_sys_ss_variant" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="mat function">
+<dt id="+AMrotorSIM.+Experiments.&#64;Stationaere_Lsg.get_state_space_matrices">
+<code class="sig-prename descclassname">+AMrotorSIM.+Experiments.&#64;Stationaere_Lsg.</code><code class="sig-name descname">get_state_space_matrices</code><span class="sig-paren">(</span><em class="sig-param">obj</em>, <em class="sig-param">omega</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.+Experiments.@Stationaere_Lsg.get_state_space_matrices" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="mat function">
+<dt id="+AMrotorSIM.+Experiments.&#64;Stationaere_Lsg.newmark_integration_with_adaptive_step_size">
+<code class="sig-prename descclassname">+AMrotorSIM.+Experiments.&#64;Stationaere_Lsg.</code><code class="sig-name descname">newmark_integration_with_adaptive_step_size</code><span class="sig-paren">(</span><em class="sig-param">obj</em>, <em class="sig-param">M</em>, <em class="sig-param">C</em>, <em class="sig-param">K</em>, <em class="sig-param">forceFunction</em>, <em class="sig-param">tspan</em>, <em class="sig-param">x0</em>, <em class="sig-param">dotx0</em>, <em class="sig-param">options</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.+Experiments.@Stationaere_Lsg.newmark_integration_with_adaptive_step_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>See for example lecture script: Rixen, Structural Dynamics
+See Schweitzerhof 2004 For adaptive time stepping:</p>
+<blockquote>
+<div><p>problem: factorization depends on time step size -&gt; do not change time
+step size too often</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="mat function">
+<dt id="+AMrotorSIM.+Experiments.&#64;Stationaere_Lsg.newmark_integration_without_adaptive_step_size">
+<code class="sig-prename descclassname">+AMrotorSIM.+Experiments.&#64;Stationaere_Lsg.</code><code class="sig-name descname">newmark_integration_without_adaptive_step_size</code><span class="sig-paren">(</span><em class="sig-param">obj</em>, <em class="sig-param">M</em>, <em class="sig-param">C</em>, <em class="sig-param">K</em>, <em class="sig-param">forceFunction</em>, <em class="sig-param">t</em>, <em class="sig-param">x0</em>, <em class="sig-param">dotx0</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.+Experiments.@Stationaere_Lsg.newmark_integration_without_adaptive_step_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>See for example lecture script: Rixen, Structural Dynamics
+but here use LU-factorization instad of Cholesky, because here S is not
+symmetric (because of G)</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt id="+AMrotorSIM.+Experiments.&#64;Stationaere_Lsg.show">
+<code class="sig-prename descclassname">+AMrotorSIM.+Experiments.&#64;Stationaere_Lsg.</code><code class="sig-name descname">show</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.+Experiments.@Stationaere_Lsg.show" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<span class="target" id="module-+AMrotorSIM.+Experiments.&#64;Stationaere_Lsg.private"></span><dl class="mat function">
+<dt id="+AMrotorSIM.+Experiments.&#64;Stationaere_Lsg.private.get_force_newmark">
+<code class="sig-prename descclassname">+AMrotorSIM.+Experiments.&#64;Stationaere_Lsg.private.</code><code class="sig-name descname">get_force_newmark</code><span class="sig-paren">(</span><em class="sig-param">obj</em>, <em class="sig-param">t</em>, <em class="sig-param">x</em>, <em class="sig-param">dotx</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.+Experiments.@Stationaere_Lsg.private.get_force_newmark" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the force from load-objects and from controller-objects</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt id="+AMrotorSIM.+Experiments.&#64;Stationaere_Lsg.private.integrate_function">
+<code class="sig-prename descclassname">+AMrotorSIM.+Experiments.&#64;Stationaere_Lsg.private.</code><code class="sig-name descname">integrate_function</code><span class="sig-paren">(</span><em class="sig-param">t</em>, <em class="sig-param">Z</em>, <em class="sig-param">Omega</em>, <em class="sig-param">rotorsystem</em>, <em class="sig-param">mat</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.+Experiments.@Stationaere_Lsg.private.integrate_function" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="mat function">
+<dt id="+AMrotorSIM.+Experiments.&#64;Stationaere_Lsg.private.odeOutputFcnController">
+<code class="sig-prename descclassname">+AMrotorSIM.+Experiments.&#64;Stationaere_Lsg.private.</code><code class="sig-name descname">odeOutputFcnController</code><span class="sig-paren">(</span><em class="sig-param">t</em>, <em class="sig-param">y</em>, <em class="sig-param">flag</em>, <em class="sig-param">varargin</em><span class="sig-paren">)</span><a class="headerlink" href="#+AMrotorSIM.+Experiments.@Stationaere_Lsg.private.odeOutputFcnController" title="Permalink to this definition">¶</a></dt>
+<dd><p>omega = varargin{1};</p>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Graphs/Graphs.html" class="btn btn-neutral float-right" title="Graphs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Modalanalyse.html" class="btn btn-neutral float-left" title="Modalanalyse" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, AMrotor_Team
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
