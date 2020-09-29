@@ -8,3 +8,11 @@ AMrotorSIM
 	Rotorsystem
         ActiveMagneticBearing
         ./Components/Components
+        TimeDataOutput
+        ./Experiments/Experiments
+        ./Graphs/Graphs
+        ./Loads/Load
+        ./pidControllers/pidController
+        ./Rotor/Rotor
+        ./Sensors/Sensor
+        ./Solvers/Solver
