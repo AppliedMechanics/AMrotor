@@ -1,6 +1,15 @@
-function [ M_seal,D_seal ,K_seal ] = BlackModel( self, sys, init )     
-%BLACKMODEL gibt Koeffizienten nach Black zurück
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
+function [ M_seal,D_seal ,K_seal ] = BlackModel( self, sys, init )     
+% Performs the BlackSeal calculations
+%
+%    :param sys: ????????
+%    :type sys: ???????????
+%    :param init: Start values ????
+%    :type init: ????????????
+%    :return: M, D and K matrices of the seal
+
+%BLACKMODEL gibt Koeffizienten nach Black zurück
 %   nach    Black, Jenssen 1969-70 - Dynamic Hybrid Bearing Characteristics
 %   und     Barrett - Turbulent Flow Annular Pump Seals
 % global verfahrenb

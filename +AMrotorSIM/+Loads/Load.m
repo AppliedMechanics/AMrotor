@@ -1,5 +1,8 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 classdef Load < matlab.mixin.Heterogeneous & handle
-% Load Class for the forces on the rotor system
+% Load class for the forces on the rotor system
+
 %   loads are computed on the right-hand side of the system's equations:
 %   M*xdd+D*xd+K*x=Loads
    properties
@@ -11,8 +14,8 @@ classdef Load < matlab.mixin.Heterogeneous & handle
     localisation_matrix
    end
    methods
-       %Konstruktor
        function self = Load(arg)
+           %Constructor
          if nargin == 0
            self.name = 'Empty Load';
          else

@@ -1,4 +1,14 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function [ M_seal, D_seal ,K_seal ] = ChildsModel( self, sys, init )
+% Performs the BlackSeal calculations
+%
+%    :param sys: ????????
+%    :type sys: ???????????
+%    :param init: Start values ????
+%    :type init: ????????????
+%    :return: M, D and K matrices of the seal
+
 %Massen-, Dämpfungs- und Steifigkeitsmatrizen nach Childs (für EINE Dichtung!!)
 
 %   für den Prüfstand sind 2 (oder auch 3) Dichtungen zu simulieren

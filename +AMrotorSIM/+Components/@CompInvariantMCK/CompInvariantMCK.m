@@ -1,12 +1,17 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 classdef CompInvariantMCK < AMrotorSIM.Components.Component
-%CompMatrixInvariant class
-% class for pre-assigned mass, damping, stiffness matirces added to one
-% node, invariant i.e. independent of time, rpm, ..
+% CompMatrixInvariant class for pre-assigned mass, damping, stiffness matrices added to one node, invariant i.e. independent of time, rpm, ..
     properties
     end
     methods
-        %Konstruktor
         function self = CompInvariantMCK(arg)
+            %Constructor
+            %
+            %    :parameter arg: cnfg_component substruct of cnfg-struct
+            %    :type arg: struct
+            %    :return: CompInvariantMCK object
+            
             self = self@AMrotorSIM.Components.Component(arg);
             if nargin == 0
                 self.name = 'Empty CompInvariantMCK';

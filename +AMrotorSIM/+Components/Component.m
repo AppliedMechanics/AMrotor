@@ -1,5 +1,9 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 classdef (Abstract) Component < matlab.mixin.Heterogeneous & handle
-% Component - Superclass for components that are added to the rotor matrices
+% Superclass (abstract) for all components such as bearings, discs, seals, ecc.
+
+%that are added to the rotor matrices
 %   Component-objects are added to the left-hand side of the system's
 %   equations: 
 %   (M+M_Component)*xdd + (C+C_Component+ Omega*(G+G_Component))*xd + (K+K_Component)*x = f
@@ -12,7 +16,7 @@ classdef (Abstract) Component < matlab.mixin.Heterogeneous & handle
 % AMrotorSIM.Loads
 
     properties
-        name
+        name 
         cnfg
         position
         type
@@ -26,7 +30,8 @@ classdef (Abstract) Component < matlab.mixin.Heterogeneous & handle
     end
     methods
         function self = Component(arg)
-            % create the component and initialize with the cnfg-struct
+            % Constructor
+
             if nargin == 0
                 self.name = 'Empty Component';
             else

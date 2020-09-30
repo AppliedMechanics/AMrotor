@@ -1,6 +1,9 @@
 CompLUTMCK
 ==========
 
+CompLUTMCK can be used to include components into the simulation, whose rpm-dependent
+M-, C-, and K-matrices (e.g. bearings) are known from Look-Up-Tables.
+
 .. automodule:: +AMrotorSIM.+Components.@CompLUTMCK
 
 .. autoclass:: CompLUTMCK
