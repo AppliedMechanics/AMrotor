@@ -1,5 +1,7 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function assemble(AMB,r)
-% Creates SimpleBearing and pidController-objects for activeMagneticBearing and adds it to the rotorsystem
+% Creates SimpleBearing- and pidController-objects for ActiveMagneticBearing and adds it to the rotorsystem
 %
 %    :param AMB: object of type ActiveMagneticBearing
 %    :type AMB: object

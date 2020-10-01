@@ -1,33 +1,31 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 classdef ActiveMagneticBearing < handle
-% activeMagneticBearing Class for AMB
+% ActiveMagneticBearing class for AMB's
+
 %   Creates other objects of the type SimpleBearing and pidController
     properties
         cnfg
         name
-        position
-        
-        % Bearing-object that gets created by this object (AMB)
-        % See also AMrotorSIM.Components.Bearings.SimpleBearing
-        simpleBearing@AMrotorSIM.Components.Bearings.SimpleBearing
-        
-        % pidController-objects that get created by AMB-object
-        % See also AMrotorSIM.pidControllers.pidController
-        pidController@AMrotorSIM.pidControllers.pidController
-        
-        kx % N/m, stiffness because of the magnetic field, typically negative value
-        
+        position        
+        simpleBearing@AMrotorSIM.Components.Bearings.SimpleBearing     
+        pidController@AMrotorSIM.pidControllers.pidController        
+        kx         
         targetDisplacementX
-        targetDisplacementY
-        
-        pidType
-        
-        electricalP % A/m
-        electricalI % A/(m*s)
-        electricalD % As/m
+        targetDisplacementY        
+        pidType        
+        electricalP
+        electricalI
+        electricalD
     end
     methods
-        %Konstruktor
         function obj=ActiveMagneticBearing(cnfg)
+            % Constructor
+            %
+            %    :parameter cnfg: cnfg-struct from separat Config-script
+            %    :type cnfg: struct
+            %    :return: AMB object
+            
             if nargin == 0
                 obj.name = 'Empty active magnetic bearing';
                 obj.position = 0;
