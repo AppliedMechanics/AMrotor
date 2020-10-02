@@ -1,5 +1,24 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function [f,H] = calculate(obj,f,inPos,outPos,type,rpm,inputDirection,outputDirection)
-% CALCULATE calculate the frequency response function of the M,D,K-system
+% Calculates the frequency response function of the M,D,K-system
+%
+%    :param f: Frequency range
+%    :type f: vector (double)
+%    :param inPos: Input positions for the FRF
+%    :type inPos: vector (double)
+%    :param outPos: Output positions for the FRF
+%    :type outPos: vector (double)
+%    :param type: Displ. ('d'), Veloc. ('v') or Accel. ('a')
+%    :type type: char
+%    :param rpm: Rotation speed
+%    :type rpm: double
+%    :param inputDirection: Desired input direction {'u_x','u_y','u_z','psi_x','psi_y','psi_z'}
+%    :type inputDirection: vector (char)
+%    :param outputDirection: Desired output direction {'u_x','u_y','u_z','psi_x','psi_y','psi_z'}
+%    :type outputDirection: vector (char)
+%    :return: Frequency range (f) and FRF-matrix (H)
+
 %   calculates frf of M,D,K-system using abravibe's function mck2frf
 %   searches the nearest points to the user input positions and gets the
 %   dof in the desired diections

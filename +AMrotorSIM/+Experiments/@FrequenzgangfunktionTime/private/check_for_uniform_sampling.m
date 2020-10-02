@@ -1,5 +1,12 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function check_for_uniform_sampling(obj,time)
-%CHECK_FOR_UNIFORM_SAMPLING check if the time data is uniformly sampled
+%Checks if the time data is uniformly sampled
+%
+%    :param time: Sampling time vector
+%    :type time: vector (double)
+%    :return: If necessary, error message
+
 % check_for_uniform_sampling(obj,time)
 
 deltaT = time(2:end)-time(1:end-1);

@@ -1,7 +1,11 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function dataset = compose_data_sensor_wise(self)
-% COMPOSE_DATA_SENSOR_WISE creates a container that includes the data of
-% the sensors, ordered sensor wise
-% AMrotorSIM.Dataoutput.TimeDataOutput/compose_data_sensor_wise 
+% Creates a container that includes the data of the sensors, ordered sensor wise
+%
+%    :return: dataset (Map-object)
+
+%AMrotorSIM.Dataoutput.TimeDataOutput/compose_data_sensor_wise 
 %   dataset = compose_data_sensor_wise(self)
 %   
 %   dataset is a Map-object with the structure:

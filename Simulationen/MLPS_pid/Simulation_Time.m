@@ -37,18 +37,19 @@ g.show(); % Plot of a 3D-isometry of the rotor with sensors, loads,...
 %% Running Time Simulation
 %% Running Time Simulation
 %% Stationary and runup with avaliable calculation methods and visualization
-St_Lsg = Experiments.Stationaere_Lsg(r,0,(0:0.001:1)); % In...
-    %stantiation of class Stationaere_Lsg
+% St_Lsg = Experiments.Stationaere_Lsg(r,0,(0:0.001:1)); % In...
+    %stantiation of class Stationaere_Lsg (Stationary solution)
     
-St_Lsg.compute_ode15s_ss; % ode15s - method
-%St_Lsg.compute_newmark; % newmark - method
+% St_Lsg.compute_ode15s_ss; % ode15s - method
+% St_Lsg.compute_newmark; % newmark - method
 
-% Runup = Experiments.Hochlaufanalyse( r , [0, 1e3] , (0:0.001:0.2) );
-% Runup.compute_ode15s_ss
+Runup = Experiments.Hochlaufanalyse(r,[0,1e3],(0:0.001:0.2)); % In...
+    %stantiation of class Hochlaufanalyse (Runup)
+Runup.compute_ode15s_ss % ode15s - method
 
 %% Processing and visualization of the results
 
-d = Dataoutput.TimeDataOutput(St_Lsg); % Instantiation of class ...
+d = Dataoutput.TimeDataOutput(Runup); % Instantiation of class ...
                                        % TimeDataOutput
 
 %% Processing and saving results
@@ -65,10 +66,10 @@ d.write_data_to_unv(datasetName);
 %% Visualizing results
 
 Lsg = St_Lsg; 
-% Lsg = Hochlauf;
+% Lsg = Runup;
 
 t = Graphs.TimeSignal(r, Lsg); % Instantiation of class TimeSignal
-f = Graphs.Fourierdarstellung(r, St_Lsg); % Instantiation of class ...
+f = Graphs.Fourierdarstellung(r, Lsg); % Instantiation of class ...
                                        % Fourierdarstellung
  for sensor = r.sensors
           t.plot(sensor); % Time signal

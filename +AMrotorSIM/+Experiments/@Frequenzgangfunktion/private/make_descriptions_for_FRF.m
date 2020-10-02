@@ -1,5 +1,18 @@
-function descriptionsH = make_descriptions_for_FRF(obj,inputNode,outputNode,inputDirection,outputDirection)
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
+function descriptionsH = make_descriptions_for_FRF(obj,inputNode,outputNode,inputDirection,outputDirection)
+% Assigns a description of the FRF's regarding the position and the orientation of the in- and outputs of the FRF's
+%
+%    :param inputNode: Input node ???????????
+%    :type inputNode: object(node) ???????
+%    :param outputNode: Output node ??????????
+%    :type outputNode: object(node) ????????
+%    :param inputDirection: Desired input direction {'u_x','u_y','u_z','psi_x','psi_y','psi_z'}
+%    :type inputDirection: double
+%    :param outputDirection: Desired output direction {'u_x','u_y','u_z','psi_x','psi_y','psi_z'}
+%    :type outputDirection: vector (char)
+%    :return: Added description parameter to the object
+            
 dof_name = {'X','Y','Z','PSIX','PSIY','PSIZ'};
 dof_loc = [1,2,3,4,5,6];
 ldof = containers.Map(dof_loc,dof_name);

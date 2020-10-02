@@ -1,4 +1,10 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function struct = convert_data_to_struct_sensor_wise(self,dataset)
+% Converts data container to struct
+%
+%    :return: Struct with sensor data
+
 % convert_data_to_struct_sensor_wise convert container.Map to struct sensor 
 %   wise for dataset, that was constructed
 %   by AMrotorSIM.Dataoutput.TimeDataOutput/compose_data_sensor_wise 

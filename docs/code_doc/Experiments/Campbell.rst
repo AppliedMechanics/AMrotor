@@ -6,6 +6,7 @@ Campbell
 .. autoclass:: Campbell
     :show-inheritance:
     :members:
+    :private-members:
 
 
 .. autofunction:: get_position_entries

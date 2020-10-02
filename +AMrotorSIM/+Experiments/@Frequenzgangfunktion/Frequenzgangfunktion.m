@@ -1,25 +1,36 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 classdef Frequenzgangfunktion < handle
-% FREQUENZGANGFUNKTION Class for calculation of frequency response functions
+% Class for calculation of frequency response functions
+
 %     This class calculates the frequency response function between
 %     specified points, for a specidifed frequency vector using the
+%   f... frequency array nFreq x 1
+%   H... matrix of frf's: nFreq x nResponses x nInputForce
+%   type... acceleration 'a', velocity 'v', displacement 'd'
 %     AbraVibe toolbox
 % See also AMrotorSIM.Graphs.Frequenzgangfunktion
     
     properties
         name
-        % See also AMrotorSIM.Rotorsystem
         rotorsystem (1,1) AMrotorSIM.Rotorsystem
-        f % frequency array: nFreq x 1
-        H % matrix of frfs: nFreq x nResponses x nInputForces
-        descriptionsH % description of entries in H for plot, cells
-        type % type of frf: acceleration 'a', velocity 'v', displacement 'd'
+        f 
+        H 
+        descriptionsH 
+        type 
         unit
-        inputPosition   % position of the inputs/InputForces
-        outputPosition  % position of the outputs
+        inputPosition
+        outputPosition
     end
     methods
-        % Konstruktor
         function self = Frequenzgangfunktion(rotorsystem,name)
+            % Constructor
+            %
+            %    :parameter rotorsystem: Object of type Rotorsystem
+            %    :type rotorsystem: object
+            %    :parameter name: Name for the FRF analysis
+            %    :type name: struct
+            %    :return: Frequenzgangfunktion object
             if nargin == 0
                 self.name = 'Empty FRF';
                 warning('rotorsystem is needed for calculation of frequency response function')

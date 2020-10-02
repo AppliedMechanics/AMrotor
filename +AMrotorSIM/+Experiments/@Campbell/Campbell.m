@@ -1,5 +1,8 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 classdef Campbell < handle
-%CAMPBELL Calculates the eigenvalues needed for a Campbell diagram
+% Class for campbell diagram
+
 % This class calculates the needed matrices for the calculation of the
 % campell diagramm and does also the sorting regarding forward/backward
 % whirl
@@ -18,7 +21,11 @@ classdef Campbell < handle
         % Konstruktor
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         function obj = Campbell(rotorsystem)
-        % obj = Campbell(rotorsystem)
+            % Constructor
+            %
+            %    :parameter rotorsystem: Object of class Rotorsystem
+            %    :type rotorsystem: struct
+            %    :return: Campbell object
             if nargin == 0
                 disp('Without a rotor-system a Campell analaysis is not possible')
             else
@@ -27,12 +34,21 @@ classdef Campbell < handle
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         function set_up(obj,omega,nModes)
+            % Defines necessary parameters for campbell analysis
+            %
+            %    :parameter omega: Range of the angular velocity [1/min])
+            %    :type omega: vector
+            %    :parameter nModes: Number of desired eigenmodes
+            %    :type nModes: double
+            %    :return: Added parameters in Campbell object
+            
             obj.omega = omega*pi/30;
             obj.set_number_of_modes(nModes);
             obj.set_number_of_revolutions();
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         function calculate(obj)
+            % Carries out the calculation
             for w = obj.omega
                 [mat.A,mat.B] = obj.get_state_space_matrices(w);
                 [V,D] = obj.perform_eigenanalysis(mat);
@@ -55,6 +71,10 @@ classdef Campbell < handle
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         function [num] = get_number_of_eigenvalues(obj)
+            % Collects the number of eigenvalues
+            %
+            %    :return: Adds numbers to num-struct
+            
             s = size(obj.EWf);
             num.forward = s(1);
             s = size(obj.EWb);
@@ -63,16 +83,28 @@ classdef Campbell < handle
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         function nModes = get_number_of_modes(obj)
+            % Collects the number of eigenmodes
+            %
+            %    :return: Number of modes
+            
             s = size(obj.EWf);
             nModes = s(2);
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         function EW = get_eigenvalues(obj)
+            % Extracts the eigenvalues
+            %
+            %    :return: Eigenvalues (EW) divided in forward and backward EV
+            
             EW.forward = obj.EWf;
             EW.backward = obj.EWb;
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         function omega = get_omega(obj)
+          % Extracts omega
+          %
+          %    :return: Angular velocity (omega)
+            
             omega = obj.omega;
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -82,10 +114,20 @@ classdef Campbell < handle
     methods (Access = private)
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         function set_number_of_revolutions(obj)
+            % (private) Sets angular velocity in num-struct
+            %
+            %    :return: Angular velocity in num-struct
+            
             obj.num.omega = length(obj.omega);
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         function set_number_of_modes(obj,nModes)
+            % (private) Makes the amount of modes even, if thats not the case
+            %
+            %    :parameter nModes: Number of desired eigenmodes
+            %    :type nModes: double
+            %    :return: Even amount of modes in num-struct
+            
             if mod(nModes,2)
                 obj.num.modes = nModes + 1;
                 disp('The number of modes is increased by one so it is an even number')

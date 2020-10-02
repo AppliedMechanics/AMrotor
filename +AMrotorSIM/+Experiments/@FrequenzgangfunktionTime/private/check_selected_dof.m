@@ -1,4 +1,14 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function check_selected_dof(obj,inputDirection,outputDirection)
+% Checks if only translational DoFs are used???????????
+%
+%    :param inputDirection: Input direction
+%    :type inputDirection: double
+%    :param outputDirection: Output direction
+%    :type outputDirection: double
+%    :return: If necessary, error message
+
 allowedInputDofs = [1,2,3];
 allowedOutputDofs = allowedInputDofs;
 flagDimInput = length(inputDirection)~=1;

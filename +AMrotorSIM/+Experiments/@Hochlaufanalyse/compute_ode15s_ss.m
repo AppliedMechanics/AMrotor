@@ -1,4 +1,10 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function compute_ode15s_ss(obj)
+% Carries out an integration of type ode15s
+%
+%    :return: integration results in results field of object
+
 rpm_span = obj.drehzahlen;
 t_span = [obj.time(1), obj.time(end)];
 

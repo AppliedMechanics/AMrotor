@@ -3,7 +3,7 @@
 function print(obj)
 % Displays the object name in the Command Window
 %
-%    :param obj: Objects of type Component
+%    :param obj: Object of type Component
 %    :type obj: object
 %    :return: Notification of object name
 

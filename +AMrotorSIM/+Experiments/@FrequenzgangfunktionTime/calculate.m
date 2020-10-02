@@ -1,5 +1,24 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function [f,H,C] = calculate(obj,sensorIn,sensorOut,rpm,inputDirection,outputDirection,numberOfBlocks,windowShape)
-% CALCULATE calculate the frequency response function from time data
+% Calculates the frequency response function from time data
+%
+%    :param sensorIn: Desired input sensor in rotorsystem object (e.g.: r.sensors(5))
+%    :type sensorIn: object(sensor)
+%    :param sensorOut: Desired input sensor in rotorsystem object (e.g.: r.sensors(5))
+%    :type sensorOut: object(sensor)
+%    :param rpm: Rotation speed
+%    :type rpm: double
+%    :param inputDirection: Desired input direction {'u_x','u_y','u_z','psi_x','psi_y','psi_z'}
+%    :type inputDirection: vector (char)
+%    :param outputDirection: Desired output direction {'u_x','u_y','u_z','psi_x','psi_y','psi_z'}
+%    :type outputDirection: vector (char)
+%    :param numberOfBlocks: Amount of blocks for the FFT
+%    :type numberOfBlocks: double
+%    :param windowShape: Window type
+%    :type windowShape: string
+%    :return: Frequency range (f) and FRF-matrix (H)
+
 % (Stationaere Lsg)
 %   calculates frf from a time data experiment using sensor-data
 %   settings for frf-calculation:

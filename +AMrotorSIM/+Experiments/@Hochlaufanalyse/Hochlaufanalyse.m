@@ -1,21 +1,35 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 classdef Hochlaufanalyse < handle
-% Hochlaufanalyse Class for time integration of run-up
+% Class for time integration of run-up
+
 %   Does time integration for the system with a linearly rising rotational
 %   speed
+%   drehzahlen... rpm steps
+%   time... time steps e.g. 0:tStep:tEnd
+%   result... results-struct: result.X, result.X_d, result.X_dd
 % See also AMrotorSIM.Graphs
    properties
-      name='Hochlaufanalyse'
-      % See also AMrotorSIM.Rotorsystem
+      name='Run-up'
       rotorsystem (1,1) AMrotorSIM.Rotorsystem 
-      drehzahlen    % rpm steps
-      time          % time steps e.g. 0:tStep:tEnd
-      result        % results-struct: result.X, result.X_d, result.X_dd
+      drehzahlen    
+      time          
+      result        
    end
    methods
-       function obj = Hochlaufanalyse(a,rpm_span,time)
-       % obj = Hochlaufanalyse(rotorsystem,rpm_span,time)
+       function obj = Hochlaufanalyse(rotorsystem,rpm_span,time)
+            % Constructor
+            %
+            %    :parameter rotorsystem: Object of type Rotorsystem
+            %    :type rotorsystem: object
+            %    :parameter rpm_span: Rotation speed steps
+            %    :type rpm_span: vector (double)
+            %    :parameter time: Time range
+            %    :type time: vector (double)
+            %    :return: Run-up object
+            
          if nargin == 0
-           disp('Keine Hoclaufanalyse möglich ohne Rotorsystem')
+           disp('No run-up possible without Rotorsystem')
          else
            obj.rotorsystem = a;
            obj.drehzahlen = rpm_span;

@@ -1,36 +1,44 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 classdef FrequenzgangfunktionTime < handle
-% FREQUENZGANGFUNKTIONTIME Class for calculation of frequency response
-% functions from time signals
+% Class for calculation of frequency response functions from time signals
+
 %     This class calculates the frequency response function between
 %     specified sensors using he abravibe toolbox
 %     Just für SISO: First step, maybe later expansion to MIMO
+%   f... frequency array nFreq x 1
+%   H... matrix of frf's: nFreq x nResponses x nInputForce
+%   type... acceleration 'a', velocity 'v', displacement 'd'
+%   descriptionsH... description of entries in H for plot, cells
 % See also AMrotorSIM.Graphs.Frequenzgangfunktion
 % AMrotorSIM.Experiments.Stationaere_Lsg
+
     properties
         name
-        % See also AMrotorSIM.Experiments
         experiment
-        f % frequency array: nFreq x 1
-        H % matrix of frfs: nFreq x nResponses x nInputForces
-        C % Coherence of frf
-%         Cx % Coherence between inputs, maybe later for MIMO
-        % Input sensor
-        % See also AMrotorSIM.Sensors
+        f 
+        H
+        C
         sensorIn
-        % Output sensor
-        % See also AMrotorSIM.Sensors
         sensorOut
-        descriptionsH % description of entries in H for plot, cells
-        type % type of frf: acceleration 'a', velocity 'v', displacement 'd'
+        descriptionsH 
+        type 
         unit
         inputDirection
         outputDirection
-%         inputPosition   % position of the inputs/InputForces
-%         outputPosition  % position of the outputs
+
     end
     methods
-        % Konstruktor
+       
         function self = FrequenzgangfunktionTime(experiment,name)
+            % Constructor
+            %
+            %    :parameter experiment: Object of type Experiment
+            %    :type experiment: object
+            %    :parameter name: Name for the FRF analysis
+            %    :type name: struct
+            %    :return: FrequenzgangfunktionTime object
+            
         % self = Frequenzgangfunktion(rotorsystem,name)
             if nargin == 0
                 self.name = 'Empty FRF';

@@ -1,6 +1,10 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function [f,frf,C,Cx] = get_frf(obj)
-% just read all the values, because all the calculated frfs will be
-% displayed
+% Extracts properties from Frequenzgangfunktion object
+%
+%    :return: Properties of type f, H, C and Cx
+
 f=obj.f;
 frf=obj.H;
 C=[];

@@ -1,5 +1,5 @@
-Frequenzgangfunktion
-====================
+Hochlaufanalyse
+===============
 
 .. automodule:: +AMrotorSIM.+Experiments.@Hochlaufanalyse
 

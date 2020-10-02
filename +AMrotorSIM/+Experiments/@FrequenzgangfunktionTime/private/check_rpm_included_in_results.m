@@ -1,5 +1,12 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function check_rpm_included_in_results(obj,rpm)
-% check if the desired rpm-step exists in the soultion
+% Checks if the desired rpm-step exists in the solution
+%
+%    :param rpm: Rotation speed
+%    :type rpm: double
+%    :return: If necessary, error message
+
 % check_rpm_included_in_results(obj,rpm)
 rpm_sol = obj.experiment.drehzahlen;
 flagDimension = length(rpm)~=1;

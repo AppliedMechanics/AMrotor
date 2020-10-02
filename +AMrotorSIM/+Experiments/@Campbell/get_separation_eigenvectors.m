@@ -1,4 +1,14 @@
-function [ EV_for,EW_for,EV_back,EW_back, EV_0, EW_0, Phase_xy, Phase_xy_mean ] = get_separation_eigenvectors(obj,EV_raw,EW_raw )
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
+function [ EV_for,EW_for,EV_back,EW_back,EV_0,EW_0, Phase_xy, Phase_xy_mean ] = get_separation_eigenvectors(obj,EV_raw,EW_raw)
+% Extracts eigenvalues (EW, eigenwert) and corresponding eigenvectors (EV) for forward, backward or no whirl from raw data
+%
+%    :param EV_raw: Eigenvector
+%    :type EV_raw: matrix
+%    :param EW_raw: Eigenvalue (eigenwert)
+%    :type EW_raw: complex double
+%    :return: EV's and EW's of forward, backward or no whirl (EV_for,EW_for,EV_back,EW_back,EV_0,EW_0) and phase information (Phase_xy, Phase_xy_mean)
+
 %Input: Matrix of EVs (format: [x1;b1;x2;b2;...y1;a1;..., next EV]) and corresponding EWs; imag(EW) has to be positive!
 %Process: calculates the phase between the entries of x and y and decides,
 %if backward or forward-whirl or no whirl at all; the mean of all phases is

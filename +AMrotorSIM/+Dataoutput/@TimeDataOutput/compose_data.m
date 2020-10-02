@@ -1,5 +1,10 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function dataset = compose_data(self)
-% COMPOSE_DATA creates a container that includes the data of the sensors
+% Creates a container that includes the data of the sensors
+%
+%    :return: dataset (Map-object)
+
 % AMrotorSIM.Dataoutput.TimeDataOutput/compose_data 
 %   dataset = compose_data(self)
 % 

@@ -1,5 +1,12 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function write_data_to_unv(self, postfix)
-% write_data_to_unv writes the sensor data to unv-files
+% Writes the sensor data to unv-files
+%
+%    :param postfix: Descriptive name
+%    :type postfix: string
+%    :return: Saved unv-file in results folder in simulation directory
+
 % AMrotorSIM.Dataoutput.TimeDataOutput/write_data_to_universal_file_format
 %   write_data_to_unv(self, postfix)
 % 
