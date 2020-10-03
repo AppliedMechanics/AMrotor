@@ -4,5 +4,6 @@ function clear_time_result(obj)
 % Clears result data in object
 %
 %    :return: Empty result field in object
+
     obj.result = [];
 end

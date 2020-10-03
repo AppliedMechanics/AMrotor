@@ -1,4 +1,24 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function [t,x,dotx,ddotx,localError,globalError] = newmark_integration_without_adaptive_step_size(obj,M,C,K,forceFunction,t,x0,dotx0)
+% Function for newmark without adaptive stepsize
+%
+%    :param M: Mass
+%    :type M: matrix
+%    :param C: Damping with out gyro
+%    :type C: matrix
+%    :param K: Stiffness
+%    :type K: matrix
+%    :param forceFunction: Force for RHS of equation
+%    :type forceFunction: function
+%    :param t: Time step
+%    :type t: double
+%    :param x0: Start state vector (Z = [x; dotx];)
+%    :type x0: vector
+%    :param dotx0: Start of derivative part of state vector Z = [x; dotx];
+%    :type dotx0: vector
+%    :return: Derivatives of state vector parts, the time vector and error values [t,x,dotx,ddotx,localError,globalError]
+
 % See for example lecture script: Rixen, Structural Dynamics
 % but here use LU-factorization instad of Cholesky, because here S is not
 % symmetric (because of G)

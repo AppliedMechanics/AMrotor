@@ -1,4 +1,19 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function dZ = integrate_function(t,Z,Omega, rotorsystem, mat)
+% Provides integration function
+%
+%    :param t: Time step
+%    :type t: double
+%    :param Z: State vector
+%    :type Z: vector
+%    :param Omega: necessary ????
+%    :type Omega: necessary ????
+%    :param rotorsystem: Object of type Rotorsystem
+%    :type rotorsystem: object
+%    :param mat: State space matrices A,B in form mat.A, mat.B
+%    :type mat: struct
+%    :return: Derivative of state vector dZ ????????
 
 A=mat.A;
 B=mat.B;

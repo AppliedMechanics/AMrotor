@@ -1,4 +1,26 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function [t,x,dotx,ddotx] = newmark_integration_with_adaptive_step_size(obj,M,C,K,forceFunction,tspan,x0,dotx0,options)
+% Function for newmark with adaptive stepsize
+%
+%    :param M: Mass
+%    :type M: matrix
+%    :param C: Damping with out gyro
+%    :type C: matrix
+%    :param K: Stiffness
+%    :type K: matrix
+%    :param forceFunction: Force for RHS of equation
+%    :type forceFunction: function
+%    :param t_span: Time step
+%    :type t_span: double
+%    :param x0: Start state vector (Z = [x; dotx];)
+%    :type x0: vector
+%    :param dotx0: Start of derivative part of state vector Z = [x; dotx];
+%    :type dotx0: vector
+%    :param options: Additional options like adaptivity, tolerances,... (check function compute_newmark)
+%    :type option: struct
+%    :return: Derivatives of state vector parts (x,dotx,ddotx) and the time vector (t)
+
 % See for example lecture script: Rixen, Structural Dynamics
 % See Schweitzerhof 2004 For adaptive time stepping:
 %   problem: factorization depends on time step size -> do not change time

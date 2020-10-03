@@ -3,7 +3,7 @@
 function dZ = integrate_function(t,Z,rpm_span,t_span, rotorsystem)
 % Provides integration function
 %
-%    :param t: time step
+%    :param t: Time step
 %    :type t: double
 %    :param Z: State vector
 %    :type Z: vector

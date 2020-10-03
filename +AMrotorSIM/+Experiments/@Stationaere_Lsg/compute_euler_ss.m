@@ -1,5 +1,10 @@
- function compute_euler_ss(obj)
- 
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
+function compute_euler_ss(obj)
+% Carries out an integration of type euler in state space
+%
+%    :return: Integration results in results field of object
+
     obj.rotorsystem.check_for_non_integrable_components;
 
     Timer = AMrotorTools.Timer();

@@ -11,7 +11,7 @@ function status = odeOutputFcnController(t,y,flag,varargin)
 %    :type flag: char
 %    :param varargin: only rotorsystem object as varargin{3} ???
 %    :type varargin: object
-%    :return: Printing and plotting the integration status
+%    :return: Printing and plotting of the integration status
 
 %rpm_span = varargin{1};
 %t_span = varargin{2};

@@ -1,5 +1,14 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function x0 = get_zero_crossing(self,x,y)
-%GET_ZERO_CROSSING get the smallest zero crossing of x,y
+% Extracts the smallest zero crossing of x,y (or omega,real(eigenvalues))
+%
+%    :parameter x: Variable used for omega ????????
+%    :type x: vector
+%    :parameter y: Variable used for eigenvalues ???????????
+%    :type y: vector
+%    :return: Smallest zero crossing x0
+
 % finds all zero crossings, but only returns the smallest value
 % 
 % Predominantly used for the damping ration over rpm to detremine the zero

@@ -1,23 +1,30 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 classdef Modalanalyse < handle
-% Modalanalyse Class for modal analysis
+% Class for modal analysis
+
 %   Calculates the eigenvalues and eigenmodes 
 % See also AMrotorSIM.Graphs.Eigenschwingformen
    properties
-      name='Modalanalyse'
-      % See also AMrotorSIM.Rotorsystem
+      name='Modal analysis'
       rotorsystem (1,1) AMrotorSIM.Rotorsystem
       n_ew
       eigenVectors
       eigenValues
    end
    methods
-       %Konstruktor
-       function obj = Modalanalyse(a)
-       % obj = Modalanalyse(rotorsystem)
+       function obj = Modalanalyse(rotorsystem)
+            % Constructor
+            %
+            %    :parameter rotorsystem: Object of class Rotorsystem
+            %    :type rotorsystem: object
+            %    :return: Modal analysis object
+            
+       % obj = Modalanalyse(a)
          if nargin == 0
-           disp('Keine Modalanalyse möglich ohne Rotorsystem')
+           disp('No Modal analysis possible without Rotorsystem')
          else
-           obj.rotorsystem = a;
+           obj.rotorsystem = rotorsystem;
          end
        end
        

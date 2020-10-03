@@ -1,11 +1,18 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 classdef Unbalance_static < AMrotorSIM.Loads.Load
-% Unbalance_static Class for force of unbalance on the rotor
+% Class for unbalance on the rotor
    properties
 
    end
    methods
-       %Konstruktor
         function obj=Unbalance_static(variable) 
+            % Constructor
+            %
+            %    :parameter variable: cnfg_load substruct of cnfg-struct
+            %    :type variable: struct
+            %    :return: Unbalance_static object
+            
            obj = obj@AMrotorSIM.Loads.Load(variable); 
         end 
         

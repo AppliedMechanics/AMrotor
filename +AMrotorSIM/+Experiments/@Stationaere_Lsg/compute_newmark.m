@@ -1,4 +1,12 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function compute_newmark(obj,options)
+% Carries out an integration of type newmark
+%
+%    :param options: Additional options like adaptivity, tolerances,... (check function)
+%    :type option: struct
+%    :return: Integration results in results field of object
+
 % compute_newmark Time integration by newmark scheme
 % using constant average acceleration (beta = 1/4, gamma = 1/2)
 % See for example lecture script: Rixen, Structural Dynamics

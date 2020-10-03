@@ -1,9 +1,18 @@
-function calculate_rotorsystem(obj,nModes,drehzahl)
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
+function calculate_rotorsystem(obj,nModes,rpm)
+% Performes the modal analysis
+%
+%    :param nModes: Number of desired modes
+%    :type nModes: double
+%    :param rpm: Rotation speed
+%    :type rpm: double
+%    :return: Resulting eigenvalues and eigenvectors in object
 
       disp('Berechne Modalanalyse Rotorsystem')
 
   obj.n_ew = nModes;
-  omega = drehzahl/60*2*pi;
+  omega = rpm/60*2*pi;
 
 %==========================================================================
 % aus Experiments.Campbell

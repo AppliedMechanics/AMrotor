@@ -1,5 +1,9 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function get_EW(obj)
-% get_EW print the zero crossing of the damping ratio as stability limit
+% Prints the zero crossing of the damping ratio as stability limit
+%
+%    :return: Display of the zero crossing in the Command Window
 
 omega = obj.experimentCampbell.get_omega();
 EW = obj.experimentCampbell.get_eigenvalues();

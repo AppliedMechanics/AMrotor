@@ -20,11 +20,11 @@ classdef Rotorsystem < handle
        function obj = Rotorsystem(c,name)
            % Constructor
 %
-%    :parameter c: cnfg-struct from separat Config-script
+%    :parameter c: Cnfg-struct from separat Config-script
 %    :type c: struct
-%    :param name: project name
+%    :param name: Project name
 %    :type name: string
-%    :return: rotorsystem object
+%    :return: Rotorsystem object
 
          if nargin == 0
            obj.name = 'Nice Rotorsystem name';

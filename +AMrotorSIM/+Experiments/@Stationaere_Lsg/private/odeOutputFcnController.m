@@ -1,4 +1,17 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function status = odeOutputFcnController(t,y,flag,varargin)
+% Provides output function of integration and displays progress in Command Window
+%
+%    :param t: Time steps of integration
+%    :type t: vector (double)
+%    :param y: Output function
+%    :type y: function
+%    :param flag: Imports status of integration (check MATLAB odeset)
+%    :type flag: char
+%    :param varargin: only rotorsystem object as varargin{2} ???
+%    :type varargin: object
+%    :return: Printing and plotting of the integration status
 
 %omega = varargin{1};
 rotorsystem = varargin{2};

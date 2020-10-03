@@ -1,5 +1,9 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function set_backward_plots_damping_ratio( obj )
-% plot the damping ratio over rpm for bwd whirl
+% Organizes and assembles the plots of the damping ratio over rpm (for Selection 'backward') 
+%
+%    :return:  Campbell diagram with bwd whirl relative to the damping ratio
 
 figure('Name','Campbell-Diagramm (Backward)','NumberTitle','off');
             axBackward = subplot(1,1,1);

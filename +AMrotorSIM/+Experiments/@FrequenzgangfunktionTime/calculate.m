@@ -17,7 +17,7 @@ function [f,H,C] = calculate(obj,sensorIn,sensorOut,rpm,inputDirection,outputDir
 %    :type numberOfBlocks: double
 %    :param windowShape: Window type
 %    :type windowShape: string
-%    :return: Frequency range (f) and FRF-matrix (H)
+%    :return: Frequency range (f), FRF-matrix (H) and Coherence-matrix (C)
 
 % (Stationaere Lsg)
 %   calculates frf from a time data experiment using sensor-data

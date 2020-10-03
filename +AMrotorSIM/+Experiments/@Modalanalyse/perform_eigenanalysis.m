@@ -1,4 +1,12 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function [V,D] = perform_eigenanalysis(obj,mat)
+% Performs the eigenanalysis
+%
+%    :param mat: Struct with ss-matrices in form mat.A and mat.B from function get_state_space_matrices
+%    :type mat: struct
+%    :return: Eigenvector (V) and eigenvalue (D) matrices
+
     opts.tol = 1e-16;
     criteria = true;
     num.eigenVectors = 4*(obj.n_ew);

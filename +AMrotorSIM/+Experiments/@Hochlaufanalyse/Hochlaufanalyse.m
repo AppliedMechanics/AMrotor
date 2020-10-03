@@ -31,7 +31,7 @@ classdef Hochlaufanalyse < handle
          if nargin == 0
            disp('No run-up possible without Rotorsystem')
          else
-           obj.rotorsystem = a;
+           obj.rotorsystem = rotorsystem;
            obj.drehzahlen = rpm_span;
            obj.time = time;
          end

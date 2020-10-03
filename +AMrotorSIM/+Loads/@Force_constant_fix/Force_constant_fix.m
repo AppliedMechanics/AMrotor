@@ -1,10 +1,18 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 classdef Force_constant_fix < AMrotorSIM.Loads.Load
-% Force_constant_fix Class of force with constant amplitude and direction
+% Class of force with constant amplitude and direction
    properties
    end
    methods
-       %Konstruktor
+       
         function obj=Force_constant_fix(variable) 
+            % Constructor
+            %
+            %    :parameter variable: cnfg_load substruct of cnfg-struct
+            %    :type variable: struct
+            %    :return: Force_constant_fix object
+            
            obj = obj@AMrotorSIM.Loads.Load(variable); 
         end 
         

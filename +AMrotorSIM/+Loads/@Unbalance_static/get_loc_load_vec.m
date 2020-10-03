@@ -1,4 +1,15 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function h = get_loc_load_vec(obj,time,node,varargin)
+% Assembles load vector for specific load type from Config-file (cnfg) in dof-order: ux,uy,uz,psix,psiy,psiz
+%
+%    :parameter time: Time step
+%    :type time: double
+%    :parameter node: State vector of node ???????????????ß
+%    :type node: vector
+%    :parameter varargin: not defined?????
+%    :type varargin: 
+%    :return: Load vector h
 
     %Constant fix force 
     obj.h = sparse(6,1);    
@@ -7,7 +18,7 @@ function h = get_loc_load_vec(obj,time,node,varargin)
     %%
     unwucht = obj.cnfg.betrag;
     phase = obj.cnfg.winkellage;
-    omega = node.qd(6);
+    omega = node.qd(6); % Velocity state vector psiz
 
     % due to centripetal force
     FCentripetalForce(1) = unwucht * omega^2 * cos(omega*time + phase);

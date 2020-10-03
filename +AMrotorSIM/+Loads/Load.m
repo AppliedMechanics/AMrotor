@@ -1,7 +1,7 @@
 % Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 classdef Load < matlab.mixin.Heterogeneous & handle
-% Load class for the forces on the rotor system
+% Superclass (abstract) for all loads (forces) on the rotor system
 
 %   loads are computed on the right-hand side of the system's equations:
 %   M*xdd+D*xd+K*x=Loads
@@ -15,7 +15,7 @@ classdef Load < matlab.mixin.Heterogeneous & handle
    end
    methods
        function self = Load(arg)
-           %Constructor
+           % Constructor
          if nargin == 0
            self.name = 'Empty Load';
          else

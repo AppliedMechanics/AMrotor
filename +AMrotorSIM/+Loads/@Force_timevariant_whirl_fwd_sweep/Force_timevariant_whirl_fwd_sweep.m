@@ -1,11 +1,17 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 classdef Force_timevariant_whirl_fwd_sweep < AMrotorSIM.Loads.Load
-% Force_timevariant_whirl_fwd_sweep Class of forward whirl with freq-sweep
-%   forward whirl with linearly increasing or decreasing frequency
+% Class of forward whirl with linearly increasing or decreasing frequency and constant amplitude and direction
    properties
    end
    methods
-       %Konstruktor
-        function obj=Force_timevariant_whirl_fwd_sweep(variable) 
+        function obj=Force_timevariant_whirl_fwd_sweep(variable)
+            % Constructor
+            %
+            %    :parameter variable: cnfg_load substruct of cnfg-struct
+            %    :type variable: struct
+            %    :return: Force_timevariant_whirl_fwd_sweep
+            
            obj = obj@AMrotorSIM.Loads.Load(variable); 
         end 
         

@@ -1,14 +1,16 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 classdef Campbell < handle
-% Campbell Class for the visualisation of a Campbell diagram
+% Class for the visualisation of a Campbell diagram
+
 %   Can plot the classic Campbell diagram, which shows the eigenfrequncies
 %   over the rotational speed.
 %   Can also plot the damping over rotational speed.
+% ColorHandler in AMrotorTools.PlotColors
 % See also AMrotorSIM.Experiments.Campbell
     properties %(Access = private)
-        Name = 'Campbell-Diagramm';
-        % See also AMrotorSIM.Experiments.Campbell
+        Name = 'Campbell diagram';
         experimentCampbell;
-        % See also AMrotorTools.PlotColors
         ColorHandler;
     end
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -17,6 +19,12 @@ classdef Campbell < handle
         % Konstruktor
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         function obj = Campbell(experimentCampbell)
+            % Constructor
+            %
+            %    :parameter experimentCampbell: Object of type Experiment.Campbell
+            %    :type experimentCampbell: object
+            %    :return: Campbell object for visualization
+            
             if nargin == 0
                 disp(['Without a Campell analaysis a Campbell-Diagram' ...
                       ' is not possible'])
@@ -26,7 +34,12 @@ classdef Campbell < handle
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         function set_plots(obj,Selection)
-        % main method to call by the user
+        % Set-up for the plot
+        %
+        %    :parameter Selection: Options: 'all','forward','backward'
+        %    :type Selection: char
+        %    :return: Disc object
+            
         %   set_plots(obj,Selection)
         %   Selection: 'all','forward','backward'
             obj.set_color_number();
@@ -52,6 +65,10 @@ classdef Campbell < handle
     methods (Access = private)
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         function set_color_number(obj)
+        % (private) Assigns colors to all eigenvalues ??????
+        %
+        %    :return: ??????????????
+        
             obj.ColorHandler = AMrotorTools.PlotColors();
             num = obj.experimentCampbell.get_number_of_eigenvalues();
             obj.ColorHandler.set_up(num.all);
