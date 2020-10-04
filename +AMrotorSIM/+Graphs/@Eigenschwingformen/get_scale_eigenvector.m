@@ -1,4 +1,12 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function scaleEigenvector = get_scale_eigenvector(obj,userInputCell)
+% Extracts the eventually included scale factor in the argument for the 3D visualization of the mode shapes
+%
+%    :param userInputCell: Cell that gets checked if 'scale' command and corresponding value is included 
+%    :type userInputCell: cell
+%    :return: Scale factor
+
 % moduloOfNodesToPlot = determine_modulo_of_nodes_to_plot(obj,userInputCell)
 % for example: 
 %   moduloOfNodesToPlot = 1 -> plot circle at every node

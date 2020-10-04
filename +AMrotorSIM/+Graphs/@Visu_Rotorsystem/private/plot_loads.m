@@ -1,4 +1,13 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function plot_loads(ax,loads)
+% Assigns the loads (unbalance and force) to the 3D visualization
+%
+%    :parameter ax: Axes properties control of the figure
+%    :type ax: matlab.graphics.axis.Axes object
+%    :parameter load: Object of type loads (obj.rotorsystem.loads)
+%    :type load: object
+%    :return: Assigned components to the 3d visualization
 
 for load=loads
     

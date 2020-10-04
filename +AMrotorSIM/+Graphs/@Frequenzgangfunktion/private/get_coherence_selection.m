@@ -1,4 +1,12 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function flagCoh = get_coherence_selection(obj,userInputCell)
+% Checks if coherence is in the argument of the main function
+%
+%    :param userInputCell: Cell that gets checked if coherence is desired ('coh')
+%    :type userInputCell: cell
+%    :return: Flag if coherence is desired or not
+
 str = {'coh','coherence'};
 flagCoh = false;
 

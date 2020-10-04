@@ -15,6 +15,5 @@ WaterfalldiagrammTwoSided
 
 .. autofunction:: DPS_FFT_C
 
-.. autofunction:: FFT_Data_Gesamt
 
 

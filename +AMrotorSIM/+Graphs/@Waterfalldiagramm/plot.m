@@ -1,4 +1,14 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function plot(self,sensors,direction)
+% Plots the one sided Waterfall diagram
+%
+%    :param sensors: Time signal of desired sensor (rotorsystem.sensors) 
+%    :type sensors: object
+%    :param direction: Sensor direction (1 for x and 2 for y, default x and y)
+%    :type direction: double
+%    :return: Figure of the one sided Waterfall diagram
+
 % plot(self,sensors,direction)
 disp(self.name)
 if ~exist('direction','var')

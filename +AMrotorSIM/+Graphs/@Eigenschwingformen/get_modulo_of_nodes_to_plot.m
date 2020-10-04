@@ -1,4 +1,12 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function moduloOfNodesToPlot = get_modulo_of_nodes_to_plot(obj,userInputCell)
+% Extracts the eventually included 'skip' command in the argument for the 3D visualization of the mode shapes
+%
+%    :param userInputCell: Cell that gets checked if 'Skip' command and corresponding value is included 
+%    :type userInputCell: cell
+%    :return: Skip value of which nodes should be plotted with circles for visualization of the mode shapes
+
 % moduloOfNodesToPlot = determine_modulo_of_nodes_to_plot(obj,userInputCell)
 % for example: 
 %   moduloOfNodesToPlot = 1 -> plot circle at every node

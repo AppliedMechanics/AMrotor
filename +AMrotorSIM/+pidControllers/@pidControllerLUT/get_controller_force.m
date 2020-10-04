@@ -1,4 +1,14 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function force = get_controller_force(obj,time,displacement)
+% Provides the controller force from LUT
+%
+%    :parameter time: Empty ???????
+%    :type time: ???
+%    :parameter displacement: Displacement
+%    :type displacement: vector???
+%    :return: Controller force
+
 % force = [I, x]*A*[I^2;x^2] + [I,x]*B*[I;x] + cT*[I;x] + d
 
 dof_name = {'u_x','u_y','u_z','psi_x','psi_y','psi_z'};

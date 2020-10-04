@@ -1,4 +1,14 @@
- function plot(self,sensors,Ordnung)
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
+function plot(self,sensors,Ordnung)
+% Plots of the Fourier orbits
+%
+%    :param sensors: Time signal of desired sensor (rotorsystem.sensors) 
+%    :type sensors: object
+%    :param Ordnung: Order of the Fourier fit from 1 to 8
+%    :type Ordnung: double
+%    :return: Figure of the Fourier orbit
+
  % main method for the user
 % plot(self,sensors,Ordnung)
 % Ordnung = order of FourierFit

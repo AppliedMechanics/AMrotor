@@ -1,4 +1,15 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function plot_pidController(ax,pidController,rotor)
+% Provides/drafts the pidConroller for the visualization of the rotor system
+%
+%    :parameter ax: Axes properties control of the figure
+%    :type ax: matlab.graphics.axis.Axes object
+%    :parameter pidController: Object of type pidController (obj.rotorsystem.pidControllers)
+%    :type pidController: object
+%    :parameter obj: Object of type rotor (obj.rotorsystem.rotor)
+%    :type obj: object
+%    :return: 3D model of the bearing for 3D-visualization
 
 for i=pidController
     

@@ -1,18 +1,24 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 classdef Frequenzgangfunktion < handle
-% Frequenzgangfunktion Class for visualisation of the frequency response
-% function
+% Class for visualization of the frequency response functions (FRF)
+
+% paramPlot... parameters for the visualisation
 % See also AMrotorSIM.Experiments.Frequenzgangfunktion
     properties
-        Name = 'Visualisierung Frequenzgangfunktion';
-        % See also AMrotorSIM.Experiments.Frequenzgangfunktion
+        Name = 'Visualization frequency response function';
         experimentFRF;
-        % See also AMrotorTools.PlotColors
         ColorHandler
-        paramPlot % parameters for the visualisation
+        paramPlot 
     end
     
     methods (Access = public)
         function self = Frequenzgangfunktion(experimentFRF)
+             % Constructor
+            %
+            %    :parameter experimentFRF: Object of type Experiments.Frequenzgangfunktion
+            %    :type experimentFRF: object
+            %    :return: Object for visualization of FRF's 
             if nargin == 0
                 disp(['Without a frequency response function analysis a '...
                     'visualisation of the frequency response function'...
@@ -23,6 +29,14 @@ classdef Frequenzgangfunktion < handle
         end
         
         function set_plots(obj,Selection,varargin)
+            % Additional setting on the FRF output
+            %
+            %    :param Selection: Additional parameters like 'nyquist', 'Bode', 'Amplitude', 'Phase', ... (check function)
+            %    :type Selection: char
+            %    :param varargin: Variable input argument (check function)
+            %    :type varargin: char
+            %    :return: Figures of the FRF's
+
         % main method for user
         % set_plots(obj,Selection,inputDirection,outputDirection,varargin)
         % 
@@ -79,6 +93,9 @@ classdef Frequenzgangfunktion < handle
     methods (Access = private)
         
         function set_color_number(obj)
+                    % (private) Assigns colors to all eigenvalues ??????
+                    %
+                    %    :return: ??????????????
             obj.ColorHandler = AMrotorTools.PlotColors();
             num = size(obj.experimentFRF.H,2)*size(obj.experimentFRF.H,3);
             obj.ColorHandler.set_up(num);

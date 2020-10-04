@@ -1,5 +1,12 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function [x,EVmain] = plot_displacements(obj,varargin)
-% plots the eigenshapes in 2D
+% Plots the eigenshapes in 2D
+%
+%    :param varargin: Additional argument for complex output ('complex')
+%    :type varargin: char
+%    :return: Figures of mode shapes and eigenvectors with corresponding postion alon z-axis
+
 % [x,EVmain] = plot_displacements(obj,varagin)
 %  examples:
 %  obj.plot_displacements;

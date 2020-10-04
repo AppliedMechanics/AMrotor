@@ -1,4 +1,14 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function plot_unbalance(ax,load)
+% Provides/drafts the unbalance for the visualization of the rotor system
+%
+%    :parameter ax: Axes properties control of the figure
+%    :type ax: matlab.graphics.axis.Axes object
+%    :parameter load: Object of type components (obj.rotorsystem.loads)
+%    :type load: object
+%    :return: 3D model of the unbalance for 3D-visualization
+
  % Visualization parameters setting -----------------------------
     color = AMrotorTools.TUMColors.TUMDiag1;
     

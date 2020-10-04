@@ -1,4 +1,15 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function set_plots(obj,Selection,varargin)
+% Carries out the 3D visualisation of the mode shapes and handles additional parameters
+%
+%    :param Selection: Additional parameters like 'All', 'Half', 'Overlay', ... (check function)
+%    :type Selection: char
+%    :param varargin: Variable input argument (check function)
+%    :type varargin: char
+%    :return: Figures with 3D visualisation of the mode shapes
+
+%    :param Selection: Parameters for plotting all mode shapes ('All') or only every second one ('Half')
 % 3D visualisation of the eigenshapes of the rotorsystem
 %   esf.set_plots('half') % 'all', 'half' or desired mode number
 %   esf.set_plots('half','overlay')

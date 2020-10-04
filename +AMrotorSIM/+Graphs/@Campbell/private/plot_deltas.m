@@ -3,7 +3,7 @@
 function plot_deltas( ax,x,y,color )
 % Plots the deltas in the diagram ??????????
 %
-%    :parameter ax: Subplot in Campbell figure
+%    :parameter ax: Axes properties control of the figure
 %    :type ax: matlab.graphics.axis.Axes object
 %    :parameter x: ??????????
 %    :type x: ??????????

@@ -1,12 +1,19 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 classdef Accelerationsensor < AMrotorSIM.Sensors.Sensor
-% Accelerationsensor Class of sensors for reading the acceleration values
-% after time integration
+% Class of sensor for reading the acceleration values after time integration
    properties
        unit = 'm/s^2'
        measurementType = 'Acceleration'  
    end
    methods
         function self=Accelerationsensor(config) 
+            % Constructor
+            %
+            %    :parameter config: Cnfg_component substruct of cnfg-struct
+            %    :type config: struct
+            %    :return: Accelerationsensor object
+            
            self = self@AMrotorSIM.Sensors.Sensor(config);
         end 
    end

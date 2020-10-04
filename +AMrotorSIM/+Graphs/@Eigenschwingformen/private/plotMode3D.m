@@ -1,4 +1,24 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function plotMode3D( axFigure, x, V_x, V_y, D , color, param)
+% Formats the figure for 3D visualization of the mode shapes
+%
+%    :param axFigure: Axes properties control of the figure
+%    :type axFigure: matlab.graphics.axis.Axes object
+%    :param x: Position of the eigenvector along z-axis
+%    :type x: double
+%    :param V_x: Eigenvector in x-direction
+%    :type V_x: vector
+%    :param V_y: Eigenvector in y-direction
+%    :type V_y: vector
+%    :param D: Eigenvalue
+%    :type D: double
+%    :param color: Color
+%    :type color: char
+%    :param param: Additional parameters for visualization (scale of EV, ...)
+%    :type param: struct
+%    :return: Notification of object name
+
 %PLOTMODE3D Summary of this function goes here
 %   Detailed explanation goes here
 

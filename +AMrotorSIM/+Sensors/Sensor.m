@@ -1,19 +1,22 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 classdef Sensor < matlab.mixin.Heterogeneous & handle
-% Sensor Superclass for sensors which read values after time integration
+% Superclass (abstract) for sensors 
+
+%which read values after time integration
 % See also AMrotorSIM.Sensors
    properties
       cnfg=struct([])  
       name
-      position % desired Position by the user from config
-      positionMesh % real position, nearest mesh node
-      % type of the Sensor
-      % must be name of any Sensor-subclass 
+      position 
+      positionMesh 
       type 
       
    end
    methods
-      %Konstruktor
        function self = Sensor(config)
+            % Constructor
+            
          if nargin == 0
            self.name = 'Sensor';
          else

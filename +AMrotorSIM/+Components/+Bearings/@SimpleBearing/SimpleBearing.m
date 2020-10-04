@@ -11,7 +11,7 @@ classdef SimpleBearing < AMrotorSIM.Components.Bearings.Bearing
         function self=SimpleBearing(arg)
             % Constructor
             %
-            %    :parameter arg: cnfg_component substruct of cnfg-struct
+            %    :parameter arg: Cnfg_component substruct of cnfg-struct
             %    :type arg: struct
             %    :return: SimpleBearing object
             

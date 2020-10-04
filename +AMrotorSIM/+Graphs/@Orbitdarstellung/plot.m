@@ -1,4 +1,12 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function plot(self,sensors)
+% Plot of the Orbits
+%
+%    :param sensors: Time signal of desired sensor (rotorsystem.sensors) 
+%    :type sensors: object
+%    :return: Figure of the Orbit
+
 % main method for the user
 % plot(self,sensors,direction)
   disp(self.name)

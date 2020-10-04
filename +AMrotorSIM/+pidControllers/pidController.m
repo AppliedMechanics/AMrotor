@@ -1,36 +1,45 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 classdef  pidController < matlab.mixin.Heterogeneous & handle%classdef (Abstract) pidController < handle
-    % pidController Class for pid controller for force
+    % Superclass (abstract) for pid controller for the AMB-force
+    
     %   Outputs a force to a certain node, that is closest to position, to
     %   maintain the desired displacement at that node
     %   First calculates the current controller current:
     %   I = Kp*e(t) + Ki*int(e(tau),t) + Kd*de(t)/dt
     %   In every integrator step it calclates the force from a model
     %   force = f(x,I)
+    
+    % Description of some properties
+    % direction % 'u_x','u_y','u_z','psi_x','psi_y','psi_z'
+    % electricalP % A/m
+    % electricalI % A/(m*s)
+    % electricalD % As/m
+    % cumError = 0 % cummulated error
+    % prevError = 0 % error in the previus step
+    % prevTime = 0 % time of the previous step
+    % current = 0 % A, current controller current
+    
     properties
         name
         position
-        direction % 'u_x','u_y','u_z','psi_x','psi_y','psi_z'
-        
-        % sub-type of the controller
-        % important for force calculation from current and displacement
-        % See also AMrotorsIM.pidControllers.pidControllerLinear
+        direction
         type
-        
         targetDisplacement
         
-        electricalP % A/m
-        electricalI % A/(m*s)
-        electricalD % As/m
+        electricalP 
+        electricalI 
+        electricalD 
         
-        cumError = 0 % cummulated error
-        prevError = 0 % error in the previus step
-        prevTime = 0 % time of the previous step
+        cumError = 0 
+        prevError = 0 
+        prevTime = 0 
         
-        current = 0 % A, current controller current
+        current = 0 
     end
     methods
-        %Konstruktor
         function obj=pidController(cnfg)
+            % Constructor
             if nargin == 0
                 obj.name = 'Empty PID-Controller';
             else
@@ -47,6 +56,16 @@ classdef  pidController < matlab.mixin.Heterogeneous & handle%classdef (Abstract
         end
         
         function current = get_controller_current(obj,tCurr,y)
+            % Provides the controller current in ampere
+            %
+            %    :parameter obj: Object of type pidController
+            %    :type obj: object
+            %    :parameter tcurr: Time step
+            %    :type tcurr: double ????
+            %    :parameter y: position vector at the corresponding controller node
+            %    :type y: vector
+            %    :return: Controller current
+            
             % get the contoller-current i with unit A (ampere)
             % gets called at the controller-frequency
             %   obj: pidController-object

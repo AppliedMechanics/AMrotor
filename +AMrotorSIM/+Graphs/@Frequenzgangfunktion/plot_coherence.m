@@ -1,4 +1,13 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function plot_coherence(obj,f,C)
+% Plots the coherence of the FRF
+%
+%    :param f: Frequency
+%    :type f: vector
+%    :param C: Coherence
+%    :type C: matrix
+%    :return: Figure with coherence
 
 figure
 k=0;

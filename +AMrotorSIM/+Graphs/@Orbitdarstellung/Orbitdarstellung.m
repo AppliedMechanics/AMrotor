@@ -1,18 +1,25 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 classdef Orbitdarstellung < handle
-% Orbitdarstellung Class for visualisation of the orbit as result of the
-% time integration
+% Class for visualization of the orbit as result of the time integration
    properties
     unit
     rotorsystem
-    name=' ---  Orbitdarstellung  --- '
-    % See also AMrotorSIM.Experiments.Stationaere_Lsg AMrotorSIM.Experiments.Hochlaufanalyse
+    name=' ---  Orbit  --- '
     experiment
-    % See also AMrotorTools.PlotColors
-    ColorHandler
+     ColorHandler
    end
   methods
-  function self=Orbitdarstellung(a, experiment) 
-      self.rotorsystem = a;
+  function self=Orbitdarstellung(rotorsystem, experiment) 
+       % Constructor
+       %
+       %    :parameter rotorsystem: Object of type Rotorsystem
+       %    :type rotorsystem: object
+       %    :parameter experiment: Object of type Experiments.Stationare_Lsg or Experiments.Hochlaufanalyse
+       %    :type experiment: object
+       %    :return: Object for Orbit representation of time results
+       
+      self.rotorsystem = rotorsystem;
       self.experiment = experiment;
       self.ColorHandler = AMrotorTools.PlotColors();
       self.ColorHandler.set_up(length(experiment.drehzahlen));

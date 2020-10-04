@@ -6,5 +6,6 @@ function show(obj)
 %    :param obj: Object of type Hochlaufanalyse
 %    :type obj: object
 %    :return: Notification of object name
+
     disp(obj.name);
 end

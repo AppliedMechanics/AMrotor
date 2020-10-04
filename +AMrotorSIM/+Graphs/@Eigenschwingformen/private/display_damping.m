@@ -1,4 +1,14 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function display_damping( strCoordinate, eigenvalue )
+% Displays the damping ratios (only approximately correct for small damping ratios) in the Command Window
+%
+%    :param strCoordinate: Description of the damping
+%    :type strCoordinate: char
+%    :param eigenvalue: EV's from the modal analysis
+%    :type eigenvalue: complex double
+%    :return: Notification of the modal damping (D= -real(lambda)/imag(lambda))
+
 % This is only approximately correct for small damping ratios
 % Here the damping ratio is calculated by D_here=delta/omega_d from eigenvalues
 % lambda=-delta+1i*omega_d. 

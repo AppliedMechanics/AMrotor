@@ -1,20 +1,25 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 classdef Eigenschwingformen < handle
-% Eigenschwingformen Class for visualisation of the eigenmodes
+% Class for visualization of the eigenmodes
+
 % See also AMrotorSIM.Experiments.Modalanalyse 
    properties %(Access = private)
-      name='Rotor Eigenschwingformen'
-      % See also AMrotorSIM.Experiments.Modalanalyse
+      name='Rotor vibration modes'
       modalsystem
-      % See also AMrotorTools.PlotColors
       ColorHandler;
    end
    methods
-       %Konstruktor
-       function obj = Eigenschwingformen(a)
+       function obj = Eigenschwingformen(modalanalysis)
+            % Constructor
+            %
+            %    :parameter modalanalysis: Object of type Experiments.Modalanalyse
+            %    :type modalanalysis: object
+            %    :return: Object for visualization of eigenmodes
          if nargin == 0
-           disp('Keine Visualierung möglich ohne Modalsystem')
+           disp('No visualization possible without modal system')
          else
-           obj.modalsystem = a;
+           obj.modalsystem = modalanalysis;
          end
        end
    end
@@ -22,6 +27,10 @@ classdef Eigenschwingformen < handle
    methods (Access = private)
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         function set_color_number(obj)
+        % (private) Assigns colors to all eigenvalues ??????
+        %
+        %    :return: ??????????????
+        
             obj.ColorHandler = AMrotorTools.PlotColors();
             num = obj.modalsystem.get_number_of_eigenvalues();
             obj.ColorHandler.set_up(num.all);

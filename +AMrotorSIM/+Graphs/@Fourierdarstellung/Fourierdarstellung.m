@@ -1,19 +1,28 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 classdef Fourierdarstellung < handle
-% Fourierdarstellung Class for visualisation of the results of the time
-% integration as fouier transform
-   properties
+% Class for visualization of the time integration results as fourier transform
+
+% abtastrate... sampling rate
+properties
     unit
     rotorsystem
-    name=' ---  Fourierdarstellung  --- '
+    name=' ---  Fourier  --- '
     abtastrate
-    % See also AMrotorSIM.Experiments.Stationaere_Lsg AMrotorSIM.Experiments.Hochlaufanalyse
     experiment
-    % See also AMrotorTools.PlotColors
     ColorHandler
    end
   methods
-  function self=Fourierdarstellung(a, experiment)  
-      self.rotorsystem = a;
+  function self=Fourierdarstellung(rotorsystem, experiment)  
+            % Constructor
+            %
+            %    :parameter rotorsystem: Object of type Rotorsystem
+            %    :type rotorsystem: object
+            %    :parameter experiment: Object of type Experiments.Stationare_Lsg or Experiments.Hochlaufanalyse
+            %    :type experiment: object
+            %    :return: Object for Fourier representation of time results
+           
+      self.rotorsystem = rotorsystem;
       self.abtastrate = 1/(experiment.time(2)-experiment.time(1));
       self.experiment = experiment;
       self.ColorHandler = AMrotorTools.PlotColors();

@@ -21,7 +21,7 @@ classdef Campbell < handle
         function obj = Campbell(experimentCampbell)
             % Constructor
             %
-            %    :parameter experimentCampbell: Object of type Experiment.Campbell
+            %    :parameter experimentCampbell: Object of type Experiments.Campbell
             %    :type experimentCampbell: object
             %    :return: Campbell object for visualization
             

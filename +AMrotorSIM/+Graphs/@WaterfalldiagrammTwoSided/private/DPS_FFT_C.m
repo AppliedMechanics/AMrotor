@@ -1,4 +1,15 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function [f,Y] = DPS_FFT_C (y,t)
+% Carries out the FFT and provides the two sided amplitude spectrum for the Waterfall diagram
+%
+%    :param y: Data
+%    :type y: vector
+%    :param t: Time vector
+%    :type t: vector
+%    :return: Frequency vector and complex amplitude f,Y
+
+
 %% BESCHREIBUNG %%
 
 %FFT-Transformation und Analyse eines Signals

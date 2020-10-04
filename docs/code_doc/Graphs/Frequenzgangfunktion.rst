@@ -6,6 +6,7 @@ Frequenzgangfunktion
 .. autoclass:: Frequenzgangfunktion
     :show-inheritance:
     :members:
+    :private-members:
 
 
 .. autofunction:: plot_amplitude

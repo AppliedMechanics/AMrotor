@@ -1,4 +1,15 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function plot_bode(obj,f,frf,paramPlot)
+% Plots the bode diagram of the FRF
+%
+%    :param f: Frequency
+%    :type f: vector
+%    :param frf: Frequency response function
+%    :type frf: vector
+%    :param paramPlot: Additional parameters for visualization (type of amplitude, …)
+%    :type paramPlot: struct
+%    :return: Figure with bode plot
 
 amplitudeMeasure = paramPlot.amplitudeMeasure;
 angleMeasure = paramPlot.angleMeasure;

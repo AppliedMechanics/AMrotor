@@ -1,4 +1,13 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function plot_disc(ax,disc)
+% Provides/drafts the component disc for the visualization of the rotor system
+%
+%    :parameter ax: Axes properties control of the figure
+%    :type ax: matlab.graphics.axis.Axes object
+%    :parameter disc: Object of type components (obj.rotorsystem.components)
+%    :type disc: object
+%    :return: 3D model of the disc for 3D-visualization
 
     zp=disc.cnfg.position;
     r=disc.cnfg.radius;

@@ -1,4 +1,15 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function [f,Y,AP] = FFT_Data_Gesamt (X,fs)
+% Carries out the FFT and provides the one sided amplitude spectrum
+%
+%    :param X: Data
+%    :type X: vector
+%    :param fs: Sampling rate
+%    :type fs: double
+%    :return: Frequency vector and amplitude (complex and absolut) f,Y,AP
+
+
 %Führt die DFT für den Datenvektor I aus und plottet das einseitige
 %Amplitudenspektrum
 

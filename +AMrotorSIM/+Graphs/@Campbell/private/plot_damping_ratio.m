@@ -3,7 +3,7 @@
 function plot_damping_ratio( ax,x,y,color )
 % Plots the damping ratios into the diagram
 %
-%    :parameter ax: Subplot in Campbell figure
+%    :parameter ax: Axes properties control of the figure
 %    :type ax: matlab.graphics.axis.Axes object
 %    :parameter x: Omega ???????
 %    :type x: vector ??????????

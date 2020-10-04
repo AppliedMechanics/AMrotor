@@ -3,7 +3,7 @@
 function set_plot_labels_deltas( ax, Name )
 % Assigns the labels to the plots (for Campbell with delta)
 %
-%    :parameter ax: Subplot in Campbell figure
+%    :parameter ax: Axes properties control of the figure
 %    :type ax: matlab.graphics.axis.Axes object
 %    :parameter Name: Name of the title of the subplot
 %    :type Name: char

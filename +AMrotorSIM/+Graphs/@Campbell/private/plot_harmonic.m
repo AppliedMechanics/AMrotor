@@ -3,7 +3,7 @@
 function plot_harmonic( ax,rpm )
 % Plots the first harmonic in the diagram
 %
-%    :parameter ax: Subplot in Campbell figure
+%    :parameter ax: Axes properties control of the figure
 %    :type ax: matlab.graphics.axis.Axes object
 %    :parameter rpm: Rotation speed
 %    :type rpm: vector

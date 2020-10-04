@@ -1,4 +1,8 @@
-function [ outputMatrix ] = LookUpTable( self, rpmTable, inputCell, rpmCurrent )     
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
+function [ outputMatrix ] = LookUpTable( self, rpmTable, inputCell, rpmCurrent ) 
+%Necessary for controller ??????????????
+
 % structure of inputs and outputs
 %
 % rpmTable = 1 x Nrpm array

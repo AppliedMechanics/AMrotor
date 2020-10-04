@@ -1,4 +1,15 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function plot_phase(obj,f,frf,paramPlot)
+% Plots the phase of the FRF
+%
+%    :param f: Frequency
+%    :type f: vector
+%    :param frf: Frequency response function
+%    :type frf: vector
+%    :param paramPlot: Additional parameters for visualization (type of amplitude, …)
+%    :type paramPlot: struct
+%    :return: Figure with phase of the FRF
 
 angleMeasure = paramPlot.angleMeasure;
 type = obj.experimentFRF.type;

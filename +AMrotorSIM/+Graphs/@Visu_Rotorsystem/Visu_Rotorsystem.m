@@ -1,16 +1,24 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 classdef Visu_Rotorsystem < handle
-% Visu_Rotorsystem Class for visualisation of the rotor system
+% Class for visualization of the rotor system
+
    properties
-      name='Rotor Gesamtsystem'
-      % See also AMrotorSIM.Rotorsystem
+      name='Rotor system'
       rotorsystem
    end
    methods
-       function obj = Visu_Rotorsystem(a)
+       function obj = Visu_Rotorsystem(rotorsystem)
+       % Constructor
+       %
+       %    :parameter rotorsystem: Object of type Rotorsystem
+       %    :type rotorsystem: object
+       %    :return: Object of type Visu_Rotorsystem
+       
          if nargin == 0
-           disp('Kein Geometrieanzeige möglich ohne Rotorsystem')
+           disp('No geometry available without Rotorsystem')
          else
-           obj.rotorsystem = a;
+           obj.rotorsystem = rotorsystem;
          end
        end
    end

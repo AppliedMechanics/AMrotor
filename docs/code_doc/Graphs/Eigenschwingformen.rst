@@ -6,7 +6,7 @@ Eigenschwingformen
 .. autoclass:: Eigenschwingformen
     :show-inheritance:
     :members:
-
+    :private-members:
 
 .. autofunction:: get_modulo_of_nodes_to_plot
 

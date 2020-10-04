@@ -55,10 +55,11 @@ m.calculate_rotorsystem(16,rpmModalAnalysis);
 % 
 esf= Graphs.Eigenschwingformen(m);
 esf.print_frequencies();
-esf.plot_displacements();
+esf.plot_displacements(); % Plots the 2D mode shapes
 % esf.set_plots('half','Overlay') % Plots of the odd-numbered eigenmodes .. 
                                 % in overlay with the original rotor
-esf.set_plots(10,'Overlay','Skip',5,'tangentialPoints',30,'scale',3)
+esf.set_plots(10,'Overlay','Skip',5,'tangentialPoints',30,'scale',3) % ...
+            % Plot of the 3D mode shapes
 Janitor.cleanFigures();
 
 %% Campbell analysis

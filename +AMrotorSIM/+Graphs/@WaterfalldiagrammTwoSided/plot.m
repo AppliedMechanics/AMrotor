@@ -1,4 +1,12 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function plot(self,sensors)
+% Plots the two sided Waterfall diagram
+%
+%    :param sensors: Time signal of desired sensor (rotorsystem.sensors) 
+%    :type sensors: object
+%    :return: Figure of the two sided Waterfall diagram
+
 disp(self.name)
 j = 1;
 
