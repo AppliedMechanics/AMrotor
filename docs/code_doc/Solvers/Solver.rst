@@ -2,6 +2,8 @@
 Solver
 ======
 
+Is this folder currently in use?????? Doc not made so far
+
 .. toctree::
 	:maxdepth: 2
 

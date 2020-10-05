@@ -1,4 +1,10 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function [K_F1, K_F2]=compute_bending_stiffness_matrix(Element)
+% Builds bending stiffness submatrices
+%
+%    :return: Bending stiffness submatrices K_F1, K_F2
+
        E = Element;
        r_bar = E.radius_inner/E.radius_outer;
        k_sc = (6*(1+E.material.poisson)*(1+r_bar)^2)/((7+6*E.material.poisson)*(1+r_bar)^2+(20+12*E.material.poisson)*r_bar^2); %Tiwari p.608

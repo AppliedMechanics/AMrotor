@@ -1,4 +1,9 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function f=check_rigidbody(self)
+% Checks for the translational rigid bodies
+%
+%    :return:???????????ß
 
  u=zeros(6*length(self.mesh.nodes),1);
 

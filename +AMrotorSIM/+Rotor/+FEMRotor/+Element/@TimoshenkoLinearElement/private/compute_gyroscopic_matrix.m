@@ -1,4 +1,10 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function [G_ele] = compute_gyroscopic_matrix(Element)
+% Builds the gyroscopic submatrix 
+%
+%    :return: Gyroscopic submatrix G
+
 % Abhaengigkeit von Drehzahl in transform_StateSpace_variant verwirklicht
     E = Element;
     r_bar = E.radius_inner/E.radius_outer;

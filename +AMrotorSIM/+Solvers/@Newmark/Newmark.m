@@ -1,5 +1,7 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 classdef Newmark < AMrotorSIM.Solvers.Solver
-    % NEWMARK führt eine Zeitintegration mit dem Newmark-Scheme durch
+% Class for the time integration based on the newmark method
     
     properties
         M;
@@ -19,17 +21,23 @@ classdef Newmark < AMrotorSIM.Solvers.Solver
         qd;
         qdd;
     end
-    
+    % Pre-computed constants.
     properties (Access = private)
-        % Pre-computed constants.
+        
         ndofin=0;
         L;
         U;
     end
     
     methods
-        % Constructor
+
         function obj = Newmark(varargin)
+            % Constructor
+            %
+            %    :parameter varargin:  Variable input argument (check corresponding functions)
+            %    :type varagin: ????????????????
+            %    :return: Newmark object
+            
             % Support name-value pair arguments when constructing the
             % object.
             %setProperties(obj,nargin,varargin{:});
@@ -44,8 +52,12 @@ classdef Newmark < AMrotorSIM.Solvers.Solver
     methods
         %% Common functions
         function setupImpl(obj)
-            % Implement tasks that need to be performed only once,
-            % such as pre-computed constants.
+            % Checks if time data is a vector and carries out a LU decomposition
+            %
+            %    :return: Error message (if necessary) and LU decomposition
+            
+            % Implement tasks that need to be performed only once, such as pre-computed constants.
+                       
         if isvector(obj.t)
             nsteps=length(obj.t);
         else
@@ -62,8 +74,7 @@ classdef Newmark < AMrotorSIM.Solvers.Solver
         end
         
         function [q, qd, qdd] = stepImpl(obj,u)
-            % Implement algorithm. Calculate y as a function of
-            % input u and discrete states.
+            % Implement algorithm. Calculate y as a function of input u and discrete states.
             % Prädiktion
             qd_p=obj.qd+((1-obj.gamma)*obj.T_A).*obj.qdd;
             q_p=obj.q+obj.T_A.*obj.qd+((0.5-obj.beta)*obj.T_A^2).*obj.qdd;

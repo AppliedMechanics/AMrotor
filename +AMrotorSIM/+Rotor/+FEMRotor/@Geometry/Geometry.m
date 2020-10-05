@@ -1,18 +1,22 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 classdef Geometry < handle
-% Geometry Class that includes the geometric nodes
+% Class that includes the geometric nodes
     properties
         name
-        
-        % See also AMrotorSIM.Rotor.FEMRotor.GeoNode
-        % 
-        % Objects containing the nodes, type: AMrotorSIM.Rotor.FEMRotor.GeoNode
         nodes (1,:) AMrotorSIM.Rotor.FEMRotor.GeoNode
     end
     
     methods
         function obj = Geometry(cnfg)
+            % Constructor
+            %
+            %    :parameter arg: Cnfg_rotor substruct of cnfg-struct
+            %    :type arg: struct
+            %    :return: Geometry object
+            
          if nargin == 0
-           obj.name = 'Geometrie eines Rotorsystems';
+           obj.name = 'Geometrie of rotor system';
          else
            obj.name = cnfg.name;
 

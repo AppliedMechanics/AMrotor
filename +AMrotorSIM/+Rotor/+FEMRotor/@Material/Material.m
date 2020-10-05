@@ -1,17 +1,34 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 classdef Material < handle
-% Material Class of material properties
+% Class of material properties
+
+% Description of noteworty properties:
+%         e_module        % Young's modulus
+%         G_module        % shear modulus
+%         density         % [kg/m^3]
+%         poisson         % shear_factor
+%         rayleigh_alpha1 % D = alpha_1*K + alpha_2*M
+%         rayleigh_alpha2 % D = alpha_1*K + alpha_2*M
+
     properties 
         name
-        e_module        % Young's modulus
-        G_module        % shear modulus
-        density         % [kg/m^3]
-        poisson         % shear_factor
-        rayleigh_alpha1 % D = alpha_1*K + alpha_2*M
-        rayleigh_alpha2 % D = alpha_1*K + alpha_2*M
+        e_module        
+        G_module        
+        density         
+        poisson         
+        rayleigh_alpha1 
+        rayleigh_alpha2 
     end
     
     methods
-        function self = Material(cnfg)
+        function self = Material(cnfg)        
+            % Constructor
+            %
+            %    :parameter arg: Cnfg_rotor substruct of cnfg-struct
+            %    :type arg: struct
+            %    :return: Material object
+            
             if nargin==0
                 self.name = 'No Material configuration';
             else

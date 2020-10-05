@@ -1,4 +1,9 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function [ax]=show_3D(self,ax,color)
+% Error ??????????????????
+
+
    ele = self.elements;
    nEle = length(self.elements);
 

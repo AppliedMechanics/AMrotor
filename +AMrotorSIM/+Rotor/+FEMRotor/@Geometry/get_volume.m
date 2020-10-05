@@ -1,4 +1,9 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function volume=get_volume(obj)
+% Calculates the volume from the cylinfrical rotor elements
+%
+%    :return: Volume of the rotor
 
     dimR=size(obj.nodes);
     n_nodes = length(obj.nodes);

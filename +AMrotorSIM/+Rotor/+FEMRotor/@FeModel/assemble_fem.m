@@ -1,4 +1,9 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function assemble_fem(self)
+% Assembles the global system matrices
+%
+%    :return: Global matrices of the rotor system M, D, G, K
 
 n_nodes=length(self.mesh.nodes);
 

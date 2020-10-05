@@ -1,31 +1,37 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 classdef FeModel < handle
-% FeModel Class which included the finite element model
-%
+% Class that includes the finite element model
+
+%   cnfg... Config-struct
 % See also AMrotorSIM.Rotor AMrotorSIM.Rotor.FEMRotor.Element
     properties
         name
-        cnfg % Config-struct
-        % See also AMrotorSIM.Rotor.FEMRotor.Geometry
+        cnfg
         geometry (1,1) AMrotorSIM.Rotor.FEMRotor.Geometry
-        % See also AMrotorSIM.Rotor.FEMRotor.Material
         material (1,1) AMrotorSIM.Rotor.FEMRotor.Material
-        % See also AMrotorSIM.Rotor.FEMRotor.Mesh
         mesh (1,1) AMrotorSIM.Rotor.FEMRotor.Mesh
         
-        mass_matrix         % mass
-        damping_matrix      % damping
-        gyroscopic_matrix   % gyroscopic, must be weighted with the rotational speed Omega, M*xdd+(C+Omega*G)*xd+K*x=f
-        stiffness_matrix    % stiffness
+        mass_matrix         
+        damping_matrix      
+        gyroscopic_matrix   
+        stiffness_matrix   
     end
     
     methods
-        function self = FeModel(a)
+        function self = FeModel(cnfg) 
+            % Constructor
+            %
+            %    :parameter cnfg: Cnfg_component substruct of cnfg-struct
+            %    :type cnfg: struct
+            %    :return: FeModel object
+            
             if nargin == 0
                 self.name = 'Non existent FE-Model';
                 disp('FeModel has no properties');
                 return
             else
-            self.cnfg = a;
+            self.cnfg = cnfg;
             self.name = self.cnfg.name;
             end
             

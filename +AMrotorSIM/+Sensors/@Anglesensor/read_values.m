@@ -1,4 +1,11 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function [psix_val,psiy_val,psiz_val] = read_values(self,experiment)
+% Extracts the angle values at the desired sensor position
+%
+%    :param experiment: Analysis type (Stationaere_Lsg, Hochlaufanalyse, ...) ????
+%    :type experiment: object
+%    :return: Values of the specific sensor
 
     res = experiment.result;
     rotor = experiment.rotorsystem.rotor;

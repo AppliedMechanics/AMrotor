@@ -1,4 +1,10 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function [M_F1, M_F2] = compute_flexural_mass_matrix(Element)
+% Builds bending mass submatrices
+%
+%    :return: Bending mass submatrices M_F1, M_F2
+
     E = Element;
     
     r_bar = E.radius_inner/E.radius_outer;

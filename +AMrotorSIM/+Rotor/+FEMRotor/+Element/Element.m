@@ -1,5 +1,10 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 classdef Element < handle
-% Element Superclass for different element formulations for the fea
+% Superclass (abstract) for different element formulations for FEA
+
+% Description of noteworthy properties:
+%           I_p % geometrical moment of inertia (polar)
 % See also AMrotorSIM.Rotor.FEMRotor.Element.TimoshenkoLinearElement
     properties
         name
@@ -13,7 +18,7 @@ classdef Element < handle
         radius_outer
         radius_inner
         mass
-        I_p % geometrical moment of inertia (polar)
+        I_p 
         I_y
         mass_matrix
         stiffness_matrix
@@ -23,6 +28,8 @@ classdef Element < handle
     methods
         
         function self = Element(name,node1,node2, material)
+            % Constructor
+            
            if nargin == 0
                self.name = 'Empty Element';
            else 
@@ -35,6 +42,11 @@ classdef Element < handle
         end
         
         function num = set_dof_number(obj,direction)
+            % Assigns numbers to formulated (char) directions
+            %
+            %    :parameter direction: Directions ('u_x','u_y','u_z','psi_x','psi_y','psi_z')
+            %    :type direction: char
+            %    :return: Corresponding number (num('u_y')=2, or num('psi_x')=4)
             
             dof_name = {'u_x','u_y','u_z','psi_x','psi_y','psi_z'};
             dof_loc = [1,2,3,4,5,6];

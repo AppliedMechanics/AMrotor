@@ -1,5 +1,14 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function [delta,nodePos]=get_distance_node_desired_position(rotor,desiredPos)
-%GET_DISTANCE_NODE_DESIRED_POSITION - get the distance of the closest node to the desired node
+% Gets the distance of the closest actual node to the desired node
+%
+%    :parameter rotor: Object of type rotorsystem ????
+%    :type rotor: object
+%    :parameter desiredPos: Desired position along z-axis
+%    :type desiredPos: double
+%    :return: Actual position (closest node) and delta distance between desired and actual position
+
 % [delta,nodePos]=get_distance_node_desired_position(rotor,desiredPos)
 % Get the distance between a desired position on the rotor and the nearest
 % node of the finite element discretisation.

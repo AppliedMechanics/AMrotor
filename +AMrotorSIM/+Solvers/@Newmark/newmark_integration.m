@@ -1,6 +1,8 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function [q,qd,qdd] = newmark_integration(obj, beta , gamma, M, D, K,f,t,q_0,qd_0,qdd_0,constant)
 % NEWMARK_INTEGRATION   führt eine Newmark Zeitintegration durch
-%
+
 % Syntax:
 %   [q,qd,qdd] = newmark_integration(beta,gamma,M,D,K,f,t,q_0,qd_0,qdd_0,constant)
 %

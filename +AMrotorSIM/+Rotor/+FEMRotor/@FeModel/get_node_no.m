@@ -1,5 +1,14 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function nodeNo = get_node_no(rotor,position)
-%GET_NODE_NO - Get the node number that is closest to the desired position.
+% Gets the node number that is closest to the desired position
+%
+%    :parameter rotor: Object of type rotorsystem ????
+%    :type rotor: object
+%    :parameter position: Desired position along z-axis
+%    :type position: vector ????
+%    :return: Number of closest node to desired position
+
 % nodeNo = get_node_no(rotor,position)
 nodeNo = zeros(size(position));
 for k = 1:length(position)

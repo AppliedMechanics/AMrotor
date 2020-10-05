@@ -1,11 +1,15 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 classdef Solver < matlab.mixin.Heterogeneous & handle
+    % Superclass (abstract) for solvers
    properties
       cnfg=struct([])  
       name
    end
    methods
-      %Konstruktor
+
        function obj = Solver(arg)
+           % Constructor
          if nargin == 0
          else
            obj.cnfg = arg;
@@ -14,6 +18,9 @@ classdef Solver < matlab.mixin.Heterogeneous & handle
       end
       
       function print(obj)
+          % Displays the object name in the Command Window
+          %
+          %    :return: Notification of object name
          disp(obj.name);
       end
    end

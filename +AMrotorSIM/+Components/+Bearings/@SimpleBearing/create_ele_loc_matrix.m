@@ -5,7 +5,7 @@ function create_ele_loc_matrix(self)
 %
 %    :return: Localisation matrix
 
-        %Vector version of the  localisation matrix:
+        %Vector version of the localisation matrix:
         Lv0_ele = [1,2,3,4,5,6];
         
         %Matrix version:

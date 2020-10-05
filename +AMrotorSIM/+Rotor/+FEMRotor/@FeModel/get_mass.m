@@ -1,4 +1,9 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function [m, J]=get_mass(self)
+% Provides the translational ('u_x') and the rotational ('psi_z') mass???????
+%
+%    :return: Translational (m) and rotational (J) mass
 
 u=zeros(6*length(self.mesh.nodes),1);
 

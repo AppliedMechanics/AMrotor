@@ -1,25 +1,37 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 classdef Mesh < handle
-% Mesh  Class of the mesh, which includes the nodes and elements
+% Class of the mesh, which includes the nodes and elements
+
+% Description of noteworthy properties:
+%         d_min               % minimum allowed element length
+%         d_max               % maximum allowed element length
+%         n_refinement        % no of refinement steps, when looking for the optimal element length
+%         
+%         % Methods for linear approximation of the element properties
+%         % allowed: upper sum, lower sum, mean, symmetric
+%         approximation  
     properties
         name
-        d_min               % minimum allowed element length
-        d_max               % maximum allowed element length
-        n_refinement        % no of refinement steps, when looking for the optimal element length
-        
-        % Methods for linear approximation of the element properties
-        % allowed: upper sum, lower sum, mean, symmetric
+        d_min               
+        d_max              
+        n_refinement        
+
         approximation      
-        
-        % See also AMrotorSIM.Rotor.FEMRotor.MeshNode
         nodes (1,:) AMrotorSIM.Rotor.FEMRotor.MeshNode
-        
-        % See also AMrotorSIM.Rotor.FEMRotor.Element.TimoshenkoLinearElement
         elements (1,:) AMrotorSIM.Rotor.FEMRotor.Element.TimoshenkoLinearElement
     end
     
     methods
         
         function self = Mesh(optn)
+            
+            % Constructor
+            %
+            %    :parameter optn: Cnfg-rotor substruct of cnfg-struct (cnfg.cnfg_rotor.mesh_opt)
+            %    :type optn: struct
+            %    :return: Mesh object
+            
             if nargin == 0
                 self.name = 'Empty Mesh';
                 disp('No Options for Meshing...!');

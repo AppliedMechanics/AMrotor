@@ -1,15 +1,21 @@
-## Notwendige Software
+## AMrotor
 
-- getestet mit *Matlab R2020a*, sollte aber auch mit anderen *Matlab*-Versionen kompatibel sein
-- notwendige *Matlab*-Toolboxen
-  - Symbolic Math Toolbox
-  - Curve Fitting Toolbox (nur für Fourierorbitdarstellung der Sensorsignale bei Zeitintegration)
+AMrotor is an object-oriented matlab-based toolbox for rotor dynamics. The toolbox provides the main component
+"rotor", which can be modelled with Timoshenko beam elements. In addition to this, different components, from simple static elements such as
+"disc" (additional massand moment of inertia) or "bearing" (spring-damper elements) to active components such as "active magnetic bearings (AMB)" 
+with "controllers", are available. After building the model, various common analysis methods (FFT, FRF, Orbits, ...) are available.
 
-## Dokumentation des Codes
+Thus AMrotor is an easy to use, flexible and mighty toolbox for quick tests as well as sophisticated rotor modells. 
 
-Startpunkt ist Eingabe des Befehls `doc AMrotor` bzw. `doc AMrotorSIM.Rotorsystem`. Von dort aus kann die Struktur des Codes und wichtige Klassen durch Nutzung der Links nachvollzogen werden.
+## Documentation of the code
 
-## Ordnerstruktur
+The documentation, necessary software and some useful examples can be found on ReadTheDocs: ............. .
+
+## License
+
+AMrotor is licensed under GPL-3.0-or-later.
+
+<!--## Ordnerstruktur
 
 - *+AMrotorMONI* enthält Funktionen für das Monitoring von Rotorsystemen, diese Teile werden aktuell nicht im Simulationsprogramm genutzt
 - *+AMrotorSIM* enthält den eigentlichen Simualtionscode. Das Rotorsimualtionsprogramm ist Objekt-orientiert aufgebaut. 
@@ -23,3 +29,10 @@ Startpunkt ist Eingabe des Befehls `doc AMrotor` bzw. `doc AMrotorSIM.Rotorsyste
 
 ## interessante Links
 - zur Dokumentation https://de.mathworks.com/matlabcentral/answers/100534-is-it-possible-to-include-package-and-class-directories-in-contents-report-created-programmatically
+
+## Notwendige Software
+
+- getestet mit *Matlab R2020a*, sollte aber auch mit anderen *Matlab*-Versionen kompatibel sein
+- notwendige *Matlab*-Toolboxen
+  - Symbolic Math Toolbox
+  - Curve Fitting Toolbox (nur für Fourierorbitdarstellung der Sensorsignale bei Zeitintegration)-->

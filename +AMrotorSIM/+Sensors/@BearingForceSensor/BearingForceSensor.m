@@ -1,6 +1,8 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 classdef BearingForceSensor < AMrotorSIM.Sensors.Sensor
-% BearingForceSensor Class of sensors for the forces of objects of the
-% Bearing-class
+% Class of sensor for reading the forces acting on the rotor from Bearing-class objects
+
 %   reads the force acting ON the rotor:
 %   F = - (k*x +d*x_dot)
 % See also AMrotorSIM.Components.Bearings
@@ -10,6 +12,12 @@ classdef BearingForceSensor < AMrotorSIM.Sensors.Sensor
    end
    methods
         function self=BearingForceSensor(config) 
+            % Constructor
+            %
+            %    :parameter config: Cnfg_component substruct of cnfg-struct
+            %    :type config: struct
+            %    :return: BearingForceSensor object
+            
            self = self@AMrotorSIM.Sensors.Sensor(config); 
         end 
    end

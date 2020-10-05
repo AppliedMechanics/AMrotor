@@ -1,5 +1,12 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function show_2D(self,varargin)
-%compare discretisation with user input geometry
+% Plots the geometry over the nodes to compare discretisation with user input geometry
+%
+%    :parameter varargin: Variable input argument (check function)
+%    :type varargin: 
+%    :return: Figure with geometry and nodes
+
 if nargin == 1
     fig = figure;
 elseif nargin ==2

@@ -1,9 +1,9 @@
 MeshNode
 ========
 
-.. automodule:: +AMrotorSIM.+Rotor.+FEMRotor.@Material
+.. automodule:: +AMrotorSIM.+Rotor.+FEMRotor.@MeshNode
 
-.. autoclass:: Material
+.. autoclass:: MeshNode
     :show-inheritance:
     :members:
 

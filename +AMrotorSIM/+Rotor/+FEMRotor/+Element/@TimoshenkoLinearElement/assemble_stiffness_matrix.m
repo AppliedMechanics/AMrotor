@@ -1,4 +1,9 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function [K] = assemble_stiffness_matrix(self)
+% Assembles stiffness matrix 
+%
+%    :return: Stiffness matrix K
             
             K_A = compute_axial_stiffness_matrix(self);
             K_T = compute_torsional_stiffness_matrix(self);

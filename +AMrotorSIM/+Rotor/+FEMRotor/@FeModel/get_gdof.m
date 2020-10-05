@@ -1,4 +1,16 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function glob_dof = get_gdof(self,direction,Node,varargin)
+% Provides the global DoF based on node number and direction
+%
+%    :parameter direction: Direction ('u_x','u_y','u_z','psi_x','psi_y','psi_z')
+%    :type direction: char
+%    :parameter Node: Number of desired node
+%    :type Node: double
+%    :parameter varargin: Variable input argument (check function)
+%    :type varargin: 
+%    :return: Global DoF 
+
 % get_gdof - get global degree of freedom
 % glob_dof = get_gdof(self,direction,Node,varargin)
 %  direction: 'u_x','u_y','u_z','psi_x','psi_y','psi_z'

@@ -1,5 +1,12 @@
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 function show_2D(self,varargin)
-% plot the distribution of elements in 2D
+% Plots the meshed rotor in 2D
+%
+%    :parameter varargin: Variable input argument (check function)
+%    :type varargin: 
+%    :return: Figure with the mesh of the rotor
+
 if nargin == 1
     figure
 elseif nargin ==2
