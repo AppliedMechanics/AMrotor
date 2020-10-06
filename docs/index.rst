@@ -4,7 +4,9 @@
    contain the root `toctree` directive.
 
 Welcome to AMrotor documentation!
-=======================================
+=================================
+
+.. include:: ../README.rst
 
 .. toctree::
    :maxdepth: 2
@@ -20,7 +22,7 @@ Welcome to AMrotor documentation!
    :caption: Getting Started
 
    installation
-   usage
+   tutorial
 
 
 .. toctree::

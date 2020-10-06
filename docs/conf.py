@@ -11,7 +11,7 @@
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
 import os
-# import sys
+#import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
 
@@ -21,6 +21,7 @@ project = 'AMrotor'
 copyright = '2020, AMrotor_Team'
 author = 'AMrotor_Team'
 
+#sys.path.append(os.path.abspath("./"))
 
 # -- General configuration ---------------------------------------------------
 

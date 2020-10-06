@@ -15,4 +15,4 @@ Contributors
 
 For a full list of `contributors`_ check the repository.
 
-.. _contributors: https://gitlab.lrz.de/jmaierhofer/AMrotor/-/graphs/master
+.. _contributors: https://github.com/AppliedMechanics/AMrotor/graphs/contributors
