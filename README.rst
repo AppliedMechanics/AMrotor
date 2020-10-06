@@ -1,5 +1,4 @@
-
-.. image:: examples/Rotor_geometry_3D_MBTR.png
+.. image:: doc/examples/Rotor_geometry_3D_MBTR.png
    :align: center
 
 AMrotor
