@@ -1,7 +1,7 @@
 % Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 function assemble_fem(self)
-% Assembles the global system matrices
+% Assembles the global system matrices of the rotor
 %
 %    :return: Global matrices of the rotor system M, D, G, K
 
