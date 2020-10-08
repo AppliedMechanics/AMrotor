@@ -7,12 +7,14 @@ function [ax]=show_3D(self,ax,color)
    ele = self.elements;
    nEle = length(self.elements);
 
-   if nargin == 1
-       f2=figure;
-       ax = axes('xlim', [-10 10], 'ylim', [-10 10], 'zlim',[-10 10]);
-   elseif nargin == 2
+   if nargin < 3
        color = AMrotorTools.TUMColors.TUMGray2;
+       if nargin < 2
+           f2=figure;
+           ax = axes('xlim', [-10 10], 'ylim', [-10 10], 'zlim',[-10 10]);
+       end
    end
+
    
    FaceColorCap = color; %rgb or color string, "cap"->Deckel
    EdgeColorCap = 'none'; 

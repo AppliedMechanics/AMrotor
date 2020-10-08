@@ -48,7 +48,7 @@ St_Lsg = Experiments.Stationaere_Lsg(r,[1000,1200],(0:0.001:0.02)); % In...
 % options.adapt=true; options.locTolUpper=1e-3; 
 % options.locTolLower=1e-4; options.globTol=1;
 
-% St_Lsg.compute_ode15s_ss; % ode15s - method
+St_Lsg.compute_ode15s_ss; % ode15s - method
 % St_Lsg.compute_euler_ss; % Forward euler - method (in progress)
 % St_Lsg.compute_newmark; % newmark - method
 % St_Lsg.compute_newmark(options); % newmark - method with options
