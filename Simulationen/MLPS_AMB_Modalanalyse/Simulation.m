@@ -80,7 +80,7 @@ Janitor.cleanFigures();
 %% Running Time Simulation
 %% Stationary with avaliable calculation methods
 
-St_Lsg = Experiments.Stationaere_Lsg(r,500,[0:0.001:1]); % In...
+St_Lsg = Experiments.Stationaere_Lsg(r,[500],[0:0.001:0.025]); % In...
     %stantiation of class Stationaere_Lsg
     
 St_Lsg.compute_ode15s_ss; % ode15s - method
@@ -118,7 +118,7 @@ w2 = Graphs.WaterfalldiagrammTwoSided(r, St_Lsg); % Instantiation of ...
           f.plot(sensor); % Fourier
           fo.plot(sensor,1); % Fourierorbit 1st order
           fo.plot(sensor,2); % Fourierorbit 2nd order
-          w.plot(sensor); % Waterfall
+          %w.plot(sensor); % Waterfall
           w2.plot(sensor); % Waterfall 2sided
          Janitor.cleanFigures();
  end

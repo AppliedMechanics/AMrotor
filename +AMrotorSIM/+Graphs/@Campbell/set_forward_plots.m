@@ -20,7 +20,6 @@ for f = 1:num.forward
 end
 plot_harmonic( axForward,rpm )
 
-
 pause(0.1) % somehow needed for setting limits
 lim.forward = max(max(imag(EW.forward)));
 ylim(axForward,[0 1.05*lim.forward/2/pi]);

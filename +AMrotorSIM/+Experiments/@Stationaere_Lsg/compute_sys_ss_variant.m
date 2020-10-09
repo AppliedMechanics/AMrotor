@@ -1,9 +1,10 @@
 % Licensed under GPL-3.0-or-later, check attached LICENSE file
 
      function compute_sys_ss_variant(obj)
-% Carries out an integration in the state space
+% Carries out an integration in the state space (currently not working)
 %
 %    :return: Integration results in results field of object
+
         obj.rotorsystem.check_for_non_integrable_components;
         Timer = AMrotorTools.Timer();
          

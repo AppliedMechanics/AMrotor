@@ -1,7 +1,7 @@
 % Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 classdef Waterfalldiagramm < handle
-% Class for visualization of the time integration results as one sided Waterfall diagram
+% Class for visualization of the time integration results as one sided Waterfall diagram (for Run-ups)
 
 %    abtastrate... sampling rate
 %    drehzahl... rotation speed

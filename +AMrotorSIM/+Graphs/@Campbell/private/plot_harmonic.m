@@ -3,7 +3,7 @@
 function plot_harmonic( ax,rpm )
 % Plots the first harmonic in the diagram
 %
-%    :parameter ax: Axes properties control of the figure
+%    :parameter ax: Axes properties control of the figure (check matlab function: axes)
 %    :type ax: matlab.graphics.axis.Axes object
 %    :parameter rpm: Rotation speed
 %    :type rpm: vector

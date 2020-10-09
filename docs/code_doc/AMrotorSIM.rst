@@ -15,4 +15,4 @@ AMrotorSIM
         ./pidControllers/pidController
         ./Rotor/Rotor
         ./Sensors/Sensor
-        ./Solvers/Solver
+..        ./Solvers/Solver

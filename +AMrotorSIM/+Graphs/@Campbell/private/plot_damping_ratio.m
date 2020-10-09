@@ -1,19 +1,19 @@
 % Licensed under GPL-3.0-or-later, check attached LICENSE file
 
-function plot_damping_ratio( ax,x,y,color )
-% Plots the damping ratios into the diagram
+function plot_damping_ratio( ax,rpm,EW,color )
+% Plots the damping ratio into the campell diagram
 %
-%    :parameter ax: Axes properties control of the figure
+%    :parameter ax: Axes properties control of the figure (check matlab function: axes)
 %    :type ax: matlab.graphics.axis.Axes object
-%    :parameter x: Omega ???????
-%    :type x: vector ??????????
-%    :parameter y: Eigenvalues ???????
-%    :type y: vector ?????????ß
-%    :parameter color: Color
-%    :type color: ???????????
-%    :return: Curves of the damping ratios
+%    :parameter rpm: Rotation speed
+%    :type rpm: vector
+%    :parameter EW: Eigenvalues
+%    :type EW: vector
+%    :parameter color: Color in RGB
+%    :type color: vector
+%    :return: Campbell diagram with damping ratio over rotation speed
 
-    plot(ax,x,-real(y)./imag(y),...
+    plot(ax,rpm,-real(EW)./imag(EW),...
               'Color',color)
 
 end

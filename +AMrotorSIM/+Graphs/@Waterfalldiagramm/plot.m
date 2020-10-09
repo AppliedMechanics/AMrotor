@@ -1,13 +1,16 @@
 % Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 function plot(self,sensors,direction)
-% Plots the one sided Waterfall diagram
+% Plots the one sided Waterfall diagram (for Run-ups)
 %
 %    :param sensors: Time signal of desired sensor (rotorsystem.sensors) 
 %    :type sensors: object
 %    :param direction: Sensor direction (1 for x and 2 for y, default x and y)
 %    :type direction: double
 %    :return: Figure of the one sided Waterfall diagram
+
+% Possible error: When Waterfalldiagram.plot is applied on a Stationary
+% solution with only 1 rotational speed an error message shows up.
 
 % plot(self,sensors,direction)
 disp(self.name)
@@ -59,6 +62,11 @@ for sensor = sensors
         F_x_mat= cell2mat(F_x);
         Y_x_mat= cell2mat(Y_x);
         AMPL_x_mat= cell2mat(AMPL_x);
+        
+        if size(AMPL_x_mat,1)<2
+            disp('Error: RPM needs to be a vector with more than 1 RPM-step')
+            return
+        end
         
         Drehzahl_mat = cell2mat(Drehzahl);
         % Plot

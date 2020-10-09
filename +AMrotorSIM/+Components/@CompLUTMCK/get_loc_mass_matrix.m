@@ -7,6 +7,8 @@ function [M] = get_loc_mass_matrix(self,rpm)
 %    :type rpm: double
 %    :return: Mass component matrix M
 
+% Rotational speed dependent mass matrix for example for seals.
+
 Table = self.cnfg.Table;
 [ M ] = self.LookUpTable( Table.rpm, Table.mass_matrix, rpm );    
 

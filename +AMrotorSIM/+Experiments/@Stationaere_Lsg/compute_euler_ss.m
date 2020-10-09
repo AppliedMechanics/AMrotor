@@ -1,7 +1,7 @@
 % Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 function compute_euler_ss(obj)
-% Carries out an integration of type euler in state space
+% Carries out an integration of type euler in state space (currently not working)
 %
 %    :return: Integration results in results field of object
 
@@ -12,9 +12,21 @@ function compute_euler_ss(obj)
     disp('Compute.... Forward Euler - State Space ....')
     obj.clear_time_result()
 
-%-----EULER ------------------------------------------------------     
-ss_A = obj.rotorsystem.systemmatrices.ss_A;
-ss_B = obj.rotorsystem.systemmatrices.ss_B;
+%-----EULER ------------------------------------------------------    
+
+       for rpm = obj.drehzahlen 
+        disp(['... rotational speed: ',num2str(rpm),' U/min'])
+        
+        n_nodes = length(obj.rotorsystem.rotor.mesh.nodes);
+        
+        Omega = rpm*pi/30;                                      %new        
+        [mat.A,mat.B] = obj.get_state_space_matrices(Omega);    %new 
+        ss_A = mat.A;                                           %new
+        ss_B = mat.B;                                           %new
+
+% ss_A = obj.rotorsystem.systemmatrices.ss_A;                   %old
+% ss_B = obj.rotorsystem.systemmatrices.ss_B;                   %old
+
 
 time=obj.time;
 Z0 = zeros(length(ss_A),1);

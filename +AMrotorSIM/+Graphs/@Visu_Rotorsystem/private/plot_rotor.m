@@ -3,7 +3,7 @@
 function plot_rotor(ax, rotor)
 % Provides/drafts the rotor for the visualization of the rotor system
 %
-%    :parameter ax: Axes properties control of the figure
+%    :parameter ax: Axes properties control of the figure (check matlab function: axes)
 %    :type ax: matlab.graphics.axis.Axes object
 %    :parameter rotor: Object of type rotor (obj.rotorsystem.rotor)
 %    :type rotor: object

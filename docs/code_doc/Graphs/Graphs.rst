@@ -12,7 +12,6 @@ Graphs
         Frequenzgangfunktion
         Orbitdarstellung
         TimeSignal
-	Visu_Rotorgeometrie
         Visu_Rotorsystem
         Waterfalldiagramm
         WaterfalldiagrammTwoSided      
