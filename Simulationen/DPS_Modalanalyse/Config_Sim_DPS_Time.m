@@ -443,19 +443,19 @@ cnfg.cnfg_component(count).damping = 0;
 % cnfg.cnfg_component (count).Table = load('Inputfiles/SealTestRigEcc/TestRigLam2Ecc0.mat'); 
 
 %% Seals
-% count = count+1;
-% cnfg.cnfg_component(count).name = 'Dichtung Black';
-% cnfg.cnfg_component(count).type='Seals';
-% cnfg.cnfg_component(count).subtype='BlackSeal';
-% cnfg.cnfg_component(count).position=100e-3;                        %[m]
-% cnfg.cnfg_component(count).sealModel = load_seal_model('Inputfiles/ChildsBlackModelParameters.m');
-% 
-% count = count+1;
-% cnfg.cnfg_component(count).name = 'Dichtung Childs';
-% cnfg.cnfg_component (count).type='Seals';
-% cnfg.cnfg_component(count).subtype='ChildsSeal';
-% cnfg.cnfg_component(count).position=150e-3;                        %[m]
-% cnfg.cnfg_component(count).sealModel = load_seal_model('Inputfiles/ChildsBlackModelParameters.m');
+count = count+1;
+cnfg.cnfg_component(count).name = 'Dichtung Black';
+cnfg.cnfg_component(count).type='Seals';
+cnfg.cnfg_component(count).subtype='BlackSeal';
+cnfg.cnfg_component(count).position=100e-3;                        %[m]
+cnfg.cnfg_component(count).sealModel = load_seal_model('ChildsBlackModelParameters.m');
+
+count = count+1;
+cnfg.cnfg_component(count).name = 'Dichtung Childs';
+cnfg.cnfg_component (count).type='Seals';
+cnfg.cnfg_component(count).subtype='ChildsSeal';
+cnfg.cnfg_component(count).position=150e-3;                        %[m]
+cnfg.cnfg_component(count).sealModel = load_seal_model('ChildsBlackModelParameters.m');
 
 
 %% ========================PID-Regler======================================

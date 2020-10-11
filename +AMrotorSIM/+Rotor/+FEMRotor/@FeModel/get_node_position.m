@@ -3,11 +3,11 @@
 function nodePos = get_node_position(rotor,nodeNo)
 % Gets the corresponding position to a node number
 %
-%    :parameter rotor: Object of type rotorsystem ????
+%    :parameter rotor: Object of type AMrotorSIM.Rotor.FEMRotor.FeModel
 %    :type rotor: object
 %    :parameter nodeNo: Desired node number
 %    :type nodeNo: vector
-%    :return: Number of closest node to desired position
+%    :return: Position along z-axis of desired node
 
 % nodePos = get_node_position(rotor,nodeNo)
 nodePos = zeros(size(nodeNo));

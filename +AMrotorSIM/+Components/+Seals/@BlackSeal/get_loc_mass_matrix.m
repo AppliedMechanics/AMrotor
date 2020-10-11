@@ -3,7 +3,7 @@
 function [M] = get_loc_mass_matrix(self,rpm)
 % Provides/builds local mass matrix of the component in dof-order: ux,uy,uz,psix,psiy,psiz
 %
-%    :param rpm: Angular velocity
+%    :param rpm: Rotation speed
 %    :type rpm: double
 %    :return: Mass component matrix M
 

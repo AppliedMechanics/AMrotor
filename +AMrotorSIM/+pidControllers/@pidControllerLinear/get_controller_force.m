@@ -3,8 +3,8 @@
 function force = get_controller_force(obj,varargin)
 % Provides the controller force
 %
-%    :parameter varargin: Empty ???????
-%    :type varargin: ???
+%    :parameter varargin: Placeholder
+%    :type varargin: 
 %    :return: Controller force
 
 ki = obj.ki;

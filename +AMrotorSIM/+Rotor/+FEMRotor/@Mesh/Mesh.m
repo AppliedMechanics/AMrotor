@@ -28,7 +28,7 @@ classdef Mesh < handle
             
             % Constructor
             %
-            %    :parameter optn: Cnfg-rotor substruct of cnfg-struct (cnfg.cnfg_rotor.mesh_opt)
+            %    :parameter optn: Cnfg_rotor.mesh_opt substruct of Cnfg-struct
             %    :type optn: struct
             %    :return: Mesh object
             

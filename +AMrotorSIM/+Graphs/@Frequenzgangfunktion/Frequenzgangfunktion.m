@@ -93,9 +93,9 @@ classdef Frequenzgangfunktion < handle
     methods (Access = private)
         
         function set_color_number(obj)
-                    % (private) Assigns colors to all eigenvalues ??????
-                    %
-                    %    :return: ??????????????
+        % (private) Assigns colors to all eigenvalues 
+        %
+        %    :return: Assigned color to eigenvalues
             obj.ColorHandler = AMrotorTools.PlotColors();
             num = size(obj.experimentFRF.H,2)*size(obj.experimentFRF.H,3);
             obj.ColorHandler.set_up(num);

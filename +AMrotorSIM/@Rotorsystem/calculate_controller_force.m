@@ -5,8 +5,8 @@ function F = calculate_controller_force(rotorsystem,time,displacement,velocity)
 %
 %    :param rotorsystem: Object of type rotorsystem
 %    :type rotorsystem: object
-%    :param time: Time step
-%    :type time: double
+%    :param time: Time-vector of solution
+%    :type time: vector
 %    :param displacement: Displacement vector
 %    :type displacement: vector(double)
 %    :param velocity: Velocity vector

@@ -9,8 +9,8 @@ function status = odeOutputFcnController(t,y,flag,varargin)
 %    :type y: function
 %    :param flag: Imports status of integration (check MATLAB odeset)
 %    :type flag: char
-%    :param varargin: only rotorsystem object as varargin{3} ???
-%    :type varargin: object
+%    :param varargin: Variable input argument (check function)
+%    :type varargin:
 %    :return: Printing and plotting of the integration status
 
 %rpm_span = varargin{1};

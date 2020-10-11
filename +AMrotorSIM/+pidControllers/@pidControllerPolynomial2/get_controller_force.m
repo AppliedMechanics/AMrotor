@@ -3,10 +3,10 @@
 function force = get_controller_force(obj,time,displacement)
 % Provides the controller force
 %
-%    :parameter time: Empty ???????
-%    :type time: ???
+%    :parameter time: Time-vector of solution (not needed)
+%    :type time: vector
 %    :parameter displacement: Displacement
-%    :type displacement: vector???
+%    :type displacement: vector
 %    :return: Controller force
 
 % force = [I, x]*A*[I^2;x^2] + [I,x]*B*[I;x] + cT*[I;x] + d

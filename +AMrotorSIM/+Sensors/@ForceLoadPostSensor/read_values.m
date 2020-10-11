@@ -1,9 +1,9 @@
 % Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 function [Fx_val,Fy_val,Fz_val] = read_values(self,experiment)
-% Extracts the force values (ForceLoadPost) at the desired sensor position ??????????????
+% Extracts the force values from the force excitation at the desired sensor position
 %
-%    :param experiment: Analysis type (Stationaere_Lsg, Hochlaufanalyse, ...) ????
+%    :param experiment: Analysis type (Stationaere_Lsg, Hochlaufanalyse, ...)
 %    :type experiment: object
 %    :return: Values of the specific sensor
 

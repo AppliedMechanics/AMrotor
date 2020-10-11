@@ -65,10 +65,11 @@ St_Lsg.compute_ode15s_ss; % ode15s - method
 
 %% FRF over time
 
-% frf = Experiments.FrequenzgangfunktionTime(St_Lsg); % Instantiation ...
+frf = Experiments.FrequenzgangfunktionTime(St_Lsg); % Instantiation ...
                                         % of class FrequenzgangfunktionTime
 
-% frf.calculate(r.sensors(6),r.sensors(5),0,'u_x','u_x',4,'boxcar');??????????
+frf.calculate(r.sensors(2),r.sensors(1),[1100],'u_x','u_x',4,'boxcar'); % .
+                                        % Carries out the calculation
 
 %% Plot results
 %% Processing and visualization of the results

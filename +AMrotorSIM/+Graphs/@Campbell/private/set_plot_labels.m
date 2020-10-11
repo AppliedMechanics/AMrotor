@@ -1,7 +1,7 @@
 % Licensed under GPL-3.0-or-later, check attached LICENSE file
 
-function set_plot_labels( ax, Name )
-% Assigns the labels to the plots (for Campbell with omega)
+function set_plot_labels(ax,Name)
+% Assigns the labels to the plots (for Campbell with angular eigenfrequency omega)
 %
 %    :parameter ax: Axes properties control of the figure
 %    :type ax: matlab.graphics.axis.Axes object

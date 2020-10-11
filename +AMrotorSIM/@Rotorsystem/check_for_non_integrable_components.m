@@ -1,4 +1,6 @@
 function check_for_non_integrable_components(self)
+%
+
 %CHECK_FOR_NON_INTEGRABLE_COMPNENTS Summary of this function goes here%????
 %   Input of class Rotorsystem
 

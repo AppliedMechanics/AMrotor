@@ -3,10 +3,10 @@
 function [ M_seal,D_seal ,K_seal ] = BlackModel( self, sys, init )     
 % Performs the BlackSeal calculations
 %
-%    :param sys: ????????
-%    :type sys: ???????????
-%    :param init: Start values ????
-%    :type init: ????????????
+%    :param sys: System parameters of the seal provided by the Config_file
+%    :type sys: struct
+%    :param init: Start values for the calculation (check function: get_loc_system_matrices)
+%    :type init: struct
 %    :return: M, D and K matrices of the seal
 
 %BLACKMODEL gibt Koeffizienten nach Black zurück

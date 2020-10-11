@@ -54,12 +54,12 @@ d = Dataoutput.TimeDataOutput(Runup); % Instantiation of class ...
 
 %% Processing and saving results
 
-% dataset_modalanalysis = d.compose_data(); % container: rpm -> 
+% dataset = d.compose_data(); % container: rpm -> 
                                           % (n,t,allsensorsxy)
-dataset_modalanalysis = d.compose_data_sensor_wise();
+dataset = d.compose_data_sensor_wise();
 datasetName = 'MLPS_pid_5s';
-d.save_data(dataset_modalanalysis,datasetName);
-struct = d.convert_data_to_struct_sensor_wise(dataset_modalanalysis);
+d.save_data(dataset,datasetName);
+struct = d.convert_data_to_struct_sensor_wise(dataset);
 d.save_data(struct,datasetName);
 d.write_data_to_unv(datasetName);
 

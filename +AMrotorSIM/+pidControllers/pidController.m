@@ -60,8 +60,8 @@ classdef  pidController < matlab.mixin.Heterogeneous & handle%classdef (Abstract
             %
             %    :parameter obj: Object of type pidController
             %    :type obj: object
-            %    :parameter tcurr: Time step
-            %    :type tcurr: double ????
+            %    :parameter tcurr: Time-vector of solution
+            %    :type tcurr: vector
             %    :parameter y: position vector at the corresponding controller node
             %    :type y: vector
             %    :return: Controller current

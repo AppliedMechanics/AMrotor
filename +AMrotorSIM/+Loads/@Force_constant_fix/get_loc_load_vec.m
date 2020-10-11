@@ -3,7 +3,7 @@
 function h = get_loc_load_vec(obj,varargin)
 % Assemles load vector for specific load type from Config-file (cnfg) in dof-order: ux,uy,uz,psix,psiy,psiz
 %
-%    :parameter varargin: not defined?????
+%    :parameter varargin: Placeholder
 %    :type varargin: 
 %    :return: Load vector h
             

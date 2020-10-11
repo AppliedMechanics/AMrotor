@@ -1,6 +1,6 @@
 % Licensed under GPL-3.0-or-later, check attached LICENSE file
 
-function plot_damping_ratio( ax,rpm,EW,color )
+function plot_damping_ratio(ax,rpm,EW,color)
 % Plots the damping ratio into the campell diagram
 %
 %    :parameter ax: Axes properties control of the figure (check matlab function: axes)

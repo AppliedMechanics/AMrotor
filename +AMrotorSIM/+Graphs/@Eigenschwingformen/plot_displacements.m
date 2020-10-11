@@ -8,6 +8,7 @@ function [x,EVmain] = plot_displacements(obj,varargin)
 %    :return: Figures of mode shapes and eigenvectors with corresponding postion alon z-axis
 
 % [x,EVmain] = plot_displacements(obj,varagin)
+
 %  examples:
 %  obj.plot_displacements;
 %  obj.plot_displacements('complex'); % to plot complex values

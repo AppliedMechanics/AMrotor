@@ -6,10 +6,11 @@ function glob_dof = get_gdof(self,direction,Node,varargin)
 %    :parameter direction: Direction ('u_x','u_y','u_z','psi_x','psi_y','psi_z')
 %    :type direction: char
 %    :parameter Node: Number of desired node
-%    :type Node: double
+%    :type Node: vector(double)
 %    :parameter varargin: Variable input argument (check function)
 %    :type varargin: 
-%    :return: Global DoF 
+%    :return: Global DoF's of the entered nodes with the corresponding orientation
+%    :rtype: vector
 
 % get_gdof - get global degree of freedom
 % glob_dof = get_gdof(self,direction,Node,varargin)

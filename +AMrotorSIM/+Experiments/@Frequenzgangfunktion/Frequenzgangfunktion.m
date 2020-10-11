@@ -5,19 +5,16 @@ classdef Frequenzgangfunktion < handle
 
 %     This class calculates the frequency response function between
 %     specified points, for a specidifed frequency vector using the
-%   f... frequency array nFreq x 1
-%   H... matrix of frf's: nFreq x nResponses x nInputForce
-%   type... acceleration 'a', velocity 'v', displacement 'd'
 %     AbraVibe toolbox
 % See also AMrotorSIM.Graphs.Frequenzgangfunktion
     
     properties
         name
         rotorsystem (1,1) AMrotorSIM.Rotorsystem
-        f 
-        H 
+        f; % frequency array nFreq x 1
+        H; % matrix of frf's: nFreq x nResponses x nInputForce
         descriptionsH 
-        type 
+        type; % acceleration 'a', velocity 'v', displacement 'd'
         unit
         inputPosition
         outputPosition

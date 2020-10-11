@@ -1,6 +1,6 @@
 % Licensed under GPL-3.0-or-later, check attached LICENSE file
 
-function set_forward_plots_damping_ratio( obj )
+function set_forward_plots_damping_ratio(obj)
 % Organizes and assembles the plots of the damping ratio over rpm (for Selection 'forward') 
 %
 %    :return:  Campbell diagram with fwd whirl relative to the damping ratio

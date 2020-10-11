@@ -1,7 +1,7 @@
 % Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 function check_selected_dof(obj,inputDirection,outputDirection)
-% Checks if only translational DoFs are used???????????
+% Checks if only translational DoFs are used
 %
 %    :param inputDirection: Input direction
 %    :type inputDirection: double

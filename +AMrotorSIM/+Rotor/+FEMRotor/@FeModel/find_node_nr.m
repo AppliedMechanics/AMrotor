@@ -1,7 +1,7 @@
 % Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 function node_nr = find_node_nr(self,position)
-% Defines which node is closer to a enteres position
+% Defines which node is closer to an entered position
 %
 %    :parameter position: Desired position along z-axis
 %    :type position: double

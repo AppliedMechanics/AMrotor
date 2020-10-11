@@ -8,7 +8,7 @@ classdef CompLUTMCK < AMrotorSIM.Components.Component
     end
     methods
         function self=CompLUTMCK(arg)
-            %Constructor
+            % Constructor
             %
             %    :parameter arg: cnfg_component substruct of cnfg-struct
             %    :type arg: struct

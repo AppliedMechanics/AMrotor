@@ -22,7 +22,7 @@ classdef FeModel < handle
         function self = FeModel(cnfg) 
             % Constructor
             %
-            %    :parameter cnfg: Cnfg_component substruct of cnfg-struct
+            %    :parameter cnfg: Cnfg_rotor substruct of cnfg-struct
             %    :type cnfg: struct
             %    :return: FeModel object
             

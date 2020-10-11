@@ -25,7 +25,7 @@ classdef Material < handle
         function self = Material(cnfg)        
             % Constructor
             %
-            %    :parameter arg: Cnfg_rotor substruct of cnfg-struct
+            %    :parameter arg: Cnfg_rotor.material substruct of Cnfg-struct
             %    :type arg: struct
             %    :return: Material object
             

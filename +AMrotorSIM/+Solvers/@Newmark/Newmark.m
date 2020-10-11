@@ -35,7 +35,7 @@ classdef Newmark < AMrotorSIM.Solvers.Solver
             % Constructor
             %
             %    :parameter varargin:  Variable input argument (check corresponding functions)
-            %    :type varagin: ????????????????
+            %    :type varagin: 
             %    :return: Newmark object
             
             % Support name-value pair arguments when constructing the

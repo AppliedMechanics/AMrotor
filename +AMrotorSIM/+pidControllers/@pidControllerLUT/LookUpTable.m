@@ -1,7 +1,15 @@
 % Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 function [ outputMatrix ] = LookUpTable( self, rpmTable, inputCell, rpmCurrent ) 
-%Necessary for controller ??????????????
+% Assembles the desired table (from Config-file) for a controller characterized by a LUT
+%
+%    :param rpmTable: Rpm values of LUT
+%    :type rpmTable: vector
+%    :param inputCell: Corresponding values of interest
+%    :type inputCell: cell
+%    :param rpmCurrent: Rotation speed (for interpolation)
+%    :type rpmCurrent: double
+%    :return: Desired ouput matrix 
 
 % structure of inputs and outputs
 %

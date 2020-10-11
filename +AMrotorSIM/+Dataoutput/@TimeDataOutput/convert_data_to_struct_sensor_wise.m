@@ -3,6 +3,8 @@
 function struct = convert_data_to_struct_sensor_wise(self,dataset)
 % Converts data container to struct
 %
+%    :param dataset: Dataset map-object
+%    :type dataset: map-object
 %    :return: Struct with sensor data
 
 % convert_data_to_struct_sensor_wise convert container.Map to struct sensor 

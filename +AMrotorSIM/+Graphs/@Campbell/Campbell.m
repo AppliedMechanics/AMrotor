@@ -65,9 +65,9 @@ classdef Campbell < handle
     methods (Access = private)
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         function set_color_number(obj)
-        % (private) Assigns colors to all eigenvalues ??????
+        % (private) Assigns colors to all eigenvalues 
         %
-        %    :return: ??????????????
+        %    :return: Assigned color to eigenvalues
         
             obj.ColorHandler = AMrotorTools.PlotColors();
             num = obj.experimentCampbell.get_number_of_eigenvalues();

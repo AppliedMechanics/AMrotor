@@ -29,8 +29,10 @@ author = 'AMrotor_Team'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-'sphinx.ext.viewcode', 'sphinx.ext.autodoc', 'sphinxcontrib.matlab'
+'sphinx.ext.viewcode', 'sphinx.ext.autodoc', 'sphinxcontrib.matlab', 'sphinx.ext.viewcode'
 ]
+
+html_show_sourcelink = False
 
 # matlab source code
 matlab_src_dir = os.path.abspath('../')

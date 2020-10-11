@@ -1,31 +1,43 @@
 .. _Tutorial:
 
+########
 Tutorial
-========
+########
 
-A very brief tutorial of a Laval-rotor should show the working principle of AMrotor.
-To get deeper into AMrotor check :ref:`Examples`.
+******
+Basics
+******
 
 To run a simulation with AMrotor, two scripts are necessary:
 
 * Configuration-script, contains all the necessary parameters for the subsequent simulation. These parameters contain
-  information about the rotor and all additional components. Essential for the config-script is the initialization of
-  all the necessary fields of the struct. If the struct-fields are not needed they can be left empty.
+  information about the rotor and all additional components. 
 
 * Simulation-script, contains the assembly and the desired analyses applied on the model.
 
+A very brief tutorial of a Laval-rotor should show the working principle of AMrotor for building a rotordynamic model,
+followed by examples referring to the available analysis methods. To see more complex models check :ref:`Examples`.
+
+
+*********************
+How to build a model?
+*********************
+
 The scope of this tutorial is to build a simple Laval-rotor model with two simple radial bearings and
-a disc in the center modelled as part of the rotor (no extra disc component). Therefore the following two
-scripts are necessary.
+a disc in the center modelled as part of the rotor (no extra disc component). For building a model it's necessary to work
+on both scripts.
 
 Configuration script
-++++++++++++++++++++
+++++++++++++++++++++++++++
 
 The following config-script can be copied-and-pasted into an empty matlab script. The script
 must then be saved into the AMrotor path. For this tutorial we save the script with the name "Config_Tutorial"
 in the Simulation- (Simulationen) folder of AMrotor. Eventually the folder has to be added
 to the path. The name of the config-script is important, since it's later
 needed in the simulation-script. By running the saved script the config-struct (cnfg) will be build.
+
+For this simple example not all components (only rotor and bearings) are necessary, nevertheless it's essential that all
+components are initialized to prevent errors.
 
 .. code-block:: matlab 
    :linenos:
@@ -105,7 +117,7 @@ needed in the simulation-script. By running the saved script the config-struct (
     count = 0;
 
 Simulation script
-+++++++++++++++++
++++++++++++++++++++++++++
 
 After building the config-script this simulation-script can be copied-and-pasted.
 Important in our case is that the called config-script name is consistent to "Config_Tutorial" (line 9).
@@ -151,3 +163,29 @@ components of the rotor system which is also visualized:
 
 Further analysis methods can be included in the simulation-script after the presented
 code block with the assembly. (check :ref:`Examples`)
+
+********************************
+How to make a Campbell analysis?
+********************************
+
+For a Campbell analysis only the Simulation-file is used.. ...............
+
+.. code-block:: matlab 
+   :linenos:
+
+   cmp = Experiments.Campbell(r); % Instantiation of ... 
+                        % class Campbell
+   cmp.set_up(0:2e2:2e3,20); % Set_up (omega range in 1/min, #modes)
+   cmp.calculate(); % Calculation
+
+   cmpDiagramm = Graphs.Campbell(cmp); % Instantiation of ... 
+                        % class Campbell for figures
+   cmpDiagramm.print_damping_zero_crossing(); % Prints in the Command Window
+   cmpDiagramm.print_critical_speeds() % Prints in the Command Window
+   cmpDiagramm.set_plots('all'); % Figures
+   Janitor.cleanFigures();
+
+
+*****************************
+How to make a Modal analysis?
+*****************************

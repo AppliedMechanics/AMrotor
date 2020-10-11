@@ -1,13 +1,13 @@
 % Licensed under GPL-3.0-or-later, check attached LICENSE file
 
-function x0 = get_zero_crossing(self,x,y)
-% Extracts the smallest zero crossing of x,y (or omega,real(eigenvalues))
+function x0 = get_zero_crossing(self,omega,y)
+% Extracts the smallest zero crossing of omega and y (y is Eigenvalue depending on the application)
 %
-%    :parameter x: Variable used for omega ????????
-%    :type x: vector
-%    :parameter y: Variable used for eigenvalues ???????????
+%    :parameter omega: Angular velocity
+%    :type omega: vector
+%    :parameter y: Eigenvalue variable (real, imag, ...)
 %    :type y: vector
-%    :return: Smallest zero crossing x0
+%    :return: Smallest zero crossing (x0)
 
 % finds all zero crossings, but only returns the smallest value
 % 
@@ -21,7 +21,7 @@ i=find(diff(sign(y))<0); % Uebergang von positiv zu negativen Werten
 
 for k=1:length(i)
     itmp=i(k);
-    x0tmp = interp1(y(itmp:itmp+1),x(itmp:itmp+1),0);
+    x0tmp = interp1(y(itmp:itmp+1),omega(itmp:itmp+1),0);
     x0(end+1)=x0tmp;
 end
 

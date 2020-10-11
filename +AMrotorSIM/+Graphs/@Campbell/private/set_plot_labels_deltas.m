@@ -1,7 +1,7 @@
 % Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 function set_plot_labels_deltas( ax, Name )
-% Assigns the labels to the plots (for Campbell with delta)
+% Assigns the labels to the plots (for Campbell with decay constant)
 %
 %    :parameter ax: Axes properties control of the figure
 %    :type ax: matlab.graphics.axis.Axes object

@@ -4,10 +4,9 @@ classdef pidControllerLinear < AMrotorSIM.pidControllers.pidController
     % Sub-class of pid controller with linear force (= ki*I)
     
     %   force = ki*I
-    % ki... [N/A], proportionality between controller current and force, force = ki*I
-    %
+   
     properties
-        ki 
+        ki; %[N/A], proportionality between controller current and force, force = ki*I 
     end
     
     methods

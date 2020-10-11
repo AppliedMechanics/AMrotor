@@ -1,7 +1,7 @@
 Rotorsystem
 ===========
 
-This is the Rotorsystem class. This is the main class of the toolbox.
+The Rotorsystem class is the main class of the toolbox.
 
 .. automodule:: +AMrotorSIM.@Rotorsystem
 

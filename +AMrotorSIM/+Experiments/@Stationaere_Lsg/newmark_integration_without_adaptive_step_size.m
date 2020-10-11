@@ -5,7 +5,7 @@ function [t,x,dotx,ddotx,localError,globalError] = newmark_integration_without_a
 %
 %    :param M: Mass
 %    :type M: matrix
-%    :param C: Damping with out gyro
+%    :param C: Damping without gyro
 %    :type C: matrix
 %    :param K: Stiffness
 %    :type K: matrix

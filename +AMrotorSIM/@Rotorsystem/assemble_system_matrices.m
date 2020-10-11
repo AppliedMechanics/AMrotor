@@ -5,6 +5,7 @@ function [M,C,G,K]= assemble_system_matrices(self,rpm,varargin)
 %
 %    :param rpm: Rotational speed
 %    :type rpm: double
+%    :param varargin: Placeholder
 %    :return: Global component matrices (M,D,G,K)
 
          if nargin == 1

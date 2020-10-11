@@ -5,7 +5,7 @@ function h = get_loc_load_vec(obj,time,varargin)
 %
 %    :parameter time: Time step
 %    :type time: double
-%    :parameter varargin: not defined?????
+%    :parameter varargin: Placeholder
 %    :type varargin: 
 %    :return: Load vector h
 

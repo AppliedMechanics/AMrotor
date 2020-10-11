@@ -7,7 +7,7 @@ function plot_bode(obj,f,frf,paramPlot)
 %    :type f: vector
 %    :param frf: Frequency response function
 %    :type frf: vector
-%    :param paramPlot: Additional parameters for visualization (type of amplitude, …)
+%    :param paramPlot: Additional parameters for visualization (type of amplitude, ..)
 %    :type paramPlot: struct
 %    :return: Figure with bode plot
 

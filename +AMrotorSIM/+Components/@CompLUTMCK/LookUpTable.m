@@ -4,10 +4,10 @@ function [ output ] = LookUpTable( self, rpmTable, inputCell, rpmCurrent )
 % Includes parameters (M, C, K) from LUT into CompLUTMCK object with interpolation
 %
 %    :param rpmTable: Rpm values of LUT
-%    :type rpmTable: vector ?????????
+%    :type rpmTable: vector
 %    :param inputCell: Corresponding values of interest (M, C or K)
-%    :type inputCell: vector/matrix/array
-%    :param rpmCurrent: Angular velocity of interest (for interpolation)
+%    :type inputCell: cell
+%    :param rpmCurrent: Rotation speed of interest (for interpolation)
 %    :type rpmCurrent: double
 %    :return: Desired ouput matrix (M, C or K)
 

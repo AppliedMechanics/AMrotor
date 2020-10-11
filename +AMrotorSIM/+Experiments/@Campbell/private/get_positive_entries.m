@@ -1,6 +1,6 @@
 % Licensed under GPL-3.0-or-later, check attached LICENSE file
 
-function [Vout, Dout] = get_positive_entries( Vin, Din )
+function [Vout, Dout] = get_positive_entries(Vin,Din)
 % Extracts only the positive enries of V and D
 %
 %    :param Vin: Eigenvectormatrix raw

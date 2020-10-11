@@ -1,6 +1,6 @@
-===========
-doc_classes
-===========
+==================
+Code documentation
+==================
 
 .. toctree::
 	:maxdepth: 3

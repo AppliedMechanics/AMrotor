@@ -3,15 +3,15 @@
 function descriptionsH = make_descriptions_for_FRF(obj,inputNode,outputNode,inputDirection,outputDirection)
 % Assigns a description of the FRF's regarding the position and the orientation of the in- and outputs of the FRF's
 %
-%    :param inputNode: Input node ???????????
-%    :type inputNode: object(node) ???????
-%    :param outputNode: Output node ??????????
-%    :type outputNode: object(node) ????????
-%    :param inputDirection: Desired input direction {'u_x','u_y','u_z','psi_x','psi_y','psi_z'}
+%    :param inputNode: Node number\numbers of the input 
+%    :type inputNode: vector(double)
+%    :param outputNode: Node number\numbers of the output 
+%    :type outputNode: vector(double)
+%    :param inputDirection: Desired input direction from 1 to 6 (e.g. 'u_x' -> 1, 'psi_y' -> 5)
 %    :type inputDirection: double
-%    :param outputDirection: Desired output direction {'u_x','u_y','u_z','psi_x','psi_y','psi_z'}
-%    :type outputDirection: vector (char)
-%    :return: Added description parameter to the object
+%    :param outputDirection: Desired output direction from 1 to 6 (e.g. 'u_x' -> 1, 'psi_y' -> 5)
+%    :type outputDirection: double
+%    :return: Added description parameter (cell) to the object
             
 dof_name = {'X','Y','Z','PSIX','PSIY','PSIZ'};
 dof_loc = [1,2,3,4,5,6];
