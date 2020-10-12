@@ -65,8 +65,8 @@ d.write_data_to_unv(datasetName);
 
 %% Visualizing results
 
-Lsg = St_Lsg; 
-% Lsg = Runup;
+%Lsg = St_Lsg; 
+Lsg = Runup;
 
 t = Graphs.TimeSignal(r, Lsg); % Instantiation of class TimeSignal
 f = Graphs.Fourierdarstellung(r, Lsg); % Instantiation of class ...
@@ -76,3 +76,4 @@ f = Graphs.Fourierdarstellung(r, Lsg); % Instantiation of class ...
           f.plot(sensor); % Fourier
           Janitor.cleanFigures();
  end
+ 

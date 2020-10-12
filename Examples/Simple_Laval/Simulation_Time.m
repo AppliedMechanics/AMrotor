@@ -68,7 +68,7 @@ St_Lsg.compute_ode15s_ss; % ode15s - method
 frf = Experiments.FrequenzgangfunktionTime(St_Lsg); % Instantiation ...
                                         % of class FrequenzgangfunktionTime
 
-frf.calculate(r.sensors(2),r.sensors(1),[1100],'u_x','u_x',4,'boxcar'); % .
+frf.calculate(r.sensors(2),r.sensors(1),[1000],'u_x','u_x',4,'boxcar'); % .
                                         % Carries out the calculation
 
 %% Plot results
@@ -80,13 +80,13 @@ d = Dataoutput.TimeDataOutput(St_Lsg); % Instantiation of class ...
 
 %% Processing and saving results
 
-dataset_modalanalysis = d.compose_data(); % container: rpm -> 
-                                          % (n,t,allsensorsxy)
-d.save_data(dataset_modalanalysis,'Hochlauf_Laval_U_x_sweep0_200Hz_3000rpm'); 
-dataset_modalanalysis = d.compose_data_sensor_wise(); % container: rpm -> 
-                                                      % (sensor1,sensor2,.)
-struct = d.convert_data_to_struct_sensor_wise(dataset_modalanalysis);
-d.save_data(struct,'Hochlauf_Laval_U_x_sweep0_200Hz_3000rpm');
+% dataset_modalanalysis = d.compose_data(); % container: rpm -> 
+%                                           % (n,t,allsensorsxy)
+% d.save_data(dataset_modalanalysis,'Hochlauf_Laval_U_x_sweep0_200Hz_3000rpm'); 
+% dataset_modalanalysis = d.compose_data_sensor_wise(); % container: rpm -> 
+%                                                       % (sensor1,sensor2,.)
+% struct = d.convert_data_to_struct_sensor_wise(dataset_modalanalysis);
+% d.save_data(struct,'Hochlauf_Laval_U_x_sweep0_200Hz_3000rpm');
 
 %% Visualizing results
 
@@ -103,8 +103,8 @@ w = Graphs.Waterfalldiagramm(r, Lsg); % Instantiation of class ...
 w2 = Graphs.WaterfalldiagrammTwoSided(r, Lsg); % Instantiation of class ...
                                                % WaterfalldiagrammTwoSided
 
-% visufrf = Graphs.Frequenzgangfunktion(frf);?????????????????
-% visufrf.set_plots('bode','log','deg','coh');
+visufrf = Graphs.Frequenzgangfunktion(frf);
+visufrf.set_plots('bode','log','deg','coh');
 
  for sensor = r.sensors % Loop over all sensors for plotting
           t.plot(sensor,[1,2,3]); % Time signal

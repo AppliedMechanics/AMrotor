@@ -86,7 +86,7 @@ St_Lsg = Experiments.Stationaere_Lsg(r,[500],[0:0.001:0.025]); % In...
 St_Lsg.compute_ode15s_ss; % ode15s - method
 %St_Lsg.compute_euler_ss; % Forward euler - method (in progress)
 %St_Lsg.compute_newmark; % newmark - method
-%St_Lsg.compute_sys_ss_variant; state space method(in progress) ??????
+%St_Lsg.compute_sys_ss_variant; state space method(in progress) 
 
 %% Processing and visualization of the results
 
@@ -118,7 +118,7 @@ w2 = Graphs.WaterfalldiagrammTwoSided(r, St_Lsg); % Instantiation of ...
           f.plot(sensor); % Fourier
           fo.plot(sensor,1); % Fourierorbit 1st order
           fo.plot(sensor,2); % Fourierorbit 2nd order
-          %w.plot(sensor); % Waterfall
+          w.plot(sensor); % Waterfall
           w2.plot(sensor); % Waterfall 2sided
          Janitor.cleanFigures();
  end
