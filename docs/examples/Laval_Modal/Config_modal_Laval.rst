@@ -1,13 +1,14 @@
-Config_file_example
-++++++++++++++++++++
+Config_file_LavalModal
+++++++++++++++++++++++
 
-This is an example code for a config file of a simple Laval rotor. All the code snippets can
-be copied and pasted together in a Matlab script and executed directly. The hidden (commented out) 
-code parts should show former possibilities.
+This is a working example code for a Configuration file of a simple Laval rotor. 
+The goal of the simulation can have effects on the configuration file. The focus of 
+the subsequent simulation is a Modal analysis, a Campbell analysis and the determination 
+of frequency response functions (FRF's) from the system matrices. All code snippets can 
+be copied and pasted into a Matlab script in the given order (recommended) and executed directly.
 
-The first step is the definition of the rotor/shaft. These definition can be devided
-into three parts: definition of the material parameters, the geometry of the rotor and the
-properties of the mesh.
+The first step is to define the rotor/shaft. This definition can be divided into three 
+parts: Definition of the material parameters, the geometry of the rotor and the properties of the mesh.
 
 .. literalinclude:: /../Examples/Simple_Laval/Config_Sim_Modal.m
     :language: matlab
@@ -15,7 +16,10 @@ properties of the mesh.
     :start-after: Rotor
     :end-before: Sensors
 
-Sensors are not necessary for a modal analysis and can therefore be neglected.
+Sensors are not absolutely necessary for the desired analysis methods, so 
+that no sensors need to be defined. Nevertheless the initialization of the sensor is 
+necessary to avoid errors. The initialization consists of the assignment 
+of a sensor field in the cnfg-struct and the definition of a control variable "count".
 
 .. literalinclude:: /../Examples/Simple_Laval/Config_Sim_Modal.m
     :language: matlab
@@ -23,10 +27,10 @@ Sensors are not necessary for a modal analysis and can therefore be neglected.
     :start-after: Sensors
     :end-before: Components
 
-The inclusion of components (in this case bearings) consists of the initialization of a 
-component struct-field and a control variable called "count". Every additional component (regardless of the type) increases 
-the count variable and is defined by a name, the position along the z-axis of the rotor, 
-the component type and additional parameters depending on the component.
+The inclusion of components (in this case bearings) consists of the initialization of a component 
+field in the cnfg-struct and a control variable called "count". Each additional component 
+(regardless of type) increases the count variable and is defined by a name, the position 
+along the z-axis of the rotor, the component type and additional parameters depending on the component.
 
 .. literalinclude:: /../Examples/Simple_Laval/Config_Sim_Modal.m
     :language: matlab
@@ -34,7 +38,10 @@ the component type and additional parameters depending on the component.
     :start-after: Components
     :end-before: Loads
 
-Also loads are not necessary for a modal analysis and can therefore be neglected.
+Loads are not absolutely necessary for the desired analysis methods, so 
+that no loads need to be defined. Nevertheless the initialization of the load is necessary to avoid errors. 
+The initialization consists of the assignment 
+of a load field in the cnfg-struct and the definition of a control variable "count".
 
 .. literalinclude:: /../Examples/Simple_Laval/Config_Sim_Modal.m
     :language: matlab
@@ -42,8 +49,9 @@ Also loads are not necessary for a modal analysis and can therefore be neglected
     :start-after: Loads
     :end-before: PID-controller
 
-The initialization of the pid-controller struct-field and the corresponding
-control variable called "count" comes here.
+Since no AMB's are intended for this model, no pidControllers are needed. Nevertheless the 
+initialization of the pidController is necessary to avoid errors. The initialization consists 
+of the assignment of a pidController field in the cnfg-struct and the definition of a control variable "count".
 
 .. literalinclude:: /../Examples/Simple_Laval/Config_Sim_Modal.m
     :language: matlab
@@ -51,8 +59,9 @@ control variable called "count" comes here.
     :start-after: PID-controller
     :end-before: Active Magnetic Bearing
 
-The initialization of the active magnetic bearing struct-field and the corresponding
-control variable called "count" comes here.
+No active magnetic bearings (AMB's) are intended for this model. Nevertheless the 
+initialization of the AMB is necessary to avoid errors. The initialization consists 
+of the assignment of a AMB field in the cnfg-struct and the definition of a control variable "count".
 
 .. literalinclude:: /../Examples/Simple_Laval/Config_Sim_Modal.m
     :language: matlab

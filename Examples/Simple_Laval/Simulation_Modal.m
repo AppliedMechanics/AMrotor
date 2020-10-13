@@ -8,11 +8,11 @@ clear all
 %% Import
 %% Import and formating of the figures
 
-import AMrotorSIM.* % path
-Config_Sim_Modal % corresponding cnfg-file
+import AMrotorSIM.*; % path
+Config_Sim_Modal; % corresponding cnfg-file
 
 Janitor = AMrotorTools.PlotJanitor(); % Instantiation of class PlotJanitor
-Janitor.setLayout(2,3); %Setting layout of the figures
+Janitor.setLayout(2,3); %Formatting of the figures
 
 %% Compute Rotor
 %% Assembly of the rotordynamic model
@@ -70,7 +70,7 @@ visufrf.set_plots('amplitude','db') % Amplitude plot of all FRF's
 visufrf.set_plots('phase','db') % Phase plot of all FRF's
 visufrf.set_plots('bode','log','deg') % Bode plot of all FRF's
 visufrf.set_plots('nyquist') % Nyquist plot of all FRF's
-Janitor.cleanFigures(); % Formating of the figures
+Janitor.cleanFigures(); % Formatting of the figures
 
 %% Modal analysis
 
@@ -87,7 +87,7 @@ esf.plot_displacements(); % Figures of the eigenmodes ...
                           % in specific directions
 esf.set_plots('half','Overlay') % Plots of the odd-numbered eigenmodes ... 
                                 % in overlay with the original rotor
-Janitor.cleanFigures(); % Formating of the figures
+Janitor.cleanFigures(); % Formatting of the figures
 
 
 %% Campbell diagramm
@@ -104,4 +104,4 @@ cmpDiagramm.print_critical_speeds() % Prints in the Command Window
 cmpDiagramm.set_plots('all'); % Figures
 % cmpDiagramm.set_plots('backward');
 % cmpDiagramm.set_plots('forward');
-Janitor.cleanFigures(); % Formating of the figures
+Janitor.cleanFigures(); % Formatting of the figures

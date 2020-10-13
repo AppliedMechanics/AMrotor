@@ -1,15 +1,11 @@
 Simple laval rotor example
 ==========================
 
-This is an example code for a simple laval rotor simulation without an active magnetic bearing. The code snippets can be copied and 
-pasted entirely in a Matlab script or can be found in the AMrotor folder under "examples".
+These are example codes (Configuration and Simulation scripts) for a simple Laval rotor simulation without active magnetic bearing (AMB). 
+The code snippets can be copied and pasted completely into empty Matlab scripts or can be found 
+in the AMrotor folder under "Examples".
 
-The config files for the modal analysis and the time integration have the same content. Nevertheless,
-the modal analysis config file has no force and sensors defined, since they are not necessary
-for the analysis.
-
-The simulation files of the modal analysis and the time integration call for different functions 
-because the focus of these analyses are different. 
+The simulation files of Laval_Modal and Laval_Time contain different analysis methods and therefore have a different focus. 
 
 .. toctree::
    :maxdepth: 2

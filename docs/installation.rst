@@ -10,12 +10,20 @@ Necessary Matlab-toolboxes are:
 * Curve Fitting Toolbox (for some special applications e.g. Fourierorbitdarstellung)
 
 
+******
+Source
+******
+The source code of AMrotor can be downloaded from `code`_.
+
+.. _code: https://github.com/AppliedMechanics/AMrotor
+
+
 **********
 First step
 **********	
 
-The folder of AMrotor needs to be in the Matlab-path. 
-This can be checked by the script InstallChecker.m in the code folder or:
+The folder of AMrotor must be located in the Matlab path. This can be checked with 
+the InstallChecker.m script in the code folder or the equivalent lines of code:
 
 .. code-block:: matlab 
   
@@ -29,12 +37,7 @@ This can be checked by the script InstallChecker.m in the code folder or:
    pfad = strcat(fileparts(which(mfilename)),'/pathdef.m');
    savepath pfad
 
-Afterwards the necessary scripts can be executed (see :ref:`Examples` and :ref:`Tutorial`). 
+Afterwards :mod:`AMrotor` is ready. The next steps can be found in :ref:`Tutorial` 
+and :ref:`Examples`. 
 
-******
-Source
-******
-The source code of AMrotor can be downloaded from `code`_.
-
-.. _code: https://github.com/AppliedMechanics/AMrotor
 

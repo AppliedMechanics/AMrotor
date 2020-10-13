@@ -8,36 +8,37 @@ Tutorial
 Basics
 ******
 
-A very brief tutorial of a Laval-rotor should show the working principle of AMrotor for building a rotordynamic model,
-followed by examples referring to the available analysis methods. To see more complex models check :ref:`Examples`.
+A brief tutorial of a Laval rotor should show the working principle of AMrotor for building 
+a rotordynamic model, followed by examples referring to the available analysis methods. 
+More advanced models can be found under :ref:`Examples`.
 
-To run a simulation with AMrotor, two scripts are necessary:
+To run a simulation with AMrotor, two scripts are required:
 
-* Configuration-script, contains all the necessary parameters for the subsequent simulation. These parameters contain
-  information about the rotor and all additional components. 
+* Configuration script, contains parameters with information about the rotor and all additional 
+  components. These parameters are processed in the subsequent Simulation script. 
 
-* Simulation-script, contains the assembly and the desired analyses applied on the model.
+* Simulation script, contains the composition of the model and the definition 
+  of desired analysis methods that are applied to the model.
 
+.. _Howtobuildamodel?:
 
 *********************
 How to build a model?
 *********************
 
-The scope of this tutorial is to build a simple Laval-rotor model with two simple radial bearings and
-a disc in the center modelled as part of the rotor (no extra disc component). The building of the model takes 
-part in both scripts.
+The scope of this tutorial is to build a simple Laval rotor model with two simple radial bearings 
+and a disk in the middle, which is modeled as part of the rotor (no additional disk component). 
 
 Configuration script
 ++++++++++++++++++++++++++
 
-The following config-script can be copied-and-pasted into an empty matlab script. The script
-must then be saved into the AMrotor path. For this tutorial we save the script with the name "Config_Tutorial"
-in the Simulation(Simulationen)-folder of AMrotor. Eventually the folder has to be added
-to the path. The name of the config-script is important, since it's later
-needed in the simulation-script. By running the saved script the config-struct (cnfg) will be build.
+The following Config script can be inserted into an empty Matlab script by copy and paste. The script
+must then be saved in the AMrotor path. For this tutorial we save the script under the name "Config_Tutorial"
+in the Simulation(Simulations)-folder of AMrotor. It may be necessary to add the folder explicitly to the path. The name of 
+the Configuration script is important, because it will be used later in the Simulation script. 
 
-For this simple example not all components (only rotor and bearings) are necessary, nevertheless it's essential that all
-components (sensors, pid-controllers, active magnetic bearings, ...) are initialized to prevent errors.
+For this simple example not all components (only rotor and bearings) are necessary, but it is important 
+that all components (sensors, pid controllers, active magnetic bearings, ...) are initialized to avoid errors.
 
 .. code-block:: matlab 
    :linenos:
@@ -116,14 +117,17 @@ components (sensors, pid-controllers, active magnetic bearings, ...) are initial
     cnfg.cnfg_activeMagneticBearing = [];
     count = 0;
 
+By executing the saved script the Config-struct (cnfg) will be created.
+
 Simulation script
 +++++++++++++++++++++++++
 
-After setting up the config-script the simulation-script has to be made. The following part
-of the simulation-script contains the asembly and the visualization of the model and can be copied-and-pasted into an
-empty Matlab script.
-Important for this tutorial is that the called config-script name in the simulation scipt is consistent to "Config_Tutorial" (line 9).
-The simulation script can be saved in the same folder as the corresponding config-script and then be executed.
+After setting up the Configuration script, the Simulation script must be created. 
+The following part of the Simulation script contains the assembly and visualization 
+of the model and can be inserted into an empty Matlab script by copy and paste.
+The Simulation script can be saved in the same folder as the corresponding Configuration 
+script. For this tutorial it is important that the name of the called Configuration script 
+in the Simulation script is equal to "Config_Tutorial" (line 9).
 
 .. code-block:: matlab 
    :linenos:
@@ -135,8 +139,8 @@ The simulation script can be saved in the same folder as the corresponding confi
     % clc
 
     %% Import and formating of the figures
-    import AMrotorSIM.* % path
-    Config_Tutorial % corresponding cnfg-file
+    import AMrotorSIM.*; % path
+    Config_Tutorial; % Corresponding cnfg-file
     Janitor = AMrotorTools.PlotJanitor(); % Instantiation of class PlotJanitor
     Janitor.setLayout(2,3); %Setting layout of the figures
 
@@ -153,33 +157,35 @@ The simulation script can be saved in the same folder as the corresponding confi
     r.rotor.show_2D(); % Plot of a side view of the rotor elements
     g=Graphs.Visu_Rotorsystem(r); % Instantiation of class Visu_Rotorsystem
     g.show(); % Plot of a 3D-isometry of the rotor with sensors, loads,...
-    Janitor.cleanFigures();
+    Janitor.cleanFigures(); % Formatting of the figures
 
-After the execution of the simulation-script the assembled rotor model will be visualized:
+After executing the Simulation script the following figures of the rotor model appear:
 
 .. image:: tutorial/2D-tutorial.png
     :width: 48 %
 .. image:: tutorial/3D-tutorial.png
     :width: 48 %
 
-More sophisticated examples with subsequent inegrated analysis methods can be found in :ref:`Examples`.
+More advanced examples including subsequent analysis methods can be found under :ref:`Examples`.
 
 
 ************************************
 How to make a **Campbell** analysis?
 ************************************
 
-.. note::  The following analysis method is not working with the previous "How to build a model?" example, since some
-           components (eg. sensors, loads, ...) are missing in this minimal example. For further information check :ref:`Examples`. 
+.. note::  The following analysis method does not work with the previous example :ref:`Howtobuildamodel?`, 
+           because in that minimal example some components (e.g. sensors, loads, ...) are missing. 
+           To merge a model with an analysis method see :ref:`Examples`. 
            
-           Generally, analysis methods
-           are defined in the simulation-script and can be devided into two sub-blocks:
+           In general, the analysis methods are defined in the Simulation script 
+           and can be divided into two sub-blocks:
 
            * Calculation code block
 
            * Visualization code block
 
-The following code snippet should show how the two code-blocks for a Cambell analysis would look like.
+To calculate and visualize a Campbell analysis, the following code is required 
+in the Simulation script after the lines of code for assembling the model.
 
 .. code-block:: matlab 
    :linenos:
@@ -195,24 +201,26 @@ The following code snippet should show how the two code-blocks for a Cambell ana
     cmpDiagramm.print_damping_zero_crossing(); % Prints in the Command Window
     cmpDiagramm.print_critical_speeds() % Prints in the Command Window
     cmpDiagramm.set_plots('all'); % Plots the visualization (Figures)
-    Janitor.cleanFigures(); % Formating of the figures
+    Janitor.cleanFigures(); % Formatting of the figures
 
 
 *********************************
 How to make a **Modal** analysis?
 *********************************
 
-.. note::  The following analysis method is not working with the previous "How to build a model?" example, since some
-           components (eg. sensors, loads, ...) are missing in this minimal example. For further information check :ref:`Examples`. 
+.. note::  The following analysis method does not work with the previous example :ref:`Howtobuildamodel?`, 
+           because in that minimal example some components (e.g. sensors, loads, ...) are missing. 
+           To merge a model with an analysis method see :ref:`Examples`. 
            
-           Generally, analysis methods
-           are defined in the simulation-script and can be devided into two sub-blocks:
+           In general, the analysis methods are defined in the Simulation script 
+           and can be divided into two sub-blocks:
 
            * Calculation code block
 
            * Visualization code block
 
-The following code snippet should show how the two code-blocks for a Modal analysis would look like.
+To calculate and visualize a Modal analysis, the following code is required 
+in the Simulation script after the lines of code for assembling the model.
 
 .. code-block:: matlab 
    :linenos:
@@ -230,7 +238,7 @@ The following code snippet should show how the two code-blocks for a Modal analy
                                 % in overlay with the original rotor
     esf.set_plots(10,'Overlay','Skip',5,'tangentialPoints',30,'scale',3); % ...
 				% Plot of the 3D mode shapes
-    Janitor.cleanFigures(); % Formating of the figures
+    Janitor.cleanFigures(); % Formatting of the figures
 
 .. _Stationary:
 
@@ -238,18 +246,20 @@ The following code snippet should show how the two code-blocks for a Modal analy
 How to make a **Stationary** time integration?
 **********************************************
 
-.. note::  The following analysis method is not working with the previous "How to build a model?" example, since some
-           components (eg. sensors, loads, ...) are missing in this minimal example. For further information check :ref:`Examples`. 
+.. note::  The following analysis method does not work with the previous example :ref:`Howtobuildamodel?`, 
+           because in that minimal example some components (e.g. sensors, loads, ...) are missing. 
+           To merge a model with an analysis method see :ref:`Examples`. 
            
-           Generally, analysis methods
-           are defined in the simulation-script and can be devided into two sub-blocks:
+           In general, the analysis methods are defined in the Simulation script 
+           and can be divided into two sub-blocks:
 
            * Calculation code block
 
            * Visualization code block
 
-In a stationary time integration the angular velocity of the rotor is kept at a constant
-value.
+To calculate and visualize a Stationary time integration, the following code is required 
+in the Simulation script after the lines of code for assembling the model.
+In a Stationary time integration, the angular velocity of the rotor is kept at a constant value.
 
 .. code-block:: matlab 
    :linenos:
@@ -280,7 +290,7 @@ value.
           fo.plot(sensor,2); % Fourierorbit 2nd order
           w.plot(sensor); % Waterfall
           w2.plot(sensor); % Waterfall 2sided
-         Janitor.cleanFigures(); % Formating of the figures
+         Janitor.cleanFigures(); % Formatting of the figures
     end
 
 .. _Runup:
@@ -289,15 +299,22 @@ value.
 How to make a **Run-up** time integration?
 ******************************************
 
-.. note::  The following analysis method is not working with the previous "How to build a model?" example, since some
-           components (eg. sensors, loads, ...) are missing in this minimal example. For further information check :ref:`Examples`. 
+.. note::  The following analysis method does not work with the previous example :ref:`Howtobuildamodel?`, 
+           because in that minimal example some components (e.g. sensors, loads, ...) are missing. 
+           To merge a model with an analysis method see :ref:`Examples`. 
            
-           Generally, analysis methods
-           are defined in the simulation-script and can be devided into two sub-blocks:
+           In general, the analysis methods are defined in the Simulation script 
+           and can be divided into two sub-blocks:
 
            * Calculation code block
 
            * Visualization code block
+
+To calculate and visualize a Run-up time integration, the following code is required 
+in the Simulation script after the lines of code for assembling the model.
+In a Run-up time integration, the angular velocity of the rotor is linearly 
+variable (up or down) over a defined range.
+
 
 .. code-block:: matlab 
    :linenos:
@@ -327,22 +344,26 @@ How to make a **Run-up** time integration?
           fo.plot(sensor,2); % Fourierorbit 2nd order
           w.plot(sensor); % Waterfall
           w2.plot(sensor); % Waterfall 2sided
-         Janitor.cleanFigures(); % Formating of the figures
+         Janitor.cleanFigures(); % Formatting of the figures
     end
 
 *******************************************
 How to get **FRF's** from the rotor system?
 *******************************************
 
-.. note::  The following analysis method is not working with the previous "How to build a model?" example, since some
-           components (eg. sensors, loads, ...) are missing in this minimal example. For further information check :ref:`Examples`. 
+.. note::  The following analysis method does not work with the previous example :ref:`Howtobuildamodel?`, 
+           because in that minimal example some components (e.g. sensors, loads, ...) are missing. 
+           To merge a model with an analysis method see :ref:`Examples`. 
            
-           Generally, analysis methods
-           are defined in the simulation-script and can be devided into two sub-blocks:
+           In general, the analysis methods are defined in the Simulation script 
+           and can be divided into two sub-blocks:
 
            * Calculation code block
 
            * Visualization code block
+
+To calculate and visualize frequency response functions (FRF's), the following code is required 
+in the Simulation script after the lines of code for assembling the model.
 
 .. code-block:: matlab 
    :linenos:
@@ -370,24 +391,28 @@ How to get **FRF's** from the rotor system?
     visufrf.set_plots('phase','db') % Phase plot of all FRF's
     visufrf.set_plots('bode','log','deg') % Bode plot of all FRF's
     visufrf.set_plots('nyquist') % Nyquist plot of all FRF's
-    Janitor.cleanFigures(); % Formating of the figures
+    Janitor.cleanFigures(); % Formatting of the figures
 
 ***********************************************************
 How to get **FRF's from time signals** of the rotor system?
 ***********************************************************
 
-.. note::  The following analysis method is not working with the previous "How to build a model?" example, since some
-           components (eg. sensors, loads, ...) are missing in this minimal example. For further information check :ref:`Examples`. 
+.. note::  The following analysis method does not work with the previous example :ref:`Howtobuildamodel?`, 
+           because in that minimal example some components (e.g. sensors, loads, ...) are missing. 
+           To merge a model with an analysis method see :ref:`Examples`. 
            
-           Generally, analysis methods
-           are defined in the simulation-script and can be devided into two sub-blocks:
+           In general, the analysis methods are defined in the Simulation script 
+           and can be divided into two sub-blocks:
 
            * Calculation code block
 
            * Visualization code block
 
-FRF's from time signals is based on results from prviously performed time integrations (check Stationary: :ref:`Stationary` or Runup: :ref:`Runup` 
-containing the desired rotation speed (rpm).
+To calculate and visualize frequency response functions (FRF's) from time signals, the following code is required 
+in the Simulation script after the lines of code for assembling the model.
+FRF's from time signals are based on results of previously performed time integrations (see Stationary: :ref:`Stationary` or Runup: :ref:`Runup`). 
+It is essential that the desired rotation speed (rpm) for the FRF's is included in the results from the time integrations 
+performed previously.
 
 .. code-block:: matlab 
    :linenos:
@@ -399,5 +424,6 @@ containing the desired rotation speed (rpm).
     frf.calculate(r.sensors(2),r.sensors(1),[1100],'u_x','u_x',4,'boxcar'); % Calculation
 
     %% Visualization
-    visufrf = Graphs.Frequenzgangfunktion(frf);
-    visufrf.set_plots('bode','log','deg','coh');
+    visufrf = Graphs.Frequenzgangfunktion(frf); % Instantiation of class FrequenzgangfunktionTime
+    visufrf.set_plots('bode','log','deg','coh'); % Plot of the FRF's
+    Janitor.cleanFigures(); % Formatting of the figures

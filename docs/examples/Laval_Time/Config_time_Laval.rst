@@ -1,11 +1,10 @@
 Config_file_example
 +++++++++++++++++++++
 
-This is an example code for a config file of a simple Laval rotor. All the code snippets can
-be copied and pasted together in a Matlab script and executed directly. The hidden (commented out) 
-code parts should show former possibilities.
+This is a working example code for a Configuration file of a simple Laval rotor. All code snippets can
+be copied and pasted together in a Matlab script and executed directly. 
 
-The first step is the definition of the rotor/shaft. These definition can be devided
+The first step is the definition of the rotor/shaft. This definition can be devided
 into three parts: definition of the material parameters, the geometry of the rotor and the
 properties of the mesh.
 

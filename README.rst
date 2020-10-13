@@ -4,12 +4,13 @@
 AMrotor
 -------
 
-AMrotor is an object-oriented matlab-based toolbox for rotor dynamics. The toolbox provides the main component
-"rotor", which can be modelled with Timoshenko beam elements. In addition to this, different components, from simple static elements such as
-"disc" (additional massand moment of inertia) or "bearing" (spring-damper elements) to active components such as "active magnetic bearings (AMB)" 
-with "controllers", are available. After building the model, various common analysis methods (FFT, FRF, Orbits, ...) are available.
+AMrotor is an object-oriented matlab-based toolbox for rotor dynamics. The toolbox is built around the main component "rotor", 
+which can be modeled with Timoshenko beam elements. Furthermore, various components are available, from simple static elements 
+such as "disc" (additional mass and moment of inertia) or "bearing" (spring-damper elements) to active components such as 
+"active magnetic bearings (AMB)" with "pidController". 
+After creating the model and eventual application of external loads (or forces), several common analysis methods (FFT, FRF, Orbits, ...) can be performed.
 
-Thus AMrotor is an easy to use, flexible and mighty toolbox for quick tests as well as sophisticated rotor modells. 
+This makes AMrotor an easy to use, flexible and powerful toolbox for fast tests as well as for sophisticated rotor models. 
 
 Documentation of the code
 -------------------------
@@ -19,7 +20,7 @@ The documentation, necessary software and some useful examples can be found on R
 Citation
 --------
 
-Paper with reference to the toolbox are:
+Paper with reference to the toolbox and more specific information about the mathematical background are:
 
 .. [1] AMrotor – A MATLAB Toolbox for the Simulation of Rotating Machinery, Johannes Maierhofer, M.Kreutz, T.Mulser, T. Thümmel, D. Rixen. 
 .. [2] Comparison of different time integration schemes and application to a rotor system with magnetic bearings in Matlab, Michael Kreutz, J. Maierhofer, T. Thümmel, D. Rixen

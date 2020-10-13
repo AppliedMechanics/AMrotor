@@ -3,7 +3,10 @@
 Examples
 ========
 
-The following example should guarantee an easy start with AMrotor.
+The following examples should help to get familiar with :mod:`AMrotor` more quickly. The examples can be found (together with others) 
+in the "Examples" and "Simulations" folders of the AMrotor directory.
+
+The examples are linked to the corresponding scripts, so that changes there lead to changes in the documentation.
 
 .. toctree::
    :maxdepth: 2

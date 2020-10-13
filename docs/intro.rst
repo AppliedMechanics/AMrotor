@@ -21,7 +21,7 @@ is meant to be a research code which focuses more on easy architecture than on
 execution performance. The goal is to enable easy implementation of new components
 with own methods and testing them.
 
-Paper with reference to the toolbox are:
+Paper with reference to the toolbox and more specific information about the mathematical background are:
 
 .. [1] AMrotor – A MATLAB Toolbox for the Simulation of Rotating Machinery, Johannes Maierhofer, M.Kreutz, T.Mulser, T. Thümmel, D. Rixen. 
 .. [2] Comparison of different time integration schemes and application to a rotor system with magnetic bearings in Matlab, Michael Kreutz, J. Maierhofer, T. Thümmel, D. Rixen
