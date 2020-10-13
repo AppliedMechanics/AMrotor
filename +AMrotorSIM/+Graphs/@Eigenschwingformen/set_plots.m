@@ -9,11 +9,23 @@ function set_plots(obj,Selection,varargin)
 %    :type varargin: char
 %    :return: Figures with 3D visualisation of the mode shapes
 
-%    :param Selection: Parameters for plotting all mode shapes ('All') or only every second one ('Half')
-% 3D visualisation of the eigenshapes of the rotorsystem
+% Selection options:
+%             'All','all','a','A': Plot all mode shapes 
+%             'Half','half','h','H': Plot every second mode shape (if mode shapes are symmetric)
+%             10 : Plot of the 10th mode shape
+
+% Varargin options:
+%             'overlay','o': Mode shapes with the original rotor 
+%             'Skip',5: Plot circle at every 5th node along z-axis
+%             'tangentialPoints',30: Discretization of the circles (30 points)
+%             'scale',3: Multiply eigenvectors by 3 for visualization
+
+% Examples:
 %   esf.set_plots('half') % 'all', 'half' or desired mode number
 %   esf.set_plots('half','overlay')
 %   esf.set_plots(10,'Overlay','Skip',5,'tangentialPoints',30,'scale',3) specify additional options, first input is index of mode
+
+
     obj.set_color_number();
     num = obj.modalsystem.get_number_of_eigenvalues();
     

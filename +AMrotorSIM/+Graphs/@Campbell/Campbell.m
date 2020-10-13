@@ -41,7 +41,10 @@ classdef Campbell < handle
         %    :return: Disc object
             
         %   set_plots(obj,Selection)
-        %   Selection: 'all','forward','backward'
+        %   Selection:  'all': forward and backward whirl
+        %               'forward': only forward whirl
+        %               'backward': only backward whirl
+        
             obj.set_color_number();
             switch Selection
                 case {'Forward','forward','f','F'}

@@ -7,12 +7,6 @@ function scaleEigenvector = get_scale_eigenvector(obj,userInputCell)
 %    :type userInputCell: cell
 %    :return: Scale factor
 
-% moduloOfNodesToPlot = determine_modulo_of_nodes_to_plot(obj,userInputCell)
-% for example: 
-%   moduloOfNodesToPlot = 1 -> plot circle at every node
-%   moduloOfNodesToPlot = 2 -> plot circle at every second node
-%   ...
-%   moduloOfNodesToPlot = 10 -> plot circle at every tenth node
 
 str{1} = 'scale';
 str{2} = 'sc';

@@ -1,5 +1,6 @@
 Config_file_example
-===================
++++++++++++++++++++++
+
 This is an example code for a config file of a simple Laval rotor. All the code snippets can
 be copied and pasted together in a Matlab script and executed directly. The hidden (commented out) 
 code parts should show former possibilities.

@@ -170,7 +170,9 @@ How to make a **Campbell** analysis?
 ************************************
 
 .. note::  The following analysis method is not working with the previous "How to build a model?" example, since some
-           components (eg. sensors, loads, ...) are missing in this minimal example. Generally, analysis methods
+           components (eg. sensors, loads, ...) are missing in this minimal example. For further information check :ref:`Examples`. 
+           
+           Generally, analysis methods
            are defined in the simulation-script and can be devided into two sub-blocks:
 
            * Calculation code block
@@ -201,7 +203,9 @@ How to make a **Modal** analysis?
 *********************************
 
 .. note::  The following analysis method is not working with the previous "How to build a model?" example, since some
-           components (eg. sensors, loads, ...) are missing in this minimal example. Generally, analysis methods
+           components (eg. sensors, loads, ...) are missing in this minimal example. For further information check :ref:`Examples`. 
+           
+           Generally, analysis methods
            are defined in the simulation-script and can be devided into two sub-blocks:
 
            * Calculation code block
@@ -235,7 +239,9 @@ How to make a **Stationary** time integration?
 **********************************************
 
 .. note::  The following analysis method is not working with the previous "How to build a model?" example, since some
-           components (eg. sensors, loads, ...) are missing in this minimal example. Generally, analysis methods
+           components (eg. sensors, loads, ...) are missing in this minimal example. For further information check :ref:`Examples`. 
+           
+           Generally, analysis methods
            are defined in the simulation-script and can be devided into two sub-blocks:
 
            * Calculation code block
@@ -284,7 +290,9 @@ How to make a **Run-up** time integration?
 ******************************************
 
 .. note::  The following analysis method is not working with the previous "How to build a model?" example, since some
-           components (eg. sensors, loads, ...) are missing in this minimal example. Generally, analysis methods
+           components (eg. sensors, loads, ...) are missing in this minimal example. For further information check :ref:`Examples`. 
+           
+           Generally, analysis methods
            are defined in the simulation-script and can be devided into two sub-blocks:
 
            * Calculation code block
@@ -327,7 +335,9 @@ How to get **FRF's** from the rotor system?
 *******************************************
 
 .. note::  The following analysis method is not working with the previous "How to build a model?" example, since some
-           components (eg. sensors, loads, ...) are missing in this minimal example. Generally, analysis methods
+           components (eg. sensors, loads, ...) are missing in this minimal example. For further information check :ref:`Examples`. 
+           
+           Generally, analysis methods
            are defined in the simulation-script and can be devided into two sub-blocks:
 
            * Calculation code block
@@ -367,7 +377,9 @@ How to get **FRF's from time signals** of the rotor system?
 ***********************************************************
 
 .. note::  The following analysis method is not working with the previous "How to build a model?" example, since some
-           components (eg. sensors, loads, ...) are missing in this minimal example. Generally, analysis methods
+           components (eg. sensors, loads, ...) are missing in this minimal example. For further information check :ref:`Examples`. 
+           
+           Generally, analysis methods
            are defined in the simulation-script and can be devided into two sub-blocks:
 
            * Calculation code block
