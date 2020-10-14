@@ -8,8 +8,11 @@ uses spring-damper elements to approximate the magnetic bearing behaviour.
 .. image:: ./Schema_MBTR.png
 
 
-.. toctree::
-   :maxdepth: 2
+.. .. toctree::
+   .. :maxdepth: 2
 
-   ./MBTR/Config_file_MBTR
-   ./MBTR/Simulation_file_MBTR
+   .. ./MBTR/Config_file_MBTR
+   .. ./MBTR/Simulation_file_MBTR
+
+.. include:: MBTR/Config_file_MBTR.rst
+.. include:: MBTR/Simulation_file_MBTR.rst

@@ -1,7 +1,7 @@
 Simulation_file_LavalModal
 ++++++++++++++++++++++++++
 
-This is an example code for a working simulation file of a simple Laval rotor for system analyses (Campbell, Modal, FRF analyses).
+This is an example code for a working Simulation file of a simple Laval rotor for system analyses (Campbell, Modal, FRF analyses).
 All code snippets can be copied and pasted into a Matlab script in the given order (recommended) and executed directly.
 
 Closing of all previous figures and cleaning of the workspace:
@@ -20,8 +20,10 @@ Import the file path and the corresponding Configuration file:
     :Start-after: Import
     :End-before: Compute Rotor
 
-Assembly and visualization of the model. The assembly of the model 
-is the most important part of the Simulation file and must be done before the analyses:
+Assembly and visualization of the model:
+
+.. note:: The assembly of the model 
+          is the most important part of the Simulation file and must be done before the analyses.
 
 .. literalinclude:: /../Examples/Simple_Laval/Simulation_Modal.m
     :language: matlab

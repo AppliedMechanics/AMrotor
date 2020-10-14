@@ -15,7 +15,7 @@ function [f,H,C] = calculate(obj,sensorIn,sensorOut,rpm,inputDirection,outputDir
 %    :type outputDirection: vector (char)
 %    :param numberOfBlocks: Amount of blocks for the FFT
 %    :type numberOfBlocks: double
-%    :param windowShape: Window type
+%    :param windowShape: Window type (check Matlab windows)
 %    :type windowShape: string
 %    :return: Frequency range (f), FRF-matrix (H) and Coherence-matrix (C)
 

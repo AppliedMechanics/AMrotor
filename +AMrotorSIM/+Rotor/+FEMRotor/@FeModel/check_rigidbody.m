@@ -1,9 +1,15 @@
 % Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 function f=check_rigidbody(self)
-% Checks for the translational rigid bodies??????????????
+% Checks for the translational rigid body modes by calculating the internal forces f
 %
-%    :return: Translational force vector f from rigid body stiffness
+%    :return: Internal force f (0 for rigid bodies)
+%    :rtype: vector
+
+% Explanation: "A special kind of eigenmode are displacement 
+% modes which do not generate internal forces: the rigid body modes u. 
+% They satisfy the fundamental relation Ku = 0."
+% (Script: Engineering Dynamics, Chap.: 5.1.1)
 
  u=zeros(6*length(self.mesh.nodes),1);
 

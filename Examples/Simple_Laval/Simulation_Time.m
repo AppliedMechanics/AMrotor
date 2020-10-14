@@ -45,16 +45,13 @@ g.show(); % Plot of a 3D-isometry of the rotor with sensors, loads,...
 St_Lsg = Experiments.Stationaere_Lsg(r,[1000,1200],(0:0.001:0.02)); % In...
     %stantiation of class Stationaere_Lsg
     
-% options.adapt=true; options.locTolUpper=1e-3; 
-% options.locTolLower=1e-4; options.globTol=1;
-
 St_Lsg.compute_ode15s_ss; % ode15s - method
 % St_Lsg.compute_euler_ss; % Forward euler - method (in progress)
 % St_Lsg.compute_newmark; % newmark - method
+% options.adapt=true; options.locTolUpper=1e-3; 
+% options.locTolLower=1e-4; options.globTol=1;
 % St_Lsg.compute_newmark(options); % newmark - method with options
 % St_Lsg.compute_sys_ss_variant; (in progress)
-
-% St_Lsg.save_data('St_Lsg_Laval_U_fwd_bwd_sweep_0_2krpm');
 
 %% Run up with avaliable calculation methods
 
@@ -65,20 +62,20 @@ St_Lsg.compute_ode15s_ss; % ode15s - method
 
 %% FRF over time
 
-frf = Experiments.FrequenzgangfunktionTime(St_Lsg); % Instantiation ...
+frf = Experiments.FrequenzgangfunktionTime(St_Lsg,'FRF time'); % Instantiation ...
                                         % of class FrequenzgangfunktionTime
 
 frf.calculate(r.sensors(2),r.sensors(1),[1000],'u_x','u_x',4,'boxcar'); % .
-                                        % Carries out the calculation
+                                        % Calculation
 
 %% Plot results
-%% Processing and visualization of the results
+%% Export and visualization of the results
+%% Export
 
 d = Dataoutput.TimeDataOutput(St_Lsg); % Instantiation of class ...
                                        % TimeDataOutput
-% d = Dataoutput.TimeDataOutput(Runup);
-
-%% Processing and saving results
+% d = Dataoutput.TimeDataOutput(Runup);% Instantiation of class ...
+                                       % TimeDataOutput
 
 % dataset_modalanalysis = d.compose_data(); % container: rpm -> 
 %                                           % (n,t,allsensorsxy)
@@ -90,7 +87,8 @@ d = Dataoutput.TimeDataOutput(St_Lsg); % Instantiation of class ...
 
 %% Visualizing results
 
-Lsg=St_Lsg;
+Lsg=St_Lsg; % Lsg=Runup;
+
 t = Graphs.TimeSignal(r, Lsg); % Instantiation of class TimeSignal
 o = Graphs.Orbitdarstellung(r, Lsg); % Instantiation of class ...
                                      % Orbitdarstellung
@@ -103,8 +101,10 @@ w = Graphs.Waterfalldiagramm(r, Lsg); % Instantiation of class ...
 w2 = Graphs.WaterfalldiagrammTwoSided(r, Lsg); % Instantiation of class ...
                                                % WaterfalldiagrammTwoSided
 
-visufrf = Graphs.Frequenzgangfunktion(frf);
-visufrf.set_plots('bode','log','deg','coh');
+visufrf = Graphs.Frequenzgangfunktion(frf); % Instantiation of class ...
+                         % Frequenzgangfunktion for visualization
+visufrf.set_plots('bode','log','deg','coh'); % Figures
+Janitor.cleanFigures(); % Formatting of the figures
 
  for sensor = r.sensors % Loop over all sensors for plotting
           t.plot(sensor,[1,2,3]); % Time signal
@@ -114,5 +114,5 @@ visufrf.set_plots('bode','log','deg','coh');
           fo.plot(sensor,2); % Fourierorbit 2nd order
           w.plot(sensor); % Waterfall
           w2.plot(sensor); % Waterfall 2sided
-          Janitor.cleanFigures();
+          Janitor.cleanFigures(); % Formatting of the figures
  end

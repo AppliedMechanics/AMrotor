@@ -47,12 +47,11 @@ Runup = Experiments.Hochlaufanalyse(r,[0,1e3],(0:0.001:0.2)); % In...
     %stantiation of class Hochlaufanalyse (Runup)
 Runup.compute_ode15s_ss % ode15s - method
 
-%% Processing and visualization of the results
+%% Export and visualization of the results
+%% Export
 
 d = Dataoutput.TimeDataOutput(Runup); % Instantiation of class ...
                                        % TimeDataOutput
-
-%% Processing and saving results
 
 % dataset = d.compose_data(); % container: rpm -> 
                                           % (n,t,allsensorsxy)
@@ -74,6 +73,6 @@ f = Graphs.Fourierdarstellung(r, Lsg); % Instantiation of class ...
  for sensor = r.sensors
           t.plot(sensor); % Time signal
           f.plot(sensor); % Fourier
-          Janitor.cleanFigures();
+          Janitor.cleanFigures(); % Formatting of the figures
  end
  

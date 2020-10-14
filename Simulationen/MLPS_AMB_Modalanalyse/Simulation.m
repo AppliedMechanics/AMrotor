@@ -12,7 +12,7 @@ import AMrotorSIM.* % path
 Config_Sim_eingebaut % corresponding cnfg-file
 
 Janitor = AMrotorTools.PlotJanitor(); % Instantiation of class PlotJanitor
-Janitor.setLayout(2,3); %Setting layout of the figures
+Janitor.setLayout(2,3); % Setting layout of the figures
 
 %% Compute Rotor
 %% Assembly of the rotordynamic model
@@ -60,7 +60,7 @@ esf.plot_displacements(); % Plots the 2D mode shapes
                                 % in overlay with the original rotor
 esf.set_plots(10,'Overlay','Skip',5,'tangentialPoints',30,'scale',3) % ...
             % Plot of the 3D mode shapes
-Janitor.cleanFigures();
+Janitor.cleanFigures(); % Formatting of the figures
 
 %% Campbell analysis
 
@@ -74,7 +74,7 @@ cmpDiagramm = Graphs.Campbell(cmp); % Instantiation of ...
 cmpDiagramm.print_damping_zero_crossing(); % Prints in the Command Window
 cmpDiagramm.print_critical_speeds() % Prints in the Command Window
 cmpDiagramm.set_plots('all'); % Figures
-Janitor.cleanFigures();
+Janitor.cleanFigures(); % Formatting of the figures
 
 %% Running Time Simulation
 %% Running Time Simulation
@@ -88,12 +88,11 @@ St_Lsg.compute_ode15s_ss; % ode15s - method
 %St_Lsg.compute_newmark; % newmark - method
 %St_Lsg.compute_sys_ss_variant; state space method(in progress) 
 
-%% Processing and visualization of the results
+%% Export and visualization of the results
+%% Export
 
 d = Dataoutput.TimeDataOutput(St_Lsg); % Instantiation of class ...
                                        % TimeDataOutput
-
-%% Processing and saving results
 dataset_modalanalysis = d.compose_data(); % container: rpm -> 
                                           % (n,t,allsensorsxy)
 d.save_data(dataset_modalanalysis,'jm_whirling-chirp_500rpm');
@@ -120,5 +119,5 @@ w2 = Graphs.WaterfalldiagrammTwoSided(r, St_Lsg); % Instantiation of ...
           fo.plot(sensor,2); % Fourierorbit 2nd order
           w.plot(sensor); % Waterfall
           w2.plot(sensor); % Waterfall 2sided
-         Janitor.cleanFigures();
+         Janitor.cleanFigures(); % Formatting of the figures
  end

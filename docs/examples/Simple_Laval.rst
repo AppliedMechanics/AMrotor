@@ -1,3 +1,5 @@
+.. _Laval:
+
 Simple laval rotor example
 ==========================
 

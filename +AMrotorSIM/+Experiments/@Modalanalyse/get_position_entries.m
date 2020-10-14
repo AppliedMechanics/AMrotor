@@ -5,7 +5,7 @@ function Vpos = get_position_entries(obj,V,mat)
 %
 %    :param V: Eigenvectors columnwise
 %    :type V: matrix
-%    :param mat: State space matrices A,B
+%    :param mat: State space matrices A,B (mat.A,mat.B)
 %    :type mat: struct
 %    :return: Eigenvectormatrix with only position entries
 
