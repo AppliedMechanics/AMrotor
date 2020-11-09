@@ -1,9 +1,9 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function set_backward_plots(obj)
 % Organizes and assembles the plots of omega over rpm (for Selection 'backward') 
 %
 %    :return:  Campbell diagram with bwd whirl relative to omega
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 figure('Name','Campbell-Diagramm (Backward)','NumberTitle','off');
             axBackward = subplot(1,1,1);

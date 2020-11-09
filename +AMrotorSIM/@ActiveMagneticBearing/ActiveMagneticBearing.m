@@ -1,9 +1,10 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef ActiveMagneticBearing < handle
 % ActiveMagneticBearing class for AMB's
 
 %   Creates other objects of the type SimpleBearing and pidController
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
     properties
         cnfg
         name

@@ -1,7 +1,8 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef Orbitdarstellung < handle
 % Class for visualization of the orbit as result of the time integration
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
    properties
     unit
     rotorsystem

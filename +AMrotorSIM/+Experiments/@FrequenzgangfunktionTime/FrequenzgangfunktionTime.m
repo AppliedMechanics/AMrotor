@@ -1,28 +1,25 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef FrequenzgangfunktionTime < handle
 % Class for calculation of frequency response functions from time signals
+%
+% See also AMrotorSIM.Graphs.Frequenzgangfunktion,AMrotorSIM.Experiments.Stationaere_Lsg
 
 %     This class calculates the frequency response function between
 %     specified sensors using he abravibe toolbox
 %     Just für SISO: First step, maybe later expansion to MIMO
-%   f... frequency array nFreq x 1
-%   H... matrix of frf's: nFreq x nResponses x nInputForce
-%   type... acceleration 'a', velocity 'v', displacement 'd'
-%   descriptionsH... description of entries in H for plot, cells
-% See also AMrotorSIM.Graphs.Frequenzgangfunktion
-% AMrotorSIM.Experiments.Stationaere_Lsg
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 
     properties
         name
         experiment
-        f 
-        H
+        f; % frequency array nFreq x 1
+        H; % matrix of frf's: nFreq x nResponses x nInputForce
         C
         sensorIn
         sensorOut
-        descriptionsH 
-        type 
+        descriptionsH; % description of entries in H for plot, cells
+        type; % acceleration 'a', velocity 'v', displacement 'd'
         unit
         inputDirection
         outputDirection

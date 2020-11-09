@@ -1,18 +1,13 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef GeoNode < handle
 % Class of the geometric nodes which are used to build the discretisation
 
-% Description of noteworthy properties:
-%         x   % outer radius
-%         xi  % inner radius
-%         z   % axial position on the rotor
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
     properties
         name 
-        x   
-        xi 
-        z  
+        x; % outer radius   
+        xi; % inner radius 
+        z; % axial position on the rotor  
     end
     
     methods

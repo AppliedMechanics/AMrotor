@@ -1,9 +1,10 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef Fourierdarstellung < handle
 % Class for visualization of the time integration results as fourier transform
 
 % abtastrate... sampling rate
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 properties
     unit
     rotorsystem

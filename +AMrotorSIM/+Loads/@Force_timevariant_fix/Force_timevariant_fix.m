@@ -1,7 +1,7 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef Force_timevariant_fix < AMrotorSIM.Loads.Load
 % Class for sine-force with constant frequency, amplitude and direction
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 properties
    end

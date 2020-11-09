@@ -1,7 +1,8 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef Force_constant_fix < AMrotorSIM.Loads.Load
 % Class of force with constant amplitude and direction
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
    properties
    end
    methods

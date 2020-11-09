@@ -1,7 +1,8 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef Force_timevariant_whirl_bwd < AMrotorSIM.Loads.Load
 % Class of backward whirl with constant frequency, amplitude and direction
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
    properties
    end
    methods

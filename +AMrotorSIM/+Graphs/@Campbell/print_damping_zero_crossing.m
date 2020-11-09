@@ -1,9 +1,9 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function [ZeroCrossingForward, ZeroCrossingBackward] = print_damping_zero_crossing(obj)
 % Prints the zero crossings of damping, which indicates instability
 %
 %    :return: Display of the zero crossings of damping in the Command Window
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 omega = obj.experimentCampbell.get_omega();
 EW = obj.experimentCampbell.get_eigenvalues();

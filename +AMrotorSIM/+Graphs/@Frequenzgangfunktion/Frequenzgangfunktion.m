@@ -1,10 +1,12 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef Frequenzgangfunktion < handle
 % Class for visualization of the frequency response functions (FRF)
+%
+% See also AMrotorSIM.Experiments.Frequenzgangfunktion
 
 % paramPlot... parameters for the visualisation
-% See also AMrotorSIM.Experiments.Frequenzgangfunktion
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
     properties
         Name = 'Visualization frequency response function';
         experimentFRF;
@@ -36,7 +38,7 @@ classdef Frequenzgangfunktion < handle
             %    :param varargin: Variable input argument (check function)
             %    :type varargin: char
             %    :return: Figures of the FRF's
-
+           
         % main method for user
         % set_plots(obj,Selection,inputDirection,outputDirection,varargin)
         % 

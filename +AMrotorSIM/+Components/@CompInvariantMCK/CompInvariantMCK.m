@@ -1,7 +1,8 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef CompInvariantMCK < AMrotorSIM.Components.Component
 % CompMatrixInvariant class for pre-assigned mass, damping, stiffness matrices added to one node, invariant i.e. independent of time, rpm, ..
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
     properties
     end
     methods

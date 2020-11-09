@@ -1,7 +1,8 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef Force_timevariant_LUT < AMrotorSIM.Loads.Load
 % Class of force from Look Up table (LUT)
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
    properties
    end
    methods

@@ -10,6 +10,8 @@ function f=check_rigidbody(self)
 % modes which do not generate internal forces: the rigid body modes u. 
 % They satisfy the fundamental relation Ku = 0."
 % (Script: Engineering Dynamics, Chap.: 5.1.1)
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
  u=zeros(6*length(self.mesh.nodes),1);
 

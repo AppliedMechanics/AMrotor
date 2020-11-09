@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function x0 = get_zero_crossing(self,omega,y)
 % Extracts the smallest zero crossing of omega and y (y is Eigenvalue depending on the application)
 %
@@ -15,6 +13,8 @@ function x0 = get_zero_crossing(self,omega,y)
 % crossing of the damping to find the stability limit of the system
 % 
 % x0 = get_zero_crossing(self,x,y)
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 x0=[];
 i=find(diff(sign(y))<0); % Uebergang von positiv zu negativen Werten

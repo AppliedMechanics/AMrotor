@@ -1,7 +1,9 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 
 classdef CompLUTMCK < AMrotorSIM.Components.Component
 % CompLUTMCK class for variable (e.g variable over rpm) mass, damping, stiffness matrices from Look-Up-Table 
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
     properties
         integrationProblemFlag = true

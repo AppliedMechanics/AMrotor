@@ -1,14 +1,15 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef TimeDataOutput < handle
 % TimeDataOutput class for writing results (from sensors) of time integration in file
+%
+% See also SAVE_DATA, COMPOSE_DATA, COMPOSE_DATA_SENSOR_WISE, CONVERT_DATA_TO_STRUCT_SENSOR_WISE
 
 %   Extracts the result data from the time integration of particular nodes;
 %   These nodes correspond to Sensor positions 
 %   Results are written in the form of a container and saved to a file on
 %   the hard drive
 %
-%   See also SAVE_DATA, COMPOSE_DATA, COMPOSE_DATA_SENSOR_WISE, CONVERT_DATASET_TO_STRUCT_SENSOR_WISE.
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+ 
     properties
         rotorsystem
         experiment_result

@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function plot_omegas(ax,rpm,EW,color)
 % Plots the imaginary part of the eigenvalue in the campbell diagram (damped angular eigenfrequencies omega_d)
 %
@@ -12,6 +10,8 @@ function plot_omegas(ax,rpm,EW,color)
 %    :parameter color: Color in RGB
 %    :type color: vector
 %    :return: Campbell diagram with imaginary part of the eigenvalue (omega) over rotation speed
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
     plot(ax,rpm,imag(EW)/2/pi,...
               'Color',color)

@@ -1,9 +1,9 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef Rotorsystem < handle
 % Rotorsystem is the basis class for a rotor system. 
 
 % R=ROTORSYSTEM(cnfg,'System');
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
    properties      
       name 

@@ -1,7 +1,7 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef (Abstract) Component < matlab.mixin.Heterogeneous & handle
 % Superclass (abstract) for all components such as bearings, discs, seals, ecc.
+%
+% See also AMrotorSIM.Components.Bearings, AMrotorSIM.Components.Seals, AMrotorSIM.Components.Disc, AMrotorSIM.Components.CompLUTMCK, AMrotorSIM.Loads
 
 %that are added to the rotor matrices
 %   Component-objects are added to the left-hand side of the system's
@@ -11,9 +11,7 @@ classdef (Abstract) Component < matlab.mixin.Heterogeneous & handle
 % for objects, that are added to the right-hand side of the equation see
 % the Loads-Superclass
 % 
-% See also AMrotorSIM.Components.Bearings, AMrotorSIM.Components.Seals,
-% AMrotorSIM.Components.Disc, AMrotorSIM.Components.CompLUTMCK,
-% AMrotorSIM.Loads
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
     properties
         name 

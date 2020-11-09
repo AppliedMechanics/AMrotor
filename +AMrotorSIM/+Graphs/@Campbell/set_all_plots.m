@@ -1,9 +1,9 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function set_all_plots(obj)
 % Organizes and assembles the plots of omega over rpm (for Selection 'all') 
 %
 %    :return:  Campbell diagram with fwd and bwd whirl relative to omega
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 figure('Name','Campbell-Diagramm (All)','NumberTitle','off');
             axAll = subplot(2,2,[1,3]);

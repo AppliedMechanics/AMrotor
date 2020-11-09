@@ -1,11 +1,10 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef Element < handle
 % Superclass (abstract) for different element formulations for FEA
-
-% Description of noteworthy properties:
-%           I_p % geometrical moment of inertia (polar)
+%
 % See also AMrotorSIM.Rotor.FEMRotor.Element.TimoshenkoLinearElement
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
     properties
         name
         node1
@@ -18,7 +17,7 @@ classdef Element < handle
         radius_outer
         radius_inner
         mass
-        I_p 
+        I_p; % geometrical moment of inertia (polar) 
         I_y
         mass_matrix
         stiffness_matrix

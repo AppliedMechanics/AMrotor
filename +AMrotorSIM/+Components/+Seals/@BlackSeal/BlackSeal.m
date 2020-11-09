@@ -1,7 +1,7 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef BlackSeal < AMrotorSIM.Components.Seals.Seal
 % Class for seals of type Black (BlackSeal)
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
    properties
    end

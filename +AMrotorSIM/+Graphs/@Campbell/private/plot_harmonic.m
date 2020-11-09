@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function plot_harmonic( ax,rpm )
 % Plots the first harmonic in the diagram
 %
@@ -8,6 +6,8 @@ function plot_harmonic( ax,rpm )
 %    :parameter rpm: Rotation speed
 %    :type rpm: vector
 %    :return: Dashed line of the first harmonic
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
    
     plot(ax,rpm,rpm/60,'Color','black','LineStyle','--');
 

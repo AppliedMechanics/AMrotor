@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef Fourierorbitdarstellung < handle
 % Class for visualisation of the orbit provided from the Fourier transform
 
@@ -7,6 +5,9 @@ classdef Fourierorbitdarstellung < handle
 % developed from the fourier transform and inverse fourier transform of the
 % results of the time integration
 % This class's method plot requires the Matlab curve fitting toolbox.
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
  properties
     unit
     rotorsystem

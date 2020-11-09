@@ -1,9 +1,9 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function set_forward_plots( obj )
 % Organizes and assembles the plots of omega over rpm (for Selection 'forward') 
 %
 %    :return:  Campbell diagram with fwd whirl relative to omega
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 figure('Name','Campbell-Diagramm (Forward)','NumberTitle','off');
             axForward = subplot(1,1,1);

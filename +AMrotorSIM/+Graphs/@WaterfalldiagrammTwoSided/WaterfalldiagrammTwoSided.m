@@ -1,10 +1,11 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef WaterfalldiagrammTwoSided < handle
 % Class for visualization of the results of the time integration results as two sided Waterfall diagram
 
 %    abtastrate... sampling rate
 %    drehzahl... rotation speed
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
    properties
     unit
     rotorsystem

@@ -1,8 +1,9 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef TimeSignal < handle
 % Class for visualisation of the signal over time as result of the time integration
-   properties
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
+properties
     unit
     rotorsystem
     name=' --- Graphobject Time signal  --- '

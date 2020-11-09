@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function plot_deltas( ax,rpm,EW,color )
 % Plots the negative real part of the eigenvalue in the diagram (decay constant)
 %
@@ -12,6 +10,8 @@ function plot_deltas( ax,rpm,EW,color )
 %    :parameter color: Color in RGB
 %    :type color: vector
 %    :return: Campbell diagram with negative real part of the eigenvalue (damping) over rotation speed
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
     plot(ax,rpm,-real(EW),...
               'Color',color)

@@ -1,9 +1,10 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef pidControllerLUT < AMrotorSIM.pidControllers.pidController
     % Sub-class of pid controller with LookUpTable for force using MATLABs interp2
     
     %   force = table(x,I)
+    %
+    % Licensed under GPL-3.0-or-later, check attached LICENSE file
+    
     properties
         % table is a struct which must include the following variables
         % table.displacement = 1 x Ndisplacment array

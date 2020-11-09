@@ -1,10 +1,11 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef RestrictAllDofsBearing < AMrotorSIM.Components.Bearings.Bearing
 % RestrictAllDofsBearing class to restrict all DOFs at a defined node
             
 %   Add stiffness and damping on every degree of freedom of the closest
 %   node of the rotor
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
     properties
     end
     methods

@@ -1,7 +1,8 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef MeshNode < handle
 % Class of the nodes for the finite element mesh
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
     properties
         name 
         radius_outer

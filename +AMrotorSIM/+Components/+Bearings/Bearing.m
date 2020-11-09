@@ -1,10 +1,12 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef (Abstract) Bearing < AMrotorSIM.Components.Component
 % Bearing superclass (abstract) for different bearing types
+%
+% See also AMrotorSIM.Components.Bearings
 
 %   Bearings are characterized by stiffness and damping coefficients
-% See also AMrotorSIM.Components.Bearings
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
     properties
     end
     methods

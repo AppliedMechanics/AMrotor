@@ -1,10 +1,12 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef Modalanalyse < handle
 % Class for modal analysis
-
-%   Calculates the eigenvalues and eigenmodes 
+%
 % See also AMrotorSIM.Graphs.Eigenschwingformen
+
+% Calculates the eigenvalues and eigenmodes
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
    properties
       name='Modal analysis'
       rotorsystem (1,1) AMrotorSIM.Rotorsystem

@@ -1,7 +1,7 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef Force_timevariant_chirp < AMrotorSIM.Loads.Load
 % Class of force-chirp with increasing or decreasing excitation frequency and constant amplitude and direction
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
    properties
    end

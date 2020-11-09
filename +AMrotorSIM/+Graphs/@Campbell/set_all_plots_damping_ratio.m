@@ -1,9 +1,9 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function set_all_plots_damping_ratio( obj )
 % Organizes and assembles the plots of the damping ratio over rpm (for Selection 'all') 
 %
 %    :return:  Campbell diagram with fwd and bwd whirl relative to the damping ratio
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 figure('Name','Campbell-Diagramm (All)','NumberTitle','off');
             axAll = subplot(2,2,[1,3]);

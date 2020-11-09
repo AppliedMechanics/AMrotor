@@ -1,11 +1,12 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef TimoshenkoLinearElement < AMrotorSIM.Rotor.FEMRotor.Element.Element
 % Class with the element formulation for Timoshenko elements
 
 %   Timoshenko elements describe beam elements
 %   they consist of 2 nodes with 6 degrees of freedom each, so that 1
 %   element has 12 degrees of freedom
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
     properties
     end
     

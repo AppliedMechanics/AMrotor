@@ -1,10 +1,11 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef SimpleAxialBearing < AMrotorSIM.Components.Bearings.Bearing
 % SimpleAxialBearing class acts in axial direction on the defined node
 
 %   Add stiffness and damping on the axial degree of freedom (z-direction)
 %   of the closest node of the rotor
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
    properties
    end
    methods

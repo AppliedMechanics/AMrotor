@@ -1,13 +1,15 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef Campbell < handle
 % Class for campbell diagram
+%
+% See also AMrotorSIM.Graphs.Campbell
 
 % This class calculates the needed matrices for the calculation of the
 % campell diagramm and does also the sorting regarding forward/backward
 % whirl
-% See also AMrotorSIM.Graphs.Campbell
-    properties (Access = private)
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
+    properties %(Access = private)
         name = 'Campell Analysis';
         rotorsystem (1,1) AMrotorSIM.Rotorsystem;
         omega;

@@ -1,13 +1,13 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef FeModel < handle
 % Class that includes the finite element model
-
-%   cnfg... Config-struct
+%
 % See also AMrotorSIM.Rotor AMrotorSIM.Rotor.FEMRotor.Element
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
     properties
         name
-        cnfg
+        cnfg; % Config-struct
         geometry (1,1) AMrotorSIM.Rotor.FEMRotor.Geometry
         material (1,1) AMrotorSIM.Rotor.FEMRotor.Material
         mesh (1,1) AMrotorSIM.Rotor.FEMRotor.Mesh

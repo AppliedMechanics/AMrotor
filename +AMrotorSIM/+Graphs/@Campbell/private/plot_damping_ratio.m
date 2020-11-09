@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function plot_damping_ratio(ax,rpm,EW,color)
 % Plots the damping ratio into the campell diagram
 %
@@ -12,6 +10,8 @@ function plot_damping_ratio(ax,rpm,EW,color)
 %    :parameter color: Color in RGB
 %    :type color: vector
 %    :return: Campbell diagram with damping ratio over rotation speed
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
     plot(ax,rpm,-real(EW)./imag(EW),...
               'Color',color)

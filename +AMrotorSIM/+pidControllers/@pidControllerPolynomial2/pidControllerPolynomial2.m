@@ -1,8 +1,5 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef pidControllerPolynomial2 < AMrotorSIM.pidControllers.pidController
     % Sub-class of pid controller with 2nd order polynomial with displacement and current for force 
-    
     
     %   force = [I, x]*A*[I^2;x^2] + [I,x]*B*[I;x] + cT*[I;x] + d
     %
@@ -24,12 +21,14 @@ classdef pidControllerPolynomial2 < AMrotorSIM.pidControllers.pidController
         % 0th order, 1x1
         % units: [d] = N
         %d
+    %
+    %Licensed under GPL-3.0-or-later, check attached LICENSE file
     
     properties
-        A
-        B
-        cT
-        d
+        A; % units: [A] = [N/A^3, N/(A*m^2); N/(A^2*m), N/m^3]
+        B; % units: [B] = [N/A^2, N/(A*m); N/(A*m), N/m^2]
+        cT; % units: [cT] = [N/A, N/m]
+        d; % units: [d] = N 
     end
     
     methods

@@ -1,7 +1,8 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef Geometry < handle
 % Class that includes the geometric nodes
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
     properties
         name
         nodes (1,:) AMrotorSIM.Rotor.FEMRotor.GeoNode

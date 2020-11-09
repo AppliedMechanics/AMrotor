@@ -1,7 +1,7 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef Visu_Rotorsystem < handle
 % Class for visualization of the rotor system
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
    properties
       name='Rotor system'

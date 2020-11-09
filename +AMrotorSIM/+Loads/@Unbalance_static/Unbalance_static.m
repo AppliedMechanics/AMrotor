@@ -1,7 +1,8 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef Unbalance_static < AMrotorSIM.Loads.Load
 % Class for unbalance on the rotor
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
    properties
 
    end

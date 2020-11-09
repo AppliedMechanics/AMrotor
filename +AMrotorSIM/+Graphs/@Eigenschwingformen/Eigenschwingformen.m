@@ -1,9 +1,10 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef Eigenschwingformen < handle
 % Class for visualization of the eigenmodes
 
 % See also AMrotorSIM.Experiments.Modalanalyse 
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
    properties %(Access = private)
       name='Rotor vibration modes'
       modalsystem

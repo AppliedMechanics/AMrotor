@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function moduloOfNodesToPlot = get_modulo_of_nodes_to_plot(obj,userInputCell)
 % Extracts the eventually included 'skip' command in the argument for the 3D visualization of the mode shapes
 %
@@ -13,6 +11,8 @@ function moduloOfNodesToPlot = get_modulo_of_nodes_to_plot(obj,userInputCell)
 %   moduloOfNodesToPlot = 2 -> plot circle at every second node
 %   ...
 %   moduloOfNodesToPlot = 10 -> plot circle at every tenth node
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 str{1} = 'SkipNodes';
 str{2} = 'skip';

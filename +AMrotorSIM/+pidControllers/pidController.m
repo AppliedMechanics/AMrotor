@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef  pidController < matlab.mixin.Heterogeneous & handle%classdef (Abstract) pidController < handle
     % Superclass (abstract) for pid controller for the AMB-force
     
@@ -9,12 +7,10 @@ classdef  pidController < matlab.mixin.Heterogeneous & handle%classdef (Abstract
     %   I = Kp*e(t) + Ki*int(e(tau),t) + Kd*de(t)/dt
     %   In every integrator step it calclates the force from a model
     %   force = f(x,I)
+    %
+    % Licensed under GPL-3.0-or-later, check attached LICENSE file
     
     % Description of some properties
-    % direction % 'u_x','u_y','u_z','psi_x','psi_y','psi_z'
-    % electricalP % A/m
-    % electricalI % A/(m*s)
-    % electricalD % As/m
     % cumError = 0 % cummulated error
     % prevError = 0 % error in the previus step
     % prevTime = 0 % time of the previous step
@@ -23,15 +19,15 @@ classdef  pidController < matlab.mixin.Heterogeneous & handle%classdef (Abstract
     properties
         name
         position
-        direction
+        direction; % 'u_x','u_y','u_z','psi_x','psi_y','psi_z'
         type
         targetDisplacement
         
-        electricalP 
-        electricalI 
-        electricalD 
+        electricalP; % A/m 
+        electricalI; % A/(m*s) 
+        electricalD; % As/m 
         
-        cumError = 0 
+        cumError = 0
         prevError = 0 
         prevTime = 0 
         

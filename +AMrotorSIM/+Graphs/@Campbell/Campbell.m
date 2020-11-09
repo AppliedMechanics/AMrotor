@@ -1,15 +1,17 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef Campbell < handle
 % Class for the visualisation of a Campbell diagram
+%
+% See also AMrotorSIM.Experiments.Campbell
 
 %   Can plot the classic Campbell diagram, which shows the eigenfrequncies
 %   over the rotational speed.
 %   Can also plot the damping over rotational speed.
 % ColorHandler in AMrotorTools.PlotColors
-% See also AMrotorSIM.Experiments.Campbell
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
     properties %(Access = private)
-        Name = 'Campbell diagram';
+        Name='Campbell diagram';
         experimentCampbell;
         ColorHandler;
     end

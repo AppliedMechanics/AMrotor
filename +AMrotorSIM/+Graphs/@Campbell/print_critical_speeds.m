@@ -1,9 +1,9 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function print_critical_speeds(obj)
 % Prints the crossing of the first harmonic with the eigenfrequencies
 %
 %    :return: Display of the first harmonic with the eigenfrequencies in the Command Window
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 omega = obj.experimentCampbell.get_omega();
 EW = obj.experimentCampbell.get_eigenvalues();

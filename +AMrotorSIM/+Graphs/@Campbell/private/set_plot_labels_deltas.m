@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function set_plot_labels_deltas( ax, Name )
 % Assigns the labels to the plots (for Campbell with decay constant)
 %
@@ -8,6 +6,8 @@ function set_plot_labels_deltas( ax, Name )
 %    :parameter Name: Name of the title of the subplot
 %    :type Name: char
 %    :return: Named axes of the subplot 
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 title(ax,Name)
 xlabel(ax,'$\Omega$ in 1/min','Interpreter','latex')

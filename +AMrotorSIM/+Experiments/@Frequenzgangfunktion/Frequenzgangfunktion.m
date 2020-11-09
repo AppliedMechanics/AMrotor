@@ -1,12 +1,14 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef Frequenzgangfunktion < handle
 % Class for calculation of frequency response functions
+%
+% See also AMrotorSIM.Graphs.Frequenzgangfunktion
 
 %     This class calculates the frequency response function between
 %     specified points, for a specidifed frequency vector using the
 %     AbraVibe toolbox
-% See also AMrotorSIM.Graphs.Frequenzgangfunktion
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
     
     properties
         name

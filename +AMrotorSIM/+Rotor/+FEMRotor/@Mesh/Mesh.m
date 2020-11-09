@@ -1,23 +1,15 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef Mesh < handle
 % Class of the mesh, which includes the nodes and elements
 
-% Description of noteworthy properties:
-%         d_min               % minimum allowed element length
-%         d_max               % maximum allowed element length
-%         n_refinement        % no of refinement steps, when looking for the optimal element length
-%         
-%         % Methods for linear approximation of the element properties
-%         % allowed: upper sum, lower sum, mean, symmetric
-%         approximation  
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
     properties
         name
-        d_min               
-        d_max              
-        n_refinement        
+        d_min; % minimum allowed element length              
+        d_max; % maximum allowed element length              
+        n_refinement; % no of refinement steps, when looking for the optimal element length       
 
-        approximation      
+        approximation; % allowed: upper sum, lower sum, mean, symmetric approximation     
         nodes (1,:) AMrotorSIM.Rotor.FEMRotor.MeshNode
         elements (1,:) AMrotorSIM.Rotor.FEMRotor.Element.TimoshenkoLinearElement
     end

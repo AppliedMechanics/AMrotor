@@ -1,20 +1,19 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef Hochlaufanalyse < handle
 % Class for time integration of run-up
+%
+% See also AMrotorSIM.Graphs
 
 %   Does time integration for the system with a linearly rising rotational
 %   speed
-%   drehzahlen... rpm steps
-%   time... time steps e.g. 0:tStep:tEnd
-%   result... results-struct: result.X, result.X_d, result.X_dd
-% See also AMrotorSIM.Graphs
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
    properties
       name='Run-up'
       rotorsystem (1,1) AMrotorSIM.Rotorsystem 
-      drehzahlen    
-      time          
-      result        
+      drehzahlen; % rpm steps    
+      time; % time steps e.g. 0:tStep:tEnd          
+      result; % results-struct: result.X, result.X_d, result.X_dd         
    end
    methods
        function obj = Hochlaufanalyse(rotorsystem,rpm_span,time)
