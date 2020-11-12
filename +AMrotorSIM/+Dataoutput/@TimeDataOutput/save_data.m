@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function save_data(self,dataset, postfix)
 % Saves the dataset (struct or containers.Map) to a mat-file
 %
@@ -13,6 +11,8 @@ function save_data(self,dataset, postfix)
 %    save_data(self,dataset, postfix)
 %
 %   See also TIMEDATAOUTPUT, COMPOSE_DATA.
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 Savepath=([pwd,'\results\',datestr(now,'yyyy-mm-dd')]);
 mkdir(Savepath)

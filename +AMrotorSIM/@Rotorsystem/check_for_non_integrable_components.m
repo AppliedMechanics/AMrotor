@@ -9,6 +9,8 @@ function check_for_non_integrable_components(self)
 % integration is desired, the flag is checked and 
 % shows the user a short reminder.
 
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 flag = 'integrationProblemFlag';
 
 for comp = self.rotor

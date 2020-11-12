@@ -1,11 +1,11 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function overall_mass = check_overall_translational_mass(self,U)
 % Calculates the overall translational mass based on rigid body modes from the mass matrix: m_trans=u' x M x u, to compare it with the expected mass
 %
 %    :param U: Eigenvector matrix (only trans. rigid body)
 %    :type U: matrix
 %    :return: Overall translational mass
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 n_nodes=length(self.rotor.mesh.nodes);
 

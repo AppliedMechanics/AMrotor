@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function [varargout] = compute_state_space_for_controller(self,Omega)
 % Computes the state space of the system, e.g. for controller design
 %
@@ -22,6 +20,7 @@ function [varargout] = compute_state_space_for_controller(self,Omega)
 %
 %   See also
 %   ss
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 [M,C,G,K]= self.assemble_system_matrices(Omega*60/2/pi);
 D = C + Omega*G;

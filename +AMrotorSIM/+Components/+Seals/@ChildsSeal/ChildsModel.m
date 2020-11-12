@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function [ M_seal, D_seal ,K_seal ] = ChildsModel( self, sys, init )
 % Performs the BlackSeal calculations
 %
@@ -20,6 +18,8 @@ function [ M_seal, D_seal ,K_seal ] = ChildsModel( self, sys, init )
 %   Childs: seal radius =?  -> Wellenradius sys.d/2 
 %       Dann stimmen die Koeffizienten zumindest mit denen von dyrobes.com überein
 %       seal radius = sys.D oder sys.Dpw verschlechtern die Übereinstimmung lediglich (Aufzeichnung 24.01.)
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 %% Koeffizienten nach Hirs
 n0= 0.066;      % coefficients for Hirs' turbulence equations

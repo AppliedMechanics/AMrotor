@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function struct = convert_data_to_struct_sensor_wise(self,dataset)
 % Converts data container to struct
 %
@@ -23,6 +21,9 @@ function struct = convert_data_to_struct_sensor_wise(self,dataset)
 %                    | y (Nx1)
 % 
 %   See also KEYS, TIMEDATAOUTPUT, SAVE_DATA, COMPOSE_DATA_SENSOR_WISE.
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
     disp(' --- Convert Dataset Timesignal  --- ')
 
     drehzahlen = keys(dataset);

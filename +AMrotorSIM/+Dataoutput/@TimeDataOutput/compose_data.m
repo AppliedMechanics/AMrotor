@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function dataset = compose_data(self)
 % Creates a container that includes the data of the sensors
 %
@@ -9,6 +7,9 @@ function dataset = compose_data(self)
 %   dataset = compose_data(self)
 % 
 %   See also TIMEDATAOUTPUT, SAVE_DATA.
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
     disp(' --- Compose Dataset Timesignal  --- ')
 
     dataset = containers.Map('KeyType','double','ValueType','any');

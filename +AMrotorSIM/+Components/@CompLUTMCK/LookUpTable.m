@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function [ output ] = LookUpTable( self, rpmTable, inputCell, rpmCurrent )
 % Includes parameters (M, C, K) from LUT into CompLUTMCK object with interpolation
 %
@@ -18,6 +16,8 @@ function [ output ] = LookUpTable( self, rpmTable, inputCell, rpmCurrent )
 % force = Ndisplacemet x Ncurrent
 %
 % outputMatrix = 6 x 6 matrix for rpmCurrent
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 output = zeros(6,6);
 for i = 1:6

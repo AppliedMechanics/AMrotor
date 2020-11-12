@@ -1,9 +1,14 @@
 function h = assemble_system_controller_forces(self,t,Z)
-% Adds the controller force to the load vector ????
+% Adds the controller force to the load vector
 % 
 %    :parameter t: time step
+%    :type t: double
 %    :parameter Z: state-space vector [x; x_dot]
+%    :type Z: vector
 %    :return: Load vector h
+%    :rtype: vector
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 
 n_nodes=length(self.rotor.mesh.nodes);

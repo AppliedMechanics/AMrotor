@@ -1,11 +1,11 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function data = generate_sensor_output(obj)
 % Extracts position data from all sensors into a data struct
 %
 %    :param obj: Object of type rotorsystem
 %    :type obj: object
 %    :return: data
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
   n=0;
   for i=obj.sensors  

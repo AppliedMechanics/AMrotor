@@ -1,11 +1,11 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function assemble(obj)
 % Imports the data (components) from the cnfg-file in the rotorsystem object
 %
 %    :parameter obj: object of type rotorsystem
 %    :type obj: object
 %    :return: Filled out rotorsystem object
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 % Adding rotor
 for cnfg=obj.cnfg.cnfg_rotor

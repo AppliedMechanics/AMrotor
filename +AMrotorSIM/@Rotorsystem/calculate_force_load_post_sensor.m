@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function F = calculate_force_load_post_sensor(rotorsystem,time,displacement,velocity)
 % Calculate the force of the sensor ForceLoadPostSensor
 %
@@ -15,6 +13,7 @@ function F = calculate_force_load_post_sensor(rotorsystem,time,displacement,velo
 
 %   Uses the displacment and velocity to obtain the force of
 %   the corresponding load-objects, through their force laws
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 F = zeros(size(displacement,1),size(displacement,2));
 % Kraftberechnung

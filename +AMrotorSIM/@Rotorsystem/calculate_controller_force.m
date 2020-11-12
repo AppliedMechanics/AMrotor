@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function F = calculate_controller_force(rotorsystem,time,displacement,velocity)
 % Calculate the force of the sensor ControllerForceSensor
 %
@@ -15,6 +13,7 @@ function F = calculate_controller_force(rotorsystem,time,displacement,velocity)
 
 %   Uses the displacment and velocity to obtain the force of
 %   the corresponding pidControllers
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 F = zeros(size(displacement,1),size(displacement,2));
 

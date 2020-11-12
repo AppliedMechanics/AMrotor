@@ -12,10 +12,12 @@ classdef Campbell < handle
     properties %(Access = private)
         name = 'Campell Analysis';
         rotorsystem (1,1) AMrotorSIM.Rotorsystem;
-        omega;
+        omega; % angular velocity
         num; % struct which will gather all kind of numbers
-        EVf; EVb; % eigenvectors forward&backward
-        EWf; EWb; % eigenvalues forward&backward
+        EVf; % eigenvectors forward 
+        EVb; % eigenvectors backward
+        EWf; % eigenvalues forward
+        EWb; % eigenvalues backward
     end
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     methods (Access = public)

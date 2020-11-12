@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function [M_Comp,D_Comp,G_Comp,K_Comp]= get_component_matrices(self,components,rpm)
 % Extracts the specific component matrices (M,D,G,K)
 %
@@ -9,6 +7,7 @@ function [M_Comp,D_Comp,G_Comp,K_Comp]= get_component_matrices(self,components,r
 %    :type rpm: double
 %    :return: Component matrices (M,D,G,K)
 
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 n_nodes=length(self.rotor.mesh.nodes);
 

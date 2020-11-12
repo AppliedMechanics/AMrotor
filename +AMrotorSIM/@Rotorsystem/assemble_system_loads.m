@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function h = assemble_system_loads(self,time,Z)
 % Assembles the system loads
 %
@@ -8,6 +6,8 @@ function h = assemble_system_loads(self,time,Z)
 %    :param Z: State vector
 %    :type Z: vector
 %    :return: System load vector h
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 n_nodes=length(self.rotor.mesh.nodes);
 h = sparse(6*n_nodes,1);
