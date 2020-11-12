@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function write_data_to_unv(self, postfix)
 % Writes the sensor data to unv-files
 %
@@ -11,6 +9,9 @@ function write_data_to_unv(self, postfix)
 %   write_data_to_unv(self, postfix)
 % 
 %   See also TIMEDATAOUTPUT, SAVE_DATA, COMPOSE_DATA, COMPOSE_DATA_SENSOR_WISE.
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
     disp(' --- Write Timesignal to UNV --- ')
 
     Savepath=([pwd,'\results\',datestr(now,'yyyy-mm-dd')]);

@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function dataset = compose_data_sensor_wise(self)
 % Creates a container that includes the data of the sensors, ordered sensor wise
 %
@@ -15,6 +13,9 @@ function dataset = compose_data_sensor_wise(self)
 %                                   sensor (object)
 % 
 %   See also KEYS, TIMEDATAOUTPUT, SAVE_DATA, CONVERT_DATASET_TO_STRUCT_SENSOR_WISE.
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
     disp(' --- Compose Dataset Timesignal  --- ')
 
     dataset = containers.Map('KeyType','double','ValueType','any');

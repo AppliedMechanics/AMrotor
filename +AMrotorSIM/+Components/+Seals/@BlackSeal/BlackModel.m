@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function [ M_seal,D_seal ,K_seal ] = BlackModel( self, sys, init )     
 % Performs the BlackSeal calculations
 %
@@ -13,6 +11,8 @@ function [ M_seal,D_seal ,K_seal ] = BlackModel( self, sys, init )
 %   nach    Black, Jenssen 1969-70 - Dynamic Hybrid Bearing Characteristics
 %   und     Barrett - Turbulent Flow Annular Pump Seals
 % global verfahrenb
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 %% Formeln zur Berechnung von lambda und Auswahl einer geeigneten Rechenvorschrift
 

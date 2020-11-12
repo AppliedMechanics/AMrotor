@@ -1,5 +1,5 @@
 classdef Mesh < handle
-% Class of the mesh, which includes the nodes and elements
+% Class of the mesh, which includes the nodes and elements 
 
 % Licensed under GPL-3.0-or-later, check attached LICENSE file
 

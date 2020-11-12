@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function [M,C,G,K]= assemble_system_matrices(self,rpm,varargin)
 % Assembles the specific component matrices to the global matrices
 %
@@ -7,6 +5,8 @@ function [M,C,G,K]= assemble_system_matrices(self,rpm,varargin)
 %    :type rpm: double
 %    :param varargin: Placeholder
 %    :return: Global component matrices (M,D,G,K)
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
          if nargin == 1
              rpm=0;

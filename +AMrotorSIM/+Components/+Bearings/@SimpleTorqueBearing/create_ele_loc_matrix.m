@@ -1,9 +1,9 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function create_ele_loc_matrix(self)
 % Builds a simple local localisation matrix in dof-order: ux,uy,uz,psix,psiy,psiz
 %
 %    :return: Localisation matrix
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
         %Vector version of the  localisation matrix:
         Lv0_ele = [1,2,3,4,5,6];

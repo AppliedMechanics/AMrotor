@@ -1,5 +1,3 @@
-
-
 classdef CompLUTMCK < AMrotorSIM.Components.Component
 % CompLUTMCK class for variable (e.g variable over rpm) mass, damping, stiffness matrices from Look-Up-Table 
 

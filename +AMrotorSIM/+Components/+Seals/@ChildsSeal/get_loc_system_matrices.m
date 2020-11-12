@@ -1,11 +1,11 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function [M,D,K] = get_loc_system_matrices(self,rpm)
 % Provides/builds all three matrices (M, D, K) of the seal in dof-order: ux,uy,uz,psix,psiy,psiz
 %
 %    :param rpm: Rotation speed
 %    :type rpm: double
 %    :return: M-, D-, K-matrices
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 M = sparse(6,6);
 D = sparse(6,6);

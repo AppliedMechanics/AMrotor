@@ -1,9 +1,9 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function warn_for_non_integrable_component(self)
 % Displays a warning message and asks for further action
 %
 %    :return: Warning message
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 wrnMsgGerman = ['Achtung! Es wurde eine Komponente als Kennfeld vorgegeben. ',...
     'Dies kann unerwünschte Effekte in der Zeitintegration bedeuten. Die ',...

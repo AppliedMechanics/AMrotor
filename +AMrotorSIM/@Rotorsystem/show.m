@@ -5,6 +5,8 @@ function show(obj)
 %    :type obj: object
 %    :return: Output in command window
 
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
             disp('--------------- Rotorsystem ------------------')
          disp(obj.name);
         for i=obj.rotor

@@ -3,6 +3,8 @@ function [K] = get_loc_stiffness_matrix(self,varargin)
 %
 %    :param varargin: Placeholder
 %    :return: Stiffness component matrix K
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
             
     K=sparse(6,6);
     
