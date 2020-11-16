@@ -1,7 +1,8 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef Displacementsensor < AMrotorSIM.Sensors.Sensor
 % Class of sensor for reading the displacement values after time integration
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
    properties
        unit = 'm'
        measurementType = 'Distance'

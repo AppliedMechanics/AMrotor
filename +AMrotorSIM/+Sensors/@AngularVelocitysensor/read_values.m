@@ -1,11 +1,11 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function [psixd_val,psiyd_val,psizd_val] = read_values(self,experiment)
 % Extracts the angular velocity values at the desired sensor position
 %
-%    :param experiment: Analysis type (Stationaere_Lsg, Hochlaufanalyse, ...) ????
+%    :param experiment: Analysis type (Stationaere_Lsg, Hochlaufanalyse, ...)
 %    :type experiment: object
 %    :return: Values of the specific sensor
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
     res = experiment.result;
     rotor = experiment.rotorsystem.rotor;
