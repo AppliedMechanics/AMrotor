@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function plot(self,sensors,direction)
 % Plot of the time results
 %
@@ -8,6 +6,8 @@ function plot(self,sensors,direction)
 %    :param direction: Sensor direction (1 for x and 2 for y, default x and y)
 %    :type direction: double
 %    :return: Figure of the time signal
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 % plot(self,sensors,direction)
   disp(' --- Plot Graph Timesignal  --- ')

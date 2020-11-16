@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function plot_phase(obj,f,frf,paramPlot)
 % Plots the phase of the FRF
 %
@@ -10,6 +8,8 @@ function plot_phase(obj,f,frf,paramPlot)
 %    :param paramPlot: Additional parameters for visualization (type of amplitude, ..)
 %    :type paramPlot: struct
 %    :return: Figure with phase of the FRF
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 angleMeasure = paramPlot.angleMeasure;
 type = obj.experimentFRF.type;

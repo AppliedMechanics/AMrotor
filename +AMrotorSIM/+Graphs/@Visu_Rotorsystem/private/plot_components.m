@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function plot_components(ax,components,obj)
 % Assigns the components (bearing, disk, CompLUTMCK) to the 3D visualization
 %
@@ -10,6 +8,8 @@ function plot_components(ax,components,obj)
 %    :parameter obj: Object of type rotor (obj.rotorsystem.rotor)
 %    :type obj: object
 %    :return: Assigned components to the 3d visualization
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 for component=components
     switch component.type

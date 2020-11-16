@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function plot(self,sensors)
 % Plot of the Orbits
 %
@@ -9,6 +7,9 @@ function plot(self,sensors)
 
 % main method for the user
 % plot(self,sensors,direction)
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
   disp(self.name)
 
       for sensor = sensors

@@ -8,7 +8,7 @@ classdef Orbitdarstellung < handle
     rotorsystem
     name=' ---  Orbit  --- '
     experiment
-     ColorHandler
+    ColorHandler
    end
   methods
   function self=Orbitdarstellung(rotorsystem, experiment) 

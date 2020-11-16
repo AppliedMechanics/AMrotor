@@ -1,9 +1,9 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function descriptionsH = make_descriptions_for_FRF(obj)
 % Assigns a description of the FRF's regarding the position and the orientation of the in- and outputs of the FRF's
 %
 %    :return: Added description parameter to the object
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 sensorIn = obj.sensorIn;
 sensorOut = obj.sensorOut;

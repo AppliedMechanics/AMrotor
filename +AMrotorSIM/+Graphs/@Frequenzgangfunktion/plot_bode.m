@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function plot_bode(obj,f,frf,paramPlot)
 % Plots the bode diagram of the FRF
 %
@@ -10,6 +8,8 @@ function plot_bode(obj,f,frf,paramPlot)
 %    :param paramPlot: Additional parameters for visualization (type of amplitude, ..)
 %    :type paramPlot: struct
 %    :return: Figure with bode plot
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 amplitudeMeasure = paramPlot.amplitudeMeasure;
 angleMeasure = paramPlot.angleMeasure;

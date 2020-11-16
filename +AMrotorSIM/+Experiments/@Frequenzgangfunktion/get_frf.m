@@ -1,9 +1,9 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function [f,frf,C,Cx] = get_frf(obj)
 % Extracts properties from Frequenzgangfunktion object
 %
 %    :return: Properties of type f, H, C and Cx
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 f=obj.f;
 frf=obj.H;

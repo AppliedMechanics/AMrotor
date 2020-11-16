@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function h = get_loc_load_vec(obj,time,node,varargin)
 % Builds the unbalance load vector from Config-file (cnfg) in dof-order: ux,uy,uz,psix,psiy,psiz
 %
@@ -10,6 +8,8 @@ function h = get_loc_load_vec(obj,time,node,varargin)
 %    :parameter varargin: Placeholder
 %    :type varargin: 
 %    :return: Load vector h
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
     %Constant fix force 
     obj.h = sparse(6,1);    

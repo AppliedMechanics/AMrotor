@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function status = odeOutputFcnController(t,y,flag,varargin)
 % Provides output function of integration and displays progress in Command Window
 %
@@ -12,6 +10,8 @@ function status = odeOutputFcnController(t,y,flag,varargin)
 %    :param varargin: Variable input argument (check function)
 %    :type varargin:
 %    :return: Printing and plotting of the integration status
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 %rpm_span = varargin{1};
 %t_span = varargin{2};

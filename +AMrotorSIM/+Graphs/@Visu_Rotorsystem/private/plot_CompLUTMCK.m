@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function plot_CompLUTMCK(ax,i,obj)
 % Provides/drafts the component compLUTMCK for the visualization of the rotor system
 %
@@ -10,6 +8,8 @@ function plot_CompLUTMCK(ax,i,obj)
 %    :parameter obj: Object of type rotor (obj.rotorsystem.rotor)
 %    :type obj: object
 %    :return: 3D model of the compLUTMCK for 3D-visualization
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
     zp=i.cnfg.position;
     

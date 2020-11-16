@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function [t,x,dotx,ddotx,localError,globalError] = newmark_integration_without_adaptive_step_size(obj,M,C,K,forceFunction,t,x0,dotx0)
 % Function for newmark without adaptive stepsize
 %
@@ -22,6 +20,8 @@ function [t,x,dotx,ddotx,localError,globalError] = newmark_integration_without_a
 % See for example lecture script: Rixen, Structural Dynamics
 % but here use LU-factorization instad of Cholesky, because here S is not
 % symmetric (because of G)
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 %NEWMARK Newmark scheme (beta = 1/4, gamma = 1/2)
 %   Mass M, damping C, stiffness K , excitation F (vector), time vector t, initial condition x0

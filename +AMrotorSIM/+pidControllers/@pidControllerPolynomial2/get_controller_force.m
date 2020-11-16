@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function force = get_controller_force(obj,time,displacement)
 % Provides the controller force
 %
@@ -10,6 +8,8 @@ function force = get_controller_force(obj,time,displacement)
 %    :return: Controller force
 
 % force = [I, x]*A*[I^2;x^2] + [I,x]*B*[I;x] + cT*[I;x] + d
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 A = obj.A;
 B = obj.B;

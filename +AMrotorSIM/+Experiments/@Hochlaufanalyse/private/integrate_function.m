@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function dZ = integrate_function(t,Z,rpm_span,t_span, rotorsystem)
 % Provides integration function 
 %
@@ -14,6 +12,8 @@ function dZ = integrate_function(t,Z,rpm_span,t_span, rotorsystem)
 %    :param rotorsystem: Object of type Rotorsystem
 %    :type rotorsystem: object
 %    :return: Derivative of state vector (dZ) for integration (check Matlab odefun)
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 rpm_curr = rpm_span(1) + (rpm_span(2)-rpm_span(1)) / (t_span(2)-t_span(1)) * t; % aktuelle Drehzahl
 Omega_curr = rpm_curr/60*2*pi;

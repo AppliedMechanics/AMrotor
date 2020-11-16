@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function plot_nyquist(obj,f,frf,paramPlot)
 % Plots the nyquist diagram of the FRF
 %
@@ -10,6 +8,8 @@ function plot_nyquist(obj,f,frf,paramPlot)
 %    :param paramPlot: Additional parameters for visualization (type of amplitude, ..)
 %    :type paramPlot: struct
 %    :return: Figure with nyquist diagram
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 type = obj.experimentFRF.type;
 unit = obj.experimentFRF.unit;

@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function label = make_phase_label(obj,type,angleMeasure)
 % Assembles the label for the phase of the FRF
 %
@@ -8,6 +6,8 @@ function label = make_phase_label(obj,type,angleMeasure)
 %    :param unit: Unit of the FRF
 %    :type unit: char
 %    :return: Labels for the phase plot
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 HStr = ['G_{',type,'}'];
 

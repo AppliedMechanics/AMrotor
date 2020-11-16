@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function [f,Y,AP] = FFT_Data_Gesamt (X,fs)
 % Carries out the FFT and provides the one sided amplitude spectrum for the Waterfall diagram
 %
@@ -19,6 +17,8 @@ function [f,Y,AP] = FFT_Data_Gesamt (X,fs)
 %   Y          -   Komplexe  Koeffizienten von X
 %   YsrcFFT    -   Komplexer  Koeffizient für gesuchte Frequenz "fsrc" genmäß FFT
 %   YsrcAFFT   -   Komplexer  Koeffizient für gesuchte Frequenz "fsrc" genmäß AFFT
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 % DFT
 Y = fft(X);
