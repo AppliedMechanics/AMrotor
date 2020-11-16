@@ -1,9 +1,9 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function [M] = assemble_mass_matrix(self)
 % Assembles mass matrix 
 %
 %    :return: Mass matrix M
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
     M_A = compute_axial_mass_matrix(self);
     M_T = compute_torsional_mass_matrix(self);

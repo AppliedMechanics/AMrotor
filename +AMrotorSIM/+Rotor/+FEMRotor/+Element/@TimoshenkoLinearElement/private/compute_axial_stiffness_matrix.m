@@ -1,9 +1,9 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function K_A = compute_axial_stiffness_matrix(Element)
 % Builds axial stiffness submatrix
 %
 %    :return: Axial stiffness submatrix K_A
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
     E = Element;
     K_A = zeros(2,2);

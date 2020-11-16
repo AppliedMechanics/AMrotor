@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function nodePos = get_node_position(rotor,nodeNo)
 % Gets the corresponding position to a node number
 %
@@ -8,6 +6,8 @@ function nodePos = get_node_position(rotor,nodeNo)
 %    :parameter nodeNo: Desired node number
 %    :type nodeNo: vector
 %    :return: Position along z-axis of desired node
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 % nodePos = get_node_position(rotor,nodeNo)
 nodePos = zeros(size(nodeNo));

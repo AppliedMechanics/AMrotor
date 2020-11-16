@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function [ax]=show_3D(self,ax,color)
 % Plots the meshed rotor in 3D (isometry)
 %
@@ -8,6 +6,8 @@ function [ax]=show_3D(self,ax,color)
 %    :param color: Color of rotor in RGB
 %    :type color: vector
 %    :return: 3D-isometry of the meshed rotor and Matlab.graphics.axis.Axes-object
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 
    ele = self.elements;

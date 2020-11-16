@@ -1,7 +1,8 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef Anglesensor < AMrotorSIM.Sensors.Sensor
 % Class of sensors for reading the angle values after time integration
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
    properties
        unit = 'rad'
        measurementType = 'Angle'

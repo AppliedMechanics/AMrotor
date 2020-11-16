@@ -1,7 +1,8 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef Accelerationsensor < AMrotorSIM.Sensors.Sensor
 % Class of sensor for reading the acceleration values after time integration
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
    properties
        unit = 'm/s^2'
        measurementType = 'Acceleration'  

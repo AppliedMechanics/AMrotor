@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function [ m, b ] = linegradient( x_1, y_1, x_2, y_2 )
 % Provides the gradient between two nodes of the geometry in the plane
 %
@@ -12,6 +10,8 @@ function [ m, b ] = linegradient( x_1, y_1, x_2, y_2 )
 %    :parameter y_2: 2nd coordinate of the 2nd node
 %    :type y_2: double
 %    :return: Gradient (m) and offset (b) 
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 syms m_1
 syms b_1

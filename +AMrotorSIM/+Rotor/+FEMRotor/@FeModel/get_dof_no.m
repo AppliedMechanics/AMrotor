@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function dofNo= get_dof_no(rotor,nodeNo)
 % Gets the numbers of all degrees of freedom, that correspond to the node numbers.
 %
@@ -12,6 +10,8 @@ function dofNo= get_dof_no(rotor,nodeNo)
 
 %GET_DOF_NO - get the dofs of selected nodes
 % dofNo= get_dof_no(rotor,nodeNo)
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 
 dofPerNode = length(rotor.mass_matrix)/length(rotor.mesh.nodes);
