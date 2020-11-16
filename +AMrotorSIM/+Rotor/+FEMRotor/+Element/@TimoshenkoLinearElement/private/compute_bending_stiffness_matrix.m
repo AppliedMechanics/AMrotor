@@ -1,9 +1,9 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function [K_F1, K_F2]=compute_bending_stiffness_matrix(Element)
 % Builds bending stiffness submatrices
 %
 %    :return: Bending stiffness submatrices K_F1, K_F2
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
        E = Element;
        r_bar = E.radius_inner/E.radius_outer;

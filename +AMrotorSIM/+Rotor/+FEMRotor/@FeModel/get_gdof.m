@@ -1,4 +1,4 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 
 function glob_dof = get_gdof(self,direction,Node,varargin)
 % Provides the global DoF based on node number and direction
@@ -17,6 +17,8 @@ function glob_dof = get_gdof(self,direction,Node,varargin)
 %  direction: 'u_x','u_y','u_z','psi_x','psi_y','psi_z'
 %  node: number of desired node
 %  varargin: A -> system matrix in state space
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
     % falls weniger als 6 dof benutzt werden
     n.nodes = length(self.mesh.nodes);    

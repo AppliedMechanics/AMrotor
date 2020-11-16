@@ -1,9 +1,9 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function show_3D(obj)
 % Plots 3D isometry of the rotor (shaft)
 %
 %    :return: Figure with 3D plot of the shaft
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
     a=1;
     n=1;

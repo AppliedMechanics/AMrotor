@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function calculate_geometry_parameters(self,method)
 % Processes how jumps in the geometry (which radius for the element) should be discretized
 %
@@ -11,6 +9,8 @@ function calculate_geometry_parameters(self,method)
 %     mean, takes for the element radius (inner and outer) the particular mean radius $r_{element}=(r_{node1}+r_{node2})/2$ (inner and outer)
 %     lower sum, takes the lower radius (inner and outer) of node 1 or node 2 for the element radius (inner and outer)
 %     upper sum, takes the upper radius (inner and outer) of node 1 or node 2 for the element radius (inner and outer)
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 switch method
         case 'symmetric'

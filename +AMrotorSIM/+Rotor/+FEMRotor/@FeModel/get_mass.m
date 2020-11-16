@@ -1,10 +1,10 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function [m, J]=get_mass(self)
 % Provides the translational m ('u_x') and the mass moment of inertia J ('psi_z') 
 %
 %    :return: Translational mass and mass moment of inertia [m, J]
 %    :rtype: double
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 u=zeros(6*length(self.mesh.nodes),1);
 

@@ -1,11 +1,11 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function show_2D(obj,varargin)
 % Plots dashed 2D border (side view) of the rotor (shaft)
 %
 %    :parameter varargin: Variable input argument
 %    :type varargin: 
 %    :return: Figure with 2D plot of the shaft
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 if nargin == 1
     f1 = figure;

@@ -1,8 +1,7 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef ForceLoadPostSensor < AMrotorSIM.Sensors.Sensor
 % Class of sensor for the forces at the defined force excitation position (e.g. for random excitation) 
 
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
    properties
        unit = 'N'

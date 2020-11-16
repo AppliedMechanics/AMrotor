@@ -1,7 +1,8 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef Velocitysensor < AMrotorSIM.Sensors.Sensor
 % Class of sensor for reading the velocity values at the node after time integration
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
    properties
        unit = 'm/s'
        measurementType = 'Velocity'  

@@ -1,7 +1,8 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef Solver < matlab.mixin.Heterogeneous & handle
     % Superclass (abstract) for solvers
+    
+    % Licensed under GPL-3.0-or-later, check attached LICENSE file
+    
    properties
       cnfg=struct([])  
       name

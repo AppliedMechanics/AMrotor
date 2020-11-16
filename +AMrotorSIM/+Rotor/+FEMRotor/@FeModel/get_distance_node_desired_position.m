@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function [delta,nodePos]=get_distance_node_desired_position(rotor,desiredPos)
 % Gets the distance of the closest actual node to the desired node
 %
@@ -9,6 +7,8 @@ function [delta,nodePos]=get_distance_node_desired_position(rotor,desiredPos)
 %    :type desiredPos: vector
 %    :return: Actual position (closest node) and delta distance between desired and actual position [delta,nodePos]
 %    :rtype: vector
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 % [delta,nodePos]=get_distance_node_desired_position(rotor,desiredPos)
 % Get the distance between a desired position on the rotor and the nearest

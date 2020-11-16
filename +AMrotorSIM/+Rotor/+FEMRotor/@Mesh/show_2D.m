@@ -1,11 +1,11 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function show_2D(self,varargin)
 % Plots the meshed rotor in 2D
 %
 %    :parameter varargin: Variable input argument (check function)
 %    :type varargin: 
 %    :return: Figure with the mesh of the rotor
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 if nargin == 1
     figure

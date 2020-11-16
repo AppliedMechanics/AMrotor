@@ -1,7 +1,8 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef AngularVelocitysensor < AMrotorSIM.Sensors.Sensor
 % Class of sensors for reading the angular velocity values after time integration
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
    properties
        unit = 'rad/s'
        measurementType = 'AngularVelocity'  

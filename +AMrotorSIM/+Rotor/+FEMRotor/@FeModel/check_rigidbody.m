@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function f=check_rigidbody(self)
 % Checks for the translational rigid body modes by calculating the internal forces f
 %

@@ -1,10 +1,12 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef Sensor < matlab.mixin.Heterogeneous & handle
 % Superclass (abstract) for sensors 
+%
+% See also AMrotorSIM.Sensors
 
 %which read values after time integration
-% See also AMrotorSIM.Sensors
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
    properties
       cnfg=struct([])  
       name

@@ -2,10 +2,14 @@
 
 classdef BearingForceSensor < AMrotorSIM.Sensors.Sensor
 % Class of sensor for reading the forces acting on the rotor from Bearing-class objects
+%
+% See also AMrotorSIM.Components.Bearings
 
 %   reads the force acting ON the rotor:
 %   F = - (k*x +d*x_dot)
-% See also AMrotorSIM.Components.Bearings
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
    properties
        unit = 'N'
        measurementType = 'Force'

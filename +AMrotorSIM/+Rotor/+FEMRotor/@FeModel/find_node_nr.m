@@ -1,11 +1,11 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function node_nr = find_node_nr(self,position)
 % Defines which node is closer to an entered position
 %
 %    :parameter position: Desired position along z-axis
 %    :type position: double
 %    :return: Number of closest node to desired position
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
     for i = 2:length(self.mesh.nodes)
 %         if self.mesh.nodes(1,i-1).z < position < self.mesh.nodes(1,i).z %

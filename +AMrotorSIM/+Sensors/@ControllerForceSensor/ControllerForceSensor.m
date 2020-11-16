@@ -1,7 +1,7 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 classdef ControllerForceSensor < AMrotorSIM.Sensors.Sensor
 % Class of sensor for reading the forces for the controller at the AMB's
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
    properties
        unit = 'N'

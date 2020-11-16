@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function mesh = create_mesh(self,mesh_opt,Geometry,material)
 % Creates the mesh based on geometry
 %
@@ -10,6 +8,8 @@ function mesh = create_mesh(self,mesh_opt,Geometry,material)
 %    :parameter material: Material
 %    :type material: object
 %    :return: Mesh object
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
     mesh = AMrotorSIM.Rotor.FEMRotor.Mesh(mesh_opt);
 
