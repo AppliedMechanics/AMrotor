@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function plot(self,sensors,Ordnung)
 % Plots of the Fourier orbits
 %
@@ -13,6 +11,9 @@ function plot(self,sensors,Ordnung)
 % plot(self,sensors,Ordnung)
 % Ordnung = order of FourierFit
 % This function requires the Matlab curve fitting toolbox.
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
       disp(self.name)
       
           for sensor = sensors

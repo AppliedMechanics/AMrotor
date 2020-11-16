@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function plot(self,sensors,direction)
 % Plots the one sided Waterfall diagram (for Run-ups)
 %
@@ -11,6 +9,8 @@ function plot(self,sensors,direction)
 
 % Possible error: When Waterfalldiagram.plot is applied on a Stationary
 % solution with only 1 rotational speed an error message shows up.
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 % plot(self,sensors,direction)
 disp(self.name)

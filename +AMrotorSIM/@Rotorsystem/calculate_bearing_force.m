@@ -15,6 +15,7 @@ function F = calculate_bearing_force(rotorsystem,time,displacement,velocity)
 %   the corresponding bearings; does not use an inertia term
 %   Calculates the forces of the bearing acting ON the rotor:
 %   F_bearing = - (k*x + d*x_dot)
+%
 % Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 F = zeros(size(displacement,1),size(displacement,2));

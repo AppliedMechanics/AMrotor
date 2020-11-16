@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function check_selected_dof(obj,inputDirection,outputDirection)
 % Checks if only translational DoFs are used
 %
@@ -8,6 +6,8 @@ function check_selected_dof(obj,inputDirection,outputDirection)
 %    :param outputDirection: Output direction
 %    :type outputDirection: double
 %    :return: If necessary, error message
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 allowedInputDofs = [1,2,3];
 allowedOutputDofs = allowedInputDofs;

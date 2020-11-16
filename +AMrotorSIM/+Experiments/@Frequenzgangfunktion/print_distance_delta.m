@@ -1,9 +1,9 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function [deltaIn,deltaOut] = print_distance_delta(obj)
 % Gives the distance between the desired z-position and the z-position of the closest node
 %
 %    :return: Delta distance from the desired in- and output positions to the real in- and output positions (deltaIn,deltaOut)
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 rotor = obj.rotorsystem.rotor;
 inPos = obj.inputPosition;

@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function [t,x,dotx,ddotx] = newmark_integration_with_adaptive_step_size(obj,M,C,K,forceFunction,tspan,x0,dotx0,options)
 % Function for newmark with adaptive stepsize
 %
@@ -25,6 +23,8 @@ function [t,x,dotx,ddotx] = newmark_integration_with_adaptive_step_size(obj,M,C,
 % See Schweitzerhof 2004 For adaptive time stepping:
 %   problem: factorization depends on time step size -> do not change time
 %   step size too often
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 if ~isempty(obj.rotorsystem.pidControllers)
     warning('newmark with adaptive step size does not consider controller forces (yet)')

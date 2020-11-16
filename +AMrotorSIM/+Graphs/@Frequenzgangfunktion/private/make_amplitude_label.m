@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function label = make_amplitude_label(obj,type,unit,amplitudeMeasure)
 % Assembles the label for the amplitude of the FRF
 %
@@ -10,6 +8,8 @@ function label = make_amplitude_label(obj,type,unit,amplitudeMeasure)
 %    :param amplitudeMeasure: Representation type (default='lin')
 %    :type amplitudeMeasure: char
 %    :return: Labels for the amplitude plot
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 HStr = ['G_{',type,'}'];
 

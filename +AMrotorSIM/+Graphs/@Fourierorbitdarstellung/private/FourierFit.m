@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function [x] = FourierFit(time,signal,Drehzahl, Ordnung)
 % Carries out the Fourier fitting 
 %
@@ -12,6 +10,8 @@ function [x] = FourierFit(time,signal,Drehzahl, Ordnung)
 %    :param Ordnung: Order of the Fourier fit from 1 to 8
 %    :type Ordnung: double
 %    :return: Vector of fitted values x
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 fo = fitoptions('Method','NonlinearLeastSquares',...
     'Lower',[-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,0.8*Drehzahl*pi/30], ...

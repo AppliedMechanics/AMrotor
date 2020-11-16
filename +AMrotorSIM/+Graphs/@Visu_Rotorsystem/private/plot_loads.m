@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function plot_loads(ax,loads)
 % Assigns the loads (unbalance and force) to the 3D visualization
 %
@@ -8,6 +6,8 @@ function plot_loads(ax,loads)
 %    :parameter load: Object of type loads (obj.rotorsystem.loads)
 %    :type load: object
 %    :return: Assigned components to the 3d visualization
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 for load=loads
     

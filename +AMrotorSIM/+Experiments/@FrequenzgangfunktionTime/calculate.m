@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function [f,H,C] = calculate(obj,sensorIn,sensorOut,rpm,inputDirection,outputDirection,numberOfBlocks,windowShape)
 % Calculates the frequency response function from time data
 %
@@ -27,6 +25,8 @@ function [f,H,C] = calculate(obj,sensorIn,sensorOut,rpm,inputDirection,outputDir
 % [f,H,C] = calculate(obj,sensorIn,sensorOut,rpm,inputDirection,outputDirection,numberOfBlocks,windowShape)
 %
 % See also time2xmtrx, xmtrx2frf
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 obj.sensorIn = sensorIn;
 obj.sensorOut = sensorOut;

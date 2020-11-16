@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function print_table(obj,desiredPosition, nodePosition, deltaPosition)
 % Builds the printing frame
 %
@@ -14,6 +12,9 @@ function print_table(obj,desiredPosition, nodePosition, deltaPosition)
 % show the distance between the desired axial positions on the rotor and
 % the closest nodes of the rotor mesh
 %   print_table(obj,desiredPosition, nodePosition, deltaPosition)
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 fprintf('      \t | \t desired \t | \t closest node \t | delta\n')
 fprintf('--------------------------------------------------------\n')
 for i=1:length(deltaPosition)

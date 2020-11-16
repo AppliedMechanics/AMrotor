@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function descriptionsH = make_descriptions_for_FRF(obj,inputNode,outputNode,inputDirection,outputDirection)
 % Assigns a description of the FRF's regarding the position and the orientation of the in- and outputs of the FRF's
 %
@@ -12,6 +10,8 @@ function descriptionsH = make_descriptions_for_FRF(obj,inputNode,outputNode,inpu
 %    :param outputDirection: Desired output direction from 1 to 6 (e.g. 'u_x' -> 1, 'psi_y' -> 5)
 %    :type outputDirection: double
 %    :return: Added description parameter (cell) to the object
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
             
 dof_name = {'X','Y','Z','PSIX','PSIY','PSIZ'};
 dof_loc = [1,2,3,4,5,6];

@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function [ EV_for,EW_for,EV_back,EW_back,EV_0,EW_0, Phase_xy, Phase_xy_mean ] = get_separation_eigenvectors(obj,EV_raw,EW_raw)
 % Extracts eigenvalues (EW, eigenwert) and corresponding eigenvectors (EV) for forward, backward or no whirl from raw data
 %
@@ -25,6 +23,8 @@ function [ EV_for,EW_for,EV_back,EW_back,EV_0,EW_0, Phase_xy, Phase_xy_mean ] = 
 % -> |phi_y-phi_x|=pi/2: the main axes of the ellipse are in x and y
 % direction with amplitude |x| and |y|
 % -> |phi_y-phi_x|~=pi/2: the main axes is no longer in x and y direction
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 PhaseAbsMin = 1e-5;
 

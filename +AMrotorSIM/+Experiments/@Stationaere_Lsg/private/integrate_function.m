@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function dZ = integrate_function(t,Z,Omega, rotorsystem, mat)
 % Provides integration function
 %
@@ -14,6 +12,8 @@ function dZ = integrate_function(t,Z,Omega, rotorsystem, mat)
 %    :param mat: State space matrices A,B in form mat.A, mat.B
 %    :type mat: struct
 %    :return: Derivative of state vector (dZ) for integration (check Matlab's odefun)
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 A=mat.A;
 B=mat.B;

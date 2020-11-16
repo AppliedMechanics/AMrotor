@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function compute_newmark(obj,options)
 % Carries out an integration of type newmark
 %
@@ -26,6 +24,8 @@ function compute_newmark(obj,options)
 %     - do not chose globTol too small, as the time integration is
 %       restarted with new local tolerances if globError>GlobTol
 %
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 obj.rotorsystem.check_for_non_integrable_components;
 tic
 obj.clear_time_result()

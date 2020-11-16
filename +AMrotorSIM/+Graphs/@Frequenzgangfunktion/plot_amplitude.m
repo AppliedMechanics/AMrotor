@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function plot_amplitude(obj,f,frf,paramPlot)
 % Plots the amplitude of the FRF
 %
@@ -10,6 +8,8 @@ function plot_amplitude(obj,f,frf,paramPlot)
 %    :param paramPlot: Additional parameters for visualization (type of amplitude, ..)
 %    :type paramPlot: struct
 %    :return: Figure with amplitude of FRF
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 amplitudeMeasure = paramPlot.amplitudeMeasure;
 type = obj.experimentFRF.type;

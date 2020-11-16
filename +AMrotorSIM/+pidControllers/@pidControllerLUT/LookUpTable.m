@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function [ outputMatrix ] = LookUpTable( self, rpmTable, inputCell, rpmCurrent ) 
 % Assembles the desired table (from Config-file) for a controller characterized by a LUT
 %
@@ -20,6 +18,8 @@ function [ outputMatrix ] = LookUpTable( self, rpmTable, inputCell, rpmCurrent )
 % rpmCurrent = 1x1 current rpm-step
 %
 % outputMatrix = 6 x 6 matrix for rpmCurrent
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 outputMatrix = zeros(6,6);
 for i = 1:6

@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function label = make_real_label(obj,type,unit)
 % Assembles the label for the real part of the FRF
 %
@@ -8,6 +6,8 @@ function label = make_real_label(obj,type,unit)
 %    :param unit: Unit of the FRF
 %    :type unit: char
 %    :return: Labels for the real part plot
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 HStr = ['Re(G_{',type,'})'];
 

@@ -1,11 +1,11 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function amplitudeMeasure = set_amplitude_measure(obj,userInputCell)
 % Extracts the desired amplitude representation from the argument of the main function
 %
 %    :param userInputCell: Cell that gets checked which representation type ('lin' (default),'log' or 'dB') is wanted
 %    :type userInputCell: cell
 %    :return: Amplitude representation type as char
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 linStr = 'lin';
 logStr = 'log';

@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function calculate_rotorsystem(obj,nModes,rpm)
 % Performes the modal analysis
 %
@@ -8,6 +6,8 @@ function calculate_rotorsystem(obj,nModes,rpm)
 %    :param rpm: Rotation speed
 %    :type rpm: double
 %    :return: Resulting eigenvalues and eigenvectors in object
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
       disp('Berechne Modalanalyse Rotorsystem')
 

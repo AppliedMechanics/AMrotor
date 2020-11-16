@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function [f,H] = calculate(obj,f,inPos,outPos,type,rpm,inputDirection,outputDirection)
 % Calculates the frequency response function of the M,D,K-system
 %
@@ -25,6 +23,9 @@ function [f,H] = calculate(obj,f,inPos,outPos,type,rpm,inputDirection,outputDire
 % [f,H] = calculate(obj,f,inPos,outPos,type,rpm,inputDirection,outputDirection)
 %
 % See also mck2frf
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
     inputNode = obj.rotorsystem.rotor.get_node_no(inPos);
     outputNode = obj.rotorsystem.rotor.get_node_no(outPos);
     

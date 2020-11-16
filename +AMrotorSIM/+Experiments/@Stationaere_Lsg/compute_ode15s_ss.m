@@ -1,9 +1,9 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function compute_ode15s_ss(obj)
 % Carries out an integration of type ode15s
 %
 %    :return: Integration results in results field of object
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
         
         Timer = AMrotorTools.Timer();
          

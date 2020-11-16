@@ -1,9 +1,9 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function [figurehandle] = show(obj)
 % Plots the overall rotor system
 %
 %    :return: Figure of rotor system
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
      disp(obj.name);
      %-----------------------------------------------------------------

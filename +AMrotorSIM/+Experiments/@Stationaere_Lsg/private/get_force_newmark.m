@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function f = get_force_newmark(obj,t,x,dotx)
 % Extracts the force from load-objects and from controller-objects
 %
@@ -10,6 +8,8 @@ function f = get_force_newmark(obj,t,x,dotx)
 %    :param dotx: Derivative part of state vector Z = [x; dotx];
 %    :type dotx: vector 
 %    :return: Force vector f
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 Z = [x; dotx];
 

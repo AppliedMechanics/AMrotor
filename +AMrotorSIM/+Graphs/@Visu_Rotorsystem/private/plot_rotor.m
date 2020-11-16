@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function plot_rotor(ax, rotor)
 % Provides/drafts the rotor for the visualization of the rotor system
 %
@@ -8,6 +6,8 @@ function plot_rotor(ax, rotor)
 %    :parameter rotor: Object of type rotor (obj.rotorsystem.rotor)
 %    :type rotor: object
 %    :return: 3D model of the rotor for 3D-visualization
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
     color = AMrotorTools.TUMColors.TUMGray2;
     

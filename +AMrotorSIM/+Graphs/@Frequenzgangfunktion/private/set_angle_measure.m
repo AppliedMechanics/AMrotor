@@ -1,11 +1,11 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function angleMeasure = set_angle_measure(obj,userInputCell)
 % Extracts the desired angle representation from the argument of the main function
 %
 %    :param userInputCell: Cell that gets checked which representation type ('rad' (default) or 'deg') is wanted
 %    :type userInputCell: cell
 %    :return: Angle representation type as char
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 radStr = 'rad';
 degStr = 'deg';

@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function plot_disc(ax,disc)
 % Provides/drafts the component disc for the visualization of the rotor system
 %
@@ -8,6 +6,8 @@ function plot_disc(ax,disc)
 %    :parameter disc: Object of type components (obj.rotorsystem.components)
 %    :type disc: object
 %    :return: 3D model of the disc for 3D-visualization
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
     zp=disc.cnfg.position;
     r=disc.cnfg.radius;

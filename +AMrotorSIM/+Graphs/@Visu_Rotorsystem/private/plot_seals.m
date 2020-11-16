@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function plot_seals(ax,seal,obj)
 % Provides/drafts the component seal for the visualization of the rotor system
 %
@@ -10,6 +8,8 @@ function plot_seals(ax,seal,obj)
 %    :parameter obj: Object of type rotor (obj.rotorsystem.rotor)
 %    :type obj: object
 %    :return: 3D model of the seal for 3D-visualization
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 for i=seal
     zp=i.cnfg.position;

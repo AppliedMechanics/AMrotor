@@ -1,5 +1,3 @@
-% Licensed under GPL-3.0-or-later, check attached LICENSE file
-
 function plot_sensors(ax,sensors)
 % Provides/drafts the sensor for the visualization of the rotor system
 %
@@ -8,6 +6,8 @@ function plot_sensors(ax,sensors)
 %    :parameter sensors: Object of type sensor (obj.rotorsystem.sensors)
 %    :type sensors: object
 %    :return: 3D model of the sensor for 3D-visualization
+
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 for sensor=sensors
     %if isa(sensor,'AMrotorSIM.Sensors.Displacementsensor')

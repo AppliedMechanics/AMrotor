@@ -11,6 +11,9 @@ function plot(self,sensors,direction)
 
 % main method for the user
 % plot(self,sensors,direction)
+%
+% Licensed under GPL-3.0-or-later, check attached LICENSE file
+
 disp(self.name)
 if ~exist('direction','var')
   direction = [1,2]; % default x and y-direction

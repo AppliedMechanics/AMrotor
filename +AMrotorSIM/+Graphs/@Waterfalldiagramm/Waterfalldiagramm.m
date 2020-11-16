@@ -1,17 +1,14 @@
 classdef Waterfalldiagramm < handle
 % Class for visualization of the time integration results as one sided Waterfall diagram (for Run-ups)
 
-%    abtastrate... sampling rate
-%    drehzahl... rotation speed
-%
 % Licensed under GPL-3.0-or-later, check attached LICENSE file
 
 properties
     unit
     rotorsystem
     name=' --- One sided Waterfalldiagram  --- '
-    abtastrate
-    drehzahl
+    abtastrate; % sampling rate
+    drehzahl; % rotation speed (rpm)
     timeresults
     experiment
    end
