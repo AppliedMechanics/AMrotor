@@ -35,7 +35,9 @@ function plot_disc(ax,disc)
     % Plotting ---------------------------
     [TH,R] = meshgrid(theta,rs);
     [x,y] = pol2cart(TH,R);
-    z=(width/2).*cos(TH)-(width/2).*sin(TH);
+%     z=(width/2).*cos(TH)-(width/2).*sin(TH);
+    z=width/2.*(cos(TH).^2-sin(TH).^2); % z=(x^2)-(y^2)
+    z(1,:) = 0;
     
     h=surf(ax,z+zp,y,x);
     set(h, 'edgecolor','none')
