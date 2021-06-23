@@ -61,7 +61,7 @@ classdef Newmark < AMrotorSIM.Solvers.Solver
         if isvector(obj.t)
             nsteps=length(obj.t);
         else
-            fprintf(2,'Fehler in newmark_intergration: t muss ein Vektor sein');
+            fprintf(2,'Fehler in newmark_integration: t muss ein Vektor sein');
             return;
         end
         

@@ -65,7 +65,7 @@ function [q,qd,qdd] = newmark_integration_ss(obj, beta , gamma,ss,f,t,q_0,qd_0,q
         if isvector(t)
             nsteps=length(t);
         else
-            fprintf(2,'Fehler in newmark_intergration: t muss ein Vektor sein');
+            fprintf(2,'Fehler in newmark_integration: t muss ein Vektor sein');
             return;
         end
         

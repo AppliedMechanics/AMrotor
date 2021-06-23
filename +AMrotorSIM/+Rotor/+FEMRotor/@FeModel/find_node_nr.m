@@ -1,5 +1,5 @@
 function node_nr = find_node_nr(self,position)
-% Defines which node is closer to an entered position
+% Defines which node is closest to an entered position
 %
 %    :parameter position: Desired position along z-axis
 %    :type position: double
