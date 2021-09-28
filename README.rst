@@ -22,8 +22,8 @@ Citation
 
 Paper with reference to the toolbox and more specific information about the mathematical background are:
 
-.. [1] AMrotor – A MATLAB Toolbox for the Simulation of Rotating Machinery, Johannes Maierhofer, M.Kreutz, T.Mulser, T. Thümmel, D. Rixen. DOI: `10.1201/9781003132639<https://doi.org/10.1201/9781003132639>` 
-.. [2] Comparison of different time integration schemes and application to a rotor system with magnetic bearings in Matlab, Michael Kreutz, J. Maierhofer, T. Thümmel, D. Rixen. DOI: `10.1201/9781003132639<https://doi.org/10.1201/9781003132639>`
+.. [1] AMrotor – A MATLAB Toolbox for the Simulation of Rotating Machinery, Johannes Maierhofer, M.Kreutz, T.Mulser, T. Thümmel, D. Rixen. DOI: `10.1201/9781003132639 <https://doi.org/10.1201/9781003132639>`_ 
+.. [2] Comparison of different time integration schemes and application to a rotor system with magnetic bearings in Matlab, Michael Kreutz, J. Maierhofer, T. Thümmel, D. Rixen. DOI: `10.1201/9781003132639 <https://doi.org/10.1201/9781003132639>`_
 
 License
 -------
