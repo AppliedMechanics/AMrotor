@@ -14,7 +14,7 @@ classdef PlotColors < handle
         end
         function set_up(obj,nColors)
             obj.num.color = nColors;
-            obj.colors = linespecer(nColors);
+            obj.colors = linespecer(nColors,'qualitative');
         end
         function colorRGBvec = getColor(obj,numEntry)
             colorRGBvec = obj.colors(numEntry,:);
