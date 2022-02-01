@@ -12,9 +12,9 @@ function [f,H] = calculate(obj,f,inPos,outPos,type,rpm,inputDirection,outputDire
 %    :param rpm: Rotation speed
 %    :type rpm: double
 %    :param inputDirection: Desired input direction {'u_x','u_y','u_z','psi_x','psi_y','psi_z'}
-%    :type inputDirection: vector (char)
+%    :type inputDirection: cell-array (char) or array (num)
 %    :param outputDirection: Desired output direction {'u_x','u_y','u_z','psi_x','psi_y','psi_z'}
-%    :type outputDirection: vector (char)
+%    :type outputDirection: cell-array (char) or array (num)
 %    :return: Frequency range (f) and FRF-matrix (H)
 
 %   calculates frf of M,D,K-system using abravibe's function mck2frf
