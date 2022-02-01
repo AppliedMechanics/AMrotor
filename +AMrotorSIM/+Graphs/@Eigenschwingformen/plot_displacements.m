@@ -35,7 +35,7 @@ function [x,EVmain] = plot_displacements(obj,varargin)
         EVmain = zeros(size(EVx));
         for s=1:n_ew
             angle = atan2(EVy(:,s),EVx(:,s));
-            angle = wrapTo2Pi(angle);
+            angle = rem(angle,2*pi);
             % wrap angle to [0 pi]
             for i = 1:length(angle)
                 if angle(i) > pi
