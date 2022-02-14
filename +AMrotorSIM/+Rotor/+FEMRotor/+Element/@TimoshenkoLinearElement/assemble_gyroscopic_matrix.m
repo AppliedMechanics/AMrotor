@@ -5,10 +5,14 @@ function [G] = assemble_gyroscopic_matrix(self)
 
 % Licensed under GPL-3.0-or-later, check attached LICENSE file
 
-    G = sparse(12,12);
-    G_ele = compute_gyroscopic_matrix(self);
+   
+    [G1,G2] = compute_gyroscopic_matrix(self);
 
-    G(5:12,5:12) = G_ele;
+    G = zeros(12,12);
+    
+
+    G(5:8,9:12) = G1;
+    G(9:12,5:8) = G2;
 
     self.gyroscopic_matrix = G;
 end
