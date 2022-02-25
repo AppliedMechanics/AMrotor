@@ -5,7 +5,7 @@ function [G] = assemble_gyroscopic_matrix(self)
 
 % Licensed under GPL-3.0-or-later, check attached LICENSE file
 
-    % According to Genta 2005: Dynamics of Rototating Systems
+    % According to Genta 2005: Dynamics of Rotating Systems
 
    
     [GAB,GBA] = compute_gyroscopic_matrix(self);
