@@ -15,30 +15,30 @@ for i = 1:size(EW.backward,1)
     criticalSpeed.backward(i) = obj.get_zero_crossing(omega,imag(EW.backward(i,:))-omega);
 end
 
-disp('Kritsche Drehzahlen')
+disp('Critical  rotation speeds')
 if ~all(isnan(criticalSpeed.forward))
-    disp('Moden mit forward-whirl')
+    disp('Modes with forward-whirl')
 end
 n_moden=length(criticalSpeed.forward);
 for s=1:n_moden
     if ~isnan(criticalSpeed.forward(s)) %remove NaN values
-        disp([num2str(s),'. Mode (forward): bei ', num2str(criticalSpeed.forward(s)*60/2/pi), ' 1/min'])
+        disp([num2str(s),'. Mode (forward): at ', num2str(criticalSpeed.forward(s)*60/2/pi), ' 1/min'])
     end
 end
 % disp(' ')
 
 if ~all(isnan(criticalSpeed.backward))
-    disp('Moden mit backward-whirl')
+    disp('Modes with backward-whirl')
 end
 n_moden=length(criticalSpeed.backward);
 for s=1:n_moden
     if ~isnan(criticalSpeed.backward(s))
-        disp([num2str(s),'. Mode (backward): bei ', num2str(criticalSpeed.backward(s)*60/2/pi), ' 1/min'])
+        disp([num2str(s),'. Mode (backward): at ', num2str(criticalSpeed.backward(s)*60/2/pi), ' 1/min'])
     end
 end
 
 if all(isnan(criticalSpeed.forward)) && all(isnan(criticalSpeed.backward))
-    disp('Keine Schnittpunkte zwischen der ersten Harmonischen mit den Eigenfrequenzen.')
+    disp('No intersections between the first harmonic and the eigenfrequencies.')
 end
 
 disp(' ')
