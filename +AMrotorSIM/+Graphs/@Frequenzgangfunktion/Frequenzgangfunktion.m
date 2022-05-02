@@ -75,6 +75,8 @@ classdef Frequenzgangfunktion < handle
                     obj.plot_bode(f,frf,paramPlot);
                 case {'Amplitude','amplitude','Amp','amp','A','a'}
                     obj.plot_amplitude(f,frf,paramPlot);
+                case {'AmplitudeMatrix','amplitudematrix','AmpMat','ampmat','Matrix','matrix'}
+                    obj.plot_amplitude_matrix(f,frf,paramPlot);
                 case {'Phase','phase','Ph','ph','P','p','Angle','angle'}
                     obj.plot_phase(f,frf,paramPlot);
                 otherwise
