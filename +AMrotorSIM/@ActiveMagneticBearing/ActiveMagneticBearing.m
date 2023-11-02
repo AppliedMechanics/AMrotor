@@ -9,8 +9,8 @@ classdef ActiveMagneticBearing < handle
         cnfg
         name
         position        
-        simpleBearing@AMrotorSIM.Components.Bearings.SimpleBearing     
-        pidController@AMrotorSIM.pidControllers.pidController        
+        simpleBearing AMrotorSIM.Components.Bearings.SimpleBearing     
+        pidController AMrotorSIM.pidControllers.pidController        
         kx         
         targetDisplacementX
         targetDisplacementY        
