@@ -39,7 +39,6 @@ g=Graphs.Visu_Rotorsystem(r); % Instantiation of class Visu_Rotorsystem
 g.show(); % Plot of a 3D-isometry of the rotor with sensors, loads,...
 
 %% Running Time Simulation
-%% Running Time Simulation
 %% Stationary with avaliable calculation methods
 
 St_Lsg = Experiments.Stationaere_Lsg(r,[1000,1200],(0:0.001:0.02)); % In...
@@ -65,7 +64,7 @@ St_Lsg.compute_ode15s_ss; % ode15s - method
 frf = Experiments.FrequenzgangfunktionTime(St_Lsg,'FRF time'); % Instantiation ...
                                         % of class FrequenzgangfunktionTime
 
-frf.calculate(r.sensors(2),r.sensors(1),[1000],'u_x','u_x',4,'boxcar'); % .
+frf.calculate(r.sensors(2),r.sensors(1),[1000],'u_x','u_x',4,'ahann'); % .
                                         % Calculation
 
 %% Plot results
